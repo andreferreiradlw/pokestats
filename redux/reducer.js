@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux'
 
-import listReducer from '../src/components/Homepage/listSlice'
+import homeReducer from '../src/components/Homepage/homeSlice'
 
 const rootReducer = combineReducers({
-  list: listReducer,
+  home: homeReducer,
 })
 
 export default rootReducer

@@ -2,8 +2,11 @@ import Link from 'next/link'
 import { useSelector, shallowEqual } from 'react-redux'
 
 export default function Homepage() {
-  const pokemonList = useSelector((state) => state.list.results, shallowEqual)
-  const loadingStatus = useSelector((state) => state.list.status)
+  const pokemonList = useSelector(
+    (state) => state.home.pokemonList,
+    shallowEqual
+  )
+  const loadingStatus = useSelector((state) => state.home.status)
 
   return (
     <main>

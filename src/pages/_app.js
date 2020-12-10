@@ -1,10 +1,10 @@
 import { Provider } from 'react-redux'
 import store from '../../redux/store'
-import { fetchPokemon } from '../components/Homepage/listSlice'
+import { fetchPokemonList } from '../components/Homepage/homeSlice'
 
 export default function App({ Component, pageProps }) {
   // fetch initial pokemon list for autocomplete
-  store.dispatch(fetchPokemon())
+  store.dispatch(fetchPokemonList())
 
   return (
     <Provider store={store}>

@@ -6,16 +6,16 @@ import {
   createEntityAdapter,
 } from '@reduxjs/toolkit'
 
-const listAdapter = createEntityAdapter()
+const homeAdapter = createEntityAdapter()
 
-const initialState = listAdapter.getInitialState({
-  results: [],
+const initialState = homeAdapter.getInitialState({
+  pokemonList: [],
   status: 'idle',
 })
 
 // Thunk functions
-export const fetchPokemon = createAsyncThunk(
-  'list/fetchPokemon',
+export const fetchPokemonList = createAsyncThunk(
+  'home/fetchPokemonList',
   async (payload, { dispatch, rejectWithValue }) => {
     try {
       const response = await axios.get(
@@ -32,8 +32,8 @@ export const fetchPokemon = createAsyncThunk(
 )
 
 // slice
-const listSlice = createSlice({
-  name: 'list',
+const homeSlice = createSlice({
+  name: 'home',
   initialState,
   reducers: {
     todoToggled(state, action) {
@@ -44,18 +44,18 @@ const listSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(fetchPokemon.pending, (state) => {
+      .addCase(fetchPokemonList.pending, (state) => {
         state.status = 'loading'
       })
-      .addCase(fetchPokemon.fulfilled, (state, action) => {
+      .addCase(fetchPokemonList.fulfilled, (state, action) => {
         // replace all existing items
-        state.results = action.payload
+        state.pokemonList = action.payload
         // listAdapter.setAll(state, action.payload)
         state.status = 'idle'
       })
   },
 })
 
-export const { todoToggled } = listSlice.actions
+export const { todoToggled } = homeSlice.actions
 
-export default listSlice.reducer
+export default homeSlice.reducer

@@ -10,13 +10,14 @@ const homeAdapter = createEntityAdapter()
 
 const initialState = homeAdapter.getInitialState({
   pokemonList: [],
-  status: 'idle',
+  loading: true,
 })
 
 // Thunk functions
 export const fetchPokemonList = createAsyncThunk(
   'home/fetchPokemonList',
   async (payload, { dispatch, rejectWithValue }) => {
+    // await new Promise((resolve) => setTimeout(resolve, 2000))
     try {
       const response = await axios.get(
         'https://pokeapi.co/api/v2/pokemon?limit=20'
@@ -36,26 +37,21 @@ const homeSlice = createSlice({
   name: 'home',
   initialState,
   reducers: {
-    todoToggled(state, action) {
-      const todoId = action.payload
-      const todo = state.entities[todoId]
-      todo.completed = !todo.completed
+    toggleStatus(state, action) {
+      state.loading = action.payload
     },
   },
   extraReducers: (builder) => {
-    builder
-      .addCase(fetchPokemonList.pending, (state) => {
-        state.status = 'loading'
+    builder.addCase(fetchPokemonList.fulfilled, (state, action) => {
+      state.pokemonList = action.payload.map((pokemon, index) => {
+        pokemon.id = index += 1
+        return pokemon
       })
-      .addCase(fetchPokemonList.fulfilled, (state, action) => {
-        // replace all existing items
-        state.pokemonList = action.payload
-        // listAdapter.setAll(state, action.payload)
-        state.status = 'idle'
-      })
+      state.loading = false
+    })
   },
 })
 
-export const { todoToggled } = homeSlice.actions
+export const { toggleStatus } = homeSlice.actions
 
 export default homeSlice.reducer

@@ -1,5 +1,6 @@
 import { Provider } from 'react-redux'
 import store from '../../redux/store'
+import ThemeProvider from '../components/Theme'
 import { fetchPokemonList } from '../components/Homepage/homeSlice'
 
 export default function App({ Component, pageProps }) {
@@ -8,7 +9,9 @@ export default function App({ Component, pageProps }) {
 
   return (
     <Provider store={store}>
-      <Component {...pageProps} />
+      <ThemeProvider>
+        <Component {...pageProps} />
+      </ThemeProvider>
     </Provider>
   )
 }

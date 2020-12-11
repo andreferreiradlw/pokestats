@@ -1,4 +1,6 @@
 import { useSelector } from 'react-redux'
+// component
+import { Container, Heading } from './styledHomepage'
 import Autocomplete from './Autocomplete'
 
 export default function Homepage() {
@@ -9,9 +11,10 @@ export default function Homepage() {
       {loadingStatus ? (
         <div>Loading!</div>
       ) : (
-        <main>
+        <Container>
+          <Heading>PokeStats</Heading>
           <Autocomplete />
-        </main>
+        </Container>
       )}
     </>
   )

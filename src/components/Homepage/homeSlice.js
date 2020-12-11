@@ -20,7 +20,7 @@ export const fetchPokemonList = createAsyncThunk(
     // await new Promise((resolve) => setTimeout(resolve, 2000))
     try {
       const response = await axios.get(
-        'https://pokeapi.co/api/v2/pokemon?limit=20'
+        'https://pokeapi.co/api/v2/pokemon?limit=151'
       )
       return response.data.results // Return a value synchronously using Async-await
     } catch (err) {

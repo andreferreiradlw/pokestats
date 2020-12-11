@@ -2,9 +2,6 @@ import { createGlobalStyle, css } from 'styled-components'
 
 const GlobalStyle = createGlobalStyle`
 
-  // Fonts
-  
-
   // Resetting margins, paddings, and borders
   html, body,
   h1, h2, h3, h4, h5, h6,
@@ -38,7 +35,13 @@ const GlobalStyle = createGlobalStyle`
     font-size: 100%;
   }
   body {
+    overflow-x: hidden;
+    width: 100%;
+    min-height: 100%;
     font-size: 1rem;
+    margin: 0;
+    background-color: white;
+    font-family: 'Lato', sans-serif;
   }
   input, textarea, button {
     font-family: inherit

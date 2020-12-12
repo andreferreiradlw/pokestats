@@ -19,15 +19,26 @@ const theme = {
     desktop: `(min-width: ${size.desktop})`,
     desktopL: `(min-width: ${size.desktop})`,
   },
+  container: {
+    maxWidth: '1920px',
+  },
   autoComplete: {
-    container: {
-      width: '50%',
-    },
     input: {
-      background: '#000',
+      color: '#FFF',
+      backgroundColor: '#000',
+      borderColor: '#000',
+      hover: {
+        color: '#000',
+        backgroundColor: '#FFF',
+      },
     },
     button: {
       background: '#000',
+    },
+  },
+  homepage: {
+    heading: {
+      color: '#FFF',
     },
   },
 }

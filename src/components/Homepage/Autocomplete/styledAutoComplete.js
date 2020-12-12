@@ -50,17 +50,46 @@ const Button = styled.button`
   border-bottom-left-radius: 0;
   transition: all 0.2s ease;
 
+  &[disabled] {
+    cursor: not-allowed;
+  }
+
+  & svg {
+    width: 20px;
+    margin: 0 10px;
+  }
+
   ${({ theme }) => {
-    const values = theme.autoComplete.input
+    const values = theme.autoComplete.button
     return css`
       color: ${values.color};
       background-color: ${values.backgroundColor};
       border: 1px solid ${values.borderColor};
 
+      & svg {
+        fill: ${values.color};
+        stroke: ${values.color};
+      }
+
       &:hover {
         background-color: ${values.hover.backgroundColor};
         color: ${values.hover.color};
         cursor: pointer;
+
+        & svg {
+          fill: ${values.hover.color};
+          stroke: ${values.hover.color};
+        }
+      }
+
+      &[disabled] {
+        color: ${values.disabled.color};
+        background-color: ${values.disabled.backgroundColor};
+
+        & svg {
+          fill: ${values.disabled.color};
+          stroke: ${values.disabled.color};
+        }
       }
     `
   }}

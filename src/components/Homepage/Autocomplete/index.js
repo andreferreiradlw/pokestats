@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import { useState } from 'react'
 import { useSelector, shallowEqual } from 'react-redux'
-// compoennts
+// components
 import {
   Container,
   Input,
@@ -9,6 +9,7 @@ import {
   Wrapper,
   WrapperOption,
 } from './styledAutoComplete'
+import SearchIcon from '../../../../public/images/search.svg'
 
 // capitalise 1st letter of the string
 const capitalize = (string) => string.charAt(0).toUpperCase() + string.slice(1)
@@ -50,7 +51,9 @@ export default function Autocomplete() {
           placeholder="Search Pokemon name or ID"
         />
         <Link as={`/pokemon/${search}`} href="/pokemon/[id]">
-          <Button>Icon</Button>
+          <Button disabled={!search}>
+            <SearchIcon />
+          </Button>
         </Link>
         {filtered.length > 0 && (
           <Wrapper>

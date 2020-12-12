@@ -33,7 +33,17 @@ const theme = {
       },
     },
     button: {
-      background: '#000',
+      color: '#FFF',
+      backgroundColor: '#000',
+      borderColor: '#000',
+      hover: {
+        color: '#000',
+        backgroundColor: '#FFF',
+      },
+      disabled: {
+        color: 'lightgrey',
+        backgroundColor: '#FFF',
+      },
     },
     wrapperOption: {
       color: '#000',

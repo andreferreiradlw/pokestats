@@ -14,6 +14,7 @@
     "next": "10.0.3",
     "react": "17.0.1",
     "react-dom": "17.0.1",
+    "react-particles-js": "^3.4.1",
     "react-redux": "^7.2.2",
     "redux": "^4.0.5",
     "redux-devtools-extension": "^2.13.8",
@@ -21,6 +22,7 @@
     "styled-components": "^5.2.1"
   },
   "devDependencies": {
+    "@svgr/webpack": "^5.5.0",
     "eslint": "^7.15.0",
     "eslint-config-prettier": "^7.0.0",
     "eslint-plugin-import": "^2.22.1",

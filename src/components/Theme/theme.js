@@ -35,11 +35,22 @@ const theme = {
     button: {
       background: '#000',
     },
+    wrapperOption: {
+      color: '#000',
+      backgroundColor: '#fff',
+      hover: {
+        color: '#FFF',
+        backgroundColor: '#000',
+      },
+    },
   },
   homepage: {
     heading: {
       color: '#FFF',
     },
+  },
+  particles: {
+    backgroundColor: '#FFF',
   },
 }
 

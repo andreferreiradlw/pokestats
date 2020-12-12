@@ -51,7 +51,7 @@ const Button = styled.button`
   transition: all 0.2s ease;
 
   ${({ theme }) => {
-    let values = theme.autoComplete.input
+    const values = theme.autoComplete.input
     return css`
       color: ${values.color};
       background-color: ${values.backgroundColor};
@@ -84,10 +84,18 @@ const WrapperOption = styled.li`
   font-size: 0.875rem;
   cursor: pointer;
 
-  &:hover {
-    background: #000;
-    color: #fff;
-  }
+  ${({ theme }) => {
+    const values = theme.autoComplete.wrapperOption
+    return css`
+      color: ${values.color};
+      background-color: ${values.backgroundColor};
+
+      &:hover {
+        background-color: ${values.hover.backgroundColor};
+        color: ${values.hover.color};
+      }
+    `
+  }}
 
   & img {
     width: 50px;

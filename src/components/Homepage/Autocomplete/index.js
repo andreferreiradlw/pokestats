@@ -1,6 +1,8 @@
 import Link from 'next/link'
-import { useState } from 'react'
-import { useSelector, shallowEqual } from 'react-redux'
+import { useRouter } from 'next/router'
+import { useState, useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { filterPokemon } from '../homeSlice'
 // components
 import {
   Container,
@@ -9,34 +11,32 @@ import {
   Wrapper,
   WrapperOption,
 } from './styledAutoComplete'
+// icons
 import SearchIcon from '../../../../public/images/search.svg'
 
 // capitalise 1st letter of the string
 const capitalize = (string) => string.charAt(0).toUpperCase() + string.slice(1)
 
 export default function Autocomplete() {
-  // get fetched pokemon list from api
-  const pokemonList = useSelector(
-    (state) => state.home.pokemonList,
-    shallowEqual
-  )
-  // states
-  const [search, setSearch] = useState('')
-  const [filtered, setFiltered] = useState([])
+  // router
+  const router = useRouter()
 
-  const filterPokemon = (value) => {
-    if (value) {
-      // filter pokemon by name
-      const filteredList = pokemonList.filter((pokemon) =>
-        pokemon.name.includes(value)
-      )
-      // set filtered state
-      setFiltered(filteredList)
-    } else {
-      // set filtered state to empty array
-      setFiltered([])
+  // dispatch
+  const dispatch = useDispatch()
+
+  // search state
+  const [search, setSearch] = useState('')
+
+  // selectors
+  const filteredPokemonList = useSelector((state) => state.home.filteredList)
+  const pokemonListError = useSelector((state) => state.home.error)
+
+  //handle error change
+  useEffect(() => {
+    if (pokemonListError.status !== 'OK') {
+      router.push('/404')
     }
-  }
+  }, [pokemonListError.status])
 
   return (
     <>
@@ -45,19 +45,19 @@ export default function Autocomplete() {
           value={search}
           onChange={(e) => {
             setSearch(e.target.value)
-            filterPokemon(e.target.value)
+            dispatch(filterPokemon(e.target.value))
           }}
           type="text"
-          placeholder="Search Pokemon name or ID"
+          placeholder="Search Pokemon Name or ID"
         />
         <Link as={`/pokemon/${search}`} href="/pokemon/[id]">
           <Button disabled={!search}>
             <SearchIcon />
           </Button>
         </Link>
-        {filtered.length > 0 && (
+        {filteredPokemonList.length > 0 && (
           <Wrapper>
-            {filtered.slice(0, 4).map((item, i) => (
+            {filteredPokemonList.slice(0, 4).map((item, i) => (
               <Link as={`/pokemon/${item.name}`} href="/pokemon/[id]" key={i}>
                 <WrapperOption>
                   <img

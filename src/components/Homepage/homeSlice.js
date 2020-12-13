@@ -1,32 +1,36 @@
 import axios from 'axios'
 import {
   createSlice,
-  createSelector,
   createAsyncThunk,
   createEntityAdapter,
 } from '@reduxjs/toolkit'
 
+// entity adapter
 const homeAdapter = createEntityAdapter()
 
+// initial state
 const initialState = homeAdapter.getInitialState({
-  pokemonList: [],
-  loading: true,
+  loading: false,
+  filteredList: [],
+  error: {
+    status: 'OK',
+    message: null,
+  },
 })
 
 // Thunk functions
 export const fetchPokemonList = createAsyncThunk(
   'home/fetchPokemonList',
-  async (payload, { dispatch, rejectWithValue }) => {
+  async (payload, { rejectWithValue }) => {
     // await new Promise((resolve) => setTimeout(resolve, 2000))
     try {
       const response = await axios.get(
         'https://pokeapi.co/api/v2/pokemon?limit=151'
       )
-      return response.data.results // Return a value synchronously using Async-await
+      return response.data.results
     } catch (err) {
-      if (!err.response) {
-        throw err
-      }
+      // Use `err.response` as `action.payload` for a `rejected` action,
+      // by explicitly returning it using the `rejectWithValue()` utility
       return rejectWithValue(err.response)
     }
   }
@@ -37,21 +41,42 @@ const homeSlice = createSlice({
   name: 'home',
   initialState,
   reducers: {
+    filterPokemon(state, action) {
+      if (action.payload) {
+        state.filteredList = Object.values(state.entities).filter((pokemon) =>
+          pokemon.name.includes(action.payload)
+        )
+      } else {
+        // set filtered state to empty array
+        state.filteredList = []
+      }
+    },
     toggleStatus(state, action) {
       state.loading = action.payload
     },
   },
   extraReducers: (builder) => {
+    builder.addCase(fetchPokemonList.pending, (state, action) => {
+      state.loading = true
+    })
     builder.addCase(fetchPokemonList.fulfilled, (state, action) => {
-      state.pokemonList = action.payload.map((pokemon, index) => {
+      const listWithId = action.payload.map((pokemon, index) => {
         pokemon.id = index += 1
         return pokemon
       })
+      homeAdapter.setAll(state, listWithId)
+      state.loading = false
+    })
+    builder.addCase(fetchPokemonList.rejected, (state, action) => {
+      state.error.status = action.payload.status
+      state.error.message = action.payload.data
       state.loading = false
     })
   },
 })
 
-export const { toggleStatus } = homeSlice.actions
+// export actions
+export const { filterPokemon, toggleStatus } = homeSlice.actions
 
+// export reducer
 export default homeSlice.reducer

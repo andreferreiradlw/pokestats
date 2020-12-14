@@ -8,8 +8,9 @@ import {
   Container,
   Input,
   Button,
-  Wrapper,
-  WrapperOption,
+  ListWrapper,
+  OptionWrapper,
+  Option,
 } from './styledAutoComplete'
 // icons
 import SearchIcon from '../../../../public/images/search.svg'
@@ -56,18 +57,18 @@ export default function Autocomplete() {
           </Button>
         </Link>
         {filteredPokemonList.length > 0 && (
-          <Wrapper>
+          <ListWrapper>
             {filteredPokemonList.slice(0, 4).map((item, i) => (
               <Link as={`/pokemon/${item.name}`} href="/pokemon/[id]" key={i}>
-                <WrapperOption>
+                <OptionWrapper>
                   <img
                     src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${item.id}.png`}
                   />
-                  {capitalize(item.name)}
-                </WrapperOption>
+                  <Option>{capitalize(item.name)}</Option>
+                </OptionWrapper>
               </Link>
             ))}
-          </Wrapper>
+          </ListWrapper>
         )}
       </Container>
     </>

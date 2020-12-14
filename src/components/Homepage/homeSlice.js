@@ -22,7 +22,6 @@ const initialState = homeAdapter.getInitialState({
 export const fetchPokemonList = createAsyncThunk(
   'home/fetchPokemonList',
   async (payload, { rejectWithValue }) => {
-    // await new Promise((resolve) => setTimeout(resolve, 2000))
     try {
       const response = await axios.get(
         'https://pokeapi.co/api/v2/pokemon?limit=151'

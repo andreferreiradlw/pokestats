@@ -95,7 +95,7 @@ const Button = styled.button`
   }}
 `
 
-const Wrapper = styled.ul`
+const ListWrapper = styled.ul`
   position: absolute;
   margin-top: 50px;
   right: 0;
@@ -105,7 +105,7 @@ const Wrapper = styled.ul`
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
 `
 
-const WrapperOption = styled.li`
+const OptionWrapper = styled.li`
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -131,4 +131,8 @@ const WrapperOption = styled.li`
   }
 `
 
-export { Container, Input, Button, Wrapper, WrapperOption }
+const Option = styled.span`
+  padding: 16px 0;
+`
+
+export { Container, Input, Button, ListWrapper, OptionWrapper, Option }

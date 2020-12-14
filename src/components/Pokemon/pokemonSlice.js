@@ -26,6 +26,14 @@ const initialState = pokemonAdapter.getInitialState({
       message: null,
     },
   },
+  evolution: null,
+  evolutionStatus: {
+    isLoadingEvolution: false,
+    error: {
+      status: 'OK',
+      message: null,
+    },
+  },
 })
 
 // Thunk functions
@@ -53,11 +61,25 @@ export const fetchPokemonData = createAsyncThunk(
 export const fetchPokemonBiology = createAsyncThunk(
   'home/fetchPokemonBiology',
   async (biologyUrl, { dispatch, rejectWithValue }) => {
-    // await new Promise((resolve) => setTimeout(resolve, 2000))
-    // console.log(payload)
     try {
       const response = await axios.get(biologyUrl)
       console.log('biology', response.data)
+      // get evolution
+      dispatch(fetchPokemonEvolution(response.data.evolution_chain.url))
+      return response.data
+    } catch (err) {
+      // Use `err.response` as `action.payload` for a `rejected` action,
+      // by explicitly returning it using the `rejectWithValue()` utility
+      return rejectWithValue(err.response)
+    }
+  }
+)
+export const fetchPokemonEvolution = createAsyncThunk(
+  'home/fetchPokemonEvolution',
+  async (evolutionUrl, { dispatch, rejectWithValue }) => {
+    try {
+      const response = await axios.get(evolutionUrl)
+      console.log('evolution', response.data)
       return response.data
     } catch (err) {
       // Use `err.response` as `action.payload` for a `rejected` action,
@@ -104,6 +126,20 @@ const pokemonSlice = createSlice({
       state.biologyStatus.error.status = action.payload.status
       state.biologyStatus.error.message = action.payload.data
       state.biologyStatus.isLoadingBiology = false
+    })
+    // evolution
+    builder.addCase(fetchPokemonEvolution.pending, (state, action) => {
+      state.evolutionStatus.isLoadingEvolution = true
+    })
+    builder.addCase(fetchPokemonEvolution.fulfilled, (state, action) => {
+      state.evolution = action.payload
+      // stop loading
+      state.evolutionStatus.isLoadingEvolution = false
+    })
+    builder.addCase(fetchPokemonEvolution.rejected, (state, action) => {
+      state.evolutionStatus.error.status = action.payload.status
+      state.evolutionStatus.error.message = action.payload.data
+      state.evolutionStatus.isLoadingEvolution = false
     })
   },
 })

@@ -10,25 +10,25 @@ const pokemonAdapter = createEntityAdapter()
 
 // initial state
 const initialState = pokemonAdapter.getInitialState({
-  biology: null,
-  biologyStatus: {
-    isLoadingBiology: false,
+  biology: {
+    data: null,
+    isLoading: true,
     error: {
       status: 'OK',
       message: null,
     },
   },
-  data: null,
-  dataStatus: {
-    isLoadingData: false,
+  info: {
+    data: null,
+    isLoading: true,
     error: {
       status: 'OK',
       message: null,
     },
   },
-  evolution: null,
-  evolutionStatus: {
-    isLoadingEvolution: false,
+  evolution: {
+    data: null,
+    isLoading: true,
     error: {
       status: 'OK',
       message: null,
@@ -41,7 +41,6 @@ export const fetchPokemonData = createAsyncThunk(
   'home/fetchPokemonData',
   async (pokemon, { dispatch, rejectWithValue }) => {
     // await new Promise((resolve) => setTimeout(resolve, 2000))
-    // console.log(payload)
     try {
       const response = await axios.get(
         `https://pokeapi.co/api/v2/pokemon/${pokemon}`
@@ -76,7 +75,7 @@ export const fetchPokemonBiology = createAsyncThunk(
 )
 export const fetchPokemonEvolution = createAsyncThunk(
   'home/fetchPokemonEvolution',
-  async (evolutionUrl, { dispatch, rejectWithValue }) => {
+  async (evolutionUrl, { rejectWithValue }) => {
     try {
       const response = await axios.get(evolutionUrl)
       console.log('evolution', response.data)
@@ -95,52 +94,64 @@ const pokemonSlice = createSlice({
   initialState,
   reducers: {
     toggleStatus(state, action) {
-      state.isLoadingData = action.payload
+      state.info.isLoading = action.payload
     },
   },
   extraReducers: (builder) => {
-    // data
-    builder.addCase(fetchPokemonData.pending, (state, action) => {
-      state.dataStatus.isLoadingData = true
+    // info
+    builder.addCase(fetchPokemonData.pending, ({ info }) => {
+      info.isLoading = true
     })
-    builder.addCase(fetchPokemonData.fulfilled, (state, action) => {
-      state.data = action.payload
+    builder.addCase(fetchPokemonData.fulfilled, ({ info }, { payload }) => {
+      info.data = payload
       // stop loading
-      state.dataStatus.isLoadingData = false
+      info.isLoading = false
     })
-    builder.addCase(fetchPokemonData.rejected, (state, action) => {
-      state.dataStatus.error.status = action.payload.status
-      state.dataStatus.error.message = action.payload.data
-      state.dataStatus.isLoadingData = false
+    builder.addCase(fetchPokemonData.rejected, ({ info }, { payload }) => {
+      // update error
+      info.error.status = payload.status
+      info.error.message = payload.data
     })
     // biology
-    builder.addCase(fetchPokemonBiology.pending, (state, action) => {
-      state.biologyStatus.isLoadingBiology = true
+    builder.addCase(fetchPokemonBiology.pending, ({ biology }) => {
+      biology.isLoading = true
     })
-    builder.addCase(fetchPokemonBiology.fulfilled, (state, action) => {
-      state.biology = action.payload
-      // stop loading
-      state.biologyStatus.isLoadingBiology = false
-    })
-    builder.addCase(fetchPokemonBiology.rejected, (state, action) => {
-      state.biologyStatus.error.status = action.payload.status
-      state.biologyStatus.error.message = action.payload.data
-      state.biologyStatus.isLoadingBiology = false
-    })
+    builder.addCase(
+      fetchPokemonBiology.fulfilled,
+      ({ biology }, { payload }) => {
+        biology.data = payload
+        // stop loading
+        biology.isLoading = false
+      }
+    )
+    builder.addCase(
+      fetchPokemonBiology.rejected,
+      ({ biology }, { payload }) => {
+        // update error
+        biology.error.status = payload.status
+        biology.error.message = payload.data
+      }
+    )
     // evolution
-    builder.addCase(fetchPokemonEvolution.pending, (state, action) => {
-      state.evolutionStatus.isLoadingEvolution = true
+    builder.addCase(fetchPokemonEvolution.pending, ({ evolution }) => {
+      evolution.isLoading = true
     })
-    builder.addCase(fetchPokemonEvolution.fulfilled, (state, action) => {
-      state.evolution = action.payload
-      // stop loading
-      state.evolutionStatus.isLoadingEvolution = false
-    })
-    builder.addCase(fetchPokemonEvolution.rejected, (state, action) => {
-      state.evolutionStatus.error.status = action.payload.status
-      state.evolutionStatus.error.message = action.payload.data
-      state.evolutionStatus.isLoadingEvolution = false
-    })
+    builder.addCase(
+      fetchPokemonEvolution.fulfilled,
+      ({ evolution }, { payload }) => {
+        evolution.data = payload
+        // stop loading
+        evolution.isLoading = false
+      }
+    )
+    builder.addCase(
+      fetchPokemonEvolution.rejected,
+      ({ evolution }, { payload }) => {
+        // update error
+        evolution.error.status = payload.status
+        evolution.error.message = payload.data
+      }
+    )
   },
 })
 

@@ -120,6 +120,16 @@ const pokemonSlice = createSlice({
       fetchPokemonBiology.fulfilled,
       ({ biology }, { payload }) => {
         biology.data = payload
+        // filter english info
+        const biologyList = biology.data.flavor_text_entries.filter(
+          (entry) => entry.language.name == 'en'
+        )
+        biology.data.flavor_text_entries = biologyList
+        // genus
+        const genusInfo = biology.data.genera.filter(
+          (entry) => entry.language.name == 'en'
+        )
+        biology.data.genera = genusInfo[0].genus
         // stop loading
         biology.isLoading = false
       }

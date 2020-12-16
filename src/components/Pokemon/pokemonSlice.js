@@ -93,8 +93,8 @@ const pokemonSlice = createSlice({
   name: 'pokemon',
   initialState,
   reducers: {
-    toggleStatus(state, action) {
-      state.info.isLoading = action.payload
+    toggleLoading(state, action) {
+      state.info.isLoading = !state.info.isLoading
     },
   },
   extraReducers: (builder) => {
@@ -166,7 +166,7 @@ const pokemonSlice = createSlice({
 })
 
 // export actions
-export const { toggleStatus } = pokemonSlice.actions
+export const { toggleLoading } = pokemonSlice.actions
 
 // export reducer
 export default pokemonSlice.reducer

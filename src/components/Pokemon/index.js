@@ -5,6 +5,9 @@ import { useRouter } from 'next/router'
 import { fetchPokemonData } from './pokemonSlice'
 // components
 import Loading from '../Loading'
+import Header from '../Header'
+import Box from '../Box'
+import Info from './Info'
 
 export default function Homepage() {
   // router
@@ -32,10 +35,12 @@ export default function Homepage() {
       {pokemonInfo.isLoading ? (
         <Loading />
       ) : (
-        <main>
-          <div>Selected Pokemon:</div>
-          <div>{router.query.id}</div>
-        </main>
+        <>
+          <Header />
+          <Box as="main" constrained margin="auto">
+            <Info />
+          </Box>
+        </>
       )}
     </>
   )

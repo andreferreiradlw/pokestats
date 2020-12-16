@@ -1,4 +1,5 @@
-import styled, { css } from 'styled-components'
+import styled, { css, keyframes } from 'styled-components'
+import Box from '../../Box'
 
 const Name = styled.h1`
   font-size: 2.5rem;
@@ -42,7 +43,31 @@ const Id = styled.span`
     }
   `}
 `
+// Create the keyframes
+const float = keyframes`
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(10px)
+  }
+  100% {
+    transform: translateY(0px)
+  }
+`
+// image
+const ImageContainer = styled(Box)`
+  min-height: 500px;
+`
+const Image = styled.img`
+  max-width: 70%;
+  margin-bottom: 10%;
+
+  @media (prefers-reduced-motion: no-preference) {
+    animation: ${float} infinite 3s ease-in-out;
+  }
+`
 
 // image section
 
-export { Name, Id }
+export { Name, Id, ImageContainer, Image }

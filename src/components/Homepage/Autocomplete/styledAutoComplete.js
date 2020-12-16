@@ -1,21 +1,17 @@
 import styled, { css } from 'styled-components'
+import Box from '../../Box'
 
-const Container = styled.section`
-  position: relative;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: stretch;
+const Container = styled(Box)`
   width: 90%;
   max-width: 850px;
-  margin: 0 auto;
+  position: relative;
 
   ${({ theme }) => css`
-    @media ${theme.device.mobileL} {
+    @media ${theme.device.sm} {
       width: 75%;
     }
-    @media ${theme.device.laptop} {
+    @media ${theme.device.lg} {
       width: 55%;
-      max-width: 800px;
     }
   `}
 `

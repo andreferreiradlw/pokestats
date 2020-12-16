@@ -3,6 +3,8 @@ import { useRouter } from 'next/router'
 import { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { filterPokemon } from '../homeSlice'
+// helpers
+import { capitalize } from '../../../helpers/typography'
 // components
 import {
   Container,
@@ -14,9 +16,6 @@ import {
 } from './styledAutoComplete'
 // icons
 import SearchIcon from '../../../../public/images/search.svg'
-
-// capitalise 1st letter of the string
-const capitalize = (string) => string.charAt(0).toUpperCase() + string.slice(1)
 
 export default function Autocomplete() {
   // router
@@ -41,7 +40,13 @@ export default function Autocomplete() {
 
   return (
     <>
-      <Container>
+      <Container
+        align="stretch"
+        direction="row"
+        grow={false}
+        margin="0 auto"
+        noGutter
+      >
         <Input
           value={search}
           onChange={(e) => {
@@ -50,7 +55,7 @@ export default function Autocomplete() {
           }}
           type="text"
           placeholder="Search Pokemon Name or ID"
-        />
+        ></Input>
         <Link as={`/pokemon/${search}`} href="/pokemon/[id]">
           <Button disabled={!search}>
             <SearchIcon />

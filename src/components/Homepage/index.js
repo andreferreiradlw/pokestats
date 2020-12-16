@@ -1,6 +1,7 @@
 import { useSelector } from 'react-redux'
-// component
-import { Container, Heading } from './styledHomepage'
+// components
+import { Heading } from './styledHomepage'
+import Box from '../Box'
 import Autocomplete from './Autocomplete'
 import Particles from '../Particles'
 import Loading from '../Loading'
@@ -14,10 +15,10 @@ export default function Homepage() {
         <Loading />
       ) : (
         <>
-          <Container>
+          <Box as="main" constrained margin="auto" height="100vh">
             <Heading>PokeStats</Heading>
             <Autocomplete />
-          </Container>
+          </Box>
           <Particles />
         </>
       )}

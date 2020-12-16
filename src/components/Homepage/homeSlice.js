@@ -50,8 +50,8 @@ const homeSlice = createSlice({
         state.filteredList = []
       }
     },
-    toggleStatus(state, action) {
-      state.loading = action.payload
+    toggleLoading(state, action) {
+      state.loading = !state.loading
     },
   },
   extraReducers: (builder) => {
@@ -75,7 +75,7 @@ const homeSlice = createSlice({
 })
 
 // export actions
-export const { filterPokemon, toggleStatus } = homeSlice.actions
+export const { filterPokemon, toggleLoading } = homeSlice.actions
 
 // export reducer
 export default homeSlice.reducer

@@ -41,10 +41,13 @@ const GlobalStyle = createGlobalStyle`
     font-size: 1rem;
     margin: 0;
     background-color: white;
-    font-family: 'Lato', sans-serif;
+    font-family: 'Open Sans', sans-serif;
   }
   input, textarea, button {
     font-family: inherit
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Lato', sans-serif;
   }
 
   // Layout & box sizing

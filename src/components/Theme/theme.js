@@ -1,26 +1,18 @@
-const size = {
-  mobileS: '320px',
-  mobileM: '375px',
-  mobileL: '425px',
-  tablet: '768px',
-  laptop: '1024px',
-  laptopL: '1440px',
-  desktop: '2560px',
-}
+import { breakpoints } from '../../helpers/box'
 
 const theme = {
   device: {
-    mobileS: `(min-width: ${size.mobileS})`,
-    mobileM: `(min-width: ${size.mobileM})`,
-    mobileL: `(min-width: ${size.mobileL})`,
-    tablet: `(min-width: ${size.tablet})`,
-    laptop: `(min-width: ${size.laptop})`,
-    laptopL: `(min-width: ${size.laptopL})`,
-    desktop: `(min-width: ${size.desktop})`,
-    desktopL: `(min-width: ${size.desktop})`,
+    xxs: `(min-width: ${breakpoints.xxs}rem)`,
+    xs: `(min-width: ${breakpoints.xs}rem)`,
+    sm: `(min-width: ${breakpoints.sm}rem)`,
+    md: `(min-width: ${breakpoints.md}rem)`,
+    lg: `(min-width: ${breakpoints.lg}rem)`,
+    xl: `(min-width: ${breakpoints.xl}rem)`,
+    xxl: `(min-width: ${breakpoints.xxl}rem)`,
   },
   container: {
-    maxWidth: '1920px',
+    maxWidth: '1200px',
+    padding: '0 2rem',
   },
   autoComplete: {
     input: {
@@ -53,6 +45,9 @@ const theme = {
         backgroundColor: '#000',
       },
     },
+  },
+  header: {
+    backgroundColor: '#E3350D',
   },
   homepage: {
     heading: {

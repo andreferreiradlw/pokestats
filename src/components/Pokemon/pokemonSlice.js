@@ -11,7 +11,7 @@ const pokemonAdapter = createEntityAdapter()
 // initial state
 const initialState = pokemonAdapter.getInitialState({
   biology: {
-    data: null,
+    data: {},
     isLoading: true,
     error: {
       status: 'OK',
@@ -19,7 +19,7 @@ const initialState = pokemonAdapter.getInitialState({
     },
   },
   info: {
-    data: null,
+    data: {},
     isLoading: true,
     error: {
       status: 'OK',
@@ -27,7 +27,7 @@ const initialState = pokemonAdapter.getInitialState({
     },
   },
   evolution: {
-    data: null,
+    data: {},
     isLoading: true,
     error: {
       status: 'OK',
@@ -60,6 +60,7 @@ export const fetchPokemonData = createAsyncThunk(
 export const fetchPokemonBiology = createAsyncThunk(
   'home/fetchPokemonBiology',
   async (biologyUrl, { dispatch, rejectWithValue }) => {
+    // await new Promise((resolve) => setTimeout(resolve, 2000))
     try {
       const response = await axios.get(biologyUrl)
       console.log('biology', response.data)

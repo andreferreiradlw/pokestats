@@ -73,9 +73,8 @@ export const BoxWrapper = styled.div`
       flex-wrap: ${flexWrap};
     `};
   ${({ widthProp }) =>
-    widthProp &&
     css`
-      width: ${widthProp};
+      width: ${widthProp || '100%'};
     `}
   ${({ heightProp }) =>
     heightProp &&

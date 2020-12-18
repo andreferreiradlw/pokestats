@@ -8,7 +8,7 @@ export default function Box({
   constrained,
   direction = 'column',
   fill,
-  flexWrap = 'wrap',
+  flexWrap = 'nowrap',
   grow = true,
   height,
   justify = 'center',

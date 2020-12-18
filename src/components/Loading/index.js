@@ -1,3 +1,5 @@
+import Box from '../Box'
+
 export default function Loading() {
-  return <div>LOADING!</div>
+  return <Box noGutter>LOADING!</Box>
 }

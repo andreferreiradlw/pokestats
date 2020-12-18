@@ -33,13 +33,7 @@ export default function HeaderComponent() {
 
   return (
     <Header forwardedAs="header">
-      <Box
-        constrained
-        direction="row"
-        justify="space-between"
-        margin="auto"
-        width="100%"
-      >
+      <Box constrained direction="row" justify="space-between" margin="auto">
         POKESTATS
         <Select onChange={(e) => dispatch(changeVersion(e.target.value))}>
           {gameVersions.map(({ name, value }, index) => (

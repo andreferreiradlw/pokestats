@@ -15,7 +15,7 @@ import {
   Option,
 } from './styledAutoComplete'
 // icons
-import SearchIcon from '../../../../public/images/search.svg'
+import SearchIcon from '../../../assets/svg/search.svg'
 
 export default function Autocomplete() {
   // router

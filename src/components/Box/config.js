@@ -14,8 +14,8 @@ export const boxConfig = {
   // box gutter
   gutterWidth: {
     xxs: '0 0.5rem',
-    md: '0 1rem',
-    lg: '0 1.5rem',
+    md: '0 1.5rem',
+    lg: '0 2rem',
   },
   constrained: '1300px',
 }

@@ -35,7 +35,7 @@ export const BoxWrapper = styled.div`
       ${flexWrap && responsiveProps('flex-wrap', flexWrap)}
       // spacing
       ${margin && responsiveProps('margin', margin)}
-      ${padding && responsiveProps('padding', pading)}
+      ${padding && responsiveProps('padding', padding)}
       // sizing
       ${widthProp && responsiveProps('width', widthProp)}
       ${heightProp && responsiveProps('height', heightProp)}

@@ -1,4 +1,5 @@
 language: node_js
+os: linux
 node_js:
   - 12
 cache:
@@ -11,9 +12,10 @@ script:
   - npm run export
   - touch out/.nojekyll
 deploy:
+  strategy: git
   provider: pages
   skip_cleanup: true
-  github_token: $github_token
+  token: $github_token
   local_dir: out
   on:
     branch: main

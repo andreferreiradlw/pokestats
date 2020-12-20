@@ -12,7 +12,7 @@
     "quotes": [2, "single", { "avoidEscape": true }],
     "module-resolver/use-alias": 2
   },
-  "plugins": ["react", "import", "module-resolver"],
+  "plugins": ["react", "import", "styled-components"],
   "parser": "babel-eslint",
   "parserOptions": {
     "ecmaVersion": 2018,

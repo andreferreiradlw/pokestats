@@ -59,7 +59,12 @@ export default function Autocomplete() {
             )
           }
         />
-        <Link as={`/pokemon/${search}`} href="/pokemon/[id]">
+        <Link
+          as={`/pokemon/${
+            filteredPokemonList[0] !== undefined && filteredPokemonList[0].name
+          }`}
+          href="/pokemon/[id]"
+        >
           <Button disabled={!search}>
             <SearchIcon />
           </Button>

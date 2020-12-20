@@ -45,7 +45,7 @@ export default function Autocomplete() {
           value={search}
           onChange={(e) => {
             setSearch(e.target.value)
-            dispatch(filterPokemon(e.target.value))
+            dispatch(filterPokemon(e.target.value.toLowerCase()))
           }}
           type="text"
           placeholder="Search Pokemon Name or ID"

@@ -1,9 +1,11 @@
 // redux
 import { useDispatch } from 'react-redux'
 import { changeVersion } from './gameSlice'
+// next
+import Link from 'next/link'
 // styled
 import Box from '../Box'
-import { Header, Container, Select } from './styledHeader'
+import { Heading, SelectContainer } from './styledHeader'
 
 const gameVersions = [
   { name: 'Red', value: 'red' },
@@ -32,17 +34,23 @@ export default function HeaderComponent() {
   const dispatch = useDispatch()
 
   return (
-    <Header forwardedAs="header">
-      <Box constrained direction="row" justify="space-between" margin="auto">
-        POKESTATS
-        <Select onChange={(e) => dispatch(changeVersion(e.target.value))}>
-          {gameVersions.map(({ name, value }, index) => (
-            <option key={index} value={value}>
-              {name}
-            </option>
-          ))}
-        </Select>
+    <Box as="header" withGutter margin="0 0 2rem">
+      <Box constrained align="flex-start" margin="auto" padding="2rem 0 0">
+        <Link href="/">
+          <Heading>PokeStats</Heading>
+        </Link>
+        {/** Select */}
+        <SelectContainer direction="row" justify="flex-start">
+          <span>Game Version:</span>
+          <select onChange={(e) => dispatch(changeVersion(e.target.value))}>
+            {gameVersions.map(({ name, value }, index) => (
+              <option key={index} value={value}>
+                {name}
+              </option>
+            ))}
+          </select>
+        </SelectContainer>
       </Box>
-    </Header>
+    </Box>
   )
 }

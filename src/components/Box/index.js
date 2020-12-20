@@ -11,23 +11,23 @@ export default function Box({
   flexWrap = 'nowrap',
   grow = true,
   height,
+  hide,
   justify = 'center',
   sizes,
-  width,
+  width = '100%',
   ...rest
 }) {
   return (
     <BoxWrapper
-      align={align}
+      alignProp={align}
       as={as}
-      background={background}
       constrained={constrained}
       fillProp={fill}
       flexDirection={direction}
       flexWrap={flexWrap}
       growProp={grow}
       heightProp={height}
-      justify={justify}
+      justifyProp={justify}
       sizesProp={sizes}
       widthProp={width}
       {...rest}

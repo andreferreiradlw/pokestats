@@ -12,27 +12,35 @@ const gutterStyle = () => css`
 `
 
 export const BoxWrapper = styled.div`
-  /** generic styles */
-  ${({ alignSelf }) =>
-    alignSelf &&
-    css`
-      align-self: ${alignSelf};
-    `}
-  ${({ margin }) =>
-    margin &&
-    css`
-      margin: ${margin};
-    `}
-  ${({ padding }) =>
-    padding &&
-    css`
-      padding: ${padding};
-    `}
-  ${({ hide }) =>
-    hide &&
-    css`
-      display: none;
-    `}
+  /** dynamic styles */
+  ${({
+    alignSelf,
+    margin,
+    padding,
+    hide,
+    flexWrap,
+    widthProp,
+    heightProp,
+    flexDirection,
+    alignProp,
+    justifyProp,
+  }) => {
+    return css`
+      // flexbox styles
+      display: ${hide ? `none` : `flex`};
+      ${flexDirection && responsiveProps('flex-direction', flexDirection)}
+      ${alignProp && responsiveProps('align-items', alignProp)}
+      ${justifyProp && responsiveProps('justify-content', justifyProp)}
+      ${alignSelf && responsiveProps('align-self', alignSelf)}
+      ${flexWrap && responsiveProps('flex-wrap', flexWrap)}
+      // spacing
+      ${margin && responsiveProps('margin', margin)}
+      ${padding && responsiveProps('padding', pading)}
+      // sizing
+      ${widthProp && responsiveProps('width', widthProp)}
+      ${heightProp && responsiveProps('height', heightProp)}
+    `
+  }}
 
   /** column-based flex size */
   ${({ constrained, sizesProp }) =>
@@ -53,7 +61,7 @@ export const BoxWrapper = styled.div`
       flex-grow: ${growProp ? 1 : 0};
     `}
   
-  /** max-width */
+  /** constrained max-width */
   ${({ constrained }) =>
     constrained &&
     css`
@@ -61,35 +69,8 @@ export const BoxWrapper = styled.div`
       max-width: ${boxConfig.constrained};
     `};
 
-  /** conditional styles */
-  ${({ hide }) =>
-    !hide &&
-    css`
-      display: flex;
-    `}
-  ${({ flexWrap }) =>
-    flexWrap &&
-    css`
-      flex-wrap: ${flexWrap};
-    `};
-  ${({ widthProp }) =>
-    css`
-      width: ${widthProp || '100%'};
-    `}
-  ${({ heightProp }) =>
-    heightProp &&
-    css`
-      height: ${heightProp};
-    `}
-
   /** gutter */
-  ${({ padding, noGutter }) => !padding && !noGutter && gutterStyle()}
-
-  /** responsive props */
-  ${({ flexDirection }) =>
-    flexDirection && responsiveProps('flex-direction', flexDirection)}
-  ${({ align }) => align && responsiveProps('align-items', align)}
-  ${({ justify }) => justify && responsiveProps('justify-content', justify)}
+  ${({ padding, withGutter }) => !padding && withGutter && gutterStyle()}
 
   /** debug */
   ${({ debug }) => debug && debugStyle()}

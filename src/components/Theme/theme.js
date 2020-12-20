@@ -1,4 +1,4 @@
-import { breakpoints } from '../../helpers/box'
+import { breakpoints } from '../Box/config'
 
 const theme = {
   device: {

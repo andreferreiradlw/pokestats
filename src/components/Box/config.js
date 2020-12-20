@@ -1,10 +1,21 @@
+export const dimensions = ['xxs', 'xs', 'sm', 'md', 'lg', 'xl', 'xxl']
+
+export const breakpoints = {
+  xxs: 0.1,
+  xs: 24, // 375px
+  sm: 27, // 425px
+  md: 48, // 768px
+  lg: 64, // 1024px
+  xl: 90, // 1440px
+  xxl: 160, // 2560px
+}
+
 export const boxConfig = {
   // box gutter
   gutterWidth: {
     xxs: '0 0.5rem',
-    xs: '0 1rem',
-    md: '0 1.5rem',
-    lg: '0 2rem',
+    md: '0 1rem',
+    lg: '0 1.5rem',
   },
-  constrained: '1200px',
+  constrained: '1300px',
 }

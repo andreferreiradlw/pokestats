@@ -1,16 +1,7 @@
 import { css } from 'styled-components'
+// config
+import { dimensions, breakpoints } from '../components/Box/config'
 
-const dimensions = ['xxs', 'xs', 'sm', 'md', 'lg', 'xl', 'xxl']
-
-export const breakpoints = {
-  xxs: 0.1,
-  xs: 24, // 375px
-  sm: 27, // 425px
-  md: 48, // 768px
-  lg: 64, // 1024px
-  xl: 90, // 1440px
-  xxl: 160, // 2560px
-}
 /**
  * Creates the media-query syntax with the provided content inside.
  * @param {number} breakpoint The rem value for min-width. These should come from ../constants

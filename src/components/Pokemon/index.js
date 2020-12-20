@@ -4,9 +4,8 @@ import { useRouter } from 'next/router'
 // action
 import { fetchPokemonData } from './pokemonSlice'
 // components
+import Layout from '../Layout'
 import Loading from '../Loading'
-import Header from '../Header'
-import Box from '../Box'
 import Info from './Info'
 
 export default function Homepage() {
@@ -35,12 +34,9 @@ export default function Homepage() {
       {pokemonInfo.isLoading ? (
         <Loading />
       ) : (
-        <>
-          <Header />
-          <Box as="main" constrained margin="auto">
-            <Info />
-          </Box>
-        </>
+        <Layout withHeader>
+          <Info />
+        </Layout>
       )}
     </>
   )

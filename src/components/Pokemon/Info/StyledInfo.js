@@ -4,7 +4,7 @@ import Box from '../../Box'
 const Name = styled.h1`
   font-size: 2.5rem;
   line-height: 3rem;
-  font-weight: 700;
+  font-weight: 600;
 
   ${({ theme }) => css`
     @media ${theme.device.xs} {
@@ -66,7 +66,7 @@ const Image = styled.img`
 `
 
 const Genera = styled.p`
-  font-weight: 700;
+  font-weight: 500;
   margin-bottom: 0.5rem;
 `
 const Flavor = styled.p`

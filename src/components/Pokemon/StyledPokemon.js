@@ -18,7 +18,7 @@ const DescriptionList = styled(Box)`
 
   & td {
     padding: 6px 16px;
-    font-weight: 600;
+    font-weight: 500;
 
     & span:not(:last-of-type) {
       margin-right: 0.5rem;

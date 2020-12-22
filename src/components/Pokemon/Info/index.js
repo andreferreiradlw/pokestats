@@ -19,7 +19,14 @@ export default function Info() {
 
   // data
   const { types, abilities, id, name, weight, height } = pokemonInfo.data
-  const { genera, flavor_text_entries } = pokemonBio.data
+  const {
+    genera,
+    flavor_text_entries,
+    shape,
+    is_baby,
+    is_legendary,
+    is_mythical,
+  } = pokemonBio.data
 
   // flavor text
   const flavorText = (version) => {
@@ -49,7 +56,12 @@ export default function Info() {
           <Loading />
         ) : (
           <>
-            <Genera>{genera}</Genera>
+            <Genera>
+              {is_baby && `Baby `}
+              {is_legendary && `Legendary `}
+              {is_mythical && `Mythical `}
+              Pokemon
+            </Genera>
             {gameVersion && <Flavor>{flavorText(gameVersion)}</Flavor>}
             <DescriptionList forwardedAs="table" align="flex-start">
               <tbody>
@@ -77,6 +89,10 @@ export default function Info() {
                     })}
                   </td>
                 </tr>
+                <tr>
+                  <th>Shape</th>
+                  <td>{capitalize(shape.name)}</td>
+                </tr>
               </tbody>
             </DescriptionList>
           </>
@@ -90,8 +106,8 @@ export default function Info() {
         </ImageContainer>
 
         <Box direction={{ xxs: 'column', md: 'row' }}>
-          <Training sizes={{ xxs: 12, md: 6 }} />
-          <Breeding sizes={{ xxs: 12, md: 6 }} />
+          <Training />
+          <Breeding />
         </Box>
       </Box>
     </Box>

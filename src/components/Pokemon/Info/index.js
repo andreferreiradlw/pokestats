@@ -4,7 +4,14 @@ import { capitalize } from '../../../helpers/typography'
 // components
 import Loading from '../../Loading'
 import Box from '../../Box'
-import { Name, ImageContainer, Image, Genera, Flavor } from './StyledInfo'
+import {
+  Name,
+  ImageContainer,
+  Image,
+  Genera,
+  Flavor,
+  Ability,
+} from './StyledInfo'
 import { DescriptionList } from '../StyledPokemon'
 import Training from './Training'
 import Breeding from './Breeding'
@@ -51,17 +58,19 @@ export default function Info() {
     >
       <Box sizes={5} align="flex-start">
         <Name>{capitalize(name)}</Name>
-        Type Badges
+        Type badges go here with some border bottom
         {pokemonBio.isLoading ? (
           <Loading />
         ) : (
           <>
-            <Genera>
-              {is_baby && `Baby `}
-              {is_legendary && `Legendary `}
-              {is_mythical && `Mythical `}
-              Pokemon
-            </Genera>
+            {(is_baby || is_legendary || is_mythical) && (
+              <Genera>
+                {is_baby && `Baby `}
+                {is_legendary && `Legendary `}
+                {is_mythical && `Mythical `}
+                Pokemon
+              </Genera>
+            )}
             {gameVersion && <Flavor>{flavorText(gameVersion)}</Flavor>}
             <DescriptionList forwardedAs="table" align="flex-start">
               <tbody>
@@ -84,8 +93,13 @@ export default function Info() {
                 <tr>
                   <th>Abilities</th>
                   <td>
-                    {abilities.map(({ ability }, i) => {
-                      return <span key={i}>{capitalize(ability.name)}</span>
+                    {abilities.map(({ ability, is_hidden }, i) => {
+                      return (
+                        <Ability isHidden={is_hidden} key={i}>
+                          {`${i + 1}. ${capitalize(ability.name)} `}
+                          {is_hidden && '(Hidden Ability)'}
+                        </Ability>
+                      )
                     })}
                   </td>
                 </tr>

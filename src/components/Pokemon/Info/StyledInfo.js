@@ -5,6 +5,7 @@ const Name = styled.h1`
   font-size: 2.5rem;
   line-height: 3rem;
   font-weight: 600;
+  margin-bottom: 0.5rem;
 
   ${({ theme }) => css`
     @media ${theme.device.xs} {
@@ -40,23 +41,27 @@ const float = keyframes`
 `
 // image
 const ImageContainer = styled(Box)`
-  min-height: 500px;
+  ${({ theme }) => css`
+    @media ${theme.device.lg} {
+      min-height: 500px;
+    }
+  `}
 `
 const Image = styled.img`
   max-width: 80%;
 
   ${({ theme }) => css`
     @media ${theme.device.xs} {
-      max-width: 55%;
+      max-width: 70%;
     }
     @media ${theme.device.sm} {
-      max-width: 50%;
+      max-width: 65%;
     }
     @media ${theme.device.md} {
-      max-width: 40%;
+      max-width: 60%;
     }
     @media ${theme.device.lg} {
-      max-width: 50%;
+      max-width: 55%;
     }
   `}
 
@@ -70,7 +75,22 @@ const Genera = styled.p`
   margin-bottom: 0.5rem;
 `
 const Flavor = styled.p`
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
 `
 
-export { Name, ImageContainer, Image, Genera, Flavor }
+const Ability = styled.span`
+  width: 100%;
+  display: block;
+
+  &:not(:last-of-type) {
+    padding-bottom: 6px;
+  }
+
+  ${(props) =>
+    props.isHidden &&
+    css`
+      font-weight: 300;
+    `}
+`
+
+export { Name, ImageContainer, Image, Genera, Flavor, Ability }

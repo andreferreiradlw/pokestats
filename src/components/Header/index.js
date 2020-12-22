@@ -28,6 +28,14 @@ const gameVersions = [
   { name: 'White', value: 'white' },
   { name: 'Black 2', value: 'black-2' },
   { name: 'White 2', value: 'white-2' },
+  { name: 'X', value: 'x' },
+  { name: 'Y', value: 'y' },
+  { name: 'Omega Ruby', value: 'omega-ruby' },
+  { name: 'Alpha Sapphire', value: 'alpha-sapphire' },
+  { name: "Let's Go Pikachu", value: 'lets-go-pikachu' },
+  { name: "Let's Go Eevee", value: 'lets-go-eevee' },
+  { name: 'Sword', value: 'sword' },
+  { name: 'Shield', value: 'shield' },
 ]
 
 export default function HeaderComponent() {

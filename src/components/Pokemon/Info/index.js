@@ -3,9 +3,11 @@ import { useSelector } from 'react-redux'
 import { capitalize } from '../../../helpers/typography'
 // components
 import Loading from '../../Loading'
+import Box from '../../Box'
 import { Name, ImageContainer, Image, Genera, Flavor } from './StyledInfo'
 import { DescriptionList } from '../StyledPokemon'
-import Box from '../../Box'
+import Training from './Training'
+import Breeding from './Breeding'
 
 export default function Info() {
   // pokemon info
@@ -34,7 +36,12 @@ export default function Info() {
   }
 
   return (
-    <Box as="section" direction={{ xxs: 'column', lg: 'row' }} margin="2rem 0">
+    <Box
+      as="section"
+      direction={{ xxs: 'column', lg: 'row' }}
+      margin="2rem 0"
+      constrained
+    >
       <Box sizes={5} align="flex-start">
         <Name>{capitalize(name)}</Name>
         Type Badges
@@ -76,14 +83,16 @@ export default function Info() {
         )}
       </Box>
       <Box sizes={7} debug>
-        {/** Image */}
         <ImageContainer sizes={12}>
           <Image
             src={`https://pokeres.bastionbot.org/images/pokemon/${id}.png`}
           />
         </ImageContainer>
-        {/** Training */}
-        {/** Breeding */}
+
+        <Box direction={{ xxs: 'column', md: 'row' }}>
+          <Training sizes={{ xxs: 12, md: 6 }} />
+          <Breeding sizes={{ xxs: 12, md: 6 }} />
+        </Box>
       </Box>
     </Box>
   )

@@ -53,7 +53,7 @@ export default function Info() {
     <Box
       as="section"
       direction={{ xxs: 'column', lg: 'row' }}
-      margin="2rem 0"
+      margin="0 0 2rem"
       constrained
     >
       <Box sizes={5} align="flex-start">

@@ -112,7 +112,7 @@ export default function Info() {
           </>
         )}
       </Box>
-      <Box sizes={7} debug>
+      <Box sizes={7}>
         <ImageContainer sizes={12}>
           <Image
             src={`https://pokeres.bastionbot.org/images/pokemon/${id}.png`}

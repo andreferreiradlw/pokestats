@@ -51,10 +51,15 @@ export default function Autocomplete() {
           value={search}
           onChange={(e) => {
             setSearch(e.target.value)
-            dispatch(filterPokemon(e.target.value))
+            dispatch(filterPokemon(e.target.value.toLowerCase()))
           }}
           type="text"
           placeholder="Search Pokemon Name or ID"
+          onKeyDown={(e) =>
+            e.code === 'Enter' &&
+            filteredPokemonList[0] !== undefined &&
+            router.push(`/pokemon/${filteredPokemonList[0].name}`)
+          }
         ></Input>
         <Link as={`/pokemon/${search}`} href="/pokemon/[id]">
           <Button disabled={!search}>

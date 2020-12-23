@@ -75,7 +75,6 @@ export default function Info() {
             })}
           </TypeContainer>
         )}
-
         {pokemonBio.isLoading ? (
           <Loading />
         ) : (

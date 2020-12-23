@@ -4,10 +4,12 @@ import { capitalize } from '../../../helpers/typography'
 // components
 import Loading from '../../Loading'
 import Box from '../../Box'
+import TypeBadge from '../../TypeBadge'
 import {
   Name,
   ImageContainer,
   Image,
+  TypeContainer,
   Genera,
   Flavor,
   Ability,
@@ -58,7 +60,22 @@ export default function Info() {
     >
       <Box sizes={5} align="flex-start">
         <Name>{capitalize(name)}</Name>
-        Type badges go here with some border bottom
+        {types.length > 0 && (
+          <TypeContainer
+            direction="row"
+            justify="flex-start"
+            margin="0 0 1.5rem"
+          >
+            {types.map(({ type }, i) => {
+              return (
+                <TypeBadge type={type.name} key={i}>
+                  {type.name}
+                </TypeBadge>
+              )
+            })}
+          </TypeContainer>
+        )}
+
         {pokemonBio.isLoading ? (
           <Loading />
         ) : (

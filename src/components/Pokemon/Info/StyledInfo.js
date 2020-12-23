@@ -70,6 +70,9 @@ const Image = styled.img`
   }
 `
 
+// type
+const TypeContainer = styled(Box)``
+
 const Genera = styled.p`
   font-weight: 500;
   margin-bottom: 0.5rem;
@@ -93,4 +96,4 @@ const Ability = styled.span`
     `}
 `
 
-export { Name, ImageContainer, Image, Genera, Flavor, Ability }
+export { Name, ImageContainer, Image, TypeContainer, Genera, Flavor, Ability }

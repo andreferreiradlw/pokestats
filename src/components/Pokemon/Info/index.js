@@ -61,11 +61,7 @@ export default function Info() {
       <Box sizes={5} align="flex-start">
         <Name>{capitalize(name)}</Name>
         {types.length > 0 && (
-          <TypeContainer
-            direction="row"
-            justify="flex-start"
-            margin="0 0 1.5rem"
-          >
+          <TypeContainer direction="row" justify="flex-start" flexWrap="wrap">
             {types.map(({ type }, i) => {
               return (
                 <TypeBadge type={type.name} key={i}>

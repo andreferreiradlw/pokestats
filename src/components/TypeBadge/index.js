@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 // helpers
 import { capitalize } from '../../helpers/typography'
 // components
@@ -11,9 +11,15 @@ const Badge = styled(Box)`
     theme.typeBadge.backgroundColor[type]};
   color: ${({ theme }) => theme.typeBadge.color};
   font-family: 'Quicksand', sans-serif;
-  font-size: 1.2rem;
+  font-size: 1rem;
   font-weight: 600;
   border-radius: 4px;
+
+  ${({ theme }) => css`
+    @media ${theme.device.lg} {
+      font-size: 1.2rem;
+    }
+  `}
 
   & svg {
     width: 25px;
@@ -61,7 +67,7 @@ export default function TypeBadge({ type, hideIcon, ...rest }) {
       width="auto"
       grow={0}
       padding="0.5rem 1.5rem"
-      margin="0 1rem 0 0"
+      margin="0 1rem 1rem 0"
       type={type}
       {...rest}
     >

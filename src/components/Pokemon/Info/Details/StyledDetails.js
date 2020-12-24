@@ -1,0 +1,56 @@
+import styled, { css } from 'styled-components'
+import Box from '../../../Box'
+
+const Name = styled.h1`
+  font-size: 2.5rem;
+  line-height: 3rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+
+  ${({ theme }) => css`
+    @media ${theme.device.xs} {
+      font-size: 3.5rem;
+      line-height: 4rem;
+    }
+    @media ${theme.device.sm} {
+      font-size: 5rem;
+      line-height: 5.5rem;
+    }
+    @media ${theme.device.md} {
+      font-size: 8rem;
+      line-height: 8.5rem;
+    }
+    @media ${theme.device.lg} {
+      font-size: 5.3rem;
+      line-height: 6rem;
+    }
+  `}
+`
+
+// type
+const TypeContainer = styled(Box)``
+
+const Genera = styled.p`
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+`
+const Flavor = styled.p`
+  margin-bottom: 0.5rem;
+`
+
+const Ability = styled.span`
+  width: 100%;
+  display: block;
+
+  &:not(:last-of-type) {
+    padding-bottom: 6px;
+  }
+
+  ${(props) =>
+    props.isHidden &&
+    css`
+      font-weight: 300;
+    `}
+`
+
+export { Name, TypeContainer, Genera, Flavor, Ability }

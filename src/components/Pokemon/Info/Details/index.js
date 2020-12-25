@@ -6,8 +6,8 @@ import Box from '../../../Box'
 import Loading from '../../../Loading'
 import TypeBadge from '../../../TypeBadge'
 // styles
-import { DescriptionList } from '../../StyledPokemon'
-import { Name, TypeContainer, Genera, Flavor, Ability } from './StyledDetails'
+import { Table, Numbered } from '../../StyledPokemon'
+import { Name, TypeContainer, Genera, Flavor } from './StyledDetails'
 
 export default function Details({ ...rest }) {
   // pokemon info
@@ -38,9 +38,16 @@ export default function Details({ ...rest }) {
   }
 
   // decimal number
-  const insertDecimal = (num) => {
-    return num / 10
-  }
+  const insertDecimal = (num) => num / 10
+
+  // abilities
+  const pokemonAbilities = (currAbilities) =>
+    currAbilities.map(({ ability, is_hidden }, i) => (
+      <Numbered light={is_hidden} key={i}>
+        {`${i + 1}. ${capitalize(ability.name)} `}
+        {is_hidden && '(Hidden Ability)'}
+      </Numbered>
+    ))
 
   return (
     <Box {...rest}>
@@ -69,7 +76,7 @@ export default function Details({ ...rest }) {
             </Genera>
           )}
           {gameVersion && <Flavor>{flavorText(gameVersion)}</Flavor>}
-          <DescriptionList forwardedAs="table" align="flex-start">
+          <Table forwardedAs="table" align="flex-start">
             <tbody>
               <tr>
                 <th>National №</th>
@@ -89,23 +96,14 @@ export default function Details({ ...rest }) {
               </tr>
               <tr>
                 <th>Abilities</th>
-                <td>
-                  {abilities.map(({ ability, is_hidden }, i) => {
-                    return (
-                      <Ability isHidden={is_hidden} key={i}>
-                        {`${i + 1}. ${capitalize(ability.name)} `}
-                        {is_hidden && '(Hidden Ability)'}
-                      </Ability>
-                    )
-                  })}
-                </td>
+                <td>{pokemonAbilities(abilities)}</td>
               </tr>
               <tr>
                 <th>Shape</th>
                 <td>{capitalize(shape.name)}</td>
               </tr>
             </tbody>
-          </DescriptionList>
+          </Table>
         </>
       )}
     </Box>

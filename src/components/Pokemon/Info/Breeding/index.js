@@ -5,7 +5,7 @@ import Box from '../../../Box'
 //helpers
 import { capitalize } from '../.././../../helpers/typography'
 // styles
-import { SectionTitle, DescriptionList } from '../../StyledPokemon'
+import { SectionTitle, Table, Numbered } from '../../StyledPokemon'
 
 export default function Breeding({ ...rest }) {
   // biology
@@ -23,13 +23,13 @@ export default function Breeding({ ...rest }) {
     }
   }
 
-  const eggGroups = (groups) => {
-    return groups.map((group) => capitalize(group.name)).join(', ')
-  }
+  const eggGroups = (groups) =>
+    groups.map((group, i) => (
+      <Numbered key={i}>{`${i + 1}. ${capitalize(group.name)} `}</Numbered>
+    ))
 
-  const eggCycle = (counter) => {
-    return `${counter} cycles, ${255 * (hatch_counter + 1)} steps`
-  }
+  const eggCycle = (counter) =>
+    `${counter} cycles, ${255 * (hatch_counter + 1)} steps`
 
   return (
     <>
@@ -38,7 +38,7 @@ export default function Breeding({ ...rest }) {
       ) : (
         <Box align="flex-start" margin="0 0 2rem" {...rest}>
           <SectionTitle>Breeding</SectionTitle>
-          <DescriptionList forwardedAs="table" align="flex-start">
+          <Table forwardedAs="table" align="flex-start">
             <tbody>
               <tr>
                 <th>Gender Distribution</th>
@@ -64,7 +64,7 @@ export default function Breeding({ ...rest }) {
                 <td>{capitalize(habitat.name)}</td>
               </tr>
             </tbody>
-          </DescriptionList>
+          </Table>
         </Box>
       )}
     </>

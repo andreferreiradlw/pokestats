@@ -38,19 +38,4 @@ const Flavor = styled.p`
   margin-bottom: 0.5rem;
 `
 
-const Ability = styled.span`
-  width: 100%;
-  display: block;
-
-  &:not(:last-of-type) {
-    padding-bottom: 6px;
-  }
-
-  ${(props) =>
-    props.isHidden &&
-    css`
-      font-weight: 300;
-    `}
-`
-
-export { Name, TypeContainer, Genera, Flavor, Ability }
+export { Name, TypeContainer, Genera, Flavor }

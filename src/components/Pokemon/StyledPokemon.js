@@ -19,7 +19,7 @@ const SectionTitle = styled.h2`
   `}
 `
 
-const DescriptionList = styled(Box)`
+const Table = styled(Box)`
   margin-bottom: 1.5rem;
   font-size: 1rem;
   line-height: 1.2rem;
@@ -42,4 +42,19 @@ const DescriptionList = styled(Box)`
   }
 `
 
-export { SectionTitle, DescriptionList }
+const Numbered = styled.span`
+  width: 100%;
+  display: block;
+
+  &:not(:last-of-type) {
+    padding-bottom: 6px;
+  }
+
+  ${({ light }) =>
+    light &&
+    css`
+      font-weight: 300;
+    `}
+`
+
+export { SectionTitle, Table, Numbered }

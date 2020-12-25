@@ -1,6 +1,24 @@
 import styled, { css } from 'styled-components'
 import Box from '../Box'
 
+const SectionTitle = styled.h2`
+  font-size: 2rem;
+  line-height: 2.5rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+
+  ${({ theme }) => css`
+    @media ${theme.device.xs} {
+      font-size: 2.5rem;
+      line-height: 3rem;
+    }
+    @media ${theme.device.md} {
+      font-size: 3rem;
+      line-height: 3.5rem;
+    }
+  `}
+`
+
 const DescriptionList = styled(Box)`
   margin-bottom: 1.5rem;
   font-size: 1rem;
@@ -24,4 +42,4 @@ const DescriptionList = styled(Box)`
   }
 `
 
-export { DescriptionList }
+export { SectionTitle, DescriptionList }

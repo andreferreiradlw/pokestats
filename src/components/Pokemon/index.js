@@ -30,14 +30,6 @@ export default function Homepage() {
   }, [pokemonInfo.error])
 
   return (
-    <>
-      {pokemonInfo.isLoading ? (
-        <Loading />
-      ) : (
-        <Layout withHeader>
-          <Info />
-        </Layout>
-      )}
-    </>
+    <Layout withHeader>{pokemonInfo.isLoading ? <Loading /> : <Info />}</Layout>
   )
 }

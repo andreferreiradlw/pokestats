@@ -11,7 +11,7 @@ export default function Breeding({ ...rest }) {
   // biology
   const pokemonBio = useSelector((state) => state.pokemon.biology)
   // data
-  const { gender_rate, habitat } = pokemonBio.data
+  const { gender_rate, egg_groups, habitat } = pokemonBio.data
 
   const genderRatio = (rate, sex) => {
     if (sex === 'male') {
@@ -21,6 +21,10 @@ export default function Breeding({ ...rest }) {
     } else {
       return
     }
+  }
+
+  const eggGroups = (groups) => {
+    return groups.map((group) => capitalize(group.name)).join(', ')
   }
 
   return (
@@ -45,7 +49,7 @@ export default function Breeding({ ...rest }) {
               </tr>
               <tr>
                 <th>Egg Groups</th>
-                <td>male</td>
+                <td>{eggGroups(egg_groups)}</td>
               </tr>
               <tr>
                 <th>Egg Cycles</th>

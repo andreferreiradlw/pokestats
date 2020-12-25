@@ -14,7 +14,8 @@ export default function Breeding({ ...rest }) {
   const { gender_rate, egg_groups, hatch_counter, habitat } = pokemonBio.data
 
   // gender ratio
-  const genderRatio = (rate) => `${12.5 * (8 - rate)}%, ${12.5 * rate}% female`
+  const genderRatio = (rate) =>
+    `${12.5 * (8 - rate)}% male, ${12.5 * rate}% female`
 
   // egg groups
   const eggGroups = (groups) =>
@@ -24,7 +25,7 @@ export default function Breeding({ ...rest }) {
 
   // egg hatch cycle
   const eggCycle = (counter) =>
-    `${counter} cycles, ${255 * (hatch_counter + 1)} steps`
+    `${counter} cycles ( ${255 * (hatch_counter + 1)} steps )`
 
   return (
     <>

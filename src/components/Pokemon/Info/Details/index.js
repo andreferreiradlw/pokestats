@@ -39,7 +39,7 @@ export default function Details({ ...rest }) {
 
   // weight
   const pokemonWeight = (currWeight) =>
-    `${currWeight / 10} kg (${Math.round(currWeight * 2.2046) / 10} lbs)`
+    `${currWeight / 10} kg ( ${Math.round(currWeight * 2.2046) / 10} lbs )`
 
   // height
   const pokemonHeight = (currHeight) => {
@@ -48,7 +48,7 @@ export default function Details({ ...rest }) {
     // split number
     const numbers = heightInFeet.toString().split('.')
     // return string
-    return `${currHeight / 10} m (${numbers[0]}'${numbers[1]}")`
+    return `${currHeight / 10} m ( ${numbers[0]}'${numbers[1]}" )`
   }
 
   // abilities

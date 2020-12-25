@@ -34,7 +34,9 @@ export default function Details({ ...rest }) {
       return entry.version.name === version
     })
     // return text
-    return versionEntry[0].flavor_text
+    return versionEntry.length
+      ? versionEntry[0].flavor_text
+      : 'No description available for currently selected generation.'
   }
 
   // weight

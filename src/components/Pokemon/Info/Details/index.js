@@ -37,8 +37,19 @@ export default function Details({ ...rest }) {
     return versionEntry[0].flavor_text
   }
 
-  // decimal number
-  const insertDecimal = (num) => num / 10
+  // weight
+  const pokemonWeight = (currWeight) =>
+    `${currWeight / 10} kg (${Math.round(currWeight * 2.2046) / 10} lbs)`
+
+  // height
+  const pokemonHeight = (currHeight) => {
+    // calculate height in feet
+    const heightInFeet = Math.round(currHeight * 3.2808) / 10
+    // split number
+    const numbers = heightInFeet.toString().split('.')
+    // return string
+    return `${currHeight / 10} m (${numbers[0]}'${numbers[1]}")`
+  }
 
   // abilities
   const pokemonAbilities = (currAbilities) =>
@@ -88,11 +99,11 @@ export default function Details({ ...rest }) {
               </tr>
               <tr>
                 <th>Weight</th>
-                <td>{`${insertDecimal(weight)} kg`}</td>
+                <td>{pokemonWeight(weight)}</td>
               </tr>
               <tr>
                 <th>Height</th>
-                <td>{`${insertDecimal(height)} m`}</td>
+                <td>{pokemonHeight(height)}</td>
               </tr>
               <tr>
                 <th>Abilities</th>

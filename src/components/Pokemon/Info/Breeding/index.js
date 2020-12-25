@@ -13,21 +13,16 @@ export default function Breeding({ ...rest }) {
   // data
   const { gender_rate, egg_groups, hatch_counter, habitat } = pokemonBio.data
 
-  const genderRatio = (rate, sex) => {
-    if (sex === 'male') {
-      return 12.5 * (8 - rate)
-    } else if (sex === 'female') {
-      return 12.5 * rate
-    } else {
-      return
-    }
-  }
+  // gender ratio
+  const genderRatio = (rate) => `${12.5 * (8 - rate)}%, ${12.5 * rate}% female`
 
+  // egg groups
   const eggGroups = (groups) =>
     groups.map((group, i) => (
       <Numbered key={i}>{`${i + 1}. ${capitalize(group.name)} `}</Numbered>
     ))
 
+  // egg hatch cycle
   const eggCycle = (counter) =>
     `${counter} cycles, ${255 * (hatch_counter + 1)} steps`
 
@@ -43,12 +38,7 @@ export default function Breeding({ ...rest }) {
               <tr>
                 <th>Gender Distribution</th>
                 <td>
-                  {gender_rate === -1
-                    ? 'Genderless'
-                    : `${genderRatio(gender_rate, 'male')}%, ${genderRatio(
-                        gender_rate,
-                        'female'
-                      )}% female`}
+                  {gender_rate === -1 ? 'Genderless' : genderRatio(gender_rate)}
                 </td>
               </tr>
               <tr>

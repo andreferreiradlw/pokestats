@@ -42,7 +42,7 @@ export default function HeaderComponent() {
   const dispatch = useDispatch()
 
   return (
-    <Box as="header" withGutter margin="0 0 2rem">
+    <Box as="header" withGutter>
       <Box constrained align="flex-start" margin="auto" padding="2rem 0 0">
         <Link href="/">
           <Heading>PokeStats</Heading>

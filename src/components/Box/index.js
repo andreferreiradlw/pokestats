@@ -11,7 +11,6 @@ export default function Box({
   flexWrap = 'nowrap',
   grow = true,
   height,
-  hide,
   justify = 'center',
   sizes,
   width = '100%',

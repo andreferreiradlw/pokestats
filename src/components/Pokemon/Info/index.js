@@ -30,7 +30,7 @@ export default function Info() {
         </ImageContainer>
 
         <Box
-          direction={{ xxs: 'column', sm: 'row' }}
+          direction={{ xxs: 'column', md: 'row' }}
           align={{ sm: 'flex-start' }}
         >
           <Training />

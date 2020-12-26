@@ -13,8 +13,8 @@ export default function Training({ ...rest }) {
   // biology
   const pokemonBio = useSelector((state) => state.pokemon.biology)
   // data
-  const { stats } = pokemonInfo.data
-  const { capture_rate } = pokemonBio.data
+  const { stats, base_experience } = pokemonInfo.data
+  const { capture_rate, base_happiness, growth_rate } = pokemonBio.data
 
   // EV yield
   const EVYield = (pokemonStats) => {
@@ -32,7 +32,29 @@ export default function Training({ ...rest }) {
   const catchRate = (rate) => {
     const rateChance = Math.round((100 / 255) * rate)
     // return string
-    return `${rate}\n( ${rateChance}% with pokeball, full HP )`
+    return (
+      <>
+        {rate}
+        <Numbered light>{`( ${rateChance}% with pokeball, full HP )`}</Numbered>
+      </>
+    )
+  }
+
+  // base happiness
+  const baseHappiness = (happiness) => {
+    let happinessRate
+
+    if (happiness <= 69) {
+      happinessRate = 'Lower than normal'
+    } else if ((happiness = 70)) {
+      happinessRate = 'Normal'
+    } else if (happiness >= 71 && happiness <= 139) {
+      happinessRate = 'Higher than normal'
+    } else if (happiness >= 140) {
+      happinessRate = 'Very high'
+    }
+
+    return `${happiness} ( ${happinessRate} )`
   }
 
   return (
@@ -54,15 +76,15 @@ export default function Training({ ...rest }) {
               </tr>
               <tr>
                 <th>Base Happiness</th>
-                <td>male</td>
+                <td>{baseHappiness(base_happiness)}</td>
               </tr>
               <tr>
-                <th>Base Experience</th>
-                <td>male</td>
+                <th>Base Exp.</th>
+                <td>{base_experience}</td>
               </tr>
               <tr>
                 <th>Growth Rate</th>
-                <td>male</td>
+                <td>{capitalize(growth_rate.name)}</td>
               </tr>
             </tbody>
           </Table>

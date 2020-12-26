@@ -20,7 +20,9 @@ export default function Breeding({ ...rest }) {
   // egg groups
   const eggGroups = (groups) =>
     groups.map((group, i) => (
-      <Numbered key={i}>{`${i + 1}. ${capitalize(group.name)} `}</Numbered>
+      <Numbered key={i}>
+        {`${groups.length > 1 ? (i + 1)`. ` : ``}${capitalize(group.name)}`}
+      </Numbered>
     ))
 
   // egg hatch cycle

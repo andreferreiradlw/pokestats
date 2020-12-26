@@ -50,7 +50,7 @@ export default function Details({ ...rest }) {
     // split number
     const numbers = heightInFeet.toString().split('.')
     // return string
-    return `${currHeight / 10} m ( ${numbers[0]}'${numbers[1]}" )`
+    return `${currHeight / 10} m ( ${numbers[0] || '0'}'${numbers[1] || '0'}" )`
   }
 
   // abilities

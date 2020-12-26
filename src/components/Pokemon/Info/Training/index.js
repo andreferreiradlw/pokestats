@@ -30,7 +30,7 @@ export default function Training({ ...rest }) {
 
   // catch rate
   const catchRate = (rate) => {
-    const rateChance = Math.round((100 / 255) * rate)
+    const rateChance = Math.round((33.33 / 255) * rate)
     // return string
     return (
       <>

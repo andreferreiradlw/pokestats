@@ -38,7 +38,7 @@ const Image = styled.img`
       max-width: 55%;
     }
     @media ${theme.device.lg} {
-      max-width: 50%;
+      max-width: 45%;
     }
   `}
 

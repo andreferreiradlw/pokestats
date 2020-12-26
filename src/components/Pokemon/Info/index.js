@@ -29,7 +29,10 @@ export default function Info() {
           />
         </ImageContainer>
 
-        <Box direction={{ xxs: 'column', sm: 'row' }}>
+        <Box
+          direction={{ xxs: 'column', sm: 'row' }}
+          align={{ sm: 'flex-start' }}
+        >
           <Training />
           <Breeding />
         </Box>

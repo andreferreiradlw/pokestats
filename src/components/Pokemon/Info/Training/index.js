@@ -1,4 +1,5 @@
 import { useSelector } from 'react-redux'
+import { useState, useEffect } from 'react'
 // components
 import Loading from '../../../Loading'
 import Box from '../../../Box'
@@ -12,9 +13,49 @@ export default function Training({ ...rest }) {
   const pokemonInfo = useSelector((state) => state.pokemon.info)
   // biology
   const pokemonBio = useSelector((state) => state.pokemon.biology)
+  // game version
+  const gameVersion = useSelector((state) => state.game.version)
   // data
-  const { stats, base_experience } = pokemonInfo.data
+  const { stats, base_experience, held_items } = pokemonInfo.data
   const { capture_rate, base_happiness, growth_rate } = pokemonBio.data
+
+  // held items
+  const [items, setItems] = useState([])
+
+  useEffect(() => {
+    if (held_items.length && gameVersion) {
+      // filter items with current version
+      const versionItems = held_items
+        .map(({ item, version_details }) => {
+          const filteredVersions = version_details.filter(
+            ({ version }) => version.name === gameVersion
+          )
+          // organize item info
+          if (filteredVersions.length > 0) {
+            return {
+              item_details: item,
+              version_details: filteredVersions[0],
+            }
+          }
+        })
+        .filter((currItem) => currItem)
+
+      // set items state
+      setItems(versionItems)
+    }
+  }, [gameVersion])
+
+  // held items
+  const heldItems = (items) => {
+    return items.map(({ item, version_details }, itemIndex) => {
+      return version_details.map(({ rarity, version }, i) => {
+        // console.log(version.name, gameVersion, version.name === gameVersion)
+        if (version.name === gameVersion) {
+          return <Numbered key={itemIndex}>{capitalize(item.name)}</Numbered>
+        }
+      })
+    })
+  }
 
   // EV yield
   const EVYield = (pokemonStats) => {
@@ -46,7 +87,7 @@ export default function Training({ ...rest }) {
 
     if (happiness <= 69) {
       happinessRate = 'Lower than normal'
-    } else if ((happiness = 70)) {
+    } else if (happiness === 70) {
       happinessRate = 'Normal'
     } else if (happiness >= 71 && happiness <= 139) {
       happinessRate = 'Higher than normal'
@@ -85,6 +126,20 @@ export default function Training({ ...rest }) {
               <tr>
                 <th>Growth Rate</th>
                 <td>{capitalize(growth_rate.name)}</td>
+              </tr>
+              <tr>
+                <th>Held Items</th>
+                <td>
+                  {!items.length
+                    ? 'None'
+                    : items.map((item, i) => (
+                        <Numbered key={i}>
+                          {`${capitalize(item.item_details.name)} ( ${
+                            item.version_details.rarity
+                          }% chance )`}
+                        </Numbered>
+                      ))}
+                </td>
               </tr>
             </tbody>
           </Table>

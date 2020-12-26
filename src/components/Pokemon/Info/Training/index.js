@@ -14,7 +14,7 @@ export default function Training({ ...rest }) {
   const pokemonBio = useSelector((state) => state.pokemon.biology)
   // data
   const { stats } = pokemonInfo.data
-  const {} = pokemonBio.data
+  const { capture_rate } = pokemonBio.data
 
   // EV yield
   const EVYield = (pokemonStats) => {
@@ -28,13 +28,20 @@ export default function Training({ ...rest }) {
     )
   }
 
+  // catch rate
+  const catchRate = (rate) => {
+    const rateChance = Math.round((100 / 255) * rate)
+    // return string
+    return `${rate}\n( ${rateChance}% with pokeball, full HP )`
+  }
+
   return (
     <>
       {pokemonBio.isLoading ? (
         <Loading />
       ) : (
         <Box align="flex-start" margin="0 0 2rem" {...rest}>
-          <SectionTitle>Breeding</SectionTitle>
+          <SectionTitle>Training</SectionTitle>
           <Table forwardedAs="table" align="flex-start">
             <tbody>
               <tr>
@@ -43,7 +50,7 @@ export default function Training({ ...rest }) {
               </tr>
               <tr>
                 <th>Catch Rate</th>
-                <td>male</td>
+                <td>{catchRate(capture_rate)}</td>
               </tr>
               <tr>
                 <th>Base Happiness</th>

@@ -39,6 +39,7 @@ const Table = styled(Box)`
   & td {
     padding: 6px 16px;
     font-weight: 500;
+    white-space: pre-line;
   }
 `
 

@@ -14,6 +14,14 @@ export default function BaseStats({ ...rest }) {
   // data
   const { stats } = pokemonInfo.data
 
+  // total stats
+  const totalStats = (values) =>
+    values.map((stat) => stat.base_stat).reduce((a, b) => a + b, 0)
+
+  // min stats
+
+  // max stats
+
   return (
     <Box align="flex-start" margin="0 0 2rem" {...rest}>
       <SectionTitle>Base Stats</SectionTitle>
@@ -32,7 +40,7 @@ export default function BaseStats({ ...rest }) {
           ))}
           <tr>
             <th>Total</th>
-            <td>900</td>
+            <td>{totalStats(stats)}</td>
             <td></td>
             <td>Min</td>
             <td>Max</td>

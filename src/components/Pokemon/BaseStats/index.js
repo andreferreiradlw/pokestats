@@ -24,24 +24,39 @@ export default function BaseStats({ ...rest }) {
     return percentage > 100 ? 100 : percentage
   }
 
-  // min stats
+  // calculate stats
+  const statsCalc = (statType, baseStat, statName) => {
+    const EV = statType === 'min' ? 0 : 252
+    const IV = statType === 'min' ? 0 : 31
+    const level = 100
+    const nature = statType === 'min' ? 0.9 : 1.1
 
-  // max stats
+    // https://bulbapedia.bulbagarden.net/wiki/Statistic
+    if (statName === 'hp') {
+      return Math.floor(
+        ((2 * baseStat + IV + EV / 4) * level) / 100 + level + 10
+      )
+    } else {
+      return Math.floor(
+        Math.floor(((2 * baseStat + IV + EV / 4) * level) / 100 + 5) * nature
+      )
+    }
+  }
 
   return (
     <Box align={{ sm: 'center', md: 'flex-start' }} margin="0 0 2rem" {...rest}>
       <SectionTitle>Base Stats</SectionTitle>
       <StatsTable forwardedAs="table" align="flex-start">
         <tbody>
-          {stats.map(({ base_stat, effort, stat }, i) => (
+          {stats.map(({ base_stat, stat }, i) => (
             <tr key={i}>
               <th>{capitalize(stat.name)}</th>
               <td>{base_stat}</td>
               <BarCell>
                 <ProgressBar progress={progressCalc(base_stat)} />
               </BarCell>
-              <td>Min</td>
-              <td>Max</td>
+              <td>{statsCalc('min', base_stat, stat.name)}</td>
+              <td>{statsCalc('max', base_stat, stat.name)}</td>
             </tr>
           ))}
           <tr>

@@ -15,12 +15,7 @@ export default function Info() {
   const { id } = pokemonInfo.data
 
   return (
-    <Box
-      as="section"
-      direction={{ xxs: 'column', lg: 'row' }}
-      margin="0 0 2rem"
-      constrained
-    >
+    <Box as="section" direction={{ xxs: 'column', lg: 'row' }} constrained>
       <Details sizes={5} align="flex-start" />
       <Box sizes={7}>
         <ImageContainer sizes={12}>

@@ -58,7 +58,7 @@ export default function Details({ ...rest }) {
     currAbilities.map(({ ability, is_hidden }, i) => (
       <Numbered light={is_hidden} key={i}>
         {`${i + 1}. ${capitalize(ability.name)} `}
-        {is_hidden && '(Hidden Ability)'}
+        {is_hidden && '( Hidden Ability )'}
       </Numbered>
     ))
 

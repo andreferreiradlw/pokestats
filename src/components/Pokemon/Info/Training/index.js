@@ -39,23 +39,10 @@ export default function Training({ ...rest }) {
           }
         })
         .filter((currItem) => currItem)
-
       // set items state
       setItems(versionItems)
     }
   }, [gameVersion])
-
-  // held items
-  const heldItems = (items) => {
-    return items.map(({ item, version_details }, itemIndex) => {
-      return version_details.map(({ rarity, version }, i) => {
-        // console.log(version.name, gameVersion, version.name === gameVersion)
-        if (version.name === gameVersion) {
-          return <Numbered key={itemIndex}>{capitalize(item.name)}</Numbered>
-        }
-      })
-    })
-  }
 
   // EV yield
   const EVYield = (pokemonStats) => {
@@ -134,9 +121,9 @@ export default function Training({ ...rest }) {
                     ? 'None'
                     : items.map((item, i) => (
                         <Numbered key={i}>
-                          {`${capitalize(item.item_details.name)} ( ${
-                            item.version_details.rarity
-                          }% chance )`}
+                          {`${items.length > 1 ? `${++i}. ` : ``}${capitalize(
+                            item.item_details.name
+                          )} ( ${item.version_details.rarity}% chance )`}
                         </Numbered>
                       ))}
                 </td>

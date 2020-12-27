@@ -6,7 +6,9 @@ import { fetchPokemonData } from './pokemonSlice'
 // components
 import Layout from '../Layout'
 import Loading from '../Loading'
+import Box from '../Box'
 import Info from './Info'
+import BaseStats from './BaseStats'
 
 export default function Homepage() {
   // router
@@ -30,6 +32,23 @@ export default function Homepage() {
   }, [pokemonInfo.error])
 
   return (
-    <Layout withHeader>{pokemonInfo.isLoading ? <Loading /> : <Info />}</Layout>
+    <Layout withHeader>
+      {pokemonInfo.isLoading ? (
+        <Loading />
+      ) : (
+        <>
+          <Info />
+          <Box
+            as="section"
+            direction={{ xxs: 'column', md: 'row' }}
+            align={{ sm: 'flex-start' }}
+            constrained
+          >
+            <BaseStats />
+            <Box>Typing</Box>
+          </Box>
+        </>
+      )}
+    </Layout>
   )
 }

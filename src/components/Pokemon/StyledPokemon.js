@@ -31,7 +31,7 @@ const Table = styled(Box)`
     padding: 6px 0;
     font-size: 0.875rem;
     font-weight: normal;
-    text-align: right;
+    text-align: left;
     white-space: nowrap;
     vertical-align: top;
   }

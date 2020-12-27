@@ -28,6 +28,7 @@ const Table = styled(Box)`
   word-break: break-word;
   border-collapse: collapse;
   border-spacing: 0;
+  width: auto;
 
   & tbody {
     flex-grow: 1;

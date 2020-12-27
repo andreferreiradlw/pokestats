@@ -90,7 +90,11 @@ export default function Training({ ...rest }) {
       {pokemonBio.isLoading ? (
         <Loading />
       ) : (
-        <Box align="flex-start" margin="0 0 2rem" {...rest}>
+        <Box
+          align={{ sm: 'center', md: 'flex-start' }}
+          margin="0 0 2rem"
+          {...rest}
+        >
           <SectionTitle>Training</SectionTitle>
           <Table forwardedAs="table" align="flex-start">
             <tbody>

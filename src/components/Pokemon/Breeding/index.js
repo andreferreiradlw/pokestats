@@ -34,7 +34,11 @@ export default function Breeding({ ...rest }) {
       {pokemonBio.isLoading ? (
         <Loading />
       ) : (
-        <Box align="flex-start" margin="0 0 2rem" {...rest}>
+        <Box
+          align={{ sm: 'center', md: 'flex-start' }}
+          margin="0 0 2rem"
+          {...rest}
+        >
           <SectionTitle>Breeding</SectionTitle>
           <Table forwardedAs="table" align="flex-start">
             <tbody>

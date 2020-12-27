@@ -29,7 +29,7 @@ export default function BaseStats({ ...rest }) {
   // max stats
 
   return (
-    <Box align="flex-start" margin="0 0 2rem" {...rest}>
+    <Box align={{ sm: 'center', md: 'flex-start' }} margin="0 0 2rem" {...rest}>
       <SectionTitle>Base Stats</SectionTitle>
       <StatsTable forwardedAs="table" align="flex-start">
         <tbody>

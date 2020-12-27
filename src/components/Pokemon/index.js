@@ -54,7 +54,7 @@ export default function Homepage() {
           </Box>
           <Box
             as="section"
-            direction={{ xxs: 'column', md: 'row' }}
+            direction={{ xxs: 'column', lg: 'row' }}
             align="flex-start"
             justify="flex-start"
             margin="0 0 2rem"

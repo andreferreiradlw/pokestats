@@ -1,12 +1,12 @@
 import { useSelector } from 'react-redux'
 import { useState, useEffect } from 'react'
 // components
-import Loading from '../../../Loading'
-import Box from '../../../Box'
+import Loading from '../../Loading'
+import Box from '../../Box'
 //helpers
-import { capitalize } from '../.././../../helpers/typography'
+import { capitalize } from '../../../helpers/typography'
 // styles
-import { SectionTitle, Table, Numbered } from '../../StyledPokemon'
+import { SectionTitle, Table, Numbered } from '../StyledPokemon'
 
 export default function Training({ ...rest }) {
   // pokemon info

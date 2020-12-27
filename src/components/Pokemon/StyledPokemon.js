@@ -5,7 +5,7 @@ const SectionTitle = styled.h2`
   font-size: 2rem;
   line-height: 2.5rem;
   font-weight: 600;
-  margin-bottom: 0.5rem;
+  margin-bottom: 1rem;
 
   ${({ theme }) => css`
     @media ${theme.device.xs} {
@@ -20,12 +20,23 @@ const SectionTitle = styled.h2`
 `
 
 const Table = styled(Box)`
+  position: relative;
+  flex-direction: row;
   margin-bottom: 1.5rem;
   font-size: 1rem;
   line-height: 1.2rem;
   word-break: break-word;
   border-collapse: collapse;
   border-spacing: 0;
+
+  & tbody {
+    flex-grow: 1;
+  }
+
+  & tr:not(:last-of-type) {
+    width: 100%;
+    border-bottom: 1px solid #ececec;
+  }
 
   & th {
     padding: 6px 0;

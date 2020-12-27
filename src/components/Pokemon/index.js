@@ -8,6 +8,8 @@ import Layout from '../Layout'
 import Loading from '../Loading'
 import Box from '../Box'
 import Info from './Info'
+import Breeding from './Breeding'
+import Training from './Training'
 import BaseStats from './BaseStats'
 
 export default function Homepage() {
@@ -41,11 +43,24 @@ export default function Homepage() {
           <Box
             as="section"
             direction={{ xxs: 'column', md: 'row' }}
-            align={{ sm: 'flex-start' }}
+            align="flex-start"
+            justify="flex-start"
+            margin="0 0 2rem"
             constrained
           >
-            <BaseStats />
+            <Breeding />
+            <Training />
             <Box>Typing</Box>
+          </Box>
+          <Box
+            as="section"
+            direction={{ xxs: 'column', md: 'row' }}
+            align="flex-start"
+            justify="flex-start"
+            margin="0 0 2rem"
+            constrained
+          >
+            <BaseStats sizes={5} />
           </Box>
         </>
       )}

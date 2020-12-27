@@ -3,8 +3,10 @@ import { useSelector } from 'react-redux'
 import { capitalize } from '../../../helpers/typography'
 // components
 import Box from '../../Box'
+import ProgressBar from './ProgressBar'
 // styles
-import { SectionTitle, Table } from '../StyledPokemon'
+import { SectionTitle } from '../StyledPokemon'
+import { StatsTable, BarCell } from './StyledBaseStats'
 
 export default function BaseStats({ ...rest }) {
   // pokemon info
@@ -15,19 +17,28 @@ export default function BaseStats({ ...rest }) {
   return (
     <Box align="flex-start" margin="0 0 2rem" {...rest}>
       <SectionTitle>Base Stats</SectionTitle>
-      <Table forwardedAs="table" align="flex-start">
+      <StatsTable forwardedAs="table" align="flex-start">
         <tbody>
           {stats.map(({ base_stat, effort, stat }, i) => (
             <tr key={i}>
               <th>{capitalize(stat.name)}</th>
               <td>{base_stat}</td>
-              <td>Progress Bar</td>
+              <BarCell>
+                <ProgressBar />
+              </BarCell>
               <td>Min</td>
               <td>Max</td>
             </tr>
           ))}
+          <tr>
+            <th>Total</th>
+            <td>900</td>
+            <td></td>
+            <td>Min</td>
+            <td>Max</td>
+          </tr>
         </tbody>
-      </Table>
+      </StatsTable>
     </Box>
   )
 }

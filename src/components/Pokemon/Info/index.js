@@ -2,8 +2,6 @@ import { useSelector } from 'react-redux'
 // components
 import Box from '../../Box'
 import Details from './Details'
-import Training from './Training'
-import Breeding from './Breeding'
 // styles
 import { ImageContainer, Image } from './StyledInfo'
 
@@ -15,7 +13,14 @@ export default function Info() {
   const { id } = pokemonInfo.data
 
   return (
-    <Box as="section" direction={{ xxs: 'column', lg: 'row' }} constrained>
+    <Box
+      as="section"
+      direction={{ xxs: 'column', lg: 'row' }}
+      align="flex-start"
+      justify="flex-start"
+      margin="2rem 0"
+      constrained
+    >
       <Details sizes={5} align="flex-start" />
       <Box sizes={7}>
         <ImageContainer sizes={12}>
@@ -23,14 +28,6 @@ export default function Info() {
             src={`https://pokeres.bastionbot.org/images/pokemon/${id}.png`}
           />
         </ImageContainer>
-
-        <Box
-          direction={{ xxs: 'column', md: 'row' }}
-          align={{ sm: 'flex-start' }}
-        >
-          <Training />
-          <Breeding />
-        </Box>
       </Box>
     </Box>
   )

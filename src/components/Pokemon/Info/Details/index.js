@@ -23,6 +23,7 @@ export default function Details({ ...rest }) {
     genera,
     flavor_text_entries,
     shape,
+    color,
     is_baby,
     is_legendary,
     is_mythical,
@@ -114,6 +115,10 @@ export default function Details({ ...rest }) {
               <tr>
                 <th>Shape</th>
                 <td>{capitalize(shape.name)}</td>
+              </tr>
+              <tr>
+                <th>Color</th>
+                <td>{capitalize(color.name)}</td>
               </tr>
             </tbody>
           </Table>

@@ -14,6 +14,8 @@ const Badge = styled(Box)`
   font-size: 1rem;
   font-weight: 600;
   border-radius: 4px;
+  text-shadow: -0.5px -0.5px 0 #000, 0.5px -0.5px 0 #000, -0.5px 0.5px 0 #000,
+    0.5px 0.5px 0 #000;
 
   ${({ theme }) => css`
     @media ${theme.device.lg} {
@@ -28,6 +30,8 @@ const Badge = styled(Box)`
 
     & > path {
       fill: ${({ theme }) => theme.typeBadge.color};
+      stroke: black;
+      stroke-width: 5;
     }
   }
 `

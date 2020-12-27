@@ -57,6 +57,9 @@ const theme = {
   particles: {
     backgroundColor: '#FFF',
   },
+  progressBar: {
+    backgroundColor: '#000',
+  },
   typeBadge: {
     backgroundColor: {
       bug: '#A6B91A',

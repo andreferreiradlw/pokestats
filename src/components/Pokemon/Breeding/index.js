@@ -10,8 +10,11 @@ import { SectionTitle, Table, Numbered } from '../StyledPokemon'
 export default function Breeding({ ...rest }) {
   // biology
   const pokemonBio = useSelector((state) => state.pokemon.biology)
+  // evolution
+  const pokemonEvo = useSelector((state) => state.pokemon.evolution)
   // data
   const { gender_rate, egg_groups, hatch_counter, habitat } = pokemonBio.data
+  const { baby_trigger_item } = pokemonEvo.data
 
   // gender ratio
   const genderRatio = (rate) =>
@@ -31,7 +34,7 @@ export default function Breeding({ ...rest }) {
 
   return (
     <>
-      {pokemonBio.isLoading ? (
+      {pokemonEvo.isLoading ? (
         <Loading />
       ) : (
         <Box
@@ -55,6 +58,14 @@ export default function Breeding({ ...rest }) {
               <tr>
                 <th>Egg Cycles</th>
                 <td>{eggCycle(hatch_counter)}</td>
+              </tr>
+              <tr>
+                <th>Baby Trigger Item</th>
+                <td>
+                  {baby_trigger_item
+                    ? capitalize(baby_trigger_item.name)
+                    : 'None'}
+                </td>
               </tr>
               <tr>
                 <th>Habitat</th>

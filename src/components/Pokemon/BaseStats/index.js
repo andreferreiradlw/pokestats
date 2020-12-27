@@ -18,6 +18,12 @@ export default function BaseStats({ ...rest }) {
   const totalStats = (values) =>
     values.map((stat) => stat.base_stat).reduce((a, b) => a + b, 0)
 
+  // progress
+  const progressCalc = (statValue) => {
+    const percentage = (100 / 180) * statValue
+    return percentage > 100 ? 100 : percentage
+  }
+
   // min stats
 
   // max stats
@@ -32,7 +38,7 @@ export default function BaseStats({ ...rest }) {
               <th>{capitalize(stat.name)}</th>
               <td>{base_stat}</td>
               <BarCell>
-                <ProgressBar />
+                <ProgressBar progress={progressCalc(base_stat)} />
               </BarCell>
               <td>Min</td>
               <td>Max</td>

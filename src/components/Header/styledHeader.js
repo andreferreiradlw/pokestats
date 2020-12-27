@@ -3,7 +3,7 @@ import Box from '../Box'
 
 const Heading = styled.h2`
   font-family: 'Josefin Sans', sans-serif;
-  font-size: 3.5rem;
+  font-size: 2.5rem;
   line-height: 3rem;
   color: ${({ theme }) => theme.homepage.heading.color};
   font-weight: 700;
@@ -16,8 +16,8 @@ const Heading = styled.h2`
 
   ${({ theme }) => css`
     @media ${theme.device.xs} {
-      font-size: 4rem;
-      line-height: 4.5rem;
+      font-size: 3rem;
+      line-height: 3.5rem;
   `}
 `
 

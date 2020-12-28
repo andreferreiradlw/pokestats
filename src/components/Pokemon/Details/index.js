@@ -1,12 +1,12 @@
 import { useSelector } from 'react-redux'
 // helpers
-import { capitalize } from '../../../../helpers/typography'
+import { capitalize } from '../../../helpers/typography'
 // components
-import Box from '../../../Box'
-import Loading from '../../../Loading'
-import TypeBadge from '../../../TypeBadge'
+import Box from '../../Box'
+import Loading from '../../Loading'
+import TypeBadge from '../../TypeBadge'
 // styles
-import { Table, Numbered } from '../../StyledPokemon'
+import { Table, Numbered } from '../StyledPokemon'
 import { Name, TypeContainer, Genera, Flavor } from './StyledDetails'
 
 export default function Details({ ...rest }) {

@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components'
-import Box from '../../../Box'
+import Box from '../../Box'
 
 const Name = styled.h1`
   font-size: 2.5rem;

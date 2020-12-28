@@ -44,7 +44,7 @@ export default function BaseStats({ ...rest }) {
   }
 
   return (
-    <Box align={{ sm: 'center', md: 'flex-start' }} margin="0 0 2rem" {...rest}>
+    <Box align={{ sm: 'center', md: 'flex-start' }} {...rest}>
       <SectionTitle>Base Stats</SectionTitle>
       <StatsTable forwardedAs="table" align="flex-start">
         <tbody>

@@ -37,7 +37,7 @@ export default function Breeding({ ...rest }) {
       {pokemonEvo.isLoading ? (
         <Loading />
       ) : (
-        <Box align={{ sm: 'center', md: 'flex-start' }} {...rest}>
+        <Box align={{ sm: 'center', lg: 'flex-start' }} {...rest}>
           <SectionTitle>Breeding</SectionTitle>
           <Table forwardedAs="table" align="flex-start">
             <tbody>

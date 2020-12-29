@@ -46,7 +46,7 @@ export default function Weaknesses({ ...rest }) {
       {pokemonInfo.isLoading ? (
         <Loading />
       ) : (
-        <Box {...rest}>
+        <Box align={{ sm: 'center', lg: 'flex-start' }} {...rest}>
           <SectionTitle>Weaknesses</SectionTitle>
         </Box>
       )}

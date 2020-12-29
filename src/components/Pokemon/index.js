@@ -65,22 +65,22 @@ export default function Homepage() {
           </Box>
           <Box
             as="section"
-            direction={{ xxs: 'column', md: 'row' }}
+            direction={{ xxs: 'column', lg: 'row' }}
             align="flex-start"
             justify="flex-start"
             margin="1rem 0"
             constrained
           >
             <Breeding
-              margin={{ xxs: '0 0 2rem', md: '0' }}
+              margin={{ xxs: '0 0 2rem', lg: '0' }}
               padding="0 1rem 0 0"
             />
             <Training
-              margin={{ xxs: '0 0 2rem', md: '0' }}
+              margin={{ xxs: '0 0 2rem', lg: '0' }}
               padding="0 0.5rem"
             />
             <Weaknesses
-              margin={{ xxs: '0 0 2rem', md: '0' }}
+              margin={{ xxs: '0 0 2rem', lg: '0' }}
               padding="0 0 0 1rem"
             />
           </Box>

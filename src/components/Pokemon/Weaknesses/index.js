@@ -1,6 +1,7 @@
 import { useSelector } from 'react-redux'
 import { useState, useEffect } from 'react'
-import axios from 'axios'
+// helpers
+import getMultipliers from './damage_multipliers'
 // components
 import Loading from '../../Loading'
 import Box from '../../Box'
@@ -16,73 +17,31 @@ export default function Weaknesses({ ...rest }) {
   // loading state
   const [typeLoading, setTypeLoading] = useState(true)
   // weakness initial state
-  const [weakness, setWeakness] = useState({
-    double_damage_from: [],
-    double_damage_to: [],
-    half_damage_from: [],
-    half_damage_to: [],
-    no_damage_from: [],
-    no_damage_to: [],
-  })
+  const [typeMultipliers, setMultipliers] = useState({})
 
-  // fetch type data on load
   useEffect(() => {
-    // requests array
-    const axiosRequests = []
-
-    const fetchTypeData = requests => {
-      axios
-        .all(requests)
-        .then(
-          axios.spread((...responses) => {
-            responses
-              .map(response => {
-                // damage relation for each type
-                return response.data.damage_relations
-              })
-              .forEach(type => {
-                // copy old state
-                const newWeakness = { ...weakness }
-                // for each type, loop relation array
-                Object.keys(type).forEach(key => {
-                  type[key].forEach(relation => {
-                    // check if type already exists in state key
-                    if (weakness[key].indexOf(relation.name) === -1) {
-                      // if it doesn't, change value
-                      newWeakness[key].push(relation.name)
-                    }
-                  })
-                })
-                // set new state
-                setWeakness(newWeakness)
-              })
-          })
-        )
-        .catch(error => {
-          // catch errors
-          console.log('error', error)
-        })
-        .finally(
-          // change loading state
-          setTypeLoading(false)
-        )
-    }
-
     if (types.length) {
-      // create an axios request for each type
-      // push request into array
-      types.forEach(({ type }) => {
-        axiosRequests.push(axios.get(type.url))
+      let currTypes = types.map(currType => {
+        return currType.type.name
       })
-      // fetch
-      fetchTypeData(axiosRequests)
+      console.log(getMultipliers(currTypes))
+      setMultipliers(getMultipliers(currTypes))
+      setTypeLoading(false)
     }
   }, [types])
 
   return (
     <Box align={{ sm: 'center', lg: 'flex-start' }} {...rest}>
-      <SectionTitle>Weaknesses</SectionTitle>
-      {typeLoading ? <Loading /> : <></>}
+      <SectionTitle>Multipliers</SectionTitle>
+      {typeLoading ? (
+        <Loading />
+      ) : (
+        <>
+          <Table forwardedAs="table" align="flex-start">
+            <tbody></tbody>
+          </Table>
+        </>
+      )}
     </Box>
   )
 }

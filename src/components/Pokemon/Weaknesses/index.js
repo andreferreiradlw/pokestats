@@ -24,8 +24,12 @@ export default function Weaknesses({ ...rest }) {
       let currTypes = types.map(currType => {
         return currType.type.name
       })
-      console.log(getMultipliers(currTypes))
-      setMultipliers(getMultipliers(currTypes))
+      //
+      const multipliers = getMultipliers(currTypes)
+      console.log(multipliers)
+
+      setMultipliers(multipliers)
+
       setTypeLoading(false)
     }
   }, [types])

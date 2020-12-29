@@ -62,6 +62,18 @@ export default function getMultipliers(types) {
       }
     })
   })
+  // remove x1.0 multipliers
+  for (const [key, value] of Object.entries(multipliers.attack)) {
+    if (value === 1) {
+      delete multipliers.attack[key]
+    }
+  }
+
+  for (const [key, value] of Object.entries(multipliers.defense)) {
+    if (value === 1) {
+      delete multipliers.defense[key]
+    }
+  }
 
   return multipliers
 }

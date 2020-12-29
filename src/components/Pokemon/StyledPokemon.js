@@ -20,15 +20,12 @@ const SectionTitle = styled.h2`
 `
 
 const Table = styled(Box)`
-  position: relative;
-  flex-direction: row;
+  display: table;
   margin-bottom: 1.5rem;
   font-size: 1rem;
   line-height: 1.2rem;
   word-break: break-word;
-  border-collapse: collapse;
   border-spacing: 0;
-  width: auto;
 
   & tbody {
     flex-grow: 1;

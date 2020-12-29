@@ -10,6 +10,7 @@ import Box from '../Box'
 import Details from './Details'
 import Breeding from './Breeding'
 import Training from './Training'
+import Weaknesses from './Weaknesses'
 import BaseStats from './BaseStats'
 // styles
 import { ImageContainer, Image } from './StyledPokemon'
@@ -70,9 +71,18 @@ export default function Homepage() {
             margin="1rem 0"
             constrained
           >
-            <Breeding margin={{ xxs: '0 0 2rem', md: '0' }} />
-            <Training margin={{ xxs: '0 0 2rem', md: '0' }} />
-            <Box>Typing</Box>
+            <Breeding
+              margin={{ xxs: '0 0 2rem', md: '0' }}
+              padding="0 1rem 0 0"
+            />
+            <Training
+              margin={{ xxs: '0 0 2rem', md: '0' }}
+              padding="0 0.5rem"
+            />
+            <Weaknesses
+              margin={{ xxs: '0 0 2rem', md: '0' }}
+              padding="0 0 0 1rem"
+            />
           </Box>
           <Box
             as="section"

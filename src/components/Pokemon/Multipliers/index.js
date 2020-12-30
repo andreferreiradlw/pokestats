@@ -37,7 +37,7 @@ export default function Weaknesses({ ...rest }) {
   return (
     <Box align={{ sm: 'center', lg: 'flex-start' }} {...rest}>
       <SectionTitle>Multipliers</SectionTitle>
-      {typeLoading ? (
+      {typeLoading && !typeMultipliers ? (
         <Loading />
       ) : (
         <>

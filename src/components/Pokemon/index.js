@@ -10,7 +10,7 @@ import Box from '../Box'
 import Details from './Details'
 import Breeding from './Breeding'
 import Training from './Training'
-import Weaknesses from './Weaknesses'
+import Multipliers from './Multipliers'
 import BaseStats from './BaseStats'
 // styles
 import { ImageContainer, Image } from './StyledPokemon'
@@ -21,7 +21,7 @@ export default function Homepage() {
   // dispatch
   const dispatch = useDispatch()
   // pokemon selector
-  const pokemonInfo = useSelector((state) => state.pokemon.info)
+  const pokemonInfo = useSelector(state => state.pokemon.info)
   // data
   const { id } = pokemonInfo.data
 
@@ -79,7 +79,7 @@ export default function Homepage() {
               margin={{ xxs: '0 0 2rem', lg: '0' }}
               padding="0 0.5rem"
             />
-            <Weaknesses
+            <Multipliers
               margin={{ xxs: '0 0 2rem', lg: '0' }}
               padding="0 0 0 1rem"
             />

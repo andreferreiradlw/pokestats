@@ -21,7 +21,7 @@ const Badge = styled(Box)`
     iconOnly
       ? css`
           display: inline-flex;
-          margin: 0 0.5rem 0 0;
+          margin: 0.2rem 0.3rem 0.2rem 0;
         `
       : css`
           margin: 0.5rem 0.5rem 0.5rem 0;

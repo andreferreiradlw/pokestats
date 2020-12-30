@@ -3,6 +3,7 @@ import Box from '../../../Box'
 
 const SwitchContainer = styled.div`
   position: relative;
+  margin-bottom: 0.5rem;
   width: 108px;
   -webkit-user-select: none;
   -moz-user-select: none;

@@ -17,6 +17,16 @@ const Badge = styled(Box)`
   text-shadow: -0.5px -0.5px 0 #000, 0.5px -0.5px 0 #000, -0.5px 0.5px 0 #000,
     0.5px 0.5px 0 #000;
 
+  ${({ iconOnly }) =>
+    iconOnly
+      ? css`
+          display: inline-flex;
+          margin: 0 0.5rem 0 0;
+        `
+      : css`
+          margin: 0.5rem 0.5rem 0.5rem 0;
+        `}
+
   ${({ theme }) => css`
     @media ${theme.device.lg} {
       font-size: 1.2rem;
@@ -24,9 +34,17 @@ const Badge = styled(Box)`
   `}
 
   & svg {
-    width: 25px;
-    height: 25px;
-    margin-right: 1rem;
+    ${({ iconOnly }) =>
+      !iconOnly
+        ? css`
+            width: 25px;
+            height: 25px;
+            margin-right: 1rem;
+          `
+        : css`
+            width: 15px;
+            height: 15px;
+          `}
 
     & > path {
       fill: ${({ theme }) => theme.typeBadge.color};
@@ -36,7 +54,7 @@ const Badge = styled(Box)`
   }
 `
 
-const generateIcon = (type) => {
+const generateIcon = type => {
   const ImportedIconRef = useRef(null)
   const [loading, setLoading] = useState(false)
 
@@ -64,19 +82,19 @@ const generateIcon = (type) => {
   return null
 }
 
-export default function TypeBadge({ type, hideIcon, ...rest }) {
+export default function TypeBadge({ type, hideIcon, iconOnly, ...rest }) {
   return (
     <Badge
       direction="row"
       width="auto"
       grow={0}
-      padding="0.5rem 1.5rem"
-      margin="0 1rem 1rem 0"
+      padding="0.5rem"
       type={type}
+      iconOnly={iconOnly}
       {...rest}
     >
       {!hideIcon && type && generateIcon(type)}
-      <span>{capitalize(type)}</span>
+      {!iconOnly && type && <span>{capitalize(type)}</span>}
     </Badge>
   )
 }

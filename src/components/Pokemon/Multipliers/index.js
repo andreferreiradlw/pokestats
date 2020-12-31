@@ -8,7 +8,7 @@ import Box from '../../Box'
 import TypeBadge from '../../TypeBadge'
 import Switch from './Switch'
 // styles
-import { SectionTitle, Table, Numbered } from '../StyledPokemon'
+import { SectionTitle, Table } from '../StyledPokemon'
 
 export default function Weaknesses({ ...rest }) {
   // pokemon info
@@ -30,7 +30,6 @@ export default function Weaknesses({ ...rest }) {
       })
       // get multipliers
       const multipliers = getMultipliers(currTypes)
-      console.log(multipliers.defense)
       // set state
       setMultipliers(multipliers)
       // initially show defense

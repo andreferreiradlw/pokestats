@@ -1,12 +1,17 @@
 import { useSelector } from 'react-redux'
 import { useState, useEffect } from 'react'
 import axios from 'axios'
+// helpers
+import { mapVersionToGroup } from '../../../helpers/gameVersion'
 
 export default function Moves() {
   // pokemon info
   const pokemonInfo = useSelector(state => state.pokemon.info)
-  // data
+  // moves data
   const { moves } = pokemonInfo.data
+  // game version
+  const gameVersion = useSelector(state => state.game.version)
+
   // moves data state
   const [pokemonMoves, setMoves] = useState()
 
@@ -46,7 +51,13 @@ export default function Moves() {
       // fetch requests
       fetchTypeData(axiosRequests)
     }
-  }, [moves])
+  }, [])
+
+  useEffect(() => {
+    if (gameVersion) {
+      console.log(gameVersion, mapVersionToGroup(gameVersion))
+    }
+  }, [gameVersion])
 
   return <div>Moves Section</div>
 }

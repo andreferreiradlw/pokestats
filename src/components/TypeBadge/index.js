@@ -17,14 +17,14 @@ const Badge = styled(Box)`
   text-shadow: -0.5px -0.5px 0 #000, 0.5px -0.5px 0 #000, -0.5px 0.5px 0 #000,
     0.5px 0.5px 0 #000;
 
-  ${({ iconOnly }) =>
+  ${({ iconOnly, margin }) =>
     iconOnly
       ? css`
           display: inline-flex;
-          margin: 0.2rem 0.3rem 0.2rem 0;
+          margin: ${margin || '0.2rem 0.3rem 0.2rem 0'};
         `
       : css`
-          margin: 0.5rem 0.5rem 0.5rem 0;
+          margin: ${margin || '0.5rem 0.5rem 0.5rem 0'};
         `}
 
   ${({ theme }) => css`

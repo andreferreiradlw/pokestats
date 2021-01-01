@@ -2,14 +2,26 @@ import styled, { css, keyframes } from 'styled-components'
 import Box from '../../Box'
 import { Table } from '../StyledPokemon'
 
+const NameTH = styled.th``
+const NameTD = styled.td``
+
 const MovesTable = styled(Table)`
+  text-align: center;
+
   & thead {
     background-color: black;
     color: white;
+  }
 
-    & th {
-      padding: 12px 6px;
-    }
+  & th,
+  & td {
+    padding: 0.5rem;
+    text-align: center;
+  }
+
+  & ${NameTH}, & ${NameTD} {
+    text-align: left;
+    width: 25%;
   }
 `
 
@@ -37,4 +49,4 @@ const Tab = styled.button`
 
 const Content = styled.tbody``
 
-export { MovesTable, TabContainer, Tab, Content }
+export { MovesTable, NameTH, NameTD, TabContainer, Tab, Content }

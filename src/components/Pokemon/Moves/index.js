@@ -3,12 +3,22 @@ import { useState, useEffect } from 'react'
 import axios from 'axios'
 // helpers
 import { mapVersionToGroup } from '../../../helpers/gameVersion'
-import { filterMoves } from '../../../helpers/moves'
+import { filterMoves, getMachineNames } from '../../../helpers/moves'
+import { capitalize } from '../../../helpers/typography'
 // components
 import Box from '../../Box'
+import Loading from '../../Loading'
+import TypeBadge from '../../TypeBadge'
 // styles
 import { SectionTitle } from '../StyledPokemon'
-import { MovesTable, TabContainer, Tab, Content } from './StyledMoves'
+import {
+  MovesTable,
+  NameTH,
+  NameTD,
+  TabContainer,
+  Tab,
+  Content,
+} from './StyledMoves'
 
 export default function Moves({ ...rest }) {
   // pokemon info
@@ -22,10 +32,19 @@ export default function Moves({ ...rest }) {
   const [pokemonMoves, setMoves] = useState()
   // tab state
   const [activeTab, setActiveTab] = useState(1)
+  // learn method state
+  const [learnMethod, setLearnMethod] = useState()
+  // current pokemon moves
+  const [currMoves, setCurrMoves] = useState()
+  // machine names
+  const [machineNames, setMachineNames] = useState()
+  // loading
+  const [movesLoading, setMovesLoading] = useState(false)
 
   // fetch move data
   useEffect(() => {
     if (moves.length) {
+      setMovesLoading(true)
       // requests array
       const axiosRequests = []
 
@@ -44,6 +63,8 @@ export default function Moves({ ...rest }) {
               })
               // set moves state
               setMoves(movesData)
+              // stop loading
+              setMovesLoading(false)
             })
           )
           .catch(errors => {
@@ -59,6 +80,63 @@ export default function Moves({ ...rest }) {
       fetchTypeData(axiosRequests)
     }
   }, [])
+
+  // tab changes
+  useEffect(() => {
+    // tab changed! update learn method
+    // changing learn method will trigger moves update
+    // start loading first
+    setMovesLoading(true)
+    // update learn method state
+    if (activeTab === 1) {
+      setLearnMethod('level-up')
+    } else if (activeTab === 2) {
+      setLearnMethod('machine')
+    } else if (activeTab === 3) {
+      setLearnMethod('egg')
+    } else if (activeTab === 4) {
+      setLearnMethod('tutor')
+    }
+  }, [activeTab])
+
+  // current pokemon moves
+  useEffect(() => {
+    if (pokemonMoves && learnMethod && gameVersion) {
+      // filter moves by learn method and current game version
+      filterMoves(
+        pokemonMoves,
+        learnMethod,
+        mapVersionToGroup(gameVersion)
+      ).then(moves => {
+        // update move state to show in table
+        setMachineNames()
+        setCurrMoves(moves)
+        // will trigger machine name search
+        // no need to stop loading here
+      })
+    }
+  }, [pokemonMoves, learnMethod, gameVersion])
+
+  // current pokemon moves
+  useEffect(() => {
+    // if move is from machine then get machine names
+    if (currMoves && learnMethod === 'machine') {
+      // requests from current moves machines
+      getMachineNames(currMoves).then(
+        axios.spread((...responses) => {
+          // get machine names from responses
+          const names = responses.map(res => res.data.item.name)
+          // update machine names state
+          setMachineNames(names)
+          // stop loading
+          setMovesLoading(false)
+        })
+      )
+    } else {
+      // otherwise just stop loading
+      setMovesLoading(false)
+    }
+  }, [currMoves])
 
   return (
     <Box align={{ sm: 'center', lg: 'flex-start' }} {...rest}>
@@ -82,46 +160,49 @@ export default function Moves({ ...rest }) {
       <MovesTable forwardedAs="table" align="flex-start">
         <thead>
           <tr>
-            <th>Level</th>
-            <th>Name</th>
+            <th>{learnMethod === 'level-up' ? 'Level' : '-'}</th>
+            <NameTH>Name</NameTH>
             <th>Type</th>
             <th>Category</th>
             <th>Power</th>
             <th>PP</th>
-            <th>Acuracy</th>
+            <th>Accuracy</th>
             <th>Priority</th>
             <th>Generation</th>
           </tr>
         </thead>
-        {pokemonMoves && activeTab === 1 && (
+        {!movesLoading && currMoves && (
           <Content>
-            {filterMoves(
-              pokemonMoves,
-              'level-up',
-              mapVersionToGroup(gameVersion)
-            )}
-          </Content>
-        )}
-        {pokemonMoves && activeTab === 2 && (
-          <Content>
-            {filterMoves(
-              pokemonMoves,
-              'machine',
-              mapVersionToGroup(gameVersion)
-            )}
-          </Content>
-        )}
-        {pokemonMoves && activeTab === 3 && (
-          <Content>
-            {filterMoves(pokemonMoves, 'egg', mapVersionToGroup(gameVersion))}
-          </Content>
-        )}
-        {pokemonMoves && activeTab === 4 && (
-          <Content>
-            {filterMoves(pokemonMoves, 'tutor', mapVersionToGroup(gameVersion))}
+            {currMoves.map((move, i) => (
+              <tr key={i}>
+                {learnMethod === 'level-up' && <td>{move.level_learned_at}</td>}
+                {learnMethod === 'machine' &&
+                  (machineNames ? (
+                    <td>{machineNames[i].toUpperCase()}</td>
+                  ) : (
+                    <td>{<Loading />}</td>
+                  ))}
+                {learnMethod === 'egg' && <td>-</td>}
+                {learnMethod === 'tutor' && <td>-</td>}
+                <NameTD>{capitalize(move.name)}</NameTD>
+                <td>
+                  <TypeBadge margin="0" type={move.type.name} />
+                </td>
+                <td>{capitalize(move.damage_class.name)}</td>
+                <td>{move.power}</td>
+                <td>{move.pp}</td>
+                <td>{move.accuracy}</td>
+                <td>{move.priority}</td>
+                <td>{move.generation.name}</td>
+              </tr>
+            ))}
           </Content>
         )}
       </MovesTable>
+      {/** NO MOVES */}
+      {currMoves && !currMoves.length && <p>No moves!</p>}
+      {/** LOADING */}
+      {movesLoading && <Loading />}
     </Box>
   )
 }

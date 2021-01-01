@@ -15,9 +15,10 @@ import {
   MovesTable,
   NameTH,
   NameTD,
+  TableRow,
   TabContainer,
   Tab,
-  Content,
+  TableBody,
 } from './StyledMoves'
 
 export default function Moves({ ...rest }) {
@@ -108,10 +109,12 @@ export default function Moves({ ...rest }) {
         learnMethod,
         mapVersionToGroup(gameVersion)
       ).then(moves => {
-        // update move state to show in table
+        // clear machine names state
+        // when we set new currMoves, these won't match
         setMachineNames()
+        // update move state to show in table
         setCurrMoves(moves)
-        // will trigger machine name search
+        // this will trigger a new machine name search
         // no need to stop loading here
       })
     }
@@ -171,10 +174,11 @@ export default function Moves({ ...rest }) {
             <th>Generation</th>
           </tr>
         </thead>
-        {!movesLoading && currMoves && (
-          <Content>
-            {currMoves.map((move, i) => (
-              <tr key={i}>
+        <TableBody>
+          {!movesLoading &&
+            currMoves &&
+            currMoves.map((move, i) => (
+              <TableRow key={i}>
                 {learnMethod === 'level-up' && <td>{move.level_learned_at}</td>}
                 {learnMethod === 'machine' &&
                   (machineNames ? (
@@ -194,10 +198,9 @@ export default function Moves({ ...rest }) {
                 <td>{move.accuracy}</td>
                 <td>{move.priority}</td>
                 <td>{move.generation.name}</td>
-              </tr>
+              </TableRow>
             ))}
-          </Content>
-        )}
+        </TableBody>
       </MovesTable>
       {/** NO MOVES */}
       {currMoves && !currMoves.length && <p>No moves!</p>}

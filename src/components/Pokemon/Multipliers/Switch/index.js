@@ -32,7 +32,7 @@ const SwitchDisplay = styled.span`
   display: block;
   width: 200%;
   margin-left: ${({ enabled }) => (enabled ? '-100%' : '0')};
-  transition: margin 0.3s ease-in 0s;
+  transition: margin 0.3s ease-in-out;
 
   &:before,
   &:after {
@@ -73,7 +73,7 @@ const SwitchControl = styled.span`
   bottom: 0;
   right: ${({ enabled }) => (enabled ? '77px' : '0')};
   border-radius: 50px;
-  transition: all 0.3s ease-in 0s;
+  transition: all 0.3s ease-in-out;
   border: 2px solid rgb(19, 29, 34);
   background-color: white;
 `

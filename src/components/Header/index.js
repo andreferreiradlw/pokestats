@@ -1,5 +1,5 @@
 // redux
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { changeVersion } from './gameSlice'
 // next
 import Link from 'next/link'
@@ -10,7 +10,10 @@ import { Heading, SelectContainer } from './styledHeader'
 import { gameVersions } from '../../helpers/gameVersion'
 
 export default function HeaderComponent() {
+  // dispatch
   const dispatch = useDispatch()
+  // game version
+  const gameVersion = useSelector(state => state.game.version)
 
   return (
     <Box as="header" margin="0 0 1rem" withGutter>
@@ -21,7 +24,10 @@ export default function HeaderComponent() {
         {/** Select */}
         <SelectContainer direction="row" justify="flex-start">
           <span>Game Version:</span>
-          <select onChange={e => dispatch(changeVersion(e.target.value))}>
+          <select
+            value={gameVersion}
+            onChange={e => dispatch(changeVersion(e.target.value))}
+          >
             {gameVersions.map(({ name, value }, index) => (
               <option key={index} value={value}>
                 {name}

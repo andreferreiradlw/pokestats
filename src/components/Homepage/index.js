@@ -4,11 +4,13 @@ import Layout from '../Layout'
 import Autocomplete from './Autocomplete'
 import Particles from '../Particles'
 import Loading from '../Loading'
+import InfinityScroll from './InfinityScroll'
+import Box from './../Box'
 // styles
 import { Heading } from './styledHomepage'
 
 export default function Homepage() {
-  const loadingStatus = useSelector((state) => state.home.loading)
+  const loadingStatus = useSelector(state => state.home.loading)
 
   return (
     <>
@@ -16,9 +18,14 @@ export default function Homepage() {
         <Loading />
       ) : (
         <>
-          <Layout height="100vh">
-            <Heading>PokeStats</Heading>
-            <Autocomplete />
+          <Layout>
+            <Box height="100vh">
+              <Heading>PokeStats</Heading>
+              <Autocomplete />
+            </Box>
+            <Box>
+              <InfinityScroll />
+            </Box>
           </Layout>
           <Particles />
         </>

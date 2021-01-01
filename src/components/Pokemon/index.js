@@ -94,8 +94,11 @@ export default function Homepage() {
             margin="1rem 0"
             constrained
           >
-            <BaseStats margin={{ xxs: '0 0 2rem', lg: '0' }} />
-            <Box>Sprites</Box>
+            <BaseStats
+              sizes={{ xxs: 12, lg: 8 }}
+              margin={{ xxs: '0 0 2rem', lg: '0' }}
+            />
+            <Box sizes={{ xxs: 12, lg: 4 }}>Forms</Box>
           </Box>
           <Box
             as="section"

@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react'
 import axios from 'axios'
 // helpers
 import { mapVersionToGroup } from '../../../helpers/gameVersion'
+import { filterMoves } from '../../../helpers/moves'
 // components
 import Box from '../../Box'
 // styles
@@ -41,7 +42,6 @@ export default function Moves({ ...rest }) {
                 // return
                 return responseData
               })
-              console.log('move data', movesData)
               // set moves state
               setMoves(movesData)
             })
@@ -59,12 +59,6 @@ export default function Moves({ ...rest }) {
       fetchTypeData(axiosRequests)
     }
   }, [])
-
-  useEffect(() => {
-    if (gameVersion) {
-      console.log(gameVersion, mapVersionToGroup(gameVersion))
-    }
-  }, [gameVersion])
 
   return (
     <Box align={{ sm: 'center', lg: 'flex-start' }} {...rest}>
@@ -99,10 +93,34 @@ export default function Moves({ ...rest }) {
             <th>Generation</th>
           </tr>
         </thead>
-        {pokemonMoves && activeTab === 1 && <Content></Content>}
-        {pokemonMoves && activeTab === 2 && <Content></Content>}
-        {pokemonMoves && activeTab === 3 && <Content></Content>}
-        {pokemonMoves && activeTab === 4 && <Content></Content>}
+        {pokemonMoves && activeTab === 1 && (
+          <Content>
+            {filterMoves(
+              pokemonMoves,
+              'level-up',
+              mapVersionToGroup(gameVersion)
+            )}
+          </Content>
+        )}
+        {pokemonMoves && activeTab === 2 && (
+          <Content>
+            {filterMoves(
+              pokemonMoves,
+              'machine',
+              mapVersionToGroup(gameVersion)
+            )}
+          </Content>
+        )}
+        {pokemonMoves && activeTab === 3 && (
+          <Content>
+            {filterMoves(pokemonMoves, 'egg', mapVersionToGroup(gameVersion))}
+          </Content>
+        )}
+        {pokemonMoves && activeTab === 4 && (
+          <Content>
+            {filterMoves(pokemonMoves, 'tutor', mapVersionToGroup(gameVersion))}
+          </Content>
+        )}
       </MovesTable>
     </Box>
   )

@@ -22,6 +22,7 @@ const Tab = styled.button`
   background: ${({ active }) => (active ? 'black' : 'none')};
   color: ${({ active }) => (active ? 'white' : 'black')};
   border: none;
+  border-radius: 4px;
   padding: 0.5rem;
   font: inherit;
   cursor: pointer;

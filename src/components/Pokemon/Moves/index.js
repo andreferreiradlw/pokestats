@@ -3,7 +3,11 @@ import { useState, useEffect } from 'react'
 import axios from 'axios'
 // helpers
 import { mapVersionToGroup, mapGeneration } from '../../../helpers/gameVersion'
-import { filterMoves, getMachineNames } from '../../../helpers/moves'
+import {
+  fetchTypeData,
+  filterMoves,
+  getMachineNames,
+} from '../../../helpers/moves'
 import { capitalize } from '../../../helpers/typography'
 // components
 import Box from '../../Box'
@@ -46,43 +50,14 @@ export default function Moves({ ...rest }) {
 
   // fetch move data
   useEffect(() => {
-    setMovesLoading(true)
     if (moves.length) {
-      // requests array
-      const axiosRequests = []
-
-      const fetchTypeData = requests => {
-        axios
-          .all(requests)
-          .then(
-            axios.spread((...responses) => {
-              const movesData = responses.map((response, i) => {
-                let responseData = response.data
-                // version details from pokemon moves info
-                responseData.version_group_details =
-                  moves[i].version_group_details
-                // return
-                return responseData
-              })
-              // set moves state
-              setMoves(movesData)
-              // stop loading
-              setMovesLoading(false)
-            })
-          )
-          .catch(errors => {
-            // react on errors.
-            console.log('error', errors)
-          })
-      }
-      // create an axios request for each move
-      moves.forEach(({ move }) => {
-        axiosRequests.push(axios.get(move.url))
+      setMovesLoading(true)
+      fetchTypeData(moves).then(movesData => {
+        setMoves(movesData)
+        setMovesLoading(false)
       })
-      // fetch requests
-      fetchTypeData(axiosRequests)
     }
-  }, [])
+  }, [moves])
 
   // tab changes
   useEffect(() => {

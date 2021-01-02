@@ -1,4 +1,4 @@
-import { useEffect, lazy, Suspense } from 'react'
+import { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useRouter } from 'next/router'
 // action
@@ -12,8 +12,7 @@ import Breeding from './Breeding'
 import Training from './Training'
 import Multipliers from './Multipliers'
 import BaseStats from './BaseStats'
-// import Moves from './Moves'
-const Moves = lazy(() => import('./Moves'))
+import Moves from './Moves'
 // styles
 import { ImageContainer, Image } from './StyledPokemon'
 
@@ -103,9 +102,7 @@ export default function Homepage() {
             margin="1rem 0"
             constrained
           >
-            <Suspense fallback={<Loading />}>
-              <Moves sizes={12} margin="0 0 2rem" />
-            </Suspense>
+            <Moves sizes={12} margin="0 0 2rem" />
           </Box>
         </>
       )}

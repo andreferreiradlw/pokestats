@@ -42,7 +42,7 @@ export default function Moves({ ...rest }) {
   // machine names
   const [machineNames, setMachineNames] = useState()
   // loading
-  const [movesLoading, setMovesLoading] = useState(false)
+  const [movesLoading, setMovesLoading] = useState(true)
 
   // fetch move data
   useEffect(() => {

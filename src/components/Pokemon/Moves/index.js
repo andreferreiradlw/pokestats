@@ -143,10 +143,6 @@ export default function Moves({ ...rest }) {
     }
   }, [currMoves])
 
-  useEffect(() => {
-    console.log(movesLoading)
-  }, [movesLoading])
-
   return (
     <Box align={{ xxs: 'center', lg: 'flex-start' }} {...rest}>
       <SectionTitle>Move Pool</SectionTitle>

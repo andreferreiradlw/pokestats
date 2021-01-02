@@ -1,6 +1,6 @@
 import { BoxWrapper } from './StyledBox'
 
-import { forwardRef } from 'React'
+import { forwardRef } from 'react'
 
 import { useForwardedRef } from '../../helpers/ref'
 

@@ -72,6 +72,7 @@ export default function Details({ ...rest }) {
           direction="row"
           justify="flex-start"
           flexWrap="wrap"
+          margin="0 0 0.5rem"
         >
           {types.map(({ type }, i) => {
             return (

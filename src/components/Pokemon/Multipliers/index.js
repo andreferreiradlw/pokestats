@@ -46,9 +46,9 @@ export default function Weaknesses({ ...rest }) {
   }, [enabled])
 
   return (
-    <Box align={{ sm: 'center', lg: 'flex-start' }} {...rest}>
+    <Box align={{ xxs: 'center', lg: 'flex-start' }} {...rest}>
       <Box
-        direction={{ sm: 'column', lg: 'row' }}
+        direction={{ xxs: 'column', lg: 'row' }}
         justify="space-between"
         flexWrap="wrap"
       >

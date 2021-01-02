@@ -11,11 +11,11 @@ import { Name, TypeContainer, Genera, Flavor } from './StyledDetails'
 
 export default function Details({ ...rest }) {
   // pokemon info
-  const pokemonInfo = useSelector((state) => state.pokemon.info)
+  const pokemonInfo = useSelector(state => state.pokemon.info)
   // biology
-  const pokemonBio = useSelector((state) => state.pokemon.biology)
+  const pokemonBio = useSelector(state => state.pokemon.biology)
   // game version
-  const gameVersion = useSelector((state) => state.game.version)
+  const gameVersion = useSelector(state => state.game.version)
 
   // data
   const { types, abilities, id, name, weight, height } = pokemonInfo.data
@@ -30,8 +30,8 @@ export default function Details({ ...rest }) {
   } = pokemonBio.data
 
   // flavor text
-  const flavorText = (version) => {
-    const versionEntry = flavor_text_entries.filter((entry) => {
+  const flavorText = version => {
+    const versionEntry = flavor_text_entries.filter(entry => {
       return entry.version.name === version
     })
     // return text
@@ -41,11 +41,11 @@ export default function Details({ ...rest }) {
   }
 
   // weight
-  const pokemonWeight = (currWeight) =>
+  const pokemonWeight = currWeight =>
     `${currWeight / 10} kg ( ${Math.round(currWeight * 2.2046) / 10} lbs )`
 
   // height
-  const pokemonHeight = (currHeight) => {
+  const pokemonHeight = currHeight => {
     // calculate height in feet
     const heightInFeet = Math.round(currHeight * 3.2808) / 10
     // split number
@@ -55,7 +55,7 @@ export default function Details({ ...rest }) {
   }
 
   // abilities
-  const pokemonAbilities = (currAbilities) =>
+  const pokemonAbilities = currAbilities =>
     currAbilities.map(({ ability, is_hidden }, i) => (
       <Numbered light={is_hidden} key={i}>
         {`${i + 1}. ${capitalize(ability.name)} `}
@@ -64,10 +64,15 @@ export default function Details({ ...rest }) {
     ))
 
   return (
-    <Box {...rest}>
+    <Box align={{ xxs: 'center', lg: 'flex-start' }} {...rest}>
       <Name>{capitalize(name)}</Name>
       {types.length > 0 && (
-        <TypeContainer direction="row" justify="flex-start" flexWrap="wrap">
+        <TypeContainer
+          width="auto"
+          direction="row"
+          justify="flex-start"
+          flexWrap="wrap"
+        >
           {types.map(({ type }, i) => {
             return (
               <TypeBadge type={type.name} key={i}>

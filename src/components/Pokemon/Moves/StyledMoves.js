@@ -7,8 +7,17 @@ const TableRow = styled.tr``
 const NameTH = styled.th``
 const NameTD = styled.td``
 
-const MovesTable = styled(Table)`
+const TableContainer = styled.div`
+  width: 100%;
+  overflow-y: auto;
+  overflow: auto;
+`
+
+const MovesTable = styled.table`
+  width: 100%;
   text-align: center;
+  font-size: 0.7rem;
+  line-height: 0.7rem;
 
   & thead {
     background-color: black;
@@ -19,6 +28,10 @@ const MovesTable = styled(Table)`
   & td {
     padding: 0.5rem;
     text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    height: 40px;
   }
 
   & ${NameTH}, & ${NameTD} {
@@ -26,17 +39,31 @@ const MovesTable = styled(Table)`
     width: 25%;
   }
 
-  & ${TableRow} {
-    background-color: white;
-    color: black;
+  & tr:not(:last-of-type) {
+    border-bottom: 1px solid #ececec;
+  }
 
+  & ${TableRow} {
     &:hover {
-      background-color: black;
-      color: white;
+      background-color: #ececec;
     }
 
     transition: all 0.1s ease-in-out;
   }
+
+  ${({ theme }) => css`
+    @media ${theme.device.md} {
+      font-size: 0.8rem;
+      line-height: 0.8rem;
+    }
+  `}
+
+  ${({ theme }) => css`
+    @media ${theme.device.md} {
+      font-size: 1rem;
+      line-height: 1rem;
+    }
+  `}
 `
 
 const TabContainer = styled(Box)`
@@ -61,4 +88,19 @@ const Tab = styled.button`
   }
 `
 
-export { MovesTable, TableBody, NameTH, NameTD, TableRow, TabContainer, Tab }
+const NoMoves = styled(Box)`
+  font-size: 2rem;
+  line-height: 2.5rem;
+`
+
+export {
+  TableContainer,
+  MovesTable,
+  TableBody,
+  NameTH,
+  NameTD,
+  TableRow,
+  TabContainer,
+  Tab,
+  NoMoves,
+}

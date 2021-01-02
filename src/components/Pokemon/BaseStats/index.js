@@ -10,16 +10,16 @@ import { StatsTable, BarCell } from './StyledBaseStats'
 
 export default function BaseStats({ ...rest }) {
   // pokemon info
-  const pokemonInfo = useSelector((state) => state.pokemon.info)
+  const pokemonInfo = useSelector(state => state.pokemon.info)
   // data
   const { stats } = pokemonInfo.data
 
   // total stats
-  const totalStats = (values) =>
-    values.map((stat) => stat.base_stat).reduce((a, b) => a + b, 0)
+  const totalStats = values =>
+    values.map(stat => stat.base_stat).reduce((a, b) => a + b, 0)
 
   // progress
-  const progressCalc = (statValue) => {
+  const progressCalc = statValue => {
     const percentage = (100 / 180) * statValue
     return percentage > 100 ? 100 : percentage
   }
@@ -44,7 +44,7 @@ export default function BaseStats({ ...rest }) {
   }
 
   return (
-    <Box align={{ sm: 'center', md: 'flex-start' }} {...rest}>
+    <Box align={{ xxs: 'center', lg: 'flex-start' }} {...rest}>
       <SectionTitle>Base Stats</SectionTitle>
       <StatsTable forwardedAs="table" align="flex-start">
         <tbody>

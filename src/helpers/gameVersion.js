@@ -178,9 +178,49 @@ const gameVersions = [
   },
 ]
 
+const generations = [
+  {
+    genValue: 'generation-i',
+    genDescription: 'Generation I',
+  },
+  {
+    genValue: 'generation-ii',
+    genDescription: 'Generation II',
+  },
+  {
+    genValue: 'generation-iii',
+    genDescription: 'Generation III',
+  },
+  {
+    genValue: 'generation-iv',
+    genDescription: 'Generation IV',
+  },
+  {
+    genValue: 'generation-v',
+    genDescription: 'Generation V',
+  },
+  {
+    genValue: 'generation-vi',
+    genDescription: 'Generation VI',
+  },
+  {
+    genValue: 'generation-vii',
+    genDescription: 'Generation VII',
+  },
+  {
+    genValue: 'generation-viii',
+    genDescription: 'Generation VIII',
+  },
+]
+
 const mapVersionToGroup = currentVersion =>
   gameVersions
     .filter(version => version.value === currentVersion)
     .map(version => version.group)
 
-export { gameVersions, mapVersionToGroup }
+const mapGeneration = generationValue =>
+  generations
+    .filter(gen => gen.genValue === generationValue)
+    .map(generation => generation.genDescription)
+
+export { gameVersions, mapVersionToGroup, mapGeneration }

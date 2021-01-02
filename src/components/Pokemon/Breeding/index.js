@@ -9,19 +9,19 @@ import { SectionTitle, Table, Numbered } from '../StyledPokemon'
 
 export default function Breeding({ ...rest }) {
   // biology
-  const pokemonBio = useSelector((state) => state.pokemon.biology)
+  const pokemonBio = useSelector(state => state.pokemon.biology)
   // evolution
-  const pokemonEvo = useSelector((state) => state.pokemon.evolution)
+  const pokemonEvo = useSelector(state => state.pokemon.evolution)
   // data
   const { gender_rate, egg_groups, hatch_counter, habitat } = pokemonBio.data
   const { baby_trigger_item } = pokemonEvo.data
 
   // gender ratio
-  const genderRatio = (rate) =>
+  const genderRatio = rate =>
     `${12.5 * (8 - rate)}% male, ${12.5 * rate}% female`
 
   // egg groups
-  const eggGroups = (groups) =>
+  const eggGroups = groups =>
     groups.map((group, i) => (
       <Numbered key={i}>
         {`${groups.length > 1 ? `${++i}. ` : ``}${capitalize(group.name)}`}
@@ -29,7 +29,7 @@ export default function Breeding({ ...rest }) {
     ))
 
   // egg hatch cycle
-  const eggCycle = (counter) =>
+  const eggCycle = counter =>
     `${counter} cycles ( ${255 * (hatch_counter + 1)} steps )`
 
   return (
@@ -37,7 +37,7 @@ export default function Breeding({ ...rest }) {
       {pokemonEvo.isLoading ? (
         <Loading />
       ) : (
-        <Box align={{ sm: 'center', lg: 'flex-start' }} {...rest}>
+        <Box align={{ xxs: 'center', lg: 'flex-start' }} {...rest}>
           <SectionTitle>Breeding</SectionTitle>
           <Table forwardedAs="table" align="flex-start">
             <tbody>

@@ -54,11 +54,7 @@ export default function Homepage() {
             margin="1rem 0"
             constrained
           >
-            <Details
-              sizes={5}
-              align="flex-start"
-              margin={{ xxs: '0 0 2rem', lg: '0' }}
-            />
+            <Details sizes={5} margin={{ xxs: '0 0 2rem', lg: '0' }} />
             <ImageContainer sizes={7} margin={{ xxs: '0 0 2rem', lg: '0' }}>
               <Image
                 src={`https://pokeres.bastionbot.org/images/pokemon/${id}.png`}
@@ -108,7 +104,7 @@ export default function Homepage() {
             constrained
           >
             <Suspense fallback={<Loading />}>
-              <Moves margin="0 0 2rem" />
+              <Moves sizes={12} margin="0 0 2rem" />
             </Suspense>
           </Box>
         </>

@@ -10,11 +10,11 @@ import { SectionTitle, Table, Numbered } from '../StyledPokemon'
 
 export default function Training({ ...rest }) {
   // pokemon info
-  const pokemonInfo = useSelector((state) => state.pokemon.info)
+  const pokemonInfo = useSelector(state => state.pokemon.info)
   // biology
-  const pokemonBio = useSelector((state) => state.pokemon.biology)
+  const pokemonBio = useSelector(state => state.pokemon.biology)
   // game version
-  const gameVersion = useSelector((state) => state.game.version)
+  const gameVersion = useSelector(state => state.game.version)
   // data
   const { stats, base_experience, held_items } = pokemonInfo.data
   const { capture_rate, base_happiness, growth_rate } = pokemonBio.data
@@ -38,14 +38,14 @@ export default function Training({ ...rest }) {
             }
           }
         })
-        .filter((currItem) => currItem)
+        .filter(currItem => currItem)
       // set items state
       setItems(versionItems)
     }
   }, [gameVersion])
 
   // EV yield
-  const EVYield = (pokemonStats) => {
+  const EVYield = pokemonStats => {
     return pokemonStats.map(
       (currStat, i) =>
         currStat.effort > 0 && (
@@ -57,7 +57,7 @@ export default function Training({ ...rest }) {
   }
 
   // catch rate
-  const catchRate = (rate) => {
+  const catchRate = rate => {
     const rateChance = Math.round((33.33 / 255) * rate)
     // return string
     return (
@@ -69,7 +69,7 @@ export default function Training({ ...rest }) {
   }
 
   // base happiness
-  const baseHappiness = (happiness) => {
+  const baseHappiness = happiness => {
     let happinessRate
 
     if (happiness <= 69) {
@@ -90,7 +90,7 @@ export default function Training({ ...rest }) {
       {pokemonBio.isLoading ? (
         <Loading />
       ) : (
-        <Box align={{ sm: 'center', lg: 'flex-start' }} {...rest}>
+        <Box align={{ xxs: 'center', lg: 'flex-start' }} {...rest}>
           <SectionTitle>Training</SectionTitle>
           <Table forwardedAs="table" align="flex-start">
             <tbody>

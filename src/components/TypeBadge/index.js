@@ -21,10 +21,12 @@ const Badge = styled(Box)`
     iconOnly
       ? css`
           display: inline-flex;
-          margin: ${margin || '0.2rem 0.3rem 0.2rem 0'};
+          margin: ${margin || '0.1rem 0.4rem 0.1rem 0'};
+          padding: 0.3rem;
         `
       : css`
           margin: ${margin || '0.5rem 0.5rem 0.5rem 0'};
+          padding: 0.5rem;
         `}
 
   ${({ theme }) => css`
@@ -88,7 +90,6 @@ export default function TypeBadge({ type, hideIcon, iconOnly, ...rest }) {
       direction="row"
       width="auto"
       grow={0}
-      padding="0.5rem"
       type={type}
       iconOnly={iconOnly}
       {...rest}

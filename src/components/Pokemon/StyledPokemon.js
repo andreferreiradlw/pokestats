@@ -26,6 +26,7 @@ const Table = styled(Box)`
   line-height: 1.2rem;
   word-break: break-word;
   border-spacing: 0;
+  width: 100%;
 
   & tbody {
     flex-grow: 1;
@@ -42,14 +43,24 @@ const Table = styled(Box)`
     font-weight: normal;
     text-align: left;
     white-space: nowrap;
-    vertical-align: top;
+    vertical-align: middle;
   }
 
   & td {
     padding: 6px 16px;
     font-weight: 500;
     white-space: pre-line;
+    height: 40px;
   }
+
+  ${({ theme }) => css`
+    @media ${theme.device.md} {
+      width: 50%;
+    }
+    @media ${theme.device.lg} {
+      width: 100%;
+    }
+  `}
 `
 
 const Numbered = styled.span`

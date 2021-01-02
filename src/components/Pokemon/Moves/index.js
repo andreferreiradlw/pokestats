@@ -2,7 +2,7 @@ import { useSelector } from 'react-redux'
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 // helpers
-import { mapVersionToGroup } from '../../../helpers/gameVersion'
+import { mapVersionToGroup, mapGeneration } from '../../../helpers/gameVersion'
 import { filterMoves, getMachineNames } from '../../../helpers/moves'
 import { capitalize } from '../../../helpers/typography'
 // components
@@ -12,6 +12,7 @@ import TypeBadge from '../../TypeBadge'
 // styles
 import { SectionTitle } from '../StyledPokemon'
 import {
+  TableContainer,
   MovesTable,
   NameTH,
   NameTD,
@@ -19,6 +20,7 @@ import {
   TabContainer,
   Tab,
   TableBody,
+  NoMoves,
 } from './StyledMoves'
 
 export default function Moves({ ...rest }) {
@@ -142,10 +144,10 @@ export default function Moves({ ...rest }) {
   }, [currMoves])
 
   return (
-    <Box align={{ sm: 'center', lg: 'flex-start' }} {...rest}>
+    <Box align={{ xxs: 'center', lg: 'flex-start' }} {...rest}>
       <SectionTitle>Move Pool</SectionTitle>
       {/** TABS */}
-      <TabContainer direction="row" justify="space-evenly">
+      <TabContainer direction="row" justify="space-evenly" flexWrap="wrap">
         <Tab active={activeTab === 1} onClick={() => setActiveTab(1)}>
           Level Up
         </Tab>
@@ -160,50 +162,56 @@ export default function Moves({ ...rest }) {
         </Tab>
       </TabContainer>
       {/** TABLE */}
-      <MovesTable forwardedAs="table" align="flex-start">
-        <thead>
-          <tr>
-            <th>{learnMethod === 'level-up' ? 'Level' : '-'}</th>
-            <NameTH>Name</NameTH>
-            <th>Type</th>
-            <th>Category</th>
-            <th>Power</th>
-            <th>PP</th>
-            <th>Accuracy</th>
-            <th>Priority</th>
-            <th>Generation</th>
-          </tr>
-        </thead>
-        <TableBody>
-          {!movesLoading &&
-            currMoves &&
-            currMoves.map((move, i) => (
-              <TableRow key={i}>
-                {learnMethod === 'level-up' && <td>{move.level_learned_at}</td>}
-                {learnMethod === 'machine' &&
-                  (machineNames ? (
-                    <td>{machineNames[i].toUpperCase()}</td>
-                  ) : (
-                    <td>{<Loading />}</td>
-                  ))}
-                {learnMethod === 'egg' && <td>-</td>}
-                {learnMethod === 'tutor' && <td>-</td>}
-                <NameTD>{capitalize(move.name)}</NameTD>
-                <td>
-                  <TypeBadge margin="0" type={move.type.name} />
-                </td>
-                <td>{capitalize(move.damage_class.name)}</td>
-                <td>{move.power}</td>
-                <td>{move.pp}</td>
-                <td>{move.accuracy}</td>
-                <td>{move.priority}</td>
-                <td>{move.generation.name}</td>
-              </TableRow>
-            ))}
-        </TableBody>
-      </MovesTable>
+      <TableContainer>
+        <MovesTable>
+          <thead>
+            <tr>
+              <th>{learnMethod === 'level-up' ? 'Level' : '-'}</th>
+              <NameTH>Name</NameTH>
+              <th>Type</th>
+              <th>Category</th>
+              <th>Power</th>
+              <th>PP</th>
+              <th>Accuracy</th>
+              <th>Priority</th>
+              <th>Generation</th>
+            </tr>
+          </thead>
+          <TableBody>
+            {!movesLoading &&
+              currMoves &&
+              currMoves.map((move, i) => (
+                <TableRow key={i}>
+                  {learnMethod === 'level-up' && (
+                    <td>{move.level_learned_at}</td>
+                  )}
+                  {learnMethod === 'machine' &&
+                    (machineNames ? (
+                      <td>{machineNames[i].toUpperCase()}</td>
+                    ) : (
+                      <td>{<Loading />}</td>
+                    ))}
+                  {learnMethod === 'egg' && <td>-</td>}
+                  {learnMethod === 'tutor' && <td>-</td>}
+                  <NameTD>{capitalize(move.name)}</NameTD>
+                  <td>
+                    <TypeBadge margin="0" iconOnly type={move.type.name} />
+                  </td>
+                  <td>{capitalize(move.damage_class.name)}</td>
+                  <td>{move.power || '-'}</td>
+                  <td>{move.pp || '-'}</td>
+                  <td>{move.accuracy || '-'}</td>
+                  <td>{move.priority}</td>
+                  <td>{mapGeneration(move.generation.name)}</td>
+                </TableRow>
+              ))}
+          </TableBody>
+        </MovesTable>
+      </TableContainer>
       {/** NO MOVES */}
-      {currMoves && !currMoves.length && <p>No moves!</p>}
+      {currMoves && !currMoves.length && (
+        <NoMoves margin="2rem 0">No Moves!</NoMoves>
+      )}
       {/** LOADING */}
       {movesLoading && <Loading />}
     </Box>

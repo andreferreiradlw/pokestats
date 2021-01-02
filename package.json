@@ -36,6 +36,7 @@
     "eslint-plugin-react": "^7.21.5",
     "eslint-plugin-styled-components": "^0.0.0",
     "prettier": "^2.2.1",
-    "redux-devtools": "^3.7.0"
+    "redux-devtools": "^3.7.0",
+    "terser-webpack-plugin": "^5.0.3"
   }
 }

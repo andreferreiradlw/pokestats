@@ -42,12 +42,12 @@ export default function Moves({ ...rest }) {
   // machine names
   const [machineNames, setMachineNames] = useState()
   // loading
-  const [movesLoading, setMovesLoading] = useState(true)
+  const [movesLoading, setMovesLoading] = useState(false)
 
   // fetch move data
   useEffect(() => {
+    setMovesLoading(true)
     if (moves.length) {
-      setMovesLoading(true)
       // requests array
       const axiosRequests = []
 
@@ -143,6 +143,10 @@ export default function Moves({ ...rest }) {
     }
   }, [currMoves])
 
+  useEffect(() => {
+    console.log(movesLoading)
+  }, [movesLoading])
+
   return (
     <Box align={{ xxs: 'center', lg: 'flex-start' }} {...rest}>
       <SectionTitle>Move Pool</SectionTitle>
@@ -213,7 +217,7 @@ export default function Moves({ ...rest }) {
         <NoMoves margin="2rem 0">No Moves!</NoMoves>
       )}
       {/** LOADING */}
-      {movesLoading && <Loading />}
+      {(movesLoading || !currMoves) && <Loading />}
     </Box>
   )
 }

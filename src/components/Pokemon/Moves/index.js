@@ -186,7 +186,7 @@ export default function Moves({ ...rest }) {
                     <td>{move.level_learned_at}</td>
                   )}
                   {learnMethod === 'machine' &&
-                    (machineNames ? (
+                    (machineNames && machineNames[i] ? (
                       <td>{machineNames[i].toUpperCase()}</td>
                     ) : (
                       <td>{<Loading />}</td>

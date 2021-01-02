@@ -67,6 +67,10 @@ const Numbered = styled.span`
   width: 100%;
   display: block;
 
+  & span {
+    font-weight: 300;
+  }
+
   &:not(:last-of-type) {
     padding-bottom: 6px;
   }

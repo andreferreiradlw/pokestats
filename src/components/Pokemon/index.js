@@ -12,6 +12,7 @@ import Breeding from './Breeding'
 import Training from './Training'
 import Multipliers from './Multipliers'
 import BaseStats from './BaseStats'
+import Form from './Forms'
 import Moves from './Moves'
 // styles
 import { ImageContainer, Image } from './StyledPokemon'
@@ -70,15 +71,15 @@ export default function Homepage() {
           >
             <Breeding
               margin={{ xxs: '0 0 2rem', lg: '0' }}
-              padding="0 1rem 0 0"
+              padding={{ xxs: '0', lg: '0 2rem 0 0' }}
             />
             <Training
               margin={{ xxs: '0 0 2rem', lg: '0' }}
-              padding="0 0.5rem"
+              padding={{ xxs: '0', lg: '0 1rem' }}
             />
             <Multipliers
               margin={{ xxs: '0 0 2rem', lg: '0' }}
-              padding="0 0 0 1rem"
+              padding={{ xxs: '0', lg: '0 0 0 2rem' }}
             />
           </Box>
           <Box
@@ -92,8 +93,9 @@ export default function Homepage() {
             <BaseStats
               sizes={{ xxs: 12, lg: 8 }}
               margin={{ xxs: '0 0 2rem', lg: '0' }}
+              padding={{ xxs: '0', lg: '0 2rem 0 0' }}
             />
-            <Box sizes={{ xxs: 12, lg: 4 }}>Forms</Box>
+            <Form sizes={{ xxs: 12, lg: 4 }} />
           </Box>
           <Box
             as="section"

@@ -1,6 +1,4 @@
 // components
 import Homepage from '../components/Homepage'
 
-export default function Home() {
-  return <Homepage />
-}
+export default Homepage

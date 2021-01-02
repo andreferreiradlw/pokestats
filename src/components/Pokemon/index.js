@@ -29,8 +29,9 @@ export default function Homepage() {
 
   // fetch pokemon data
   useEffect(() => {
-    const pokemon = router.query.id
-    pokemon && dispatch(fetchPokemonData(pokemon))
+    if (router.query.id) {
+      dispatch(fetchPokemonData(router.query.id))
+    }
   }, [router])
 
   // error handling

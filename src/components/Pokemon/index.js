@@ -12,8 +12,9 @@ import Breeding from './Breeding'
 import Training from './Training'
 import Multipliers from './Multipliers'
 import BaseStats from './BaseStats'
-import Form from './Forms'
+import Forms from './Forms'
 import Moves from './Moves'
+import Sprites from './Sprites'
 // styles
 import { ImageContainer, Image } from './StyledPokemon'
 
@@ -49,7 +50,7 @@ export default function Homepage() {
         <>
           <Box
             as="section"
-            direction={{ xxs: 'column', lg: 'row' }}
+            direction={{ xxs: 'column-reverse', lg: 'row' }}
             align="flex-start"
             justify="flex-start"
             margin="1rem 0"
@@ -58,7 +59,7 @@ export default function Homepage() {
             <Details sizes={5} margin={{ xxs: '0 0 2rem', lg: '0' }} />
             <ImageContainer sizes={7} margin={{ xxs: '0 0 2rem', lg: '0' }}>
               <Image
-                src={`https://pokeres.bastionbot.org/images/pokemon/${id}.png`}
+                src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`}
               />
             </ImageContainer>
           </Box>
@@ -96,7 +97,7 @@ export default function Homepage() {
               margin={{ xxs: '0 0 2rem', lg: '0' }}
               padding={{ xxs: '0', lg: '0 2rem 0 0' }}
             />
-            <Form sizes={{ xxs: 12, lg: 4 }} />
+            <Forms sizes={{ xxs: 12, lg: 4 }} />
           </Box>
           <Box
             as="section"
@@ -106,6 +107,15 @@ export default function Homepage() {
             constrained
           >
             <Moves sizes={12} margin="0 0 2rem" />
+          </Box>
+          <Box
+            as="section"
+            align="flex-start"
+            justify="flex-start"
+            margin="1rem 0"
+            constrained
+          >
+            <Sprites sizes={12} margin="0 0 2rem" />
           </Box>
         </>
       )}

@@ -19,6 +19,24 @@ const SectionTitle = styled.h2`
   `}
 `
 
+const SectionSubTitle = styled.h3`
+  font-size: 1.3rem;
+  line-height: 1rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+
+  ${({ theme }) => css`
+    @media ${theme.device.xs} {
+      font-size: 1.6rem;
+      line-height: 2rem;
+    }
+    @media ${theme.device.md} {
+      font-size: 2rem;
+      line-height: 2.5rem;
+    }
+  `}
+`
+
 const Table = styled(Box)`
   display: table;
   margin-bottom: 1.5rem;
@@ -126,4 +144,4 @@ const Image = styled.img`
   }
 `
 
-export { SectionTitle, Table, Numbered, ImageContainer, Image }
+export { SectionTitle, SectionSubTitle, Table, Numbered, ImageContainer, Image }

@@ -116,9 +116,9 @@ export default function Homepage() {
 // This function gets called at build time
 export async function getStaticPaths() {
   // Call an external API endpoint to get posts
-  const res = await fetch('https://pokeapi.co/api/v2/pokemon?limit=3')
+  const res = await fetch('https://pokeapi.co/api/v2/pokemon?limit=151')
   const pokemonList = await res.json()
-
+  console.log(pokemonList.results)
   // Get the paths we want to pre-render based on posts
   const paths = pokemonList.results.map(pokemon => ({
     params: { id: pokemon.name },

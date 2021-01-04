@@ -10,12 +10,22 @@ const SpriteContainer = styled(Box)`
 `
 
 const Sprite = styled.img`
+  height: auto;
+  width: 130px;
+
   ${({ dreamworld }) =>
     dreamworld &&
     css`
-      height: 200px;
+      height: 180px;
+      width: auto;
       margin-bottom: 1rem;
     `}
 `
 
-export { SpriteContainer, Sprite }
+const NoSprites = styled(Box)`
+  font-size: 2rem;
+  line-height: 2.5rem;
+  text-align: center;
+`
+
+export { SpriteContainer, Sprite, NoSprites }

@@ -6,7 +6,7 @@ import Box from '../../Box'
 import Loading from '../../Loading'
 // styles
 import { SectionTitle, SectionSubTitle } from '../StyledPokemon'
-import { SpriteContainer, Sprite } from './StyledSprites'
+import { SpriteContainer, Sprite, NoSprites } from './StyledSprites'
 
 export default function Sprites({ ...rest }) {
   // pokemon info
@@ -24,59 +24,68 @@ export default function Sprites({ ...rest }) {
         <Loading />
       ) : (
         <>
-          <Box
-            direction="row-reverse"
-            justify={{ xxs: 'center', lg: 'flex-end' }}
-            margin="0 0 2rem"
-            flexWrap="wrap"
-          >
-            {Object.keys(sprites).map(
-              (key, i) =>
-                sprites[key] &&
-                typeof sprites[key] !== 'object' && (
-                  <SpriteContainer sizes={1.5} key={i}>
-                    <Sprite src={sprites[key]} />
-                    <p>{humanize(key)}</p>
-                  </SpriteContainer>
-                )
-            )}
-          </Box>
-          <Box
-            direction={{ xxs: 'column', md: 'row' }}
-            justify={{ xxs: 'center' }}
-            align="flex-start"
-          >
-            {(dreamWorld.front_default || dreamWorld.front_female) && (
-              <Box align="center" sizes={6}>
-                <SectionSubTitle>Dreamworld Artwork</SectionSubTitle>
-                <Box
-                  direction="row"
-                  justify="center"
-                  margin="0 0 2rem"
-                  flexWrap="wrap"
-                >
-                  {Object.keys(dreamWorld).map(
-                    (key, i) =>
-                      dreamWorld[key] && (
-                        <SpriteContainer key={i} align="center" sizes={6}>
-                          <Sprite dreamworld src={dreamWorld[key]} />
-                          <p>{humanize(key)}</p>
-                        </SpriteContainer>
-                      )
-                  )}
-                </Box>
+          {dreamWorld.front_default ||
+          dreamWorld.front_female ||
+          sprites.length ||
+          officialArtwork ? (
+            <>
+              <Box
+                direction="row-reverse"
+                justify={{ xxs: 'center', lg: 'flex-end' }}
+                margin="0 0 2rem"
+                flexWrap="wrap"
+              >
+                {Object.keys(sprites).map(
+                  (key, i) =>
+                    sprites[key] &&
+                    typeof sprites[key] !== 'object' && (
+                      <SpriteContainer sizes={1.5} key={i}>
+                        <Sprite src={sprites[key]} />
+                        <p>{humanize(key)}</p>
+                      </SpriteContainer>
+                    )
+                )}
               </Box>
-            )}
-            {officialArtwork && (
-              <Box align="center" sizes={6}>
-                <SectionSubTitle>Official Artwork</SectionSubTitle>
-                <SpriteContainer align="center">
-                  <Sprite dreamworld src={officialArtwork} />
-                  <p>Front Default</p>
-                </SpriteContainer>
+              <Box
+                direction={{ xxs: 'column', md: 'row' }}
+                justify={{ xxs: 'center', md: 'flex-start' }}
+                align="flex-start"
+              >
+                {(dreamWorld.front_default || dreamWorld.front_female) && (
+                  <Box align={{ xxs: 'center', md: 'flex-start' }} sizes={6}>
+                    <SectionSubTitle>Dreamworld Artwork</SectionSubTitle>
+                    <Box
+                      direction="row"
+                      justify={{ xxs: 'center', md: 'flex-start' }}
+                      margin="0 0 2rem"
+                      flexWrap="wrap"
+                    >
+                      {Object.keys(dreamWorld).map(
+                        (key, i) =>
+                          dreamWorld[key] && (
+                            <SpriteContainer key={i} sizes={6}>
+                              <Sprite dreamworld src={dreamWorld[key]} />
+                              <p>{humanize(key)}</p>
+                            </SpriteContainer>
+                          )
+                      )}
+                    </Box>
+                  </Box>
+                )}
+                {officialArtwork && (
+                  <Box align={{ xxs: 'center', md: 'flex-start' }} sizes={6}>
+                    <SectionSubTitle>Official Artwork</SectionSubTitle>
+                    <SpriteContainer width={{ xxs: '100%', md: 'auto' }}>
+                      <Sprite dreamworld src={officialArtwork} />
+                      <p>Front Default</p>
+                    </SpriteContainer>
+                  </Box>
+                )}
               </Box>
-            )}
-          </Box>
+            </>
+          ) : (
+            <NoSprites>No sprites available for this Pokémon.</NoSprites>
+          )}
         </>
       )}
     </Box>

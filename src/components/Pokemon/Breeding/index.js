@@ -49,11 +49,15 @@ export default function Breeding({ ...rest }) {
               </tr>
               <tr>
                 <th>Egg Groups</th>
-                <td>{eggGroups(egg_groups)}</td>
+                <td>
+                  {egg_groups.length ? eggGroups(egg_groups) : 'No Egg Groups'}
+                </td>
               </tr>
               <tr>
                 <th>Egg Cycles</th>
-                <td>{eggCycle(hatch_counter)}</td>
+                <td>
+                  {hatch_counter ? eggCycle(hatch_counter) : 'No Egg Cycles'}
+                </td>
               </tr>
               <tr>
                 <th>Baby Trigger Item</th>
@@ -65,7 +69,7 @@ export default function Breeding({ ...rest }) {
               </tr>
               <tr>
                 <th>Habitat</th>
-                <td>{capitalize(habitat.name)}</td>
+                <td>{habitat ? capitalize(habitat.name) : 'None'}</td>
               </tr>
             </tbody>
           </Table>

@@ -42,8 +42,8 @@ export default function Sprites({ ...rest }) {
             )}
           </Box>
           <Box
-            direction={{ xxs: 'column', lg: 'row' }}
-            justify={{ xxs: 'center', lg: 'flex-start' }}
+            direction={{ xxs: 'column', md: 'row' }}
+            justify={{ xxs: 'center' }}
             align="flex-start"
           >
             {(dreamWorld.front_default || dreamWorld.front_female) && (
@@ -72,6 +72,7 @@ export default function Sprites({ ...rest }) {
                 <SectionSubTitle>Official Artwork</SectionSubTitle>
                 <SpriteContainer align="center">
                   <Sprite dreamworld src={officialArtwork} />
+                  <p>Front Default</p>
                 </SpriteContainer>
               </Box>
             )}

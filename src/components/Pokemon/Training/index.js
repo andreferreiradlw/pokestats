@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 import Loading from '../../Loading'
 import Box from '../../Box'
 //helpers
-import { capitalize } from '../../../helpers/typography'
+import { removeDash } from '../../../helpers/typography'
 // styles
 import { SectionTitle, Table, Numbered } from '../StyledPokemon'
 
@@ -49,7 +49,7 @@ export default function Training({ ...rest }) {
     return pokemonStats.map(
       (currStat, i) =>
         currStat.effort > 0 && (
-          <Numbered key={i}>{`${currStat.effort} ${capitalize(
+          <Numbered key={i}>{`${currStat.effort} ${removeDash(
             currStat.stat.name
           )}`}</Numbered>
         )
@@ -112,7 +112,7 @@ export default function Training({ ...rest }) {
               </tr>
               <tr>
                 <th>Growth Rate</th>
-                <td>{capitalize(growth_rate.name)}</td>
+                <td>{removeDash(growth_rate.name)}</td>
               </tr>
               <tr>
                 <th>Held Items</th>
@@ -121,7 +121,7 @@ export default function Training({ ...rest }) {
                     ? 'None'
                     : items.map((item, i) => (
                         <Numbered key={i}>
-                          {`${items.length > 1 ? `${++i}. ` : ``}${capitalize(
+                          {`${items.length > 1 ? `${++i}. ` : ``}${removeDash(
                             item.item_details.name
                           )} ( ${item.version_details.rarity}% chance )`}
                         </Numbered>

@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux'
 import Loading from '../../Loading'
 import Box from '../../Box'
 //helpers
-import { capitalize } from '../.././../helpers/typography'
+import { capitalize, removeDash } from '../.././../helpers/typography'
 // styles
 import { SectionTitle, Table, Numbered } from '../StyledPokemon'
 
@@ -24,7 +24,7 @@ export default function Breeding({ ...rest }) {
   const eggGroups = groups =>
     groups.map((group, i) => (
       <Numbered key={i}>
-        {`${groups.length > 1 ? `${++i}. ` : ``}${capitalize(group.name)}`}
+        {`${groups.length > 1 ? `${++i}. ` : ``}${removeDash(group.name)}`}
       </Numbered>
     ))
 
@@ -63,7 +63,7 @@ export default function Breeding({ ...rest }) {
                 <th>Baby Trigger Item</th>
                 <td>
                   {baby_trigger_item
-                    ? capitalize(baby_trigger_item.name)
+                    ? removeDash(baby_trigger_item.name)
                     : 'None'}
                 </td>
               </tr>

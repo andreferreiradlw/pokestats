@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux'
 // helpers
-import { capitalize } from '../../../helpers/typography'
+import { removeDash } from '../../../helpers/typography'
 // components
 import Box from '../../Box'
 import ProgressBar from './ProgressBar'
@@ -50,7 +50,7 @@ export default function BaseStats({ ...rest }) {
         <tbody>
           {stats.map(({ base_stat, stat }, i) => (
             <tr key={i}>
-              <th>{capitalize(stat.name)}</th>
+              <th>{removeDash(stat.name)}</th>
               <td>{base_stat}</td>
               <BarCell>
                 <ProgressBar progress={progressCalc(base_stat)} />

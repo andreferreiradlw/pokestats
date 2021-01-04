@@ -2,12 +2,22 @@
 export const capitalize = string =>
   string.charAt(0).toUpperCase() + string.slice(1)
 
-export const humanize = string => {
-  const frags = string.split('_')
+export const removeUnderscore = string => {
+  const words = string.split('_')
 
-  for (let i = 0; i < frags.length; i++) {
-    frags[i] = frags[i].charAt(0).toUpperCase() + frags[i].slice(1)
+  for (let i = 0; i < words.length; i++) {
+    words[i] = words[i].charAt(0).toUpperCase() + words[i].slice(1)
   }
 
-  return frags.join(' ')
+  return words.join(' ')
+}
+
+export const removeDash = string => {
+  const words = string.split('-')
+
+  for (let i = 0; i < words.length; i++) {
+    words[i] = words[i].charAt(0).toUpperCase() + words[i].slice(1)
+  }
+
+  return words.join(' ')
 }

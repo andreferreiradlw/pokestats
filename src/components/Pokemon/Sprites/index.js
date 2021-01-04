@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux'
 // helpers
-import { humanize } from '../../../helpers/typography'
+import { removeUnderscore } from '../../../helpers/typography'
 // components
 import Box from '../../Box'
 import Loading from '../../Loading'
@@ -41,7 +41,7 @@ export default function Sprites({ ...rest }) {
                     typeof sprites[key] !== 'object' && (
                       <SpriteContainer sizes={1.5} key={i}>
                         <Sprite src={sprites[key]} />
-                        <p>{humanize(key)}</p>
+                        <p>{removeUnderscore(key)}</p>
                       </SpriteContainer>
                     )
                 )}
@@ -65,7 +65,7 @@ export default function Sprites({ ...rest }) {
                           dreamWorld[key] && (
                             <SpriteContainer key={i} sizes={6}>
                               <Sprite dreamworld src={dreamWorld[key]} />
-                              <p>{humanize(key)}</p>
+                              <p>{removeUnderscore(key)}</p>
                             </SpriteContainer>
                           )
                       )}

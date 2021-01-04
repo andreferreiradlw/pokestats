@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux'
 // helpers
-import { capitalize } from '../../../helpers/typography'
+import { capitalize, removeDash } from '../../../helpers/typography'
 // components
 import Box from '../../Box'
 import Loading from '../../Loading'
@@ -58,14 +58,14 @@ export default function Details({ ...rest }) {
   const pokemonAbilities = currAbilities =>
     currAbilities.map(({ ability, is_hidden }, i) => (
       <Numbered light={is_hidden} key={i}>
-        {`${i + 1}. ${capitalize(ability.name)} `}
+        {`${i + 1}. ${removeDash(ability.name)} `}
         {is_hidden && '( Hidden Ability )'}
       </Numbered>
     ))
 
   return (
     <Box align={{ xxs: 'center', lg: 'flex-start' }} {...rest}>
-      <Name>{capitalize(name)}</Name>
+      <Name>{removeDash(name)}</Name>
       {types.length > 0 && (
         <TypeContainer
           width="auto"

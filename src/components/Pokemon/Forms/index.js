@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux'
 import Loading from '../../Loading'
 import Box from '../../Box'
 //helpers
-import { capitalize } from '../.././../helpers/typography'
+import { removeDash } from '../.././../helpers/typography'
 // styles
 import { SectionTitle, Table, Numbered } from '../StyledPokemon'
 
@@ -21,7 +21,7 @@ export default function Forms({ ...rest }) {
   const currForms = forms =>
     forms.map((form, i) => (
       <Numbered key={i}>
-        {`${forms.length > 1 ? `${++i}. ` : ``}${capitalize(
+        {`${forms.length > 1 ? `${++i}. ` : ``}${removeDash(
           form.pokemon.name
         )}`}
         {form.is_default && <span>{` ( default )`}</span>}

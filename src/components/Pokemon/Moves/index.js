@@ -8,7 +8,7 @@ import {
   filterMoves,
   getMachineNames,
 } from '../../../helpers/moves'
-import { capitalize } from '../../../helpers/typography'
+import { capitalize, removeDash } from '../../../helpers/typography'
 // components
 import Box from '../../Box'
 import Loading from '../../Loading'
@@ -171,7 +171,7 @@ export default function Moves({ ...rest }) {
                     ))}
                   {learnMethod === 'egg' && <td>-</td>}
                   {learnMethod === 'tutor' && <td>-</td>}
-                  <NameTD>{capitalize(move.name)}</NameTD>
+                  <NameTD>{removeDash(move.name)}</NameTD>
                   <td>
                     <TypeBadge margin="0" iconOnly type={move.type.name} />
                   </td>

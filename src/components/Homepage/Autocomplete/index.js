@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { filterPokemon } from '../homeSlice'
 // helpers
-import { capitalize } from '../../../helpers/typography'
+import { removeDash } from '../../../helpers/typography'
 // components
 import {
   Container,
@@ -28,8 +28,8 @@ export default function Autocomplete() {
   const [search, setSearch] = useState('')
 
   // selectors
-  const filteredPokemonList = useSelector((state) => state.home.filteredList)
-  const pokemonListError = useSelector((state) => state.home.error)
+  const filteredPokemonList = useSelector(state => state.home.filteredList)
+  const pokemonListError = useSelector(state => state.home.error)
 
   //handle error change
   useEffect(() => {
@@ -49,13 +49,13 @@ export default function Autocomplete() {
       >
         <Input
           value={search}
-          onChange={(e) => {
+          onChange={e => {
             setSearch(e.target.value)
             dispatch(filterPokemon(e.target.value.toLowerCase()))
           }}
           type="text"
           placeholder="Search Pokemon Name or ID"
-          onKeyDown={(e) =>
+          onKeyDown={e =>
             e.code === 'Enter' &&
             filteredPokemonList[0] !== undefined &&
             router.push(`/pokemon/${filteredPokemonList[0].name}`)
@@ -74,7 +74,7 @@ export default function Autocomplete() {
                   <img
                     src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${item.id}.png`}
                   />
-                  <Option>{capitalize(item.name)}</Option>
+                  <Option>{removeDash(item.name)}</Option>
                 </OptionWrapper>
               </Link>
             ))}

@@ -182,34 +182,42 @@ const generations = [
   {
     genValue: 'generation-i',
     genDescription: 'Generation I',
+    gameVersion: 'yellow',
   },
   {
     genValue: 'generation-ii',
     genDescription: 'Generation II',
+    gameVersion: 'crystal',
   },
   {
     genValue: 'generation-iii',
     genDescription: 'Generation III',
+    gameVersion: 'leafgreen',
   },
   {
     genValue: 'generation-iv',
     genDescription: 'Generation IV',
+    gameVersion: 'soulsilver',
   },
   {
     genValue: 'generation-v',
     genDescription: 'Generation V',
+    gameVersion: 'black',
   },
   {
     genValue: 'generation-vi',
     genDescription: 'Generation VI',
+    gameVersion: 'alpha-sapphire',
   },
   {
     genValue: 'generation-vii',
     genDescription: 'Generation VII',
+    gameVersion: 'sun',
   },
   {
     genValue: 'generation-viii',
     genDescription: 'Generation VIII',
+    gameVersion: 'sword',
   },
 ]
 
@@ -222,5 +230,12 @@ const mapGeneration = generationValue =>
   generations
     .filter(gen => gen.genValue === generationValue)
     .map(generation => generation.genDescription)
+    .toString()
 
-export { gameVersions, mapVersionToGroup, mapGeneration }
+const mapGenerationToGame = value =>
+  generations
+    .filter(gen => gen.genValue === value)
+    .map(generation => generation.gameVersion)
+    .toString()
+
+export { gameVersions, mapVersionToGroup, mapGeneration, mapGenerationToGame }

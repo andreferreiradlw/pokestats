@@ -1,8 +1,11 @@
 import { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useRouter } from 'next/router'
-// action
+// actions
 import { fetchPokemonData } from './pokemonSlice'
+import { changeVersion } from '../Header/gameSlice'
+// helpers
+import { mapGenerationToGame } from '../../helpers/gameVersion'
 // components
 import Layout from '../Layout'
 import Loading from '../Loading'
@@ -25,8 +28,11 @@ export default function Homepage() {
   const dispatch = useDispatch()
   // pokemon selector
   const pokemonInfo = useSelector(state => state.pokemon.info)
+  // biology
+  const pokemonBio = useSelector(state => state.pokemon.biology)
   // data
-  const { id } = pokemonInfo.data
+  const { id, game_indices } = pokemonInfo.data
+  const { generation } = pokemonBio.data
 
   // fetch pokemon data
   useEffect(() => {
@@ -35,10 +41,22 @@ export default function Homepage() {
     }
   }, [router])
 
+  // update game version for current Pokemon
+  useEffect(() => {
+    if (game_indices && game_indices[0]) {
+      // change to first game indice
+      dispatch(changeVersion(game_indices[0].version.name))
+    } else if (generation) {
+      // if no game indice avaliable change to generation
+      let gameGen = mapGenerationToGame(generation.name)
+      dispatch(changeVersion(gameGen))
+    }
+  }, [generation])
+
   // error handling
   useEffect(() => {
     if (pokemonInfo.error.status !== 'OK') {
-      // router.push('/404')
+      router.push('/404')
     }
   }, [pokemonInfo.error])
 

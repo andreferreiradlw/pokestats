@@ -11,6 +11,8 @@ const homeAdapter = createEntityAdapter()
 // initial state
 const initialState = homeAdapter.getInitialState({
   loading: false,
+  pokemon: [],
+  pokemonLength: 0,
   filteredList: [],
   error: {
     status: 'OK',
@@ -42,7 +44,7 @@ const homeSlice = createSlice({
   reducers: {
     filterPokemon(state, action) {
       if (action.payload) {
-        state.filteredList = Object.values(state.entities).filter(pokemon =>
+        state.filteredList = state.pokemon.filter(pokemon =>
           pokemon.name.includes(action.payload)
         )
       } else {
@@ -63,7 +65,8 @@ const homeSlice = createSlice({
         pokemon.id = index += 1
         return pokemon
       })
-      homeAdapter.setAll(state, listWithId)
+      state.pokemon = listWithId
+      state.pokemonLength = listWithId.length
       state.loading = false
     })
     builder.addCase(fetchPokemonList.rejected, (state, action) => {

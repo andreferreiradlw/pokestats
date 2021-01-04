@@ -26,7 +26,11 @@ export default function Navigation({ ...rest }) {
   const { id } = pokemonInfo.data
 
   return (
-    <Box direction="row" justify={{ xxs: 'center', lg: 'flex-end' }} {...rest}>
+    <Box
+      direction={{ xxs: 'column', sm: 'row' }}
+      justify={{ xxs: 'flex-start', sm: 'center', lg: 'flex-end' }}
+      {...rest}
+    >
       {id !== 1 && (
         <Link as={`/pokemon/${allPokemon[id - 2].name}`} href="/pokemon/[id]">
           <BtnContainer>

@@ -6,6 +6,7 @@ const Name = styled.h1`
   line-height: 3rem;
   font-weight: 600;
   margin-bottom: 0.5rem;
+  text-align: center;
 
   ${({ theme }) => css`
     @media ${theme.device.xs} {
@@ -21,8 +22,9 @@ const Name = styled.h1`
       line-height: 8.5rem;
     }
     @media ${theme.device.lg} {
-      font-size: 5.3rem;
-      line-height: 6rem;
+      text-align: left;
+      font-size: 6.5rem;
+      line-height: 7rem;
     }
   `}
 `
@@ -36,6 +38,13 @@ const Genera = styled.p`
 `
 const Flavor = styled.p`
   margin-bottom: 0.5rem;
+  text-align: center;
+
+  ${({ theme }) => css`
+    @media ${theme.device.lg} {
+      text-align: left;
+    }
+  `}
 `
 
 export { Name, TypeContainer, Genera, Flavor }

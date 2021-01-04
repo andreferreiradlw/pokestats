@@ -18,6 +18,7 @@ import BaseStats from './BaseStats'
 import Forms from './Forms'
 import Moves from './Moves'
 import Sprites from './Sprites'
+import Navigation from './Navigation'
 // styles
 import { ImageContainer, Image } from './StyledPokemon'
 
@@ -134,6 +135,15 @@ export default function Homepage() {
             constrained
           >
             <Sprites sizes={12} margin="0 0 2rem" />
+          </Box>
+          <Box
+            as="section"
+            align="flex-start"
+            justify="flex-start"
+            margin="1rem 0"
+            constrained
+          >
+            <Navigation sizes={12} margin="0 0 2rem" />
           </Box>
         </>
       )}

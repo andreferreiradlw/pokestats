@@ -1,6 +1,5 @@
-import styled, { css, keyframes } from 'styled-components'
+import styled, { css } from 'styled-components'
 import Box from '../../Box'
-import { Table } from '../StyledPokemon'
 
 const TableBody = styled.tbody``
 const TableRow = styled.tr``
@@ -91,6 +90,7 @@ const Tab = styled.button`
 const NoMoves = styled(Box)`
   font-size: 2rem;
   line-height: 2.5rem;
+  text-align: center;
 `
 
 export {

@@ -42,7 +42,7 @@ export default function Moves({ ...rest }) {
   // learn method state
   const [learnMethod, setLearnMethod] = useState()
   // current pokemon moves
-  const [currMoves, setCurrMoves] = useState()
+  const [currMoves, setCurrMoves] = useState([])
   // machine names
   const [machineNames, setMachineNames] = useState()
   // loading
@@ -50,13 +50,16 @@ export default function Moves({ ...rest }) {
 
   // fetch move data
   useEffect(() => {
-    if (moves.length) {
-      setMovesLoading(true)
-      fetchTypeData(moves).then(movesData => {
+    setMovesLoading(true)
+    fetchTypeData(moves)
+      .then(movesData => {
         setMoves(movesData)
         setMovesLoading(false)
       })
-    }
+      .catch(errors => {
+        // no moves
+        setMovesLoading(false)
+      })
   }, [moves])
 
   // tab changes
@@ -184,11 +187,11 @@ export default function Moves({ ...rest }) {
         </MovesTable>
       </TableContainer>
       {/** NO MOVES */}
-      {currMoves && !currMoves.length && (
-        <NoMoves margin="2rem 0">No Moves!</NoMoves>
+      {(!moves.length || !currMoves.length) && !movesLoading && (
+        <NoMoves margin="2rem 0">No moves for current game version!</NoMoves>
       )}
       {/** LOADING */}
-      {(movesLoading || !currMoves) && <Loading />}
+      {movesLoading && <Loading />}
     </Box>
   )
 }

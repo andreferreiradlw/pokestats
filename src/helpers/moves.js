@@ -1,34 +1,40 @@
 import axios from 'axios'
 
 function fetchTypeData(moves) {
-  // requests array
-  let axiosRequests = []
-  // create an axios request for each move
-  moves.forEach(({ move }) => {
-    axiosRequests.push(axios.get(move.url))
-  })
   // return a promisse that resolves with moves data
   return new Promise(function (resolve, reject) {
-    // moves axios requests
-    axios
-      .all(axiosRequests)
-      .then(
-        axios.spread((...responses) => {
-          const movesData = responses.map((response, i) => {
-            let responseData = response.data
-            // version details from pokemon moves info
-            responseData.version_group_details = moves[i].version_group_details
-            // return
-            return responseData
-          })
-          resolve(movesData)
-        })
-      )
-      .catch(errors => {
-        // react on errors.
-        reject(errors)
-        console.log('error', errors)
+    if (!moves.length) {
+      // reject promisse
+      reject('no moves')
+    } else {
+      // requests array
+      let axiosRequests = []
+      // create an axios request for each move
+      moves.forEach(({ move }) => {
+        axiosRequests.push(axios.get(move.url))
       })
+      // moves axios requests
+      axios
+        .all(axiosRequests)
+        .then(
+          axios.spread((...responses) => {
+            const movesData = responses.map((response, i) => {
+              let responseData = response.data
+              // version details from pokemon moves info
+              responseData.version_group_details =
+                moves[i].version_group_details
+              // return
+              return responseData
+            })
+            resolve(movesData)
+          })
+        )
+        .catch(errors => {
+          // react on errors.
+          reject(errors)
+          console.log('error', errors)
+        })
+    }
   })
 }
 

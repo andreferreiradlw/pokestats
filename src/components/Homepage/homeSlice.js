@@ -24,7 +24,7 @@ export const fetchPokemonList = createAsyncThunk(
   async (payload, { rejectWithValue }) => {
     try {
       const response = await axios.get(
-        'https://pokeapi.co/api/v2/pokemon?limit=151'
+        'https://pokeapi.co/api/v2/pokemon?limit=898'
       )
       return response.data.results
     } catch (err) {
@@ -42,7 +42,7 @@ const homeSlice = createSlice({
   reducers: {
     filterPokemon(state, action) {
       if (action.payload) {
-        state.filteredList = Object.values(state.entities).filter((pokemon) =>
+        state.filteredList = Object.values(state.entities).filter(pokemon =>
           pokemon.name.includes(action.payload)
         )
       } else {
@@ -54,7 +54,7 @@ const homeSlice = createSlice({
       state.loading = !state.loading
     },
   },
-  extraReducers: (builder) => {
+  extraReducers: builder => {
     builder.addCase(fetchPokemonList.pending, (state, action) => {
       state.loading = true
     })

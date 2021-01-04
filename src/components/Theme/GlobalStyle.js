@@ -49,6 +49,9 @@ const GlobalStyle = createGlobalStyle`
   input, textarea, button {
     font-family: inherit
   }
+  a{
+    text-decoration: none;
+  }
 
   // Layout & box sizing
   article,

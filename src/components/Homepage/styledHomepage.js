@@ -1,15 +1,10 @@
 import styled, { css } from 'styled-components'
+import Box from '../Box'
 
-const Container = styled.main`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  max-width: ${({ theme }) => theme.container.maxWidth};
-  padding: ${({ theme }) => theme.container.padding};
+const Container = styled(Box)`
   margin: auto;
   height: 100vh;
+  min-height: 100vh;
   z-index: 1;
 `
 

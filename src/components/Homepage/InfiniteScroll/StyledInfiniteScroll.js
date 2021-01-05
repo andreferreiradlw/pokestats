@@ -3,6 +3,7 @@ import Box from '../../Box'
 
 const Container = styled(Box)`
   background-color: black;
+  color: white;
 `
 
 const List = styled(Box)`

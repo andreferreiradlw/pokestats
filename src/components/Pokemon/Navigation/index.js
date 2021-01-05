@@ -5,15 +5,7 @@ import { removeDash } from '../../../helpers/typography'
 // components
 import Box from '../../Box'
 // styles
-import {
-  BtnContainer,
-  BtnAnchor,
-  BtnSpan,
-  ArrowLeft,
-  ArrowRight,
-  PokemonImg,
-  NumberID,
-} from './StyledNavigation'
+import { BtnAnchor, Title, Arrow, PokemonImg } from './StyledNavigation'
 
 export default function Navigation({ ...rest }) {
   // pokemon selector
@@ -28,47 +20,41 @@ export default function Navigation({ ...rest }) {
   return (
     <Box
       direction={{ xxs: 'column', sm: 'row' }}
-      justify={{ xxs: 'flex-start', sm: 'center', lg: 'flex-end' }}
+      justify={{ xxs: 'flex-start', sm: 'center' }}
       {...rest}
     >
       {id !== 1 && (
         <Link as={`/pokemon/${allPokemon[id - 2].name}`} href="/pokemon/[id]">
-          <BtnContainer>
-            <BtnAnchor left>
-              <BtnSpan isIcon left>
-                <PokemonImg
-                  src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${
-                    id - 1
-                  }.png`}
-                />
-                <ArrowLeft />
-              </BtnSpan>
-              <BtnSpan isTitle right>
-                <NumberID>{`#${id - 1}`}</NumberID>
-                {removeDash(allPokemon[id - 2].name)}
-              </BtnSpan>
-            </BtnAnchor>
-          </BtnContainer>
+          <BtnAnchor left>
+            <Arrow left>
+              <PokemonImg
+                src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${
+                  id - 1
+                }.png`}
+              />
+            </Arrow>
+            <Title right>
+              <span>{`#${id - 1}`}</span>
+              {removeDash(allPokemon[id - 2].name)}
+            </Title>
+          </BtnAnchor>
         </Link>
       )}
       {id !== pokemonLength && (
         <Link as={`/pokemon/${allPokemon[id].name}`} href="/pokemon/[id]">
-          <BtnContainer>
-            <BtnAnchor right>
-              <BtnSpan isIcon right>
-                <PokemonImg
-                  src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${
-                    id + 1
-                  }.png`}
-                />
-                <ArrowRight />
-              </BtnSpan>
-              <BtnSpan isTitle left>
-                <NumberID>{`#${id + 1}`}</NumberID>
-                {removeDash(allPokemon[id].name)}
-              </BtnSpan>
-            </BtnAnchor>
-          </BtnContainer>
+          <BtnAnchor right>
+            <Arrow right>
+              <PokemonImg
+                src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${
+                  id + 1
+                }.png`}
+              />
+            </Arrow>
+            <Title left>
+              <span>{`#${id + 1}`}</span>
+              {removeDash(allPokemon[id].name)}
+            </Title>
+          </BtnAnchor>
         </Link>
       )}
     </Box>

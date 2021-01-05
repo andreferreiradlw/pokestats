@@ -1,28 +1,6 @@
-import styled, { css, keyframes } from 'styled-components'
-import Box from '../../Box'
-
-const Arrow = styled.span`
-  position: absolute;
-  width: 0;
-  height: 0;
-  border-top: 45px solid transparent;
-  border-bottom: 45px solid transparent;
-  transition: all 0.15s ease-in-out;
-`
-
-const ArrowLeft = styled(Arrow)`
-  right: 0;
-  border-right: 10px solid black;
-  box-shadow: 10px 0 0 0 black, 10px 3px 0 0 black;
-`
-const ArrowRight = styled(Arrow)`
-  left: 0;
-  border-left: 10px solid black;
-  box-shadow: -10px 0 0 0 black, -10px 3px 0 0 black;
-`
+import styled, { css } from 'styled-components'
 
 const BtnSpan = styled.span`
-  display: block;
   position: relative;
   height: 90px;
   display: flex;
@@ -30,27 +8,43 @@ const BtnSpan = styled.span`
   align-items: center;
   justify-content: center;
   padding: 0 0.5rem;
+`
+
+const Arrow = styled(BtnSpan)`
+  ${({ right, left }) =>
+    css`
+      &:after {
+        position: absolute;
+        content: '';
+        border-top: 45px solid transparent;
+        border-bottom: 45px solid transparent;
+        transition: all 0.15s ease-in-out;
+        ${left &&
+        css`
+          right: 0;
+          border-right: 10px solid black;
+          box-shadow: 10px 0 0 0 black, 10px 3px 0 0 black;
+        `}
+        ${right &&
+        css`
+          left: 0;
+          border-left: 10px solid black;
+          box-shadow: -10px 0 0 0 black, -10px 3px 0 0 black;
+        `}
+      }
+    `}
+`
+
+const Title = styled(BtnSpan)`
   color: white;
+  background-color: black;
+  width: 120px;
+  max-width: 120px;
+  transition: all 0.15s ease-in-out;
 
-  ${({ left }) =>
-    left &&
-    css`
-      float: left;
-    `}
-
-  ${({ right }) =>
-    right &&
-    css`
-      float: right;
-    `}
-
-  ${({ isTitle }) =>
-    isTitle &&
-    css`
-      background-color: black;
-      width: 120px;
-      max-width: 120px;
-    `}
+  & span {
+    font-size: 2rem;
+  }
 `
 
 const PokemonImg = styled.img`
@@ -59,11 +53,7 @@ const PokemonImg = styled.img`
   transition: all 0.15s ease-in-out;
 `
 
-const BtnContainer = styled.div``
-
 const BtnAnchor = styled.a`
-  position: relative;
-  display: inline-block;
   overflow: hidden;
   border: 2px solid black;
   font-weight: 600;
@@ -73,6 +63,10 @@ const BtnAnchor = styled.a`
     css`
       border-radius: 4px 0 0 4px;
       border-right: 1px solid white;
+
+      & ${BtnSpan} {
+        float: left;
+      }
     `}
 
   ${({ right }) =>
@@ -80,39 +74,36 @@ const BtnAnchor = styled.a`
     css`
       border-radius: 0 4px 4px 0;
       border-left: 1px solid white;
-    `}
 
-  &::active {
-    height: 51px;
-  }
+      & ${BtnSpan} {
+        float: right;
+      }
+    `}
 
   &:hover {
     cursor: pointer;
 
-    & ${ArrowLeft} {
-      right: 10px;
+    & ${Arrow} {
+      ${({ right }) =>
+        right &&
+        css`
+          &:after {
+            left: 10px;
+          }
+        `}
+      ${({ left }) =>
+        left &&
+        css`
+          &:after {
+            right: 10px;
+          }
+        `}
     }
 
-    & ${ArrowRight} {
-      left: 10px;
-    }
-
-    & ${PokemonImg} {
+    & ${PokemonImg}, & ${Title} {
       transform: scale(1.1);
     }
   }
 `
 
-const NumberID = styled.span`
-  font-size: 2rem;
-`
-
-export {
-  BtnContainer,
-  BtnAnchor,
-  BtnSpan,
-  ArrowLeft,
-  ArrowRight,
-  PokemonImg,
-  NumberID,
-}
+export { BtnAnchor, Title, Arrow, PokemonImg }

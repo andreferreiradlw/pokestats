@@ -17,7 +17,7 @@ export default function Homepage() {
         <Loading />
       ) : (
         <>
-          <Layout withGutter={false}>
+          <Layout withGutter={false} withFooter>
             <Container height="100vh" constrained withGutter>
               <Heading>PokeStats</Heading>
               <Autocomplete />

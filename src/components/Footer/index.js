@@ -21,7 +21,7 @@ export default function Footer() {
           <FooterA href="https://andreferreira.tech" target="_blank">
             André
           </FooterA>
-          {`, Powered by `}{' '}
+          {`, powered by `}{' '}
           <FooterA href="https://pokeapi.co/" target="_blank">
             <img src={PokeApi} />
           </FooterA>

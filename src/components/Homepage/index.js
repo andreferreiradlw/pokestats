@@ -6,7 +6,7 @@ import Particles from '../Particles'
 import Loading from '../Loading'
 import InfiniteScroll from './InfiniteScroll'
 // styles
-import { Container, Heading } from './StyledHomepage'
+import { Container, Heading } from './styledHomepage'
 
 export default function Homepage() {
   const loadingStatus = useSelector(state => state.home.loading)

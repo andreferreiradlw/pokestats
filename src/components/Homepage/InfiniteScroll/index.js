@@ -10,8 +10,8 @@ import { Container, List } from './StyledInfiniteScroll'
 export default function InfiniteScroll({ ...rest }) {
   //pokemon list
   const pokemonList = useSelector(state => state.home.pokemon)
-  // items per page
-  const itemsPerPage = 40
+  // items per page, should be multiple of 7
+  const itemsPerPage = 42
 
   // current page state
   const [currPage, setCurrPage] = useState(1)
@@ -29,15 +29,13 @@ export default function InfiniteScroll({ ...rest }) {
 
   function handleObserver(entitites) {
     // entity data
-    // console.log(entitites[0])
     const { isIntersecting, boundingClientRect } = entitites[0]
 
     if (isIntersecting && boundingClientRect.y >= prevY) {
-      console.log('trigger new page!', boundingClientRect.y, prevY)
       // start loading
       setLoading(true)
       // set new y state
-      // remove about 50 pixels as redundancy
+      // remove 50 pixels as redundancy
       setPrevY(boundingClientRect.y - 50)
       // change page
       setCurrPage(currPage + 1)
@@ -52,26 +50,26 @@ export default function InfiniteScroll({ ...rest }) {
       rootMargin: '0px',
       threshold: 1,
     }
-    // disconnect from previous node
+    // make sure previous observer is disconnected
     if (observer.current) observer.current.disconnect()
     // create observer for new node
     observer.current = new window.IntersectionObserver(handleObserver, options)
-
+    // observer.current can be mutated so create a variable
     const { current: currentObserver } = observer
-    // if node exists, observer
+    // if node exists, observe
     if (node) currentObserver.observe(node)
-
+    // disconnect when component unmounts
     return () => currentObserver.disconnect()
   }, [node])
 
   useEffect(() => {
-    // slice pokemon array
-    const slice = pokemonList.slice(
+    // slice new page from pokemon array
+    const newPage = pokemonList.slice(
       currPage === 1 ? 0 : (currPage - 1) * itemsPerPage,
       currPage * itemsPerPage
     )
     // update show list with sliced array
-    setShowList([...showList, ...slice])
+    setShowList([...showList, ...newPage])
     // stop loading
     setLoading(false)
   }, [currPage])

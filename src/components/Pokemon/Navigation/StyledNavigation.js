@@ -100,7 +100,7 @@ const BtnAnchor = styled.a`
         `}
     }
 
-    & ${PokemonImg}, & ${Title} {
+    & ${PokemonImg} {
       transform: scale(1.1);
     }
   }

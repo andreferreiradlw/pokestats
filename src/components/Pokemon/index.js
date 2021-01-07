@@ -11,6 +11,7 @@ import Layout from '../Layout'
 import Loading from '../Loading'
 import Box from '../Box'
 import Details from './Details'
+import EvolutionChain from './EvolutionChain'
 import Breeding from './Breeding'
 import Training from './Training'
 import Multipliers from './Multipliers'
@@ -81,6 +82,15 @@ export default function Homepage() {
                 src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`}
               />
             </ImageContainer>
+          </Box>
+          <Box
+            as="section"
+            align="flex-start"
+            justify="flex-start"
+            margin="1rem 0"
+            constrained
+          >
+            <EvolutionChain sizes={12} margin="0 0 2rem" />
           </Box>
           <Box
             as="section"

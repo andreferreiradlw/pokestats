@@ -19,6 +19,7 @@ const PokemonBox = forwardRef(({ pokemon, ...rest }, ref) => {
 
   return (
     <PokeBox
+      forwardedAs="a"
       sizes={{ xxs: 5.4, xs: 5.4, sm: 4, md: 3, lg: 2, xl: 1.5 }}
       ref={ref}
       onMouseUp={handleClick}

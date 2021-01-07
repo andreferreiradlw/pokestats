@@ -39,7 +39,6 @@ const PokeBox = styled(Box)`
 
   &:hover {
     cursor: pointer;
-    box-shadow: 2px 2px 10px 1px rgba(255, 255, 255, 0.9);
     transform: scale(1.01);
 
     & ${PokeImg} {

@@ -47,4 +47,12 @@ const PokeBox = styled(Box)`
   }
 `
 
-export { PokeBox, PokeImg }
+const NumberId = styled.span`
+  font-size: 2rem;
+`
+
+const PokeName = styled.span`
+  font-size: 1.2rem;
+`
+
+export { PokeBox, PokeImg, NumberId, PokeName }

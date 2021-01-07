@@ -69,7 +69,7 @@ export default function Breeding({ ...rest }) {
               </tr>
               <tr>
                 <th>Habitat</th>
-                <td>{habitat ? capitalize(habitat.name) : 'None'}</td>
+                <td>{habitat ? removeDash(habitat.name) : 'None'}</td>
               </tr>
             </tbody>
           </Table>

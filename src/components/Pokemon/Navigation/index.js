@@ -19,7 +19,7 @@ export default function Navigation({ ...rest }) {
 
   return (
     <>
-      {allPokemon && (
+      {allPokemon.length > 0 && (
         <Box
           direction={{ xxs: 'column', sm: 'row' }}
           justify={{ xxs: 'flex-start', sm: 'center' }}

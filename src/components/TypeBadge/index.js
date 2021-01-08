@@ -65,7 +65,7 @@ const generateIcon = type => {
     const importIcon = async () => {
       try {
         ImportedIconRef.current = (
-          await import(`../../assets/svg/${type}.svg`)
+          await import(`../../assets/svg/types/${type}.svg`)
         ).default
       } catch (err) {
         throw err

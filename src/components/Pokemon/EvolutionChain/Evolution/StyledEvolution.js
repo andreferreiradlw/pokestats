@@ -16,7 +16,7 @@ const float = keyframes`
 `
 
 const PokeImg = styled.img`
-  height: 120px;
+  width: 115px;
   transition: all 0.05s ease-in-out;
 `
 

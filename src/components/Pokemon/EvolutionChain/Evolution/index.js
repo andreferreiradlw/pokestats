@@ -3,10 +3,16 @@ import { useState, useEffect } from 'react'
 import axios from 'axios'
 // helpers
 import { removeDash } from '../../../../helpers/typography'
-// component
+// components
 import Box from '../../../Box'
 // styles
-import { PokeBox, PokeImg, NumberId, PokeName } from './StyledEvolution'
+import {
+  PokeBox,
+  PokeImg,
+  NumberId,
+  PokeName,
+  EvoArrow,
+} from './StyledEvolution'
 
 export default function Evolution({
   noArrow = false,
@@ -41,11 +47,15 @@ export default function Evolution({
       {currSpecies && (
         <Box direction="row" {...rest}>
           {/** Arrow with evolution details */}
-          {!noArrow && <div>--></div>}
+          {!noArrow && (
+            <Box width="auto">
+              <EvoArrow />
+            </Box>
+          )}
           {/** Pokemon box with image and types */}
           <PokeBox width="auto" onMouseUp={handleClick}>
             <PokeImg
-              src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${currSpecies.id}.png`}
+              src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${currSpecies.id}.png`}
             />
             <NumberId>{`#${currSpecies.id}`}</NumberId>
             <PokeName>{removeDash(currSpecies.name)}</PokeName>

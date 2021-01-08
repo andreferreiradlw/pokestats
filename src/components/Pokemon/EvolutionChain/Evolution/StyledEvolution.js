@@ -1,5 +1,6 @@
 import styled, { css, keyframes } from 'styled-components'
 import Box from '../../../Box'
+import Arrow from '../../../../assets/svg/arrows.svg'
 
 // Create the keyframes for floating img
 const float = keyframes`
@@ -15,7 +16,7 @@ const float = keyframes`
 `
 
 const PokeImg = styled.img`
-  min-height: 105px;
+  height: 120px;
   transition: all 0.05s ease-in-out;
 `
 
@@ -31,19 +32,13 @@ const PokeBox = styled(Box)`
 
   &:hover {
     cursor: pointer;
-    transform: scale(1.01);
 
     & ${PokeImg} {
-      transform: scale(1.01);
+      transform: scale(2);
       @media (prefers-reduced-motion: no-preference) {
         animation: ${float} infinite 3s ease-in-out;
       }
     }
-  }
-
-  &:active {
-    box-shadow: none;
-    transform: scale(1);
   }
 `
 
@@ -55,4 +50,8 @@ const PokeName = styled.span`
   font-size: 1.2rem;
 `
 
-export { PokeBox, PokeImg, NumberId, PokeName }
+const EvoArrow = styled(Arrow)`
+  width: 50px;
+`
+
+export { PokeBox, PokeImg, NumberId, PokeName, EvoArrow }

@@ -23,8 +23,6 @@ export default function Evolution({
   details,
   ...rest
 }) {
-  // console.log('details', details)
-
   // router
   const router = useRouter()
 
@@ -47,10 +45,6 @@ export default function Evolution({
       )
     })
   }, [species])
-
-  useEffect(() => {
-    console.log('currSpecies', currSpecies)
-  }, [currSpecies])
 
   return (
     <>

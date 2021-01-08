@@ -5,6 +5,7 @@ import axios from 'axios'
 import { removeDash } from '../../../../helpers/typography'
 // components
 import Box from '../../../Box'
+import EvoDetails from './EvolutionDetails'
 // styles
 import {
   PokeBox,
@@ -32,31 +33,39 @@ export default function Evolution({
 
   // species state
   const [currSpecies, setCurrSpecies] = useState()
+  const [imgSrc, setImgSrc] = useState()
 
   // fetch species.url data
   useEffect(() => {
-    axios.get(species.url).then(newSpecies => setCurrSpecies(newSpecies.data))
+    // get data
+    axios.get(species.url).then(newSpecies => {
+      setCurrSpecies(newSpecies.data)
+      setImgSrc(
+        `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${newSpecies.data.id}.png`
+      )
+    })
   }, [species])
 
   useEffect(() => {
-    console.log('species', currSpecies)
-  }, [currSpecies])
+    // console.log('evo details', details)
+  }, [details])
 
   return (
     <>
-      {currSpecies && (
-        <Box direction="row" {...rest}>
+      {currSpecies && imgSrc && (
+        <Box direction="row" margin="0 0 1rem" {...rest}>
           {/** Arrow with evolution details */}
           {!noArrow && (
-            <Box width="auto">
+            <Box width="auto" sizes={7}>
+              {details.map((currDetails, i) => (
+                <EvoDetails key={i} details={currDetails} />
+              ))}
               <EvoArrow />
             </Box>
           )}
           {/** Pokemon box with image and types */}
-          <PokeBox width="auto" onMouseUp={handleClick}>
-            <PokeImg
-              src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${currSpecies.id}.png`}
-            />
+          <PokeBox sizes={5} width="auto" onMouseUp={handleClick}>
+            <PokeImg src={imgSrc} />
             <NumberId>{`#${currSpecies.id}`}</NumberId>
             <PokeName>{removeDash(currSpecies.name)}</PokeName>
           </PokeBox>

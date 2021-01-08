@@ -52,6 +52,7 @@ const PokeName = styled.span`
 
 const EvoArrow = styled(Arrow)`
   width: 50px;
+  margin-top: 0.5rem;
 `
 
 export { PokeBox, PokeImg, NumberId, PokeName, EvoArrow }

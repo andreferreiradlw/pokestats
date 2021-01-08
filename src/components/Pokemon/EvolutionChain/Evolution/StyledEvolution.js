@@ -48,6 +48,7 @@ const NumberId = styled.span`
 
 const PokeName = styled.span`
   font-size: 1.2rem;
+  margin-bottom: 0.5rem;
 `
 
 const EvoArrow = styled(Arrow)`
@@ -55,4 +56,9 @@ const EvoArrow = styled(Arrow)`
   margin-top: 0.5rem;
 `
 
-export { PokeBox, PokeImg, NumberId, PokeName, EvoArrow }
+const PokeGen = styled.span`
+  font-size: 1rem;
+  font-weight: 300;
+`
+
+export { PokeBox, PokeImg, NumberId, PokeName, EvoArrow, PokeGen }

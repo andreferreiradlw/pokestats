@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react'
 import axios from 'axios'
 // helpers
 import { removeDash } from '../../../../helpers/typography'
+import { mapGeneration } from '../../../../helpers/gameVersion'
 // components
 import Box from '../../../Box'
 import EvoDetails from './EvolutionDetails'
@@ -13,6 +14,7 @@ import {
   NumberId,
   PokeName,
   EvoArrow,
+  PokeGen,
 } from './StyledEvolution'
 
 export default function Evolution({
@@ -47,8 +49,8 @@ export default function Evolution({
   }, [species])
 
   useEffect(() => {
-    // console.log('evo details', details)
-  }, [details])
+    console.log('currSpecies', currSpecies)
+  }, [currSpecies])
 
   return (
     <>
@@ -68,6 +70,9 @@ export default function Evolution({
             <PokeImg src={imgSrc} />
             <NumberId>{`#${currSpecies.id}`}</NumberId>
             <PokeName>{removeDash(currSpecies.name)}</PokeName>
+            {currSpecies.generation.name && (
+              <PokeGen>{mapGeneration(currSpecies.generation.name)}</PokeGen>
+            )}
           </PokeBox>
         </Box>
       )}

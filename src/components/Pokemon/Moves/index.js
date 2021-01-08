@@ -14,7 +14,7 @@ import Box from '../../Box'
 import Loading from '../../Loading'
 import TypeBadge from '../../TypeBadge'
 // styles
-import { SectionTitle } from '../StyledPokemon'
+import { SectionTitle, SectionMessage } from '../StyledPokemon'
 import {
   TableContainer,
   MovesTable,
@@ -24,7 +24,6 @@ import {
   TabContainer,
   Tab,
   TableBody,
-  NoMoves,
 } from './StyledMoves'
 
 export default function Moves({ ...rest }) {
@@ -188,7 +187,7 @@ export default function Moves({ ...rest }) {
       </TableContainer>
       {/** NO MOVES */}
       {(!moves.length || !currMoves.length) && !movesLoading && (
-        <NoMoves margin="2rem 0">No moves for current game version!</NoMoves>
+        <SectionMessage>No moves for current game version!</SectionMessage>
       )}
       {/** LOADING */}
       {movesLoading && <Loading />}

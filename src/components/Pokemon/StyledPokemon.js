@@ -37,6 +37,14 @@ const SectionSubTitle = styled.h3`
   `}
 `
 
+const SectionMessage = styled.p`
+  font-size: 1.5rem;
+  line-height: 2rem;
+  margin: 1.5rem 0;
+  text-align: center;
+  width: 100%;
+`
+
 const Table = styled(Box)`
   display: table;
   margin-bottom: 1.5rem;
@@ -144,4 +152,12 @@ const Image = styled.img`
   }
 `
 
-export { SectionTitle, SectionSubTitle, Table, Numbered, ImageContainer, Image }
+export {
+  SectionTitle,
+  SectionSubTitle,
+  SectionMessage,
+  Table,
+  Numbered,
+  ImageContainer,
+  Image,
+}

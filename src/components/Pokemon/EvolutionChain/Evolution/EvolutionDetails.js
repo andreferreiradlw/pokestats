@@ -5,7 +5,7 @@ import { removeDash } from '../../../../helpers/typography'
 
 const Details = styled.span`
   margin-bottom: 1rem;
-  font-weight: 400;
+  font-weight: 600;
   text-align: center;
   word-break: break-word;
 `

@@ -1,11 +1,10 @@
 import { useSelector } from 'react-redux'
-import { useState, useEffect } from 'react'
 // components
 import Box from '../../Box'
 import Loading from '../../Loading'
 import Evolution from './Evolution'
 // styles
-import { SectionTitle } from '../StyledPokemon'
+import { SectionTitle, SectionMessage } from '../StyledPokemon'
 
 export default function EvolutionChain({ ...rest }) {
   // evolution
@@ -20,7 +19,9 @@ export default function EvolutionChain({ ...rest }) {
         <Loading />
       ) : (
         <>
-          {!chain.evolves_to.length && <p>This Pokemon does not evolve.</p>}
+          {!chain.evolves_to.length && (
+            <SectionMessage>This Pokémon does not evolve.</SectionMessage>
+          )}
           <Box direction={{ xxs: 'column', lg: 'row' }} sizes={12}>
             <Evolution
               noArrow

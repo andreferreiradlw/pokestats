@@ -87,12 +87,6 @@ const Tab = styled.button`
   }
 `
 
-const NoMoves = styled(Box)`
-  font-size: 2rem;
-  line-height: 2.5rem;
-  text-align: center;
-`
-
 export {
   TableContainer,
   MovesTable,
@@ -102,5 +96,4 @@ export {
   TableRow,
   TabContainer,
   Tab,
-  NoMoves,
 }

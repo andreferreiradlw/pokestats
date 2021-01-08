@@ -94,11 +94,13 @@ const pokemonSlice = createSlice({
   name: 'pokemon',
   initialState,
   reducers: {
-    toggleLoading(state, action) {
-      state.info.isLoading = !state.info.isLoading
+    startLoading(state, action) {
+      state.info.isLoading = true
+      state.biology.isLoading = true
+      state.evolution.isLoading = true
     },
   },
-  extraReducers: (builder) => {
+  extraReducers: builder => {
     // info
     builder.addCase(fetchPokemonData.pending, ({ info }) => {
       info.isLoading = true
@@ -123,12 +125,12 @@ const pokemonSlice = createSlice({
         biology.data = payload
         // filter english info
         const biologyList = biology.data.flavor_text_entries.filter(
-          (entry) => entry.language.name == 'en'
+          entry => entry.language.name == 'en'
         )
         biology.data.flavor_text_entries = biologyList
         // genus
         const genusInfo = biology.data.genera.filter(
-          (entry) => entry.language.name == 'en'
+          entry => entry.language.name == 'en'
         )
         biology.data.genera = genusInfo[0].genus
         // stop loading
@@ -167,7 +169,7 @@ const pokemonSlice = createSlice({
 })
 
 // export actions
-export const { toggleLoading } = pokemonSlice.actions
+export const { startLoading } = pokemonSlice.actions
 
 // export reducer
 export default pokemonSlice.reducer

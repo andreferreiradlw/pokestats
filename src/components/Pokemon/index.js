@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useRouter } from 'next/router'
 // actions
-import { fetchPokemonData } from './pokemonSlice'
+import { fetchPokemonData, startLoading } from './pokemonSlice'
 import { changeVersion } from '../Header/gameSlice'
 // helpers
 import { mapGenerationToGame } from '../../helpers/gameVersion'
@@ -36,9 +36,16 @@ export default function Homepage() {
   const { id, game_indices } = pokemonInfo.data
   const { generation } = pokemonBio.data
 
+  // start loading info, biology and evolution states
+  useEffect(() => {
+    dispatch(startLoading())
+  }, [])
+
   // fetch pokemon data
   useEffect(() => {
     if (router.query.id) {
+      // also start loading when router changes
+      dispatch(startLoading())
       dispatch(fetchPokemonData(router.query.id))
     }
   }, [router])

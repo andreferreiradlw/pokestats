@@ -22,16 +22,11 @@ export default function EvolutionChain({ ...rest }) {
         <>
           {!chain.evolves_to.length && <p>This Pokemon does not evolve.</p>}
           <Box direction={{ xxs: 'column', md: 'row' }} sizes={12}>
-            <Evolution
-              noArrow
-              species={chain.species}
-              sizes="auto"
-              width="auto"
-            />
-            <Box direction="column" sizes="auto" width="auto">
+            <Evolution noArrow species={chain.species} sizes={4} />
+            <Box direction="column" sizes={8}>
               {chain.evolves_to.length > 0 &&
                 chain.evolves_to.map((firstEvo, i) => (
-                  <Box direction="row" sizes="auto" width="auto" key={i}>
+                  <Box direction="row" key={i}>
                     <Evolution
                       species={firstEvo.species}
                       details={firstEvo.evolution_details}

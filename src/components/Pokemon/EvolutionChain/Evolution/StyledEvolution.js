@@ -54,6 +54,13 @@ const PokeName = styled.span`
 const EvoArrow = styled(Arrow)`
   width: 50px;
   margin-top: 0.5rem;
+  transform: rotateZ(90deg);
+
+  ${({ theme }) => css`
+    @media ${theme.device.lg} {
+      transform: none;
+    }
+  `}
 `
 
 const PokeGen = styled.span`

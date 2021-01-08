@@ -65,7 +65,7 @@ export default function EvolutionDetails({ details }) {
 
   return (
     <Details>
-      {min_level ? `Level ${min_level}+` : mapTriggerName(trigger.name)}
+      {min_level ? `Level ${min_level}` : mapTriggerName(trigger.name)}
       {held_item && ` holding ${removeDash(held_item.name)}`}
       {item && ` ${removeDash(item.name)}`}
       {known_move && ` by learning ${removeDash(known_move.name)}`}

@@ -38,8 +38,9 @@ const Arrow = styled(BtnSpan)`
 const Title = styled(BtnSpan)`
   color: white;
   background-color: black;
-  width: 120px;
-  max-width: 120px;
+  width: 130px;
+  max-width: 130px;
+  text-align: center;
   transition: all 0.15s ease-in-out;
 
   & span {

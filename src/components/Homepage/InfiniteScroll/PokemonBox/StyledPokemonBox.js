@@ -28,6 +28,8 @@ const PokeName = styled.span`
 `
 
 const PokeBox = styled(Box)`
+  max-width: 150px;
+  width: 150px;
   background-color: white;
   color: black;
   padding: 1rem;
@@ -35,14 +37,20 @@ const PokeBox = styled(Box)`
   text-align: center;
   font-weight: 600;
   transition: all 0.05s ease-in-out;
+  transition: box-shadow 0.15s ease-in-out;
   overflow: hidden;
 
   &:hover {
     cursor: pointer;
-    transform: scale(1.01);
+    transform: scale(1.05);
+    box-shadow: 2px 2px 3px 0px rgba(255, 255, 255, 0.75);
+
+    &:active {
+      transition: box-shadow 0.01s ease-in-out;
+      box-shadow: 1px 1px 2px 0px rgba(0, 0, 0, 0.75) inset;
+    }
 
     & ${PokeImg} {
-      transform: scale(1.01);
       @media (prefers-reduced-motion: no-preference) {
         animation: ${float} infinite 3s ease-in-out;
       }

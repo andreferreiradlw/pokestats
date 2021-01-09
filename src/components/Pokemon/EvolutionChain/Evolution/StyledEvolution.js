@@ -44,7 +44,6 @@ const PokeBox = styled(Box)`
     &:active {
       transition: box-shadow 0.01s ease-in-out;
       box-shadow: 1px 1px 2px 0px rgba(0, 0, 0, 0.75) inset;
-      // box-shadow: none;
     }
 
     & ${PokeImg} {

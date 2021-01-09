@@ -1,5 +1,5 @@
-import { useRouter } from 'next/router'
 import { useState, useEffect } from 'react'
+import Link from 'next/link'
 import axios from 'axios'
 // helpers
 import { removeDash } from '../../../../helpers/typography'
@@ -23,14 +23,6 @@ export default function Evolution({
   details,
   ...rest
 }) {
-  // router
-  const router = useRouter()
-
-  const handleClick = e => {
-    e.preventDefault()
-    router.push(`/pokemon/${species.name}`)
-  }
-
   // species state
   const [currSpecies, setCurrSpecies] = useState()
   const [imgSrc, setImgSrc] = useState()
@@ -64,18 +56,16 @@ export default function Evolution({
             </Box>
           )}
           {/** Pokemon box with image and types */}
-          <PokeBox
-            sizes={noArrow ? 12 : 3.5}
-            width="auto"
-            onMouseUp={handleClick}
-          >
-            <PokeImg src={imgSrc} />
-            <NumberId>{`#${currSpecies.id}`}</NumberId>
-            <PokeName>{removeDash(currSpecies.name)}</PokeName>
-            {currSpecies.generation.name && (
-              <PokeGen>{mapGeneration(currSpecies.generation.name)}</PokeGen>
-            )}
-          </PokeBox>
+          <Link as={`/pokemon/${species.name}`} href="/pokemon/[id]" passHref>
+            <PokeBox forwardedAs="a" sizes={noArrow ? 12 : 3.5} width="auto">
+              <PokeImg src={imgSrc} />
+              <NumberId>{`#${currSpecies.id}`}</NumberId>
+              <PokeName>{removeDash(currSpecies.name)}</PokeName>
+              {currSpecies.generation.name && (
+                <PokeGen>{mapGeneration(currSpecies.generation.name)}</PokeGen>
+              )}
+            </PokeBox>
+          </Link>
         </Box>
       )}
     </>

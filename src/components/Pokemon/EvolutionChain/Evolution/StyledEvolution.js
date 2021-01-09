@@ -21,20 +21,33 @@ const PokeImg = styled.img`
 `
 
 const PokeBox = styled(Box)`
+  max-width: 150px;
+  width: 150px;
   background-color: white;
   color: black;
   padding: 1rem;
   margin: 0.5rem;
+  border: 1px solid transparent;
+  border-radius: 4px;
   text-align: center;
   font-weight: 600;
-  transition: all 0.05s ease-in-out;
-  overflow: hidden;
+  transition: border 0.1s ease-in-out;
+  transition: box-shadow 0.15s ease-in-out;
+  // overflow: hidden;
 
   &:hover {
     cursor: pointer;
+    transform: scale(1.05);
+    border: 1px solid black;
+    box-shadow: 2px 2px 3px 0px rgba(0, 0, 0, 0.75);
+
+    &:active {
+      transition: box-shadow 0.01s ease-in-out;
+      box-shadow: 1px 1px 2px 0px rgba(0, 0, 0, 0.75) inset;
+      // box-shadow: none;
+    }
 
     & ${PokeImg} {
-      transform: scale(2);
       @media (prefers-reduced-motion: no-preference) {
         animation: ${float} infinite 3s ease-in-out;
       }
@@ -53,7 +66,7 @@ const PokeName = styled.span`
 
 const EvoArrow = styled(Arrow)`
   width: 50px;
-  margin-top: 0.5rem;
+  margin: 0.5rem 0 1rem;
   transform: rotateZ(90deg);
 
   ${({ theme }) => css`

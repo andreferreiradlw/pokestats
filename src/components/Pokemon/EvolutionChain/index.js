@@ -26,8 +26,8 @@ export default function EvolutionChain({ ...rest }) {
             <Evolution
               noArrow
               species={chain.species}
-              sizes={2.4}
-              width="100%"
+              grow={false}
+              width="auto"
             />
             {chain.evolves_to.length > 0 && (
               <Box direction={{ xxs: 'row', lg: 'column' }} sizes={9.6}>

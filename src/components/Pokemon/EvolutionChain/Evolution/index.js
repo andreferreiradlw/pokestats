@@ -48,7 +48,7 @@ export default function Evolution({
         >
           {/** Arrow with evolution details */}
           {!noArrow && (
-            <Box width="auto" sizes={8.5}>
+            <Box width="auto">
               {details.map((currDetails, i) => (
                 <EvoDetails key={i} details={currDetails} />
               ))}
@@ -57,7 +57,7 @@ export default function Evolution({
           )}
           {/** Pokemon box with image and types */}
           <Link as={`/pokemon/${species.name}`} href="/pokemon/[id]" passHref>
-            <PokeBox forwardedAs="a" sizes={noArrow ? 12 : 3.5} width="auto">
+            <PokeBox forwardedAs="a" grow={false} width="auto">
               <PokeImg src={imgSrc} />
               <NumberId>{`#${currSpecies.id}`}</NumberId>
               <PokeName>{removeDash(currSpecies.name)}</PokeName>

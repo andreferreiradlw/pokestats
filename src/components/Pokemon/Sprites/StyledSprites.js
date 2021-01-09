@@ -20,6 +20,13 @@ const Sprite = styled.img`
       width: auto;
       margin-bottom: 1rem;
     `}
+
+  ${({ animated }) =>
+    animated &&
+    css`
+      width: 80px;
+      margin: 1rem 0;
+    `}
 `
 
 const NoSprites = styled(Box)`

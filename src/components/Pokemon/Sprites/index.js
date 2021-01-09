@@ -12,10 +12,12 @@ export default function Sprites({ ...rest }) {
   // pokemon info
   const pokemonInfo = useSelector(state => state.pokemon.info)
   // data
-  const { sprites } = pokemonInfo.data
+  const { sprites, id } = pokemonInfo.data
   // artwork
   const dreamWorld = sprites.other.dream_world
   const officialArtwork = sprites.other['official-artwork'].front_default
+  const animatedSprites =
+    sprites.versions['generation-v']['black-white'].animated
 
   return (
     <Box align={{ xxs: 'center', lg: 'flex-start' }} {...rest}>
@@ -46,6 +48,28 @@ export default function Sprites({ ...rest }) {
                     )
                 )}
               </Box>
+              {id < 650 && (
+                <Box align={{ xxs: 'center', lg: 'flex-start' }}>
+                  <SectionSubTitle>Animated Sprites</SectionSubTitle>
+                  <Box
+                    direction="row-reverse"
+                    justify={{ xxs: 'center', lg: 'flex-end' }}
+                    margin="0 0 2rem"
+                    flexWrap="wrap"
+                  >
+                    {Object.keys(animatedSprites).map(
+                      (key, i) =>
+                        animatedSprites[key] &&
+                        typeof animatedSprites[key] !== 'object' && (
+                          <SpriteContainer sizes={1.5} key={i}>
+                            <Sprite animated src={animatedSprites[key]} />
+                            <p>{removeUnderscore(key)}</p>
+                          </SpriteContainer>
+                        )
+                    )}
+                  </Box>
+                </Box>
+              )}
               <Box
                 direction={{ xxs: 'column', md: 'row' }}
                 align={{ xxs: 'center', md: 'flex-start' }}

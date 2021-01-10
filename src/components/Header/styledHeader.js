@@ -22,9 +22,16 @@ const Heading = styled.h2`
 `
 
 const SelectContainer = styled(Box)`
+  margin-bottom: 1rem;
+
   & span {
     margin-right: 0.5rem;
   }
+
+  ${({ theme }) => css`
+    @media ${theme.device.md} {
+      margin-bottom: 0;
+  `}
 `
 
 export { Heading, SelectContainer }

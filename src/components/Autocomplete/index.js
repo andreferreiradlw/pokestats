@@ -14,7 +14,14 @@ import {
   PokeID,
 } from './styledAutoComplete'
 
-export default function Autocomplete() {
+export default function Autocomplete({
+  align = 'stretch',
+  direction = 'row',
+  grow = false,
+  margin = '0 auto',
+  noGutter = true,
+  ...rest
+}) {
   // router
   const router = useRouter()
   // selectors
@@ -38,10 +45,12 @@ export default function Autocomplete() {
   // reset states
   useEffect(() => {
     // on load
+    setSearch('')
     setFiltered([])
     setActiveOption(-1)
     // unmount
     return () => {
+      setSearch('')
       setFiltered([])
       setActiveOption(-1)
     }
@@ -79,6 +88,8 @@ export default function Autocomplete() {
           router.push(`/pokemon/${filtered[activeOption].name}`)
       // clean filtered state
       setFiltered([])
+      // clean search
+      setSearch('')
     } // up arrow
     else if (e.keyCode === 38) {
       // stop window from scrolling
@@ -109,11 +120,12 @@ export default function Autocomplete() {
 
   return (
     <Container
-      align="stretch"
-      direction="row"
-      grow={false}
-      margin="0 auto"
-      noGutter
+      align={align}
+      direction={direction}
+      grow={grow}
+      margin={margin}
+      noGutter={noGutter}
+      {...rest}
     >
       <Input
         type="text"

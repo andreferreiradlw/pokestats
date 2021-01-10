@@ -2,38 +2,56 @@ import styled, { css } from 'styled-components'
 import Box from '../Box'
 
 const Container = styled(Box)`
-  width: 90%;
-  max-width: 850px;
+  max-width: 100%;
   position: relative;
 
-  ${({ theme }) => css`
-    @media ${theme.device.sm} {
-      width: 75%;
-    }
-    @media ${theme.device.lg} {
-      width: 55%;
-    }
-  `}
+  ${({ theme, width }) =>
+    !width &&
+    css`
+      width: 90%;
+
+      @media ${theme.device.sm} {
+        max-width: 850px;
+        width: 75%;
+      }
+      @media ${theme.device.lg} {
+        width: 55%;
+      }
+    `}
 `
 
 const Input = styled.input`
-  flex: 1 1 auto;
-  padding: 0.375rem 0.75rem;
-  font-size: 1rem;
+  width: 100%;
+  max-width: 100%;
+  padding: 0.2rem 0.5rem;
+  font-size: 0.7rem;
   font-weight: 400;
   line-height: 1.5;
   height: 50px;
   border-radius: 0.25rem;
   outline: none;
 
+  ${({ theme }) => css`
+    @media ${theme.device.md} {
+      font-size: 1rem;
+      padding: 0.375rem 0.75rem;
+    }
+  `}
+
   ${({ theme }) => {
     let values = theme.autoComplete.input
+
     return css`
       color: ${values.color};
       background-color: ${values.backgroundColor};
       border: 1px solid ${values.borderColor};
     `
   }}
+
+  &::placeholder {
+    color: white;
+    font-weight: 200;
+  }
 `
 
 const ListWrapper = styled.div`

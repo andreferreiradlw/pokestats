@@ -20,17 +20,17 @@ const Heading = styled.h1`
 
   ${({ theme }) => css`
     @media ${theme.device.xs} {
-      font-size: 5.5rem;
-      line-height: 6rem;
+      font-size: 5rem;
+      line-height: 5.5rem;
       margin-bottom: 25px;
     }
     @media ${theme.device.md} {
-      font-size: 7.5rem;
-      line-height: 8rem;
+      font-size: 10rem;
+      line-height: 10.5rem;
     }
     @media ${theme.device.lg} {
-      font-size: 9rem;
-      line-height: 9.5rem;
+      font-size: 13.5rem;
+      line-height: 14rem;
     }
   `}
 `

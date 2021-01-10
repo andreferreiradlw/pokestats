@@ -4,16 +4,18 @@ import Layout from '../Layout'
 import Autocomplete from '../Autocomplete'
 import Particles from '../Particles'
 import Loading from '../Loading'
-import InfiniteScroll from './InfiniteScroll'
+import InfiniteScroll from '../InfiniteScroll'
 // styles
 import { Container, Heading } from './styledHomepage'
 
 export default function Homepage() {
-  const loadingStatus = useSelector(state => state.home.loading)
+  const homeState = useSelector(state => state.home)
+
+  const { isLoading, pokemon } = homeState
 
   return (
     <>
-      {loadingStatus ? (
+      {isLoading && !pokemon ? (
         <Loading />
       ) : (
         <>
@@ -23,7 +25,7 @@ export default function Homepage() {
               <Autocomplete />
               <Particles />
             </Container>
-            <InfiniteScroll />
+            <InfiniteScroll pokemonList={pokemon} itemsPerPage={98} />
           </Layout>
         </>
       )}

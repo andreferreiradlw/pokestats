@@ -10,7 +10,7 @@ const homeAdapter = createEntityAdapter()
 
 // initial state
 const initialState = homeAdapter.getInitialState({
-  loading: false,
+  isLoading: false,
   pokemon: [],
   pokemonLength: 0,
   error: {
@@ -42,12 +42,12 @@ const homeSlice = createSlice({
   initialState,
   reducers: {
     toggleLoading(state, action) {
-      state.loading = !state.loading
+      state.isLoading = !state.loading
     },
   },
   extraReducers: builder => {
     builder.addCase(fetchPokemonList.pending, (state, action) => {
-      state.loading = true
+      state.isLoading = true
     })
     builder.addCase(fetchPokemonList.fulfilled, (state, action) => {
       const listWithId = action.payload.map((pokemon, index) => {
@@ -56,12 +56,12 @@ const homeSlice = createSlice({
       })
       state.pokemon = listWithId
       state.pokemonLength = listWithId.length
-      state.loading = false
+      state.isLoading = false
     })
     builder.addCase(fetchPokemonList.rejected, (state, action) => {
       state.error.status = action.payload.status
       state.error.message = action.payload.data
-      state.loading = false
+      state.isLoading = false
     })
   },
 })

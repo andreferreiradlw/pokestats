@@ -1,18 +1,17 @@
 import { useState, useEffect, useRef } from 'react'
-import { useSelector } from 'react-redux'
 // components
-import Loading from '../../Loading'
+import Loading from '../Loading'
 import PokemonBox from './PokemonBox'
 
 // styles
 import { Container, List } from './StyledInfiniteScroll'
 
-export default function InfiniteScroll({ light, ...rest }) {
-  //pokemon list
-  const pokemonList = useSelector(state => state.home.pokemon)
-  // items per page, should be multiple of 7
-  const itemsPerPage = 98
-
+export default function InfiniteScroll({
+  pokemonList,
+  itemsPerPage = 98,
+  light,
+  ...rest
+}) {
   // current page state
   const [currPage, setCurrPage] = useState(1)
   // y state

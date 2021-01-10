@@ -1,7 +1,7 @@
 import { forwardRef } from 'react'
 import Link from 'next/link'
 // helpers
-import { removeDash } from '../../../../helpers/typography'
+import { removeDash } from '../../../helpers/typography'
 // components
 
 // styles

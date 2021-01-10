@@ -55,14 +55,16 @@ const OptionWrapper = styled.a`
   cursor: pointer;
   padding: 0 1rem 0 0;
 
-  ${({ theme }) => {
+  ${({ theme, isActive }) => {
     const values = theme.autoComplete.wrapperOption
+
     return css`
       color: ${values.color};
       background-color: ${values.backgroundColor};
 
       &:hover,
-      &:active {
+      &:active,
+      &:focus {
         background-color: ${values.hover.backgroundColor};
         color: ${values.hover.color};
       }

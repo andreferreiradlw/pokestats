@@ -43,17 +43,18 @@ export default function Autocomplete({
   }, [pokemonListError.status])
 
   // reset states
-  useEffect(() => {
-    // on load
+  const resetStates = () => {
     setSearch('')
     setFiltered([])
     setActiveOption(-1)
+  }
+
+  // reset states
+  useEffect(() => {
+    // on load
+    resetStates()
     // unmount
-    return () => {
-      setSearch('')
-      setFiltered([])
-      setActiveOption(-1)
-    }
+    return () => resetStates()
   }, [])
 
   // input changes
@@ -66,8 +67,10 @@ export default function Autocomplete({
   const handleFilter = value => {
     if (value) {
       // filter by name
-      const filteredPokemon = pokemonList.filter(pokemon =>
-        pokemon.name.includes(value)
+      const filteredPokemon = pokemonList.filter(
+        pokemon =>
+          pokemon.name.includes(value) ||
+          pokemon.id.toString().includes(value.toString())
       )
       // update filtered state with first 4 options
       setFiltered(filteredPokemon.slice(0, 4))
@@ -79,6 +82,7 @@ export default function Autocomplete({
 
   // key pressed
   const handleKeyDown = e => {
+    console.log(e)
     // enter
     if (e.code === 'Enter' && filtered[0] !== undefined) {
       activeOption === -1
@@ -87,9 +91,7 @@ export default function Autocomplete({
         : // trigger router for active option
           router.push(`/pokemon/${filtered[activeOption].name}`)
       // clean filtered state
-      setFiltered([])
-      // clean search
-      setSearch('')
+      resetStates()
     } // up arrow
     else if (e.keyCode === 38) {
       // stop window from scrolling
@@ -110,6 +112,9 @@ export default function Autocomplete({
       }
       // increment the index
       setActiveOption(activeOption + 1)
+    } else {
+      // reset active option
+      setActiveOption(-1)
     }
   }
 
@@ -145,6 +150,7 @@ export default function Autocomplete({
               key={i}
             >
               <OptionWrapper
+                onClick={() => resetStates()}
                 onFocus={() => handleOptionFocus(i)}
                 onKeyDown={e => handleKeyDown(e)}
                 ref={option => option && i === activeOption && option.focus()}

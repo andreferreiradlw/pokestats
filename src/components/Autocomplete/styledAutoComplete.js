@@ -53,6 +53,7 @@ const OptionWrapper = styled.a`
   justify-content: flex-start;
   font-size: 0.875rem;
   cursor: pointer;
+  padding: 0 1rem 0 0;
 
   ${({ theme }) => {
     const values = theme.autoComplete.wrapperOption
@@ -77,4 +78,10 @@ const Option = styled.span`
   padding: 16px 0;
 `
 
-export { Container, Input, ListWrapper, OptionWrapper, Option }
+const PokeID = styled.span`
+  font-weight: 600;
+  font-size: 1.5rem;
+  margin-left: auto;
+`
+
+export { Container, Input, ListWrapper, OptionWrapper, Option, PokeID }

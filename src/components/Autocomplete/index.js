@@ -11,6 +11,7 @@ import {
   ListWrapper,
   OptionWrapper,
   Option,
+  PokeID,
 } from './styledAutoComplete'
 
 export default function Autocomplete() {
@@ -94,6 +95,7 @@ export default function Autocomplete() {
                     src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${item.id}.png`}
                   />
                   <Option>{removeDash(item.name)}</Option>
+                  <PokeID>{`#${item.id}`}</PokeID>
                 </OptionWrapper>
               </Link>
             ))}

@@ -55,7 +55,7 @@ const OptionWrapper = styled.a`
   cursor: pointer;
   padding: 0 1rem 0 0;
 
-  ${({ theme, isActive }) => {
+  ${({ theme }) => {
     const values = theme.autoComplete.wrapperOption
 
     return css`

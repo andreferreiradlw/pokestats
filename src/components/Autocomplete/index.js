@@ -37,9 +37,10 @@ export default function Autocomplete() {
 
   // reset states
   useEffect(() => {
+    // on load
     setFiltered([])
     setActiveOption(-1)
-
+    // unmount
     return () => {
       setFiltered([])
       setActiveOption(-1)
@@ -55,6 +56,7 @@ export default function Autocomplete() {
   // filter pokemon
   const handleFilter = value => {
     if (value) {
+      // filter by name
       const filteredPokemon = pokemonList.filter(pokemon =>
         pokemon.name.includes(value)
       )
@@ -106,47 +108,45 @@ export default function Autocomplete() {
   }
 
   return (
-    <>
-      <Container
-        align="stretch"
-        direction="row"
-        grow={false}
-        margin="0 auto"
-        noGutter
-      >
-        <Input
-          value={search}
-          onChange={e => handleInputChange(e)}
-          type="text"
-          placeholder="Search Pokemon Name or ID"
-          onKeyDown={e => handleKeyDown(e)}
-        ></Input>
-        {/** display filtered list */}
-        {filtered.length > 0 && (
-          <ListWrapper>
-            {filtered.map((item, i) => (
-              <Link
-                as={`/pokemon/${item.name}`}
-                href="/pokemon/[id]"
-                passHref
-                key={i}
+    <Container
+      align="stretch"
+      direction="row"
+      grow={false}
+      margin="0 auto"
+      noGutter
+    >
+      <Input
+        type="text"
+        placeholder="Search Pokemon Name or ID"
+        value={search}
+        onChange={e => handleInputChange(e)}
+        onKeyDown={e => handleKeyDown(e)}
+      ></Input>
+      {/** display filtered list */}
+      {filtered.length > 0 && (
+        <ListWrapper>
+          {filtered.map((item, i) => (
+            <Link
+              as={`/pokemon/${item.name}`}
+              href="/pokemon/[id]"
+              passHref
+              key={i}
+            >
+              <OptionWrapper
+                onFocus={() => handleOptionFocus(i)}
+                onKeyDown={e => handleKeyDown(e)}
+                ref={option => option && i === activeOption && option.focus()}
               >
-                <OptionWrapper
-                  onFocus={e => handleOptionFocus(i)}
-                  onKeyDown={e => handleKeyDown(e)}
-                  ref={option => option && i === activeOption && option.focus()}
-                >
-                  <img
-                    src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${item.id}.png`}
-                  />
-                  <Option>{removeDash(item.name)}</Option>
-                  <PokeID>{`#${item.id}`}</PokeID>
-                </OptionWrapper>
-              </Link>
-            ))}
-          </ListWrapper>
-        )}
-      </Container>
-    </>
+                <img
+                  src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${item.id}.png`}
+                />
+                <Option>{removeDash(item.name)}</Option>
+                <PokeID>{`#${item.id}`}</PokeID>
+              </OptionWrapper>
+            </Link>
+          ))}
+        </ListWrapper>
+      )}
+    </Container>
   )
 }

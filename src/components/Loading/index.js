@@ -1,5 +1,13 @@
+import { forwardRef } from 'react'
+// components
 import Box from '../Box'
 
-export default function Loading() {
-  return <Box noGutter>LOADING!</Box>
-}
+const Loading = forwardRef(({ ...rest }, ref) => {
+  return (
+    <Box noGutter ref={ref} {...rest}>
+      LOADING!
+    </Box>
+  )
+})
+
+export default Loading

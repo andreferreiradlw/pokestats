@@ -54,6 +54,14 @@ const theme = {
       color: '#FFF',
     },
   },
+  infiniteScroll: {
+    backgroundColor: '#000',
+    color: '#FFF',
+    light: {
+      backgroundColor: '#FFF',
+      color: '#000',
+    },
+  },
   particles: {
     backgroundColor: '#FFF',
   },

@@ -7,16 +7,14 @@ import PokemonBox from './PokemonBox'
 // styles
 import { Container, List } from './StyledInfiniteScroll'
 
-export default function InfiniteScroll({ ...rest }) {
+export default function InfiniteScroll({ light, ...rest }) {
   //pokemon list
   const pokemonList = useSelector(state => state.home.pokemon)
   // items per page, should be multiple of 7
-  const itemsPerPage = 42
+  const itemsPerPage = 98
 
   // current page state
   const [currPage, setCurrPage] = useState(1)
-  // loading state
-  const [isLoading, setLoading] = useState(false)
   // y state
   const [prevY, setPrevY] = useState(0)
   // show list state
@@ -32,8 +30,6 @@ export default function InfiniteScroll({ ...rest }) {
     const { isIntersecting, boundingClientRect } = entitites[0]
 
     if (isIntersecting && boundingClientRect.y >= prevY) {
-      // start loading
-      setLoading(true)
       // set new y state
       // remove 50 pixels as redundancy
       setPrevY(boundingClientRect.y - 50)
@@ -52,7 +48,7 @@ export default function InfiniteScroll({ ...rest }) {
     }
     // make sure previous observer is disconnected
     if (observer.current) observer.current.disconnect()
-    // create observer for new node
+    // create new observer
     observer.current = new window.IntersectionObserver(handleObserver, options)
     // observer.current can be mutated so create a variable
     const { current: currentObserver } = observer
@@ -60,7 +56,7 @@ export default function InfiniteScroll({ ...rest }) {
     if (node) currentObserver.observe(node)
     // disconnect when component unmounts
     return () => currentObserver.disconnect()
-  }, [node])
+  }, [node, currPage])
 
   useEffect(() => {
     // slice new page from pokemon array
@@ -70,12 +66,10 @@ export default function InfiniteScroll({ ...rest }) {
     )
     // update show list with sliced array
     setShowList([...showList, ...newPage])
-    // stop loading
-    setLoading(false)
   }, [currPage])
 
   return (
-    <Container {...rest}>
+    <Container light={light} {...rest}>
       <List
         withGutter
         constrained
@@ -85,10 +79,10 @@ export default function InfiniteScroll({ ...rest }) {
         flexWrap="wrap"
       >
         {showList.map((currPokemon, i) => (
-          <PokemonBox key={i} pokemon={currPokemon} ref={setNode} />
+          <PokemonBox key={i} light={light} pokemon={currPokemon} />
         ))}
       </List>
-      {isLoading && pokemonList.length !== showList.length && <Loading />}
+      {pokemonList.length !== showList.length && <Loading ref={setNode} />}
     </Container>
   )
 }

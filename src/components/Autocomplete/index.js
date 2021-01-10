@@ -82,7 +82,6 @@ export default function Autocomplete({
 
   // key pressed
   const handleKeyDown = e => {
-    console.log(e)
     // enter
     if (e.code === 'Enter' && filtered[0] !== undefined) {
       activeOption === -1

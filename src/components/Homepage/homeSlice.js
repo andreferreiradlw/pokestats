@@ -13,7 +13,6 @@ const initialState = homeAdapter.getInitialState({
   loading: false,
   pokemon: [],
   pokemonLength: 0,
-  filteredList: [],
   error: {
     status: 'OK',
     message: null,
@@ -42,16 +41,6 @@ const homeSlice = createSlice({
   name: 'home',
   initialState,
   reducers: {
-    filterPokemon(state, action) {
-      if (action.payload) {
-        state.filteredList = state.pokemon.filter(pokemon =>
-          pokemon.name.includes(action.payload)
-        )
-      } else {
-        // set filtered state to empty array
-        state.filteredList = []
-      }
-    },
     toggleLoading(state, action) {
       state.loading = !state.loading
     },
@@ -78,7 +67,7 @@ const homeSlice = createSlice({
 })
 
 // export actions
-export const { filterPokemon, toggleLoading } = homeSlice.actions
+export const { toggleLoading } = homeSlice.actions
 
 // export reducer
 export default homeSlice.reducer

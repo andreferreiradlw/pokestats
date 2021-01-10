@@ -1,35 +1,26 @@
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useState, useEffect } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-import { filterPokemon } from '../homeSlice'
+import { useSelector } from 'react-redux'
 // helpers
-import { removeDash } from '../../../helpers/typography'
+import { removeDash } from '../../helpers/typography'
 // components
 import {
   Container,
   Input,
-  Button,
   ListWrapper,
   OptionWrapper,
   Option,
 } from './styledAutoComplete'
 // icons
-import SearchIcon from '../../../assets/svg/search.svg'
+import SearchIcon from '../../assets/svg/search.svg'
 
 export default function Autocomplete() {
   // router
   const router = useRouter()
-
-  // dispatch
-  const dispatch = useDispatch()
-
-  // search state
-  const [search, setSearch] = useState('')
-
   // selectors
-  const filteredPokemonList = useSelector(state => state.home.filteredList)
   const pokemonListError = useSelector(state => state.home.error)
+  const pokemonList = useSelector(state => state.home.pokemon)
 
   //handle error change
   useEffect(() => {
@@ -37,6 +28,38 @@ export default function Autocomplete() {
       router.push('/404')
     }
   }, [pokemonListError.status])
+
+  // search state
+  const [search, setSearch] = useState('')
+  // filtered state
+  const [filtered, setFiltered] = useState([])
+
+  // input changes
+  const handleInputChange = e => {
+    setSearch(e.target.value)
+    handleFilter(e.target.value.toLowerCase())
+  }
+
+  // filter pokemon
+  const handleFilter = value => {
+    if (value) {
+      const filteredPokemon = pokemonList.filter(pokemon =>
+        pokemon.name.includes(value)
+      )
+      setFiltered(filteredPokemon)
+    } else {
+      // set filtered state to empty array
+      setFiltered([])
+    }
+  }
+
+  // key pressed
+  const handleKeyDown = e => {
+    // enter
+    if (e.code === 'Enter' && filteredPokemonList[0] !== undefined) {
+      router.push(`/pokemon/${filteredPokemonList[0].name}`)
+    }
+  }
 
   return (
     <>
@@ -49,26 +72,15 @@ export default function Autocomplete() {
       >
         <Input
           value={search}
-          onChange={e => {
-            setSearch(e.target.value)
-            dispatch(filterPokemon(e.target.value.toLowerCase()))
-          }}
+          onChange={e => handleInputChange(e)}
           type="text"
           placeholder="Search Pokemon Name or ID"
-          onKeyDown={e =>
-            e.code === 'Enter' &&
-            filteredPokemonList[0] !== undefined &&
-            router.push(`/pokemon/${filteredPokemonList[0].name}`)
-          }
+          onKeyDown={e => handleKeyDown(e)}
         ></Input>
-        <Link as={`/pokemon/${search}`} href="/pokemon/[id]">
-          <Button disabled={!search}>
-            <SearchIcon />
-          </Button>
-        </Link>
-        {filteredPokemonList.length > 0 && (
+        {/** display filtered list */}
+        {filtered.length > 0 && (
           <ListWrapper>
-            {filteredPokemonList.slice(0, 4).map((item, i) => (
+            {filtered.slice(0, 4).map((item, i) => (
               <Link as={`/pokemon/${item.name}`} href="/pokemon/[id]" key={i}>
                 <OptionWrapper>
                   <img

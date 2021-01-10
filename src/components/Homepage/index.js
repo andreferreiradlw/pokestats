@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux'
 // components
 import Layout from '../Layout'
-import Autocomplete from './Autocomplete'
+import Autocomplete from '../Autocomplete'
 import Particles from '../Particles'
 import Loading from '../Loading'
 import InfiniteScroll from './InfiniteScroll'

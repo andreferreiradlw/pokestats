@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components'
-import Box from '../../Box'
+import Box from '../Box'
 
 const Container = styled(Box)`
   width: 90%;
@@ -24,8 +24,6 @@ const Input = styled.input`
   line-height: 1.5;
   height: 50px;
   border-radius: 0.25rem;
-  border-top-right-radius: 0;
-  border-bottom-right-radius: 0;
   outline: none;
 
   ${({ theme }) => {
@@ -34,59 +32,6 @@ const Input = styled.input`
       color: ${values.color};
       background-color: ${values.backgroundColor};
       border: 1px solid ${values.borderColor};
-    `
-  }}
-`
-
-const Button = styled.button`
-  display: flex;
-  align-items: center;
-  border-radius: 0.25rem;
-  border-top-left-radius: 0;
-  border-bottom-left-radius: 0;
-  transition: all 0.2s ease;
-
-  &[disabled] {
-    cursor: not-allowed;
-  }
-
-  & svg {
-    width: 20px;
-    margin: 0 10px;
-  }
-
-  ${({ theme }) => {
-    const values = theme.autoComplete.button
-    return css`
-      color: ${values.color};
-      background-color: ${values.backgroundColor};
-      border: 1px solid ${values.borderColor};
-
-      & svg {
-        fill: ${values.color};
-        stroke: ${values.color};
-      }
-
-      &:hover {
-        background-color: ${values.hover.backgroundColor};
-        color: ${values.hover.color};
-        cursor: pointer;
-
-        & svg {
-          fill: ${values.hover.color};
-          stroke: ${values.hover.color};
-        }
-      }
-
-      &[disabled] {
-        color: ${values.disabled.color};
-        background-color: ${values.disabled.backgroundColor};
-
-        & svg {
-          fill: ${values.disabled.color};
-          stroke: ${values.disabled.color};
-        }
-      }
     `
   }}
 `
@@ -115,7 +60,8 @@ const OptionWrapper = styled.li`
       color: ${values.color};
       background-color: ${values.backgroundColor};
 
-      &:hover {
+      &:hover,
+      &:active {
         background-color: ${values.hover.backgroundColor};
         color: ${values.hover.color};
       }
@@ -131,4 +77,4 @@ const Option = styled.span`
   padding: 16px 0;
 `
 
-export { Container, Input, Button, ListWrapper, OptionWrapper, Option }
+export { Container, Input, ListWrapper, OptionWrapper, Option }

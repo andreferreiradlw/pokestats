@@ -12,8 +12,6 @@ import {
   OptionWrapper,
   Option,
 } from './styledAutoComplete'
-// icons
-import SearchIcon from '../../assets/svg/search.svg'
 
 export default function Autocomplete() {
   // router
@@ -55,9 +53,13 @@ export default function Autocomplete() {
 
   // key pressed
   const handleKeyDown = e => {
+    console.log(e.code)
     // enter
     if (e.code === 'Enter' && filteredPokemonList[0] !== undefined) {
+      // trigger router
       router.push(`/pokemon/${filteredPokemonList[0].name}`)
+      // clean filtered state
+      setFiltered([])
     }
   }
 
@@ -81,7 +83,12 @@ export default function Autocomplete() {
         {filtered.length > 0 && (
           <ListWrapper>
             {filtered.slice(0, 4).map((item, i) => (
-              <Link as={`/pokemon/${item.name}`} href="/pokemon/[id]" key={i}>
+              <Link
+                as={`/pokemon/${item.name}`}
+                href="/pokemon/[id]"
+                passHref
+                key={i}
+              >
                 <OptionWrapper>
                   <img
                     src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${item.id}.png`}

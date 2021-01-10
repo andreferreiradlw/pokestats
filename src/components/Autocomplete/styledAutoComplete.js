@@ -36,7 +36,7 @@ const Input = styled.input`
   }}
 `
 
-const ListWrapper = styled.ul`
+const ListWrapper = styled.div`
   position: absolute;
   margin-top: 50px;
   right: 0;
@@ -46,7 +46,7 @@ const ListWrapper = styled.ul`
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
 `
 
-const OptionWrapper = styled.li`
+const OptionWrapper = styled.a`
   display: flex;
   flex-direction: row;
   align-items: center;

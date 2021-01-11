@@ -2,12 +2,11 @@ import { forwardRef } from 'react'
 import Link from 'next/link'
 // helpers
 import { removeDash } from '../../../helpers/typography'
-// components
-
 // styles
-import { PokeBox, PokeImg, NumberId, PokeName } from './StyledPokemonBox'
+import { PokeBox, PokeImg, NumberId, PokeName } from '../../BaseStyles'
 
 const PokemonBox = forwardRef(({ pokemon, ...rest }, ref) => {
+  // data from prop
   const { name, id } = pokemon
 
   return (

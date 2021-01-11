@@ -8,14 +8,8 @@ import { mapGeneration } from '../../../../helpers/gameVersion'
 import Box from '../../../Box'
 import EvoDetails from './EvolutionDetails'
 // styles
-import {
-  PokeBox,
-  PokeImg,
-  NumberId,
-  PokeName,
-  EvoArrow,
-  PokeGen,
-} from './StyledEvolution'
+import { PokeBox, PokeImg, NumberId, PokeName } from '../../../BaseStyles'
+import { EvoArrow, PokeGen } from './StyledEvolution'
 
 export default function Evolution({
   noArrow = false,
@@ -57,7 +51,7 @@ export default function Evolution({
           )}
           {/** Pokemon box with image and types */}
           <Link as={`/pokemon/${species.name}`} href="/pokemon/[id]" passHref>
-            <PokeBox forwardedAs="a" grow={false} width="auto">
+            <PokeBox forwardedAs="a" grow={false} width="auto" dark>
               <PokeImg src={imgSrc} />
               <NumberId>{`#${currSpecies.id}`}</NumberId>
               <PokeName>{removeDash(currSpecies.name)}</PokeName>

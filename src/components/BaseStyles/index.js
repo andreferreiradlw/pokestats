@@ -1,6 +1,8 @@
 // keyframes
-export { float } from './keyframes'
+export * from './keyframes'
 // typography
-export { SectionTitle, SectionSubTitle, SectionMessage } from './typography'
+export * from './typography'
 // table
-export { Table, Numbered } from './table'
+export * from './table'
+// pokemon box
+export * from './pokemonBox'

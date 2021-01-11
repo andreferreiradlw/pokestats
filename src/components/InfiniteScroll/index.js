@@ -1,15 +1,16 @@
 import { useState, useEffect, useRef } from 'react'
 // components
+import Box from '../Box'
 import Loading from '../Loading'
 import PokemonBox from './PokemonBox'
-
-// styles
-import { Container, List } from './StyledInfiniteScroll'
 
 export default function InfiniteScroll({
   pokemonList,
   itemsPerPage = 98,
-  light,
+  dark,
+  direction = 'row',
+  align = 'flex-start',
+  flexWrap = 'wrap',
   ...rest
 }) {
   // current page state
@@ -68,20 +69,13 @@ export default function InfiniteScroll({
   }, [currPage])
 
   return (
-    <Container light={light} {...rest}>
-      <List
-        withGutter
-        constrained
-        margin="2rem 0"
-        direction="row"
-        align="flex-start"
-        flexWrap="wrap"
-      >
+    <>
+      <Box direction={direction} align={align} flexWrap={flexWrap} {...rest}>
         {showList.map((currPokemon, i) => (
-          <PokemonBox key={i} light={light} pokemon={currPokemon} />
+          <PokemonBox key={i} pokemon={currPokemon} dark={dark} />
         ))}
-      </List>
+      </Box>
       {pokemonList.length !== showList.length && <Loading ref={setNode} />}
-    </Container>
+    </>
   )
 }

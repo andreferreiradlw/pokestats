@@ -4,7 +4,7 @@ import Box from '../../Box'
 import Loading from '../../Loading'
 import Evolution from './Evolution'
 // styles
-import { SectionTitle, SectionMessage } from '../StyledPokemon'
+import { SectionTitle, SectionMessage } from '../../BaseStyles'
 
 export default function EvolutionChain({ ...rest }) {
   // evolution

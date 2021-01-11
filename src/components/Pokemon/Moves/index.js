@@ -14,7 +14,7 @@ import Box from '../../Box'
 import Loading from '../../Loading'
 import TypeBadge from '../../TypeBadge'
 // styles
-import { SectionTitle, SectionMessage } from '../StyledPokemon'
+import { SectionTitle, SectionMessage } from '../../BaseStyles'
 import {
   TableContainer,
   MovesTable,

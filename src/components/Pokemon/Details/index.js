@@ -6,7 +6,7 @@ import Box from '../../Box'
 import Loading from '../../Loading'
 import TypeBadge from '../../TypeBadge'
 // styles
-import { Table, Numbered } from '../StyledPokemon'
+import { Table, Numbered } from '../../BaseStyles'
 import { Name, TypeContainer, Genera, Flavor } from './StyledDetails'
 
 export default function Details({ ...rest }) {

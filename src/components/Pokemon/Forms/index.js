@@ -5,7 +5,7 @@ import Box from '../../Box'
 //helpers
 import { removeDash } from '../.././../helpers/typography'
 // styles
-import { SectionTitle, Table, Numbered } from '../StyledPokemon'
+import { SectionTitle, Table, Numbered } from '../../BaseStyles'
 
 export default function Forms({ ...rest }) {
   // biology

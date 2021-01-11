@@ -1,125 +1,9 @@
-import styled, { css, keyframes } from 'styled-components'
+import styled, { css } from 'styled-components'
+// components
 import Box from '../Box'
+// styles
+import { float } from '../BaseStyles'
 
-const SectionTitle = styled.h2`
-  font-size: 2rem;
-  line-height: 2.5rem;
-  font-weight: 600;
-  margin-bottom: 1rem;
-
-  ${({ theme }) => css`
-    @media ${theme.device.xs} {
-      font-size: 2.5rem;
-      line-height: 3rem;
-    }
-    @media ${theme.device.md} {
-      font-size: 3rem;
-      line-height: 3.5rem;
-    }
-  `}
-`
-
-const SectionSubTitle = styled.h3`
-  font-size: 1.3rem;
-  line-height: 1rem;
-  font-weight: 600;
-  margin-bottom: 1rem;
-
-  ${({ theme }) => css`
-    @media ${theme.device.xs} {
-      font-size: 1.6rem;
-      line-height: 2rem;
-    }
-    @media ${theme.device.md} {
-      font-size: 2rem;
-      line-height: 2.5rem;
-    }
-  `}
-`
-
-const SectionMessage = styled.p`
-  font-size: 1.5rem;
-  line-height: 2rem;
-  margin: 1.5rem 0;
-  text-align: center;
-  width: 100%;
-`
-
-const Table = styled(Box)`
-  display: table;
-  margin-bottom: 1.5rem;
-  font-size: 1rem;
-  line-height: 1.2rem;
-  word-break: break-word;
-  border-spacing: 0;
-  width: 100%;
-
-  & tbody {
-    flex-grow: 1;
-  }
-
-  & tr:not(:last-of-type) {
-    width: 100%;
-    border-bottom: 1px solid #ececec;
-  }
-
-  & th {
-    padding: 6px 0;
-    font-size: 0.875rem;
-    font-weight: normal;
-    text-align: left;
-    white-space: nowrap;
-    vertical-align: middle;
-  }
-
-  & td {
-    padding: 6px 16px;
-    font-weight: 500;
-    white-space: pre-line;
-    height: 40px;
-  }
-
-  ${({ theme }) => css`
-    @media ${theme.device.md} {
-      width: 50%;
-    }
-    @media ${theme.device.lg} {
-      width: 100%;
-    }
-  `}
-`
-
-const Numbered = styled.span`
-  width: 100%;
-  display: block;
-
-  & span {
-    font-weight: 300;
-  }
-
-  &:not(:last-of-type) {
-    padding-bottom: 6px;
-  }
-
-  ${({ light }) =>
-    light &&
-    css`
-      font-weight: 300;
-    `}
-`
-
-// Create the keyframes for floating img
-const float = keyframes`
-  0% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(10px)
-  }
-  100% {
-    transform: translateY(0px)
-  }
-`
 // image
 const ImageContainer = styled(Box)`
   ${({ theme }) => css`
@@ -152,12 +36,4 @@ const Image = styled.img`
   }
 `
 
-export {
-  SectionTitle,
-  SectionSubTitle,
-  SectionMessage,
-  Table,
-  Numbered,
-  ImageContainer,
-  Image,
-}
+export { ImageContainer, Image }

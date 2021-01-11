@@ -1,5 +1,5 @@
-import styled, { css } from 'styled-components'
-import { Table } from '../StyledPokemon'
+import styled from 'styled-components'
+import { Table } from '../../BaseStyles'
 
 const StatsTable = styled(Table)`
   width: 100%;

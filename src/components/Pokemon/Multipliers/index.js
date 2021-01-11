@@ -8,7 +8,7 @@ import Box from '../../Box'
 import TypeBadge from '../../TypeBadge'
 import Switch from './Switch'
 // styles
-import { SectionTitle, Table } from '../StyledPokemon'
+import { SectionTitle, Table } from '../../BaseStyles'
 
 export default function Weaknesses({ ...rest }) {
   // pokemon info

@@ -5,7 +5,7 @@ import { removeDash } from '../../../helpers/typography'
 import Box from '../../Box'
 import ProgressBar from './ProgressBar'
 // styles
-import { SectionTitle } from '../StyledPokemon'
+import { SectionTitle } from '../../BaseStyles'
 import { StatsTable, BarCell } from './StyledBaseStats'
 
 export default function BaseStats({ ...rest }) {

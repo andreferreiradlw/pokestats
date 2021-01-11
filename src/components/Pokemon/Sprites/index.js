@@ -5,7 +5,7 @@ import { removeUnderscore } from '../../../helpers/typography'
 import Box from '../../Box'
 import Loading from '../../Loading'
 // styles
-import { SectionTitle, SectionSubTitle } from '../StyledPokemon'
+import { SectionTitle, SectionSubTitle } from '../../BaseStyles'
 import { SpriteContainer, Sprite, NoSprites } from './StyledSprites'
 
 export default function Sprites({ ...rest }) {

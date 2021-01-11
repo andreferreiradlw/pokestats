@@ -3,9 +3,9 @@ import { useSelector } from 'react-redux'
 import Loading from '../../Loading'
 import Box from '../../Box'
 //helpers
-import { capitalize, removeDash } from '../.././../helpers/typography'
+import { removeDash } from '../.././../helpers/typography'
 // styles
-import { SectionTitle, Table, Numbered } from '../StyledPokemon'
+import { SectionTitle, Table, Numbered } from '../../BaseStyles'
 
 export default function Breeding({ ...rest }) {
   // biology

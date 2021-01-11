@@ -1,19 +1,10 @@
 import styled, { css, keyframes } from 'styled-components'
+// component
 import Box from '../../../Box'
+// styles
+import { float } from '../../../BaseStyles'
+// svg
 import Arrow from '../../../../assets/svg/arrows.svg'
-
-// Create the keyframes for floating img
-const float = keyframes`
-  0% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(5px)
-  }
-  100% {
-    transform: translateY(0)
-  }
-`
 
 const PokeImg = styled.img`
   width: 115px;
@@ -33,7 +24,6 @@ const PokeBox = styled(Box)`
   font-weight: 600;
   transition: border 0.1s ease-in-out;
   transition: box-shadow 0.15s ease-in-out;
-  // overflow: hidden;
 
   &:hover {
     cursor: pointer;

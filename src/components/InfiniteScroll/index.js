@@ -13,7 +13,7 @@ export default function InfiniteScroll({
   ...rest
 }) {
   // current page state
-  const [currPage, setCurrPage] = useState(1)
+  const [currPage, setCurrPage] = useState(0)
   // y state
   const [prevY, setPrevY] = useState(0)
   // show list state

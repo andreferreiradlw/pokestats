@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
 import axios from 'axios'
 // helpers
@@ -21,14 +21,29 @@ export default function Evolution({
   const [currSpecies, setCurrSpecies] = useState()
   const [imgSrc, setImgSrc] = useState()
 
+  // ref
+  const isMounted = useRef(null)
+  // mounted effect
+  useEffect(() => {
+    // executed when component mounted
+    isMounted.current = true
+    return () => {
+      // executed when unmount
+      isMounted.current = false
+    }
+  }, [])
+
   // fetch species.url data
   useEffect(() => {
     // get data
     axios.get(species.url).then(newSpecies => {
-      setCurrSpecies(newSpecies.data)
-      setImgSrc(
-        `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${newSpecies.data.id}.png`
-      )
+      // only update states if mounted
+      if (isMounted.current) {
+        setCurrSpecies(newSpecies.data)
+        setImgSrc(
+          `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${newSpecies.data.id}.png`
+        )
+      }
     })
   }, [species])
 

@@ -61,7 +61,10 @@ const generateIcon = type => {
   const [loading, setLoading] = useState(false)
 
   useEffect(() => {
+    const abortController = new AbortController()
+    // start loading
     setLoading(true)
+    // import icon async
     const importIcon = async () => {
       try {
         ImportedIconRef.current = (
@@ -74,6 +77,8 @@ const generateIcon = type => {
       }
     }
     importIcon()
+    // abort async import on unmount
+    return () => abortController.abort()
   }, [type])
 
   if (!loading && ImportedIconRef.current) {

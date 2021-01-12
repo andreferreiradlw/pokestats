@@ -46,14 +46,16 @@ export default function InfiniteScroll({
     }
   }
 
-  function sliceNewPage(page) {
+  function sliceNewPage(page, listUpdated) {
     // slice new page from pokemon array
     const newPage = pokemonList.slice(
       page === 1 ? 0 : (page - 1) * itemsPerPage,
       page * itemsPerPage
     )
     // update show list with sliced array
-    setShowList([...showList, ...newPage])
+    listUpdated
+      ? setShowList([...newPage])
+      : setShowList([...showList, ...newPage])
   }
 
   // pokemon list effect
@@ -68,7 +70,7 @@ export default function InfiniteScroll({
       setCurrPage(1)
     } else {
       // page is already 1, with showList reset we can slice a new first page
-      sliceNewPage(currPage)
+      sliceNewPage(currPage, true)
     }
   }, [pokemonList])
 
@@ -104,7 +106,7 @@ export default function InfiniteScroll({
   // page effect
   useEffect(() => {
     // page has been changed so slice it into showList
-    sliceNewPage(currPage)
+    sliceNewPage(currPage, false)
   }, [currPage])
 
   return (

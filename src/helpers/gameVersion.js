@@ -221,6 +221,28 @@ const generations = [
   },
 ]
 
+const mapIdToGeneration = id => {
+  if (id <= 151) {
+    return 'generation-i'
+  } else if (id > 151 && id <= 251) {
+    return 'generation-ii'
+  } else if (id > 251 && id <= 386) {
+    return 'generation-iii'
+  } else if (id > 386 && id <= 493) {
+    return 'generation-iv'
+  } else if (id > 483 && id <= 649) {
+    return 'generation-v'
+  } else if (id > 649 && id <= 721) {
+    return 'generation-vi'
+  } else if (id > 721 && id <= 809) {
+    return 'generation-vii'
+  } else if (id > 809 && id <= 898) {
+    return 'generation-viii'
+  } else {
+    return 'all'
+  }
+}
+
 const mapVersionToGroup = currentVersion =>
   gameVersions
     .filter(version => version.value === currentVersion)
@@ -238,4 +260,11 @@ const mapGenerationToGame = value =>
     .map(generation => generation.gameVersion)
     .toString()
 
-export { gameVersions, mapVersionToGroup, mapGeneration, mapGenerationToGame }
+export {
+  gameVersions,
+  generations,
+  mapIdToGeneration,
+  mapVersionToGroup,
+  mapGeneration,
+  mapGenerationToGame,
+}

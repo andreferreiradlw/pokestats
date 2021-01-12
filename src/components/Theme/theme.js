@@ -57,13 +57,9 @@ const theme = {
     heading: {
       color: white,
     },
-  },
-  infiniteScroll: {
-    backgroundColor: black,
-    color: white,
-    light: {
-      backgroundColor: white,
-      color: black,
+    pokemonList: {
+      backgroundColor: black,
+      color: white,
     },
   },
   particles: {

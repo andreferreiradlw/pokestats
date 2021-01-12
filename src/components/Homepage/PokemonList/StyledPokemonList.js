@@ -2,16 +2,18 @@ import styled, { css } from 'styled-components'
 import Box from '../../Box'
 
 const Container = styled(Box)`
-  ${({ theme, light }) =>
-    light
-      ? css`
-          background-color: ${theme.infiniteScroll.light.backgroundColor};
-          color: ${theme.infiniteScroll.light.color};
-        `
-      : css`
-          background-color: ${theme.infiniteScroll.backgroundColor};
-          color: ${theme.infiniteScroll.color};
-        `}
+  ${({ theme }) => css`
+    background-color: ${theme.homepage.pokemonList.backgroundColor};
+    color: ${theme.homepage.pokemonList.color};
+  `}
 `
 
-export { Container }
+const SelectContainer = styled(Box)`
+  margin-bottom: 1rem;
+
+  & span {
+    margin-right: 0.5rem;
+  }
+`
+
+export { Container, SelectContainer }

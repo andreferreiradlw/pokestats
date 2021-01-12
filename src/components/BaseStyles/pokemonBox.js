@@ -28,7 +28,7 @@ const PokeBox = styled(Box)`
             border: 1px solid ${theme.pokemonBox.dark.hoverBorder};
           }
           &:hover {
-            box-shadow: 2px 2px 3px 0px ${theme.pokemonBox.dark.boxShadow};
+            box-shadow: 1px 1px 3px 0px ${theme.pokemonBox.dark.boxShadow};
           }
           &:active {
             box-shadow: 1px 1px 2px 0px ${theme.pokemonBox.dark.activeShadow}
@@ -43,7 +43,7 @@ const PokeBox = styled(Box)`
             border: 1px solid ${theme.pokemonBox.hoverBorder};
           }
           &:hover {
-            box-shadow: 2px 2px 3px 0px ${theme.pokemonBox.boxShadow};
+            box-shadow: 1px 1px 3px 0px ${theme.pokemonBox.boxShadow};
           }
           &:active {
             box-shadow: 1px 1px 2px 0px ${theme.pokemonBox.activeShadow} inset;

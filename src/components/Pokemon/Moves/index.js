@@ -56,6 +56,7 @@ export default function Moves({ ...rest }) {
         setMovesLoading(false)
       })
       .catch(errors => {
+        console.log('errors in moves index: ', errors)
         // no moves
         setMovesLoading(false)
       })
@@ -107,7 +108,13 @@ export default function Moves({ ...rest }) {
       getMachineNames(currMoves).then(
         axios.spread((...responses) => {
           // get machine names from responses
-          const names = responses.map(res => res.data.item.name)
+          const names = responses.map(res => {
+            if (res === null) {
+              return '❌'
+            } else {
+              return res.data.item.name
+            }
+          })
           // update machine names state
           setMachineNames(names)
           // stop loading

@@ -1,5 +1,9 @@
 import axios from 'axios'
 
+function useNull() {
+  return null
+}
+
 function fetchTypeData(moves) {
   // return a promisse that resolves with moves data
   return new Promise(function (resolve, reject) {
@@ -11,28 +15,32 @@ function fetchTypeData(moves) {
       let axiosRequests = []
       // create an axios request for each move
       moves.forEach(({ move }) => {
-        axiosRequests.push(axios.get(move.url))
+        axiosRequests.push(axios.get(move.url).catch(useNull))
       })
       // moves axios requests
       axios
         .all(axiosRequests)
         .then(
           axios.spread((...responses) => {
-            const movesData = responses.map((response, i) => {
-              let responseData = response.data
-              // version details from pokemon moves info
-              responseData.version_group_details =
-                moves[i].version_group_details
-              // return
-              return responseData
-            })
+            console.log('response in fetchTypeData', responses)
+            const movesData = responses
+              .map((response, i) => {
+                if (response !== null) {
+                  let responseData = response.data
+                  // version details from pokemon moves info
+                  responseData.version_group_details =
+                    moves[i].version_group_details
+                  // return
+                  return responseData
+                }
+              })
+              .filter(data => data)
             resolve(movesData)
           })
         )
         .catch(errors => {
           // react on errors.
           reject(errors)
-          console.log('error', errors)
         })
     }
   })
@@ -90,7 +98,7 @@ function getMachineNames(machineMoves) {
   // create an axios request for each move
   machineMoves.forEach(move => {
     // current_version_machine is available from filterMoves function
-    machineRequests.push(axios.get(move.current_version_machine))
+    machineRequests.push(axios.get(move.current_version_machine).catch(useNull))
   })
   // return axios promisse
   return axios.all(machineRequests)

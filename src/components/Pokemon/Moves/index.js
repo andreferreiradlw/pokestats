@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import axios from 'axios'
 // helpers
 import { mapVersionToGroup, mapGeneration } from '../../../helpers/gameVersion'
@@ -47,41 +47,57 @@ export default function Moves({ ...rest }) {
   // loading
   const [movesLoading, setMovesLoading] = useState(true)
 
+  // ref
+  const isMounted = useRef(null)
+  // mounted effect
+  useEffect(() => {
+    // executed when component mounted
+    isMounted.current = true
+    return () => {
+      // executed when unmount
+      isMounted.current = false
+    }
+  }, [])
+
   // fetch move data
   useEffect(() => {
-    setMovesLoading(true)
-    fetchTypeData(moves)
-      .then(movesData => {
-        setMoves(movesData)
-        setMovesLoading(false)
-      })
-      .catch(errors => {
-        // no moves
-        setMovesLoading(false)
-      })
+    if (isMounted.current) {
+      setMovesLoading(true)
+      fetchTypeData(moves)
+        .then(movesData => {
+          setMoves(movesData)
+          setMovesLoading(false)
+        })
+        .catch(errors => {
+          // no moves
+          setMovesLoading(false)
+        })
+    }
   }, [moves])
 
   // tab changes
   useEffect(() => {
-    // tab changed! update learn method
-    // changing learn method will trigger moves update
-    // start loading first
-    setMovesLoading(true)
-    // update learn method state
-    if (activeTab === 1) {
-      setLearnMethod('level-up')
-    } else if (activeTab === 2) {
-      setLearnMethod('machine')
-    } else if (activeTab === 3) {
-      setLearnMethod('egg')
-    } else if (activeTab === 4) {
-      setLearnMethod('tutor')
+    if (isMounted.current) {
+      // tab changed! update learn method
+      // changing learn method will trigger moves update
+      // start loading first
+      setMovesLoading(true)
+      // update learn method state
+      if (activeTab === 1) {
+        setLearnMethod('level-up')
+      } else if (activeTab === 2) {
+        setLearnMethod('machine')
+      } else if (activeTab === 3) {
+        setLearnMethod('egg')
+      } else if (activeTab === 4) {
+        setLearnMethod('tutor')
+      }
     }
   }, [activeTab])
 
   // current pokemon moves
   useEffect(() => {
-    if (pokemonMoves && learnMethod && gameVersion) {
+    if (isMounted.current && pokemonMoves && learnMethod && gameVersion) {
       // filter moves by learn method and current game version
       filterMoves(
         pokemonMoves,
@@ -101,34 +117,32 @@ export default function Moves({ ...rest }) {
 
   // current pokemon moves
   useEffect(() => {
-    // if move is from machine then get machine names
-    if (currMoves && learnMethod === 'machine') {
-      // requests from current moves machines
-      getMachineNames(currMoves).then(
-        axios.spread((...responses) => {
-          // get machine names from responses
-          const names = responses.map(res => {
-            if (res === null) {
-              return '❌'
-            } else {
-              return res.data.item.name
-            }
+    if (isMounted.current) {
+      // if move is from machine then get machine names
+      if (currMoves && learnMethod === 'machine') {
+        // requests from current moves machines
+        getMachineNames(currMoves).then(
+          axios.spread((...responses) => {
+            // get machine names from responses
+            const names = responses.map(res => {
+              if (res === null) {
+                return '❌'
+              } else {
+                return res.data.item.name
+              }
+            })
+            // update machine names state
+            setMachineNames(names)
+            // stop loading
+            setMovesLoading(false)
           })
-          // update machine names state
-          setMachineNames(names)
-          // stop loading
-          setMovesLoading(false)
-        })
-      )
-    } else {
-      // otherwise just stop loading
-      setMovesLoading(false)
+        )
+      } else {
+        // otherwise just stop loading
+        setMovesLoading(false)
+      }
     }
   }, [currMoves])
-
-  useEffect(() => {
-    console.log('loading changed! ', movesLoading)
-  }, [movesLoading])
 
   return (
     <Box align={{ xxs: 'center', lg: 'flex-start' }} {...rest}>

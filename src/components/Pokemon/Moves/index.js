@@ -45,7 +45,7 @@ export default function Moves({ ...rest }) {
   // machine names
   const [machineNames, setMachineNames] = useState()
   // loading
-  const [movesLoading, setMovesLoading] = useState(false)
+  const [movesLoading, setMovesLoading] = useState(true)
 
   // fetch move data
   useEffect(() => {
@@ -56,7 +56,6 @@ export default function Moves({ ...rest }) {
         setMovesLoading(false)
       })
       .catch(errors => {
-        console.log('errors in moves index: ', errors)
         // no moves
         setMovesLoading(false)
       })
@@ -126,6 +125,10 @@ export default function Moves({ ...rest }) {
       setMovesLoading(false)
     }
   }, [currMoves])
+
+  useEffect(() => {
+    console.log('loading changed! ', movesLoading)
+  }, [movesLoading])
 
   return (
     <Box align={{ xxs: 'center', lg: 'flex-start' }} {...rest}>

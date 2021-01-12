@@ -22,7 +22,6 @@ function fetchTypeData(moves) {
         .all(axiosRequests)
         .then(
           axios.spread((...responses) => {
-            console.log('response in fetchTypeData', responses)
             const movesData = responses
               .map((response, i) => {
                 if (response !== null) {

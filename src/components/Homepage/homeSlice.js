@@ -25,7 +25,7 @@ export const fetchPokemonList = createAsyncThunk(
   async (payload, { rejectWithValue }) => {
     try {
       const response = await axios.get(
-        'https://pokeapi.co/api/v2/pokemon?limit=898'
+        'https://pokeapi.co/api/v2/pokemon?limit=809'
       )
       return response.data.results
     } catch (err) {

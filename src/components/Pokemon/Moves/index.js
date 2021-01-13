@@ -66,7 +66,7 @@ export default function Moves({ ...rest }) {
       fetchTypeData(moves)
         .then(movesData => {
           setMoves(movesData)
-          setMovesLoading(false)
+          //setMovesLoading(false)
         })
         .catch(errors => {
           // no moves
@@ -104,27 +104,34 @@ export default function Moves({ ...rest }) {
         learnMethod,
         mapVersionToGroup(gameVersion)
       ).then(moves => {
-        // clear machine names state
-        // when we set new currMoves, these won't match
-        setMachineNames()
-        // update move state to show in table
-        setCurrMoves(moves)
-        // this will trigger a new machine name search
-        // no need to stop loading here
+        if (moves.length) {
+          // clear machine names state
+          // when we set new currMoves, these won't match
+          setMachineNames()
+          // update move state to show in table
+          setCurrMoves(moves)
+          // this will trigger a new machine name search
+        } else {
+          // empty currMoves
+          setCurrMoves([])
+          // stop loading
+          setMovesLoading(false)
+        }
       })
     }
   }, [pokemonMoves, learnMethod, gameVersion])
 
   // current pokemon moves
   useEffect(() => {
-    if (isMounted.current) {
-      // if move is from machine then get machine names
-      if (currMoves && learnMethod === 'machine') {
+    if (isMounted.current && currMoves.length) {
+      // if move is machine then get machine names
+      if (learnMethod === 'machine') {
         // requests from current moves machines
         getMachineNames(currMoves).then(
           axios.spread((...responses) => {
             // get machine names from responses
             const names = responses.map(res => {
+              // if request fails will return null
               if (res === null) {
                 return '❌'
               } else {
@@ -138,7 +145,7 @@ export default function Moves({ ...rest }) {
           })
         )
       } else {
-        // otherwise just stop loading
+        // if not machine just stop loading instead
         setMovesLoading(false)
       }
     }
@@ -210,7 +217,7 @@ export default function Moves({ ...rest }) {
         </MovesTable>
       </TableContainer>
       {/** NO MOVES */}
-      {(!moves.length || !currMoves.length) && !movesLoading && (
+      {!movesLoading && currMoves.length === 0 && (
         <SectionMessage>No moves for current game version!</SectionMessage>
       )}
       {/** LOADING */}

@@ -164,6 +164,7 @@ const gameVersions = [
     group: 'lets-go-pikachu-lets-go-eevee',
     generation: 'Generation VII',
   },
+  /** 
   {
     name: 'Sword',
     value: 'sword',
@@ -176,6 +177,7 @@ const gameVersions = [
     group: 'sword-shield',
     generation: 'Generation VIII',
   },
+  */
 ]
 
 const generations = [
@@ -214,11 +216,13 @@ const generations = [
     genDescription: 'Generation VII',
     gameVersion: 'sun',
   },
+  /** 
   {
     genValue: 'generation-viii',
     genDescription: 'Generation VIII',
     gameVersion: 'sword',
   },
+  */
 ]
 
 const mapIdToGeneration = id => {
@@ -236,9 +240,9 @@ const mapIdToGeneration = id => {
     return 'generation-vi'
   } else if (id > 721 && id <= 809) {
     return 'generation-vii'
-  } else if (id > 809 && id <= 898) {
+  } /** else if (id > 809 && id <= 898) {
     return 'generation-viii'
-  } else {
+  } */ else {
     return 'all'
   }
 }

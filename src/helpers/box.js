@@ -26,7 +26,7 @@ export const responsiveProps = (property, values) => {
     // same values for all screen sizes
     return property ? `${property}: ${values};` : `${values}`
   } else if (typeof values === 'object') {
-    return dimensions.map((d) => {
+    return dimensions.map(d => {
       if (breakpoints[d] && values[d] !== undefined) {
         return css`
           ${breakpointStyle(
@@ -47,7 +47,7 @@ export const responsiveProps = (property, values) => {
  * @param {number|string|Object} sizeProp The sizes prop.
  * @returns {string[]} Returns the flex-basis styles for the multiple breakpoints.
  */
-export const flexStyle = (sizeProp) => {
+export const flexStyle = sizeProp => {
   if (typeof sizeProp === 'number') {
     return css`
       flex-basis: ${(sizeProp / 12) * 100}%;
@@ -58,17 +58,25 @@ export const flexStyle = (sizeProp) => {
       flex-grow: 0;
     `
   } else {
-    return dimensions.map((d) => {
+    return dimensions.map(d => {
       if (breakpoints[d] && sizeProp[d] && sizeProp[d] !== 'auto') {
         return css`
           ${breakpointStyle(
             breakpoints[d],
-            `flex-basis: ${(sizeProp[d] / 12) * 100}%;`
+            css`
+              flex-basis: ${(sizeProp[d] / 12) * 100}%;
+            `
           )}
         `
       } else if (breakpoints[d] && sizeProp[d] === 'auto') {
         return css`
-          ${breakpointStyle(breakpoints[d], `flex-basis: auto; flex-grow: 1;`)}
+          ${breakpointStyle(
+            breakpoints[d],
+            css`
+              flex-basis: auto;
+              flex-grow: 1;
+            `
+          )}
         `
       }
     })

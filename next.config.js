@@ -1,5 +1,5 @@
 const withImages = require('next-images')
-const NextWorkboxPlugin = require('next-workbox-webpack-plugin')
+const nextWorkboxWebpackPlugin = require('next-workbox-webpack-plugin')
 const path = require('path')
 
 module.exports = withImages({
@@ -60,7 +60,7 @@ module.exports = withImages({
 
     if (!isServer && !dev) {
       config.plugins.push(
-        new NextWorkboxPlugin({
+        new nextWorkboxWebpackPlugin({
           buildId,
           ...workboxOptions,
         })

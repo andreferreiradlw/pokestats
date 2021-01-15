@@ -18,11 +18,15 @@ export default function Footer() {
       >
         <span>
           {`Developed by `}{' '}
-          <FooterA href="https://andreferreira.tech" target="_blank">
+          <FooterA
+            href="https://andreferreira.tech"
+            target="_blank"
+            rel="noopener"
+          >
             André
           </FooterA>
           {`, powered by `}{' '}
-          <FooterA href="https://pokeapi.co/" target="_blank">
+          <FooterA href="https://pokeapi.co/" target="_blank" rel="noopener">
             <img src={PokeApi} />
           </FooterA>
         </span>
@@ -30,6 +34,7 @@ export default function Footer() {
           <FooterA
             href="https://github.com/andreferreiradlw/pokestats"
             target="_blank"
+            rel="noopener"
           >
             GitHub
             <GitHub />

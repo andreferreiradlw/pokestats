@@ -1,19 +1,77 @@
 const withImages = require('next-images')
+const NextWorkboxPlugin = require('next-workbox-webpack-plugin')
 const path = require('path')
-const withPWA = require('next-pwa')
 
-module.exports = withPWA(
-  withImages({
-    pwa: {
-      dest: 'public',
-    },
-    exclude: path.resolve(__dirname, 'src/assets/svg'),
-    webpack(config) {
-      config.module.rules.push({
-        test: /\.svg$/,
-        use: ['@svgr/webpack'],
-      })
-      return config
-    },
-  })
-)
+module.exports = withImages({
+  exclude: path.resolve(__dirname, 'src/assets/svg'),
+  webpack(config, { isServer, buildId, dev }) {
+    // Fixes npm packages that depend on `fs` module
+    config.node = {
+      fs: 'empty',
+    }
+
+    const workboxOptions = {
+      clientsClaim: true,
+      skipWaiting: true,
+      globPatterns: ['.next/static/*', '.next/static/commons/*'],
+      modifyUrlPrefix: {
+        '.next': '/_next',
+      },
+      runtimeCaching: [
+        {
+          urlPattern: /.*\.(?:png|jpg|jpeg|svg|gif)/,
+          handler: 'cacheFirst',
+          options: {
+            cacheName: 'image-cache',
+            cacheableResponse: {
+              statuses: [0, 200],
+            },
+          },
+        },
+        {
+          urlPattern: /.*\.(?:js|css)/,
+          handler: 'staleWhileRevalidate',
+          options: {
+            cacheName: 'js-css-caches',
+            cacheableResponse: {
+              statuses: [0, 200],
+            },
+          },
+        },
+        {
+          urlPattern: '/',
+          handler: 'networkFirst',
+          options: {
+            cacheName: 'html-cache',
+          },
+        },
+        {
+          urlPattern: new RegExp('^https://pokeapi.co/api/v2'),
+          handler: 'staleWhileRevalidate',
+          options: {
+            cacheName: 'api-cache',
+            cacheableResponse: {
+              statuses: [200],
+            },
+          },
+        },
+      ],
+    }
+
+    if (!isServer && !dev) {
+      config.plugins.push(
+        new NextWorkboxPlugin({
+          buildId,
+          ...workboxOptions,
+        })
+      )
+    }
+
+    config.module.rules.push({
+      test: /\.svg$/,
+      use: ['@svgr/webpack'],
+    })
+
+    return config
+  },
+})

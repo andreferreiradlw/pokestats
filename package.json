@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "node server.js",
     "build": "next build",
-    "start": "node server.js",
+    "start": "NODE_ENV=production node server.js",
     "export": "next export"
   },
   "dependencies": {
@@ -13,9 +13,9 @@
     "axios": "^0.21.0",
     "express": "^4.17.1",
     "heroku-ssl-redirect": "^0.1.1",
+    "lru-cache": "^6.0.0",
     "next": "10.0.3",
     "next-images": "^1.6.2",
-    "next-pwa": "^5.0.3",
     "react": "17.0.1",
     "react-dom": "17.0.1",
     "react-particles-js": "^3.4.1",
@@ -38,6 +38,7 @@
     "eslint-plugin-prettier": "^3.2.0",
     "eslint-plugin-react": "^7.21.5",
     "eslint-plugin-styled-components": "^0.0.0",
+    "next-workbox-webpack-plugin": "^2.1.1",
     "prettier": "^2.2.1",
     "redux-devtools": "^3.7.0"
   }

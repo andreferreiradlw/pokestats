@@ -3,15 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "node server.js",
+    "dev": "next dev",
     "build": "next build",
-    "start": "cross-env NODE_ENV=production node server.js",
+    "start": "next start",
     "export": "next export"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.5.0",
     "axios": "^0.21.0",
-    "cross-env": "^7.0.3",
     "next": "10.0.3",
     "next-images": "^1.6.2",
     "next-pwa": "^5.0.3",

@@ -6,6 +6,7 @@ module.exports = withPWA(
   withImages({
     pwa: {
       dest: 'public',
+      sw: 'pokeapi-sw.js',
     },
     exclude: path.resolve(__dirname, 'src/assets/svg'),
     webpack(config) {

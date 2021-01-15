@@ -1,0 +1,23 @@
+{
+  "theme_color": "#000000",
+  "background_color": "#ffffff",
+  "orientation": "portrait",
+  "display": "standalone",
+  "scope": "/",
+  "start_url": "/",
+  "app_name": "PokeStats",
+  "short_name": "Pokestats",
+  "description": "Online encyclopedia of Pok\u00e9mon species containing information such as Pok\u00e9dex data, descriptions and much more.",
+  "icons": [
+    {
+      "src": "/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "./icons/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

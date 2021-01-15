@@ -14,6 +14,7 @@
     "cross-env": "^7.0.3",
     "next": "10.0.3",
     "next-images": "^1.6.2",
+    "next-pwa": "^5.0.3",
     "react": "17.0.1",
     "react-dom": "17.0.1",
     "react-particles-js": "^3.4.1",
@@ -37,7 +38,6 @@
     "eslint-plugin-react": "^7.21.5",
     "eslint-plugin-styled-components": "^0.0.0",
     "prettier": "^2.2.1",
-    "redux-devtools": "^3.7.0",
-    "terser-webpack-plugin": "^5.0.3"
+    "redux-devtools": "^3.7.0"
   }
 }

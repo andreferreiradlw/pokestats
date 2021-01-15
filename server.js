@@ -4,7 +4,7 @@ const next = require('next')
 const cache = require('lru-cache') // for using least-recently-used based caching
 const sslRedirect = require('heroku-ssl-redirect').default
 
-const PORT = 8000
+const port = parseInt(process.env.PORT, 10) || 3000
 const dev = process.env.NODE_ENV !== 'production'
 const app = next({ dev })
 const handle = app.getRequestHandler()
@@ -35,9 +35,9 @@ app.prepare().then(() => {
     }
   })
 
-  server.listen(PORT, err => {
+  server.listen(port, err => {
     if (err) throw err
-    console.log(`> Live @ https://localhost:${PORT}`)
+    console.log(`> Live @ https://localhost:${port}`)
   })
 })
 

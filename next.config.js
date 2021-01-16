@@ -30,7 +30,7 @@ module.exports = withImages({
               maxAgeSeconds: 7 * 24 * 60 * 60, // 1 week
             },
             cacheableResponse: {
-              statuses: [0, 200],
+              statuses: [200],
             },
           },
         },

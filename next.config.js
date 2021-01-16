@@ -18,6 +18,7 @@ module.exports = withImages({
         '.next': '/_next',
       },
       runtimeCaching: [
+        /** 
         {
           urlPattern: new RegExp(
             '^https://raw.githubusercontent.com/PokeAPI/sprites'
@@ -25,8 +26,12 @@ module.exports = withImages({
           handler: 'staleWhileRevalidate',
           options: {
             cacheName: 'image-cache',
+            cacheableResponse: {
+              statuses: [200],
+            },
           },
         },
+        */
         {
           urlPattern: /.*\.(?:js|css)/,
           handler: 'staleWhileRevalidate',

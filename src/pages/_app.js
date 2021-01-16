@@ -15,17 +15,19 @@ export default function App({ Component, pageProps }) {
   }, [])
 
   useEffect(() => {
-    /** 
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', function () {
-        navigator.serviceWorker.register('/pokeapi-sw.js')
+        navigator.serviceWorker
+          .register('/pokeapi-sw.js')
+          .then(() => console.log('pokeapi-sw registered.'))
+          .catch(err => console.dir(err))
       })
     }
-    */
+
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker
         .register('/sw.js')
-        .then(() => console.log('service worker registered.'))
+        .then(() => console.log('workbox-sw registered.'))
         .catch(err => console.dir(err))
     }
   }, [])

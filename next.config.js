@@ -26,9 +26,6 @@ module.exports = withImages({
           handler: 'cacheFirst',
           options: {
             cacheName: 'image-cache',
-            cacheableResponse: {
-              statuses: [200],
-            },
           },
         },
         {

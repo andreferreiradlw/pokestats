@@ -10,19 +10,6 @@
  * and re-run your build process.
  * See https://goo.gl/2aRDsh
  */
-/** 
-importScripts(
-  'https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js'
-)
-
-importScripts(
-  'https://storage.googleapis.com/workbox-cdn/releases/5.0.0/workbox-sw.js'
-)
-importScripts(
-  '/static/workbox/workbox-v4.3.1/workbox-sw.js',
-  '/static/workbox/next-precache-manifest-e2b7d73e4bd4503af08535ec35edf558.js'
-)
-*/
 
 importScripts(
   'https://storage.googleapis.com/workbox-cdn/releases/6.0.2/workbox-sw.js'
@@ -40,6 +27,7 @@ workbox.core.clientsClaim()
 self.__precacheManifest = [].concat(self.__precacheManifest || [])
 workbox.precaching.precacheAndRoute(self.__precacheManifest, {})
 
+// css, js
 workbox.routing.registerRoute(
   /.*\.(?:js|css)/,
   new workbox.strategies.StaleWhileRevalidate({
@@ -52,6 +40,7 @@ workbox.routing.registerRoute(
   }),
   'GET'
 )
+// homepage
 workbox.routing.registerRoute(
   '/',
   new workbox.strategies.NetworkFirst({
@@ -60,6 +49,7 @@ workbox.routing.registerRoute(
   }),
   'GET'
 )
+// pokemon page
 workbox.routing.registerRoute(
   '/pokemon/',
   new workbox.strategies.NetworkFirst({
@@ -68,6 +58,7 @@ workbox.routing.registerRoute(
   }),
   'GET'
 )
+// pokeapi requests
 workbox.routing.registerRoute(
   /^https:\/\/pokeapi.co\/api\/v2/,
   new workbox.strategies.StaleWhileRevalidate({
@@ -84,6 +75,7 @@ workbox.routing.registerRoute(
   }),
   'GET'
 )
+// google fonts
 workbox.routing.registerRoute(
   /^https:\/\/fonts.googleapis.com/,
   new workbox.strategies.StaleWhileRevalidate({
@@ -93,9 +85,8 @@ workbox.routing.registerRoute(
   'GET'
 )
 
-// POKE API REQUESTS
+// POKE API IMAGE REQUESTS
 const imgRe = /https:\/\/raw\.githubusercontent\.com\/PokeAPI\/sprites\/[\/-\w\d]+\/[\d\w-]+\.(?:png|svg|gif)/
-const version = 1
 
 self.addEventListener('fetch', function (event) {
   if (event.request.url.match(imgRe)) {
@@ -108,7 +99,7 @@ self.addEventListener('fetch', function (event) {
         return fetch(event.request)
           .then(function (response) {
             if (event.request.url.match(imgRe)) {
-              caches.open('images-cache-' + version).then(function (cache) {
+              caches.open('images-cache').then(function (cache) {
                 // The response is opaque, if it fails cache.add() will reject it
                 cache.add(event.request.url)
               })

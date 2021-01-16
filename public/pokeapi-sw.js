@@ -10,17 +10,20 @@
  * and re-run your build process.
  * See https://goo.gl/2aRDsh
  */
-// importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
+importScripts(
+  'https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js'
+)
 /** 
 importScripts(
   '/static/workbox/workbox-v4.3.1/workbox-sw.js',
   '/static/workbox/next-precache-manifest-e2b7d73e4bd4503af08535ec35edf558.js'
 )
-*/
+
 
 importScripts(
   'https://storage.googleapis.com/workbox-cdn/releases/6.0.2/workbox-sw.js'
 )
+*/
 
 workbox.core.skipWaiting()
 

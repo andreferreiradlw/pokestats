@@ -19,12 +19,18 @@ module.exports = withImages({
       },
       runtimeCaching: [
         {
-          urlPattern: /.*\.(?:png|jpg|jpeg|svg|gif)/,
+          urlPattern: new RegExp(
+            '^https://raw.githubusercontent.com/PokeAPI/sprites'
+          ),
           handler: 'cacheFirst',
           options: {
             cacheName: 'image-cache',
+            expiration: {
+              maxEntries: 500,
+              maxAgeSeconds: 7 * 24 * 60 * 60, // 1 week
+            },
             cacheableResponse: {
-              statuses: [200],
+              statuses: [0, 200],
             },
           },
         },
@@ -33,9 +39,6 @@ module.exports = withImages({
           handler: 'staleWhileRevalidate',
           options: {
             cacheName: 'js-css-caches',
-            cacheableResponse: {
-              statuses: [200],
-            },
           },
         },
         {
@@ -50,9 +53,20 @@ module.exports = withImages({
           handler: 'staleWhileRevalidate',
           options: {
             cacheName: 'api-cache',
+            expiration: {
+              maxEntries: 500,
+              maxAgeSeconds: 5 * 60,
+            },
             cacheableResponse: {
               statuses: [200],
             },
+          },
+        },
+        {
+          urlPattern: new RegExp('^https://fonts.googleapis.com'),
+          handler: 'staleWhileRevalidate',
+          options: {
+            cacheName: 'google-fonts',
           },
         },
       ],

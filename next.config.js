@@ -23,9 +23,12 @@ module.exports = withImages({
             '^https://raw.githubusercontent.com/PokeAPI/sprites'
           ),
           method: 'GET',
-          handler: 'cacheFirst',
+          handler: 'staleWhileRevalidate',
           options: {
             cacheName: 'image-cache',
+            cacheableResponse: {
+              statuses: [200],
+            },
           },
         },
         {

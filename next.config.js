@@ -24,7 +24,7 @@ module.exports = withImages({
           options: {
             cacheName: 'image-cache',
             cacheableResponse: {
-              statuses: [0, 200],
+              statuses: [200],
             },
           },
         },
@@ -34,7 +34,7 @@ module.exports = withImages({
           options: {
             cacheName: 'js-css-caches',
             cacheableResponse: {
-              statuses: [0, 200],
+              statuses: [200],
             },
           },
         },

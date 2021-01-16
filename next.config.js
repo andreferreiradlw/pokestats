@@ -22,13 +22,9 @@ module.exports = withImages({
           urlPattern: new RegExp(
             '^https://raw.githubusercontent.com/PokeAPI/sprites'
           ),
-          method: 'GET',
           handler: 'staleWhileRevalidate',
           options: {
             cacheName: 'image-cache',
-            cacheableResponse: {
-              statuses: [200],
-            },
           },
         },
         {

@@ -23,13 +23,6 @@ export default function App({ Component, pageProps }) {
           .catch(err => console.dir(err))
       })
     }
-
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker
-        .register('/sw.js')
-        .then(() => console.log('workbox-sw registered.'))
-        .catch(err => console.dir(err))
-    }
   }, [])
 
   return (

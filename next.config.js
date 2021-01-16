@@ -18,25 +18,11 @@ module.exports = withImages({
         '.next': '/_next',
       },
       runtimeCaching: [
-        /** 
-        {
-          urlPattern: new RegExp(
-            '^https://raw.githubusercontent.com/PokeAPI/sprites'
-          ),
-          handler: 'staleWhileRevalidate',
-          options: {
-            cacheName: 'image-cache',
-            cacheableResponse: {
-              statuses: [200],
-            },
-          },
-        },
-        */
         {
           urlPattern: /.*\.(?:js|css)/,
           handler: 'staleWhileRevalidate',
           options: {
-            cacheName: 'js-css-caches',
+            cacheName: 'js-css-cache',
             cacheableResponse: {
               statuses: [0, 200],
             },
@@ -55,8 +41,7 @@ module.exports = withImages({
           options: {
             cacheName: 'api-cache',
             expiration: {
-              maxEntries: 500,
-              maxAgeSeconds: 5 * 60,
+              maxAgeSeconds: 7 * 24 * 60 * 60, // 1 week
             },
             cacheableResponse: {
               statuses: [200],
@@ -67,7 +52,7 @@ module.exports = withImages({
           urlPattern: new RegExp('^https://fonts.googleapis.com'),
           handler: 'staleWhileRevalidate',
           options: {
-            cacheName: 'google-fonts',
+            cacheName: 'google-fonts-cache',
           },
         },
       ],

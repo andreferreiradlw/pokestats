@@ -18,13 +18,14 @@ export default function App({ Component, pageProps }) {
           .register('/pokeapi-sw.js')
           .then(() => console.log('pokeapi-sw registered.'))
           .catch(err => console.dir(err))
-        // workbox sw
-        navigator.serviceWorker
-          .register('/sw.js')
-          .then(() => console.log('workbox-sw registered.'))
-          .catch(err => console.dir(err))
       })
+      // workbox sw
+      navigator.serviceWorker
+        .register('/sw.js')
+        .then(() => console.log('workbox-sw registered.'))
+        .catch(err => console.dir(err))
     }
+
     // fetch initial pokemon list on app load
     store.dispatch(fetchPokemonList())
   }, [])

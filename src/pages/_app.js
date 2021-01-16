@@ -17,15 +17,20 @@ export default function App({ Component, pageProps }) {
   useEffect(() => {
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', function () {
-        navigator.serviceWorker.register('/pokeapi-sw.js')
+        navigator.serviceWorker
+          .register('/pokeapi-sw.js')
+          .then(() => console.log('POKEAPI service worker registered.'))
+          .catch(err => console.dir(err))
       })
     }
+    /** 
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker
         .register('/sw.js')
         .then(() => console.log('service worker registered.'))
         .catch(err => console.dir(err))
     }
+    */
   }, [])
 
   return (

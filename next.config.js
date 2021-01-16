@@ -32,7 +32,14 @@ module.exports = withImages({
           urlPattern: '/',
           handler: 'networkFirst',
           options: {
-            cacheName: 'html-cache',
+            cacheName: 'homepage-cache',
+          },
+        },
+        {
+          urlPattern: '/pokemon/',
+          handler: 'networkFirst',
+          options: {
+            cacheName: 'pokemon-cache',
           },
         },
         {

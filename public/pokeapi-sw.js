@@ -10,8 +10,13 @@
  * and re-run your build process.
  * See https://goo.gl/2aRDsh
  */
+/** 
 importScripts(
   'https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js'
+)
+*/
+importScripts(
+  'https://storage.googleapis.com/workbox-cdn/releases/5.0.0/workbox-sw.js'
 )
 /** 
 importScripts(
@@ -41,7 +46,11 @@ workbox.routing.registerRoute(
   /.*\.(?:js|css)/,
   new workbox.strategies.StaleWhileRevalidate({
     cacheName: 'js-css-cache',
-    plugins: [new workbox.cacheableResponse.Plugin({ statuses: [0, 200] })],
+    plugins: [
+      new workbox.cacheableResponse.CacheableResponsePlugin({
+        statuses: [0, 200],
+      }),
+    ],
   }),
   'GET'
 )
@@ -66,11 +75,13 @@ workbox.routing.registerRoute(
   new workbox.strategies.StaleWhileRevalidate({
     cacheName: 'api-cache',
     plugins: [
-      new workbox.expiration.Plugin({
+      new workbox.expiration.ExpirationPlugin({
         maxAgeSeconds: 604800,
         purgeOnQuotaError: false,
       }),
-      new workbox.cacheableResponse.Plugin({ statuses: [200] }),
+      new workbox.cacheableResponse.CacheableResponsePlugin({
+        statuses: [200],
+      }),
     ],
   }),
   'GET'

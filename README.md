@@ -40,19 +40,19 @@
 
 ## Roadmap
 
-✅ Autocomplete
-✅ Infinite Scroll
-✅ Pokemon Page
-✅ Offline Support
-🚫 Generation 8 Pokemon (waiting on [PokeApi's issue](https://github.com/PokeAPI/pokeapi/issues/520))
-🛠️ Loading & 404
-🧶 Framer Motion Animations
-🧶 Type Page
-🧶 Berry Page
-🧶 Item Page
-🧶 Dark Mode
-🧶 Locations
-❓ SSR Support
+✅ Autocomplete <br />
+✅ Infinite Scroll <br />
+✅ Pokemon Page <br />
+✅ Offline Support <br />
+🚫 Generation 8 Pokemon (waiting on [PokeApi's issue](https://github.com/PokeAPI/pokeapi/issues/520)) <br />
+🛠️ Loading & 404 <br />
+🧶 Framer Motion Animations <br />
+🧶 Type Page <br />
+🧶 Berry Page <br />
+🧶 Item Page <br />
+🧶 Dark Mode <br />
+🧶 Locations <br />
+❓ SSR Support <br />
 
 ## Contributing
 

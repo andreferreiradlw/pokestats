@@ -6,7 +6,7 @@ import PokemonBox from './PokemonBox'
 
 export default function InfiniteScroll({
   pokemonList,
-  itemsPerPage = 70,
+  itemsPerPage = 35,
   dark,
   direction = 'row',
   align = 'flex-start',

@@ -36,14 +36,18 @@
   <br />
 </div>
 
-##Getting Started
+## Getting Started
 
-##Roadmap
+## Roadmap
 
-##Contributing
-PokeStats.gg is an open source project, and contributions of any kind are welcome and appreciated. Open issues, bugs, and feature requests will be listed on the issues tab and labeled accordingly. Feel free to open bug tickets and make feature requests that aren't already on the roadmap. Easy bugs and features will be tagged with the good first issue label.
+## Contributing
 
-##Aknowledgements
+[PokeStats.gg](https://pokestats.gg) is an open source project, and contributions of any kind are welcome and appreciated. Open issues, bugs, and feature requests will be listed on the [issues tab](https://github.com/andreferreiradlw/pokestats/issues) and labeled accordingly. Feel free to open bug tickets and make feature requests that aren't already on the roadmap. Easy bugs and features will be tagged with the good first issue label.
 
-##Copyright Notice
+You can also reach out to me directly [here](mailto:hello@andreferreira.tech).
+
+## Aknowledgements
+
+## Copyright Notice
+
 This is an unofficial, non-commercial, fan-made app and is NOT affiliated, endorsed or supported by Nintendo, Game Freak and The Pokémon Company in any way. Many images used in this app are copyrighted and are supported under fair use. Pokémon and Pokémon character names are trademarks of Nintendo. No copyright infringement intended.

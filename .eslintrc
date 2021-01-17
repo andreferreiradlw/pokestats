@@ -10,9 +10,12 @@
     "react/prop-types": 0,
     "no-console": "off",
     "quotes": [2, "single", { "avoidEscape": true }],
-    "module-resolver/use-alias": 2
+    "react/react-in-jsx-scope": "off"
   },
-  "plugins": ["react", "import", "styled-components"],
+  "globals": {
+    "React": "writable"
+  },
+  "plugins": ["react", "import", "better-styled-components"],
   "parser": "babel-eslint",
   "parserOptions": {
     "ecmaVersion": 2018,

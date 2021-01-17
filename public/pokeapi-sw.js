@@ -15,6 +15,8 @@ importScripts(
   'https://storage.googleapis.com/workbox-cdn/releases/6.0.2/workbox-sw.js'
 )
 
+workbox.setConfig({ debug: false })
+
 self.skipWaiting()
 
 workbox.core.clientsClaim()
@@ -51,7 +53,7 @@ workbox.routing.registerRoute(
 )
 // pokemon page
 workbox.routing.registerRoute(
-  '/pokemon/',
+  new RegExp('/pokemon/.*'),
   new workbox.strategies.NetworkFirst({
     cacheName: 'pokemon-cache',
     plugins: [],
@@ -75,12 +77,45 @@ workbox.routing.registerRoute(
   }),
   'GET'
 )
+/** 
+// pokeapi images
+const customPlugin = {
+  requestWillFetch: async ({ request, event, state }) => {
+    // Return `request` or a different `Request` object.
+    // console.log(request, event, state)
+    return request
+  },
+  fetchDidSucceed: async ({ request, response, event, state }) => {
+    // Return `response` to use the network response as-is,
+    // or alternatively create and return a new `Response` object.
+    // console.log(request, response, event, state)
+    return response
+  },
+}
+
+workbox.routing.registerRoute(
+  /^https:\/\/raw.githubusercontent.com\/PokeAPI\/sprites/,
+  new workbox.strategies.StaleWhileRevalidate({
+    cacheName: 'image-cache-workbox',
+    plugins: [
+      customPlugin,
+      new workbox.expiration.ExpirationPlugin({
+        maxAgeSeconds: 604800,
+        purgeOnQuotaError: false,
+      }),
+      new workbox.cacheableResponse.CacheableResponsePlugin({
+        statuses: [200],
+      }),
+    ],
+  }),
+  'GET'
+)
+*/
 // google fonts
 workbox.routing.registerRoute(
   /^https:\/\/fonts.googleapis.com/,
   new workbox.strategies.StaleWhileRevalidate({
     cacheName: 'google-fonts-cache',
-    plugins: [],
   }),
   'GET'
 )
@@ -96,7 +131,7 @@ self.addEventListener('fetch', function (event) {
           return response
         }
 
-        return fetch(event.request)
+        return fetch(event.request, { cache: 'force-cache' })
           .then(function (response) {
             if (event.request.url.match(imgRe)) {
               caches.open('images-cache').then(function (cache) {
@@ -104,6 +139,7 @@ self.addEventListener('fetch', function (event) {
                 cache.add(event.request.url)
               })
             }
+            //
             return response
           })
           .catch(function (error) {

@@ -26,8 +26,13 @@ export default function Footer() {
             André
           </FooterA>
           {`, powered by `}{' '}
-          <FooterA href="https://pokeapi.co/" target="_blank" rel="noopener">
-            <img src={PokeApi} />
+          <FooterA
+            href="https://pokeapi.co/"
+            target="_blank"
+            rel="noopener"
+            aria-label="PokeApi"
+          >
+            <img src={PokeApi} alt="PokeApi Logo" />
           </FooterA>
         </span>
         <span as="span">

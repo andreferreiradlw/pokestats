@@ -18,6 +18,13 @@ const Container = styled(Box)`
         width: 55%;
       }
     `}
+
+  & #autocomplete_label {
+    width: 0;
+    height: 0;
+    overflow: hidden;
+    visibility: hidden;
+  }
 `
 
 const Input = styled.input`

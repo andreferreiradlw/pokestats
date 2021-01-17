@@ -11,7 +11,7 @@ const Container = styled(Box)`
 const SelectContainer = styled(Box)`
   margin-bottom: 1rem;
 
-  & span {
+  & label {
     margin-right: 0.5rem;
   }
 `

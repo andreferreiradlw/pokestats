@@ -131,13 +131,18 @@ export default function Autocomplete({
       noGutter={noGutter}
       {...rest}
     >
+      <label htmlFor="autocomplete" id="autocomplete_label" aria-hidden="true">
+        Search Pokemon Name or ID
+      </label>
       <Input
         type="text"
         placeholder="Search Pokemon Name or ID"
+        id="autocomplete"
+        aria-labelledby="autocomplete_label"
         value={search}
         onChange={e => handleInputChange(e)}
         onKeyDown={e => handleKeyDown(e)}
-      ></Input>
+      />
       {/** display filtered list */}
       {filtered.length > 0 && (
         <ListWrapper>

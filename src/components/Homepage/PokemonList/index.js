@@ -51,8 +51,15 @@ export default function PokemonList() {
           >
             <SectionTitle>{`Select your Pokemon (${showPokemon.length})`}</SectionTitle>
             <SelectContainer direction="row" justify="flex-start">
-              <span>Game Generation:</span>
-              <select value={gen} onChange={e => setGen(e.target.value)}>
+              <label id="generation" htmlFor="gen_select">
+                Game Generation:
+              </label>
+              <select
+                aria-labelledby="generation"
+                id="gen_select"
+                value={gen}
+                onChange={e => setGen(e.target.value)}
+              >
                 <option value="all">All</option>
                 {generations.map(({ genDescription, genValue }, i) => (
                   <option key={i} value={genValue}>

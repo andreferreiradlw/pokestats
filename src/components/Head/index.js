@@ -13,6 +13,7 @@ export default function Heading() {
       <meta name="description" content="Description" />
       <meta name="keywords" content="Keywords" />
       <title>PokeStats</title>
+      <link rel="canonical" href="https://pokestats.andreferreira.tech" />
       {/** MANIFEST */}
       <link href="/manifest.json" rel="manifest" />
       {/** ICONS */}

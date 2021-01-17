@@ -15,7 +15,7 @@ export default function App({ Component, pageProps }) {
       window.addEventListener('load', function () {
         navigator.serviceWorker
           .register('/pokeapi-sw.js')
-          .then(() => console.log('POKEAPI service worker registered.'))
+          .then(() => console.log('PokeStats service worker registered.'))
           .catch(err => console.dir(err))
       })
     }

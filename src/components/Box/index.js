@@ -8,7 +8,6 @@ const Box = forwardRef(
     {
       align = 'center',
       as = 'div',
-      background,
       children,
       constrained,
       direction = 'column',
@@ -45,5 +44,7 @@ const Box = forwardRef(
     )
   }
 )
+
+Box.displayName = 'Box'
 
 export default Box

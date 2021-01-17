@@ -9,7 +9,11 @@
   "rules": {
     "react/prop-types": 0,
     "no-console": "off",
-    "quotes": [2, "single", { "avoidEscape": true }],
+    "quotes": [
+      2,
+      "single",
+      { "avoidEscape": true, "allowTemplateLiterals": true }
+    ],
     "react/react-in-jsx-scope": "off"
   },
   "globals": {

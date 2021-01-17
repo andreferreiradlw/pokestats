@@ -10,4 +10,6 @@ const Loading = forwardRef(({ ...rest }, ref) => {
   )
 })
 
+Loading.displayName = 'Loading'
+
 export default Loading

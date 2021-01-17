@@ -2,7 +2,6 @@ import { breakpoints } from '../Box/config'
 
 const white = '#FFF'
 const black = '#000'
-const lightGrey = 'lightgrey'
 
 const theme = {
   device: {

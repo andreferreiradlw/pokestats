@@ -70,8 +70,6 @@ const generateIcon = type => {
         ImportedIconRef.current = (
           await import(`../../assets/svg/types/${type}.svg`)
         ).default
-      } catch (err) {
-        throw err
       } finally {
         setLoading(false)
       }

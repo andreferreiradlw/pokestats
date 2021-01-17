@@ -47,7 +47,7 @@ function fetchTypeData(moves) {
 
 function filterMoves(moves, learnMethod, versionGroup) {
   // return a promisse that resolves with filtered groupMoves
-  return new Promise(function (resolve, reject) {
+  return new Promise(function (resolve) {
     // filter pokemon moves by learn method and game version
     const groupMoves = moves.filter(move => {
       const groupDetails = move.version_group_details

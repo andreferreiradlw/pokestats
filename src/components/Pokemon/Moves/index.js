@@ -69,6 +69,7 @@ export default function Moves({ ...rest }) {
           //setMovesLoading(false)
         })
         .catch(errors => {
+          console.log(errors)
           // no moves
           setMovesLoading(false)
         })

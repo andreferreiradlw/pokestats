@@ -24,4 +24,6 @@ const PokemonBox = forwardRef(({ pokemon, dark, ...rest }, ref) => {
   )
 })
 
+PokemonBox.displayName = 'PokemonBox'
+
 export default PokemonBox

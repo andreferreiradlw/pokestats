@@ -1,4 +1,4 @@
-import styled, { css, keyframes } from 'styled-components'
+import { keyframes } from 'styled-components'
 
 // Create the keyframes for floating img
 const float = keyframes`

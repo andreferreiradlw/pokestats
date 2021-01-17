@@ -1,5 +1,4 @@
-import styled, { css } from 'styled-components'
-import Box from '../../../Box'
+import styled from 'styled-components'
 
 const SwitchContainer = styled.div`
   position: relative;

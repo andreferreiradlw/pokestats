@@ -1,7 +1,5 @@
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 import Box from '../Box'
-// pokeapi logo
-// import PokeApi from '../../assets/pokeapi_logo.png'
 
 const FooterContainer = styled(Box)`
   background-color: black;

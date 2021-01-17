@@ -41,12 +41,12 @@ const homeSlice = createSlice({
   name: 'home',
   initialState,
   reducers: {
-    toggleLoading(state, action) {
+    toggleLoading(state) {
       state.isLoading = !state.loading
     },
   },
   extraReducers: builder => {
-    builder.addCase(fetchPokemonList.pending, (state, action) => {
+    builder.addCase(fetchPokemonList.pending, state => {
       state.isLoading = true
     })
     builder.addCase(fetchPokemonList.fulfilled, (state, action) => {

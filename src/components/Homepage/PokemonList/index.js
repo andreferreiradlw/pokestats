@@ -4,7 +4,6 @@ import { useState, useEffect } from 'react'
 import { generations, mapIdToGeneration } from '../../../helpers/gameVersion'
 // components
 import Box from '../../Box'
-import Loading from '../../Loading'
 import InfiniteScroll from '../../InfiniteScroll'
 // styles
 import { SectionTitle } from '../../BaseStyles'

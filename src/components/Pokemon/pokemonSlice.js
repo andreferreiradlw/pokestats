@@ -94,7 +94,7 @@ const pokemonSlice = createSlice({
   name: 'pokemon',
   initialState,
   reducers: {
-    startLoading(state, action) {
+    startLoading(state) {
       state.info.isLoading = true
       state.biology.isLoading = true
       state.evolution.isLoading = true

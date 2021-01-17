@@ -27,7 +27,7 @@ export const BoxWrapper = styled.div`
   }) => {
     return css`
       // flexbox styles
-      display: ${hide ? `none` : `flex`};
+      display: ${hide ? 'none' : 'flex'};
       ${flexDirection && responsiveProps('flex-direction', flexDirection)}
       ${alignProp && responsiveProps('align-items', alignProp)}
       ${justifyProp && responsiveProps('justify-content', justifyProp)}

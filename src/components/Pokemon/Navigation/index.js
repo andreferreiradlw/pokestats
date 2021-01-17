@@ -37,6 +37,7 @@ export default function Navigation({ ...rest }) {
                     src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${
                       id - 1
                     }.png`}
+                    alt={allPokemon[id - 2].name}
                   />
                 </Arrow>
                 <Title right>
@@ -58,6 +59,7 @@ export default function Navigation({ ...rest }) {
                     src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${
                       id + 1
                     }.png`}
+                    alt={allPokemon[id].name}
                   />
                 </Arrow>
                 <Title left>

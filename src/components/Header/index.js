@@ -23,7 +23,7 @@ export default function HeaderComponent() {
         constrained
         direction={{ xxs: 'column', md: 'row' }}
         justify="space-between"
-        align="flex-start"
+        align={{ xxs: 'center', md: 'flex-start' }}
         margin="auto"
         padding="2rem 0 0"
       >
@@ -33,8 +33,12 @@ export default function HeaderComponent() {
           </Link>
           {/** Select */}
           <SelectContainer direction="row" justify="flex-start">
-            <span>Game Version:</span>
+            <label id="header_generation" htmlFor="header_gen_select">
+              Game Version:
+            </label>
             <select
+              aria-labelledby="header_generation"
+              id="header_gen_select"
               value={gameVersion}
               onChange={e => dispatch(changeVersion(e.target.value))}
             >

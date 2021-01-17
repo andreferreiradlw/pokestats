@@ -42,7 +42,7 @@ export default function Sprites({ ...rest }) {
                     sprites[key] &&
                     typeof sprites[key] !== 'object' && (
                       <SpriteContainer sizes={1.5} key={i}>
-                        <Sprite src={sprites[key]} />
+                        <Sprite alt={key} src={sprites[key]} />
                         <p>{removeUnderscore(key)}</p>
                       </SpriteContainer>
                     )
@@ -62,7 +62,11 @@ export default function Sprites({ ...rest }) {
                         animatedSprites[key] &&
                         typeof animatedSprites[key] !== 'object' && (
                           <SpriteContainer sizes={1.5} key={i}>
-                            <Sprite animated src={animatedSprites[key]} />
+                            <Sprite
+                              alt={key}
+                              animated
+                              src={animatedSprites[key]}
+                            />
                             <p>{removeUnderscore(key)}</p>
                           </SpriteContainer>
                         )
@@ -82,7 +86,13 @@ export default function Sprites({ ...rest }) {
                         (key, i) =>
                           dreamWorld[key] && (
                             <SpriteContainer key={i} sizes={6}>
-                              <Sprite dreamworld src={dreamWorld[key]} />
+                              <Sprite
+                                alt={`DreamWorld Design ${removeUnderscore(
+                                  key
+                                )}`}
+                                dreamworld
+                                src={dreamWorld[key]}
+                              />
                               <p>{removeUnderscore(key)}</p>
                             </SpriteContainer>
                           )
@@ -94,7 +104,11 @@ export default function Sprites({ ...rest }) {
                   <Box align="center" sizes={6}>
                     <SectionSubTitle>Official Artwork</SectionSubTitle>
                     <SpriteContainer width={{ xxs: '100%', md: 'auto' }}>
-                      <Sprite dreamworld src={officialArtwork} />
+                      <Sprite
+                        alt={`Official Artwork Front Default`}
+                        dreamworld
+                        src={officialArtwork}
+                      />
                       <p>Front Default</p>
                     </SpriteContainer>
                   </Box>

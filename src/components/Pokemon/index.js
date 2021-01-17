@@ -33,7 +33,7 @@ export default function Homepage() {
   // biology
   const pokemonBio = useSelector(state => state.pokemon.biology)
   // data
-  const { id, game_indices } = pokemonInfo.data
+  const { id, game_indices, name } = pokemonInfo.data
   const { generation } = pokemonBio.data
 
   // start loading info, biology and evolution states
@@ -86,6 +86,7 @@ export default function Homepage() {
             <Details sizes={5} margin={{ xxs: '0 0 2rem', lg: '0' }} />
             <ImageContainer sizes={7} margin={{ xxs: '0 0 2rem', lg: '0' }}>
               <Image
+                alt={name}
                 src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`}
               />
             </ImageContainer>

@@ -40,11 +40,25 @@
 
 ## Roadmap
 
+✅ Autocomplete
+✅ Infinite Scroll
+✅ Pokemon Page
+✅ Offline Support
+🚫 Generation 8 Pokemon (waiting on [PokeApi's issue](https://github.com/PokeAPI/pokeapi/issues/520))
+🛠️ Loading & 404
+🧶 Framer Motion Animations
+🧶 Type Page
+🧶 Berry Page
+🧶 Item Page
+🧶 Dark Mode
+🧶 Locations
+❓ SSR Support
+
 ## Contributing
 
 [PokeStats.gg](https://pokestats.gg) is an open source project, and contributions of any kind are welcome and appreciated. Open issues, bugs, and feature requests will be listed on the [issues tab](https://github.com/andreferreiradlw/pokestats/issues) and labeled accordingly. Feel free to open bug tickets and make feature requests that aren't already on the roadmap. Easy bugs and features will be tagged with the good first issue label.
 
-You can also reach out to me directly [here](mailto:hello@andreferreira.tech).
+You can also reach out to me directly [here 📥](mailto:hello@andreferreira.tech).
 
 ## Aknowledgements
 

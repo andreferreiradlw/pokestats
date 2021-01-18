@@ -1,6 +1,6 @@
 <div align="center">
   <a href="https://pokestats.gg">
-    <img alt="pokestats" src="https://raw.githubusercontent.com/andreferreiradlw/pokestats/main/static/pokestats_logo.png" height="150px" />
+    <img alt="pokestats" src="https://raw.githubusercontent.com/andreferreiradlw/pokestats/main/public/static/pokestats_logo.png" height="150px" />
   </a>
 </div>
 

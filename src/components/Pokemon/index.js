@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useRouter } from 'next/router'
 // actions
-import { fetchPokemonData, startLoading } from './pokemonSlice'
+import { fetchPokemonData, startLoading, cleanData } from './pokemonSlice'
 import { changeVersion } from '../Header/gameSlice'
 // helpers
 import { mapGenerationToGame } from '../../helpers/gameVersion'
@@ -39,6 +39,11 @@ export default function Homepage() {
   // start loading info, biology and evolution states
   useEffect(() => {
     dispatch(startLoading())
+    // on unmount
+    return () => {
+      dispatch(startLoading())
+      dispatch(cleanData())
+    }
   }, [])
 
   // fetch pokemon data

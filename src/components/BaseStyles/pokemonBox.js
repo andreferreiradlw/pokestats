@@ -8,6 +8,11 @@ const PokeImg = styled.img`
   width: 115px;
   min-height: 105px;
   transition: all 0.05s ease-in-out;
+  ${({ pixelated }) =>
+    pixelated &&
+    css`
+      image-rendering: pixelated;
+    `}
 `
 
 const PokeBox = styled(Box)`

@@ -52,6 +52,7 @@ const PokemonImg = styled.img`
   width: auto;
   height: 90px;
   transition: all 0.15s ease-in-out;
+  image-rendering: pixelated;
 `
 
 const BtnAnchor = styled.a`

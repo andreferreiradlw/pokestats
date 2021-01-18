@@ -14,12 +14,15 @@ const Sprite = styled.img`
   width: 130px;
 
   ${({ dreamworld }) =>
-    dreamworld &&
-    css`
-      height: 180px;
-      width: auto;
-      margin-bottom: 1rem;
-    `}
+    dreamworld
+      ? css`
+          height: 180px;
+          width: auto;
+          margin-bottom: 1rem;
+        `
+      : css`
+          image-rendering: pixelated;
+        `}
 
   ${({ animated }) =>
     animated &&

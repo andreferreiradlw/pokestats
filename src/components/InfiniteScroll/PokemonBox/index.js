@@ -16,6 +16,7 @@ const PokemonBox = forwardRef(({ pokemon, dark, ...rest }, ref) => {
           src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`}
           crossorigin="anonymous"
           alt={name}
+          pixelated
         />
         <NumberId>{`#${id}`}</NumberId>
         <PokeName>{removeDash(name)}</PokeName>

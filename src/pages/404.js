@@ -1,3 +1,4 @@
-export default function NotFound() {
-  return <h1>This is the 404 page</h1>
-}
+// components
+import NotFound from '../components/NotFound'
+
+export default NotFound

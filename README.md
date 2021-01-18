@@ -32,7 +32,7 @@
 </div>
 
 <div align="center">
-  <strong>PokeStats.gg is an online encyclopedia of Pokémon species containing information such as Pokédex entries, descriptions, evolution chains, stats and much more. It also works offline! 🔌</strong>
+  <strong><a href="https://pokestats.gg" target="_blank">PokeStats.gg</a> is an online encyclopedia of Pokémon species containing information such as Pokédex entries, descriptions, evolution chains, stats and much more. It also works offline! 🔌</strong>
   <br />
 </div>
 
@@ -42,23 +42,49 @@
 ✅ Infinite Scroll <br />
 ✅ Pokemon Page <br />
 ✅ Offline Support <br />
-🚫 Generation 8 Pokemon (waiting on [PokéApi's issue](https://github.com/PokeAPI/pokeapi/issues/520)) <br />
-🛠️ Loading & 404 <br />
+🛠️ Loading & 404 Components <br />
 🧶 Framer Motion Animations <br />
 🧶 Type Page <br />
 🧶 Berry Page <br />
 🧶 Item Page <br />
 🧶 Dark Mode <br />
+🚫 Generation 8 Pokemon (waiting on [PokéApi's issue](https://github.com/PokeAPI/pokeapi/issues/520)) <br />
 ✏ Locations <br />
 ❓ SSR Support <br />
 
 ## Getting Started
 
+Checkout [PokeStats.gg](https://pokestats.gg) for the live version. 🌍
+
+### Install dependencies
+
+```shell
+  $ yarn install
+```
+
+### Run project locally
+
+```shell
+  $ yarn run dev
+```
+
+### Linting
+
+```shell
+  $ yarn run lint
+```
+
+### Code Formatting
+
+```shell
+  $ yarn run prettier
+```
+
 ## Contributing
 
 [PokeStats.gg](https://pokestats.gg) is an open source project, and contributions of any kind are welcome and appreciated. Open issues, bugs, and feature requests will be listed on the [issues tab](https://github.com/andreferreiradlw/pokestats/issues) and labeled accordingly. Feel free to open bug tickets and make feature requests that aren't already on the roadmap. Easy bugs and features will be tagged with the good first issue label.
 
-Checkout [CONTRIBUTING.md](https://github.com/andreferreiradlw/pokestats/blob/main/CONTRIBUTING.md) to learn about the project and how to contribute.
+Checkout [CONTRIBUTING.md](https://github.com/andreferreiradlw/pokestats/blob/main/CONTRIBUTING.md) to learn more about the project and how to contribute.
 
 ## Aknowledgements
 

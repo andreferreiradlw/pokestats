@@ -1,14 +1,34 @@
 {
   "name": "pokestats",
-  "version": "0.1.0",
-  "private": true,
+  "version": "0.2.0",
+  "private": false,
+  "description": "PokeStats.gg is an online encyclopedia of Pokémon species containing information such as Pokédex entries, descriptions, evolution chains, moves, stats and much more. It also works offline!",
+  "keywords": [
+    "pokemon",
+    "pokedex",
+    "pokestats",
+    "react",
+    "nextjs",
+    "styled-components",
+    "pokeapi"
+  ],
+  "author": "Andre Ferreira <hello@andreferreira.tech> (andreferreira.tech)",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/andreferreiradlw/pokestats.git"
+  },
+  "bugs": {
+    "url": "https://github.com/andreferreiradlw/pokestats/issues"
+  },
+  "homepage": "https://pokestats.gg/",
+  "license": "MIT",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "NODE_ENV=production node server.js",
     "export": "next export",
-    "lint": "eslint src -c .eslintrc --ext js",
-    "prettier": "prettier --write src/**/*.js"
+    "lint": "eslint --ignore-path .gitignore .",
+    "prettier": "prettier \"**/*.{js,ts,md,json,yml}\" --ignore-path .gitignore"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.5.0",

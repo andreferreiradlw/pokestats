@@ -49,6 +49,20 @@ const theme = {
       },
     },
   },
+  button: {
+    backgroundColor: white,
+    boxShadow: 'rgba(255, 255, 255, 0.3)',
+    color: black,
+    afterColor: black,
+    hoverColor: white,
+    dark: {
+      backgroundColor: black,
+      boxShadow: 'rgba(0, 0, 0, 0.3)',
+      color: white,
+      afterColor: white,
+      hoverColor: black,
+    },
+  },
   header: {
     backgroundColor: white,
   },

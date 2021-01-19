@@ -6,3 +6,5 @@ export * from './typography'
 export * from './table'
 // pokemon box
 export * from './pokemonBox'
+// headings
+export * from './headings'

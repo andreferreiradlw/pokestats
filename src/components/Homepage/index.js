@@ -6,7 +6,8 @@ import Particles from '../Particles'
 import Loading from '../Loading'
 import PokemonList from './PokemonList'
 // styles
-import { Container, Heading } from './styledHomepage'
+import { Container } from './styledHomepage'
+import { MainHeading } from '../BaseStyles'
 
 export default function Homepage() {
   const homeState = useSelector(state => state.home)
@@ -21,7 +22,7 @@ export default function Homepage() {
         <>
           <Layout withGutter={false} withFooter>
             <Container height="100vh" constrained withGutter>
-              <Heading>PokeStats</Heading>
+              <MainHeading>PokeStats</MainHeading>
               <Autocomplete />
               <Particles />
             </Container>

@@ -47,6 +47,7 @@
 🧶 Type Page <br />
 🧶 Berry Page <br />
 🧶 Item Page <br />
+🧶 Move Details <br />
 🧶 Dark Mode <br />
 🚫 Generation 8 Pokemon (waiting on [PokéApi's issue](https://github.com/PokeAPI/pokeapi/issues/520)) <br />
 ✏ Locations <br />

@@ -1,3 +1,28 @@
+import Link from 'next/link'
+import { useRouter } from 'next/router'
+// components
+import Particles from '../Particles'
+// styles
+import { Container, Title, Message, Image } from './StyledNotFound'
+
 export default function NotFound() {
-  return <h1>This is the NotFound Component page</h1>
+  // router
+  const router = useRouter()
+
+  return (
+    <Container justify="center" align="center">
+      <Image src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/shiny/250.gif" />
+      <Title>HO-OH!</Title>
+      <Message>
+        The requested page {router.asPath && <span>{router.asPath}</span>} could
+        not be found.
+        <br />
+        Check that you typed the URL correctly!
+      </Message>
+      <Link href="/">
+        <button>Go back home</button>
+      </Link>
+      {/** <Particles /> */}
+    </Container>
+  )
 }

@@ -49,7 +49,7 @@ const GlobalStyle = createGlobalStyle`
   input, textarea, button {
     font-family: inherit
   }
-  a{
+  a {
     text-decoration: none;
   }
 
@@ -86,7 +86,6 @@ const GlobalStyle = createGlobalStyle`
   }
   img {
     border-style: none;
-    max-width: 100%;
     height: auto;
   }
   blockquote,

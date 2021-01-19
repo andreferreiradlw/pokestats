@@ -8,3 +8,5 @@ export * from './table'
 export * from './pokemonBox'
 // headings
 export * from './headings'
+// buttons
+export * from './button'

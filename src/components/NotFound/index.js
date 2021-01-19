@@ -4,6 +4,7 @@ import { useRouter } from 'next/router'
 import Particles from '../Particles'
 // styles
 import { Container, Title, Message, Image } from './StyledNotFound'
+import { Button } from '../BaseStyles'
 
 export default function NotFound() {
   // router
@@ -19,8 +20,8 @@ export default function NotFound() {
         <br />
         Check that you typed the URL correctly!
       </Message>
-      <Link href="/">
-        <button>Go back home</button>
+      <Link href="/" passHref>
+        <Button as="a">Go back home</Button>
       </Link>
       {/** <Particles /> */}
     </Container>

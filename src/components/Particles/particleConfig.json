@@ -13,7 +13,7 @@
     "shape": {
       "type": "image",
       "image": {
-        "src": "./static/pokeball.svg",
+        "src": "../static/pokeball.svg",
         "width": 100,
         "height": 100
       }

@@ -101,6 +101,10 @@ const pokemonSlice = createSlice({
     },
     cleanData(state) {
       state.info.data = {}
+      state.info.error = {
+        status: 'OK',
+        message: null,
+      }
       state.biology.data = {}
       state.evolution.data = {}
     },

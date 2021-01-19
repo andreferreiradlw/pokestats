@@ -1,6 +1,5 @@
 import { default as NextHead } from 'next/head'
 import { useRouter } from 'next/router'
-import { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 // helpers
 import { removeDash } from '../../helpers/typography'

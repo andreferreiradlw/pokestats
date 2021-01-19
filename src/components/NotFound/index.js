@@ -23,7 +23,7 @@ export default function NotFound() {
       <Link href="/" passHref>
         <Button as="a">Go back home</Button>
       </Link>
-      {/** <Particles /> */}
+      <Particles />
     </Container>
   )
 }

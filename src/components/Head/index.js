@@ -12,8 +12,6 @@ export default function Heading() {
   // router
   const router = useRouter()
 
-  const canURL = `https://pokestats.gg${router.asPath}`
-
   return (
     <NextHead>
       {/** MUST */}
@@ -32,7 +30,7 @@ export default function Heading() {
         content="pokemon, pokedex, pokestats, react, nextjs, styled-components, pokeapi"
       />
       <title>{name && `${removeDash(name)} - `}PokeStats.gg</title>
-      <link rel="canonical" href={canURL} />
+      <link rel="canonical" href={`https://pokestats.gg${router.asPath}`} />
       {/** MANIFEST */}
       <link href="/manifest.json" rel="manifest" />
       {/** ICONS */}

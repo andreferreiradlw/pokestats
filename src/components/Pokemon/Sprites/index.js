@@ -43,7 +43,7 @@ export default function Sprites({ ...rest }) {
                     sprites[key] &&
                     typeof sprites[key] !== 'object' && (
                       <SpriteContainer sizes={1.5} key={`${key}-${i}`}>
-                        <LazyLoad height={130} once offset={20}>
+                        <LazyLoad height={130} once offset={50}>
                           <Sprite alt={key} src={sprites[key]} />
                         </LazyLoad>
                         <p>{removeUnderscore(key)}</p>
@@ -65,7 +65,7 @@ export default function Sprites({ ...rest }) {
                         animatedSprites[key] &&
                         typeof animatedSprites[key] !== 'object' && (
                           <SpriteContainer sizes={1.5} key={`${key}-${i}`}>
-                            <LazyLoad height={80} once offset={20}>
+                            <LazyLoad height={80} once offset={50}>
                               <Sprite
                                 alt={key}
                                 animated
@@ -91,7 +91,7 @@ export default function Sprites({ ...rest }) {
                         (key, i) =>
                           dreamWorld[key] && (
                             <SpriteContainer key={`${key}-${i}`} sizes={6}>
-                              <LazyLoad height={180} once offset={20}>
+                              <LazyLoad height={180} once offset={50}>
                                 <Sprite
                                   alt={`DreamWorld Design ${removeUnderscore(
                                     key
@@ -111,7 +111,7 @@ export default function Sprites({ ...rest }) {
                   <Box align="center" sizes={6}>
                     <SectionSubTitle>Official Artwork</SectionSubTitle>
                     <SpriteContainer width={{ xxs: '100%', md: 'auto' }}>
-                      <LazyLoad height={180} once offset={20}>
+                      <LazyLoad height={180} once offset={50}>
                         <Sprite
                           alt={`Official Artwork Front Default`}
                           dreamworld

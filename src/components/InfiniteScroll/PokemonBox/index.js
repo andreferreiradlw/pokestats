@@ -13,7 +13,7 @@ const PokemonBox = forwardRef(({ pokemon, dark, ...rest }, ref) => {
   return (
     <Link as={`/pokemon/${name}`} href="/pokemon/[id]" passHref>
       <PokeBox forwardedAs="a" ref={ref} dark={dark} {...rest}>
-        <LazyLoad height={115} once offset={10}>
+        <LazyLoad height={115} once offset={50}>
           <PokeImg
             src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`}
             crossorigin="anonymous"

@@ -34,7 +34,7 @@ export default function Navigation({ ...rest }) {
             >
               <BtnAnchor left>
                 <Arrow left>
-                  <LazyLoad height={130} once offset={20}>
+                  <LazyLoad height={130} once offset={50}>
                     <PokemonImg
                       src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${
                         id - 1
@@ -58,7 +58,7 @@ export default function Navigation({ ...rest }) {
             >
               <BtnAnchor right>
                 <Arrow right>
-                  <LazyLoad height={130} once offset={20}>
+                  <LazyLoad height={130} once offset={50}>
                     <PokemonImg
                       src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${
                         id + 1

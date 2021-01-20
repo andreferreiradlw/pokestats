@@ -57,7 +57,7 @@ export default function Details({ ...rest }) {
   // abilities
   const pokemonAbilities = currAbilities =>
     currAbilities.map(({ ability, is_hidden }, i) => (
-      <Numbered light={is_hidden} key={i}>
+      <Numbered light={is_hidden} key={`${ability}-${i}`}>
         {`${i + 1}. ${removeDash(ability.name)} `}
         {is_hidden && '( Hidden Ability )'}
       </Numbered>
@@ -76,7 +76,7 @@ export default function Details({ ...rest }) {
         >
           {types.map(({ type }, i) => {
             return (
-              <TypeBadge type={type.name} key={i}>
+              <TypeBadge type={type.name} key={`${type.name}-${i}-details`}>
                 {type.name}
               </TypeBadge>
             )

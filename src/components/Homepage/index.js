@@ -1,10 +1,11 @@
 import { useSelector } from 'react-redux'
+import dynamic from 'next/dynamic'
 // components
 import Layout from '../Layout'
-import Autocomplete from '../Autocomplete'
-import Particles from '../Particles'
 import Loading from '../Loading'
-import PokemonList from './PokemonList'
+const Autocomplete = dynamic(() => import('../Autocomplete'))
+const Particles = dynamic(() => import('../Particles'))
+const PokemonList = dynamic(() => import('./PokemonList'))
 // styles
 import { Container } from './styledHomepage'
 import { MainHeading } from '../BaseStyles'

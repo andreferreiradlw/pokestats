@@ -38,7 +38,7 @@ const SectionSubTitle = styled.h3`
 
 const SectionMessage = styled.p`
   font-size: 0.8rem;
-  line-height: 1rem;
+  line-height: 1.1rem;
   margin: 1.5rem 0;
   text-align: center;
   width: 100%;
@@ -46,11 +46,11 @@ const SectionMessage = styled.p`
   ${({ theme }) => css`
     @media ${theme.device.md} {
       font-size: 1rem;
-      line-height: 1.3rem;
+      line-height: 1.5rem;
     }
     @media ${theme.device.lg} {
       font-size: 1.2rem;
-      line-height: 1.5rem;
+      line-height: 1.7rem;
     }
   `}
 `

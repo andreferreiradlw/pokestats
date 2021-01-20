@@ -32,7 +32,10 @@ export default function EvolutionChain({ ...rest }) {
             {chain.evolves_to.length > 0 && (
               <Box direction={{ xxs: 'row', lg: 'column' }} sizes={9.6}>
                 {chain.evolves_to.map((firstEvo, i) => (
-                  <Box direction={{ xxs: 'column', lg: 'row' }} key={i}>
+                  <Box
+                    direction={{ xxs: 'column', lg: 'row' }}
+                    key={`first-evo-${i}`}
+                  >
                     <Evolution
                       species={firstEvo.species}
                       details={firstEvo.evolution_details}

@@ -49,7 +49,7 @@ export default function BaseStats({ ...rest }) {
       <StatsTable forwardedAs="table" align="flex-start">
         <tbody>
           {stats.map(({ base_stat, stat }, i) => (
-            <tr key={i}>
+            <tr key={`${stat.name}-${i}`}>
               <th>{removeDash(stat.name)}</th>
               <td>{base_stat}</td>
               <BarCell>

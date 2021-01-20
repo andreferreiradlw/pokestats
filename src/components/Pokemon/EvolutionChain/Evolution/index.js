@@ -60,7 +60,7 @@ export default function Evolution({
           {!noArrow && (
             <Box width="auto">
               {details.map((currDetails, i) => (
-                <EvoDetails key={i} details={currDetails} />
+                <EvoDetails key={`evo-details-${i}`} details={currDetails} />
               ))}
               <EvoArrow />
             </Box>

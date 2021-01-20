@@ -61,7 +61,7 @@ export default function PokemonList() {
               >
                 <option value="all">All</option>
                 {generations.map(({ genDescription, genValue }, i) => (
-                  <option key={i} value={genValue}>
+                  <option key={`${genValue}-${i}`} value={genValue}>
                     {genDescription}
                   </option>
                 ))}

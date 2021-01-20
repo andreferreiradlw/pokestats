@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useRouter } from 'next/router'
+import LazyLoad from 'react-lazyload'
 // actions
 import { fetchPokemonData, startLoading, cleanData } from './pokemonSlice'
 import { changeVersion } from '../Header/gameSlice'
@@ -80,94 +81,114 @@ export default function Homepage() {
         <Loading />
       ) : (
         <>
-          <Box
-            as="section"
-            direction={{ xxs: 'column-reverse', lg: 'row' }}
-            align="flex-start"
-            justify="flex-start"
-            margin="1rem 0"
-            constrained
-          >
-            <Details sizes={5} margin={{ xxs: '0 0 2rem', lg: '0' }} />
-            <ImageContainer sizes={7} margin={{ xxs: '0 0 2rem', lg: '0' }}>
-              <Image
-                alt={name}
-                src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`}
+          <LazyLoad height={200} once>
+            <Box
+              as="section"
+              direction={{ xxs: 'column-reverse', lg: 'row' }}
+              align="flex-start"
+              justify="flex-start"
+              margin="1rem 0"
+              constrained
+            >
+              <Details sizes={5} margin={{ xxs: '0 0 2rem', lg: '0' }} />
+              <ImageContainer sizes={7} margin={{ xxs: '0 0 2rem', lg: '0' }}>
+                <LazyLoad height={200} once>
+                  <Image
+                    alt={name}
+                    src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`}
+                  />
+                </LazyLoad>
+              </ImageContainer>
+            </Box>
+          </LazyLoad>
+          <LazyLoad height={200} once>
+            <Box
+              as="section"
+              align="flex-start"
+              justify="flex-start"
+              margin="1rem 0"
+              constrained
+            >
+              <EvolutionChain sizes={12} margin="0 0 2rem" />
+            </Box>
+          </LazyLoad>
+
+          <LazyLoad height={200} once offset={10}>
+            <Box
+              as="section"
+              direction={{ xxs: 'column', lg: 'row' }}
+              align="flex-start"
+              justify="flex-start"
+              margin="1rem 0"
+              constrained
+            >
+              <Breeding
+                margin={{ xxs: '0 0 2rem', lg: '0' }}
+                padding={{ xxs: '0', lg: '0 2rem 0 0' }}
               />
-            </ImageContainer>
-          </Box>
-          <Box
-            as="section"
-            align="flex-start"
-            justify="flex-start"
-            margin="1rem 0"
-            constrained
-          >
-            <EvolutionChain sizes={12} margin="0 0 2rem" />
-          </Box>
-          <Box
-            as="section"
-            direction={{ xxs: 'column', lg: 'row' }}
-            align="flex-start"
-            justify="flex-start"
-            margin="1rem 0"
-            constrained
-          >
-            <Breeding
-              margin={{ xxs: '0 0 2rem', lg: '0' }}
-              padding={{ xxs: '0', lg: '0 2rem 0 0' }}
-            />
-            <Training
-              margin={{ xxs: '0 0 2rem', lg: '0' }}
-              padding={{ xxs: '0', lg: '0 1rem' }}
-            />
-            <Multipliers
-              margin={{ xxs: '0 0 2rem', lg: '0' }}
-              padding={{ xxs: '0', lg: '0 0 0 2rem' }}
-            />
-          </Box>
-          <Box
-            as="section"
-            direction={{ xxs: 'column', lg: 'row' }}
-            align="flex-start"
-            justify="flex-start"
-            margin="1rem 0"
-            constrained
-          >
-            <BaseStats
-              sizes={{ xxs: 12, lg: 8 }}
-              margin={{ xxs: '0 0 2rem', lg: '0' }}
-              padding={{ xxs: '0', lg: '0 2rem 0 0' }}
-            />
-            <Forms sizes={{ xxs: 12, lg: 4 }} />
-          </Box>
-          <Box
-            as="section"
-            align="flex-start"
-            justify="flex-start"
-            margin="1rem 0"
-            constrained
-          >
-            <Moves sizes={12} margin="0 0 2rem" />
-          </Box>
-          <Box
-            as="section"
-            align="flex-start"
-            justify="flex-start"
-            margin="1rem 0"
-            constrained
-          >
-            <Sprites sizes={12} margin="0 0 2rem" />
-          </Box>
-          <Box
-            as="section"
-            align="flex-start"
-            justify="flex-start"
-            margin="1rem 0"
-            constrained
-          >
-            <Navigation sizes={12} margin="0 0 2rem" />
-          </Box>
+              <Training
+                margin={{ xxs: '0 0 2rem', lg: '0' }}
+                padding={{ xxs: '0', lg: '0 1rem' }}
+              />
+              <Multipliers
+                margin={{ xxs: '0 0 2rem', lg: '0' }}
+                padding={{ xxs: '0', lg: '0 0 0 2rem' }}
+              />
+            </Box>
+          </LazyLoad>
+          <LazyLoad height={200} once offset={10}>
+            <Box
+              as="section"
+              direction={{ xxs: 'column', lg: 'row' }}
+              align="flex-start"
+              justify="flex-start"
+              margin="1rem 0"
+              constrained
+            >
+              <BaseStats
+                sizes={{ xxs: 12, lg: 8 }}
+                margin={{ xxs: '0 0 2rem', lg: '0' }}
+                padding={{ xxs: '0', lg: '0 2rem 0 0' }}
+              />
+              <Forms sizes={{ xxs: 12, lg: 4 }} />
+            </Box>
+          </LazyLoad>
+
+          <LazyLoad height={200} once offset={10}>
+            <Box
+              as="section"
+              align="flex-start"
+              justify="flex-start"
+              margin="1rem 0"
+              constrained
+            >
+              <Moves sizes={12} margin="0 0 2rem" />
+            </Box>
+          </LazyLoad>
+
+          <LazyLoad height={200} once offset={10}>
+            <Box
+              as="section"
+              align="flex-start"
+              justify="flex-start"
+              margin="1rem 0"
+              constrained
+            >
+              <Sprites sizes={12} margin="0 0 2rem" />
+            </Box>
+          </LazyLoad>
+
+          <LazyLoad height={200} once offset={10}>
+            <Box
+              as="section"
+              align="flex-start"
+              justify="flex-start"
+              margin="1rem 0"
+              constrained
+            >
+              <Navigation sizes={12} margin="0 0 2rem" />
+            </Box>
+          </LazyLoad>
         </>
       )}
     </Layout>

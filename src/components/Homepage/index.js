@@ -1,11 +1,11 @@
 import { useSelector } from 'react-redux'
-import dynamic from 'next/dynamic'
+import LazyLoad from 'react-lazyload'
 // components
 import Layout from '../Layout'
+import Autocomplete from '../Autocomplete'
+import Particles from '../Particles'
 import Loading from '../Loading'
-const Autocomplete = dynamic(() => import('../Autocomplete'))
-const Particles = dynamic(() => import('../Particles'))
-const PokemonList = dynamic(() => import('./PokemonList'))
+import PokemonList from './PokemonList'
 // styles
 import { Container } from './styledHomepage'
 import { MainHeading } from '../BaseStyles'
@@ -25,9 +25,13 @@ export default function Homepage() {
             <Container height="100vh" constrained withGutter>
               <MainHeading>PokeStats</MainHeading>
               <Autocomplete />
-              <Particles />
+              <LazyLoad height={200} once offset={10}>
+                <Particles />
+              </LazyLoad>
             </Container>
-            <PokemonList />
+            <LazyLoad height={200} once>
+              <PokemonList />
+            </LazyLoad>
           </Layout>
         </>
       )}

@@ -1,6 +1,7 @@
+import dynamic from 'next/dynamic'
 // components
-import Header from '../Header'
-import Footer from '../Footer'
+const Header = dynamic(() => import('../Header'))
+const Footer = dynamic(() => import('../Footer'))
 import Box from '../Box'
 
 export default function Layout({

@@ -1,34 +1,27 @@
 import styled, { css } from 'styled-components'
 
 const Button = styled.button`
-  position: relative;
   padding: 10px 20px;
   margin: 0 auto;
 
-  font-size: 1.2rem;
+  font-size: 1rem;
+  line-height: 1rem;
   font-weight: 700;
   text-align: center;
 
-  border: none;
   outline: none;
-  overflow: hidden;
+  border-radius: 4px;
 
   cursor: pointer;
   transition: all 0.2s ease-in-out;
-  z-index: 1;
 
-  &:after {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0;
-    height: 295%;
-    width: 140%;
-    background: ${({ dark, theme }) =>
-      dark ? theme.button.dark.afterColor : theme.button.afterColor};
-    transition: all 0.4s ease-in-out;
-    transform: translateX(-85%) translateY(-25%) rotate(45deg);
-    z-index: -1;
+  &:hover {
+    transform: scale(1.02);
+  }
+
+  &:active {
+    transition: all 0.01s ease-in-out;
+    transform: scale(1);
   }
 
   ${({ dark, theme }) =>
@@ -36,40 +29,48 @@ const Button = styled.button`
       ? css`
           background-color: ${theme.button.dark.backgroundColor};
           color: ${theme.button.dark.color};
+          border: 2px solid ${theme.button.dark.borderColor};
           &:hover,
           &:active {
             color: ${theme.button.dark.hoverColor};
+            background-color: ${theme.button.dark.hoverBackground};
+            border: 2px solid ${theme.button.dark.hoverBorder};
           }
           &:hover {
             box-shadow: 2px 2px 5px ${theme.button.dark.boxShadow};
+          }
+          &:active {
+            box-shadow: 1px 1px 2px 0px ${theme.button.dark.activeShadow} inset;
           }
         `
       : css`
           background-color: ${theme.button.backgroundColor};
           color: ${theme.button.color};
+          border: 2px solid ${theme.button.borderColor};
           &:hover,
           &:active {
             color: ${theme.button.hoverColor};
+            background-color: ${theme.button.hoverBackground};
+            border: 2px solid ${theme.button.hoverBorder};
           }
           &:hover {
             box-shadow: 2px 2px 5px ${theme.button.boxShadow};
           }
+          &:active {
+            box-shadow: 1px 1px 2px 0px ${theme.button.activeShadow} inset;
+          }
         `}
 
-  &:hover {
-    &:after {
-      transform: translateX(-10.5%) translateY(-25%) rotate(45deg);
+  ${({ theme }) => css`
+    @media ${theme.device.md} {
+      font-size: 1.2rem;
+      line-height: 1.2rem;
     }
-  }
-
-  &:active {
-    box-shadow: none;
-
-    &:after {
-      transition: all 0.1s ease-in-out;
-      transform: scale(1.5);
+    @media ${theme.device.lg} {
+      font-size: 1.4rem;
+      line-height: 1.4rem;
     }
-  }
+  `}
 `
 
 export { Button }

@@ -19,8 +19,6 @@ const Title = styled(MainHeading)`
 `
 
 const Message = styled(SectionMessage)`
-  font-size: 1rem;
-  line-height: 1.5rem;
   max-width: 90%;
   margin: 0 auto 1.5rem;
   font-weight: 500;
@@ -35,8 +33,6 @@ const Message = styled(SectionMessage)`
 
   ${({ theme }) => css`
     @media ${theme.device.md} {
-      font-size: 1.5rem;
-      line-height: 2rem;
       max-width: 75%;
       margin: 0 auto 2rem;
     }

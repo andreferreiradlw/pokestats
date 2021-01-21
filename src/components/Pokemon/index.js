@@ -12,6 +12,7 @@ import Layout from '../Layout'
 import Loading from '../Loading'
 import Box from '../Box'
 import Details from './Details'
+import FeaturedImage from './FeatureImage'
 import EvolutionChain from './EvolutionChain'
 import Breeding from './Breeding'
 import Training from './Training'
@@ -21,8 +22,6 @@ import Forms from './Forms'
 import Moves from './Moves'
 import Sprites from './Sprites'
 import Navigation from './Navigation'
-// styles
-import { ImageContainer, Image } from './StyledPokemon'
 
 export default function Homepage() {
   // router
@@ -91,16 +90,15 @@ export default function Homepage() {
               constrained
             >
               <Details sizes={5} margin={{ xxs: '0 0 2rem', lg: '0' }} />
-              <ImageContainer sizes={7} margin={{ xxs: '0 0 2rem', lg: '0' }}>
-                <LazyLoad height={200} once>
-                  <Image
-                    alt={name}
-                    src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`}
-                  />
-                </LazyLoad>
-              </ImageContainer>
+              <FeaturedImage
+                sizes={7}
+                margin={{ xxs: '0 0 2rem', lg: '0' }}
+                pokemonName={name}
+                pokemonId={id}
+              />
             </Box>
           </LazyLoad>
+          {/** EVOLUTION CHAIN */}
           <LazyLoad height={200} once>
             <Box
               as="section"
@@ -112,7 +110,7 @@ export default function Homepage() {
               <EvolutionChain sizes={12} margin="0 0 2rem" />
             </Box>
           </LazyLoad>
-
+          {/** BREEDING, TRAINING, MULTIPLIERS */}
           <LazyLoad height={200} once offset={10}>
             <Box
               as="section"
@@ -136,7 +134,8 @@ export default function Homepage() {
               />
             </Box>
           </LazyLoad>
-          <LazyLoad height={200} once offset={10}>
+          {/** BASESTATS, FORMS */}
+          <LazyLoad height={200} once offset={100}>
             <Box
               as="section"
               direction={{ xxs: 'column', lg: 'row' }}
@@ -153,8 +152,8 @@ export default function Homepage() {
               <Forms sizes={{ xxs: 12, lg: 4 }} />
             </Box>
           </LazyLoad>
-
-          <LazyLoad height={200} once offset={10}>
+          {/** MOVES */}
+          <LazyLoad height={200} once offset={100}>
             <Box
               as="section"
               align="flex-start"
@@ -165,7 +164,7 @@ export default function Homepage() {
               <Moves sizes={12} margin="0 0 2rem" />
             </Box>
           </LazyLoad>
-
+          {/** SPRITES */}
           <LazyLoad height={200} once offset={10}>
             <Box
               as="section"
@@ -177,8 +176,8 @@ export default function Homepage() {
               <Sprites sizes={12} margin="0 0 2rem" />
             </Box>
           </LazyLoad>
-
-          <LazyLoad height={200} once offset={10}>
+          {/** NAVIGATION */}
+          <LazyLoad height={200} once offset={100}>
             <Box
               as="section"
               align="flex-start"

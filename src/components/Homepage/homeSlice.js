@@ -10,7 +10,7 @@ const homeAdapter = createEntityAdapter()
 
 // initial state
 const initialState = homeAdapter.getInitialState({
-  isLoading: false,
+  isLoading: true,
   pokemon: [],
   pokemonLength: 0,
   error: {
@@ -41,8 +41,15 @@ const homeSlice = createSlice({
   name: 'home',
   initialState,
   reducers: {
-    toggleLoading(state) {
-      state.isLoading = !state.loading
+    startLoading(state) {
+      state.isLoading = true
+      state.error = {
+        status: 'OK',
+        message: null,
+      }
+    },
+    stopLoading(state) {
+      state.isLoading = false
     },
   },
   extraReducers: builder => {
@@ -67,7 +74,7 @@ const homeSlice = createSlice({
 })
 
 // export actions
-export const { toggleLoading } = homeSlice.actions
+export const { startLoading, stopLoading } = homeSlice.actions
 
 // export reducer
 export default homeSlice.reducer

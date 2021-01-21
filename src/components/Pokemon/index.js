@@ -111,7 +111,7 @@ export default function Homepage() {
             </Box>
           </LazyLoad>
           {/** BREEDING, TRAINING, MULTIPLIERS */}
-          <LazyLoad height={200} once offset={10}>
+          <LazyLoad height={200} once offset={100}>
             <Box
               as="section"
               direction={{ xxs: 'column', lg: 'row' }}
@@ -165,7 +165,7 @@ export default function Homepage() {
             </Box>
           </LazyLoad>
           {/** SPRITES */}
-          <LazyLoad height={200} once offset={10}>
+          <LazyLoad height={200} once offset={100}>
             <Box
               as="section"
               align="flex-start"

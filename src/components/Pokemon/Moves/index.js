@@ -133,7 +133,11 @@ export default function Moves({ ...rest }) {
             // get machine names from responses
             const names = responses.map(res => {
               // if request fails will return null
-              res === null ? '❌' : res.data.item.name
+              if (res === null) {
+                return '❌'
+              } else {
+                return res.data.item.name
+              }
             })
             // update machine names state
             setMachineNames(names)

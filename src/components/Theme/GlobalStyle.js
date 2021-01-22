@@ -110,6 +110,15 @@ const GlobalStyle = createGlobalStyle`
   :focus:not(:focus-visible) {
     outline: none;
   }
+
+  // lazy load
+  .lazyload-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
 `
 
 export default GlobalStyle

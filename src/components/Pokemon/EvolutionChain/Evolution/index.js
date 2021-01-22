@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
 import axios from 'axios'
+import LazyLoad from 'react-lazyload'
 // helpers
 import { removeDash } from '../../../../helpers/typography'
 import { mapGeneration } from '../../../../helpers/gameVersion'
@@ -59,7 +60,7 @@ export default function Evolution({
           {!noArrow && (
             <Box width="auto">
               {details.map((currDetails, i) => (
-                <EvoDetails key={i} details={currDetails} />
+                <EvoDetails key={`evo-details-${i}`} details={currDetails} />
               ))}
               <EvoArrow />
             </Box>
@@ -67,7 +68,9 @@ export default function Evolution({
           {/** Pokemon box with image and types */}
           <Link as={`/pokemon/${species.name}`} href="/pokemon/[id]" passHref>
             <PokeBox forwardedAs="a" grow={false} width="auto" dark>
-              <PokeImg alt={species.name} src={imgSrc} />
+              <LazyLoad height={115} once offset={20}>
+                <PokeImg alt={species.name} src={imgSrc} />
+              </LazyLoad>
               <NumberId>{`#${currSpecies.id}`}</NumberId>
               <PokeName>{removeDash(currSpecies.name)}</PokeName>
               {currSpecies.generation.name && (

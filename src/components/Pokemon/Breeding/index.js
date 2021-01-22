@@ -23,7 +23,7 @@ export default function Breeding({ ...rest }) {
   // egg groups
   const eggGroups = groups =>
     groups.map((group, i) => (
-      <Numbered key={i}>
+      <Numbered key={`${group.name}-${i}`}>
         {`${groups.length > 1 ? `${++i}. ` : ``}${removeDash(group.name)}`}
       </Numbered>
     ))

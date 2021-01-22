@@ -20,7 +20,7 @@ export default function Forms({ ...rest }) {
   // forms
   const currForms = forms =>
     forms.map((form, i) => (
-      <Numbered key={i}>
+      <Numbered key={`${form.pokemon.name}-${i}`}>
         {`${forms.length > 1 ? `${++i}. ` : ``}${removeDash(
           form.pokemon.name
         )}`}

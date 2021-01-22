@@ -67,7 +67,7 @@ export default function Weaknesses({ ...rest }) {
                   <th>{enabled ? 'Immune To' : 'No Effect To'}</th>
                   <td>
                     {currMultipliers.no_damage.map((type, i) => (
-                      <TypeBadge key={i} type={type} iconOnly />
+                      <TypeBadge key={`no-damage-${i}`} type={type} iconOnly />
                     ))}
                   </td>
                 </tr>
@@ -75,7 +75,11 @@ export default function Weaknesses({ ...rest }) {
                   <th>0.25x</th>
                   <td>
                     {currMultipliers.quarter_damage.map((type, i) => (
-                      <TypeBadge key={i} type={type} iconOnly />
+                      <TypeBadge
+                        key={`quarter-damage-${i}`}
+                        type={type}
+                        iconOnly
+                      />
                     ))}
                   </td>
                 </tr>
@@ -83,7 +87,11 @@ export default function Weaknesses({ ...rest }) {
                   <th>0.5x</th>
                   <td>
                     {currMultipliers.half_damage.map((type, i) => (
-                      <TypeBadge key={i} type={type} iconOnly />
+                      <TypeBadge
+                        key={`half-damage-${i}`}
+                        type={type}
+                        iconOnly
+                      />
                     ))}
                   </td>
                 </tr>
@@ -91,7 +99,11 @@ export default function Weaknesses({ ...rest }) {
                   <th>2x</th>
                   <td>
                     {currMultipliers.double_damage.map((type, i) => (
-                      <TypeBadge key={i} type={type} iconOnly />
+                      <TypeBadge
+                        key={`double-damage-${i}`}
+                        type={type}
+                        iconOnly
+                      />
                     ))}
                   </td>
                 </tr>
@@ -99,7 +111,11 @@ export default function Weaknesses({ ...rest }) {
                   <th>4x</th>
                   <td>
                     {currMultipliers.quadruple_damage.map((type, i) => (
-                      <TypeBadge key={i} type={type} iconOnly />
+                      <TypeBadge
+                        key={`quadruple-damage-${i}`}
+                        type={type}
+                        iconOnly
+                      />
                     ))}
                   </td>
                 </tr>

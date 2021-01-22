@@ -119,8 +119,12 @@ export default function InfiniteScroll({
             flexWrap={flexWrap}
             {...rest}
           >
-            {showList.map((currPokemon, i) => (
-              <PokemonBox key={i} pokemon={currPokemon} dark={dark} />
+            {showList.map(currPokemon => (
+              <PokemonBox
+                key={currPokemon.id}
+                pokemon={currPokemon}
+                dark={dark}
+              />
             ))}
           </Box>
           {showList.length > 0 && pokemonList.length != showList.length && (

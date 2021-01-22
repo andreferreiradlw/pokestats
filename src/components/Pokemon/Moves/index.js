@@ -190,7 +190,7 @@ export default function Moves({ ...rest }) {
             {!movesLoading &&
               currMoves &&
               currMoves.map((move, i) => (
-                <TableRow key={i}>
+                <TableRow key={`${move.name}-${i}`}>
                   {learnMethod === 'level-up' && (
                     <td>{move.level_learned_at}</td>
                   )}

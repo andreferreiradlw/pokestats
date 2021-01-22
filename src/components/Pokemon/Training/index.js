@@ -49,9 +49,9 @@ export default function Training({ ...rest }) {
     return pokemonStats.map(
       (currStat, i) =>
         currStat.effort > 0 && (
-          <Numbered key={i}>{`${currStat.effort} ${removeDash(
-            currStat.stat.name
-          )}`}</Numbered>
+          <Numbered key={`${currStat.stat.name}-${i}`}>{`${
+            currStat.effort
+          } ${removeDash(currStat.stat.name)}`}</Numbered>
         )
     )
   }
@@ -120,7 +120,7 @@ export default function Training({ ...rest }) {
                   {!items.length
                     ? 'None'
                     : items.map((item, i) => (
-                        <Numbered key={i}>
+                        <Numbered key={`${item.item_details.name}-${i}`}>
                           {`${items.length > 1 ? `${++i}. ` : ``}${removeDash(
                             item.item_details.name
                           )} ( ${item.version_details.rarity}% chance )`}

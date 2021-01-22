@@ -1,5 +1,6 @@
 import { useSelector } from 'react-redux'
 import Link from 'next/link'
+import LazyLoad from 'react-lazyload'
 // helpers
 import { removeDash } from '../../../helpers/typography'
 // components
@@ -33,12 +34,14 @@ export default function Navigation({ ...rest }) {
             >
               <BtnAnchor left>
                 <Arrow left>
-                  <PokemonImg
-                    src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${
-                      id - 1
-                    }.png`}
-                    alt={allPokemon[id - 2].name}
-                  />
+                  <LazyLoad height={130} once>
+                    <PokemonImg
+                      src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${
+                        id - 1
+                      }.png`}
+                      alt={allPokemon[id - 2].name}
+                    />
+                  </LazyLoad>
                 </Arrow>
                 <Title right>
                   <span>{`#${id - 1}`}</span>
@@ -55,12 +58,14 @@ export default function Navigation({ ...rest }) {
             >
               <BtnAnchor right>
                 <Arrow right>
-                  <PokemonImg
-                    src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${
-                      id + 1
-                    }.png`}
-                    alt={allPokemon[id].name}
-                  />
+                  <LazyLoad height={130} once>
+                    <PokemonImg
+                      src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${
+                        id + 1
+                      }.png`}
+                      alt={allPokemon[id].name}
+                    />
+                  </LazyLoad>
                 </Arrow>
                 <Title left>
                   <span>{`#${id + 1}`}</span>

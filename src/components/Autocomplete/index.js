@@ -151,7 +151,7 @@ export default function Autocomplete({
               as={`/pokemon/${item.name}`}
               href="/pokemon/[id]"
               passHref
-              key={i}
+              key={`${item.id}-${item.name}-${i}`}
             >
               <OptionWrapper
                 onClick={() => resetStates()}

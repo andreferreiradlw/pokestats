@@ -4,7 +4,7 @@ import Box from '../Box'
 // styles
 import { SectionSubTitle } from '../BaseStyles'
 // helpers
-import { ellipsis } from '../BaseStyles'
+import { ellipsis, rotate } from '../BaseStyles'
 //svg
 import Potion from '../../assets/svg/potion.svg'
 
@@ -23,6 +23,25 @@ const LoadingContainer = styled(Box)`
 const PotionIcon = styled(Potion)`
   width: ${({ iconwidth }) => (iconwidth ? iconwidth : '200px')};
   height: auto;
+
+  animation: 15s ${rotate} 0ms infinite ease-in-out;
+  /** 
+  -webkit-animation-name: shake-rotate;
+  -ms-animation-name: shake-rotate;
+  -webkit-animation-name: shake-rotate;
+  -webkit-animation-duration: 100ms;
+  -ms-animation-duration: 100ms;
+  -webkit-animation-duration: 100ms;
+  -webkit-animation-iteration-count: infinite;
+  -ms-animation-iteration-count: infinite;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-timing-function: ease-in-out;
+  -ms-animation-timing-function: ease-in-out;
+  -webkit-animation-timing-function: ease-in-out;
+  -webkit-animation-delay: 0s;
+  -ms-animation-delay: 0s;
+  -webkit-animation-delay: 0s;
+  */
 `
 
 const Text = styled(SectionSubTitle)`

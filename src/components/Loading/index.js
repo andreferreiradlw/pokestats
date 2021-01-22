@@ -1,14 +1,35 @@
 import { forwardRef } from 'react'
-// components
-import Box from '../Box'
+// styles
+import { LoadingContainer, PotionIcon } from './StyledLoading'
 
-const Loading = forwardRef(({ ...rest }, ref) => {
-  return (
-    <Box noGutter ref={ref} {...rest}>
-      LOADING!
-    </Box>
-  )
-})
+const Loading = forwardRef(
+  (
+    {
+      height,
+      iconWidth,
+      noIcon,
+      text,
+      justify = 'center',
+      align = 'center',
+      ...rest
+    },
+    ref
+  ) => {
+    return (
+      <LoadingContainer
+        noGutter
+        ref={ref}
+        justify={justify}
+        align={align}
+        height={height}
+        {...rest}
+      >
+        {!noIcon && <PotionIcon iconWidth={iconWidth} />}
+        {text && text}
+      </LoadingContainer>
+    )
+  }
+)
 
 Loading.displayName = 'Loading'
 

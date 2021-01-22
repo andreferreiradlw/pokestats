@@ -1,6 +1,6 @@
 import { forwardRef } from 'react'
 // styles
-import { LoadingContainer, PotionIcon } from './StyledLoading'
+import { LoadingContainer, PotionIcon, Text } from './StyledLoading'
 
 const Loading = forwardRef(
   (
@@ -25,7 +25,7 @@ const Loading = forwardRef(
         {...rest}
       >
         {!noIcon && <PotionIcon iconwidth={iconWidth} />}
-        {text && text}
+        {text && <Text>{text}</Text>}
       </LoadingContainer>
     )
   }

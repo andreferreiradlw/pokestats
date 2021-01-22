@@ -7,6 +7,7 @@ import { fetchPokemonData, startLoading, cleanData } from './pokemonSlice'
 import { changeVersion } from '../Header/gameSlice'
 // helpers
 import { mapGenerationToGame } from '../../helpers/gameVersion'
+import { removeDash } from '../../helpers/typography'
 // components
 import Layout from '../Layout'
 import Loading from '../Loading'
@@ -73,11 +74,14 @@ export default function Homepage() {
       router.push('/404', router.asPath)
     }
   }, [pokemonInfo.error])
-
+  //
   return (
     <Layout withHeader withFooter>
       {pokemonInfo.isLoading ? (
-        <Loading iconWidth="10%" />
+        <Loading
+          iconWidth="10%"
+          text={`Loading ${router.query.id && removeDash(router.query.id)}`}
+        />
       ) : (
         <>
           <Box

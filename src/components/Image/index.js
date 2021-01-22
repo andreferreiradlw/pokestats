@@ -18,7 +18,7 @@ function index({ width, height, pixelated, src, offset, ...rest }) {
   return (
     <>
       {!imgLoaded && <Placeholder width={width} height={height} />}
-      <LazyLoad height={height || 200} once offset={offset || 250}>
+      <LazyLoad height={height || 135} once offset={offset || 250}>
         <Image
           src={src}
           pixelated={pixelated}

@@ -1,4 +1,6 @@
 import styled, { css } from 'styled-components'
+// components
+import Image from '../../Image'
 
 const BtnSpan = styled.span`
   position: relative;
@@ -48,11 +50,8 @@ const Title = styled(BtnSpan)`
   }
 `
 
-const PokemonImg = styled.img`
-  width: auto;
-  height: 90px;
+const PokemonImg = styled(Image)`
   transition: all 0.15s ease-in-out;
-  image-rendering: pixelated;
 `
 
 const BtnAnchor = styled.a`
@@ -102,7 +101,7 @@ const BtnAnchor = styled.a`
         `}
     }
 
-    & ${PokemonImg} {
+    & img {
       transform: scale(1.1);
     }
   }

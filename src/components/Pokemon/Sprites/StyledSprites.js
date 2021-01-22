@@ -1,5 +1,7 @@
 import styled, { css } from 'styled-components'
+// components
 import Box from '../../Box'
+import Image from '../../Image'
 
 const SpriteContainer = styled(Box)`
   margin: 0 1.5rem;
@@ -9,25 +11,16 @@ const SpriteContainer = styled(Box)`
   }
 `
 
-const Sprite = styled.img`
-  height: auto;
-  width: 130px;
-
+const Sprite = styled(Image)`
   ${({ dreamworld }) =>
-    dreamworld
-      ? css`
-          height: 180px;
-          width: auto;
-          margin-bottom: 1rem;
-        `
-      : css`
-          image-rendering: pixelated;
-        `}
+    dreamworld &&
+    css`
+      margin-bottom: 1rem;
+    `}
 
   ${({ animated }) =>
     animated &&
     css`
-      width: 80px;
       margin: 1rem 0;
     `}
 `

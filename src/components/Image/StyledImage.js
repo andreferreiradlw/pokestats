@@ -8,13 +8,13 @@ const Image = styled.img`
   ${({ width }) =>
     width &&
     css`
-      width: ${width || 'auto'};
+      width: ${width ? `${width}px` : 'auto'};
     `}
 
   ${({ height }) =>
     css`
-      height: ${height || 'auto'};
-      ${height && `min-height: ${height};`}
+      height: ${height ? `${height}px` : 'auto'};
+      ${height && `min-height: ${height}px;`}
     `}
 
   ${({ loaded }) =>
@@ -34,13 +34,13 @@ const Placeholder = styled(Egg)`
   ${({ width }) =>
     width &&
     css`
-      width: ${width || 'auto'};
+      width: ${width ? `${width}px` : 'auto'};
     `}
 
   ${({ height }) =>
     height &&
     css`
-      height: ${height || 'auto'};
+      height: ${height ? `${height}px` : 'auto'};
     `}
 `
 

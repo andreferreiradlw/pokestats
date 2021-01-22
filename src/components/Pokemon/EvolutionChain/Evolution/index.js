@@ -7,9 +7,10 @@ import { removeDash } from '../../../../helpers/typography'
 import { mapGeneration } from '../../../../helpers/gameVersion'
 // components
 import Box from '../../../Box'
+import Image from '../../../Image'
 import EvoDetails from './EvolutionDetails'
 // styles
-import { PokeBox, PokeImg, NumberId, PokeName } from '../../../BaseStyles'
+import { PokeBox, NumberId, PokeName } from '../../../BaseStyles'
 import { EvoArrow, PokeGen } from './StyledEvolution'
 
 export default function Evolution({
@@ -68,9 +69,7 @@ export default function Evolution({
           {/** Pokemon box with image and types */}
           <Link as={`/pokemon/${species.name}`} href="/pokemon/[id]" passHref>
             <PokeBox forwardedAs="a" grow={false} width="auto" dark>
-              <LazyLoad height={115} once offset={20}>
-                <PokeImg alt={species.name} src={imgSrc} />
-              </LazyLoad>
+              <Image alt={species.name} src={imgSrc} height={115} />
               <NumberId>{`#${currSpecies.id}`}</NumberId>
               <PokeName>{removeDash(currSpecies.name)}</PokeName>
               {currSpecies.generation.name && (

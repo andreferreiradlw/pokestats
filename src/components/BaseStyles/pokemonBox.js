@@ -4,17 +4,6 @@ import Box from '../Box'
 // styles
 import { float } from './keyframes'
 
-const PokeImg = styled.img`
-  width: 115px;
-  min-height: 105px;
-  transition: all 0.05s ease-in-out;
-  ${({ pixelated }) =>
-    pixelated &&
-    css`
-      image-rendering: pixelated;
-    `}
-`
-
 const PokeBox = styled(Box)`
   ${({ width }) =>
     !width &&
@@ -75,7 +64,7 @@ const PokeBox = styled(Box)`
       transform: scale(1);
     }
 
-    & ${PokeImg} {
+    & img {
       @media (prefers-reduced-motion: no-preference) {
         animation: ${float} infinite 3s ease-in-out;
       }
@@ -92,4 +81,4 @@ const PokeName = styled.span`
   margin-bottom: 0.5rem;
 `
 
-export { PokeBox, PokeImg, NumberId, PokeName }
+export { PokeBox, NumberId, PokeName }

@@ -128,7 +128,7 @@ export default function InfiniteScroll({
             ))}
           </Box>
           {showList.length > 0 && pokemonList.length != showList.length && (
-            <Loading ref={setNode} />
+            <Loading height="100px" iconWidth="10%" ref={setNode} />
           )}
         </>
       )}

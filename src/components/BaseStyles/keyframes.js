@@ -13,4 +13,16 @@ const float = keyframes`
   }
 `
 
-export { float }
+const ellipsis = keyframes`
+  0% {
+    content: '.';
+  }
+  33% {
+    content: '..';
+  }
+  66% {
+    content: '...';
+  }
+`
+
+export { float, ellipsis }

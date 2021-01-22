@@ -2,7 +2,9 @@ import styled, { css } from 'styled-components'
 // components
 import Box from '../Box'
 // styles
-import { SectionMessage, SectionSubTitle } from '../BaseStyles'
+import { SectionSubTitle } from '../BaseStyles'
+// helpers
+import { ellipsis } from '../BaseStyles'
 //svg
 import Potion from '../../assets/svg/potion.svg'
 
@@ -28,22 +30,10 @@ const Text = styled(SectionSubTitle)`
 
   &:after {
     display: inline-block;
-    animation: ellipsis 1.25s infinite;
+    animation: ${ellipsis} 1.25s infinite;
     content: '.';
     width: 1em;
     text-align: left;
-  }
-
-  @keyframes ellipsis {
-    0% {
-      content: '.';
-    }
-    33% {
-      content: '..';
-    }
-    66% {
-      content: '...';
-    }
   }
 `
 

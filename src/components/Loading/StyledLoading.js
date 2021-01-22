@@ -4,7 +4,7 @@ import Box from '../Box'
 // styles
 import { SectionSubTitle } from '../BaseStyles'
 // helpers
-import { ellipsis, rotate } from '../BaseStyles'
+import { ellipsis, rotate, riseUp } from '../BaseStyles'
 //svg
 import Potion from '../../assets/svg/potion.svg'
 
@@ -23,25 +23,27 @@ const LoadingContainer = styled(Box)`
 const PotionIcon = styled(Potion)`
   width: ${({ iconwidth }) => (iconwidth ? iconwidth : '200px')};
   height: auto;
-
-  animation: 15s ${rotate} 0ms infinite ease-in-out;
-  /** 
-  -webkit-animation-name: shake-rotate;
-  -ms-animation-name: shake-rotate;
-  -webkit-animation-name: shake-rotate;
-  -webkit-animation-duration: 100ms;
-  -ms-animation-duration: 100ms;
-  -webkit-animation-duration: 100ms;
-  -webkit-animation-iteration-count: infinite;
-  -ms-animation-iteration-count: infinite;
-  -webkit-animation-iteration-count: infinite;
-  -webkit-animation-timing-function: ease-in-out;
-  -ms-animation-timing-function: ease-in-out;
-  -webkit-animation-timing-function: ease-in-out;
-  -webkit-animation-delay: 0s;
-  -ms-animation-delay: 0s;
-  -webkit-animation-delay: 0s;
-  */
+  // rotation
+  animation: 20s ${rotate} 0ms infinite ease-in-out;
+  // rise up
+  circle {
+    animation: ${riseUp} 2s infinite linear;
+  }
+  .potion_svg__bubble-1 {
+    animation-delay: 0.5s;
+  }
+  .potion_svg__bubble-2 {
+    animation-delay: 0.3s;
+  }
+  .potion_svg__bubble-3 {
+    animation-delay: 0.8s;
+  }
+  .potion_svg__bubble-4 {
+    animation-delay: 1s;
+  }
+  .potion_svg__bubble-5 {
+    animation-delay: 0.1s;
+  }
 `
 
 const Text = styled(SectionSubTitle)`

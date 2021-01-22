@@ -74,10 +74,10 @@ export default function Homepage() {
       router.push('/404', router.asPath)
     }
   }, [pokemonInfo.error])
-  // pokemonInfo.isLoading
+
   return (
     <Layout withHeader withFooter>
-      {true ? (
+      {pokemonInfo.isLoading ? (
         <Loading
           iconWidth="10%"
           text={`Loading ${router.query.id && removeDash(router.query.id)}`}

@@ -78,4 +78,23 @@ const rotate = keyframes`
   98% { -webkit-transform: translate(0px, 0px) rotate(4.5deg); } 
 `
 
-export { float, ellipsis, rotate }
+const riseUp = keyframes`
+  0% {
+    transform: translateY(0);
+    opacity: 0;
+  }
+  2% {
+    transform: translateY(0);
+    opacity: 0.8;
+  }
+  80% {
+    transform: translateY(-20%);
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateY(-25%);
+    opacity: 0;
+  }
+`
+
+export { float, ellipsis, rotate, riseUp }

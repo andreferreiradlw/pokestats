@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
 import axios from 'axios'
-import LazyLoad from 'react-lazyload'
 // helpers
 import { removeDash } from '../../../../helpers/typography'
 import { mapGeneration } from '../../../../helpers/gameVersion'

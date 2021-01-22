@@ -1,5 +1,4 @@
 import { useSelector } from 'react-redux'
-import LazyLoad from 'react-lazyload'
 // helpers
 import { removeUnderscore } from '../../../helpers/typography'
 // components

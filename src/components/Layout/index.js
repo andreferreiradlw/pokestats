@@ -4,9 +4,7 @@ import Header from '../Header'
 import Footer from '../Footer'
 import Box from '../Box'
 
-const LayoutContainer = styled.div`
-  display: flex;
-  flex-direction: column;
+const LayoutContainer = styled(Box)`
   min-height: 100vh;
 `
 
@@ -18,7 +16,7 @@ export default function Layout({
   ...rest
 }) {
   return (
-    <LayoutContainer>
+    <LayoutContainer direction="column" noGutter>
       {withHeader && <Header />}
       <Box as="main" withGutter={withGutter} flexGrow {...rest}>
         {children}

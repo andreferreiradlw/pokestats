@@ -57,15 +57,16 @@ export const BoxWrapper = styled.div`
   ${({ constrained, sizesProp, growProp }) =>
     !constrained &&
     !sizesProp &&
+    growProp &&
     css`
-      flex-grow: ${growProp ? 1 : 0};
+      flex-grow: 1;
     `}
   
   /** constrained max-width */
-  ${({ constrained }) =>
+  ${({ constrained, growProp }) =>
     constrained &&
     css`
-      flex-grow: 1;
+      ${growProp && 'flex-grow: 1;'}
       max-width: ${boxConfig.constrained};
     `};
 

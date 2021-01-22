@@ -12,13 +12,13 @@ const PokemonBox = forwardRef(({ pokemon, dark, ...rest }, ref) => {
 
   return (
     <Link as={`/pokemon/${name}`} href="/pokemon/[id]" passHref>
-      <PokeBox forwardedAs="a" ref={ref} dark={dark} {...rest}>
+      <PokeBox forwardedAs="a" ref={ref} dark={dark} flexGrow {...rest}>
         <Image
           src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`}
           crossorigin="anonymous"
           alt={name}
           pixelated
-          height="115px"
+          height={115}
         />
         <NumberId>{`#${id}`}</NumberId>
         <PokeName>{removeDash(name)}</PokeName>

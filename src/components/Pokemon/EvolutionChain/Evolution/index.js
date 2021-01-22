@@ -59,7 +59,7 @@ export default function Evolution({
         >
           {/** Arrow with evolution details */}
           {!noArrow && (
-            <Box width="auto">
+            <Box width="auto" flexGrow>
               {details.map((currDetails, i) => (
                 <EvoDetails key={`evo-details-${i}`} details={currDetails} />
               ))}

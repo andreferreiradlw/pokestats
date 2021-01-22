@@ -77,7 +77,7 @@ export default function Homepage() {
   return (
     <Layout withHeader withFooter>
       {pokemonInfo.isLoading ? (
-        <Loading />
+        <Loading iconWidth="10%" />
       ) : (
         <>
           <Box

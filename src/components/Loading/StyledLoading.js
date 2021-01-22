@@ -17,7 +17,7 @@ const LoadingContainer = styled(Box)`
 `
 
 const PotionIcon = styled(Potion)`
-  width: ${({ iconWidth }) => (iconWidth ? iconWidth : '200px')};
+  width: ${({ iconwidth }) => (iconwidth ? iconwidth : '200px')};
   height: auto;
 `
 

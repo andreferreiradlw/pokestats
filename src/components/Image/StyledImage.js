@@ -40,7 +40,7 @@ const Placeholder = styled(Egg)`
   ${({ height }) =>
     height &&
     css`
-      height: ${height ? `${height}px` : 'auto'};
+      height: ${height ? `${height - 15}px` : 'auto'};
     `}
 `
 

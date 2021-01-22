@@ -13,7 +13,7 @@ const Box = forwardRef(
       direction = 'column',
       fill,
       flexWrap = 'nowrap',
-      grow = true,
+      flexGrow,
       height,
       justify = 'center',
       sizes,
@@ -31,7 +31,7 @@ const Box = forwardRef(
         fillProp={fill}
         flexDirection={direction}
         flexWrap={flexWrap}
-        growProp={grow}
+        growProp={flexGrow}
         heightProp={height}
         justifyProp={justify}
         sizesProp={sizes}

@@ -1,5 +1,4 @@
 import { useEffect } from 'react'
-import LazyLoad from 'react-lazyload'
 // redux
 import { Provider } from 'react-redux'
 import store from '../../redux/store'
@@ -28,9 +27,7 @@ export default function App({ Component, pageProps }) {
     <Provider store={store}>
       <ThemeProvider>
         <Head />
-        <LazyLoad once>
-          <Component {...pageProps} />
-        </LazyLoad>
+        <Component {...pageProps} />
       </ThemeProvider>
     </Provider>
   )

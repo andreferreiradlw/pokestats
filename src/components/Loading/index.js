@@ -24,7 +24,7 @@ const Loading = forwardRef(
         height={height}
         {...rest}
       >
-        {!noIcon && <PotionIcon iconWidth={iconWidth} />}
+        {!noIcon && <PotionIcon iconwidth={iconWidth} />}
         {text && text}
       </LoadingContainer>
     )

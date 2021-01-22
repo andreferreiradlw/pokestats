@@ -40,13 +40,11 @@ export default function Homepage() {
             <Container height="100vh" constrained withGutter>
               <MainHeading>PokeStats</MainHeading>
               <Autocomplete />
-              <LazyLoad height={200} once offset={10}>
+              <LazyLoad height={200} once>
                 <Particles />
               </LazyLoad>
             </Container>
-            <LazyLoad height={200} once>
-              <PokemonList />
-            </LazyLoad>
+            <PokemonList />
           </Layout>
         </>
       )}

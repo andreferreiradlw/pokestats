@@ -80,80 +80,72 @@ export default function Homepage() {
         <Loading />
       ) : (
         <>
-          <LazyLoad height={200} once>
-            <Box
-              as="section"
-              direction={{ xxs: 'column-reverse', lg: 'row' }}
-              align="flex-start"
-              justify="flex-start"
-              margin="1rem 0"
-              constrained
-            >
-              <Details sizes={5} margin={{ xxs: '0 0 2rem', lg: '0' }} />
-              <FeaturedImage
-                sizes={7}
-                margin={{ xxs: '0 0 2rem', lg: '0' }}
-                pokemonName={name}
-                pokemonId={id}
-              />
-            </Box>
-          </LazyLoad>
+          <Box
+            as="section"
+            direction={{ xxs: 'column-reverse', lg: 'row' }}
+            align="flex-start"
+            justify="flex-start"
+            margin="1rem 0"
+            constrained
+          >
+            <Details sizes={5} margin={{ xxs: '0 0 2rem', lg: '0' }} />
+            <FeaturedImage
+              sizes={7}
+              margin={{ xxs: '0 0 2rem', lg: '0' }}
+              pokemonName={name}
+              pokemonId={id}
+            />
+          </Box>
           {/** EVOLUTION CHAIN */}
-          <LazyLoad height={200} once>
-            <Box
-              as="section"
-              align="flex-start"
-              justify="flex-start"
-              margin="1rem 0"
-              constrained
-            >
-              <EvolutionChain sizes={12} margin="0 0 2rem" />
-            </Box>
-          </LazyLoad>
+          <Box
+            as="section"
+            align="flex-start"
+            justify="flex-start"
+            margin="1rem 0"
+            constrained
+          >
+            <EvolutionChain sizes={12} margin="0 0 2rem" />
+          </Box>
           {/** BREEDING, TRAINING, MULTIPLIERS */}
-          <LazyLoad height={200} once offset={100}>
-            <Box
-              as="section"
-              direction={{ xxs: 'column', lg: 'row' }}
-              align="flex-start"
-              justify="flex-start"
-              margin="1rem 0"
-              constrained
-            >
-              <Breeding
-                margin={{ xxs: '0 0 2rem', lg: '0' }}
-                padding={{ xxs: '0', lg: '0 2rem 0 0' }}
-              />
-              <Training
-                margin={{ xxs: '0 0 2rem', lg: '0' }}
-                padding={{ xxs: '0', lg: '0 1rem' }}
-              />
-              <Multipliers
-                margin={{ xxs: '0 0 2rem', lg: '0' }}
-                padding={{ xxs: '0', lg: '0 0 0 2rem' }}
-              />
-            </Box>
-          </LazyLoad>
+          <Box
+            as="section"
+            direction={{ xxs: 'column', lg: 'row' }}
+            align="flex-start"
+            justify="flex-start"
+            margin="1rem 0"
+            constrained
+          >
+            <Breeding
+              margin={{ xxs: '0 0 2rem', lg: '0' }}
+              padding={{ xxs: '0', lg: '0 2rem 0 0' }}
+            />
+            <Training
+              margin={{ xxs: '0 0 2rem', lg: '0' }}
+              padding={{ xxs: '0', lg: '0 1rem' }}
+            />
+            <Multipliers
+              margin={{ xxs: '0 0 2rem', lg: '0' }}
+              padding={{ xxs: '0', lg: '0 0 0 2rem' }}
+            />
+          </Box>
           {/** BASESTATS, FORMS */}
-          <LazyLoad height={200} once offset={100}>
-            <Box
-              as="section"
-              direction={{ xxs: 'column', lg: 'row' }}
-              align="flex-start"
-              justify="flex-start"
-              margin="1rem 0"
-              constrained
-            >
-              <BaseStats
-                sizes={{ xxs: 12, lg: 8 }}
-                margin={{ xxs: '0 0 2rem', lg: '0' }}
-                padding={{ xxs: '0', lg: '0 2rem 0 0' }}
-              />
-              <Forms sizes={{ xxs: 12, lg: 4 }} />
-            </Box>
-          </LazyLoad>
+          <Box
+            as="section"
+            direction={{ xxs: 'column', lg: 'row' }}
+            align="flex-start"
+            justify="flex-start"
+            margin="1rem 0"
+            constrained
+          >
+            <BaseStats
+              sizes={{ xxs: 12, lg: 8 }}
+              margin={{ xxs: '0 0 2rem', lg: '0' }}
+              padding={{ xxs: '0', lg: '0 2rem 0 0' }}
+            />
+            <Forms sizes={{ xxs: 12, lg: 4 }} />
+          </Box>
           {/** MOVES */}
-          <LazyLoad height={200} once offset={100}>
+          <LazyLoad height={500} once offset={200}>
             <Box
               as="section"
               align="flex-start"
@@ -165,7 +157,7 @@ export default function Homepage() {
             </Box>
           </LazyLoad>
           {/** SPRITES */}
-          <LazyLoad height={200} once offset={100}>
+          <LazyLoad height={800} once offset={200}>
             <Box
               as="section"
               align="flex-start"
@@ -177,17 +169,15 @@ export default function Homepage() {
             </Box>
           </LazyLoad>
           {/** NAVIGATION */}
-          <LazyLoad height={200} once offset={100}>
-            <Box
-              as="section"
-              align="flex-start"
-              justify="flex-start"
-              margin="1rem 0"
-              constrained
-            >
-              <Navigation sizes={12} margin="0 0 2rem" />
-            </Box>
-          </LazyLoad>
+          <Box
+            as="section"
+            align="flex-start"
+            justify="flex-start"
+            margin="1rem 0"
+            constrained
+          >
+            <Navigation sizes={12} margin="0 0 2rem" />
+          </Box>
         </>
       )}
     </Layout>

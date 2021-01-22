@@ -33,7 +33,7 @@ export default function Homepage() {
   return (
     <>
       {isLoading || pokemonLength === 0 ? (
-        <Loading height="100vh" iconWidth="15%" />
+        <Loading height="100vh" />
       ) : (
         <>
           <Layout withGutter={false} withFooter>

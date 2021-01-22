@@ -21,7 +21,10 @@ const LoadingContainer = styled(Box)`
 `
 
 const PotionIcon = styled(Potion)`
-  width: ${({ iconwidth }) => (iconwidth ? iconwidth : '200px')};
+  ${({ iconwidth }) =>
+    css`
+      width: ${iconwidth};
+    `}
   height: auto;
   // rotation
   animation: 20s ${rotate} 0ms infinite ease-in-out;

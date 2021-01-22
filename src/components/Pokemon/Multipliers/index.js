@@ -55,13 +55,12 @@ export default function Weaknesses({ ...rest }) {
         <SectionTitle>Multipliers</SectionTitle>
         <Switch enabled={enabled} onClick={() => setEnabled(!enabled)} />
       </Box>
-
       {!typeMultipliers ? (
-        <Loading />
+        <Loading height="251px" iconWidth="20%" />
       ) : (
         <>
           {currMultipliers && (
-            <Table forwardedAs="table" align="flex-start">
+            <Table forwardedAs="table" align="flex-start" margin="0 0 1.5rem">
               <tbody>
                 <tr>
                   <th>{enabled ? 'Immune To' : 'No Effect To'}</th>

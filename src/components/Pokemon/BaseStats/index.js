@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux'
 import { removeDash } from '../../../helpers/typography'
 // components
 import Box from '../../Box'
+import Loading from '../../Loading'
 import ProgressBar from './ProgressBar'
 // styles
 import { SectionTitle } from '../../BaseStyles'
@@ -42,28 +43,32 @@ export default function BaseStats({ ...rest }) {
   return (
     <Box align={{ xxs: 'center', lg: 'flex-start' }} {...rest}>
       <SectionTitle>Base Stats</SectionTitle>
-      <StatsTable forwardedAs="table" align="flex-start">
-        <tbody>
-          {stats.map(({ base_stat, stat }, i) => (
-            <tr key={`${stat.name}-${i}`}>
-              <th>{removeDash(stat.name)}</th>
-              <td>{base_stat}</td>
-              <BarCell>
-                <ProgressBar progress={progressCalc(base_stat)} />
-              </BarCell>
-              <td>{statsCalc('min', base_stat, stat.name)}</td>
-              <td>{statsCalc('max', base_stat, stat.name)}</td>
+      {pokemonInfo.isLoading ? (
+        <Loading height="280px" iconWidth="15%" />
+      ) : (
+        <StatsTable forwardedAs="table" align="flex-start" margin="0 0 1.5rem">
+          <tbody>
+            {stats.map(({ base_stat, stat }, i) => (
+              <tr key={`${stat.name}-${i}`}>
+                <th>{removeDash(stat.name)}</th>
+                <td>{base_stat}</td>
+                <BarCell>
+                  <ProgressBar progress={progressCalc(base_stat)} />
+                </BarCell>
+                <td>{statsCalc('min', base_stat, stat.name)}</td>
+                <td>{statsCalc('max', base_stat, stat.name)}</td>
+              </tr>
+            ))}
+            <tr>
+              <th>Total</th>
+              <td>{totalStats(stats)}</td>
+              <td></td>
+              <td>Min</td>
+              <td>Max</td>
             </tr>
-          ))}
-          <tr>
-            <th>Total</th>
-            <td>{totalStats(stats)}</td>
-            <td></td>
-            <td>Min</td>
-            <td>Max</td>
-          </tr>
-        </tbody>
-      </StatsTable>
+          </tbody>
+        </StatsTable>
+      )}
     </Box>
   )
 }

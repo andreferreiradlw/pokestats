@@ -86,52 +86,50 @@ export default function Training({ ...rest }) {
   }
 
   return (
-    <>
+    <Box align={{ xxs: 'center', lg: 'flex-start' }} {...rest}>
+      <SectionTitle>Training</SectionTitle>
       {pokemonBio.isLoading ? (
-        <Loading />
+        <Loading height="251px" iconWidth="20%" />
       ) : (
-        <Box align={{ xxs: 'center', lg: 'flex-start' }} {...rest}>
-          <SectionTitle>Training</SectionTitle>
-          <Table forwardedAs="table" align="flex-start">
-            <tbody>
-              <tr>
-                <th>EV Yield</th>
-                <td>{EVYield(stats)}</td>
-              </tr>
-              <tr>
-                <th>Catch Rate</th>
-                <td>{catchRate(capture_rate)}</td>
-              </tr>
-              <tr>
-                <th>Base Happiness</th>
-                <td>{baseHappiness(base_happiness)}</td>
-              </tr>
-              <tr>
-                <th>Base Exp.</th>
-                <td>{base_experience}</td>
-              </tr>
-              <tr>
-                <th>Growth Rate</th>
-                <td>{removeDash(growth_rate.name)}</td>
-              </tr>
-              <tr>
-                <th>Held Items</th>
-                <td>
-                  {!items.length
-                    ? 'None'
-                    : items.map((item, i) => (
-                        <Numbered key={`${item.item_details.name}-${i}`}>
-                          {`${items.length > 1 ? `${++i}. ` : ``}${removeDash(
-                            item.item_details.name
-                          )} ( ${item.version_details.rarity}% chance )`}
-                        </Numbered>
-                      ))}
-                </td>
-              </tr>
-            </tbody>
-          </Table>
-        </Box>
+        <Table forwardedAs="table" align="flex-start" margin="0 0 1.5rem">
+          <tbody>
+            <tr>
+              <th>EV Yield</th>
+              <td>{EVYield(stats)}</td>
+            </tr>
+            <tr>
+              <th>Catch Rate</th>
+              <td>{catchRate(capture_rate)}</td>
+            </tr>
+            <tr>
+              <th>Base Happiness</th>
+              <td>{baseHappiness(base_happiness)}</td>
+            </tr>
+            <tr>
+              <th>Base Exp.</th>
+              <td>{base_experience}</td>
+            </tr>
+            <tr>
+              <th>Growth Rate</th>
+              <td>{removeDash(growth_rate.name)}</td>
+            </tr>
+            <tr>
+              <th>Held Items</th>
+              <td>
+                {!items.length
+                  ? 'None'
+                  : items.map((item, i) => (
+                      <Numbered key={`${item.item_details.name}-${i}`}>
+                        {`${items.length > 1 ? `${++i}. ` : ``}${removeDash(
+                          item.item_details.name
+                        )} ( ${item.version_details.rarity}% chance )`}
+                      </Numbered>
+                    ))}
+              </td>
+            </tr>
+          </tbody>
+        </Table>
       )}
-    </>
+    </Box>
   )
 }

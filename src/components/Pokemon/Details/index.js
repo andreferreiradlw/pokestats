@@ -84,7 +84,7 @@ export default function Details({ ...rest }) {
         </TypeContainer>
       )}
       {pokemonBio.isLoading ? (
-        <Loading />
+        <Loading height="390px" iconWidth="30%" />
       ) : (
         <>
           {(is_baby || is_legendary || is_mythical) && (

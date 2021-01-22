@@ -29,30 +29,28 @@ export default function Forms({ ...rest }) {
     ))
 
   return (
-    <>
+    <Box align={{ xxs: 'center', lg: 'flex-start' }} {...rest}>
+      <SectionTitle>Forms</SectionTitle>
       {pokemonBio.isLoading ? (
-        <Loading />
+        <Loading height="251px" iconWidth="20%" />
       ) : (
-        <Box align={{ xxs: 'center', lg: 'flex-start' }} {...rest}>
-          <SectionTitle>Forms</SectionTitle>
-          <Table forwardedAs="table" align="flex-start">
-            <tbody>
-              <tr>
-                <th>Alternative Forms</th>
-                <td>{forms_switchable ? 'Yes' : 'None'}</td>
-              </tr>
-              <tr>
-                <th>Varieties</th>
-                <td>{currForms(varieties)}</td>
-              </tr>
-              <tr>
-                <th>Gender Differences</th>
-                <td>{has_gender_differences ? 'Yes' : 'None'}</td>
-              </tr>
-            </tbody>
-          </Table>
-        </Box>
+        <Table forwardedAs="table" align="flex-start" margin="0 0 1.5rem">
+          <tbody>
+            <tr>
+              <th>Alternative Forms</th>
+              <td>{forms_switchable ? 'Yes' : 'None'}</td>
+            </tr>
+            <tr>
+              <th>Varieties</th>
+              <td>{currForms(varieties)}</td>
+            </tr>
+            <tr>
+              <th>Gender Differences</th>
+              <td>{has_gender_differences ? 'Yes' : 'None'}</td>
+            </tr>
+          </tbody>
+        </Table>
       )}
-    </>
+    </Box>
   )
 }

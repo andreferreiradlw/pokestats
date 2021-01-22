@@ -16,7 +16,7 @@ export default function EvolutionChain({ ...rest }) {
     <Box align={{ xxs: 'center', lg: 'flex-start' }} {...rest}>
       <SectionTitle>Evolution Chain</SectionTitle>
       {pokemonEvo.isLoading ? (
-        <Loading />
+        <Loading height="271px" iconWidth="10%" />
       ) : (
         <>
           {!chain.evolves_to.length && (

@@ -222,7 +222,7 @@ export default function Moves({ ...rest }) {
         <SectionMessage>No moves for current game version!</SectionMessage>
       )}
       {/** LOADING */}
-      {movesLoading && <Loading />}
+      {movesLoading && <Loading height="300px" iconWidth="10%" />}
     </Box>
   )
 }

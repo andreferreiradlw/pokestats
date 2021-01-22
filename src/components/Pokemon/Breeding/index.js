@@ -33,48 +33,46 @@ export default function Breeding({ ...rest }) {
     `${counter} cycles ( ${255 * (hatch_counter + 1)} steps )`
 
   return (
-    <>
+    <Box align={{ xxs: 'center', lg: 'flex-start' }} {...rest}>
+      <SectionTitle>Breeding</SectionTitle>
       {pokemonEvo.isLoading ? (
-        <Loading />
+        <Loading height="251px" iconWidth="20%" />
       ) : (
-        <Box align={{ xxs: 'center', lg: 'flex-start' }} {...rest}>
-          <SectionTitle>Breeding</SectionTitle>
-          <Table forwardedAs="table" align="flex-start">
-            <tbody>
-              <tr>
-                <th>Gender Distribution</th>
-                <td>
-                  {gender_rate === -1 ? 'Genderless' : genderRatio(gender_rate)}
-                </td>
-              </tr>
-              <tr>
-                <th>Egg Groups</th>
-                <td>
-                  {egg_groups.length ? eggGroups(egg_groups) : 'No Egg Groups'}
-                </td>
-              </tr>
-              <tr>
-                <th>Egg Cycles</th>
-                <td>
-                  {hatch_counter ? eggCycle(hatch_counter) : 'No Egg Cycles'}
-                </td>
-              </tr>
-              <tr>
-                <th>Baby Trigger Item</th>
-                <td>
-                  {baby_trigger_item
-                    ? removeDash(baby_trigger_item.name)
-                    : 'None'}
-                </td>
-              </tr>
-              <tr>
-                <th>Habitat</th>
-                <td>{habitat ? removeDash(habitat.name) : 'None'}</td>
-              </tr>
-            </tbody>
-          </Table>
-        </Box>
+        <Table forwardedAs="table" align="flex-start" margin="0 0 1.5rem">
+          <tbody>
+            <tr>
+              <th>Gender Distribution</th>
+              <td>
+                {gender_rate === -1 ? 'Genderless' : genderRatio(gender_rate)}
+              </td>
+            </tr>
+            <tr>
+              <th>Egg Groups</th>
+              <td>
+                {egg_groups.length ? eggGroups(egg_groups) : 'No Egg Groups'}
+              </td>
+            </tr>
+            <tr>
+              <th>Egg Cycles</th>
+              <td>
+                {hatch_counter ? eggCycle(hatch_counter) : 'No Egg Cycles'}
+              </td>
+            </tr>
+            <tr>
+              <th>Baby Trigger Item</th>
+              <td>
+                {baby_trigger_item
+                  ? removeDash(baby_trigger_item.name)
+                  : 'None'}
+              </td>
+            </tr>
+            <tr>
+              <th>Habitat</th>
+              <td>{habitat ? removeDash(habitat.name) : 'None'}</td>
+            </tr>
+          </tbody>
+        </Table>
       )}
-    </>
+    </Box>
   )
 }

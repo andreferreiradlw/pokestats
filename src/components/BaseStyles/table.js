@@ -4,7 +4,6 @@ import Box from '../Box'
 
 const Table = styled(Box)`
   display: table;
-  margin-bottom: 1.5rem;
   font-size: 1rem;
   line-height: 1.2rem;
   word-break: break-word;

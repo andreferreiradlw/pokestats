@@ -30,7 +30,7 @@ function index({
     <>
       {!imgLoaded && (
         <Placeholder width={width} height={height}>
-          <EggIcon iconWidth={iconWidth} iconHeight={iconHeight} />
+          <EggIcon iconwidth={iconWidth} iconheight={iconHeight} />
         </Placeholder>
       )}
       <LazyLoad height={height || 135} once offset={offset || 250}>

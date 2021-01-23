@@ -52,14 +52,14 @@ const Placeholder = styled.div`
 const EggIcon = styled(Egg)`
   animation: ${tumble} 5s ease-in-out 0s infinite;
 
-  ${({ iconWidth }) =>
+  ${({ iconwidth }) =>
     css`
-      width: ${iconWidth ? `${iconWidth}` : 'auto'};
+      width: ${iconwidth ? `${iconwidth}` : 'auto'};
     `}
 
-  ${({ iconHeight }) =>
+  ${({ iconheight }) =>
     css`
-      height: ${iconHeight ? `${iconHeight}` : 'auto'};
+      height: ${iconheight ? `${iconheight}` : 'auto'};
     `}
 `
 

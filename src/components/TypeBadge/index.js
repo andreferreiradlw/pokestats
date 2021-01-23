@@ -5,11 +5,14 @@ import { capitalize } from '../../helpers/typography'
 import { Badge } from './StyledBadge'
 
 export default function TypeBadge({ type, hideIcon, iconOnly, ...rest }) {
-  let [icon, setIcon] = useState()
+  const [icon, setIcon] = useState()
 
-  useEffect(async () => {
-    let importedIcon = await import(`../../assets/svg/types/${type}.svg`)
-    setIcon(importedIcon.default)
+  useEffect(() => {
+    async function fetchSVG() {
+      const importedIcon = await import(`../../assets/svg/types/${type}.svg`)
+      setIcon(importedIcon.default)
+    }
+    fetchSVG()
   }, [])
 
   return (

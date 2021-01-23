@@ -68,7 +68,12 @@ export default function Evolution({
           {/** Pokemon box with image and types */}
           <Link as={`/pokemon/${species.name}`} href="/pokemon/[id]" passHref>
             <PokeBox forwardedAs="a" grow={false} width="auto" dark>
-              <Image alt={species.name} src={imgSrc} height={115} />
+              <Image
+                alt={species.name}
+                src={imgSrc}
+                height={115}
+                iconHeight="75%"
+              />
               <NumberId>{`#${currSpecies.id}`}</NumberId>
               <PokeName>{removeDash(currSpecies.name)}</PokeName>
               {currSpecies.generation.name && (

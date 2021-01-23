@@ -23,7 +23,7 @@ export default function Sprites({ ...rest }) {
     <Box align={{ xxs: 'center', lg: 'flex-start' }} {...rest}>
       <SectionTitle>Sprites</SectionTitle>
       {pokemonInfo.isLoading ? (
-        <Loading />
+        <Loading height="300px" iconWidth="5%" key="pokemon-sprites" />
       ) : (
         <>
           {dreamWorld.front_default ||
@@ -47,6 +47,7 @@ export default function Sprites({ ...rest }) {
                           src={sprites[key]}
                           pixelated
                           width={130}
+                          iconWidth="40%"
                         />
                         <p>{removeUnderscore(key)}</p>
                       </SpriteContainer>
@@ -73,6 +74,7 @@ export default function Sprites({ ...rest }) {
                               animated
                               pixelated
                               width={80}
+                              iconWidth="75%"
                             />
                             <p>{removeUnderscore(key)}</p>
                           </SpriteContainer>
@@ -100,6 +102,7 @@ export default function Sprites({ ...rest }) {
                                 dreamworld
                                 src={dreamWorld[key]}
                                 height={180}
+                                iconHeight="65%"
                               />
                               <p>{removeUnderscore(key)}</p>
                             </SpriteContainer>
@@ -117,6 +120,7 @@ export default function Sprites({ ...rest }) {
                         dreamworld
                         src={officialArtwork}
                         height={180}
+                        iconHeight="65%"
                       />
                       <p>Front Default</p>
                     </SpriteContainer>

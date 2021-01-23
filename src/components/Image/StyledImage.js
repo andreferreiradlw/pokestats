@@ -30,18 +30,31 @@ const Image = styled.img`
     `}
 `
 
-const Placeholder = styled(Egg)`
+const Placeholder = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   ${({ width }) =>
-    width &&
     css`
-      width: ${width ? `${width}px` : 'auto'};
+      width: ${width ? `${width}px` : '100%'};
     `}
 
   ${({ height }) =>
-    height &&
     css`
-      height: ${height ? `${height - 15}px` : 'auto'};
+      height: ${height ? `${height}px` : '100%'};
     `}
 `
 
-export { Image, Placeholder }
+const EggIcon = styled(Egg)`
+  ${({ iconWidth }) =>
+    css`
+      width: ${iconWidth ? `${iconWidth}` : 'auto'};
+    `}
+
+  ${({ iconHeight }) =>
+    css`
+      height: ${iconHeight ? `${iconHeight}` : 'auto'};
+    `}
+`
+
+export { Image, Placeholder, EggIcon }

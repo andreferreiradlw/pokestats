@@ -1,9 +1,18 @@
 import { useState, useEffect, useRef } from 'react'
 import LazyLoad from 'react-lazyload'
 // styles
-import { Image, Placeholder } from './StyledImage'
+import { Image, Placeholder, EggIcon } from './StyledImage'
 
-function index({ width, height, pixelated, src, offset, ...rest }) {
+function index({
+  width,
+  height,
+  iconWidth,
+  iconHeight,
+  pixelated,
+  src,
+  offset,
+  ...rest
+}) {
   // img state
   const [imgLoaded, setImgLoaded] = useState(false)
   // ref
@@ -17,7 +26,11 @@ function index({ width, height, pixelated, src, offset, ...rest }) {
 
   return (
     <>
-      {!imgLoaded && <Placeholder width={width} height={height} />}
+      {imgLoaded && (
+        <Placeholder width={width} height={height}>
+          <EggIcon iconWidth={iconWidth} iconHeight={iconHeight} />
+        </Placeholder>
+      )}
       <LazyLoad height={height || 135} once offset={offset || 250}>
         <Image
           src={src}

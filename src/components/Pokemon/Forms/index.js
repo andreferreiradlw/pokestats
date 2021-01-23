@@ -32,7 +32,7 @@ export default function Forms({ ...rest }) {
     <Box align={{ xxs: 'center', lg: 'flex-start' }} {...rest}>
       <SectionTitle>Forms</SectionTitle>
       {pokemonBio.isLoading ? (
-        <Loading height="251px" iconWidth="20%" />
+        <Loading height="251px" iconWidth="15%" key="pokemon-forms" />
       ) : (
         <Table forwardedAs="table" align="flex-start" margin="0 0 1.5rem">
           <tbody>

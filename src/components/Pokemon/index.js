@@ -79,7 +79,6 @@ export default function Homepage() {
     <Layout withHeader withFooter>
       {pokemonInfo.isLoading ? (
         <Loading
-          iconWidth="10%"
           text={`Loading ${router.query.id && removeDash(router.query.id)}`}
         />
       ) : (
@@ -161,7 +160,7 @@ export default function Homepage() {
             </Box>
           </LazyLoad>
           {/** SPRITES */}
-          <LazyLoad height={800} once offset={200}>
+          <LazyLoad height={800} once offset={250}>
             <Box
               as="section"
               align="flex-start"

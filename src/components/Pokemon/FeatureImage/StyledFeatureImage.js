@@ -19,7 +19,7 @@ const ImageContainer = styled(Box)`
     }
   `}
 
-  & ${FeatureImage}, & svg {
+  & ${FeatureImage} {
     max-width: 80%;
     margin: 1.5rem 0;
 

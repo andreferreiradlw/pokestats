@@ -56,7 +56,7 @@ export default function Weaknesses({ ...rest }) {
         <Switch enabled={enabled} onClick={() => setEnabled(!enabled)} />
       </Box>
       {!typeMultipliers ? (
-        <Loading height="251px" iconWidth="20%" />
+        <Loading height="251px" iconWidth="15%" key="pokemon-multipliers" />
       ) : (
         <>
           {currMultipliers && (

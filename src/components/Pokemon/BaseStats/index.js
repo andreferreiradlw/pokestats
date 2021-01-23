@@ -44,7 +44,7 @@ export default function BaseStats({ ...rest }) {
     <Box align={{ xxs: 'center', lg: 'flex-start' }} {...rest}>
       <SectionTitle>Base Stats</SectionTitle>
       {pokemonInfo.isLoading ? (
-        <Loading height="280px" iconWidth="15%" />
+        <Loading height="280px" iconWidth="10%" key="pokemon-stats" />
       ) : (
         <StatsTable forwardedAs="table" align="flex-start" margin="0 0 1.5rem">
           <tbody>

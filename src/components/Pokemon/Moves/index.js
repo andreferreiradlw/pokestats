@@ -222,7 +222,9 @@ export default function Moves({ ...rest }) {
         <SectionMessage>No moves for current game version!</SectionMessage>
       )}
       {/** LOADING */}
-      {movesLoading && <Loading height="300px" iconWidth="10%" />}
+      {movesLoading && (
+        <Loading height="300px" iconWidth="5%" key="pokemon-moves" />
+      )}
     </Box>
   )
 }

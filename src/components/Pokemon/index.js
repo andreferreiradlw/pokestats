@@ -79,14 +79,18 @@ export default function Homepage() {
     <Layout withHeader withFooter>
       {pokemonInfo.isLoading ? (
         <Loading
-          text={`Loading ${router.query.id && removeDash(router.query.id)}`}
+          text={`Loading ${
+            router.query.id &&
+            router.query.id !== undefined &&
+            removeDash(router.query.id)
+          }`}
         />
       ) : (
         <>
           <Box
             as="section"
             direction={{ xxs: 'column-reverse', lg: 'row' }}
-            align="flex-start"
+            align="center"
             justify="flex-start"
             margin="1rem 0"
             constrained

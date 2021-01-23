@@ -26,7 +26,7 @@ function index({
 
   return (
     <>
-      {imgLoaded && (
+      {!imgLoaded && (
         <Placeholder width={width} height={height}>
           <EggIcon iconWidth={iconWidth} iconHeight={iconHeight} />
         </Placeholder>

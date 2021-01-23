@@ -8,6 +8,7 @@ export default function FeaturedImage({ pokemonName, pokemonId, ...rest }) {
     <ImageContainer {...rest}>
       <FeatureImage
         iconWidth="20%"
+        height={350}
         alt={pokemonName}
         src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemonId}.png`}
       />

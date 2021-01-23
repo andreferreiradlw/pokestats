@@ -1,4 +1,6 @@
 import styled, { css } from 'styled-components'
+// helpers
+import { tumble } from '../BaseStyles/keyframes'
 // svg
 import Egg from '../../assets/svg/egg.svg'
 
@@ -34,6 +36,8 @@ const Placeholder = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 15px 0;
+
   ${({ width }) =>
     css`
       width: ${width ? `${width}px` : '100%'};
@@ -46,6 +50,8 @@ const Placeholder = styled.div`
 `
 
 const EggIcon = styled(Egg)`
+  animation: ${tumble} 5s ease-in-out 0s infinite;
+
   ${({ iconWidth }) =>
     css`
       width: ${iconWidth ? `${iconWidth}` : 'auto'};

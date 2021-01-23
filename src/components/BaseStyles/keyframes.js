@@ -97,4 +97,34 @@ const riseUp = keyframes`
   }
 `
 
-export { float, ellipsis, rotate, riseUp }
+const tumble = keyframes`
+	0% { transform: rotateZ( 0deg ); }
+	1% { transform: rotateZ( 10deg ); }
+	2% { transform: rotateZ( 0deg ); }
+	
+	6% { transform: rotateZ( 0deg ); }	
+  7% { transform: rotateZ( -15deg ); }
+	8% { transform: rotateZ( 0deg ); }
+	
+	40% { transform: rotateZ( 0deg ); }	
+	41% { transform: rotateZ( -10deg ); }
+	42% { transform: rotateZ( 0deg ); }
+	
+	43% { transform: rotateZ( 0deg ); }	
+	44% { transform: rotateZ( 10deg ); }
+	45% { transform: rotateZ( 0deg ); }
+	
+  77% { transform: rotateZ( 0deg ); }	
+  78% { transform: rotateZ( -15deg ); }
+	79% { transform: rotateZ( 0deg ); }
+	
+	80% { transform: rotateZ( 0deg ); }
+	81% { transform: rotateZ( 10deg ); }
+	82% { transform: rotateZ( 0deg ); }
+	
+	96% { transform: rotateZ( 0deg ); }	
+  97% { transform: rotateZ( -10deg ); }
+	98% { transform: rotateZ( 0deg ); }
+`
+
+export { float, ellipsis, rotate, riseUp, tumble }

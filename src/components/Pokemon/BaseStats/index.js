@@ -33,11 +33,15 @@ export default function BaseStats({ ...rest }) {
     const nature = statType === 'min' ? 0.9 : 1.1
 
     // https://bulbapedia.bulbagarden.net/wiki/Statistic
-    statName === 'hp'
-      ? Math.floor(((2 * baseStat + IV + EV / 4) * level) / 100 + level + 10)
-      : Math.floor(
-          Math.floor(((2 * baseStat + IV + EV / 4) * level) / 100 + 5) * nature
-        )
+    if (statName === 'hp') {
+      return Math.floor(
+        ((2 * baseStat + IV + EV / 4) * level) / 100 + level + 10
+      )
+    } else {
+      return Math.floor(
+        Math.floor(((2 * baseStat + IV + EV / 4) * level) / 100 + 5) * nature
+      )
+    }
   }
 
   return (

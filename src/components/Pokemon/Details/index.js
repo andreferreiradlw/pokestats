@@ -34,9 +34,19 @@ export default function Details({ ...rest }) {
     const versionEntry = flavor_text_entries.filter(entry => {
       return entry.version.name === version
     })
-    // return text
+    // return formatted text
+    // page breaks are treated just like newlines
+    // soft hyphens followed by newlines vanish
+    // letter-hyphen-newline becomes letter-hyphen, to preserve real hyphenation
+    // any other newline becomes a space
     return versionEntry.length
       ? versionEntry[0].flavor_text
+          .replace(/u'\f'/, /u'\n'/)
+          .replace(/u'\u00ad\n'/, /u''/)
+          .replace(/u'\u00ad'/, /u''/)
+          .replace(/u' -\n'/, /u' - '/)
+          .replace(/u'-\n'/, /u'-'/)
+          .replace(/u'\n'/, /u' '/)
       : 'No description available for currently selected generation.'
   }
 

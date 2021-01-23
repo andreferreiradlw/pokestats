@@ -219,7 +219,9 @@ export default function Moves({ ...rest }) {
       </TableContainer>
       {/** NO MOVES */}
       {!movesLoading && currMoves.length === 0 && (
-        <SectionMessage>No moves for current game version!</SectionMessage>
+        <SectionMessage>
+          No moves for currently selected game version.
+        </SectionMessage>
       )}
       {/** LOADING */}
       {movesLoading && (

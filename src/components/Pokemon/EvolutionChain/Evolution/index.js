@@ -72,6 +72,7 @@ export default function Evolution({
                 alt={species.name}
                 src={imgSrc}
                 height={115}
+                imgHeight={115}
                 iconHeight="75%"
               />
               <NumberId>{`#${currSpecies.id}`}</NumberId>

@@ -19,6 +19,7 @@ const PokemonBox = forwardRef(({ pokemon, dark, ...rest }, ref) => {
           alt={name}
           pixelated
           height={115}
+          imgHeight={115}
           iconHeight="65%"
           offset={300}
         />

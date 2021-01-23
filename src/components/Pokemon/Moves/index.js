@@ -223,7 +223,11 @@ export default function Moves({ ...rest }) {
       )}
       {/** LOADING */}
       {movesLoading && (
-        <Loading height="300px" iconWidth="5%" key="pokemon-moves" />
+        <Loading
+          height="300px"
+          iconWidth={{ xxs: '20%', xs: '15%', md: '10%', lg: '5%' }}
+          key="pokemon-moves"
+        />
       )}
     </Box>
   )

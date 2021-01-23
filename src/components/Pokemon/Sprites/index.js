@@ -102,6 +102,7 @@ export default function Sprites({ ...rest }) {
                                 dreamworld
                                 src={dreamWorld[key]}
                                 height={180}
+                                imgHeight={180}
                                 iconHeight="65%"
                               />
                               <p>{removeUnderscore(key)}</p>
@@ -120,6 +121,7 @@ export default function Sprites({ ...rest }) {
                         dreamworld
                         src={officialArtwork}
                         height={180}
+                        imgHeight={180}
                         iconHeight="65%"
                       />
                       <p>Front Default</p>

@@ -8,6 +8,8 @@ function index({
   height,
   iconWidth,
   iconHeight,
+  imgWidth,
+  imgHeight,
   pixelated,
   src,
   offset,
@@ -37,8 +39,8 @@ function index({
           pixelated={pixelated}
           onLoad={() => !imgLoaded && setImgLoaded(true)}
           ref={imageRef}
-          width={width}
-          height={height}
+          width={imgWidth}
+          height={imgHeight}
           loaded={imgLoaded}
           {...rest}
         />

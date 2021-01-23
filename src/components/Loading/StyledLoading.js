@@ -2,9 +2,9 @@ import styled, { css } from 'styled-components'
 // components
 import Box from '../Box'
 // styles
-import { SectionSubTitle } from '../BaseStyles'
+import { SectionSubTitle, ellipsis, rotate, riseUp } from '../BaseStyles'
 // helpers
-import { ellipsis, rotate, riseUp } from '../BaseStyles'
+import { responsiveProps } from '../../helpers/box'
 //svg
 import Potion from '../../assets/svg/potion.svg'
 
@@ -21,10 +21,7 @@ const LoadingContainer = styled(Box)`
 `
 
 const PotionIcon = styled(Potion)`
-  ${({ iconwidth }) =>
-    css`
-      width: ${iconwidth};
-    `}
+  ${({ iconwidth }) => iconwidth && responsiveProps('width', iconwidth)}
   height: auto;
   // rotation
   animation: 20s ${rotate} 0ms infinite ease-in-out;

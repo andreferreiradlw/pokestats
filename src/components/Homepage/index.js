@@ -9,6 +9,7 @@ import Autocomplete from '../Autocomplete'
 import Particles from '../Particles'
 import Loading from '../Loading'
 import PokemonList from './PokemonList'
+import BoxWrapper from '../Box/StyledBox'
 // styles
 import { Container } from './styledHomepage'
 import { MainHeading } from '../BaseStyles'

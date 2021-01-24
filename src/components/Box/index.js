@@ -1,7 +1,7 @@
 import { forwardRef } from 'react'
 import { useForwardedRef } from '../../helpers/refs'
 // styles
-import { BoxWrapper } from './StyledBox'
+import BoxWrapper from './StyledBox'
 
 const Box = forwardRef(
   (
@@ -9,33 +9,24 @@ const Box = forwardRef(
       align = 'center',
       as = 'div',
       children,
-      constrained,
       direction = 'column',
-      fill,
       flexWrap = 'nowrap',
-      flexGrow,
-      height,
       justify = 'center',
-      sizes,
       width = '100%',
       ...rest
     },
     ref
   ) => {
     const boxRef = useForwardedRef(ref)
+
     return (
       <BoxWrapper
-        alignProp={align}
+        align={align}
         as={as}
-        constrained={constrained}
-        fillProp={fill}
-        flexDirection={direction}
+        direction={direction}
         flexWrap={flexWrap}
-        growProp={flexGrow}
-        heightProp={height}
-        justifyProp={justify}
-        sizesProp={sizes}
-        widthProp={width}
+        justify={justify}
+        width={width}
         ref={boxRef}
         {...rest}
       >

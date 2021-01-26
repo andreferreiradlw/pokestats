@@ -1,10 +1,15 @@
 import styled, { css } from 'styled-components'
+import { motion } from 'framer-motion'
 // components
-import Box from '../Box'
+import BoxWrapper from '../Box/StyledBox'
 // styles
 import { float } from './keyframes'
 
-const PokeBox = styled(Box)`
+const PokeBox = styled(BoxWrapper)`
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
   ${({ width }) =>
     !width &&
     css`
@@ -72,11 +77,11 @@ const PokeBox = styled(Box)`
   }
 `
 
-const NumberId = styled.span`
+const NumberId = styled(motion.span)`
   font-size: 2rem;
 `
 
-const PokeName = styled.span`
+const PokeName = styled(motion.span)`
   font-size: 1.2rem;
   margin-bottom: 0.5rem;
 `

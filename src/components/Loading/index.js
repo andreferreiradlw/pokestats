@@ -1,6 +1,9 @@
 import { forwardRef } from 'react'
+import { motion } from 'framer-motion'
 // styles
 import { LoadingContainer, PotionIcon, Text } from './StyledLoading'
+// helpers
+import { loadingContainer, loadingChild } from '../../helpers/animations'
 
 const Loading = forwardRef(
   (
@@ -11,6 +14,7 @@ const Loading = forwardRef(
       text,
       justify = 'center',
       align = 'center',
+      passKey,
       ...rest
     },
     ref
@@ -22,10 +26,23 @@ const Loading = forwardRef(
         justify={justify}
         align={align}
         height={height}
+        variants={loadingContainer}
+        initial="initial"
+        animate="animate"
+        exit="exit"
+        key={passKey}
         {...rest}
       >
-        {!noIcon && <PotionIcon iconwidth={iconWidth} />}
-        {text && <Text>{text}</Text>}
+        {!noIcon && (
+          <motion.div variants={loadingChild} key={`icon-${passKey}`}>
+            <PotionIcon iconwidth={iconWidth} />
+          </motion.div>
+        )}
+        {text && (
+          <motion.div variants={loadingChild} key={`text-${passKey}`}>
+            <Text>{text}</Text>
+          </motion.div>
+        )}
       </LoadingContainer>
     )
   }

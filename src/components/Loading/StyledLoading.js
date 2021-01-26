@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components'
 // components
-import Box from '../Box'
+import BoxWrapper from '../Box/StyledBox'
 // styles
 import { SectionSubTitle, ellipsis, rotate, riseUp } from '../BaseStyles'
 // helpers
@@ -8,7 +8,15 @@ import { responsiveProps } from '../../helpers/box'
 //svg
 import Potion from '../../assets/svg/potion.svg'
 
-const LoadingContainer = styled(Box)`
+const LoadingContainer = styled(BoxWrapper)`
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  z-index: 2;
+  flex-grow 1;
+  // background-color: white;
+
   ${({ height }) =>
     height
       ? css`

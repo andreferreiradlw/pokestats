@@ -1,8 +1,8 @@
 import { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useRouter } from 'next/router'
-import LazyLoad from 'react-lazyload'
-import { motion, AnimatePresence } from 'framer-motion'
+// import LazyLoad from 'react-lazyload'
+import { AnimatePresence } from 'framer-motion'
 // actions
 import { fetchPokemonData, startLoading, cleanData } from './pokemonSlice'
 import { changeVersion } from '../Header/gameSlice'

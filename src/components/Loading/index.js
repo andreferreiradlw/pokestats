@@ -1,5 +1,4 @@
 import { forwardRef } from 'react'
-import { motion } from 'framer-motion'
 // styles
 import { LoadingContainer, PotionIcon, Text } from './StyledLoading'
 import BoxWrapper from '../Box/StyledBox'

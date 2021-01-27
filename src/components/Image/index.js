@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 import LazyLoad from 'react-lazyload'
-import { motion, AnimatePresence, AnimateSharedLayout } from 'framer-motion'
+import { AnimatePresence } from 'framer-motion'
 // helpers
 import { placeholderVariant, imageVariant } from '../../helpers/animations'
 // styles

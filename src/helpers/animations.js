@@ -30,15 +30,15 @@ export const loadingChild = {
 export const pageVariant = {
   pageInitial: {
     opacity: 1,
-    x: 0,
+    scale: 1,
   },
   pageAnimate: {
     opacity: 1,
-    x: 0,
+    scale: 1,
   },
   pageExit: {
     opacity: 0,
-    x: '-100vw',
+    scale: 0,
     transition: { duration: 0.5, ease: 'easeInOut' },
   },
 }
@@ -56,8 +56,8 @@ export const pageContainerVariant = {
       delay: 0.5,
       type: 'spring',
       mass: 1,
-      damping: 15,
-      stiffness: 500,
+      damping: 25,
+      stiffness: 350,
     },
   },
   exit: {
@@ -99,14 +99,51 @@ export const fadeInUpVariant = {
   initial: {
     y: 60,
     opacity: 0,
-    transition: { duration: 0.6, ease: 'easeInOut' },
+    transition: { duration: 0.3, ease: 'easeInOut' },
   },
   animate: {
     y: 0,
     opacity: 1,
     transition: {
-      duration: 0.6,
+      duration: 0.3,
       ease: 'easeInOut',
+    },
+  },
+}
+
+export const placeholderVariant = {
+  initial: {
+    opacity: 1,
+    scale: 1,
+  },
+  animate: {
+    opacity: 1,
+    scale: 1,
+  },
+  exit: {
+    opacity: 0,
+    scale: 0,
+    transition: {
+      duration: 0.2,
+      ease: 'easeInOut',
+    },
+  },
+}
+
+export const imageVariant = {
+  hidden: {
+    scale: 0,
+    opacity: 0,
+  },
+  show: {
+    opacity: 1,
+    scale: 1,
+    transition: {
+      delay: 0.2,
+      type: 'spring',
+      mass: 1,
+      damping: 15,
+      stiffness: 200,
     },
   },
 }

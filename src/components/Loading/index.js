@@ -3,7 +3,7 @@ import { motion } from 'framer-motion'
 // styles
 import { LoadingContainer, PotionIcon, Text } from './StyledLoading'
 // helpers
-import { loadingContainer, loadingChild } from '../../helpers/animations'
+import { staggerExitVariant, loadingChild } from '../../helpers/animations'
 
 const Loading = forwardRef(
   (
@@ -26,7 +26,7 @@ const Loading = forwardRef(
         justify={justify}
         align={align}
         height={height}
-        variants={loadingContainer}
+        variants={staggerExitVariant}
         initial="initial"
         animate="animate"
         exit="exit"

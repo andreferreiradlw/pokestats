@@ -57,16 +57,12 @@ const PokeBox = styled(BoxWrapper)`
   font-weight: 600;
   transition: border 0.1s ease-in-out;
   transition: box-shadow 0.05s ease-in-out;
-  transition: transform 0.05s ease-in-out;
 
   &:hover {
     cursor: pointer;
-    transform: scale(1.03);
 
     &:active {
       transition: box-shadow 0.01s ease-in-out;
-      transition: transform 0.01s ease-in-out;
-      transform: scale(1);
     }
 
     & img {

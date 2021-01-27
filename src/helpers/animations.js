@@ -68,10 +68,11 @@ export const pageContainerVariant = {
 }
 
 export const staggerInitialVariant = {
-  hidden: { opacity: 0 },
+  hidden: { opacity: 1 },
   show: {
     opacity: 1,
     transition: {
+      delay: 0.5,
       staggerChildren: 0.5,
     },
   },
@@ -90,6 +91,22 @@ export const scaleInVariant = {
       mass: 1,
       damping: 15,
       stiffness: 200,
+    },
+  },
+}
+
+export const fadeInUpVariant = {
+  initial: {
+    y: 60,
+    opacity: 0,
+    transition: { duration: 0.6, ease: 'easeInOut' },
+  },
+  animate: {
+    y: 0,
+    opacity: 1,
+    transition: {
+      duration: 0.6,
+      ease: 'easeInOut',
     },
   },
 }

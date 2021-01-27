@@ -1,15 +1,16 @@
 import { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import LazyLoad from 'react-lazyload'
-// actions
+import { AnimatePresence } from 'framer-motion'
+// redux actions
 import { startLoading, stopLoading } from './homeSlice'
+// heplpers
+import { scaleInVariant, staggerInitialVariant } from '../../helpers/animations'
 // components
 import Layout from '../Layout'
 import Autocomplete from '../Autocomplete'
 import Particles from '../Particles'
 import Loading from '../Loading'
 import PokemonList from './PokemonList'
-import BoxWrapper from '../Box/StyledBox'
 // styles
 import { Container } from './styledHomepage'
 import { MainHeading } from '../BaseStyles'
@@ -32,23 +33,35 @@ export default function Homepage() {
   }, [])
 
   return (
-    <>
-      {isLoading || pokemonLength === 0 ? (
-        <Loading height="100vh" />
-      ) : (
-        <>
-          <Layout withGutter={false} withFooter>
-            <Container height="100vh" constrained withGutter>
-              <MainHeading>PokeStats</MainHeading>
-              <Autocomplete />
-              <LazyLoad height={200} once>
-                <Particles />
-              </LazyLoad>
+    <Layout withGutter={false} withFooter key="homepage-layout">
+      <AnimatePresence exitBeforeEnter>
+        {(isLoading || pokemonLength === 0) && (
+          <Loading key="homepage-loading" height="100vh" />
+        )}
+        {(!isLoading || pokemonLength !== 0) && (
+          <>
+            <Container
+              height="100vh"
+              constrained
+              withGutter
+              initial="hidden"
+              animate="show"
+              variants={staggerInitialVariant}
+              key="homepage-container"
+            >
+              <MainHeading variants={scaleInVariant} key="homepage-heading">
+                PokeStats
+              </MainHeading>
+              <Autocomplete
+                variants={scaleInVariant}
+                key="homepage-autocomplete"
+              />
+              <Particles />
             </Container>
             <PokemonList />
-          </Layout>
-        </>
-      )}
-    </>
+          </>
+        )}
+      </AnimatePresence>
+    </Layout>
   )
 }

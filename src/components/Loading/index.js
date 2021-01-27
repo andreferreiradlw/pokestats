@@ -2,6 +2,7 @@ import { forwardRef } from 'react'
 import { motion } from 'framer-motion'
 // styles
 import { LoadingContainer, PotionIcon, Text } from './StyledLoading'
+import BoxWrapper from '../Box/StyledBox'
 // helpers
 import { staggerExitVariant, loadingChild } from '../../helpers/animations'
 
@@ -34,14 +35,19 @@ const Loading = forwardRef(
         {...rest}
       >
         {!noIcon && (
-          <motion.div variants={loadingChild} key={`icon-${passKey}`}>
+          <BoxWrapper
+            width="100%"
+            justify="center"
+            variants={loadingChild}
+            key={`icon-${passKey}`}
+          >
             <PotionIcon iconwidth={iconWidth} />
-          </motion.div>
+          </BoxWrapper>
         )}
         {text && (
-          <motion.div variants={loadingChild} key={`text-${passKey}`}>
+          <BoxWrapper variants={loadingChild} key={`text-${passKey}`}>
             <Text>{text}</Text>
-          </motion.div>
+          </BoxWrapper>
         )}
       </LoadingContainer>
     )

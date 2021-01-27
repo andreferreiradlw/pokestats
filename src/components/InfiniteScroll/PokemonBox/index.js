@@ -18,9 +18,8 @@ const PokemonBox = forwardRef(({ pokemon, dark, ...rest }, ref) => {
           crossorigin="anonymous"
           alt={name}
           pixelated
+          width={115}
           height={115}
-          imgHeight={115}
-          iconHeight="65%"
           offset={300}
         />
         <NumberId>{`#${id}`}</NumberId>

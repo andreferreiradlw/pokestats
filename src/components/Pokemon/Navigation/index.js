@@ -38,9 +38,7 @@ export default function Navigation({ ...rest }) {
                       id - 1
                     }.png`}
                     alt={allPokemon[id - 2].name}
-                    height={90}
-                    imgHeight={90}
-                    iconHeight="75%"
+                    width={100}
                     pixelated
                   />
                 </Arrow>
@@ -64,9 +62,7 @@ export default function Navigation({ ...rest }) {
                       id + 1
                     }.png`}
                     alt={allPokemon[id].name}
-                    height={90}
-                    imgHeight={90}
-                    iconHeight="75%"
+                    width={100}
                     pixelated
                   />
                 </Arrow>

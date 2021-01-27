@@ -1,16 +1,6 @@
 import styled, { css } from 'styled-components'
 // components
 import Box from '../../Box'
-import Image from '../../Image'
-// styles
-import { float } from '../../BaseStyles'
-
-// image
-const FeatureImage = styled(Image)`
-  @media (prefers-reduced-motion: no-preference) {
-    animation: ${float} infinite 3s ease-in-out;
-  }
-`
 
 const ImageContainer = styled(Box)`
   ${({ theme }) => css`
@@ -19,7 +9,7 @@ const ImageContainer = styled(Box)`
     }
   `}
 
-  & ${FeatureImage} {
+  & img {
     max-width: 80%;
     margin: 1.5rem 0;
 
@@ -40,4 +30,4 @@ const ImageContainer = styled(Box)`
   }
 `
 
-export { ImageContainer, FeatureImage }
+export { ImageContainer }

@@ -33,6 +33,7 @@ export default function Sprites({ ...rest }) {
             <>
               <Box
                 direction="row-reverse"
+                align="flex-end"
                 justify={{ xxs: 'center', lg: 'flex-end' }}
                 margin="0 0 2rem"
                 flexWrap="wrap"
@@ -59,6 +60,7 @@ export default function Sprites({ ...rest }) {
                   <SectionSubTitle>Animated Sprites</SectionSubTitle>
                   <Box
                     direction="row-reverse"
+                    align="flex-end"
                     justify={{ xxs: 'center', lg: 'flex-end' }}
                     margin="0 0 2rem"
                     flexWrap="wrap"
@@ -102,8 +104,6 @@ export default function Sprites({ ...rest }) {
                                 dreamworld
                                 src={dreamWorld[key]}
                                 height={180}
-                                imgHeight={180}
-                                iconHeight="65%"
                               />
                               <p>{removeUnderscore(key)}</p>
                             </SpriteContainer>
@@ -121,8 +121,6 @@ export default function Sprites({ ...rest }) {
                         dreamworld
                         src={officialArtwork}
                         height={180}
-                        imgHeight={180}
-                        iconHeight="65%"
                       />
                       <p>Front Default</p>
                     </SpriteContainer>

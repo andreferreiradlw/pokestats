@@ -4,6 +4,7 @@ import axios from 'axios'
 // helpers
 import { removeDash } from '../../../../helpers/typography'
 import { mapGeneration } from '../../../../helpers/gameVersion'
+import { fadeInUpVariant } from '../../../../helpers/animations'
 // components
 import Box from '../../../Box'
 import Image from '../../../Image'
@@ -67,13 +68,30 @@ export default function Evolution({
           )}
           {/** Pokemon box with image and types */}
           <Link as={`/pokemon/${species.name}`} href="/pokemon/[id]" passHref>
-            <PokeBox forwardedAs="a" grow={false} width="auto" dark>
+            <PokeBox
+              forwardedAs="a"
+              grow={false}
+              width="auto"
+              dark
+              whileHover={{
+                zIndex: 1,
+                scale: [1, 1.05, 1.02],
+                rotate: [0, 1, -1, 0],
+                transition: {
+                  duration: 0.2,
+                },
+              }}
+              whileTap={{ scale: 0.99 }}
+              initial="initial"
+              animate="animate"
+              variants={fadeInUpVariant}
+            >
               <Image
                 alt={species.name}
                 src={imgSrc}
+                width={115}
                 height={115}
-                imgHeight={115}
-                iconHeight="75%"
+                notLazy
               />
               <NumberId>{`#${currSpecies.id}`}</NumberId>
               <PokeName>{removeDash(currSpecies.name)}</PokeName>

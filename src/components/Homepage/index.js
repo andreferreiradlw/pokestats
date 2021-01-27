@@ -56,9 +56,9 @@ export default function Homepage() {
                 variants={scaleInVariant}
                 key="homepage-autocomplete"
               />
-              <Particles />
             </Container>
             <PokemonList />
+            <Particles />
           </>
         )}
       </AnimatePresence>

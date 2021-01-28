@@ -45,6 +45,7 @@ export default function Sprites({ ...rest }) {
                       <SpriteContainer sizes={1.5} key={`${key}-${i}`}>
                         <Sprite
                           alt={key}
+                          key={`sprite-${key}`}
                           src={sprites[key]}
                           pixelated
                           width={130}
@@ -72,6 +73,7 @@ export default function Sprites({ ...rest }) {
                           <SpriteContainer sizes={1.5} key={`${key}-${i}`}>
                             <Sprite
                               alt={key}
+                              key={`animated-sprite-${key}`}
                               src={animatedSprites[key]}
                               animated
                               pixelated
@@ -101,6 +103,7 @@ export default function Sprites({ ...rest }) {
                                 alt={`DreamWorld Design ${removeUnderscore(
                                   key
                                 )}`}
+                                key={`dreamworld-sprite-${key}`}
                                 dreamworld
                                 src={dreamWorld[key]}
                                 height={180}
@@ -118,6 +121,7 @@ export default function Sprites({ ...rest }) {
                     <SpriteContainer width={{ xxs: '100%', md: 'auto' }}>
                       <Sprite
                         alt={`Official Artwork Front Default`}
+                        key={`official-artwork-${officialArtwork}`}
                         dreamworld
                         src={officialArtwork}
                         height={180}

@@ -88,6 +88,7 @@ export default function Evolution({
             >
               <Image
                 alt={species.name}
+                key={`evolution-${species.name}-${imgSrc}`}
                 src={imgSrc}
                 width={115}
                 height={115}

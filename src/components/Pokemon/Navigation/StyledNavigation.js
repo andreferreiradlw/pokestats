@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components'
+import { motion } from 'framer-motion'
 // components
 import Image from '../../Image'
 
@@ -54,7 +55,7 @@ const PokemonImg = styled(Image)`
   transition: all 0.15s ease-in-out;
 `
 
-const BtnAnchor = styled.a`
+const BtnAnchor = styled(motion.a)`
   overflow: hidden;
   border: 2px solid black;
   font-weight: 600;

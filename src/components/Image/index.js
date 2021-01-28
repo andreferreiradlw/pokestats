@@ -3,7 +3,7 @@ import axios from 'axios'
 import LazyLoad from 'react-lazyload'
 import { AnimatePresence } from 'framer-motion'
 // helpers
-import { placeholderVariant, imageVariant } from '../../helpers/animations'
+import { placeholderVariant, fadeInUpVariant } from '../../helpers/animations'
 // styles
 import { ImageWrapper, Image, Placeholder, EggIcon } from './StyledImage'
 
@@ -18,11 +18,12 @@ function ImageComponent({
   alt,
   width,
   height,
-  placeholderWidth = '65%',
+  placeholderwidth = '65%',
   pixelated,
   src,
   offset,
   notLazy,
+  key,
   ...rest
 }) {
   // img src
@@ -40,7 +41,7 @@ function ImageComponent({
 
   return (
     <ConditionalWrapper
-      key={alt}
+      key={key || alt}
       condition={!notLazy}
       height={height}
       wrapper={children => (
@@ -57,10 +58,10 @@ function ImageComponent({
             initial="initial"
             animate="animate"
             exit="exit"
-            key={`image-placeholder-${src}-${alt}`}
+            key={`image-placeholder-${src}-${key || alt}`}
             variants={placeholderVariant}
           >
-            <EggIcon placeholderWidth={placeholderWidth} />
+            <EggIcon placeholderwidth={placeholderwidth} />
           </Placeholder>
         )}
         {imgSrc && (
@@ -72,8 +73,8 @@ function ImageComponent({
             height={height}
             initial="hidden"
             animate="show"
-            variants={imageVariant}
-            key={`image-${src}-${alt}`}
+            variants={fadeInUpVariant}
+            key={`image-${src}-${key || alt}`}
             {...rest}
           />
         )}

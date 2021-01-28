@@ -58,9 +58,9 @@ const Placeholder = styled(motion.div)`
 const EggIcon = styled(Egg)`
   animation: ${tumble} 5s ease-in-out 0s infinite;
 
-  ${({ placeholderWidth }) =>
+  ${({ placeholderwidth }) =>
     css`
-      width: ${placeholderWidth ? `${placeholderWidth}` : 'auto'};
+      width: ${placeholderwidth ? `${placeholderwidth}` : 'auto'};
     `}
 `
 

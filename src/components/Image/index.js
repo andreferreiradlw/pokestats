@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import axios from 'axios'
 import LazyLoad from 'react-lazyload'
 import { AnimatePresence } from 'framer-motion'
@@ -23,25 +23,37 @@ function ImageComponent({
   src,
   offset,
   notLazy,
-  key,
   ...rest
 }) {
   // img src
   const [imgSrc, setImgSrc] = useState(null)
+  // ref
+  const _isMounted = useRef(null)
+  // manage mounted state to avoid memory leaks
+  useEffect(() => {
+    _isMounted.current = true
+    return () => {
+      _isMounted.current = false
+      setImgSrc(null)
+    }
+  }, [])
 
   useEffect(() => {
-    axios.get(src, { responseType: 'arraybuffer' }).then(response => {
-      let blob = new Blob([response.data], {
-        type: response.headers['content-type'],
+    async function fetchImage() {
+      await axios.get(src, { responseType: 'arraybuffer' }).then(response => {
+        let blob = new Blob([response.data], {
+          type: response.headers['content-type'],
+        })
+        let image = URL.createObjectURL(blob)
+        if (_isMounted.current) setImgSrc(image)
       })
-      let image = URL.createObjectURL(blob)
-      setImgSrc(image)
-    })
-  }, [])
+    }
+    fetchImage()
+  }, [_isMounted])
 
   return (
     <ConditionalWrapper
-      key={key || alt}
+      key={alt}
       condition={!notLazy}
       height={height}
       wrapper={children => (
@@ -58,7 +70,7 @@ function ImageComponent({
             initial="initial"
             animate="animate"
             exit="exit"
-            key={`image-placeholder-${src}-${key || alt}`}
+            key={`image-placeholder-${src}`}
             variants={placeholderVariant}
           >
             <EggIcon placeholderwidth={placeholderwidth} />
@@ -74,7 +86,7 @@ function ImageComponent({
             initial="hidden"
             animate="show"
             variants={fadeInUpVariant}
-            key={`image-${src}-${key || alt}`}
+            key={`image-${src}`}
             {...rest}
           />
         )}

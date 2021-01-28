@@ -6,9 +6,9 @@ import { Badge } from './StyledBadge'
 
 export default function TypeBadge({ type, hideIcon, iconOnly, ...rest }) {
   const [Icon, setIcon] = useState()
-
+  // ref
   const _isMounted = useRef(null)
-
+  // manage mounted state to avoid memory leaks
   useEffect(() => {
     _isMounted.current = true
     return () => {

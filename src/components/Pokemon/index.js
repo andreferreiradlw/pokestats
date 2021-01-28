@@ -83,24 +83,25 @@ export default function Homepage() {
   return (
     <Layout
       withHeader
-      withFooter={!pokemonInfo.isLoading}
+      withFooter={false}
       withMain={false}
-      key={`layout-${router.query.id}`}
+      key={`layout-pokemon-${router.query.id}`}
     >
       <AnimatePresence exitBeforeEnter>
         {pokemonInfo.isLoading && (
           <Loading
             passKey={`loading-pokemon-${router.query.id}`}
+            key={`loading-pokemon-${router.query.id}`}
             text={router.query.id && `Loading ${removeDash(router.query.id)}`}
           />
         )}
         {!pokemonInfo.isLoading && (
           <BoxWrapper
-            as="main"
-            variants={pageContainerVariant}
+            forwardedAs="main"
+            key={`pokemon-${router.query.id}`}
             initial="hidden"
             animate="visible"
-            key={`pokemon-${router.query.id}`}
+            variants={pageContainerVariant}
             constrained
             withGutter
             direction="column"
@@ -176,7 +177,7 @@ export default function Homepage() {
               justify="flex-start"
               margin="1rem 0"
             >
-              <LazyLoad height={500} once offset={250}>
+              <LazyLoad height={500} once offset={350}>
                 <Moves sizes={12} margin="0 0 2rem" />
               </LazyLoad>
             </Box>
@@ -187,7 +188,7 @@ export default function Homepage() {
               justify="flex-start"
               margin="1rem 0"
             >
-              <LazyLoad height={800} once offset={250}>
+              <LazyLoad height={800} once offset={350}>
                 <Sprites sizes={12} margin="0 0 2rem" />
               </LazyLoad>
             </Box>

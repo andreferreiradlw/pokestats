@@ -49,7 +49,7 @@ export default function Sprites({ ...rest }) {
                           src={sprites[key]}
                           pixelated
                           width={130}
-                          iconWidth="40%"
+                          placeholderwidth="40%"
                         />
                         <p>{removeUnderscore(key)}</p>
                       </SpriteContainer>
@@ -78,7 +78,7 @@ export default function Sprites({ ...rest }) {
                               animated
                               pixelated
                               width={80}
-                              iconWidth="75%"
+                              placeholderwidth="75%"
                             />
                             <p>{removeUnderscore(key)}</p>
                           </SpriteContainer>
@@ -107,6 +107,7 @@ export default function Sprites({ ...rest }) {
                                 dreamworld
                                 src={dreamWorld[key]}
                                 height={180}
+                                placeholderwidth="30%"
                               />
                               <p>{removeUnderscore(key)}</p>
                             </SpriteContainer>
@@ -125,6 +126,7 @@ export default function Sprites({ ...rest }) {
                         dreamworld
                         src={officialArtwork}
                         height={180}
+                        placeholderwidth="30%"
                       />
                       <p>Front Default</p>
                     </SpriteContainer>

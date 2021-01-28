@@ -2,7 +2,6 @@
 export const staggerExitVariant = {
   exit: {
     transition: {
-      delayChildren: 0.5,
       staggerChildren: 0.2,
       staggerDirection: -1,
     },
@@ -14,7 +13,6 @@ export const staggerInitialVariant = {
   show: {
     opacity: 1,
     transition: {
-      delayChildren: 0.5,
       staggerChildren: 0.5,
     },
   },

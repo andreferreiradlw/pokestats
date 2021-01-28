@@ -14,6 +14,7 @@ export default function Layout({
   withGutter = true,
   withHeader,
   withMain = true,
+  constrained,
   children,
   ...rest
 }) {
@@ -26,6 +27,7 @@ export default function Layout({
           direction="column"
           width="100%"
           withGutter={withGutter}
+          constrained={constrained}
           flexGrow
         >
           {children}

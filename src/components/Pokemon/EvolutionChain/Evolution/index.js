@@ -73,15 +73,8 @@ export default function Evolution({
               grow={false}
               width="auto"
               dark
-              whileHover={{
-                zIndex: 1,
-                scale: [1, 1.05, 1.02],
-                rotate: [0, 1, -1, 0],
-                transition: {
-                  duration: 0.2,
-                },
-              }}
-              whileTap={{ scale: 0.99 }}
+              whileHover="hover"
+              whileTap="tap"
               initial="initial"
               animate="animate"
               variants={fadeInUpVariant}

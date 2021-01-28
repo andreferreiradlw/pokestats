@@ -18,14 +18,14 @@ export default function HeaderComponent() {
   const gameVersion = useSelector(state => state.game.version)
 
   return (
-    <Box as="header" margin="0 0 1rem" withGutter>
+    <Box as="header" margin="2rem 0">
       <Box
         constrained
+        withGutter
         direction={{ xxs: 'column', md: 'row' }}
         justify="space-between"
         align={{ xxs: 'center', md: 'flex-start' }}
         margin="auto"
-        padding="2rem 0 0"
       >
         <div>
           <Link href="/">

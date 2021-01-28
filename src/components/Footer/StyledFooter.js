@@ -1,13 +1,13 @@
 import styled from 'styled-components'
-import Box from '../Box'
+import BoxWrapper from '../Box/StyledBox'
 
-const FooterContainer = styled(Box)`
+const FooterContainer = styled(BoxWrapper)`
   background-color: black;
   color: white;
   font-weight: 300;
 
   & span {
-    margin-bottom: 1rem;
+    margin: 1rem 0;
   }
 `
 

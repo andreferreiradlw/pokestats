@@ -96,12 +96,13 @@ export default function Homepage() {
         )}
         {!pokemonInfo.isLoading && (
           <BoxWrapper
-            forwardedAs="main"
+            as="main"
             variants={pageContainerVariant}
             initial="hidden"
             animate="visible"
             key={`pokemon-${router.query.id}`}
             constrained
+            withGutter
             direction="column"
             align="center"
             justify="center"
@@ -139,7 +140,6 @@ export default function Homepage() {
               align="flex-start"
               justify="flex-start"
               margin="1rem 0"
-              constrained
             >
               <Breeding
                 margin={{ xxs: '0 0 2rem', lg: '0' }}
@@ -161,7 +161,6 @@ export default function Homepage() {
               align="flex-start"
               justify="flex-start"
               margin="1rem 0"
-              constrained
             >
               <BaseStats
                 sizes={{ xxs: 12, lg: 8 }}
@@ -176,7 +175,6 @@ export default function Homepage() {
               align="flex-start"
               justify="flex-start"
               margin="1rem 0"
-              constrained
             >
               <LazyLoad height={500} once offset={250}>
                 <Moves sizes={12} margin="0 0 2rem" />
@@ -188,7 +186,6 @@ export default function Homepage() {
               align="flex-start"
               justify="flex-start"
               margin="1rem 0"
-              constrained
             >
               <LazyLoad height={800} once offset={250}>
                 <Sprites sizes={12} margin="0 0 2rem" />
@@ -200,7 +197,6 @@ export default function Homepage() {
               align="flex-start"
               justify="flex-start"
               margin="1rem 0"
-              constrained
             >
               <Navigation sizes={12} margin="0 0 2rem" />
             </Box>

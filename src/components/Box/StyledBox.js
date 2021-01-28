@@ -47,7 +47,7 @@ export default styled(motion.div)`
   ${({ constrained, sizes }) =>
     constrained
       ? css`
-          flex-basis: 0%;
+          // flex-basis: 100%;
         `
       : sizes
       ? flexStyle(sizes)

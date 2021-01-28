@@ -126,17 +126,8 @@ export default function InfiniteScroll({
                 key={`infinite-scroll-${currPokemon.id}`}
                 pokemon={currPokemon}
                 dark={dark}
-                whileHover={{
-                  zIndex: 1,
-                  scale: [1, 1.05, 1.02],
-                  rotate: [0, 1, -1, 0],
-                  transition: {
-                    duration: 0.2,
-                  },
-                }}
-                whileTap={{ scale: 0.99 }}
-                initial="hidden"
-                animate="show"
+                whileHover="hover"
+                whileTap="tap"
                 variants={fadeInUpVariant}
               />
             ))}

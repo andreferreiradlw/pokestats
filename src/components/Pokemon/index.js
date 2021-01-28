@@ -202,9 +202,7 @@ export default function Homepage() {
               margin="1rem 0"
               constrained
             >
-              <LazyLoad height={200} once offset={250}>
-                <Navigation sizes={12} margin="0 0 2rem" />
-              </LazyLoad>
+              <Navigation sizes={12} margin="0 0 2rem" />
             </Box>
           </BoxWrapper>
         )}

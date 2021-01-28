@@ -48,7 +48,7 @@ function ImageComponent({
         if (_isMounted.current) setImgSrc(image)
       })
     }
-    fetchImage()
+    if (_isMounted.current) fetchImage()
   }, [_isMounted])
 
   return (
@@ -61,6 +61,7 @@ function ImageComponent({
           {children}
         </LazyLoad>
       )}
+      {...rest}
     >
       <AnimatePresence exitBeforeEnter>
         {!imgSrc && (
@@ -87,7 +88,6 @@ function ImageComponent({
             animate="show"
             variants={fadeInUpVariant}
             key={`image-${src}`}
-            {...rest}
           />
         )}
       </AnimatePresence>

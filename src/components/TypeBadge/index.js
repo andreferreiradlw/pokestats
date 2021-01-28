@@ -23,7 +23,7 @@ export default function TypeBadge({ type, hideIcon, iconOnly, ...rest }) {
       // console.log(importedIcon.default)
       if (_isMounted.current) setIcon(importedIcon.default)
     }
-    fetchSVG()
+    if (_isMounted.current) fetchSVG()
   }, [_isMounted])
 
   return (

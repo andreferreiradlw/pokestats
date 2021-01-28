@@ -1,9 +1,7 @@
 import styled, { css } from 'styled-components'
 import { motion } from 'framer-motion'
-// components
-import Image from '../../Image'
 
-const BtnSpan = styled.span`
+const BtnSpan = styled(motion.span)`
   position: relative;
   height: 90px;
   display: flex;
@@ -51,10 +49,6 @@ const Title = styled(BtnSpan)`
   }
 `
 
-const PokemonImg = styled(Image)`
-  transition: all 0.15s ease-in-out;
-`
-
 const BtnAnchor = styled(motion.a)`
   overflow: hidden;
   border: 2px solid black;
@@ -81,7 +75,6 @@ const BtnAnchor = styled(motion.a)`
         float: right;
       }
     `}
-
   &:hover {
     cursor: pointer;
 
@@ -102,10 +95,10 @@ const BtnAnchor = styled(motion.a)`
         `}
     }
 
-    & img {
-      transform: scale(1.1);
+    img {
+      transform: scale(1.2) !important;
     }
   }
 `
 
-export { BtnAnchor, Title, Arrow, PokemonImg }
+export { BtnAnchor, Title, Arrow }

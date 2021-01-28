@@ -114,6 +114,15 @@ export const fadeInUpVariant = {
       stiffness: 200,
     },
   },
+  hover: {
+    zIndex: 1,
+    scale: [1, 1.05, 1.02],
+    rotate: [0, 1, -1, 0],
+    transition: {
+      duration: 0.2,
+    },
+  },
+  tap: { scale: 0.99 },
 }
 
 export const scaleInVariant = {
@@ -132,4 +141,24 @@ export const scaleInVariant = {
       stiffness: 200,
     },
   },
+}
+
+// HOVER ANIMATIONS
+export const hoverVariant = {
+  hover: {
+    zIndex: 1,
+    scale: [1, 1.05, 1.02],
+    rotate: [0, 1, -1, 0],
+    transition: {
+      duration: 0.2,
+    },
+  },
+  tap: { scale: 0.99 },
+}
+
+export const scaleHoverVariant = {
+  initial: { scale: 1 },
+  animate: { scale: 1 },
+  hover: { scale: 1.5 },
+  tap: { scale: 1 },
 }

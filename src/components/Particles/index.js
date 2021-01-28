@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import { motion } from 'framer-motion'
 // helpers
-import { imageVariant } from '../../helpers/animations'
+import { scaleInVariant } from '../../helpers/animations'
 // particles
 import { default as ParticlesJS } from 'react-particles-js'
 // config
@@ -31,7 +31,7 @@ export default function Particles() {
     <ParticlesContainer
       initial="hidden"
       animate="show"
-      variants={imageVariant}
+      variants={scaleInVariant}
       key="particles"
     >
       <ParticlesElement width="100%" height="100%" params={particleParams} />

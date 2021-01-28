@@ -83,7 +83,7 @@ export default function Homepage() {
   return (
     <Layout
       withHeader
-      withFooter
+      withFooter={!pokemonInfo.isLoading}
       withMain={false}
       key={`layout-${router.query.id}`}
     >

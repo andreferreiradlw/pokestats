@@ -4,7 +4,10 @@ import { AnimatePresence } from 'framer-motion'
 // redux actions
 import { startLoading, stopLoading } from './homeSlice'
 // heplpers
-import { scaleInVariant, staggerInitialVariant } from '../../helpers/animations'
+import {
+  staggerInitialVariant,
+  fadeInUpVariant,
+} from '../../helpers/animations'
 // components
 import Layout from '../Layout'
 import Autocomplete from '../Autocomplete'
@@ -49,11 +52,11 @@ export default function Homepage() {
               variants={staggerInitialVariant}
               key="homepage-container"
             >
-              <MainHeading variants={scaleInVariant} key="homepage-heading">
+              <MainHeading variants={fadeInUpVariant} key="homepage-heading">
                 PokeStats
               </MainHeading>
               <Autocomplete
-                variants={scaleInVariant}
+                variants={fadeInUpVariant}
                 key="homepage-autocomplete"
               />
             </Container>

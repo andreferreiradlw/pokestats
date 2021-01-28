@@ -135,8 +135,8 @@ export default function InfiniteScroll({
                   },
                 }}
                 whileTap={{ scale: 0.99 }}
-                initial="initial"
-                animate="animate"
+                initial="hidden"
+                animate="show"
                 variants={fadeInUpVariant}
               />
             ))}

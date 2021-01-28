@@ -8,7 +8,7 @@ export default function FeaturedImage({ pokemonName, pokemonId, ...rest }) {
     <ImageContainer {...rest}>
       <Image
         notLazy
-        placeholderWidth="20%"
+        placeholderwidth="20%"
         alt={pokemonName}
         src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemonId}.png`}
       />

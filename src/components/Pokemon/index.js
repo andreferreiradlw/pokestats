@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useRouter } from 'next/router'
-// import LazyLoad from 'react-lazyload'
+import LazyLoad from 'react-lazyload'
 import { AnimatePresence } from 'framer-motion'
 // actions
 import { fetchPokemonData, startLoading, cleanData } from './pokemonSlice'
@@ -36,6 +36,8 @@ export default function Homepage() {
   const pokemonInfo = useSelector(state => state.pokemon.info)
   // biology
   const pokemonBio = useSelector(state => state.pokemon.biology)
+  // pokemon array length
+  const pokemonLength = useSelector(state => state.home.pokemonLength)
   // data
   const { id, game_indices, name } = pokemonInfo.data
   const { generation } = pokemonBio.data
@@ -73,10 +75,10 @@ export default function Homepage() {
 
   // error handling
   useEffect(() => {
-    if (pokemonInfo.error.status !== 'OK') {
+    if (pokemonInfo.error.status !== 'OK' || id > pokemonLength) {
       router.push('/404', router.asPath)
     }
-  }, [pokemonInfo.error])
+  }, [pokemonInfo, pokemonLength])
 
   return (
     <Layout
@@ -176,7 +178,9 @@ export default function Homepage() {
               margin="1rem 0"
               constrained
             >
-              <Moves sizes={12} margin="0 0 2rem" />
+              <LazyLoad height={500} once offset={250}>
+                <Moves sizes={12} margin="0 0 2rem" />
+              </LazyLoad>
             </Box>
             {/** SPRITES */}
             <Box
@@ -186,7 +190,9 @@ export default function Homepage() {
               margin="1rem 0"
               constrained
             >
-              <Sprites sizes={12} margin="0 0 2rem" />
+              <LazyLoad height={800} once offset={250}>
+                <Sprites sizes={12} margin="0 0 2rem" />
+              </LazyLoad>
             </Box>
             {/** NAVIGATION */}
             <Box
@@ -196,7 +202,9 @@ export default function Homepage() {
               margin="1rem 0"
               constrained
             >
-              <Navigation sizes={12} margin="0 0 2rem" />
+              <LazyLoad height={200} once offset={250}>
+                <Navigation sizes={12} margin="0 0 2rem" />
+              </LazyLoad>
             </Box>
           </BoxWrapper>
         )}

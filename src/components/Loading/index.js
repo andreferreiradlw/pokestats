@@ -1,6 +1,9 @@
 import { forwardRef } from 'react'
 // styles
 import { LoadingContainer, PotionIcon, Text } from './StyledLoading'
+import BoxWrapper from '../Box/StyledBox'
+// helpers
+import { staggerExitVariant, loadingChild } from '../../helpers/animations'
 
 const Loading = forwardRef(
   (
@@ -11,6 +14,7 @@ const Loading = forwardRef(
       text,
       justify = 'center',
       align = 'center',
+      passKey,
       ...rest
     },
     ref
@@ -22,10 +26,28 @@ const Loading = forwardRef(
         justify={justify}
         align={align}
         height={height}
+        variants={staggerExitVariant}
+        initial="initial"
+        animate="animate"
+        exit="exit"
+        key={passKey}
         {...rest}
       >
-        {!noIcon && <PotionIcon iconwidth={iconWidth} />}
-        {text && <Text>{text}</Text>}
+        {!noIcon && (
+          <BoxWrapper
+            width="100%"
+            justify="center"
+            variants={loadingChild}
+            key={`icon-${passKey}`}
+          >
+            <PotionIcon iconwidth={iconWidth} />
+          </BoxWrapper>
+        )}
+        {text && (
+          <BoxWrapper variants={loadingChild} key={`text-${passKey}`}>
+            <Text>{text}</Text>
+          </BoxWrapper>
+        )}
       </LoadingContainer>
     )
   }

@@ -9,7 +9,7 @@ import TypeBadge from '../../TypeBadge'
 import { Table, Numbered } from '../../BaseStyles'
 import { Name, TypeContainer, Genera, Flavor } from './StyledDetails'
 
-export default function Details({ ...rest }) {
+export default function Details({ sizes, ...rest }) {
   // pokemon info
   const pokemonInfo = useSelector(state => state.pokemon.info)
   // biology
@@ -74,29 +74,38 @@ export default function Details({ ...rest }) {
     ))
 
   return (
-    <Box align={{ xxs: 'center', lg: 'flex-start' }} {...rest}>
-      <Name>{removeDash(name)}</Name>
-      {types.length > 0 && (
-        <TypeContainer
-          width="auto"
-          direction="row"
-          justify="flex-start"
-          flexWrap="wrap"
-          margin="0 0 0.5rem"
-        >
-          {types.map(({ type }, i) => {
-            return (
-              <TypeBadge type={type.name} key={`${type.name}-${i}-details`}>
-                {type.name}
-              </TypeBadge>
-            )
-          })}
-        </TypeContainer>
-      )}
-      {pokemonBio.isLoading ? (
-        <Loading height="390px" iconWidth="15%" key="pokemon-details" />
+    <>
+      {pokemonInfo.isLoading || pokemonBio.isLoading ? (
+        <Loading
+          sizes={sizes}
+          height="558px"
+          iconWidth="15%"
+          key="pokemon-details"
+        />
       ) : (
-        <>
+        <Box
+          sizes={sizes}
+          align={{ xxs: 'center', lg: 'flex-start' }}
+          {...rest}
+        >
+          <Name>{removeDash(name)}</Name>
+          {types.length > 0 && (
+            <TypeContainer
+              width="auto"
+              direction="row"
+              justify="flex-start"
+              flexWrap="wrap"
+              margin="0 0 0.5rem"
+            >
+              {types.map(({ type }, i) => {
+                return (
+                  <TypeBadge type={type.name} key={`${type.name}-${i}-details`}>
+                    {type.name}
+                  </TypeBadge>
+                )
+              })}
+            </TypeContainer>
+          )}
           {(is_baby || is_legendary || is_mythical) && (
             <Genera>
               {is_baby && `Baby `}
@@ -138,8 +147,8 @@ export default function Details({ ...rest }) {
               </tr>
             </tbody>
           </Table>
-        </>
+        </Box>
       )}
-    </Box>
+    </>
   )
 }

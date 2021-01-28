@@ -1,8 +1,13 @@
 import { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import LazyLoad from 'react-lazyload'
-// actions
+import { AnimatePresence } from 'framer-motion'
+// redux actions
 import { startLoading, stopLoading } from './homeSlice'
+// heplpers
+import {
+  staggerInitialVariant,
+  fadeInUpVariant,
+} from '../../helpers/animations'
 // components
 import Layout from '../Layout'
 import Autocomplete from '../Autocomplete'
@@ -31,23 +36,35 @@ export default function Homepage() {
   }, [])
 
   return (
-    <>
-      {isLoading || pokemonLength === 0 ? (
-        <Loading height="100vh" />
-      ) : (
-        <>
-          <Layout withGutter={false} withFooter>
-            <Container height="100vh" constrained withGutter>
-              <MainHeading>PokeStats</MainHeading>
-              <Autocomplete />
-              <LazyLoad height={200} once>
-                <Particles />
-              </LazyLoad>
+    <Layout withGutter={false} withFooter key="homepage-layout">
+      <AnimatePresence exitBeforeEnter>
+        {(isLoading || pokemonLength === 0) && (
+          <Loading key="homepage-loading" height="100vh" />
+        )}
+        {(!isLoading || pokemonLength !== 0) && (
+          <>
+            <Container
+              height="100vh"
+              constrained
+              withGutter
+              initial="hidden"
+              animate="show"
+              variants={staggerInitialVariant}
+              key="homepage-container"
+            >
+              <MainHeading variants={fadeInUpVariant} key="homepage-heading">
+                PokeStats
+              </MainHeading>
+              <Autocomplete
+                variants={fadeInUpVariant}
+                key="homepage-autocomplete"
+              />
             </Container>
             <PokemonList />
-          </Layout>
-        </>
-      )}
-    </>
+            <Particles />
+          </>
+        )}
+      </AnimatePresence>
+    </Layout>
   )
 }

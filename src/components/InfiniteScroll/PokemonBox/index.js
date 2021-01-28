@@ -17,10 +17,10 @@ const PokemonBox = forwardRef(({ pokemon, dark, ...rest }, ref) => {
           src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`}
           crossorigin="anonymous"
           alt={name}
+          key={`infinite-scroll-${name}-${id}`}
           pixelated
+          width={115}
           height={115}
-          imgHeight={115}
-          iconHeight="65%"
           offset={300}
         />
         <NumberId>{`#${id}`}</NumberId>

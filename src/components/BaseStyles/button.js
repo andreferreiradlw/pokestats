@@ -1,6 +1,7 @@
 import styled, { css } from 'styled-components'
+import { motion } from 'framer-motion'
 
-const Button = styled.button`
+const Button = styled(motion.button)`
   padding: 10px 20px;
   margin: 0 auto;
 

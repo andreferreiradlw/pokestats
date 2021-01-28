@@ -1,4 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
+// helpers
+import { fadeInUpVariant } from '../../helpers/animations'
 // components
 import Box from '../Box'
 import Loading from '../Loading'
@@ -121,16 +123,19 @@ export default function InfiniteScroll({
           >
             {showList.map(currPokemon => (
               <PokemonBox
-                key={currPokemon.id}
+                key={`infinite-scroll-${currPokemon.id}`}
                 pokemon={currPokemon}
                 dark={dark}
+                whileHover="hover"
+                whileTap="tap"
+                variants={fadeInUpVariant}
               />
             ))}
           </Box>
           {showList.length > 0 && pokemonList.length != showList.length && (
             <Loading
               height="100px"
-              iconWidth="10%"
+              iconWidth="5%"
               padding="1rem 0"
               ref={setNode}
             />

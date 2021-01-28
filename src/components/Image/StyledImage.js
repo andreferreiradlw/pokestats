@@ -1,11 +1,23 @@
 import styled, { css } from 'styled-components'
+import { motion } from 'framer-motion'
 // helpers
 import { tumble } from '../BaseStyles/keyframes'
 // svg
 import Egg from '../../assets/svg/egg.svg'
 
-const Image = styled.img`
-  transition: all 0.05s ease-in-out;
+const ImageWrapper = styled(motion.div)`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  ${({ height }) =>
+    css`
+      min-height: ${height ? `${height}px` : '135px'};
+    `}
+`
+
+const Image = styled(motion.img)`
+  will-change: opacity;
 
   ${({ width }) =>
     width &&
@@ -19,12 +31,6 @@ const Image = styled.img`
       ${height && `min-height: ${height}px;`}
     `}
 
-  ${({ loaded }) =>
-    !loaded &&
-    css`
-      display: none;
-    `}
-
   ${({ pixelated }) =>
     pixelated &&
     css`
@@ -32,7 +38,7 @@ const Image = styled.img`
     `}
 `
 
-const Placeholder = styled.div`
+const Placeholder = styled(motion.div)`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -52,15 +58,10 @@ const Placeholder = styled.div`
 const EggIcon = styled(Egg)`
   animation: ${tumble} 5s ease-in-out 0s infinite;
 
-  ${({ iconwidth }) =>
+  ${({ placeholderwidth }) =>
     css`
-      width: ${iconwidth ? `${iconwidth}` : 'auto'};
-    `}
-
-  ${({ iconheight }) =>
-    css`
-      height: ${iconheight ? `${iconheight}` : 'auto'};
+      width: ${placeholderwidth ? `${placeholderwidth}` : 'auto'};
     `}
 `
 
-export { Image, Placeholder, EggIcon }
+export { ImageWrapper, Image, Placeholder, EggIcon }

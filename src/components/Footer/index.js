@@ -5,19 +5,20 @@ import { FooterContainer, FooterA } from './StyledFooter'
 import GitHub from '../../assets/svg/github.svg'
 import PokeApi from '../../assets/pokeapi_logo.png'
 
-export default function Footer() {
+export default function Footer({ ...rest }) {
   return (
-    <FooterContainer forwardedAs="footer" withGutter>
+    <FooterContainer as="footer" margin="2rem 0 0" {...rest}>
       <Box
-        constrained
         direction={{ xxs: 'column', sm: 'row' }}
         align={{ xxs: 'flex-start', sm: 'center' }}
         justify={{ xxs: 'center', sm: 'space-between' }}
         margin="auto"
-        padding="1rem 0 0 "
+        sizes={12}
+        constrained
+        withGutter
       >
         <span>
-          {`Developed by `}{' '}
+          {`Created by `}{' '}
           <FooterA
             href="https://andreferreira.tech"
             target="_blank"

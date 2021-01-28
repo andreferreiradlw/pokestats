@@ -33,6 +33,7 @@ export default function Sprites({ ...rest }) {
             <>
               <Box
                 direction="row-reverse"
+                align="flex-end"
                 justify={{ xxs: 'center', lg: 'flex-end' }}
                 margin="0 0 2rem"
                 flexWrap="wrap"
@@ -44,10 +45,11 @@ export default function Sprites({ ...rest }) {
                       <SpriteContainer sizes={1.5} key={`${key}-${i}`}>
                         <Sprite
                           alt={key}
+                          key={`sprite-${key}`}
                           src={sprites[key]}
                           pixelated
                           width={130}
-                          iconWidth="40%"
+                          placeholderwidth="40%"
                         />
                         <p>{removeUnderscore(key)}</p>
                       </SpriteContainer>
@@ -59,6 +61,7 @@ export default function Sprites({ ...rest }) {
                   <SectionSubTitle>Animated Sprites</SectionSubTitle>
                   <Box
                     direction="row-reverse"
+                    align="flex-end"
                     justify={{ xxs: 'center', lg: 'flex-end' }}
                     margin="0 0 2rem"
                     flexWrap="wrap"
@@ -70,11 +73,12 @@ export default function Sprites({ ...rest }) {
                           <SpriteContainer sizes={1.5} key={`${key}-${i}`}>
                             <Sprite
                               alt={key}
+                              key={`animated-sprite-${key}`}
                               src={animatedSprites[key]}
                               animated
                               pixelated
                               width={80}
-                              iconWidth="75%"
+                              placeholderwidth="75%"
                             />
                             <p>{removeUnderscore(key)}</p>
                           </SpriteContainer>
@@ -99,11 +103,11 @@ export default function Sprites({ ...rest }) {
                                 alt={`DreamWorld Design ${removeUnderscore(
                                   key
                                 )}`}
+                                key={`dreamworld-sprite-${key}`}
                                 dreamworld
                                 src={dreamWorld[key]}
                                 height={180}
-                                imgHeight={180}
-                                iconHeight="65%"
+                                placeholderwidth="30%"
                               />
                               <p>{removeUnderscore(key)}</p>
                             </SpriteContainer>
@@ -118,11 +122,11 @@ export default function Sprites({ ...rest }) {
                     <SpriteContainer width={{ xxs: '100%', md: 'auto' }}>
                       <Sprite
                         alt={`Official Artwork Front Default`}
+                        key={`official-artwork-${officialArtwork}`}
                         dreamworld
                         src={officialArtwork}
                         height={180}
-                        imgHeight={180}
-                        iconHeight="65%"
+                        placeholderwidth="30%"
                       />
                       <p>Front Default</p>
                     </SpriteContainer>

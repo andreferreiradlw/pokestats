@@ -8,6 +8,7 @@ const SpriteContainer = styled(Box)`
 
   & p {
     text-align: center;
+    margin-top: 1rem;
   }
 `
 

@@ -1,17 +1,23 @@
 import { useEffect } from 'react'
+import { AnimatePresence, motion } from 'framer-motion'
 // redux
 import { Provider } from 'react-redux'
 import store from '../../redux/store'
 import { fetchPokemonList } from '../components/Homepage/homeSlice'
-// Theme
+// helpers
+import { pageVariant } from '../helpers/animations'
+// theme
 import ThemeProvider from '../components/Theme'
-// Head
+// components
 import Head from '../components/Head'
 
-export default function App({ Component, pageProps }) {
+export default function App({ Component, pageProps, router }) {
   useEffect(() => {
     // register service worker
-    if ('serviceWorker' in navigator) {
+    if (
+      process.env.NODE_ENV !== 'development' &&
+      'serviceWorker' in navigator
+    ) {
       window.addEventListener('load', function () {
         navigator.serviceWorker
           .register('/pokeapi-sw.js')
@@ -27,7 +33,17 @@ export default function App({ Component, pageProps }) {
     <Provider store={store}>
       <ThemeProvider>
         <Head />
-        <Component {...pageProps} />
+        <AnimatePresence exitBeforeEnter>
+          <motion.div
+            key={router.route}
+            initial="pageInitial"
+            animate="pageAnimate"
+            exit="pageExit"
+            variants={pageVariant}
+          >
+            <Component {...pageProps} />
+          </motion.div>
+        </AnimatePresence>
       </ThemeProvider>
     </Provider>
   )

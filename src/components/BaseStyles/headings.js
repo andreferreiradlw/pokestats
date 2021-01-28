@@ -1,6 +1,7 @@
 import styled, { css } from 'styled-components'
+import { motion } from 'framer-motion'
 
-const MainHeading = styled.h1`
+const MainHeading = styled(motion.h1)`
   font-size: 3.5rem;
   line-height: 4rem;
   font-family: 'Josefin Sans', sans-serif;

@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components'
-import Box from '../Box'
+import BoxWrapper from '../Box/StyledBox'
 
-const Container = styled(Box)`
+const Container = styled(BoxWrapper)`
   max-width: 100%;
   position: relative;
 

@@ -1,6 +1,7 @@
 import styled, { css } from 'styled-components'
 import { responsiveProps, flexStyle } from '../../helpers/box'
 import { boxConfig } from './config'
+import { motion } from 'framer-motion'
 
 const debugStyle = () => css`
   background-color: #5901ad40;
@@ -11,7 +12,7 @@ const gutterStyle = () => css`
   ${responsiveProps('padding', boxConfig.gutterWidth)}
 `
 
-export const BoxWrapper = styled.div`
+export default styled(motion.div)`
   /** dynamic styles */
   ${({
     alignSelf,
@@ -19,54 +20,54 @@ export const BoxWrapper = styled.div`
     padding,
     hide,
     flexWrap,
-    widthProp,
-    heightProp,
-    flexDirection,
-    alignProp,
-    justifyProp,
+    width,
+    height,
+    direction,
+    align,
+    justify,
   }) => {
     return css`
       // flexbox styles
       display: ${hide ? 'none' : 'flex'};
-      ${flexDirection && responsiveProps('flex-direction', flexDirection)}
-      ${alignProp && responsiveProps('align-items', alignProp)}
-      ${justifyProp && responsiveProps('justify-content', justifyProp)}
+      ${direction && responsiveProps('flex-direction', direction)}
+      ${align && responsiveProps('align-items', align)}
+      ${justify && responsiveProps('justify-content', justify)}
       ${alignSelf && responsiveProps('align-self', alignSelf)}
       ${flexWrap && responsiveProps('flex-wrap', flexWrap)}
       // spacing
       ${margin && responsiveProps('margin', margin)}
       ${padding && responsiveProps('padding', padding)}
       // sizing
-      ${widthProp && responsiveProps('width', widthProp)}
-      ${heightProp && responsiveProps('height', heightProp)}
+      ${width && responsiveProps('width', width)}
+      ${height && responsiveProps('height', height)}
     `
   }}
 
   /** column-based flex size */
-  ${({ constrained, sizesProp }) =>
+  ${({ constrained, sizes }) =>
     constrained
       ? css`
-          flex-basis: 0%;
+          // flex-basis: 100%;
         `
-      : sizesProp
-      ? flexStyle(sizesProp)
+      : sizes
+      ? flexStyle(sizes)
       : css`
           flex-basis: auto;
         `}
   
-  ${({ constrained, sizesProp, growProp }) =>
+  ${({ constrained, sizes, flexGrow }) =>
     !constrained &&
-    !sizesProp &&
-    growProp &&
+    !sizes &&
+    flexGrow &&
     css`
       flex-grow: 1;
     `}
   
   /** constrained max-width */
-  ${({ constrained, growProp }) =>
+  ${({ constrained, flexGrow }) =>
     constrained &&
     css`
-      ${growProp && 'flex-grow: 1;'}
+      ${flexGrow && 'flex-grow: 1;'}
       max-width: ${boxConfig.constrained};
     `};
 

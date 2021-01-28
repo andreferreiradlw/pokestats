@@ -1,19 +1,30 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 // helpers
 import { capitalize } from '../../helpers/typography'
 // styles
 import { Badge } from './StyledBadge'
 
 export default function TypeBadge({ type, hideIcon, iconOnly, ...rest }) {
-  const [icon, setIcon] = useState()
+  const [Icon, setIcon] = useState()
+  // ref
+  const _isMounted = useRef(null)
+  // manage mounted state to avoid memory leaks
+  useEffect(() => {
+    _isMounted.current = true
+    return () => {
+      _isMounted.current = false
+      setIcon(null)
+    }
+  }, [])
 
   useEffect(() => {
     async function fetchSVG() {
       const importedIcon = await import(`../../assets/svg/types/${type}.svg`)
-      setIcon(importedIcon.default)
+      // console.log(importedIcon.default)
+      if (_isMounted.current) setIcon(importedIcon.default)
     }
-    fetchSVG()
-  }, [])
+    if (_isMounted.current) fetchSVG()
+  }, [_isMounted])
 
   return (
     <Badge
@@ -24,7 +35,7 @@ export default function TypeBadge({ type, hideIcon, iconOnly, ...rest }) {
       iconOnly={iconOnly}
       {...rest}
     >
-      {!hideIcon && type && icon && icon}
+      {!hideIcon && type && Icon && Icon}
       {!iconOnly && type && <span>{capitalize(type)}</span>}
     </Badge>
   )

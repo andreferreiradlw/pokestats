@@ -26,6 +26,7 @@ import Forms from './Forms'
 import Moves from './Moves'
 import Sprites from './Sprites'
 import Navigation from './Navigation'
+import Footer from '../Footer'
 
 export default function Homepage() {
   // router
@@ -99,10 +100,11 @@ export default function Homepage() {
         {!pokemonInfo.isLoading && (
           <BoxWrapper
             forwardedAs="main"
-            key={`pokemon-${router.query.id}`}
             initial="hidden"
             animate="visible"
+            exit="fade"
             variants={pageContainerVariant}
+            key={`pokemon-${router.query.id}`}
             constrained
             withGutter
             direction="column"

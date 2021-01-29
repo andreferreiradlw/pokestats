@@ -4,6 +4,7 @@ export const staggerExitVariant = {
     transition: {
       staggerChildren: 0.2,
       staggerDirection: -1,
+      delayChildren: 0.5,
     },
   },
 }
@@ -59,16 +60,16 @@ export const pageContainerVariant = {
     opacity: 1,
     x: 0,
     transition: {
-      delay: 0.5,
+      delay: 0.1,
       type: 'spring',
       mass: 1,
       damping: 25,
       stiffness: 350,
     },
   },
-  exit: {
+  fade: {
     opacity: 0,
-    transition: { duration: 0.2, ease: 'easeOut' },
+    transition: { duration: 0.1, ease: 'easeInOut' },
   },
 }
 
@@ -87,6 +88,7 @@ export const loadingChild = {
     y: 60,
     opacity: 0,
     transition: {
+      delay: 0.5,
       duration: 0.2,
     },
   },

@@ -146,6 +146,7 @@ export default function Homepage() {
               align="flex-start"
               justify="flex-start"
               margin="1rem 0"
+              minHeight="347px"
             >
               <Breeding
                 margin={{ xxs: '0 0 2rem', lg: '0' }}

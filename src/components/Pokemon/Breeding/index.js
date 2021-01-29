@@ -1,9 +1,11 @@
 import { useSelector } from 'react-redux'
+import { AnimatePresence } from 'framer-motion'
 // components
 import Loading from '../../Loading'
 import Box from '../../Box'
 //helpers
-import { removeDash } from '../.././../helpers/typography'
+import { removeDash } from '../../../helpers/typography'
+import { fadeInUpVariant } from '../../../helpers/animations'
 // styles
 import { SectionTitle, Table, Numbered } from '../../BaseStyles'
 
@@ -35,10 +37,16 @@ export default function Breeding({ ...rest }) {
   return (
     <Box align={{ xxs: 'center', lg: 'flex-start' }} {...rest}>
       <SectionTitle>Breeding</SectionTitle>
-      {pokemonEvo.isLoading ? (
+      {pokemonEvo.isLoading && (
         <Loading height="251px" iconWidth="15%" key="pokemon-breeding" />
-      ) : (
-        <Table forwardedAs="table" align="flex-start" margin="0 0 1.5rem">
+      )}
+      {!pokemonEvo.isLoading && (
+        <Table
+          initial="hidden"
+          animate="show"
+          variants={fadeInUpVariant}
+          key={`pokemon-breeding-table`}
+        >
           <tbody>
             <tr>
               <th>Gender Distribution</th>

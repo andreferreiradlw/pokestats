@@ -182,6 +182,17 @@ export const scaleInVariant = {
     },
   },
 }
+export const footerVariant = {
+  hidden: {
+    opacity: 0,
+  },
+  show: {
+    opacity: 1,
+    transition: {
+      delay: 1.0,
+    },
+  },
+}
 
 // HOVER ANIMATIONS
 export const hoverVariant = {

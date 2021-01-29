@@ -82,7 +82,7 @@ export default function Details({ sizes, ...rest }) {
           sizes={sizes}
           height="558px"
           iconWidth="15%"
-          key="pokemon-details-loading"
+          key={`pokemon-details-loading`}
         />
       )}
       {!pokemonInfo.isLoading && !pokemonBio.isLoading && (
@@ -93,7 +93,7 @@ export default function Details({ sizes, ...rest }) {
           initial="hidden"
           animate="show"
           variants={fadeInUpVariant}
-          key={`pokemon-details-${name}`}
+          key={`pokemon-details`}
           {...rest}
         >
           <Name>{removeDash(name)}</Name>

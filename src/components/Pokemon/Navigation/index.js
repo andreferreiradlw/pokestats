@@ -20,73 +20,77 @@ export default function Navigation({ ...rest }) {
   const { id } = pokemonInfo.data
 
   return (
-    <Box
-      direction={{ xxs: 'column', sm: 'row' }}
-      justify={{ xxs: 'flex-start', sm: 'center' }}
-      {...rest}
-    >
-      {id !== 1 && (
-        <Link
-          as={`/pokemon/${allPokemon[id - 2].name}`}
-          href="/pokemon/[id]"
-          passHref
+    <>
+      {!pokemonInfo.isLoading && allPokemon && (
+        <Box
+          direction={{ xxs: 'column', sm: 'row' }}
+          justify={{ xxs: 'flex-start', sm: 'center' }}
+          {...rest}
         >
-          <BtnAnchor
-            left
-            whileHover="hover"
-            whileTap="tap"
-            variants={fadeInUpVariant}
-          >
-            <Arrow left>
-              <Image
-                src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${
-                  id - 1
-                }.png`}
-                alt={allPokemon[id - 2].name}
-                key={`navigation-left-${allPokemon[id - 2].name}`}
-                width={100}
-                pixelated
-                notLazy
-              />
-            </Arrow>
-            <Title right>
-              <span>{`#${id - 1}`}</span>
-              {removeDash(allPokemon[id - 2].name)}
-            </Title>
-          </BtnAnchor>
-        </Link>
+          {id !== 1 && (
+            <Link
+              as={`/pokemon/${allPokemon[id - 2].name}`}
+              href="/pokemon/[id]"
+              passHref
+            >
+              <BtnAnchor
+                left
+                whileHover="hover"
+                whileTap="tap"
+                variants={fadeInUpVariant}
+              >
+                <Arrow left>
+                  <Image
+                    src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${
+                      id - 1
+                    }.png`}
+                    alt={allPokemon[id - 2].name}
+                    key={`navigation-left-${allPokemon[id - 2].name}`}
+                    width={100}
+                    pixelated
+                    notLazy
+                  />
+                </Arrow>
+                <Title right>
+                  <span>{`#${id - 1}`}</span>
+                  {removeDash(allPokemon[id - 2].name)}
+                </Title>
+              </BtnAnchor>
+            </Link>
+          )}
+          {id !== pokemonLength && (
+            <Link
+              as={`/pokemon/${allPokemon[id].name}`}
+              href="/pokemon/[id]"
+              passHref
+            >
+              <BtnAnchor
+                right
+                whileHover="hover"
+                whileTap="tap"
+                variants={fadeInUpVariant}
+              >
+                <Arrow right>
+                  <Image
+                    src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${
+                      id + 1
+                    }.png`}
+                    alt={allPokemon[id].name}
+                    key={`navigation-right-${allPokemon[id].name}`}
+                    width={100}
+                    pixelated
+                    notLazy
+                  />
+                </Arrow>
+                <Title left>
+                  <span>{`#${id + 1}`}</span>
+                  {removeDash(allPokemon[id].name)}
+                </Title>
+              </BtnAnchor>
+            </Link>
+          )}
+        </Box>
       )}
-      {id !== pokemonLength && (
-        <Link
-          as={`/pokemon/${allPokemon[id].name}`}
-          href="/pokemon/[id]"
-          passHref
-        >
-          <BtnAnchor
-            right
-            whileHover="hover"
-            whileTap="tap"
-            variants={fadeInUpVariant}
-          >
-            <Arrow right>
-              <Image
-                src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${
-                  id + 1
-                }.png`}
-                alt={allPokemon[id].name}
-                key={`navigation-right-${allPokemon[id].name}`}
-                width={100}
-                pixelated
-                notLazy
-              />
-            </Arrow>
-            <Title left>
-              <span>{`#${id + 1}`}</span>
-              {removeDash(allPokemon[id].name)}
-            </Title>
-          </BtnAnchor>
-        </Link>
-      )}
-    </Box>
+    </>
   )
 }

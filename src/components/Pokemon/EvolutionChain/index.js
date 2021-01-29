@@ -21,14 +21,14 @@ export default function EvolutionChain({ ...rest }) {
       <SectionTitle>Evolution Chain</SectionTitle>
       <AnimatePresence exitBeforeEnter>
         {pokemonEvo.isLoading && (
-          <Loading height="271px" iconWidth="5%" key="pokemon-evolution" />
+          <Loading height="271px" iconWidth="5%" key={`pokemon-evolution`} />
         )}
-        {!chain.evolves_to.length && (
+        {!pokemonEvo.isLoading && !chain.evolves_to.length && (
           <SectionMessage
             initial="hidden"
             animate="show"
             variants={fadeInUpVariant}
-            key="no-pokemon-evolution"
+            key={`no-pokemon-evolution`}
           >
             This Pokémon does not evolve.
           </SectionMessage>
@@ -46,17 +46,18 @@ export default function EvolutionChain({ ...rest }) {
                 {chain.evolves_to.map((firstEvo, i) => (
                   <Box
                     direction={{ xxs: 'column', lg: 'row' }}
-                    key={`first-evo-${i}`}
+                    key={`first-evo-box-${i}`}
                   >
                     <Evolution
                       species={firstEvo.species}
                       details={firstEvo.evolution_details}
+                      key={`first-evo-${i}`}
                     />
                     {firstEvo.evolves_to.length > 0 && (
                       <Box direction={{ xxs: 'row', lg: 'column' }}>
                         {firstEvo.evolves_to.map((secondEvo, x) => (
                           <Evolution
-                            key={x}
+                            key={`second-evo-${x}`}
                             species={secondEvo.species}
                             details={secondEvo.evolution_details}
                           />

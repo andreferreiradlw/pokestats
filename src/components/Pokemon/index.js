@@ -44,17 +44,18 @@ export default function Homepage() {
 
   // start loading info, biology and evolution states
   useEffect(() => {
-    dispatch(startLoading())
+    // dispatch(startLoading())
     // on unmount
     return () => {
-      dispatch(startLoading())
       dispatch(cleanData())
+      dispatch(startLoading())
     }
   }, [])
 
   // fetch pokemon data
   useEffect(() => {
     if (router.query.id) {
+      dispatch(cleanData())
       // also start loading when router changes
       dispatch(startLoading())
       dispatch(fetchPokemonData(router.query.id))
@@ -134,7 +135,9 @@ export default function Homepage() {
               margin="1rem 0"
               minHeight="375px"
             >
-              <EvolutionChain sizes={12} margin="0 0 2rem" />
+              <LazyLoad height={500} once offset={50}>
+                <EvolutionChain sizes={12} margin="0 0 2rem" />
+              </LazyLoad>
             </Box>
             {/** BREEDING, TRAINING, MULTIPLIERS */}
             <Box

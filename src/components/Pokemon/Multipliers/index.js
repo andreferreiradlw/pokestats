@@ -24,7 +24,7 @@ export default function Weaknesses({ ...rest }) {
   const [enabled, setEnabled] = useState(true)
 
   useEffect(() => {
-    if (types.length) {
+    if (types && types.length) {
       let currTypes = types.map(currType => {
         return currType.type.name
       })
@@ -46,83 +46,95 @@ export default function Weaknesses({ ...rest }) {
   }, [enabled])
 
   return (
-    <Box align={{ xxs: 'center', lg: 'flex-start' }} {...rest}>
-      <Box
-        direction={{ xxs: 'column', lg: 'row' }}
-        justify="space-between"
-        flexWrap="wrap"
-      >
-        <SectionTitle>Multipliers</SectionTitle>
-        <Switch enabled={enabled} onClick={() => setEnabled(!enabled)} />
-      </Box>
-      {!typeMultipliers ? (
-        <Loading height="251px" iconWidth="15%" key="pokemon-multipliers" />
-      ) : (
-        <>
-          {currMultipliers && (
-            <Table forwardedAs="table" align="flex-start" margin="0 0 1.5rem">
-              <tbody>
-                <tr>
-                  <th>{enabled ? 'Immune To' : 'No Effect To'}</th>
-                  <td>
-                    {currMultipliers.no_damage.map((type, i) => (
-                      <TypeBadge key={`no-damage-${i}`} type={type} iconOnly />
-                    ))}
-                  </td>
-                </tr>
-                <tr>
-                  <th>0.25x</th>
-                  <td>
-                    {currMultipliers.quarter_damage.map((type, i) => (
-                      <TypeBadge
-                        key={`quarter-damage-${i}`}
-                        type={type}
-                        iconOnly
-                      />
-                    ))}
-                  </td>
-                </tr>
-                <tr>
-                  <th>0.5x</th>
-                  <td>
-                    {currMultipliers.half_damage.map((type, i) => (
-                      <TypeBadge
-                        key={`half-damage-${i}`}
-                        type={type}
-                        iconOnly
-                      />
-                    ))}
-                  </td>
-                </tr>
-                <tr>
-                  <th>2x</th>
-                  <td>
-                    {currMultipliers.double_damage.map((type, i) => (
-                      <TypeBadge
-                        key={`double-damage-${i}`}
-                        type={type}
-                        iconOnly
-                      />
-                    ))}
-                  </td>
-                </tr>
-                <tr>
-                  <th>4x</th>
-                  <td>
-                    {currMultipliers.quadruple_damage.map((type, i) => (
-                      <TypeBadge
-                        key={`quadruple-damage-${i}`}
-                        type={type}
-                        iconOnly
-                      />
-                    ))}
-                  </td>
-                </tr>
-              </tbody>
-            </Table>
+    <>
+      {!pokemonInfo.isLoading && (
+        <Box align={{ xxs: 'center', lg: 'flex-start' }} {...rest}>
+          <Box
+            direction={{ xxs: 'column', lg: 'row' }}
+            justify="space-between"
+            flexWrap="wrap"
+          >
+            <SectionTitle>Multipliers</SectionTitle>
+            <Switch enabled={enabled} onClick={() => setEnabled(!enabled)} />
+          </Box>
+          {!typeMultipliers ? (
+            <Loading height="251px" iconWidth="15%" key="pokemon-multipliers" />
+          ) : (
+            <>
+              {currMultipliers && (
+                <Table
+                  forwardedAs="table"
+                  align="flex-start"
+                  margin="0 0 1.5rem"
+                >
+                  <tbody>
+                    <tr>
+                      <th>{enabled ? 'Immune To' : 'No Effect To'}</th>
+                      <td>
+                        {currMultipliers.no_damage.map((type, i) => (
+                          <TypeBadge
+                            key={`no-damage-${i}`}
+                            type={type}
+                            iconOnly
+                          />
+                        ))}
+                      </td>
+                    </tr>
+                    <tr>
+                      <th>0.25x</th>
+                      <td>
+                        {currMultipliers.quarter_damage.map((type, i) => (
+                          <TypeBadge
+                            key={`quarter-damage-${i}`}
+                            type={type}
+                            iconOnly
+                          />
+                        ))}
+                      </td>
+                    </tr>
+                    <tr>
+                      <th>0.5x</th>
+                      <td>
+                        {currMultipliers.half_damage.map((type, i) => (
+                          <TypeBadge
+                            key={`half-damage-${i}`}
+                            type={type}
+                            iconOnly
+                          />
+                        ))}
+                      </td>
+                    </tr>
+                    <tr>
+                      <th>2x</th>
+                      <td>
+                        {currMultipliers.double_damage.map((type, i) => (
+                          <TypeBadge
+                            key={`double-damage-${i}`}
+                            type={type}
+                            iconOnly
+                          />
+                        ))}
+                      </td>
+                    </tr>
+                    <tr>
+                      <th>4x</th>
+                      <td>
+                        {currMultipliers.quadruple_damage.map((type, i) => (
+                          <TypeBadge
+                            key={`quadruple-damage-${i}`}
+                            type={type}
+                            iconOnly
+                          />
+                        ))}
+                      </td>
+                    </tr>
+                  </tbody>
+                </Table>
+              )}
+            </>
           )}
-        </>
+        </Box>
       )}
-    </Box>
+    </>
   )
 }

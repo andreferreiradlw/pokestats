@@ -1,8 +1,10 @@
 import { useSelector } from 'react-redux'
+import { AnimatePresence } from 'framer-motion'
 // helpers
 import { capitalize, removeDash } from '../../../helpers/typography'
+import { fadeInUpVariant } from '../../../helpers/animations'
 // components
-import Box from '../../Box'
+import BoxWrapper from '../../Box/StyledBox'
 import Loading from '../../Loading'
 import TypeBadge from '../../TypeBadge'
 // styles
@@ -74,18 +76,24 @@ export default function Details({ sizes, ...rest }) {
     ))
 
   return (
-    <>
-      {pokemonInfo.isLoading || pokemonBio.isLoading ? (
+    <AnimatePresence exitBeforeEnter>
+      {(pokemonInfo.isLoading || pokemonBio.isLoading) && (
         <Loading
           sizes={sizes}
           height="558px"
           iconWidth="15%"
-          key="pokemon-details"
+          key="pokemon-details-loading"
         />
-      ) : (
-        <Box
+      )}
+      {!pokemonInfo.isLoading && !pokemonBio.isLoading && (
+        <BoxWrapper
           sizes={sizes}
+          direction="column"
           align={{ xxs: 'center', lg: 'flex-start' }}
+          initial="hidden"
+          animate="show"
+          variants={fadeInUpVariant}
+          key={`pokemon-details-${name}`}
           {...rest}
         >
           <Name>{removeDash(name)}</Name>
@@ -147,8 +155,8 @@ export default function Details({ sizes, ...rest }) {
               </tr>
             </tbody>
           </Table>
-        </Box>
+        </BoxWrapper>
       )}
-    </>
+    </AnimatePresence>
   )
 }

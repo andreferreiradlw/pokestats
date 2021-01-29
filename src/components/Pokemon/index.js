@@ -116,6 +116,7 @@ export default function Homepage() {
               align="center"
               justify="flex-start"
               margin="1rem 0"
+              minHeight="533px"
             >
               <Details sizes={5} margin={{ xxs: '0 0 2rem', lg: '0' }} />
               <FeaturedImage

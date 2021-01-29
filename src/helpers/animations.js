@@ -16,6 +16,22 @@ export const staggerInitialVariant = {
       staggerChildren: 0.5,
     },
   },
+  exit: {
+    opacity: 0,
+  },
+}
+
+export const staggerTableVariant = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+    },
+  },
+  exit: {
+    opacity: 0,
+  },
 }
 
 // PAGES
@@ -121,6 +137,28 @@ export const fadeInUpVariant = {
     },
   },
   tap: { scale: 0.99 },
+}
+
+export const fadeInRightVariant = {
+  hidden: {
+    x: 60,
+    opacity: 0,
+    transition: { duration: 0.3, ease: 'easeInOut' },
+  },
+  show: {
+    x: 0,
+    opacity: 1,
+    transition: {
+      type: 'spring',
+      mass: 1,
+      damping: 15,
+      stiffness: 200,
+    },
+  },
+  exit: {
+    x: 0,
+    opacity: 0,
+  },
 }
 
 export const scaleInVariant = {

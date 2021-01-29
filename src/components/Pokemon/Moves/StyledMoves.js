@@ -1,18 +1,19 @@
 import styled, { css } from 'styled-components'
+import { motion } from 'framer-motion'
 import Box from '../../Box'
 
-const TableBody = styled.tbody``
-const TableRow = styled.tr``
-const NameTH = styled.th``
-const NameTD = styled.td``
+const TableBody = styled(motion.tbody)``
+const TableRow = styled(motion.tr)``
+const NameTH = styled(motion.th)``
+const NameTD = styled(motion.td)``
 
-const TableContainer = styled.div`
+const TableContainer = styled(motion.div)`
   width: 100%;
   overflow-y: auto;
   overflow: auto;
 `
 
-const MovesTable = styled.table`
+const MovesTable = styled(motion.table)`
   width: 100%;
   text-align: center;
   font-size: 0.7rem;
@@ -47,7 +48,7 @@ const MovesTable = styled.table`
       background-color: #ececec;
     }
 
-    transition: all 0.1s ease-in-out;
+    // transition: all 0.1s ease-in-out;
   }
 
   ${({ theme }) => css`
@@ -69,7 +70,7 @@ const TabContainer = styled(Box)`
   margin-bottom: 1rem;
 `
 
-const Tab = styled.button`
+const Tab = styled(motion.button)`
   margin: 0.5rem;
   background: ${({ active }) => (active ? 'black' : 'none')};
   color: ${({ active }) => (active ? 'white' : 'black')};
@@ -79,7 +80,7 @@ const Tab = styled.button`
   font: inherit;
   cursor: pointer;
   outline: inherit;
-  transition: all 0.3s ease-in-out;
+  // transition: all 0.3s ease-in-out;
 
   &:hover,
   &:focus {

@@ -63,7 +63,8 @@ export default function Evolution({
           margin="0 0 1rem"
           initial="hidden"
           animate="show"
-          variants={staggerInitialVariant}
+          variants={fadeInUpVariant}
+          key={`evo-details-container-${species.name}`}
           {...rest}
         >
           {/** Arrow with evolution details */}
@@ -75,10 +76,6 @@ export default function Evolution({
               flexWrap="nowrap"
               justify="center"
               align="center"
-              initial="hidden"
-              animate="show"
-              variants={fadeInUpVariant}
-              key={`evo-details-arrow`}
             >
               {details.map((currDetails, i) => (
                 <EvoDetails key={`evo-details-${i}`} details={currDetails} />
@@ -95,8 +92,6 @@ export default function Evolution({
               dark
               whileHover="hover"
               whileTap="tap"
-              initial="hidden"
-              animate="show"
               variants={fadeInUpVariant}
               key={`evolution-${species.name}`}
             >

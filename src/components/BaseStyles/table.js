@@ -5,7 +5,7 @@ const Table = styled(motion.table)`
   display: table;
   font-size: 1rem;
   line-height: 1.2rem;
-  word-break: break-word;
+  word-break: keep-all;
   border-spacing: 0;
   width: 100%;
   margin: 0 0 1.5rem;

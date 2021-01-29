@@ -70,24 +70,6 @@ const TabContainer = styled(Box)`
   margin-bottom: 1rem;
 `
 
-const Tab = styled(motion.button)`
-  margin: 0.5rem;
-  background: ${({ active }) => (active ? 'black' : 'none')};
-  color: ${({ active }) => (active ? 'white' : 'black')};
-  border: none;
-  border-radius: 4px;
-  padding: 0.5rem;
-  font: inherit;
-  cursor: pointer;
-  outline: inherit;
-  // transition: all 0.3s ease-in-out;
-
-  &:hover,
-  &:focus {
-    outline: 1px solid black;
-  }
-`
-
 export {
   TableContainer,
   MovesTable,
@@ -96,5 +78,4 @@ export {
   NameTD,
   TableRow,
   TabContainer,
-  Tab,
 }

@@ -28,7 +28,6 @@ import {
   NameTD,
   TableRow,
   TabContainer,
-  Tab,
   TableBody,
 } from './StyledMoves'
 

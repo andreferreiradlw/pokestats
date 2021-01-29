@@ -11,7 +11,7 @@ import TypeBadge from '../../TypeBadge'
 import { Table, Numbered } from '../../BaseStyles'
 import { Name, TypeContainer, Genera, Flavor } from './StyledDetails'
 
-export default function Details({ sizes, ...rest }) {
+export default function Details({ sizes, pokemonId, ...rest }) {
   // pokemon info
   const pokemonInfo = useSelector(state => state.pokemon.info)
   // biology
@@ -82,7 +82,7 @@ export default function Details({ sizes, ...rest }) {
           sizes={sizes}
           height="558px"
           iconWidth="15%"
-          key={`pokemon-details-loading`}
+          key={`pokemon-details-loading-${pokemonId}`}
         />
       )}
       {!pokemonInfo.isLoading && !pokemonBio.isLoading && (
@@ -93,7 +93,7 @@ export default function Details({ sizes, ...rest }) {
           initial="hidden"
           animate="show"
           variants={fadeInUpVariant}
-          key={`pokemon-details`}
+          key={`pokemon-details-${pokemonId}`}
           {...rest}
         >
           <Name>{removeDash(name)}</Name>
@@ -107,7 +107,10 @@ export default function Details({ sizes, ...rest }) {
             >
               {types.map(({ type }, i) => {
                 return (
-                  <TypeBadge type={type.name} key={`${type.name}-${i}-details`}>
+                  <TypeBadge
+                    type={type.name}
+                    key={`${type.name}-${i}-details-${pokemonId}`}
+                  >
                     {type.name}
                   </TypeBadge>
                 )

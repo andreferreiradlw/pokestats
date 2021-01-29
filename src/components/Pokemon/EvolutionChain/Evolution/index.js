@@ -4,9 +4,12 @@ import axios from 'axios'
 // helpers
 import { removeDash } from '../../../../helpers/typography'
 import { mapGeneration } from '../../../../helpers/gameVersion'
-import { fadeInUpVariant } from '../../../../helpers/animations'
+import {
+  staggerInitialVariant,
+  fadeInUpVariant,
+} from '../../../../helpers/animations'
 // components
-import Box from '../../../Box'
+import BoxWrapper from '../../../Box/StyledBox'
 import Image from '../../../Image'
 import EvoDetails from './EvolutionDetails'
 // styles
@@ -22,49 +25,66 @@ export default function Evolution({
   // species state
   const [currSpecies, setCurrSpecies] = useState()
   const [imgSrc, setImgSrc] = useState()
-
   // ref
-  const isMounted = useRef(null)
-  // mounted effect
+  const _isMounted = useRef(null)
+  // manage mounted state to avoid memory leaks
   useEffect(() => {
-    // executed when component mounted
-    isMounted.current = true
+    _isMounted.current = true
     return () => {
-      // executed when unmount
-      isMounted.current = false
+      _isMounted.current = false
+      setImgSrc(null)
     }
   }, [])
 
   // fetch species.url data
   useEffect(() => {
-    // get data
-    axios.get(species.url).then(newSpecies => {
-      // only update states if mounted
-      if (isMounted.current) {
-        setCurrSpecies(newSpecies.data)
-        setImgSrc(
-          `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${newSpecies.data.id}.png`
-        )
-      }
-    })
+    async function fetchImage() {
+      // get data
+      await axios.get(species.url).then(newSpecies => {
+        // only update states if mounted
+        if (_isMounted.current) {
+          setCurrSpecies(newSpecies.data)
+          setImgSrc(
+            `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${newSpecies.data.id}.png`
+          )
+        }
+      })
+    }
+    // fetch if mounted
+    if (_isMounted.current && species) fetchImage()
   }, [species])
 
   return (
     <>
       {currSpecies && imgSrc && (
-        <Box
+        <BoxWrapper
           direction={{ xxs: 'column', lg: 'row' }}
+          width="100%"
           margin="0 0 1rem"
+          initial="hidden"
+          animate="show"
+          variants={staggerInitialVariant}
           {...rest}
         >
           {/** Arrow with evolution details */}
           {!noArrow && (
-            <Box width="auto" flexGrow>
+            <BoxWrapper
+              width="auto"
+              flexGrow
+              direction="column"
+              flexWrap="nowrap"
+              justify="center"
+              align="center"
+              initial="hidden"
+              animate="show"
+              variants={fadeInUpVariant}
+              key={`evo-details-arrow`}
+            >
               {details.map((currDetails, i) => (
                 <EvoDetails key={`evo-details-${i}`} details={currDetails} />
               ))}
               <EvoArrow />
-            </Box>
+            </BoxWrapper>
           )}
           {/** Pokemon box with image and types */}
           <Link as={`/pokemon/${species.name}`} href="/pokemon/[id]" passHref>
@@ -75,13 +95,14 @@ export default function Evolution({
               dark
               whileHover="hover"
               whileTap="tap"
-              initial="initial"
-              animate="animate"
+              initial="hidden"
+              animate="show"
               variants={fadeInUpVariant}
+              key={`evolution-${species.name}`}
             >
               <Image
                 alt={species.name}
-                key={`evolution-${species.name}-${imgSrc}`}
+                key={`evolution-img-${species.name}-${imgSrc}`}
                 src={imgSrc}
                 width={115}
                 height={115}
@@ -94,7 +115,7 @@ export default function Evolution({
               )}
             </PokeBox>
           </Link>
-        </Box>
+        </BoxWrapper>
       )}
     </>
   )

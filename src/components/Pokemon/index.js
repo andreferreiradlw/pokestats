@@ -132,6 +132,7 @@ export default function Homepage() {
               align="flex-start"
               justify="flex-start"
               margin="1rem 0"
+              minHeight="375px"
             >
               <EvolutionChain sizes={12} margin="0 0 2rem" />
             </Box>

@@ -14,16 +14,7 @@ const Button = styled(motion.button)`
   border-radius: 4px;
 
   cursor: pointer;
-  transition: all 0.2s ease-in-out;
-
-  &:hover {
-    transform: scale(1.02);
-  }
-
-  &:active {
-    transition: all 0.01s ease-in-out;
-    transform: scale(1);
-  }
+  transition: box-shadow 0.2s ease-in-out;
 
   ${({ dark, theme }) =>
     dark

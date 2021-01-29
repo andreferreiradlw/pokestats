@@ -27,6 +27,7 @@ export const staggerTableVariant = {
     opacity: 1,
     transition: {
       staggerChildren: 0.1,
+      delayChildren: 0.2,
     },
   },
   exit: {
@@ -116,7 +117,6 @@ export const fadeInUpVariant = {
   hidden: {
     y: 60,
     opacity: 0,
-    transition: { duration: 0.3, ease: 'easeInOut' },
   },
   show: {
     y: 0,
@@ -127,6 +127,10 @@ export const fadeInUpVariant = {
       damping: 15,
       stiffness: 200,
     },
+  },
+  exit: {
+    y: 0,
+    opacity: 0,
   },
   hover: {
     zIndex: 1,

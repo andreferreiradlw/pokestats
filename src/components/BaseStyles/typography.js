@@ -1,6 +1,7 @@
 import styled, { css } from 'styled-components'
+import { motion } from 'framer-motion'
 
-const SectionTitle = styled.h2`
+const SectionTitle = styled(motion.h2)`
   font-size: 2rem;
   line-height: 2.5rem;
   font-weight: 600;
@@ -18,7 +19,7 @@ const SectionTitle = styled.h2`
   `}
 `
 
-const SectionSubTitle = styled.h3`
+const SectionSubTitle = styled(motion.h3)`
   font-size: 1.3rem;
   line-height: 1rem;
   font-weight: 600;
@@ -36,7 +37,7 @@ const SectionSubTitle = styled.h3`
   `}
 `
 
-const SectionMessage = styled.p`
+const SectionMessage = styled(motion.p)`
   font-size: 0.8rem;
   line-height: 1.1rem;
   margin: 1.5rem 0;

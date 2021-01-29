@@ -20,7 +20,7 @@ import Box from '../../Box'
 import Loading from '../../Loading'
 import TypeBadge from '../../TypeBadge'
 // styles
-import { SectionTitle, SectionMessage } from '../../BaseStyles'
+import { SectionTitle, SectionMessage, Button } from '../../BaseStyles'
 import {
   TableContainer,
   MovesTable,
@@ -67,8 +67,9 @@ export default function Moves({ ...rest }) {
 
   // fetch move data
   useEffect(() => {
-    if (isMounted.current) {
+    if (isMounted.current && moves && moves.length) {
       setMovesLoading(true)
+      // fetch
       fetchTypeData(moves)
         .then(movesData => {
           setMoves(movesData)
@@ -163,22 +164,50 @@ export default function Moves({ ...rest }) {
       <SectionTitle>Move Pool</SectionTitle>
       {/** TABS */}
       <TabContainer direction="row" justify="space-evenly" flexWrap="wrap">
-        <Tab active={activeTab === 1} onClick={() => setActiveTab(1)}>
+        <Button
+          active={activeTab === 1}
+          onClick={() => setActiveTab(1)}
+          whileHover="hover"
+          whileTap="tap"
+          variants={fadeInUpVariant}
+          key="pokemon-moves-lvlup-btn"
+        >
           Level Up
-        </Tab>
-        <Tab active={activeTab === 2} onClick={() => setActiveTab(2)}>
+        </Button>
+        <Button
+          active={activeTab === 2}
+          onClick={() => setActiveTab(2)}
+          whileHover="hover"
+          whileTap="tap"
+          variants={fadeInUpVariant}
+          key="pokemon-moves-tmhm-btn"
+        >
           TM / HM
-        </Tab>
-        <Tab active={activeTab === 3} onClick={() => setActiveTab(3)}>
+        </Button>
+        <Button
+          active={activeTab === 3}
+          onClick={() => setActiveTab(3)}
+          whileHover="hover"
+          whileTap="tap"
+          variants={fadeInUpVariant}
+          key="pokemon-moves-egg-btn"
+        >
           Egg
-        </Tab>
-        <Tab active={activeTab === 4} onClick={() => setActiveTab(4)}>
+        </Button>
+        <Button
+          active={activeTab === 4}
+          onClick={() => setActiveTab(4)}
+          whileHover="hover"
+          whileTap="tap"
+          variants={fadeInUpVariant}
+          key="pokemon-moves-tutor-btn"
+        >
           Tutor
-        </Tab>
+        </Button>
       </TabContainer>
       <AnimatePresence exitBeforeEnter>
         {/** LOADING */}
-        {(movesLoading || !currMoves) && (
+        {movesLoading && (
           <Loading
             height="300px"
             iconWidth={{ xxs: '20%', xs: '15%', md: '10%', lg: '5%' }}
@@ -186,8 +215,14 @@ export default function Moves({ ...rest }) {
           />
         )}
         {/** TABLE */}
-        {!movesLoading && currMoves && (
-          <TableContainer>
+        {!movesLoading && currMoves.length && (
+          <TableContainer
+            initial="hidden"
+            animate="show"
+            exit="exit"
+            variants={fadeInUpVariant}
+            key="pokemon-moves-table-container"
+          >
             <MovesTable>
               <thead>
                 <tr>
@@ -241,18 +276,19 @@ export default function Moves({ ...rest }) {
             </MovesTable>
           </TableContainer>
         )}
+        {/** NO MOVES */}
+        {!movesLoading && currMoves.length === 0 && (
+          <SectionMessage
+            initial="hidden"
+            animate="show"
+            exit="exit"
+            variants={fadeInUpVariant}
+            key="pokemon-nomoves-message"
+          >
+            No moves for currently selected game version.
+          </SectionMessage>
+        )}
       </AnimatePresence>
-      {/** NO MOVES */}
-      {!movesLoading && currMoves.length === 0 && (
-        <SectionMessage
-          initial="hide"
-          animate="show"
-          variants={fadeInUpVariant}
-          key="pokemon-nomoves-message"
-        >
-          No moves for currently selected game version.
-        </SectionMessage>
-      )}
     </Box>
   )
 }

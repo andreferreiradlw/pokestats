@@ -135,7 +135,7 @@ export default function Homepage() {
               margin="1rem 0"
               minHeight="375px"
             >
-              <LazyLoad height={500} once offset={50}>
+              <LazyLoad height={375} once offset={50}>
                 <EvolutionChain sizes={12} margin="0 0 2rem" />
               </LazyLoad>
             </Box>
@@ -148,18 +148,24 @@ export default function Homepage() {
               margin="1rem 0"
               minHeight="347px"
             >
-              <Breeding
-                margin={{ xxs: '0 0 2rem', lg: '0' }}
-                padding={{ xxs: '0', lg: '0 2rem 0 0' }}
-              />
-              <Training
-                margin={{ xxs: '0 0 2rem', lg: '0' }}
-                padding={{ xxs: '0', lg: '0 1rem' }}
-              />
-              <Multipliers
-                margin={{ xxs: '0 0 2rem', lg: '0' }}
-                padding={{ xxs: '0', lg: '0 0 0 2rem' }}
-              />
+              <LazyLoad height={347} once offset={50}>
+                <Breeding
+                  margin={{ xxs: '0 0 2rem', lg: '0' }}
+                  padding={{ xxs: '0', lg: '0 2rem 0 0' }}
+                />
+              </LazyLoad>
+              <LazyLoad height={347} once offset={50}>
+                <Training
+                  margin={{ xxs: '0 0 2rem', lg: '0' }}
+                  padding={{ xxs: '0', lg: '0 1rem' }}
+                />
+              </LazyLoad>
+              <LazyLoad height={347} once offset={50}>
+                <Multipliers
+                  margin={{ xxs: '0 0 2rem', lg: '0' }}
+                  padding={{ xxs: '0', lg: '0 0 0 2rem' }}
+                />
+              </LazyLoad>
             </Box>
             {/** BASESTATS, FORMS */}
             <Box

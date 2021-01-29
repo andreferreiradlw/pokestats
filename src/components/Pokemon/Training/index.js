@@ -25,7 +25,7 @@ export default function Training({ ...rest }) {
   const [items, setItems] = useState([])
 
   useEffect(() => {
-    if (held_items.length && gameVersion) {
+    if (held_items && held_items.length && gameVersion) {
       // filter items with current version
       const versionItems = held_items
         .map(({ item, version_details }) => {

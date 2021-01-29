@@ -7,11 +7,13 @@ import { placeholderVariant, fadeInUpVariant } from '../../helpers/animations'
 // styles
 import { ImageWrapper, Image, Placeholder, EggIcon } from './StyledImage'
 
-const ConditionalWrapper = ({ condition, wrapper, children, height }) =>
-  condition ? (
-    wrapper(children)
+const ConditionalWrapper = ({ isLazy, children, offset }) =>
+  isLazy ? (
+    <LazyLoad once offset={offset || 250}>
+      {children}
+    </LazyLoad>
   ) : (
-    <ImageWrapper height={height}>{children}</ImageWrapper>
+    children
   )
 
 function ImageComponent({
@@ -45,52 +47,43 @@ function ImageComponent({
           type: response.headers['content-type'],
         })
         let image = URL.createObjectURL(blob)
+        // check again if mounted before updating the state
         if (_isMounted.current) setImgSrc(image)
       })
     }
+    // fetch if mounted
     if (_isMounted.current) fetchImage()
   }, [_isMounted])
 
   return (
-    <ConditionalWrapper
-      key={alt}
-      condition={!notLazy}
-      height={height}
-      wrapper={children => (
-        <LazyLoad height={height || 135} once offset={offset || 250}>
-          {children}
-        </LazyLoad>
-      )}
-      {...rest}
-    >
-      <AnimatePresence exitBeforeEnter>
-        {!imgSrc && (
-          <Placeholder
-            width={width}
-            height={height}
-            initial="initial"
-            animate="animate"
-            exit="exit"
-            key={`image-placeholder-${src}`}
-            variants={placeholderVariant}
-          >
-            <EggIcon placeholderwidth={placeholderwidth} />
-          </Placeholder>
-        )}
-        {imgSrc && (
-          <Image
-            alt={alt}
-            src={imgSrc}
-            pixelated={pixelated}
-            width={width}
-            height={height}
-            initial="hidden"
-            animate="show"
-            variants={fadeInUpVariant}
-            key={`image-${src}`}
-          />
-        )}
-      </AnimatePresence>
+    <ConditionalWrapper key={alt} isLazy={!notLazy} offset={offset} {...rest}>
+      <ImageWrapper width={width} height={height}>
+        <AnimatePresence exitBeforeEnter>
+          {!imgSrc && (
+            <Placeholder
+              initial="initial"
+              animate="animate"
+              exit="exit"
+              key={`image-placeholder-${src}`}
+              variants={placeholderVariant}
+            >
+              <EggIcon placeholderwidth={placeholderwidth} height={height} />
+            </Placeholder>
+          )}
+          {imgSrc && (
+            <Image
+              alt={alt}
+              src={imgSrc}
+              pixelated={pixelated}
+              height={height}
+              initial="hidden"
+              animate="show"
+              variants={fadeInUpVariant}
+              key={`image-${src}`}
+            />
+          )}
+        </AnimatePresence>
+      </ImageWrapper>
     </ConditionalWrapper>
   )
 }

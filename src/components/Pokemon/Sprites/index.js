@@ -47,8 +47,8 @@ export default function Sprites({ ...rest }) {
                           alt={key}
                           key={`sprite-${key}`}
                           src={sprites[key]}
+                          width={115}
                           pixelated
-                          width={130}
                           placeholderwidth="40%"
                         />
                         <p>{removeUnderscore(key)}</p>
@@ -75,10 +75,10 @@ export default function Sprites({ ...rest }) {
                               alt={key}
                               key={`animated-sprite-${key}`}
                               src={animatedSprites[key]}
+                              width={115}
                               animated
                               pixelated
-                              width={80}
-                              placeholderwidth="75%"
+                              placeholderwidth="40%"
                             />
                             <p>{removeUnderscore(key)}</p>
                           </SpriteContainer>

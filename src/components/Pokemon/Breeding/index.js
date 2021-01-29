@@ -37,50 +37,52 @@ export default function Breeding({ ...rest }) {
   return (
     <Box align={{ xxs: 'center', lg: 'flex-start' }} {...rest}>
       <SectionTitle>Breeding</SectionTitle>
-      {pokemonEvo.isLoading && (
-        <Loading height="251px" iconWidth="15%" key="pokemon-breeding" />
-      )}
-      {!pokemonEvo.isLoading && (
-        <Table
-          initial="hidden"
-          animate="show"
-          variants={fadeInUpVariant}
-          key={`pokemon-breeding-table`}
-        >
-          <tbody>
-            <tr>
-              <th>Gender Distribution</th>
-              <td>
-                {gender_rate === -1 ? 'Genderless' : genderRatio(gender_rate)}
-              </td>
-            </tr>
-            <tr>
-              <th>Egg Groups</th>
-              <td>
-                {egg_groups.length ? eggGroups(egg_groups) : 'No Egg Groups'}
-              </td>
-            </tr>
-            <tr>
-              <th>Egg Cycles</th>
-              <td>
-                {hatch_counter ? eggCycle(hatch_counter) : 'No Egg Cycles'}
-              </td>
-            </tr>
-            <tr>
-              <th>Baby Trigger Item</th>
-              <td>
-                {baby_trigger_item
-                  ? removeDash(baby_trigger_item.name)
-                  : 'None'}
-              </td>
-            </tr>
-            <tr>
-              <th>Habitat</th>
-              <td>{habitat ? removeDash(habitat.name) : 'None'}</td>
-            </tr>
-          </tbody>
-        </Table>
-      )}
+      <AnimatePresence exitBeforeEnter>
+        {pokemonEvo.isLoading && (
+          <Loading height="251px" iconWidth="15%" key="pokemon-breeding" />
+        )}
+        {!pokemonEvo.isLoading && (
+          <Table
+            initial="hidden"
+            animate="show"
+            variants={fadeInUpVariant}
+            key={`pokemon-breeding-table`}
+          >
+            <tbody>
+              <tr>
+                <th>Gender Distribution</th>
+                <td>
+                  {gender_rate === -1 ? 'Genderless' : genderRatio(gender_rate)}
+                </td>
+              </tr>
+              <tr>
+                <th>Egg Groups</th>
+                <td>
+                  {egg_groups.length ? eggGroups(egg_groups) : 'No Egg Groups'}
+                </td>
+              </tr>
+              <tr>
+                <th>Egg Cycles</th>
+                <td>
+                  {hatch_counter ? eggCycle(hatch_counter) : 'No Egg Cycles'}
+                </td>
+              </tr>
+              <tr>
+                <th>Baby Trigger Item</th>
+                <td>
+                  {baby_trigger_item
+                    ? removeDash(baby_trigger_item.name)
+                    : 'None'}
+                </td>
+              </tr>
+              <tr>
+                <th>Habitat</th>
+                <td>{habitat ? removeDash(habitat.name) : 'None'}</td>
+              </tr>
+            </tbody>
+          </Table>
+        )}
+      </AnimatePresence>
     </Box>
   )
 }

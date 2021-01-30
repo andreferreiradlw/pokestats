@@ -1,10 +1,10 @@
-import { useEffect, useRef } from 'react'
+import { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useRouter } from 'next/router'
 import LazyLoad from 'react-lazyload'
 import { AnimatePresence } from 'framer-motion'
 // actions
-import { fetchPokemonData, startLoading, cleanData } from './pokemonSlice'
+import { fetchPokemonData, cleanData } from './pokemonSlice'
 import { changeVersion } from '../Header/gameSlice'
 // helpers
 import { mapGenerationToGame } from '../../helpers/gameVersion'
@@ -44,7 +44,6 @@ export default function Homepage() {
   const { id, game_indices, name } = pokemonInfo.data
   const { generation } = pokemonBio.data
 
-  // start loading info, biology and evolution states
   useEffect(() => {
     // reset data on unmount
     return () => {
@@ -54,11 +53,12 @@ export default function Homepage() {
 
   // fetch pokemon data
   useEffect(() => {
-    if (Object.keys(pokemonInfo.data).length !== 0) {
-      // reset data
-      dispatch(cleanData())
-    }
     if (router.query.id) {
+      // check if previous pokemon data exists
+      if (Object.keys(pokemonInfo.data).length !== 0) {
+        // reset data
+        dispatch(cleanData())
+      }
       // fetch new pokemon data
       dispatch(fetchPokemonData(router.query.id))
     }
@@ -85,17 +85,12 @@ export default function Homepage() {
   }, [pokemonInfo, pokemonLength])
 
   return (
-    <Layout
-      withHeader
-      withFooter
-      withMain={false}
-      key={`layout-pokemon-${router.query.id}`}
-    >
+    <Layout withHeader withFooter withMain={false} key={`layout-pokemon-${id}`}>
       <AnimatePresence exitBeforeEnter>
         {pokemonInfo.isLoading && (
           <Loading
-            passKey={`loading-pokemon-${router.query.id}`}
-            key={`loading-pokemon-${router.query.id}`}
+            passKey={`loading-pokemon-${id}`}
+            key={`loading-pokemon-${id}`}
             text={router.query.id && `Loading ${removeDash(router.query.id)}`}
           />
         )}
@@ -106,7 +101,7 @@ export default function Homepage() {
             animate="visible"
             exit="fade"
             variants={pageContainerVariant}
-            key={`pokemon-${router.query.id}`}
+            key={`pokemon-${id}`}
             constrained
             withGutter
             direction="column"

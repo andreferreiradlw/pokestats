@@ -28,12 +28,12 @@ const GlobalStyle = createGlobalStyle`
     margin: 0;
     padding: 0;
     border: 0;
+    
   }
 
   // typography
   html {
     font-size: 100%;
-    font-display: optional;
   }
   body {
     overflow-x: hidden;

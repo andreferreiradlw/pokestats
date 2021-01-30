@@ -8,6 +8,16 @@ export const staggerExitVariant = {
     },
   },
 }
+export const staggerExitLoadingVariant = {
+  exit: {
+    transition: {
+      staggerChildren: 0.2,
+      staggerDirection: -1,
+      delayChildren: 0.2,
+      when: 'afterChildren',
+    },
+  },
+}
 
 export const staggerInitialVariant = {
   hidden: { opacity: 1 },
@@ -58,7 +68,7 @@ export const pageVariant = {
 
 export const pageContainerVariant = {
   hidden: {
-    opacity: 0,
+    opacity: 1,
     x: '100vw',
     transition: { delay: 0.2 },
   },
@@ -83,7 +93,7 @@ export const pageContainerVariant = {
 export const loadingChild = {
   initial: {
     y: 0,
-    opacity: 0,
+    opacity: 1,
   },
   animate: {
     y: 0,

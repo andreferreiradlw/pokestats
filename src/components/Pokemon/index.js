@@ -85,12 +85,17 @@ export default function Homepage() {
   }, [pokemonInfo, pokemonLength])
 
   return (
-    <Layout withHeader withFooter withMain={false} key={`layout-pokemon-${id}`}>
+    <Layout
+      withHeader
+      withFooter
+      withMain={false}
+      key={`layout-pokemon-${router.query.id}`}
+    >
       <AnimatePresence exitBeforeEnter>
         {pokemonInfo.isLoading && (
           <Loading
-            passKey={`loading-pokemon-${id}`}
-            key={`loading-pokemon-${id}`}
+            passKey={`loading-pokemon-${router.query.id}`}
+            key={`loading-pokemon-${router.query.id}`}
             text={router.query.id && `Loading ${removeDash(router.query.id)}`}
           />
         )}
@@ -101,7 +106,7 @@ export default function Homepage() {
             animate="visible"
             exit="fade"
             variants={pageContainerVariant}
-            key={`pokemon-${id}`}
+            key={`pokemon-${router.query.id}`}
             constrained
             withGutter
             direction="column"

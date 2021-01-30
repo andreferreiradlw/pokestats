@@ -41,6 +41,7 @@ const Table = styled(motion.table)`
     }
     @media ${theme.device.lg} {
       width: 100%;
+      overflow-x: hidden;
     }
   `}
 `

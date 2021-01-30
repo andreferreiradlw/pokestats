@@ -19,6 +19,16 @@ export default function EvolutionChain({ ...rest }) {
   return (
     <Box align={{ xxs: 'center', lg: 'flex-start' }} {...rest}>
       <SectionTitle>Evolution Chain</SectionTitle>
+      {!pokemonEvo.isLoading && chain && !chain.evolves_to.length && (
+        <SectionMessage
+          initial="hidden"
+          animate="show"
+          variants={fadeInUpVariant}
+          key={`no-pokemon-evolution-${chainId}`}
+        >
+          This Pokémon does not evolve.
+        </SectionMessage>
+      )}
       <AnimatePresence exitBeforeEnter>
         {pokemonEvo.isLoading && (
           <Loading
@@ -27,17 +37,7 @@ export default function EvolutionChain({ ...rest }) {
             key={`pokemon-evolution-${chainId}`}
           />
         )}
-        {!pokemonEvo.isLoading && !chain.evolves_to.length && (
-          <SectionMessage
-            initial="hidden"
-            animate="show"
-            variants={fadeInUpVariant}
-            key={`no-pokemon-evolution-${chainId}`}
-          >
-            This Pokémon does not evolve.
-          </SectionMessage>
-        )}
-        {!pokemonEvo.isLoading && chain.evolves_to.length > 0 && (
+        {!pokemonEvo.isLoading && chain && (
           <BoxWrapper
             direction={{ xxs: 'column', lg: 'row' }}
             justify="center"

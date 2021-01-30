@@ -21,7 +21,7 @@ export default function Navigation({ ...rest }) {
 
   return (
     <>
-      {!pokemonInfo.isLoading && allPokemon && (
+      {!pokemonInfo.isLoading && allPokemon.length && pokemonLength && (
         <Box
           direction={{ xxs: 'column', sm: 'row' }}
           justify={{ xxs: 'flex-start', sm: 'center' }}

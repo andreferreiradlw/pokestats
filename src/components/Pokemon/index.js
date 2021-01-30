@@ -200,9 +200,9 @@ export default function Homepage() {
               align="flex-start"
               justify="flex-start"
               margin="1rem 0"
-              minHeight="209px"
+              minHeight="210px"
             >
-              <LazyLoad height={209} once offset={350}>
+              <LazyLoad once offset={350}>
                 <Moves sizes={12} margin="0 0 2rem" />
               </LazyLoad>
             </Box>

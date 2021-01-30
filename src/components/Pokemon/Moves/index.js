@@ -53,38 +53,35 @@ export default function Moves({ ...rest }) {
   const [movesLoading, setMovesLoading] = useState(true)
 
   // ref
-  const isMounted = useRef(null)
-  // mounted effect
+  const _isMounted = useRef(null)
+  // manage mounted state to avoid memory leaks
   useEffect(() => {
-    // executed when component mounted
-    isMounted.current = true
+    _isMounted.current = true
     return () => {
-      // executed when unmount
-      isMounted.current = false
+      _isMounted.current = false
     }
   }, [])
 
   // fetch move data
   useEffect(() => {
-    if (isMounted.current && moves && moves.length) {
+    if (_isMounted.current && moves && moves.length) {
       setMovesLoading(true)
       // fetch
       fetchTypeData(moves)
         .then(movesData => {
-          setMoves(movesData)
-          //setMovesLoading(false)
+          if (_isMounted.current) setMoves(movesData)
         })
         .catch(errors => {
           console.log(errors)
           // no moves
-          setMovesLoading(false)
+          if (_isMounted.current) setMovesLoading(false)
         })
     }
   }, [moves])
 
   // tab changes
   useEffect(() => {
-    if (isMounted.current) {
+    if (_isMounted.current) {
       // tab changed! update learn method
       // changing learn method will trigger moves update
       // start loading first
@@ -104,25 +101,27 @@ export default function Moves({ ...rest }) {
 
   // current pokemon moves
   useEffect(() => {
-    if (isMounted.current && pokemonMoves && learnMethod && gameVersion) {
+    if (_isMounted.current && pokemonMoves && learnMethod && gameVersion) {
       // filter moves by learn method and current game version
       filterMoves(
         pokemonMoves,
         learnMethod,
         mapVersionToGroup(gameVersion)
       ).then(moves => {
-        if (moves.length) {
-          // clear machine names state
-          // when we set new currMoves, these won't match
-          setMachineNames()
-          // update move state to show in table
-          setCurrMoves(moves)
-          // this will trigger a new machine name search
-        } else {
-          // empty currMoves
-          setCurrMoves([])
-          // stop loading
-          setMovesLoading(false)
+        if (_isMounted.current) {
+          if (moves.length) {
+            // clear machine names state
+            // when we set new currMoves, these won't match
+            setMachineNames()
+            // update move state to show in table
+            setCurrMoves(moves)
+            // this will trigger a new machine name search
+          } else {
+            // empty currMoves
+            setCurrMoves([])
+            // stop loading
+            setMovesLoading(false)
+          }
         }
       })
     }
@@ -130,7 +129,7 @@ export default function Moves({ ...rest }) {
 
   // current pokemon moves
   useEffect(() => {
-    if (isMounted.current && currMoves.length) {
+    if (_isMounted.current && currMoves.length) {
       // if move is machine then get machine names
       if (learnMethod === 'machine') {
         // requests from current moves machines
@@ -145,15 +144,17 @@ export default function Moves({ ...rest }) {
                 return res.data.item.name
               }
             })
-            // update machine names state
-            setMachineNames(names)
-            // stop loading
-            setMovesLoading(false)
+            if (_isMounted.current) {
+              // update machine names state
+              setMachineNames(names)
+              // stop loading
+              setMovesLoading(false)
+            }
           })
         )
       } else {
         // if not machine just stop loading instead
-        setMovesLoading(false)
+        if (_isMounted.current) setMovesLoading(false)
       }
     }
   }, [currMoves])
@@ -208,7 +209,7 @@ export default function Moves({ ...rest }) {
         {/** LOADING */}
         {movesLoading && (
           <Loading
-            height="300px"
+            height="100%"
             iconWidth={{ xxs: '20%', xs: '15%', md: '10%', lg: '5%' }}
             key="pokemon-moves"
           />

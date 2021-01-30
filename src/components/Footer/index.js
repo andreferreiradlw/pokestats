@@ -7,7 +7,7 @@ import PokeApi from '../../assets/pokeapi_logo.png'
 
 export default function Footer({ ...rest }) {
   return (
-    <FooterContainer as="footer" margin="2rem 0 0" {...rest}>
+    <FooterContainer as="footer" {...rest}>
       <Box
         direction={{ xxs: 'column', sm: 'row' }}
         align={{ xxs: 'flex-start', sm: 'center' }}

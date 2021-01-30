@@ -2,6 +2,8 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 // components
 import Particles from '../Particles'
+// helpers
+import { fadeInUpVariant } from '../../helpers/animations'
 // styles
 import { Container, Title, Message, Image } from './StyledNotFound'
 import { Button } from '../BaseStyles'
@@ -21,7 +23,15 @@ export default function NotFound() {
         Check that you typed the URL correctly!
       </Message>
       <Link href="/" passHref>
-        <Button as="a">Go back home</Button>
+        <Button
+          as="a"
+          whileHover="hover"
+          whileTap="tap"
+          variants={fadeInUpVariant}
+          key="404-notfound-btn"
+        >
+          Go back home
+        </Button>
       </Link>
       <Particles />
     </Container>

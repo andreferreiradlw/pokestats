@@ -4,7 +4,7 @@ import { useRouter } from 'next/router'
 import LazyLoad from 'react-lazyload'
 import { AnimatePresence } from 'framer-motion'
 // actions
-import { fetchPokemonData, startLoading, cleanData } from './pokemonSlice'
+import { fetchPokemonData, cleanData } from './pokemonSlice'
 import { changeVersion } from '../Header/gameSlice'
 // helpers
 import { mapGenerationToGame } from '../../helpers/gameVersion'
@@ -36,18 +36,17 @@ export default function Homepage() {
   const pokemonInfo = useSelector(state => state.pokemon.info)
   // biology
   const pokemonBio = useSelector(state => state.pokemon.biology)
+  // game version
+  const gameVersion = useSelector(state => state.game.version)
   // pokemon array length
   const pokemonLength = useSelector(state => state.home.pokemonLength)
   // data
   const { id, game_indices, name } = pokemonInfo.data
   const { generation } = pokemonBio.data
 
-  // start loading info, biology and evolution states
   useEffect(() => {
-    dispatch(startLoading())
-    // on unmount
+    // reset data on unmount
     return () => {
-      dispatch(startLoading())
       dispatch(cleanData())
     }
   }, [])
@@ -55,8 +54,12 @@ export default function Homepage() {
   // fetch pokemon data
   useEffect(() => {
     if (router.query.id) {
-      // also start loading when router changes
-      dispatch(startLoading())
+      // check if previous pokemon data exists
+      if (Object.keys(pokemonInfo.data).length !== 0) {
+        // reset data
+        dispatch(cleanData())
+      }
+      // fetch new pokemon data
       dispatch(fetchPokemonData(router.query.id))
     }
   }, [router])
@@ -65,11 +68,12 @@ export default function Homepage() {
   useEffect(() => {
     if (game_indices && game_indices[0]) {
       // change to first game indice
-      dispatch(changeVersion(game_indices[0].version.name))
+      if (gameVersion !== game_indices[0].version.name)
+        dispatch(changeVersion(game_indices[0].version.name))
     } else if (generation) {
       // if no game indice avaliable change to generation
       let gameGen = mapGenerationToGame(generation.name)
-      dispatch(changeVersion(gameGen))
+      if (gameVersion !== gameGen) dispatch(changeVersion(gameGen))
     }
   }, [generation])
 
@@ -83,7 +87,7 @@ export default function Homepage() {
   return (
     <Layout
       withHeader
-      withFooter={false}
+      withFooter
       withMain={false}
       key={`layout-pokemon-${router.query.id}`}
     >
@@ -98,10 +102,11 @@ export default function Homepage() {
         {!pokemonInfo.isLoading && (
           <BoxWrapper
             forwardedAs="main"
-            key={`pokemon-${router.query.id}`}
             initial="hidden"
             animate="visible"
+            exit="fade"
             variants={pageContainerVariant}
+            key={`pokemon-${router.query.id}`}
             constrained
             withGutter
             direction="column"
@@ -116,8 +121,13 @@ export default function Homepage() {
               align="center"
               justify="flex-start"
               margin="1rem 0"
+              minHeight="533px"
             >
-              <Details sizes={5} margin={{ xxs: '0 0 2rem', lg: '0' }} />
+              <Details
+                sizes={5}
+                margin={{ xxs: '0 0 2rem', lg: '0' }}
+                key={`pokemon-details-${id}`}
+              />
               <FeaturedImage
                 sizes={7}
                 margin={{ xxs: '0 0 2rem', lg: '0' }}
@@ -131,8 +141,15 @@ export default function Homepage() {
               align="flex-start"
               justify="flex-start"
               margin="1rem 0"
+              minHeight="375px"
             >
-              <EvolutionChain sizes={12} margin="0 0 2rem" />
+              <LazyLoad height={375} once offset={50}>
+                <EvolutionChain
+                  sizes={12}
+                  margin="0 0 2rem"
+                  key={`pokemon-evolution-${id}`}
+                />
+              </LazyLoad>
             </Box>
             {/** BREEDING, TRAINING, MULTIPLIERS */}
             <Box
@@ -141,19 +158,26 @@ export default function Homepage() {
               align="flex-start"
               justify="flex-start"
               margin="1rem 0"
+              minHeight="347px"
             >
-              <Breeding
-                margin={{ xxs: '0 0 2rem', lg: '0' }}
-                padding={{ xxs: '0', lg: '0 2rem 0 0' }}
-              />
-              <Training
-                margin={{ xxs: '0 0 2rem', lg: '0' }}
-                padding={{ xxs: '0', lg: '0 1rem' }}
-              />
-              <Multipliers
-                margin={{ xxs: '0 0 2rem', lg: '0' }}
-                padding={{ xxs: '0', lg: '0 0 0 2rem' }}
-              />
+              <LazyLoad height={347} once offset={50}>
+                <Breeding
+                  margin={{ xxs: '0 0 2rem', lg: '0' }}
+                  padding={{ xxs: '0', lg: '0 2rem 0 0' }}
+                />
+              </LazyLoad>
+              <LazyLoad height={347} once offset={50}>
+                <Training
+                  margin={{ xxs: '0 0 2rem', lg: '0' }}
+                  padding={{ xxs: '0', lg: '0 1rem' }}
+                />
+              </LazyLoad>
+              <LazyLoad height={347} once offset={50}>
+                <Multipliers
+                  margin={{ xxs: '0 0 2rem', lg: '0' }}
+                  padding={{ xxs: '0', lg: '0 0 0 2rem' }}
+                />
+              </LazyLoad>
             </Box>
             {/** BASESTATS, FORMS */}
             <Box
@@ -176,8 +200,9 @@ export default function Homepage() {
               align="flex-start"
               justify="flex-start"
               margin="1rem 0"
+              minHeight="210px"
             >
-              <LazyLoad height={500} once offset={350}>
+              <LazyLoad once offset={350}>
                 <Moves sizes={12} margin="0 0 2rem" />
               </LazyLoad>
             </Box>

@@ -1,6 +1,8 @@
 import styled, { css } from 'styled-components'
 // components
 import Box from '../../Box'
+// styles
+import { float } from '../../BaseStyles'
 
 const ImageContainer = styled(Box)`
   ${({ theme }) => css`
@@ -27,6 +29,10 @@ const ImageContainer = styled(Box)`
         max-width: 60%;
       }
     `}
+
+    @media (prefers-reduced-motion: no-preference) {
+      animation: ${float} infinite 3s ease-in-out;
+    }
   }
 `
 

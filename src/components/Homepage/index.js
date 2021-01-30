@@ -28,7 +28,7 @@ export default function Homepage() {
 
   // start loading again when unmounts
   useEffect(() => {
-    if (pokemonLength) dispatch(stopLoading())
+    if (pokemonLength && isLoading) dispatch(stopLoading())
     // on unmount
     return () => {
       dispatch(startLoading())

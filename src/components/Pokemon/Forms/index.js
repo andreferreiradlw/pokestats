@@ -1,9 +1,11 @@
 import { useSelector } from 'react-redux'
+import { AnimatePresence } from 'framer-motion'
 // components
 import Loading from '../../Loading'
 import Box from '../../Box'
 //helpers
-import { removeDash } from '../.././../helpers/typography'
+import { removeDash } from '../../../helpers/typography'
+import { fadeInUpVariant } from '../../../helpers/animations'
 // styles
 import { SectionTitle, Table, Numbered } from '../../BaseStyles'
 
@@ -31,26 +33,34 @@ export default function Forms({ ...rest }) {
   return (
     <Box align={{ xxs: 'center', lg: 'flex-start' }} {...rest}>
       <SectionTitle>Forms</SectionTitle>
-      {pokemonBio.isLoading ? (
-        <Loading height="251px" iconWidth="15%" key="pokemon-forms" />
-      ) : (
-        <Table forwardedAs="table" align="flex-start" margin="0 0 1.5rem">
-          <tbody>
-            <tr>
-              <th>Alternative Forms</th>
-              <td>{forms_switchable ? 'Yes' : 'None'}</td>
-            </tr>
-            <tr>
-              <th>Varieties</th>
-              <td>{currForms(varieties)}</td>
-            </tr>
-            <tr>
-              <th>Gender Differences</th>
-              <td>{has_gender_differences ? 'Yes' : 'None'}</td>
-            </tr>
-          </tbody>
-        </Table>
-      )}
+      <AnimatePresence exitBeforeEnter>
+        {pokemonBio.isLoading && (
+          <Loading height="251px" iconWidth="15%" key="pokemon-forms" />
+        )}
+        {!pokemonBio.isLoading && (
+          <Table
+            initial="hidden"
+            animate="show"
+            variants={fadeInUpVariant}
+            key={`pokemon-forms-table`}
+          >
+            <tbody>
+              <tr>
+                <th>Alternative Forms</th>
+                <td>{forms_switchable ? 'Yes' : 'None'}</td>
+              </tr>
+              <tr>
+                <th>Varieties</th>
+                <td>{currForms(varieties)}</td>
+              </tr>
+              <tr>
+                <th>Gender Differences</th>
+                <td>{has_gender_differences ? 'Yes' : 'None'}</td>
+              </tr>
+            </tbody>
+          </Table>
+        )}
+      </AnimatePresence>
     </Box>
   )
 }

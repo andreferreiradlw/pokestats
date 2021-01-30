@@ -3,7 +3,10 @@ import { forwardRef } from 'react'
 import { LoadingContainer, PotionIcon, Text } from './StyledLoading'
 import BoxWrapper from '../Box/StyledBox'
 // helpers
-import { staggerExitVariant, loadingChild } from '../../helpers/animations'
+import {
+  staggerExitLoadingVariant,
+  loadingChild,
+} from '../../helpers/animations'
 
 const Loading = forwardRef(
   (
@@ -26,10 +29,10 @@ const Loading = forwardRef(
         justify={justify}
         align={align}
         height={height}
-        variants={staggerExitVariant}
         initial="initial"
         animate="animate"
         exit="exit"
+        variants={staggerExitLoadingVariant}
         key={passKey}
         {...rest}
       >

@@ -1,14 +1,14 @@
 import styled, { css } from 'styled-components'
-// components
-import Box from '../Box'
+import { motion } from 'framer-motion'
 
-const Table = styled(Box)`
+const Table = styled(motion.table)`
   display: table;
   font-size: 1rem;
   line-height: 1.2rem;
-  word-break: break-word;
+  word-break: keep-all;
   border-spacing: 0;
   width: 100%;
+  margin: 0 0 1.5rem;
 
   & tbody {
     flex-grow: 1;
@@ -41,6 +41,7 @@ const Table = styled(Box)`
     }
     @media ${theme.device.lg} {
       width: 100%;
+      overflow-x: hidden;
     }
   `}
 `

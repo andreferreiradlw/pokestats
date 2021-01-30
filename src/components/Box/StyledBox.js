@@ -22,6 +22,7 @@ export default styled(motion.div)`
     flexWrap,
     width,
     height,
+    minHeight,
     direction,
     align,
     justify,
@@ -40,6 +41,7 @@ export default styled(motion.div)`
       // sizing
       ${width && responsiveProps('width', width)}
       ${height && responsiveProps('height', height)}
+      ${minHeight && responsiveProps('min-height', minHeight)}
     `
   }}
 

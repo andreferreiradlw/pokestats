@@ -1,8 +1,9 @@
 import styled from 'styled-components'
+import { motion } from 'framer-motion'
 // helpers
 import { removeDash } from '../../../../helpers/typography'
 
-const Details = styled.span`
+const Details = styled(motion.span)`
   margin-bottom: 1rem;
   font-weight: 600;
   text-align: center;

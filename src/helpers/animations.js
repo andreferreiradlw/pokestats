@@ -62,7 +62,7 @@ export const pageVariant = {
   },
   pageExit: {
     opacity: 0,
-    transition: { duration: 0.5, ease: 'easeInOut' },
+    transition: { duration: 0.2, ease: 'easeInOut' },
   },
 }
 
@@ -76,7 +76,7 @@ export const pageContainerVariant = {
     opacity: 1,
     x: 0,
     transition: {
-      delay: 0.1,
+      delay: 0.2,
       type: 'spring',
       mass: 1,
       damping: 25,

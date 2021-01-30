@@ -2,7 +2,7 @@ import { useSelector } from 'react-redux'
 import Link from 'next/link'
 // helpers
 import { removeDash } from '../../../helpers/typography'
-import { fadeInUpVariant } from '../../../helpers/animations'
+import { hoverVariant } from '../../../helpers/animations'
 // components
 import Box from '../../Box'
 import Image from '../../Image'
@@ -36,7 +36,7 @@ export default function Navigation({ ...rest }) {
                 left
                 whileHover="hover"
                 whileTap="tap"
-                variants={fadeInUpVariant}
+                variants={hoverVariant}
               >
                 <Arrow left>
                   <Image
@@ -67,7 +67,7 @@ export default function Navigation({ ...rest }) {
                 right
                 whileHover="hover"
                 whileTap="tap"
-                variants={fadeInUpVariant}
+                variants={hoverVariant}
               >
                 <Arrow right>
                   <Image

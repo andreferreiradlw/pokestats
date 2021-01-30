@@ -49,7 +49,7 @@ export default function Details({ sizes, ...rest }) {
           .replace(/\u000C/g, ' ')
           .replace(/u' -\n'/, ' - ')
           .replace(/u'-\n'/, '-')
-          .replace(/u'\n'/, ' ')
+          .replace(/(\r\n|\n|\r)/gm, ' ')
       : 'No description available for currently selected generation.'
   }
 

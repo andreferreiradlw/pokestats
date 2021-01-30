@@ -41,14 +41,15 @@ export default function Details({ sizes, ...rest }) {
     // soft hyphens followed by newlines vanish
     // letter-hyphen-newline becomes letter-hyphen, to preserve real hyphenation
     // any other newline becomes a space
+    // .replace(/[\u0000-\u001F\u007F-\u009F]/g, ' ')
     return versionEntry.length
       ? versionEntry[0].flavor_text
           .replace(/u'\f'/, /u'\n'/)
-          .replace(/u'\u00ad\n'/, /u''/)
-          .replace(/u'\u00ad'/, /u''/)
-          .replace(/u' -\n'/, /u' - '/)
-          .replace(/u'-\n'/, /u'-'/)
-          .replace(/u'\n'/, /u' '/)
+          .replace(/\u00AD/g, '')
+          .replace(/\u000C/g, ' ')
+          .replace(/u' -\n'/, ' - ')
+          .replace(/u'-\n'/, '-')
+          .replace(/u'\n'/, ' ')
       : 'No description available for currently selected generation.'
   }
 

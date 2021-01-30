@@ -14,21 +14,25 @@ export default function EvolutionChain({ ...rest }) {
   // evolution
   const pokemonEvo = useSelector(state => state.pokemon.evolution)
   // chain
-  const { chain } = pokemonEvo.data
+  const { chain, id: chainId } = pokemonEvo.data
 
   return (
     <Box align={{ xxs: 'center', lg: 'flex-start' }} {...rest}>
       <SectionTitle>Evolution Chain</SectionTitle>
       <AnimatePresence exitBeforeEnter>
         {pokemonEvo.isLoading && (
-          <Loading height="271px" iconWidth="5%" key={`pokemon-evolution`} />
+          <Loading
+            height="271px"
+            iconWidth="5%"
+            key={`pokemon-evolution-${chainId}`}
+          />
         )}
         {!pokemonEvo.isLoading && !chain.evolves_to.length && (
           <SectionMessage
             initial="hidden"
             animate="show"
             variants={fadeInUpVariant}
-            key={`no-pokemon-evolution`}
+            key={`no-pokemon-evolution-${chainId}`}
           >
             This Pokémon does not evolve.
           </SectionMessage>
@@ -46,18 +50,18 @@ export default function EvolutionChain({ ...rest }) {
                 {chain.evolves_to.map((firstEvo, i) => (
                   <Box
                     direction={{ xxs: 'column', lg: 'row' }}
-                    key={`first-evo-box-${i}`}
+                    key={`first-evo-box-${i}-${chainId}`}
                   >
                     <Evolution
                       species={firstEvo.species}
                       details={firstEvo.evolution_details}
-                      key={`first-evo-${i}`}
+                      key={`first-evo-${i}-${chainId}`}
                     />
                     {firstEvo.evolves_to.length > 0 && (
                       <Box direction={{ xxs: 'row', lg: 'column' }}>
                         {firstEvo.evolves_to.map((secondEvo, x) => (
                           <Evolution
-                            key={`second-evo-${x}`}
+                            key={`second-evo-${x}-${chainId}`}
                             species={secondEvo.species}
                             details={secondEvo.evolution_details}
                           />

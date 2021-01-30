@@ -38,7 +38,7 @@ const initialState = pokemonAdapter.getInitialState({
 
 // Thunk functions
 export const fetchPokemonData = createAsyncThunk(
-  'home/fetchPokemonData',
+  'pokemon/fetchPokemonData',
   async (pokemon, { dispatch, rejectWithValue }) => {
     // await new Promise((resolve) => setTimeout(resolve, 2000))
     try {
@@ -58,7 +58,7 @@ export const fetchPokemonData = createAsyncThunk(
   }
 )
 export const fetchPokemonBiology = createAsyncThunk(
-  'home/fetchPokemonBiology',
+  'pokemon/fetchPokemonBiology',
   async (biologyUrl, { dispatch, rejectWithValue }) => {
     // await new Promise((resolve) => setTimeout(resolve, 2000))
     try {
@@ -75,7 +75,7 @@ export const fetchPokemonBiology = createAsyncThunk(
   }
 )
 export const fetchPokemonEvolution = createAsyncThunk(
-  'home/fetchPokemonEvolution',
+  'pokemon/fetchPokemonEvolution',
   async (evolutionUrl, { rejectWithValue }) => {
     try {
       const response = await axios.get(evolutionUrl)

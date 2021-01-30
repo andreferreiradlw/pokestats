@@ -2,7 +2,7 @@ import { useSelector } from 'react-redux'
 import Link from 'next/link'
 // helpers
 import { removeDash } from '../../../helpers/typography'
-import { fadeInUpVariant, scaleHoverVariant } from '../../../helpers/animations'
+import { fadeInUpVariant } from '../../../helpers/animations'
 // components
 import Box from '../../Box'
 import Image from '../../Image'
@@ -31,7 +31,6 @@ export default function Navigation({ ...rest }) {
             <Link
               as={`/pokemon/${allPokemon[id - 2].name}`}
               href="/pokemon/[id]"
-              passHref
             >
               <BtnAnchor
                 left

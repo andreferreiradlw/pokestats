@@ -33,6 +33,7 @@ const GlobalStyle = createGlobalStyle`
   // typography
   html {
     font-size: 100%;
+    font-display: optional;
   }
   body {
     overflow-x: hidden;

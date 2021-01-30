@@ -11,7 +11,7 @@ import TypeBadge from '../../TypeBadge'
 import { Table, Numbered } from '../../BaseStyles'
 import { Name, TypeContainer, Genera, Flavor } from './StyledDetails'
 
-export default function Details({ sizes, pokemonId, ...rest }) {
+export default function Details({ sizes, ...rest }) {
   // pokemon info
   const pokemonInfo = useSelector(state => state.pokemon.info)
   // biology
@@ -77,15 +77,15 @@ export default function Details({ sizes, pokemonId, ...rest }) {
 
   return (
     <AnimatePresence exitBeforeEnter>
-      {(pokemonInfo.isLoading || pokemonBio.isLoading) && (
+      {pokemonBio.isLoading && (
         <Loading
           sizes={sizes}
           height="558px"
           iconWidth="15%"
-          key={`pokemon-details-loading-${pokemonId}`}
+          key={`pokemon-details-loading-${id}`}
         />
       )}
-      {!pokemonInfo.isLoading && !pokemonBio.isLoading && (
+      {!pokemonBio.isLoading && (
         <BoxWrapper
           sizes={sizes}
           direction="column"
@@ -93,7 +93,7 @@ export default function Details({ sizes, pokemonId, ...rest }) {
           initial="hidden"
           animate="show"
           variants={fadeInUpVariant}
-          key={`pokemon-details-${pokemonId}`}
+          key={`pokemon-details-${id}`}
           {...rest}
         >
           <Name>{removeDash(name)}</Name>
@@ -109,7 +109,7 @@ export default function Details({ sizes, pokemonId, ...rest }) {
                 return (
                   <TypeBadge
                     type={type.name}
-                    key={`${type.name}-${i}-details-${pokemonId}`}
+                    key={`${type.name}-${i}-detail-${id}`}
                   >
                     {type.name}
                   </TypeBadge>

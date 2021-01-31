@@ -50,7 +50,7 @@ const JpnName = styled(motion.span)`
   line-height: 1;
   text-transform: uppercase;
   text-align: center;
-  font-size: 5rem;
+  font-size: 4rem;
   font-weight: bold;
   width: 1em;
 

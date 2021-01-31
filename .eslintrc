@@ -8,6 +8,7 @@
   ],
   "rules": {
     "react/prop-types": 0,
+    "no-control-regex": 0,
     "no-console": "off",
     "quotes": [
       2,

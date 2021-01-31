@@ -46,11 +46,17 @@ export default function EvolutionChain({ ...rest }) {
           >
             <Evolution noArrow species={chain.species} width="auto" />
             {chain.evolves_to.length > 0 && (
-              <Box direction={{ xxs: 'row', lg: 'column' }} sizes={9.6}>
+              <Box
+                direction={{ xxs: 'row', lg: 'column' }}
+                flexWrap={{ xxs: 'wrap', lg: 'nowrap' }}
+                sizes={9.6}
+              >
                 {chain.evolves_to.map((firstEvo, i) => (
                   <Box
                     direction={{ xxs: 'column', lg: 'row' }}
+                    align={{ xxs: 'flex-end', lg: 'center' }}
                     key={`first-evo-box-${i}-${chainId}`}
+                    width={{ xxs: '200px', lg: '100%' }}
                   >
                     <Evolution
                       species={firstEvo.species}
@@ -58,7 +64,10 @@ export default function EvolutionChain({ ...rest }) {
                       key={`first-evo-${i}-${chainId}`}
                     />
                     {firstEvo.evolves_to.length > 0 && (
-                      <Box direction={{ xxs: 'row', lg: 'column' }}>
+                      <Box
+                        direction={{ xxs: 'row', lg: 'column' }}
+                        align={{ xxs: 'flex-end', lg: 'center' }}
+                      >
                         {firstEvo.evolves_to.map((secondEvo, x) => (
                           <Evolution
                             key={`second-evo-${x}-${chainId}`}

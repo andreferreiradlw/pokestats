@@ -9,8 +9,13 @@ const NameTD = styled(motion.td)``
 
 const TableContainer = styled(motion.div)`
   width: 100%;
-  overflow-y: auto;
   overflow: auto;
+
+  ${({ theme }) => css`
+    @media ${theme.device.lg} {
+      overflow-x: hidden;
+    }
+  `}
 `
 
 const MovesTable = styled(motion.table)`
@@ -56,10 +61,7 @@ const MovesTable = styled(motion.table)`
       font-size: 0.8rem;
       line-height: 0.8rem;
     }
-  `}
-
-  ${({ theme }) => css`
-    @media ${theme.device.md} {
+    @media ${theme.device.lg} {
       font-size: 1rem;
       line-height: 1rem;
     }

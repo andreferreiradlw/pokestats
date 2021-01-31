@@ -192,7 +192,7 @@ export const scaleInVariant = {
     opacity: 1,
     scale: 1,
     transition: {
-      delay: 0.2,
+      delay: 0.5,
       type: 'spring',
       mass: 1,
       damping: 15,

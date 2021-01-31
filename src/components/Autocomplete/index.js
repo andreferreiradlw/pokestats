@@ -83,7 +83,7 @@ export default function Autocomplete({
   // key pressed
   const handleKeyDown = e => {
     // enter
-    if (e.code === 'Enter' && filtered[0] !== undefined) {
+    if (e.keyCode === 13 && filtered[0] !== undefined) {
       activeOption === -1
         ? // trigger router for first suggestion
           router.push(`/pokemon/${filtered[0].name}`)

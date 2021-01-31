@@ -38,11 +38,9 @@ export default function Homepage() {
   const pokemonBio = useSelector(state => state.pokemon.biology)
   // game version
   const gameVersion = useSelector(state => state.game.version)
-  // pokemon array length
-  const pokemonLength = useSelector(state => state.home.pokemonLength)
   // data
   const { id, game_indices, name } = pokemonInfo.data
-  const { generation } = pokemonBio.data
+  const { generation, names } = pokemonBio.data
 
   useEffect(() => {
     // reset data on unmount
@@ -79,10 +77,10 @@ export default function Homepage() {
 
   // error handling
   useEffect(() => {
-    if (pokemonInfo.error.status !== 'OK' || id > pokemonLength) {
+    if (pokemonInfo.error.status !== 'OK' || id > 809) {
       router.push('/404', router.asPath)
     }
-  }, [pokemonInfo, pokemonLength])
+  }, [pokemonInfo])
 
   return (
     <Layout
@@ -131,6 +129,7 @@ export default function Homepage() {
               <FeaturedImage
                 sizes={7}
                 margin={{ xxs: '0 0 2rem', lg: '0' }}
+                pokemonNames={names}
                 pokemonName={name}
                 pokemonId={id}
               />
@@ -160,19 +159,19 @@ export default function Homepage() {
               margin="1rem 0"
               minHeight="347px"
             >
-              <LazyLoad height={347} once offset={50}>
+              <LazyLoad height={347} once offset={100}>
                 <Breeding
                   margin={{ xxs: '0 0 2rem', lg: '0' }}
                   padding={{ xxs: '0', lg: '0 2rem 0 0' }}
                 />
               </LazyLoad>
-              <LazyLoad height={347} once offset={50}>
+              <LazyLoad height={347} once offset={100}>
                 <Training
                   margin={{ xxs: '0 0 2rem', lg: '0' }}
                   padding={{ xxs: '0', lg: '0 1rem' }}
                 />
               </LazyLoad>
-              <LazyLoad height={347} once offset={50}>
+              <LazyLoad height={347} once offset={100}>
                 <Multipliers
                   margin={{ xxs: '0 0 2rem', lg: '0' }}
                   padding={{ xxs: '0', lg: '0 0 0 2rem' }}
@@ -202,7 +201,7 @@ export default function Homepage() {
               margin="1rem 0"
               minHeight="210px"
             >
-              <LazyLoad once offset={350}>
+              <LazyLoad once offset={500}>
                 <Moves sizes={12} margin="0 0 2rem" />
               </LazyLoad>
             </Box>

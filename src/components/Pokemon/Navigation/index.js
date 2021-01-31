@@ -2,7 +2,6 @@ import { useSelector } from 'react-redux'
 import Link from 'next/link'
 // helpers
 import { removeDash } from '../../../helpers/typography'
-import { hoverVariant } from '../../../helpers/animations'
 // components
 import Box from '../../Box'
 import Image from '../../Image'
@@ -32,12 +31,7 @@ export default function Navigation({ ...rest }) {
               as={`/pokemon/${allPokemon[id - 2].name}`}
               href="/pokemon/[id]"
             >
-              <BtnAnchor
-                left
-                whileHover="hover"
-                whileTap="tap"
-                variants={hoverVariant}
-              >
+              <BtnAnchor left>
                 <Arrow left>
                   <Image
                     src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${
@@ -63,12 +57,7 @@ export default function Navigation({ ...rest }) {
               href="/pokemon/[id]"
               passHref
             >
-              <BtnAnchor
-                right
-                whileHover="hover"
-                whileTap="tap"
-                variants={hoverVariant}
-              >
+              <BtnAnchor right>
                 <Arrow right>
                   <Image
                     src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${

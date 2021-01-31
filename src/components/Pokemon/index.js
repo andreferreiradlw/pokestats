@@ -38,11 +38,9 @@ export default function Homepage() {
   const pokemonBio = useSelector(state => state.pokemon.biology)
   // game version
   const gameVersion = useSelector(state => state.game.version)
-  // pokemon array length
-  const pokemonLength = useSelector(state => state.home.pokemonLength)
   // data
   const { id, game_indices, name } = pokemonInfo.data
-  const { generation } = pokemonBio.data
+  const { generation, names } = pokemonBio.data
 
   useEffect(() => {
     // reset data on unmount
@@ -131,6 +129,7 @@ export default function Homepage() {
               <FeaturedImage
                 sizes={7}
                 margin={{ xxs: '0 0 2rem', lg: '0' }}
+                pokemonNames={names}
                 pokemonName={name}
                 pokemonId={id}
               />

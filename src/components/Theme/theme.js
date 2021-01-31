@@ -81,6 +81,9 @@ const theme = {
       color: white,
     },
   },
+  jpnName: {
+    color: black,
+  },
   particles: {
     backgroundColor: white,
   },

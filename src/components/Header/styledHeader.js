@@ -7,6 +7,7 @@ const Heading = styled.h2`
   line-height: 4rem;
   color: ${({ theme }) => theme.homepage.heading.color};
   font-weight: 700;
+  user-select: none;
   text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
     1px 1px 0 #000;
 

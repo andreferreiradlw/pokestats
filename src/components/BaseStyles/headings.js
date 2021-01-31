@@ -7,6 +7,7 @@ const MainHeading = styled(motion.h1)`
   font-family: 'Josefin Sans', sans-serif;
   color: ${({ theme }) => theme.homepage.heading.color};
   font-weight: 700;
+  user-select: none;
   margin-bottom: 15px;
   text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000,
     2px 2px 0 #000;

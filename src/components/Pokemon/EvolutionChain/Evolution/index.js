@@ -4,10 +4,7 @@ import axios from 'axios'
 // helpers
 import { removeDash } from '../../../../helpers/typography'
 import { mapGeneration } from '../../../../helpers/gameVersion'
-import {
-  staggerInitialVariant,
-  fadeInUpVariant,
-} from '../../../../helpers/animations'
+import { fadeInUpVariant } from '../../../../helpers/animations'
 // components
 import BoxWrapper from '../../../Box/StyledBox'
 import Image from '../../../Image'
@@ -60,7 +57,7 @@ export default function Evolution({
         <BoxWrapper
           direction={{ xxs: 'column', lg: 'row' }}
           width={{ xxs: 'auto', lg: '100%' }}
-          margin="0 0 1rem"
+          margin={{ xxs: '0 auto 1rem', lg: 'auto' }}
           initial="hidden"
           animate="show"
           variants={fadeInUpVariant}
@@ -88,7 +85,6 @@ export default function Evolution({
             <PokeBox
               forwardedAs="a"
               grow={false}
-              width="auto"
               dark
               whileHover="hover"
               whileTap="tap"

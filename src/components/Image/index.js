@@ -80,6 +80,7 @@ function ImageComponent({
               animate="show"
               variants={fadeInUpVariant}
               key={`image-${src}`}
+              draggable="false"
             />
           )}
         </AnimatePresence>

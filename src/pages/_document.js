@@ -1,27 +1,34 @@
 import Document, { Html, Head, Main, NextScript } from 'next/document'
-// Import styled components ServerStyleSheet
+// styled ssr
 import { ServerStyleSheet } from 'styled-components'
 
 class MyDocument extends Document {
   static getInitialProps({ renderPage }) {
-    // Step 1: Create an instance of ServerStyleSheet
+    // https://dev.to/aprietof/nextjs--styled-components-the-really-simple-guide----101c
+    // https://github.com/vercel/next.js/blob/master/examples/with-styled-components/pages/_document.js
+
+    // create an instance of ServerStyleSheet
     const sheet = new ServerStyleSheet()
 
-    // Step 2: Retrieve styles from components in the page
+    // retrieve styles from components in the page
     const page = renderPage(App => props =>
       sheet.collectStyles(<App {...props} />)
     )
 
-    // Step 3: Extract the styles as <style> tags
+    // extract the styles as <style> tags
     const styleTags = sheet.getStyleElement()
 
-    // Step 4: Pass styleTags as a prop
+    // seal
+    sheet.seal()
+
+    // pass styleTags as a prop
     return { ...page, styleTags }
   }
 
   render() {
     return (
       <Html lang="en">
+        {/** inject the server side rendered styles into the head */}
         <Head>{this.props.styleTags}</Head>
         <body>
           <Main />

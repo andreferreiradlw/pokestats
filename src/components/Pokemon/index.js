@@ -159,24 +159,18 @@ export default function Homepage() {
               margin="1rem 0"
               minHeight="347px"
             >
-              <LazyLoad height={347} once offset={100}>
-                <Breeding
-                  margin={{ xxs: '0 0 2rem', lg: '0' }}
-                  padding={{ xxs: '0', lg: '0 2rem 0 0' }}
-                />
-              </LazyLoad>
-              <LazyLoad height={347} once offset={100}>
-                <Training
-                  margin={{ xxs: '0 0 2rem', lg: '0' }}
-                  padding={{ xxs: '0', lg: '0 1rem' }}
-                />
-              </LazyLoad>
-              <LazyLoad height={347} once offset={100}>
-                <Multipliers
-                  margin={{ xxs: '0 0 2rem', lg: '0' }}
-                  padding={{ xxs: '0', lg: '0 0 0 2rem' }}
-                />
-              </LazyLoad>
+              <Breeding
+                margin={{ xxs: '0 0 2rem', lg: '0' }}
+                padding={{ xxs: '0', lg: '0 2rem 0 0' }}
+              />
+              <Training
+                margin={{ xxs: '0 0 2rem', lg: '0' }}
+                padding={{ xxs: '0', lg: '0 1rem' }}
+              />
+              <Multipliers
+                margin={{ xxs: '0 0 2rem', lg: '0' }}
+                padding={{ xxs: '0', lg: '0 0 0 2rem' }}
+              />
             </Box>
             {/** BASESTATS, FORMS */}
             <Box

@@ -1,4 +1,6 @@
 import Box from '../Box'
+// helpers
+import { footerVariant } from '../../helpers/animations'
 // styles
 import { FooterContainer, FooterA } from './StyledFooter'
 // icons
@@ -7,7 +9,13 @@ import PokeApi from '../../assets/pokeapi_logo.png'
 
 export default function Footer({ ...rest }) {
   return (
-    <FooterContainer as="footer" {...rest}>
+    <FooterContainer
+      initial="hidden"
+      animate="show"
+      variants={footerVariant}
+      key="layout-footer"
+      {...rest}
+    >
       <Box
         direction={{ xxs: 'column', sm: 'row' }}
         align={{ xxs: 'flex-start', sm: 'center' }}

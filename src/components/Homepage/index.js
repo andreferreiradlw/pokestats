@@ -36,7 +36,11 @@ export default function Homepage() {
   }, [])
 
   return (
-    <Layout withGutter={false} withFooter key="homepage-layout">
+    <Layout
+      withGutter={false}
+      withFooter={!isLoading || pokemonLength !== 0}
+      key="homepage-layout"
+    >
       <AnimatePresence exitBeforeEnter>
         {(isLoading || pokemonLength === 0) && (
           <Loading key="homepage-loading" height="100vh" />

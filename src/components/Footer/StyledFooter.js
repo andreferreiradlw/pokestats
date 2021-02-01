@@ -1,7 +1,12 @@
 import styled from 'styled-components'
+import { motion } from 'framer-motion'
+// components
 import BoxWrapper from '../Box/StyledBox'
 
-const FooterContainer = styled(BoxWrapper)`
+const FooterContainer = styled(motion.footer)`
+  display: flex;
+  flex-basis: auto;
+  width: 100%;
   background-color: black;
   color: white;
   font-weight: 300;

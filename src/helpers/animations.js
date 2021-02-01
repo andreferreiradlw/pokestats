@@ -131,6 +131,18 @@ export const placeholderVariant = {
 }
 
 // ENTER ANIMATIONS
+export const footerVariant = {
+  hidden: {
+    opacity: 0,
+  },
+  show: {
+    opacity: 1,
+    transition: {
+      delay: 1.2,
+    },
+  },
+}
+
 export const fadeInUpVariant = {
   hidden: {
     y: 60,
@@ -197,17 +209,6 @@ export const scaleInVariant = {
       mass: 1,
       damping: 15,
       stiffness: 200,
-    },
-  },
-}
-export const footerVariant = {
-  hidden: {
-    opacity: 0,
-  },
-  show: {
-    opacity: 1,
-    transition: {
-      delay: 1.0,
     },
   },
 }

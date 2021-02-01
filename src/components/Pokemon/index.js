@@ -11,7 +11,7 @@ import { mapGenerationToGame } from '../../helpers/gameVersion'
 import { removeDash } from '../../helpers/typography'
 import { pageContainerVariant } from '../../helpers/animations'
 // components
-import Layout from '../Layout'
+import Layout, { MainContainer } from '../Layout'
 import Loading from '../Loading'
 import Box from '../Box'
 import BoxWrapper from '../Box/StyledBox'
@@ -85,7 +85,7 @@ export default function Homepage() {
   return (
     <Layout
       withHeader
-      withFooter
+      withFooter={!pokemonInfo.isLoading}
       withMain={false}
       key={`layout-pokemon-${router.query.id}`}
     >
@@ -98,20 +98,14 @@ export default function Homepage() {
           />
         )}
         {!pokemonInfo.isLoading && (
-          <BoxWrapper
-            forwardedAs="main"
+          <MainContainer
+            constrained
+            withGutter
             initial="hidden"
             animate="visible"
             exit="fade"
             variants={pageContainerVariant}
             key={`pokemon-${router.query.id}`}
-            constrained
-            withGutter
-            direction="column"
-            align="center"
-            justify="center"
-            margin="0 auto"
-            width="100%"
           >
             <Box
               as="section"
@@ -219,7 +213,7 @@ export default function Homepage() {
             >
               <Navigation sizes={12} margin="0 0 2rem" />
             </Box>
-          </BoxWrapper>
+          </MainContainer>
         )}
       </AnimatePresence>
     </Layout>

@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux'
 // helpers
 import { removeDash } from '../../helpers/typography'
 
-export default function Heading() {
+export default function Heading({ children }) {
   // pokemon selector
   const pokemonInfo = useSelector(state => state.pokemon.info)
   // data
@@ -157,6 +157,7 @@ export default function Heading() {
         href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,700;1,700&family=Montserrat:wght@400;500&family=Quicksand:wght@600&display=block"
         rel="stylesheet"
       />
+      {children}
     </NextHead>
   )
 }

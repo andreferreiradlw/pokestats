@@ -56,6 +56,7 @@ export default function Evolution({
       {currSpecies && imgSrc && (
         <BoxWrapper
           direction={{ xxs: 'column', lg: 'row' }}
+          align="center"
           width={{ xxs: 'auto', lg: '100%' }}
           margin={{ xxs: '0 auto 1rem', lg: 'auto' }}
           initial="hidden"

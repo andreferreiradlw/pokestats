@@ -1,11 +1,11 @@
 import styled, { css } from 'styled-components'
 import { motion } from 'framer-motion'
-// components
-import BoxWrapper from '../Box/StyledBox'
 // styles
 import { float } from './keyframes'
 
-const PokeBox = styled(BoxWrapper)`
+const PokeBox = styled(motion.a)`
+  display: flex;
+  flex-basis: auto;
   flex-direction: column;
   align-items: center;
   justify-content: center;

@@ -84,7 +84,6 @@ export default function Evolution({
           {/** Pokemon box with image and types */}
           <Link as={`/pokemon/${species.name}`} href="/pokemon/[id]" passHref>
             <PokeBox
-              forwardedAs="a"
               grow={false}
               dark
               whileHover="hover"

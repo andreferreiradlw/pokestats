@@ -43,12 +43,13 @@
 ✅ Pokemon Page <br />
 ✅ Offline Support <br />
 ✅ Loading & 404 Components <br />
-🛠️ Framer Motion Animations <br />
-🧶 Type Page <br />
+✅ Framer Motion Animations <br />
+🛠️ Type Page <br />
 🧶 Berry Page <br />
 🧶 Item Page <br />
 🧶 Move Details <br />
 🧶 Dark Mode <br />
+🧶 Testing / Code Coverage <br />
 🚫 Generation 8 Pokemon (waiting on [PokéApi's issue](https://github.com/PokeAPI/pokeapi/issues/520)) <br />
 ✏ Locations <br />
 ❓ SSR Support <br />

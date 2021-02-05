@@ -6,12 +6,29 @@ import store from '../../redux/store'
 import { fetchPokemonList } from '../components/Homepage/homeSlice'
 // helpers
 import { pageVariant } from '../helpers/animations'
+import * as gtag from '../helpers/analytics'
 // theme
 import ThemeProvider from '../components/Theme'
 // components
 import Head from '../components/Head'
 
 export default function App({ Component, pageProps, router }) {
+  // analytics
+  useEffect(() => {
+    // handle change
+    const handleRouteChange = url => {
+      gtag.pageview(url)
+    }
+    // event listener
+    process.env.NODE_ENV !== 'development' &&
+      router.events.on('routeChangeComplete', handleRouteChange)
+    // cleanup
+    return () => {
+      router.events.off('routeChangeComplete', handleRouteChange)
+    }
+  }, [router.events])
+
+  // on mount
   useEffect(() => {
     // register service worker
     if (

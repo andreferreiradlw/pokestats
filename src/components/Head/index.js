@@ -3,6 +3,8 @@ import { useRouter } from 'next/router'
 import { useSelector } from 'react-redux'
 // helpers
 import { removeDash } from '../../helpers/typography'
+// google analytics
+import { GA_TRACKING_ID } from '../../helpers/analytics'
 
 export default function Heading({ children }) {
   // pokemon selector
@@ -14,6 +16,28 @@ export default function Heading({ children }) {
 
   return (
     <NextHead>
+      {/* Global Site Tag (gtag.js) - Google Analytics */}
+      {process.env.NODE_ENV !== 'development' && (
+        <>
+          <script
+            async
+            src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`}
+          />
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '${GA_TRACKING_ID}', {
+              page_path: window.location.pathname,
+            });
+          `,
+            }}
+          />
+        </>
+      )}
+
       {/** MUST */}
       <meta charSet="utf-8" />
       <meta httpEquiv="X-UA-Compatible" content="IE=edge" />

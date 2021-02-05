@@ -22,7 +22,7 @@
 
 <div align="center">
 
-![Build Status](https://img.shields.io/travis/com/andreferreiradlw/pokestats/main)
+![Build Status](https://circleci.com/gh/andreferreiradlw/pokestats.svg?style=shield)
 ![Issues](https://img.shields.io/github/issues/andreferreiradlw/pokestats)
 ![Repo Size](https://img.shields.io/github/repo-size/andreferreiradlw/pokestats)
 ![License](https://img.shields.io/github/license/andreferreiradlw/pokestats)

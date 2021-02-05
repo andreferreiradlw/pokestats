@@ -8,6 +8,7 @@ workflows:
     jobs:
       - yarn/test-if-changed:
           run-command: tryBuild
+          paths: ./src
       - heroku/deploy-via-git:
           requires:
             - yarn/test-if-changed

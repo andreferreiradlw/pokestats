@@ -27,6 +27,7 @@
     "build": "next build",
     "start": "NODE_ENV=production node server.js",
     "export": "next export",
+    "tryBuild": "next build && next export",
     "lint": "eslint src -c .eslintrc --ext js",
     "prettier": "prettier \"**/*.{js,ts,md,json,yml}\" --ignore-path .gitignore"
   },

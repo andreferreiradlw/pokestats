@@ -7,6 +7,8 @@ workflows:
   build_test_deploy:
     jobs:
       - yarn/test-if-changed:
+          git_base_branch: origin/main
+          except_branches: 'qa'
           run-command: tryBuild
           paths: ./src
       - heroku/deploy-via-git:

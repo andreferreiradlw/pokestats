@@ -45,13 +45,11 @@ const typeSlice = createSlice({
       state.type.isLoading = true
     },
     cleanData(state) {
-      state.type = {
-        data: {},
-        isLoading: true,
-        error: {
-          status: 'OK',
-          message: null,
-        },
+      state.data = {}
+      state.isLoading = true
+      state.error = {
+        status: 'OK',
+        message: null,
       }
     },
   },

@@ -21,7 +21,7 @@ export default function TypeBadge({ type, hideIcon, iconOnly, ...rest }) {
   useEffect(() => {
     async function fetchSVG() {
       const importedIcon = await import(`../../assets/svg/types/${type}.svg`)
-      // console.log(importedIcon.default)
+      // if mounted, set icon state
       if (_isMounted.current) setIcon(importedIcon.default)
     }
     if (_isMounted.current) fetchSVG()

@@ -111,7 +111,6 @@ export default function Details({ sizes, ...rest }) {
                   <TypeBadge
                     type={type.name}
                     key={`${type.name}-${i}-detail-${id}`}
-                    passKey={`${type.name}-${i}-detail-${id}`}
                   >
                     {type.name}
                   </TypeBadge>

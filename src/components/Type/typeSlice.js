@@ -25,7 +25,7 @@ export const fetchTypeData = createAsyncThunk(
     // await new Promise((resolve) => setTimeout(resolve, 2000))
     try {
       const response = await axios.get(`https://pokeapi.co/api/v2/type/${type}`)
-      // console.log('type', response.data)
+      console.log('type', response.data)
       // return data
       return response.data
     } catch (err) {

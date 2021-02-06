@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
+import Link from 'next/link'
 // helpers
-import { capitalize } from '../../helpers/typography'
+import { capitalize, hoverVariant } from '../../helpers'
 // styles
 import { Badge } from './StyledBadge'
 
@@ -20,23 +21,25 @@ export default function TypeBadge({ type, hideIcon, iconOnly, ...rest }) {
   useEffect(() => {
     async function fetchSVG() {
       const importedIcon = await import(`../../assets/svg/types/${type}.svg`)
-      // console.log(importedIcon.default)
+      // if mounted, set icon state
       if (_isMounted.current) setIcon(importedIcon.default)
     }
     if (_isMounted.current) fetchSVG()
   }, [_isMounted])
 
   return (
-    <Badge
-      direction="row"
-      width="auto"
-      grow={0}
-      type={type}
-      iconOnly={iconOnly}
-      {...rest}
-    >
-      {!hideIcon && type && Icon && Icon}
-      {!iconOnly && type && <span>{capitalize(type)}</span>}
-    </Badge>
+    <Link as={`/type/${type}`} href="/type/[typeName]" passHref>
+      <Badge
+        type={type}
+        iconOnly={iconOnly}
+        whileHover="hover"
+        whileTap="tap"
+        variants={hoverVariant}
+        {...rest}
+      >
+        {!hideIcon && type && Icon && Icon}
+        {!iconOnly && type && <span>{capitalize(type)}</span>}
+      </Badge>
+    </Link>
   )
 }

@@ -1,8 +1,12 @@
 import styled, { css } from 'styled-components'
-// components
-import Box from '../Box'
+import { motion } from 'framer-motion'
 
-const Badge = styled(Box)`
+const Badge = styled(motion.a)`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: auto;
   background-color: ${({ theme, type }) =>
     theme.typeBadge.backgroundColor[type]};
   color: ${({ theme }) => theme.typeBadge.color};

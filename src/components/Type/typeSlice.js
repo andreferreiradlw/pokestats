@@ -10,13 +10,11 @@ const pokemonAdapter = createEntityAdapter()
 
 // initial state
 const initialState = pokemonAdapter.getInitialState({
-  type: {
-    data: {},
-    isLoading: true,
-    error: {
-      status: 'OK',
-      message: null,
-    },
+  data: {},
+  isLoading: true,
+  error: {
+    status: 'OK',
+    message: null,
   },
 })
 
@@ -27,7 +25,7 @@ export const fetchTypeData = createAsyncThunk(
     // await new Promise((resolve) => setTimeout(resolve, 2000))
     try {
       const response = await axios.get(`https://pokeapi.co/api/v2/type/${type}`)
-      console.log('type', response.data)
+      // console.log('type', response.data)
       // return data
       return response.data
     } catch (err) {
@@ -59,18 +57,18 @@ const typeSlice = createSlice({
   },
   extraReducers: builder => {
     // type
-    builder.addCase(fetchTypeData.pending, ({ type }) => {
-      type.isLoading = true
+    builder.addCase(fetchTypeData.pending, state => {
+      state.isLoading = true
     })
-    builder.addCase(fetchTypeData.fulfilled, ({ type }, { payload }) => {
-      type.data = payload
+    builder.addCase(fetchTypeData.fulfilled, (state, { payload }) => {
+      state.data = payload
       // stop loading
-      type.isLoading = false
+      state.isLoading = false
     })
-    builder.addCase(fetchTypeData.rejected, ({ type }, { payload }) => {
+    builder.addCase(fetchTypeData.rejected, (state, { payload }) => {
       // update error
-      type.error.status = payload.status
-      type.error.message = payload.data
+      state.error.status = payload.status
+      state.error.message = payload.data
     })
   },
 })

@@ -45,7 +45,7 @@ export const fetchPokemonData = createAsyncThunk(
       const response = await axios.get(
         `https://pokeapi.co/api/v2/pokemon/${pokemon}`
       )
-      console.log('data', response.data)
+      // console.log('data', response.data)
       // get biology
       dispatch(fetchPokemonBiology(response.data.species.url))
       // return data
@@ -63,7 +63,7 @@ export const fetchPokemonBiology = createAsyncThunk(
     // await new Promise((resolve) => setTimeout(resolve, 2000))
     try {
       const response = await axios.get(biologyUrl)
-      console.log('biology', response.data)
+      // console.log('biology', response.data)
       // get evolution
       dispatch(fetchPokemonEvolution(response.data.evolution_chain.url))
       return response.data
@@ -79,7 +79,7 @@ export const fetchPokemonEvolution = createAsyncThunk(
   async (evolutionUrl, { rejectWithValue }) => {
     try {
       const response = await axios.get(evolutionUrl)
-      console.log('evolution', response.data)
+      // console.log('evolution', response.data)
       return response.data
     } catch (err) {
       // Use `err.response` as `action.payload` for a `rejected` action,

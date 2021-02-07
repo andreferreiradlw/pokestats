@@ -1,17 +1,22 @@
 import { useState, useEffect } from 'react'
+import { useSelector } from 'react-redux'
+import { AnimatePresence } from 'framer-motion'
 // helpers
-import { hoverVariant } from '../../../helpers'
+import { hoverVariant, removeDash } from '../../../helpers'
 // styles
-import { Button } from '../../BaseStyles'
+import { Button, SectionTitle } from '../../BaseStyles'
 // components
 import Box from '../../Box'
+import InfiniteScroll from '../../InfiniteScroll'
 
 export default function Tabs({ ...rest }) {
+  // tab state
   const [currTab, setCurrTab] = useState('pokemon')
-
-  useEffect(() => {
-    console.log(currTab)
-  }, [currTab])
+  // pokemon list
+  // type selector
+  const typeInfo = useSelector(state => state.type)
+  // data
+  const { name, pokemonListWithId } = typeInfo.data
 
   return (
     <Box align={{ xxs: 'center', lg: 'flex-start' }} {...rest}>
@@ -42,6 +47,21 @@ export default function Tabs({ ...rest }) {
           Moves
         </Button>
       </Box>
+      <AnimatePresence exitBeforeEnter>
+        {currTab === 'pokemon' && (
+          <>
+            <SectionTitle>{`${removeDash(name)} Type Pokemon (${
+              pokemonListWithId.length
+            })`}</SectionTitle>
+            <InfiniteScroll
+              pokemonList={pokemonListWithId}
+              itemsPerPage={pokemonListWithId.length}
+              dark
+            />
+          </>
+        )}
+        {currTab === 'moves' && <span>Moves</span>}
+      </AnimatePresence>
     </Box>
   )
 }

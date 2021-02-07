@@ -19,8 +19,6 @@ export default function Type() {
   const dispatch = useDispatch()
   // type selector
   const typeInfo = useSelector(state => state.type)
-  // type data
-  const { name } = typeInfo.data
 
   useEffect(() => {
     // reset data on unmount

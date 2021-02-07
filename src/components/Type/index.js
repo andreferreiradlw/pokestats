@@ -48,7 +48,12 @@ export default function Type() {
   }, [typeInfo.error])
 
   return (
-    <Layout withHeader withFooter withMain={true} key={`layout-type`}>
+    <Layout
+      withHeader
+      withFooter={!typeInfo.isLoading}
+      withMain={true}
+      key={`layout-type`}
+    >
       <AnimatePresence exitBeforeEnter>
         {typeInfo.isLoading && router.query.typeName && (
           <Loading

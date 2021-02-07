@@ -60,7 +60,7 @@ export const fetchTypeMoves = createAsyncThunk(
             .map(response => {
               if (response !== null) return response.data
             })
-            .filter(data => data)
+            .filter(Boolean)
 
           return movesData
         })
@@ -134,7 +134,6 @@ const typeSlice = createSlice({
       state.moves.isLoading = true
     })
     builder.addCase(fetchTypeMoves.fulfilled, (state, { payload }) => {
-      console.log('moves payload', payload)
       state.moves.data = payload
       state.moves.isLoading = false
     })

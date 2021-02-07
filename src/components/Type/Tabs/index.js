@@ -7,6 +7,7 @@ import { Button, SectionTitle } from '../../BaseStyles'
 // components
 import Box from '../../Box'
 import InfiniteScroll from '../../InfiniteScroll'
+import Moves from './Moves'
 
 export default function Tabs({ ...rest }) {
   // tab state
@@ -15,7 +16,7 @@ export default function Tabs({ ...rest }) {
   // type selector
   const typeInfo = useSelector(state => state.type)
   // data
-  const { name, pokemonListWithId } = typeInfo.data
+  const { name, pokemonListWithId, moves } = typeInfo.data
 
   return (
     <Box align={{ xxs: 'center', lg: 'flex-start' }} {...rest}>
@@ -46,19 +47,22 @@ export default function Tabs({ ...rest }) {
           Moves
         </Button>
       </Box>
-      {currTab === 'pokemon' && (
+      {!typeInfo.isLoading && currTab === 'pokemon' && (
         <>
           <SectionTitle>{`${removeDash(name)} Type Pokemon (${
             pokemonListWithId.length
           })`}</SectionTitle>
-          <InfiniteScroll
-            pokemonList={pokemonListWithId}
-            itemsPerPage={pokemonListWithId.length}
-            dark
-          />
+          <InfiniteScroll pokemonList={pokemonListWithId} dark />
         </>
       )}
-      {currTab === 'moves' && <span>Moves</span>}
+      {!typeInfo.isLoading && currTab === 'moves' && (
+        <>
+          <SectionTitle>{`${removeDash(name)} Type Moves (${
+            moves.length
+          })`}</SectionTitle>{' '}
+          <Moves />
+        </>
+      )}
     </Box>
   )
 }

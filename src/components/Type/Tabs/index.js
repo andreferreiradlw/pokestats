@@ -1,7 +1,9 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { useSelector } from 'react-redux'
+import styled from 'styled-components'
+import { motion, AnimatePresence } from 'framer-motion'
 // helpers
-import { hoverVariant, removeDash } from '../../../helpers'
+import { hoverVariant, removeDash, fadeInUpVariant } from '../../../helpers'
 // styles
 import { Button, SectionTitle } from '../../BaseStyles'
 // components
@@ -9,10 +11,13 @@ import Box from '../../Box'
 import InfiniteScroll from '../../InfiniteScroll'
 import Moves from './Moves'
 
+const TabContainer = styled(motion.div)`
+  width: 100%;
+`
+
 export default function Tabs({ ...rest }) {
   // tab state
   const [currTab, setCurrTab] = useState('pokemon')
-  // pokemon list
   // type selector
   const typeInfo = useSelector(state => state.type)
   // data
@@ -47,22 +52,36 @@ export default function Tabs({ ...rest }) {
           Moves
         </Button>
       </Box>
-      {!typeInfo.isLoading && currTab === 'pokemon' && (
-        <>
-          <SectionTitle>{`${removeDash(name)} Type Pokemon (${
-            pokemonListWithId.length
-          })`}</SectionTitle>
-          <InfiniteScroll pokemonList={pokemonListWithId} dark />
-        </>
-      )}
-      {!typeInfo.isLoading && currTab === 'moves' && (
-        <>
-          <SectionTitle>{`${removeDash(name)} Type Moves (${
-            moves.length
-          })`}</SectionTitle>{' '}
-          <Moves />
-        </>
-      )}
+      <AnimatePresence exitBeforeEnter>
+        {!typeInfo.isLoading && currTab === 'pokemon' && (
+          <TabContainer
+            initial="hidden"
+            animate="show"
+            exit="exit"
+            variants={fadeInUpVariant}
+            key={`${name}-type-pokemon`}
+          >
+            <SectionTitle>{`${removeDash(name)} Type Pokemon (${
+              pokemonListWithId.length
+            })`}</SectionTitle>
+            <InfiniteScroll pokemonList={pokemonListWithId} dark />
+          </TabContainer>
+        )}
+        {!typeInfo.isLoading && currTab === 'moves' && (
+          <TabContainer
+            initial="hidden"
+            animate="show"
+            exit="exit"
+            variants={fadeInUpVariant}
+            key={`${name}-type-moves`}
+          >
+            <SectionTitle>{`${removeDash(name)} Type Moves (${
+              moves.length
+            })`}</SectionTitle>{' '}
+            <Moves />
+          </TabContainer>
+        )}
+      </AnimatePresence>
     </Box>
   )
 }

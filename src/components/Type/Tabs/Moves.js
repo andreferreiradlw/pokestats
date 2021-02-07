@@ -1,13 +1,7 @@
 import { useSelector } from 'react-redux'
 import { AnimatePresence } from 'framer-motion'
 // helpers
-import {
-  removeDash,
-  mapGeneration,
-  fadeInUpVariant,
-  staggerTableVariant,
-  fadeInRightVariant,
-} from '../../../helpers'
+import { removeDash, mapGeneration, fadeInUpVariant } from '../../../helpers'
 // styles
 import { SectionMessage } from '../../BaseStyles'
 import {
@@ -39,13 +33,7 @@ export default function Moves() {
         />
       )}
       {/** TABLE */}
-      <TableContainer
-        initial="hidden"
-        animate="show"
-        exit="exit"
-        variants={fadeInUpVariant}
-        key="type-moves-table-container"
-      >
+      <TableContainer>
         <MovesTable>
           <thead>
             <tr>
@@ -59,18 +47,9 @@ export default function Moves() {
               <th>Generation</th>
             </tr>
           </thead>
-          <TableBody
-            key={`type-moves-tbody`}
-            initial="hidden"
-            animate="show"
-            exit="exit"
-            variants={staggerTableVariant}
-          >
+          <TableBody>
             {data.map((move, i) => (
-              <TableRow
-                key={`type-${move.name}-${i}`}
-                variants={fadeInRightVariant}
-              >
+              <TableRow key={`type-${move.name}-${i}`}>
                 <NameTD>{removeDash(move.name)}</NameTD>
                 <td>
                   <TypeBadge margin="0" iconOnly type={move.type.name} />

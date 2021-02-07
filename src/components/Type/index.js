@@ -29,7 +29,6 @@ export default function Type() {
 
   // fetch type data
   useEffect(() => {
-    console.log(router.query.typeName)
     if (router.query.typeName) {
       // check if router query is valid
       if (typeList.includes(router.query.typeName)) {
@@ -51,7 +50,7 @@ export default function Type() {
   return (
     <Layout withHeader withFooter withMain={true} key={`layout-type`}>
       <AnimatePresence exitBeforeEnter>
-        {typeInfo.isLoading && (
+        {typeInfo.isLoading && router.query.typeName && (
           <Loading
             passKey={`loading-type-${router.query.typeName}`}
             key={`loading-type-${router.query.typeName}`}

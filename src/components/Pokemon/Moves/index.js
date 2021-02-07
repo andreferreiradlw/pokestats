@@ -3,18 +3,18 @@ import { useState, useEffect, useRef } from 'react'
 import axios from 'axios'
 import { AnimatePresence } from 'framer-motion'
 // helpers
-import { mapVersionToGroup, mapGeneration } from '../../../helpers/gameVersion'
 import {
+  mapVersionToGroup,
+  mapGeneration,
   fetchTypeData,
   filterMoves,
   getMachineNames,
-} from '../../../helpers/moves'
-import { capitalize, removeDash } from '../../../helpers/typography'
-import {
+  capitalize,
+  removeDash,
   staggerTableVariant,
   fadeInRightVariant,
   fadeInUpVariant,
-} from '../../../helpers/animations'
+} from '../../../helpers'
 // components
 import Box from '../../Box'
 import Loading from '../../Loading'

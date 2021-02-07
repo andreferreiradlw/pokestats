@@ -9,6 +9,8 @@ import { typeList, removeDash, pageContainerVariant } from '../../helpers'
 // components
 import Layout, { MainContainer } from '../Layout'
 import Loading from '../Loading'
+import Box from '../Box'
+import Tabs from './Tabs'
 
 export default function Type() {
   // router
@@ -67,6 +69,7 @@ export default function Type() {
         )}
         {!typeInfo.isLoading && (
           <MainContainer
+            justify="flex-start"
             constrained
             withGutter
             initial="hidden"
@@ -75,7 +78,24 @@ export default function Type() {
             variants={pageContainerVariant}
             key={`type-${router.query.typeName}`}
           >
-            <span>Type Page {name}</span>
+            <Box
+              as="section"
+              direction={{ xxs: 'column', lg: 'row' }}
+              align="flex-start"
+              justify="flex-start"
+              margin="1rem 0"
+              minHeight="347px"
+            >
+              Tables go here
+            </Box>
+            <Box
+              as="section"
+              align="flex-start"
+              justify="flex-start"
+              margin="1rem 0"
+            >
+              <Tabs sizes={12} margin="0 0 2rem" />
+            </Box>
           </MainContainer>
         )}
       </AnimatePresence>

@@ -17,7 +17,7 @@ export const MainContainer = styled(motion.main)`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: ${({ justify }) => (justify ? justify : 'center')};
   margin: 0 auto;
   width: 100%;
   flex-grow: 1;

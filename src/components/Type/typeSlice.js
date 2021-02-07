@@ -25,7 +25,7 @@ export const fetchTypeData = createAsyncThunk(
     // await new Promise((resolve) => setTimeout(resolve, 2000))
     try {
       const response = await axios.get(`https://pokeapi.co/api/v2/type/${type}`)
-      console.log('type', response.data)
+      // console.log('type', response.data)
       // return data
       return response.data
     } catch (err) {
@@ -60,6 +60,21 @@ const typeSlice = createSlice({
     })
     builder.addCase(fetchTypeData.fulfilled, (state, { payload }) => {
       state.data = payload
+      state.data.pokemonListWithId = payload.pokemon.map(currPokemon => {
+        // url
+        const url = currPokemon.pokemon.url
+        // get id from url and convert to number
+        const id = parseInt(url.match(/\/([^\/]+)\/?$/)[1])
+        // if pokemon not gen 8
+        if (id <= 809) {
+          return {
+            name: currPokemon.pokemon.name,
+            id: id,
+            url: currPokemon.pokemon.url,
+            slot: currPokemon.slot,
+          }
+        }
+      })
       // stop loading
       state.isLoading = false
     })

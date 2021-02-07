@@ -86,7 +86,7 @@ export default function Homepage() {
       withHeader
       withFooter={!pokemonInfo.isLoading}
       withMain={false}
-      key={`layout-pokemon-${router.query.id}`}
+      key={`layout-pokemon`}
     >
       <AnimatePresence exitBeforeEnter>
         {pokemonInfo.isLoading && (

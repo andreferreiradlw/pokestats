@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
-import { AnimatePresence } from 'framer-motion'
 // helpers
 import { hoverVariant, removeDash } from '../../../helpers'
 // styles
@@ -47,21 +46,19 @@ export default function Tabs({ ...rest }) {
           Moves
         </Button>
       </Box>
-      <AnimatePresence exitBeforeEnter>
-        {currTab === 'pokemon' && (
-          <>
-            <SectionTitle>{`${removeDash(name)} Type Pokemon (${
-              pokemonListWithId.length
-            })`}</SectionTitle>
-            <InfiniteScroll
-              pokemonList={pokemonListWithId}
-              itemsPerPage={pokemonListWithId.length}
-              dark
-            />
-          </>
-        )}
-        {currTab === 'moves' && <span>Moves</span>}
-      </AnimatePresence>
+      {currTab === 'pokemon' && (
+        <>
+          <SectionTitle>{`${removeDash(name)} Type Pokemon (${
+            pokemonListWithId.length
+          })`}</SectionTitle>
+          <InfiniteScroll
+            pokemonList={pokemonListWithId}
+            itemsPerPage={pokemonListWithId.length}
+            dark
+          />
+        </>
+      )}
+      {currTab === 'moves' && <span>Moves</span>}
     </Box>
   )
 }

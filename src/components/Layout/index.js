@@ -16,7 +16,7 @@ const LayoutContainer = styled(BoxWrapper)`
 export const MainContainer = styled(motion.main)`
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: ${({ align }) => (align ? align : 'center')};
   justify-content: ${({ justify }) => (justify ? justify : 'center')};
   margin: 0 auto;
   width: 100%;

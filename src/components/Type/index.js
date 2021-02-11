@@ -89,7 +89,6 @@ export default function Type() {
               align="flex-start"
               justify="flex-start"
               margin="1rem 0"
-              minHeight="347px"
             >
               <Box
                 justify={{ xxs: 'center', lg: 'flex-start' }}

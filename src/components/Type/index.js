@@ -59,6 +59,7 @@ export default function Type() {
       withHeader
       withFooter={!typeInfo.isLoading}
       withMain={false}
+      withGameVersion={false}
       key={`layout-type`}
     >
       <AnimatePresence exitBeforeEnter>

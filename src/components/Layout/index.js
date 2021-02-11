@@ -30,13 +30,14 @@ export default function Layout({
   withFooter,
   withHeader,
   withMain = true,
+  withGameVersion = true,
   children,
   mainKey,
   ...rest
 }) {
   return (
     <LayoutContainer direction="column" width="100%" noGutter>
-      {withHeader && <Header />}
+      {withHeader && <Header withGameVersion={withGameVersion} />}
       {withMain ? (
         <MainContainer key={mainKey} {...rest}>
           {children}

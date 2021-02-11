@@ -52,8 +52,6 @@ const MovesTable = styled(motion.table)`
     &:hover {
       background-color: #ececec;
     }
-
-    // transition: all 0.1s ease-in-out;
   }
 
   ${({ theme }) => css`

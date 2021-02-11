@@ -97,6 +97,8 @@ export default function Type() {
                 <PageHeading>{removeDash(name)}</PageHeading>
                 <Box
                   direction={{ xxs: 'column', md: 'row' }}
+                  justify={{ xxs: 'center', md: 'flex-start' }}
+                  align={{ xxs: 'center', md: 'flex-start' }}
                   sizes={{ xxs: 12, lg: 8 }}
                 >
                   <TypeInfo info={typeInfo.data} />

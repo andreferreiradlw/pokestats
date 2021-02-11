@@ -2,6 +2,7 @@
 export const capitalize = string =>
   string.charAt(0).toUpperCase() + string.slice(1)
 
+// remove underscores and replace with spaces
 export const removeUnderscore = string => {
   const words = string.split('_')
 
@@ -12,6 +13,7 @@ export const removeUnderscore = string => {
   return words.join(' ')
 }
 
+// remove dashes
 export const removeDash = string => {
   const words = string.split('-')
 

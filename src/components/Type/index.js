@@ -12,6 +12,7 @@ import Loading from '../Loading'
 import Box from '../Box'
 import TypeInfo from './Info'
 import TypeRelations from './Relations'
+import TypeIcon from './TypeIcon'
 import Tabs from './Tabs'
 // styles
 import { PageHeading } from '../BaseStyles'
@@ -24,7 +25,7 @@ export default function Type() {
   // type selector
   const typeInfo = useSelector(state => state.type)
   // data
-  const { name, damage_relations } = typeInfo.data
+  const { name, names, damage_relations } = typeInfo.data
 
   useEffect(() => {
     // reset data on unmount
@@ -105,7 +106,11 @@ export default function Type() {
                   <TypeRelations relations={damage_relations} />
                 </Box>
               </Box>
-              <Box sizes={{ xxs: 12, lg: 4 }}>Icon</Box>
+              <TypeIcon
+                sizes={{ xxs: 12, lg: 4 }}
+                typeName={name}
+                otherNames={names}
+              />
             </Box>
             <Box
               as="section"

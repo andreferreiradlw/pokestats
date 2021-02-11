@@ -73,6 +73,13 @@ export default styled(motion.div)`
       max-width: ${boxConfig.constrained};
     `};
 
+  /** Position */
+  ${({ relative }) =>
+    relative &&
+    css`
+      position: relative;
+    `}
+
   /** gutter */
   ${({ padding, withGutter }) => !padding && withGutter && gutterStyle()}
 

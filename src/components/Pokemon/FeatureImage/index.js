@@ -3,7 +3,8 @@ import Image from '../../Image'
 // helpers
 import { scaleInVariant } from '../../../helpers/animations'
 // styles
-import { ImageContainer, JpnName } from './StyledFeatureImage'
+import { JpnName } from '../../BaseStyles'
+import { ImageContainer } from './StyledFeatureImage'
 
 export default function FeaturedImage({
   pokemonNames,

@@ -105,12 +105,12 @@ export default function Type() {
                 >
                   <TypeInfo
                     margin={{ xxs: '0 0 2rem', lg: '0' }}
-                    padding={{ xxs: '0', md: '0 1rem 0 0', lg: '0 0 0 2rem' }}
+                    padding={{ xxs: '0', md: '0 1rem 0 0' }}
                     info={typeInfo.data}
                   />
                   <TypeRelations
                     margin={{ xxs: '0 0 2rem', lg: '0' }}
-                    padding={{ xxs: '0', md: '0 0 0 1rem', lg: '0 0 0 2rem' }}
+                    padding={{ xxs: '0', md: '0 0 0 1rem', lg: '0 1rem' }}
                     relations={damage_relations}
                   />
                 </Box>

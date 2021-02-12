@@ -16,7 +16,7 @@ const LayoutContainer = styled(BoxWrapper)`
 export const MainContainer = styled(motion.main)`
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: ${({ align }) => (align ? align : 'center')};
   justify-content: ${({ justify }) => (justify ? justify : 'center')};
   margin: 0 auto;
   width: 100%;
@@ -30,13 +30,14 @@ export default function Layout({
   withFooter,
   withHeader,
   withMain = true,
+  withGameVersion = true,
   children,
   mainKey,
   ...rest
 }) {
   return (
     <LayoutContainer direction="column" width="100%" noGutter>
-      {withHeader && <Header />}
+      {withHeader && <Header withGameVersion={withGameVersion} />}
       {withMain ? (
         <MainContainer key={mainKey} {...rest}>
           {children}

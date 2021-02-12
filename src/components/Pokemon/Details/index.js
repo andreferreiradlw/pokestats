@@ -8,8 +8,8 @@ import BoxWrapper from '../../Box/StyledBox'
 import Loading from '../../Loading'
 import TypeBadge from '../../TypeBadge'
 // styles
-import { Table, Numbered } from '../../BaseStyles'
-import { Name, TypeContainer, Genera, Flavor } from './StyledDetails'
+import { PageHeading, Table, Numbered } from '../../BaseStyles'
+import { TypeContainer, Genera, Flavor } from './StyledDetails'
 
 export default function Details({ sizes, ...rest }) {
   // pokemon info
@@ -97,7 +97,7 @@ export default function Details({ sizes, ...rest }) {
           key={`pokemon-details-${id}`}
           {...rest}
         >
-          <Name>{removeDash(name)}</Name>
+          <PageHeading>{removeDash(name)}</PageHeading>
           {types.length > 0 && (
             <TypeContainer
               width="auto"

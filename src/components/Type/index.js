@@ -10,7 +10,12 @@ import { typeList, removeDash, pageContainerVariant } from '../../helpers'
 import Layout, { MainContainer } from '../Layout'
 import Loading from '../Loading'
 import Box from '../Box'
+import TypeInfo from './Info'
+import TypeRelations from './Relations'
+import TypeIcon from './TypeIcon'
 import Tabs from './Tabs'
+// styles
+import { PageHeading } from '../BaseStyles'
 
 export default function Type() {
   // router
@@ -19,6 +24,8 @@ export default function Type() {
   const dispatch = useDispatch()
   // type selector
   const typeInfo = useSelector(state => state.type)
+  // data
+  const { name, names, damage_relations } = typeInfo.data
 
   useEffect(() => {
     // reset data on unmount
@@ -51,7 +58,8 @@ export default function Type() {
     <Layout
       withHeader
       withFooter={!typeInfo.isLoading}
-      withMain={true}
+      withMain={false}
+      withGameVersion={false}
       key={`layout-type`}
     >
       <AnimatePresence exitBeforeEnter>
@@ -68,6 +76,7 @@ export default function Type() {
         {!typeInfo.isLoading && (
           <MainContainer
             justify="flex-start"
+            align="flex-start"
             constrained
             withGutter
             initial="hidden"
@@ -78,13 +87,39 @@ export default function Type() {
           >
             <Box
               as="section"
-              direction={{ xxs: 'column', lg: 'row' }}
+              direction={{ xxs: 'column-reverse', lg: 'row' }}
               align="flex-start"
               justify="flex-start"
               margin="1rem 0"
-              minHeight="347px"
             >
-              Tables go here
+              <Box
+                justify={{ xxs: 'center', lg: 'flex-start' }}
+                align={{ xxs: 'center', lg: 'flex-start' }}
+              >
+                <PageHeading>{removeDash(name)}</PageHeading>
+                <Box
+                  direction={{ xxs: 'column', md: 'row' }}
+                  justify={{ xxs: 'center', md: 'flex-start' }}
+                  align={{ xxs: 'center', md: 'flex-start' }}
+                  sizes={{ xxs: 12, lg: 8 }}
+                >
+                  <TypeInfo
+                    margin={{ xxs: '0 0 2rem', lg: '0' }}
+                    padding={{ xxs: '0', md: '0 1rem 0 0' }}
+                    info={typeInfo.data}
+                  />
+                  <TypeRelations
+                    margin={{ xxs: '0 0 2rem', lg: '0' }}
+                    padding={{ xxs: '0', md: '0 0 0 1rem', lg: '0 1rem' }}
+                    relations={damage_relations}
+                  />
+                </Box>
+              </Box>
+              <TypeIcon
+                sizes={{ xxs: 12, lg: 4 }}
+                typeName={name}
+                otherNames={names}
+              />
             </Box>
             <Box
               as="section"

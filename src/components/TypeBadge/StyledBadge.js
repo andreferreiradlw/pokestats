@@ -1,5 +1,7 @@
 import styled, { css } from 'styled-components'
 import { motion } from 'framer-motion'
+// styles
+import { float as floatAnim } from '../BaseStyles'
 
 const Badge = styled(motion.a)`
   display: flex;
@@ -7,8 +9,8 @@ const Badge = styled(motion.a)`
   align-items: center;
   justify-content: center;
   width: auto;
-  background-color: ${({ theme, type }) =>
-    theme.typeBadge.backgroundColor[type]};
+  background-color: ${({ theme, type, fill }) =>
+    !fill && theme.typeBadge.backgroundColor[type]};
   color: ${({ theme }) => theme.typeBadge.color};
   font-family: 'Quicksand', sans-serif;
   font-size: 1rem;
@@ -35,21 +37,30 @@ const Badge = styled(motion.a)`
     }
   `}
 
+  ${({ float }) =>
+    float &&
+    css`
+      @media (prefers-reduced-motion: no-preference) {
+        animation: ${floatAnim} infinite 3s ease-in-out;
+      }
+    `}
+
   & svg {
-    ${({ iconOnly }) =>
+    ${({ iconOnly, iconWidth, iconHeight }) =>
       !iconOnly
         ? css`
-            width: 25px;
-            height: 25px;
+            width: ${iconWidth || '25px'};
+            height: ${iconHeight || '25px'};
             margin-right: 1rem;
           `
         : css`
-            width: 15px;
-            height: 15px;
+            width: ${iconWidth || '15px'};
+            height: ${iconHeight || '15px'};
           `}
 
     & > path {
-      fill: ${({ theme }) => theme.typeBadge.color};
+      fill: ${({ theme, type, fill }) =>
+        fill ? theme.typeBadge.backgroundColor[type] : theme.typeBadge.color};
       stroke: black;
       stroke-width: 5;
     }

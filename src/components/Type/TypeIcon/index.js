@@ -6,20 +6,21 @@ import TypeBadge from '../../TypeBadge'
 import { JpnName } from '../../BaseStyles'
 
 export default function TypeIcon({ typeName, otherNames, ...rest }) {
+  const japanName = otherNames.find(name => name.language.name === 'ja-Hrkt')
+    .name
+
   return (
     <Box relative minHeight={{ xxs: '250px', lg: '350px' }} {...rest}>
       <TypeBadge
         type={typeName}
         key={`type-icon-${typeName}`}
         iconOnly
-        fill
+        fill="true"
         float
         iconWidth="auto"
         iconHeight="150px"
       />
-      <JpnName>
-        {otherNames.find(name => name.language.name === 'ja-Hrkt').name}
-      </JpnName>
+      {japanName && <JpnName>{japanName}</JpnName>}
     </Box>
   )
 }

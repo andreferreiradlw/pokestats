@@ -11,8 +11,6 @@ const InfoTable = styled(Table)`
 `
 
 export default function TypeInfo({ info, ...rest }) {
-  console.log('info', info)
-
   const { id, generation, move_damage_class } = info
 
   return (
@@ -23,14 +21,18 @@ export default function TypeInfo({ info, ...rest }) {
             <th>Type Id</th>
             <td>{`#${id}`}</td>
           </tr>
-          <tr>
-            <th>Generation</th>
-            <td>{mapGeneration(generation.name)}</td>
-          </tr>
-          <tr>
-            <th>Move Damage Class</th>
-            <td>{removeDash(move_damage_class.name)}</td>
-          </tr>
+          {generation && (
+            <tr>
+              <th>Generation</th>
+              <td>{mapGeneration(generation.name)}</td>
+            </tr>
+          )}
+          {move_damage_class && (
+            <tr>
+              <th>Move Damage Class</th>
+              <td>{removeDash(move_damage_class.name)}</td>
+            </tr>
+          )}
         </tbody>
       </InfoTable>
     </Box>

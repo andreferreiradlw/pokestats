@@ -32,7 +32,6 @@ export default function Weaknesses({ ...rest }) {
       })
       // get multipliers
       const multipliers = getMultipliers(currTypes)
-      console.log(multipliers)
       // set state
       setMultipliers(multipliers)
       // initially show defense

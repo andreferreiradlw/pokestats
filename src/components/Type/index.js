@@ -103,8 +103,16 @@ export default function Type() {
                   align={{ xxs: 'center', md: 'flex-start' }}
                   sizes={{ xxs: 12, lg: 8 }}
                 >
-                  <TypeInfo info={typeInfo.data} />
-                  <TypeRelations relations={damage_relations} />
+                  <TypeInfo
+                    margin={{ xxs: '0 0 2rem', lg: '0' }}
+                    padding={{ xxs: '0', md: '0 1rem 0 0', lg: '0 0 0 2rem' }}
+                    info={typeInfo.data}
+                  />
+                  <TypeRelations
+                    margin={{ xxs: '0 0 2rem', lg: '0' }}
+                    padding={{ xxs: '0', md: '0 0 0 1rem', lg: '0 0 0 2rem' }}
+                    relations={damage_relations}
+                  />
                 </Box>
               </Box>
               <TypeIcon

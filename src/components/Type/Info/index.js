@@ -1,9 +1,14 @@
+import styled from 'styled-components'
 // helpers
 import { mapGeneration, removeDash } from '../../../helpers'
 // components
 import Box from '../../Box'
 // styles
 import { Table } from '../../BaseStyles'
+
+const InfoTable = styled(Table)`
+  width: 100%;
+`
 
 export default function TypeInfo({ info, ...rest }) {
   console.log('info', info)
@@ -12,7 +17,7 @@ export default function TypeInfo({ info, ...rest }) {
 
   return (
     <Box {...rest}>
-      <Table>
+      <InfoTable>
         <tbody>
           <tr>
             <th>Type Id</th>
@@ -27,7 +32,7 @@ export default function TypeInfo({ info, ...rest }) {
             <td>{removeDash(move_damage_class.name)}</td>
           </tr>
         </tbody>
-      </Table>
+      </InfoTable>
     </Box>
   )
 }

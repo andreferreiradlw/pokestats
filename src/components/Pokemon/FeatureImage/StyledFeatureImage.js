@@ -1,5 +1,4 @@
 import styled, { css } from 'styled-components'
-import { motion } from 'framer-motion'
 // components
 import Box from '../../Box'
 // styles

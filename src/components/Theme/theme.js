@@ -127,6 +127,14 @@ const theme = {
     },
     color: white,
   },
+  select: {
+    color: white,
+    background: black,
+    light: {
+      color: black,
+      background: white,
+    },
+  },
 }
 
 export default theme

@@ -1,5 +1,8 @@
 import styled, { css } from 'styled-components'
+// components
 import BoxWrapper from '../Box/StyledBox'
+// styles
+import { Select } from '../BaseStyles'
 
 const Container = styled(BoxWrapper)`
   max-width: 100%;
@@ -35,7 +38,7 @@ const Input = styled.input`
   font-weight: 400;
   line-height: 1.5;
   height: 50px;
-  border-radius: 0.25rem;
+  border-radius: 0.25rem 0 0 0.25rem;
   outline: none;
 
   ${({ theme }) => css`
@@ -59,6 +62,11 @@ const Input = styled.input`
     color: white;
     font-weight: 200;
   }
+`
+
+const OptionSelect = styled(Select)`
+  height: 50px;
+  border-radius: 0 0.25rem 0.25rem 0;
 `
 
 const ListWrapper = styled.div`
@@ -111,4 +119,12 @@ const PokeID = styled.span`
   margin-left: auto;
 `
 
-export { Container, Input, ListWrapper, OptionWrapper, Option, PokeID }
+export {
+  Container,
+  Input,
+  OptionSelect,
+  ListWrapper,
+  OptionWrapper,
+  Option,
+  PokeID,
+}

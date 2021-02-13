@@ -8,6 +8,7 @@ import { removeDash, typeList } from '../../helpers'
 import {
   Container,
   Input,
+  OptionSelect,
   ListWrapper,
   OptionWrapper,
   Option,
@@ -31,7 +32,7 @@ export default function Autocomplete({
   // select options
   const searchOptions = [
     { name: 'Pokemon', value: 'pokemon' },
-    { name: 'type', value: 'type' },
+    { name: 'Type', value: 'type' },
   ]
 
   // option State
@@ -111,7 +112,7 @@ export default function Autocomplete({
         : // trigger router for active option
           router.push({
             pathname: `/${searchOption}/${filtered[activeOption].name}`,
-            query: { id: filtered[0].name },
+            query: { id: filtered[activeOption].name },
           })
       // clean filtered state
       resetStates()
@@ -151,11 +152,11 @@ export default function Autocomplete({
       {...rest}
     >
       <label htmlFor="autocomplete" id="autocomplete_label" aria-hidden="true">
-        Search Pokemon Name or ID
+        Pokemon Name or ID
       </label>
       <Input
         type="text"
-        placeholder="Search Pokemon Name or ID"
+        placeholder="Pokemon Name or ID"
         id="autocomplete"
         aria-labelledby="autocomplete_label"
         value={search}
@@ -165,7 +166,7 @@ export default function Autocomplete({
       <label id="search_options" htmlFor="search_options_select">
         Select Option
       </label>
-      <select
+      <OptionSelect
         aria-labelledby="search_options"
         id="search_options_select"
         value={searchOption}
@@ -175,11 +176,11 @@ export default function Autocomplete({
         }}
       >
         {searchOptions.map(({ name, value }, index) => (
-          <option key={index} value={value}>
+          <option key={index} value={value} selected={value === searchOption}>
             {name}
           </option>
         ))}
-      </select>
+      </OptionSelect>
       {/** display filtered list */}
       {filtered.length > 0 && (
         <ListWrapper>

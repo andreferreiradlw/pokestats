@@ -6,7 +6,7 @@ import { generations, mapIdToGeneration } from '../../../helpers/gameVersion'
 import Box from '../../Box'
 import InfiniteScroll from '../../InfiniteScroll'
 // styles
-import { SectionTitle } from '../../BaseStyles'
+import { SectionTitle, Select } from '../../BaseStyles'
 import { Container, SelectContainer } from './StyledPokemonList'
 
 export default function PokemonList() {
@@ -53,7 +53,8 @@ export default function PokemonList() {
               <label id="generation" htmlFor="gen_select">
                 Game Generation:
               </label>
-              <select
+              <Select
+                light
                 aria-labelledby="generation"
                 id="gen_select"
                 value={gen}
@@ -65,7 +66,7 @@ export default function PokemonList() {
                     {genDescription}
                   </option>
                 ))}
-              </select>
+              </Select>
             </SelectContainer>
             {showPokemon.length > 0 && (
               <InfiniteScroll sizes={12} pokemonList={showPokemon} />

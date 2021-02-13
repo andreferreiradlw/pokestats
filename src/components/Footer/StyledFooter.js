@@ -1,7 +1,5 @@
 import styled from 'styled-components'
 import { motion } from 'framer-motion'
-// components
-import BoxWrapper from '../Box/StyledBox'
 
 const FooterContainer = styled(motion.footer)`
   display: flex;

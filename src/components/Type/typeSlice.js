@@ -109,6 +109,7 @@ const typeSlice = createSlice({
           // url
           const url = currPokemon.pokemon.url
           // get id from url and convert to number
+          // eslint-disable-next-line
           const id = parseInt(url.match(/\/([^\/]+)\/?$/)[1])
           // if pokemon not gen 8
           if (id <= 809) {

@@ -68,9 +68,7 @@ export default function Type() {
           <Loading
             passKey={`loading-type-${router.query.id}`}
             key={`loading-type-${router.query.id}`}
-            text={
-              router.query.id && `Loading ${removeDash(router.query.id)} Type`
-            }
+            text={`Loading ${removeDash(router.query.id)} Type`}
           />
         )}
         {!typeInfo.isLoading && (

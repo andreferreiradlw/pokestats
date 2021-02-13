@@ -19,7 +19,7 @@ const Container = styled(BoxWrapper)`
       }
     `}
 
-  & #autocomplete_label {
+  label {
     width: 0;
     height: 0;
     overflow: hidden;

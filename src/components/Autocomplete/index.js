@@ -92,7 +92,7 @@ export default function Autocomplete({
     // filter by type
     const filteredList = itemList.filter(
       item =>
-        item.name.includes(filterValue) ||
+        removeDash(item.name).toLowerCase().includes(filterValue) ||
         item.id.toString().includes(filterValue.toString())
     )
     // update filtered state with first 4 options

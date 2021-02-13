@@ -78,6 +78,7 @@ const ListWrapper = styled.div`
   z-index: 2;
   border-radius: 0.25rem;
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+  background: white;
 `
 
 const OptionWrapper = styled.a`

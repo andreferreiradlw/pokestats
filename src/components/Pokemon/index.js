@@ -50,16 +50,16 @@ export default function Homepage() {
 
   // fetch pokemon data
   useEffect(() => {
-    if (router.query.id) {
+    if (router.query.pokemonId) {
       // check if previous pokemon data exists
       if (Object.keys(pokemonInfo.data).length !== 0) {
         // reset data
         dispatch(cleanData())
       }
       // fetch new pokemon data
-      dispatch(fetchPokemonData(router.query.id))
+      dispatch(fetchPokemonData(router.query.pokemonId))
     }
-  }, [router])
+  }, [router.query.pokemonId])
 
   // update game version for current Pokemon
   useEffect(() => {
@@ -89,11 +89,11 @@ export default function Homepage() {
       key={`layout-pokemon`}
     >
       <AnimatePresence exitBeforeEnter>
-        {pokemonInfo.isLoading && (
+        {pokemonInfo.isLoading && router.query.pokemonId && (
           <Loading
-            passKey={`loading-pokemon-${router.query.id}`}
-            key={`loading-pokemon-${router.query.id}`}
-            text={router.query.id && `Loading ${removeDash(router.query.id)}`}
+            passKey={`loading-pokemon-${router.query.pokemonId}`}
+            key={`loading-pokemon-${router.query.pokemonId}`}
+            text={`Loading ${removeDash(router.query.pokemonId)}`}
           />
         )}
         {!pokemonInfo.isLoading && (
@@ -104,7 +104,7 @@ export default function Homepage() {
             animate="visible"
             exit="fade"
             variants={pageContainerVariant}
-            key={`pokemon-${router.query.id}`}
+            key={`pokemon-${router.query.pokemonId}`}
           >
             <Box
               as="section"
@@ -188,7 +188,7 @@ export default function Homepage() {
               margin="1rem 0"
               minHeight="210px"
             >
-              <LazyLoad once offset={500}>
+              <LazyLoad once offset={600}>
                 <Moves sizes={12} margin="0 0 2rem" />
               </LazyLoad>
             </Box>

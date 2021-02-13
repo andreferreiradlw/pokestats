@@ -82,7 +82,11 @@ export default function Evolution({
             </BoxWrapper>
           )}
           {/** Pokemon box with image and types */}
-          <Link as={`/pokemon/${species.name}`} href="/pokemon/[id]" passHref>
+          <Link
+            as={`/pokemon/${species.name}`}
+            href="/pokemon/[pokemonId]"
+            passHref
+          >
             <PokeBox
               grow={false}
               dark

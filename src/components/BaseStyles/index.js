@@ -10,3 +10,5 @@ export * from './pokemonBox'
 export * from './headings'
 // buttons
 export * from './button'
+// inputs
+export * from './inputs'

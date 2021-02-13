@@ -7,6 +7,7 @@ import Link from 'next/link'
 import Box from '../Box'
 import Autocomplete from '../Autocomplete'
 // styles
+import { Select } from '../BaseStyles'
 import { Heading, SelectContainer } from './styledHeader'
 // Info
 import { gameVersions } from '../../helpers/gameVersion'
@@ -37,7 +38,7 @@ export default function HeaderComponent({ withGameVersion = true, ...rest }) {
               <label id="header_generation" htmlFor="header_gen_select">
                 Game Version:
               </label>
-              <select
+              <Select
                 aria-labelledby="header_generation"
                 id="header_gen_select"
                 value={gameVersion}
@@ -48,7 +49,7 @@ export default function HeaderComponent({ withGameVersion = true, ...rest }) {
                     {name}
                   </option>
                 ))}
-              </select>
+              </Select>
             </SelectContainer>
           )}
         </div>

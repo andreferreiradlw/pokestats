@@ -36,11 +36,14 @@ export default function Type() {
 
   // fetch type data
   useEffect(() => {
-    if (router.query.typeName) {
+    if (router.query.typeId) {
+      const validType = typeList.filter(
+        type => type.name === router.query.typeId
+      )
       // check if router query is valid
-      if (typeList.includes(router.query.typeName)) {
+      if (validType.length) {
         // fetch new pokemon data
-        dispatch(fetchTypeData(router.query.typeName))
+        dispatch(fetchTypeData(router.query.typeId))
       } else {
         router.push('/404', router.asPath)
       }
@@ -63,14 +66,11 @@ export default function Type() {
       key={`layout-type`}
     >
       <AnimatePresence exitBeforeEnter>
-        {typeInfo.isLoading && router.query.typeName && (
+        {typeInfo.isLoading && router.query.typeId && (
           <Loading
-            passKey={`loading-type-${router.query.typeName}`}
-            key={`loading-type-${router.query.typeName}`}
-            text={
-              router.query.typeName &&
-              `Loading ${removeDash(router.query.typeName)} Type`
-            }
+            passKey={`loading-type-${router.query.typeId}`}
+            key={`loading-type-${router.query.typeId}`}
+            text={`Loading ${removeDash(router.query.typeId)} Type`}
           />
         )}
         {!typeInfo.isLoading && (
@@ -83,7 +83,7 @@ export default function Type() {
             animate="visible"
             exit="fade"
             variants={pageContainerVariant}
-            key={`type-${router.query.typeName}`}
+            key={`type-${router.query.typeId}`}
           >
             <Box
               as="section"

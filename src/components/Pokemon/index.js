@@ -77,7 +77,7 @@ export default function Homepage() {
   // error handling
   useEffect(() => {
     if (pokemonInfo.error.status !== 'OK' || id > 809) {
-      // router.push('/404', router.asPath)
+      router.push('/404', router.asPath)
     }
   }, [pokemonInfo])
 

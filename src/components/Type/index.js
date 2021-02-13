@@ -45,7 +45,7 @@ export default function Type() {
         // fetch new pokemon data
         dispatch(fetchTypeData(router.query.typeId))
       } else {
-        // router.push('/404', router.asPath)
+        router.push('/404', router.asPath)
       }
     }
   }, [router.query])

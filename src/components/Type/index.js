@@ -37,8 +37,11 @@ export default function Type() {
   // fetch type data
   useEffect(() => {
     if (router.query.typeName) {
+      const validType = typeList.filter(
+        type => type.name === router.query.typeName
+      )
       // check if router query is valid
-      if (typeList.includes(router.query.typeName)) {
+      if (validType.length) {
         // fetch new pokemon data
         dispatch(fetchTypeData(router.query.typeName))
       } else {

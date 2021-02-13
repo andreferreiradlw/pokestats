@@ -59,8 +59,9 @@ const Input = styled.input`
   }}
 
   &::placeholder {
-    color: white;
+    color: #e6e6e6;
     font-weight: 200;
+    font-style: italic;
   }
 `
 

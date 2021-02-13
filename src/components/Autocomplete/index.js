@@ -146,11 +146,11 @@ export default function Autocomplete({
       {...rest}
     >
       <label htmlFor="autocomplete" id="autocomplete_label" aria-hidden="true">
-        Pokemon Name or ID
+        {`${removeDash(searchOption)} Name or ID`}
       </label>
       <Input
         type="text"
-        placeholder="Pokemon Name or ID"
+        placeholder={`${removeDash(searchOption)} Name or ID`}
         id="autocomplete"
         aria-labelledby="autocomplete_label"
         value={search}

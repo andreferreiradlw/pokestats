@@ -12,7 +12,7 @@ import Particles from '../Particles'
 import Loading from '../Loading'
 import PokemonList from './PokemonList'
 // styles
-import { Container, RepoAnchor } from './styledHomepage'
+import { Container, RepoAnchor, ScrollDown } from './styledHomepage'
 import { MainHeading } from '../BaseStyles'
 // svg
 import Github from '../../assets/svg/github.svg'
@@ -55,6 +55,7 @@ export default function Homepage() {
               whileHover="hover"
               whileTap="tap"
               variants={fadeInUpVariant}
+              key="homepage-github"
             >
               <Github />
             </RepoAnchor>
@@ -73,6 +74,10 @@ export default function Homepage() {
               <Autocomplete
                 variants={fadeInUpVariant}
                 key="homepage-autocomplete"
+              />
+              <ScrollDown
+                variants={fadeInUpVariant}
+                key="homepage-scroll-down"
               />
             </Container>
             <PokemonList />

@@ -127,4 +127,21 @@ const tumble = keyframes`
 	98% { transform: rotateZ( 0deg ); }
 `
 
-export { float, ellipsis, rotate, riseUp, tumble }
+const mouseScroll = keyframes`
+  0% {
+    transform: translate(0, 0);
+    opacity: 0;
+  }
+  40% {
+    opacity: 1;
+  }
+  80% {
+    transform: translate(0, 20px);
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
+`
+
+export { float, ellipsis, rotate, riseUp, tumble, mouseScroll }

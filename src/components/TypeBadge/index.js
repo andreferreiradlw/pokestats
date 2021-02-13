@@ -28,7 +28,7 @@ export default function TypeBadge({ type, hideIcon, iconOnly, ...rest }) {
   }, [_isMounted])
 
   return (
-    <Link as={`/type/${type}`} href="/type/[typeName]" scroll={false} passHref>
+    <Link as={`/type/${type}`} href="/type/[typeName]" passHref>
       <Badge
         type={type}
         iconOnly={iconOnly}

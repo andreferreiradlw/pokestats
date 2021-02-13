@@ -29,8 +29,7 @@ export default function Navigation({ ...rest }) {
           {id !== 1 && (
             <Link
               as={`/pokemon/${allPokemon[id - 2].name}`}
-              href="/pokemon/[id]"
-              scroll={false}
+              href="/pokemon/[pokemonId]"
             >
               <BtnAnchor left>
                 <Arrow left>
@@ -55,9 +54,8 @@ export default function Navigation({ ...rest }) {
           {id !== pokemonLength && (
             <Link
               as={`/pokemon/${allPokemon[id].name}`}
-              href="/pokemon/[id]"
+              href="/pokemon/[pokemonId]"
               passHref
-              scroll={false}
             >
               <BtnAnchor right>
                 <Arrow right>

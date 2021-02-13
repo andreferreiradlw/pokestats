@@ -89,14 +89,11 @@ export default function Homepage() {
       key={`layout-pokemon`}
     >
       <AnimatePresence exitBeforeEnter>
-        {pokemonInfo.isLoading && (
+        {pokemonInfo.isLoading && router.query.pokemonId && (
           <Loading
             passKey={`loading-pokemon-${router.query.pokemonId}`}
             key={`loading-pokemon-${router.query.pokemonId}`}
-            text={
-              router.query.pokemonId &&
-              `Loading ${removeDash(router.query.pokemonId)}`
-            }
+            text={`Loading ${removeDash(router.query.pokemonId)}`}
           />
         )}
         {!pokemonInfo.isLoading && (
@@ -191,7 +188,7 @@ export default function Homepage() {
               margin="1rem 0"
               minHeight="210px"
             >
-              <LazyLoad once offset={500}>
+              <LazyLoad once offset={600}>
                 <Moves sizes={12} margin="0 0 2rem" />
               </LazyLoad>
             </Box>

@@ -4,10 +4,7 @@ import { AnimatePresence } from 'framer-motion'
 // redux actions
 import { startLoading, stopLoading } from './homeSlice'
 // heplpers
-import {
-  staggerInitialVariant,
-  fadeInUpVariant,
-} from '../../helpers/animations'
+import { staggerInitialVariant, fadeInUpVariant } from '../../helpers'
 // components
 import Layout from '../Layout'
 import Autocomplete from '../Autocomplete'
@@ -15,8 +12,10 @@ import Particles from '../Particles'
 import Loading from '../Loading'
 import PokemonList from './PokemonList'
 // styles
-import { Container } from './styledHomepage'
+import { Container, RepoAnchor } from './styledHomepage'
 import { MainHeading } from '../BaseStyles'
+// svg
+import Github from '../../assets/svg/github.svg'
 
 export default function Homepage() {
   // dispatch
@@ -47,6 +46,18 @@ export default function Homepage() {
         )}
         {(!isLoading || pokemonLength !== 0) && (
           <>
+            <RepoAnchor
+              href="https://github.com/andreferreiradlw/pokestats"
+              target="_blank"
+              rel="noopener"
+              initial="hidden"
+              animate="show"
+              whileHover="hover"
+              whileTap="tap"
+              variants={fadeInUpVariant}
+            >
+              <Github />
+            </RepoAnchor>
             <Container
               height="100vh"
               constrained

@@ -48,6 +48,7 @@ const FooterA = styled.a`
     width: 20px;
     margin-left: 10px;
     vertical-align: bottom;
+    fill: white;
   }
 `
 

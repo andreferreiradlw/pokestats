@@ -1,4 +1,6 @@
 import styled from 'styled-components'
+import { motion } from 'framer-motion'
+// components
 import BoxWrapper from '../Box/StyledBox'
 
 const Container = styled(BoxWrapper)`
@@ -12,4 +14,21 @@ const Container = styled(BoxWrapper)`
   z-index: 1;
 `
 
-export { Container }
+const RepoAnchor = styled(motion.a)`
+  position: absolute;
+  top: 20px;
+  right: 20px;
+
+  &:hover svg {
+    fill: white;
+    background: black;
+  }
+
+  svg {
+    width: 65px;
+    height: auto;
+    border-radius: 30%;
+  }
+`
+
+export { Container, RepoAnchor }

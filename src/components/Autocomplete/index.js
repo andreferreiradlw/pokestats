@@ -105,15 +105,9 @@ export default function Autocomplete({
     if (e.keyCode === 13 && filtered[0] !== undefined) {
       activeOption === -1
         ? // trigger router for first suggestion
-          router.push({
-            pathname: `/${searchOption}/${filtered[0].name}`,
-            query: { id: filtered[0].name },
-          })
+          router.push(`/${searchOption}/${filtered[0].name}`)
         : // trigger router for active option
-          router.push({
-            pathname: `/${searchOption}/${filtered[activeOption].name}`,
-            query: { id: filtered[activeOption].name },
-          })
+          router.push(`/${searchOption}/${filtered[activeOption].name}`)
       // clean filtered state
       resetStates()
     } // up arrow
@@ -176,7 +170,7 @@ export default function Autocomplete({
         }}
       >
         {searchOptions.map(({ name, value }, index) => (
-          <option key={index} value={value} selected={value === searchOption}>
+          <option key={index} value={value}>
             {name}
           </option>
         ))}
@@ -187,7 +181,7 @@ export default function Autocomplete({
           {filtered.map((item, i) => (
             <Link
               as={`/${searchOption}/${item.name}`}
-              href={`/${searchOption}/[id]`}
+              href={`/${searchOption}/[${searchOption}Id]`}
               passHref
               key={`${item.id}-${item.name}-${i}`}
             >

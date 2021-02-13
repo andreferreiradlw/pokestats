@@ -50,16 +50,16 @@ export default function Homepage() {
 
   // fetch pokemon data
   useEffect(() => {
-    if (router.query.id) {
+    if (router.query.pokemonId) {
       // check if previous pokemon data exists
       if (Object.keys(pokemonInfo.data).length !== 0) {
         // reset data
         dispatch(cleanData())
       }
       // fetch new pokemon data
-      dispatch(fetchPokemonData(router.query.id))
+      dispatch(fetchPokemonData(router.query.pokemonId))
     }
-  }, [router])
+  }, [router.query.pokemonId])
 
   // update game version for current Pokemon
   useEffect(() => {
@@ -77,7 +77,7 @@ export default function Homepage() {
   // error handling
   useEffect(() => {
     if (pokemonInfo.error.status !== 'OK' || id > 809) {
-      router.push('/404', router.asPath)
+      // router.push('/404', router.asPath)
     }
   }, [pokemonInfo])
 
@@ -91,9 +91,12 @@ export default function Homepage() {
       <AnimatePresence exitBeforeEnter>
         {pokemonInfo.isLoading && (
           <Loading
-            passKey={`loading-pokemon-${router.query.id}`}
-            key={`loading-pokemon-${router.query.id}`}
-            text={router.query.id && `Loading ${removeDash(router.query.id)}`}
+            passKey={`loading-pokemon-${router.query.pokemonId}`}
+            key={`loading-pokemon-${router.query.pokemonId}`}
+            text={
+              router.query.pokemonId &&
+              `Loading ${removeDash(router.query.pokemonId)}`
+            }
           />
         )}
         {!pokemonInfo.isLoading && (
@@ -104,7 +107,7 @@ export default function Homepage() {
             animate="visible"
             exit="fade"
             variants={pageContainerVariant}
-            key={`pokemon-${router.query.id}`}
+            key={`pokemon-${router.query.pokemonId}`}
           >
             <Box
               as="section"

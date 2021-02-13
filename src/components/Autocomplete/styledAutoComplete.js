@@ -86,7 +86,7 @@ const OptionWrapper = styled.a`
   justify-content: flex-start;
   font-size: 0.875rem;
   cursor: pointer;
-  padding: 0 1rem 0 0;
+  padding: 0 1rem 0;
 
   ${({ theme }) => {
     const values = theme.autoComplete.wrapperOption
@@ -110,6 +110,7 @@ const OptionWrapper = styled.a`
 `
 
 const Option = styled.span`
+  font-weight: 600;
   padding: 16px 0;
 `
 

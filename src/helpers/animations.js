@@ -138,7 +138,7 @@ export const footerVariant = {
   show: {
     opacity: 1,
     transition: {
-      delay: 1.2,
+      delay: 1.5,
     },
   },
 }

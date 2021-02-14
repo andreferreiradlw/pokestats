@@ -36,15 +36,13 @@ export default function Type({ typeName }) {
 
   // fetch type data
   useEffect(() => {
-    if (typeName) {
-      const validType = typeList.filter(type => type.name === typeName)
-      // check if router query is valid
-      if (validType.length) {
-        // fetch new pokemon data
-        dispatch(fetchTypeData(typeName))
-      } else {
-        router.push('/404', router.asPath)
-      }
+    const validType = typeList.filter(type => type.name === typeName)
+    // check if router query is valid
+    if (validType.length) {
+      // fetch new pokemon data
+      dispatch(fetchTypeData(typeName))
+    } else {
+      router.push('/404', router.asPath)
     }
   }, [typeName])
 
@@ -64,7 +62,7 @@ export default function Type({ typeName }) {
       key={`layout-type`}
     >
       <AnimatePresence exitBeforeEnter>
-        {typeInfo.isLoading && typeName && (
+        {typeInfo.isLoading && (
           <Loading
             passKey={`loading-type-${typeName}`}
             key={`loading-type-${typeName}`}

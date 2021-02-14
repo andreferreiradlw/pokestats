@@ -1,8 +1,8 @@
 import Type from '../../components/Type'
 import { typeList } from '../../helpers'
 
-export default function TypePage({ typeData }) {
-  return <Type typeData={typeData} />
+export default function TypePage({ typeName }) {
+  return <Type typeName={typeName} />
 }
 
 export async function getStaticPaths() {

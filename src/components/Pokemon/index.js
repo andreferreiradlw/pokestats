@@ -26,7 +26,7 @@ import Moves from './Moves'
 import Sprites from './Sprites'
 import Navigation from './Navigation'
 
-export default function Homepage() {
+export default function Homepage({ pokemonName }) {
   // router
   const router = useRouter()
   // dispatch
@@ -50,16 +50,16 @@ export default function Homepage() {
 
   // fetch pokemon data
   useEffect(() => {
-    if (router.query.pokemonId) {
+    if (pokemonName) {
       // check if previous pokemon data exists
       if (Object.keys(pokemonInfo.data).length !== 0) {
         // reset data
         dispatch(cleanData())
       }
       // fetch new pokemon data
-      dispatch(fetchPokemonData(router.query.pokemonId))
+      dispatch(fetchPokemonData(pokemonName))
     }
-  }, [router.query.pokemonId])
+  }, [pokemonName])
 
   // update game version for current Pokemon
   useEffect(() => {
@@ -89,11 +89,11 @@ export default function Homepage() {
       key={`layout-pokemon`}
     >
       <AnimatePresence exitBeforeEnter>
-        {pokemonInfo.isLoading && router.query.pokemonId && (
+        {pokemonInfo.isLoading && (
           <Loading
-            passKey={`loading-pokemon-${router.query.pokemonId}`}
-            key={`loading-pokemon-${router.query.pokemonId}`}
-            text={`Loading ${removeDash(router.query.pokemonId)}`}
+            passKey={`loading-pokemon-${pokemonName}`}
+            key={`loading-pokemon-${pokemonName}`}
+            text={`Loading ${removeDash(pokemonName)}`}
           />
         )}
         {!pokemonInfo.isLoading && (
@@ -104,7 +104,7 @@ export default function Homepage() {
             animate="visible"
             exit="fade"
             variants={pageContainerVariant}
-            key={`pokemon-${router.query.pokemonId}`}
+            key={`pokemon-${pokemonName}`}
           >
             <Box
               as="section"
@@ -117,7 +117,7 @@ export default function Homepage() {
               <Details
                 sizes={5}
                 margin={{ xxs: '0 0 2rem', lg: '0' }}
-                key={`pokemon-details-${id}`}
+                key={`pokemon-details-${pokemonName}`}
               />
               <FeaturedImage
                 sizes={7}
@@ -139,7 +139,7 @@ export default function Homepage() {
                 <EvolutionChain
                   sizes={12}
                   margin="0 0 2rem"
-                  key={`pokemon-evolution-${id}`}
+                  key={`pokemon-evolution-${pokemonName}`}
                 />
               </LazyLoad>
             </Box>

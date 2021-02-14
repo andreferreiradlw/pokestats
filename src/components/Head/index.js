@@ -16,8 +16,8 @@ export default function Heading({ children }) {
   const { name: typeName } = reduxState.type.data
 
   const pageTitle = () => {
-    if (pokemonName) return `${removeDash(pokemonName)} - `
-    else if (typeName) return `${removeDash(typeName)} - `
+    if (pokemonName) return `${removeDash(pokemonName)} (Pokemon) - `
+    else if (typeName) return `${removeDash(typeName)} (Type) - `
     else return
   }
 
@@ -58,12 +58,13 @@ export default function Heading({ children }) {
       />
       <meta
         name="keywords"
-        content="pokemon, pokedex, pokestats, react, nextjs, styled-components, pokeapi"
+        content="pokemon, stats, pokedex, pokestats, react, nextjs, styled-components, pokeapi"
       />
       <title>
-        {pageTitle()}PokeStats.gg, the PokeApi-driven Pokémon encyclopaedia
+        {pageTitle()}PokeStats.gg, the open sourced PokeApi driven Pokémon
+        encyclopaedia
       </title>
-      <link rel="canonical" href={`https://pokestats.gg${router.asPath}`} />
+      <link rel="canonical" href={`https://pokestats.gg${router.pathname}`} />
       {/** MANIFEST */}
       <link href="/manifest.json" rel="manifest" />
       {/** ICONS */}

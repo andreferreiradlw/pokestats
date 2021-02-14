@@ -24,7 +24,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "next build && next export",
     "start": "NODE_ENV=production node server.js",
     "export": "next export",
     "tryBuild": "next build && next export",

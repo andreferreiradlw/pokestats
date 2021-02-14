@@ -64,7 +64,7 @@ export default function Heading({ children }) {
         {pageTitle()}PokeStats.gg, the open sourced PokeApi driven Pokémon
         encyclopaedia
       </title>
-      <link rel="canonical" href={`https://pokestats.gg${router.pathname}`} />
+      <link rel="canonical" href={`https://pokestats.gg${router.asPath}`} />
       {/** MANIFEST */}
       <link href="/manifest.json" rel="manifest" />
       {/** ICONS */}

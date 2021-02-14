@@ -23,11 +23,11 @@ export default function Heading({ children }) {
 
   return (
     <NextHead>
-      {/** process.env.ENV_NAME !== 'production' && (
+      {process.env.ENV_NAME === 'preview' && (
         <meta name="robots" content="noindex"></meta>
-      ) */}
+      )}
       {/* Global Site Tag (gtag.js) - Google Analytics */}
-      {process.env.NODE_ENV === 'production' &&
+      {process.env.NODE_ENV !== 'development' &&
         process.env.ENV_NAME !== 'production' && (
           <>
             <script

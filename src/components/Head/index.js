@@ -23,7 +23,7 @@ export default function Heading({ children }) {
 
   return (
     <NextHead>
-      {process.env.ENV_Name !== 'production' && (
+      {process.env.ENV_NAME !== 'production' && (
         <meta name="robots" content="noindex"></meta>
       )}
       {/* Global Site Tag (gtag.js) - Google Analytics */}

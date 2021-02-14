@@ -7,12 +7,19 @@ import { removeDash } from '../../helpers/typography'
 import { GA_TRACKING_ID } from '../../helpers/analytics'
 
 export default function Heading({ children }) {
-  // pokemon selector
-  const pokemonInfo = useSelector(state => state.pokemon.info)
-  // data
-  const { name } = pokemonInfo.data
   // router
   const router = useRouter()
+  // redux state
+  const reduxState = useSelector(state => state)
+  // data
+  const { name: pokemonName } = reduxState.pokemon.info.data
+  const { name: typeName } = reduxState.type.data
+
+  const pageTitle = () => {
+    if (pokemonName) return `${removeDash(pokemonName)} - `
+    else if (typeName) return `${removeDash(typeName)} - `
+    else return
+  }
 
   return (
     <NextHead>
@@ -53,7 +60,9 @@ export default function Heading({ children }) {
         name="keywords"
         content="pokemon, pokedex, pokestats, react, nextjs, styled-components, pokeapi"
       />
-      <title>{name && `${removeDash(name)} - `}PokeStats.gg</title>
+      <title>
+        {pageTitle()}PokeStats.gg, the PokeApi-driven Pokémon encyclopaedia
+      </title>
       <link rel="canonical" href={`https://pokestats.gg${router.asPath}`} />
       {/** MANIFEST */}
       <link href="/manifest.json" rel="manifest" />

@@ -23,19 +23,20 @@ export default function Heading({ children }) {
 
   return (
     <NextHead>
-      {process.env.ENV_NAME !== 'production' && (
+      {/** process.env.ENV_NAME !== 'production' && (
         <meta name="robots" content="noindex"></meta>
-      )}
+      ) */}
       {/* Global Site Tag (gtag.js) - Google Analytics */}
-      {process.env.NODE_ENV !== 'development' && (
-        <>
-          <script
-            async
-            src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`}
-          />
-          <script
-            dangerouslySetInnerHTML={{
-              __html: `
+      {process.env.NODE_ENV === 'production' &&
+        process.env.ENV_NAME !== 'production' && (
+          <>
+            <script
+              async
+              src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`}
+            />
+            <script
+              dangerouslySetInnerHTML={{
+                __html: `
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
@@ -43,10 +44,10 @@ export default function Heading({ children }) {
               page_path: window.location.pathname,
             });
           `,
-            }}
-          />
-        </>
-      )}
+              }}
+            />
+          </>
+        )}
 
       {/** MUST */}
       <meta charSet="utf-8" />

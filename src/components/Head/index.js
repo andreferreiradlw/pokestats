@@ -21,6 +21,8 @@ export default function Heading({ children }) {
     else return
   }
 
+  console.log(process.env.ENV_NAME)
+
   return (
     <NextHead>
       {process.env.ENV_NAME === 'preview' && (

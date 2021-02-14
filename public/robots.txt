@@ -1,0 +1,2 @@
+User-agent: *
+Sitemap: https://pokestats.gg/sitemap.xml

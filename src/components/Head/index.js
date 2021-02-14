@@ -7,17 +7,26 @@ import { removeDash } from '../../helpers/typography'
 import { GA_TRACKING_ID } from '../../helpers/analytics'
 
 export default function Heading({ children }) {
-  // pokemon selector
-  const pokemonInfo = useSelector(state => state.pokemon.info)
-  // data
-  const { name } = pokemonInfo.data
   // router
   const router = useRouter()
+  // redux state
+  const reduxState = useSelector(state => state)
+  // data
+  const { name: pokemonName } = reduxState.pokemon.info.data
+  const { name: typeName } = reduxState.type.data
+
+  const pageTitle = () => {
+    if (pokemonName) return `${removeDash(pokemonName)} (Pokemon) - `
+    else if (typeName) return `${removeDash(typeName)} (Type) - `
+    else return
+  }
+
+  console.log(process.env.ENV_NAME)
 
   return (
     <NextHead>
       {/* Global Site Tag (gtag.js) - Google Analytics */}
-      {process.env.NODE_ENV !== 'development' && (
+      {process.env.NODE_ENV === 'production' && (
         <>
           <script
             async
@@ -37,7 +46,6 @@ export default function Heading({ children }) {
           />
         </>
       )}
-
       {/** MUST */}
       <meta charSet="utf-8" />
       <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
@@ -51,9 +59,12 @@ export default function Heading({ children }) {
       />
       <meta
         name="keywords"
-        content="pokemon, pokedex, pokestats, react, nextjs, styled-components, pokeapi"
+        content="pokemon, stats, pokedex, pokestats, react, nextjs, styled-components, pokeapi"
       />
-      <title>{name && `${removeDash(name)} - `}PokeStats.gg</title>
+      <title>
+        {pageTitle()}PokeStats.gg, the open sourced PokeApi driven Pokémon
+        encyclopaedia
+      </title>
       <link rel="canonical" href={`https://pokestats.gg${router.asPath}`} />
       {/** MANIFEST */}
       <link href="/manifest.json" rel="manifest" />

@@ -17,7 +17,7 @@ const createSitemap = (
 
 const Sitemap = () => {}
 
-Sitemap.getInitialProps = async ({ res, req }) => {
+Sitemap.getInitialProps = async ({ req, res }) => {
   // fixed routes
   const routes = ['']
   //fetch pokemon list
@@ -31,6 +31,7 @@ Sitemap.getInitialProps = async ({ res, req }) => {
   res.setHeader('Content-Type', 'text/xml')
   res.write(sitemap)
   res.end()
+
   return res
 }
 

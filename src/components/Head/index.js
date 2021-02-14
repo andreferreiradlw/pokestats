@@ -21,8 +21,6 @@ export default function Heading({ children }) {
     else return
   }
 
-  console.log(process.env.NODE_ENV)
-
   return (
     <NextHead>
       {process.env.ENV_Name !== 'production' && (

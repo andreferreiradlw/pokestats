@@ -21,8 +21,13 @@ export default function Heading({ children }) {
     else return
   }
 
+  console.log(process.env.NODE_ENV)
+
   return (
     <NextHead>
+      {process.env.ENV_Name !== 'production' && (
+        <meta name="robots" content="noindex"></meta>
+      )}
       {/* Global Site Tag (gtag.js) - Google Analytics */}
       {process.env.NODE_ENV !== 'development' && (
         <>

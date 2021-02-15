@@ -1,8 +1,6 @@
 import styled, { css } from 'styled-components'
 // components
 import BoxWrapper from '../Box/StyledBox'
-// styles
-import { Select } from '../BaseStyles'
 
 const Container = styled(BoxWrapper)`
   max-width: 100%;
@@ -60,7 +58,7 @@ const Input = styled.input`
 
   &::placeholder {
     color: #e6e6e6;
-    font-weight: 200;
+    font-weight: 500;
     font-style: italic;
   }
 `

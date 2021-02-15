@@ -100,10 +100,16 @@ const OptionWrapper = styled.a`
       }
     `
   }}
+`
 
-  & img {
-    width: 50px;
-  }
+const OptionImg = styled.img`
+  width: 50px;
+
+  ${({ type }) =>
+    type === 'type' &&
+    css`
+      padding: 10px;
+    `}
 `
 
 const Option = styled.span`
@@ -117,4 +123,12 @@ const PokeID = styled.span`
   margin-left: auto;
 `
 
-export { Container, Input, ListWrapper, OptionWrapper, Option, PokeID }
+export {
+  Container,
+  Input,
+  ListWrapper,
+  OptionWrapper,
+  OptionImg,
+  Option,
+  PokeID,
+}

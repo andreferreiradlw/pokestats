@@ -4,12 +4,13 @@ import { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 // helpers
 import { removeDash } from '../../helpers'
-// components
+// styles
 import {
   Container,
   Input,
   ListWrapper,
   OptionWrapper,
+  OptionImg,
   Option,
   PokeID,
 } from './styledAutoComplete'
@@ -157,8 +158,14 @@ export default function Autocomplete({
                   listOption && i === activeOption && listOption.focus()
                 }
               >
+                {item.type === 'type' && (
+                  <OptionImg
+                    type={item.type}
+                    src={`https://raw.githubusercontent.com/andreferreiradlw/pokestats/Improves_Autocomplete/src/assets/svg/types/${item.name}.svg`}
+                  />
+                )}
                 {item.type === 'pokemon' && (
-                  <img
+                  <OptionImg
                     src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${item.id}.png`}
                   />
                 )}

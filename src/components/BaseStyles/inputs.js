@@ -5,11 +5,11 @@ const Select = styled.select`
     light
       ? css`
           color: ${theme.select.light.color};
-          background-color: ${theme.select.light.background};
+          background-color: ${theme.select.light.background} !important;
         `
       : css`
           color: ${theme.select.color};
-          background-color: ${theme.select.background};
+          background-color: ${theme.select.background} !important;
         `}
 
   display: flex;
@@ -18,6 +18,7 @@ const Select = styled.select`
   padding: 4px 2px;
   border: none;
   border-radius: 0.25rem;
+  outline: none;
 
   &:focus {
     outline: none;

@@ -36,7 +36,7 @@ const Input = styled.input`
   font-weight: 400;
   line-height: 1.5;
   height: 50px;
-  border-radius: 0.25rem 0 0 0.25rem;
+  border-radius: 0.25rem;
   outline: none;
 
   ${({ theme }) => css`

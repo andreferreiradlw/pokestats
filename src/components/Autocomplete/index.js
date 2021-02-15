@@ -161,7 +161,7 @@ export default function Autocomplete({
                 {item.type === 'type' && (
                   <OptionImg
                     type={item.type}
-                    src={`https://raw.githubusercontent.com/andreferreiradlw/pokestats/Improves_Autocomplete/src/assets/svg/types/${item.name}.svg`}
+                    src={`https://raw.githubusercontent.com/andreferreiradlw/pokestats/main/src/assets/svg/types/${item.name}.svg`}
                   />
                 )}
                 {item.type === 'pokemon' && (

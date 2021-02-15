@@ -70,7 +70,9 @@ const homeSlice = createSlice({
       // length
       state.pokemonLength = listWithId.length
       // update filter list for autocomplete
-      state.filterList = state.filterList.concat(listWithId)
+      const stateList = [...state.filterList]
+      state.filterList = [...listWithId, ...stateList]
+      // state.filterList = state.filterList.concat(listWithId)
       // stop loading
       state.isLoading = false
     })

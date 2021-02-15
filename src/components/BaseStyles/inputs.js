@@ -5,11 +5,11 @@ const Select = styled.select`
     light
       ? css`
           color: ${theme.select.light.color};
-          background: ${theme.select.light.background};
+          background-color: ${theme.select.light.background};
         `
       : css`
           color: ${theme.select.color};
-          background: ${theme.select.background};
+          background-color: ${theme.select.background};
         `}
 
   display: flex;

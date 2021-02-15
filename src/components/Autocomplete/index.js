@@ -3,12 +3,11 @@ import { useRouter } from 'next/router'
 import { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 // helpers
-import { removeDash, typeList } from '../../helpers'
+import { removeDash } from '../../helpers'
 // components
 import {
   Container,
   Input,
-  OptionSelect,
   ListWrapper,
   OptionWrapper,
   Option,
@@ -27,16 +26,8 @@ export default function Autocomplete({
   const router = useRouter()
   // selectors
   const pokemonListError = useSelector(state => state.home.error)
-  const pokemonList = useSelector(state => state.home.pokemon)
+  const filterList = useSelector(state => state.home.filterList)
 
-  // select options
-  const searchOptions = [
-    { name: 'Pokemon', value: 'pokemon' },
-    { name: 'Type', value: 'type' },
-  ]
-
-  // option State
-  const [searchOption, setSearchOption] = useState('pokemon')
   // search state
   const [search, setSearch] = useState('')
   // filtered state
@@ -75,28 +66,17 @@ export default function Autocomplete({
   // filter by option
   const handleFilter = value => {
     if (value) {
-      if (searchOption === 'pokemon') {
-        // filter by pokemon
-        filterItems(pokemonList, value)
-      } else if (searchOption === 'type') {
-        // filter by type
-        filterItems(typeList, value)
-      }
+      const filteredList = filterList.filter(
+        item =>
+          removeDash(item.name).toLowerCase().includes(value) ||
+          item.id.toString().includes(value.toString())
+      )
+      // update filtered state with first 4 options
+      setFiltered(filteredList.slice(0, 4))
     } else {
       // set filtered state to empty array
       setFiltered([])
     }
-  }
-  // filter
-  const filterItems = (itemList, filterValue) => {
-    // filter by type
-    const filteredList = itemList.filter(
-      item =>
-        removeDash(item.name).toLowerCase().includes(filterValue) ||
-        item.id.toString().includes(filterValue.toString())
-    )
-    // update filtered state with first 4 options
-    setFiltered(filteredList.slice(0, 4))
   }
 
   // key pressed
@@ -105,9 +85,11 @@ export default function Autocomplete({
     if (e.keyCode === 13 && filtered[0] !== undefined) {
       activeOption === -1
         ? // trigger router for first suggestion
-          router.push(`/${searchOption}/${filtered[0].name}`)
+          router.push(`/${filtered[0].type}/${filtered[0].name}`)
         : // trigger router for active option
-          router.push(`/${searchOption}/${filtered[activeOption].name}`)
+          router.push(
+            `/${filtered[activeOption].type}/${filtered[activeOption].name}`
+          )
       // clean filtered state
       resetStates()
     } // up arrow
@@ -146,44 +128,26 @@ export default function Autocomplete({
       {...rest}
     >
       <label htmlFor="autocomplete" id="autocomplete_label" aria-hidden="true">
-        {`${removeDash(searchOption)} Name or ID`}
+        {`Search Pokemon or Type Name`}
       </label>
       <Input
         type="text"
-        placeholder={`${removeDash(searchOption)} Name or ID`}
+        placeholder={`Search Pokemon or Type Name`}
         id="autocomplete"
         aria-labelledby="autocomplete_label"
         value={search}
         onChange={e => handleInputChange(e)}
         onKeyDown={e => handleKeyDown(e)}
       />
-      <label id="search_options" htmlFor="search_options_select">
-        Select Option
-      </label>
-      <OptionSelect
-        aria-labelledby="search_options"
-        id="search_options_select"
-        value={searchOption}
-        onChange={e => {
-          resetStates()
-          setSearchOption(e.target.value)
-        }}
-      >
-        {searchOptions.map(({ name, value }, index) => (
-          <option key={index} value={value}>
-            {name}
-          </option>
-        ))}
-      </OptionSelect>
       {/** display filtered list */}
       {filtered.length > 0 && (
         <ListWrapper>
           {filtered.map((item, i) => (
             <Link
-              as={`/${searchOption}/${item.name}`}
-              href={`/${searchOption}/[${searchOption}Id]`}
+              as={`/${item.type}/${item.name}`}
+              href={`/${item.type}/[${item.type}Id]`}
               passHref
-              key={`${item.id}-${item.name}-${i}`}
+              key={`${item.type}-${item.id}-${item.name}-${i}`}
             >
               <OptionWrapper
                 onClick={() => resetStates()}
@@ -193,7 +157,7 @@ export default function Autocomplete({
                   listOption && i === activeOption && listOption.focus()
                 }
               >
-                {searchOption === 'pokemon' && (
+                {item.type === 'pokemon' && (
                   <img
                     src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${item.id}.png`}
                   />

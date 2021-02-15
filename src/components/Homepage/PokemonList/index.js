@@ -10,27 +10,21 @@ import { SectionTitle, Select } from '../../BaseStyles'
 import { Container, SelectContainer } from './StyledPokemonList'
 
 export default function PokemonList() {
-  //data
+  // data
   const pokemon = useSelector(state => state.home.pokemon)
   // display pokemon list
   const [showPokemon, setShowPokemon] = useState([])
-  //select state
+  // select state
   const [gen, setGen] = useState('all')
 
   useEffect(() => {
-    // console.log(pokemon)
-    // if (pokemon) setShowPokemon(pokemon)
-  }, [pokemon])
-
-  useEffect(() => {
-    // console.log(gen, pokemon)
     setShowPokemon([])
 
     if (gen && gen !== 'all') {
       const filteredPokemon = pokemon.filter(
         pokemon => gen === mapIdToGeneration(pokemon.id)
       )
-      // console.log('filteredPokemon:', filteredPokemon)
+      // show state
       setShowPokemon(filteredPokemon)
     } else {
       setShowPokemon(pokemon)

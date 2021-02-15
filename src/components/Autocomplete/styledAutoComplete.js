@@ -65,11 +65,6 @@ const Input = styled.input`
   }
 `
 
-const OptionSelect = styled(Select)`
-  height: 50px;
-  border-radius: 0 0.25rem 0.25rem 0;
-`
-
 const ListWrapper = styled.div`
   position: absolute;
   margin-top: 50px;
@@ -122,12 +117,4 @@ const PokeID = styled.span`
   margin-left: auto;
 `
 
-export {
-  Container,
-  Input,
-  OptionSelect,
-  ListWrapper,
-  OptionWrapper,
-  Option,
-  PokeID,
-}
+export { Container, Input, ListWrapper, OptionWrapper, Option, PokeID }

@@ -4,6 +4,8 @@ import {
   createAsyncThunk,
   createEntityAdapter,
 } from '@reduxjs/toolkit'
+// helpers
+import { typeList } from '../../helpers'
 
 // entity adapter
 const homeAdapter = createEntityAdapter()
@@ -17,6 +19,7 @@ const initialState = homeAdapter.getInitialState({
     status: 'OK',
     message: null,
   },
+  filterList: typeList,
 })
 
 // Thunk functions
@@ -59,10 +62,16 @@ const homeSlice = createSlice({
     builder.addCase(fetchPokemonList.fulfilled, (state, action) => {
       const listWithId = action.payload.map((pokemon, index) => {
         pokemon.id = index += 1
+        pokemon.type = 'pokemon'
         return pokemon
       })
+      // pokemon
       state.pokemon = listWithId
+      // length
       state.pokemonLength = listWithId.length
+      // update filter list for autocomplete
+      state.filterList = state.filterList.concat(listWithId)
+      // stop loading
       state.isLoading = false
     })
     builder.addCase(fetchPokemonList.rejected, (state, action) => {

@@ -26,7 +26,8 @@ export default function Heading({ children }) {
   return (
     <NextHead>
       {/* Global Site Tag (gtag.js) - Google Analytics */}
-      {process.env.NODE_ENV === 'production' && (
+      {process.env.NODE_ENV === 'production' &&
+      process.env.NEXT_PUBLIC_ENV_VAR === 'prod_deployment' ? (
         <>
           <script
             async
@@ -44,6 +45,12 @@ export default function Heading({ children }) {
           `,
             }}
           />
+        </>
+      ) : (
+        <>
+          <meta name="robots" content="noindex, nofollow" />
+          <meta name="googlebot" content="noindex" />
+          <meta name="googlebot-news" content="noindex, nosnippet" />
         </>
       )}
       {/** MUST */}

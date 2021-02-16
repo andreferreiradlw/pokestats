@@ -21,8 +21,6 @@ export default function Heading({ children }) {
     else return
   }
 
-  console.log(process.env.NEXT_PUBLIC_ENV_VAR)
-
   return (
     <NextHead>
       {/* Global Site Tag (gtag.js) - Google Analytics */}

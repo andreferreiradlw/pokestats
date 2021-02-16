@@ -18,7 +18,7 @@ export default function Heading({ children }) {
   const pageTitle = () => {
     if (pokemonName) return `${removeDash(pokemonName)} (Pokemon) - `
     else if (typeName) return `${removeDash(typeName)} (Type) - `
-    else return
+    else return ''
   }
 
   return (

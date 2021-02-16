@@ -2,8 +2,6 @@ import { default as NextHead } from 'next/head'
 import { useRouter } from 'next/router'
 // helpers
 import { removeDash } from '../../helpers/typography'
-// google analytics
-import { GA_TRACKING_ID } from '../../helpers/analytics'
 
 export default function Heading({ children }) {
   // router
@@ -21,24 +19,12 @@ export default function Heading({ children }) {
       {/* Global Site Tag (gtag.js) - Google Analytics */}
       {process.env.NODE_ENV === 'production' &&
       process.env.NEXT_PUBLIC_ENV_VAR === 'prod_deployment' ? (
-        <>
-          <script
-            async
-            src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`}
-          />
-          <script
-            dangerouslySetInnerHTML={{
-              __html: `
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', '${GA_TRACKING_ID}', {
-              page_path: window.location.pathname,
-            });
-          `,
-            }}
-          />
-        </>
+        <script
+          async
+          defer
+          data-domain="pokestats.gg"
+          src="https://plausible.io/js/plausible.js"
+        ></script>
       ) : (
         <>
           <meta name="robots" content="noindex, nofollow" />

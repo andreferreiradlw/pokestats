@@ -1,5 +1,3 @@
-// analytics
-export * from './analytics'
 // animations
 export * from './animations'
 // box

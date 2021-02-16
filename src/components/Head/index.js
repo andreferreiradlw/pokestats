@@ -1,6 +1,5 @@
 import { default as NextHead } from 'next/head'
 import { useRouter } from 'next/router'
-import { useSelector } from 'react-redux'
 // helpers
 import { removeDash } from '../../helpers/typography'
 // google analytics
@@ -9,15 +8,11 @@ import { GA_TRACKING_ID } from '../../helpers/analytics'
 export default function Heading({ children }) {
   // router
   const router = useRouter()
-  // redux state
-  const reduxState = useSelector(state => state)
-  // data
-  const { name: pokemonName } = reduxState.pokemon.info.data
-  const { name: typeName } = reduxState.type.data
+
   // dynamic page title
-  const pageTitle = () => {
-    if (pokemonName) return `${removeDash(pokemonName)} (Pokemon) - `
-    else if (typeName) return `${removeDash(typeName)} (Type) - `
+  const pageTitle = ({ pokemonId, typeId }) => {
+    if (pokemonId) return `${removeDash(pokemonId)} (Pokemon) - `
+    else if (typeId) return `${removeDash(typeId)} (Type) - `
     else return ''
   }
 
@@ -67,7 +62,9 @@ export default function Heading({ children }) {
         content="pokemon, Pokémon, stats, pokedex, Pokédex, pokestats, gg, database, pokeapi, moves, abilities, evolutions, locations"
       />
       <title>
-        {`${pageTitle()}PokeStats.gg - The online open-sourced Pokémon
+        {`${pageTitle(
+          router.query
+        )}PokeStats.gg - The online open-sourced Pokémon
         encyclopaedia. Pokédex powered by PokeApi.`}
       </title>
       <link rel="canonical" href={`https://pokestats.gg${router.asPath}`} />

@@ -14,7 +14,7 @@ export default function Heading({ children }) {
   // data
   const { name: pokemonName } = reduxState.pokemon.info.data
   const { name: typeName } = reduxState.type.data
-
+  // dynamic page title
   const pageTitle = () => {
     if (pokemonName) return `${removeDash(pokemonName)} (Pokemon) - `
     else if (typeName) return `${removeDash(typeName)} (Type) - `
@@ -53,22 +53,22 @@ export default function Heading({ children }) {
       )}
       {/** MUST */}
       <meta charSet="utf-8" />
-      <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
+      <meta httpEquiv="X-UA-Compatible" content="IE=edge,chrome=1" />
       <meta
         name="viewport"
         content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"
       />
       <meta
         name="description"
-        content="PokeStats.gg is an online encyclopedia of Pokémon species containing information such as Pokédex entries, descriptions, evolution chains, moves, stats and much more. It also works offline!"
+        content="PokeStats.gg is an online encyclopedia of Pokémon species containing information such as Pokédex entries, descriptions, abilities, evolution chains, moves learned, stats and much more!"
       />
       <meta
         name="keywords"
-        content="pokemon, stats, pokedex, pokestats, react, nextjs, styled-components, pokeapi"
+        content="pokemon, Pokémon, stats, pokedex, Pokédex, pokestats, gg, database, pokeapi, moves, abilities, evolutions, locations"
       />
       <title>
-        {pageTitle()}PokeStats.gg, the open sourced PokeApi driven Pokémon
-        encyclopaedia
+        {`${pageTitle()}PokeStats.gg - The online open-sourced Pokémon
+        encyclopaedia. Pokédex powered by PokeApi.`}
       </title>
       <link rel="canonical" href={`https://pokestats.gg${router.asPath}`} />
       {/** MANIFEST */}

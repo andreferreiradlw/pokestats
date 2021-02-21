@@ -25,10 +25,7 @@ app.prepare().then(() => {
   })
 
   server.get('*', (req, res) => {
-    if (req.url.includes('/sw')) {
-      const filePath = join(__dirname, 'static', 'workbox', 'sw.js')
-      app.serveStatic(req, res, filePath)
-    } else if (req.url.startsWith('static/workbox/')) {
+    if (req.url.startsWith('static/workbox/')) {
       app.serveStatic(req, res, join(__dirname, req.url))
     } else {
       handle(req, res, req.url)

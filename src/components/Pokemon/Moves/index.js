@@ -12,7 +12,6 @@ import {
   capitalize,
   removeDash,
   staggerTableVariant,
-  fadeInRightVariant,
   fadeInUpVariant,
 } from '../../../helpers'
 // components
@@ -245,10 +244,7 @@ export default function Moves({ ...rest }) {
                 variants={staggerTableVariant}
               >
                 {currMoves.map((move, i) => (
-                  <TableRow
-                    key={`${move.name}-${i}`}
-                    variants={fadeInRightVariant}
-                  >
+                  <TableRow key={`${move.name}-${i}`}>
                     {learnMethod === 'level-up' && (
                       <td>{move.level_learned_at}</td>
                     )}

@@ -1,4 +1,5 @@
 import { useSelector } from 'react-redux'
+import { useRouter } from 'next/router'
 import { AnimatePresence } from 'framer-motion'
 // helpers
 import { capitalize, removeDash } from '../../../helpers/typography'
@@ -12,6 +13,8 @@ import { PageHeading, Table, Numbered } from '../../BaseStyles'
 import { TypeContainer, Genera, Flavor } from './StyledDetails'
 
 export default function Details({ sizes, ...rest }) {
+  // router
+  const router = useRouter()
   // pokemon info
   const pokemonInfo = useSelector(state => state.pokemon.info)
   // biology
@@ -83,7 +86,7 @@ export default function Details({ sizes, ...rest }) {
           sizes={sizes}
           height="558px"
           iconWidth="15%"
-          key={`pokemon-details-loading-${id}`}
+          key={`pokemon-details-loading-${router.query.pokemonId}`}
         />
       )}
       {!pokemonBio.isLoading && (
@@ -94,7 +97,7 @@ export default function Details({ sizes, ...rest }) {
           initial="hidden"
           animate="show"
           variants={fadeInUpVariant}
-          key={`pokemon-details-${id}`}
+          key={`pokemon-details-${router.query.pokemonId}`}
           {...rest}
         >
           <PageHeading>{removeDash(name)}</PageHeading>

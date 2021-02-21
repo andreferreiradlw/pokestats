@@ -118,6 +118,7 @@ export default function Homepage({ pokemonName }) {
                 sizes={5}
                 margin={{ xxs: '0 0 2rem', lg: '0' }}
                 key={`pokemon-details-${pokemonName}`}
+                pokemonName={pokemonName}
               />
               <FeaturedImage
                 sizes={7}

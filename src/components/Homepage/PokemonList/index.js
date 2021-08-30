@@ -8,14 +8,28 @@ import InfiniteScroll from '../../InfiniteScroll'
 // styles
 import { SectionTitle, Select } from '../../BaseStyles'
 import { Container, SelectContainer } from './StyledPokemonList'
+import { m } from 'framer-motion'
 
 export default function PokemonList() {
   // data
   const pokemon = useSelector(state => state.home.pokemon)
   // display pokemon list
   const [showPokemon, setShowPokemon] = useState([])
-  // select state
+  // gen select state
   const [gen, setGen] = useState('all')
+  // sort select state
+  const [sortBy, setSortBy] = useState('id')
+
+  const sortPokemon = (pokemonList, sortBy) =>
+    [...pokemonList].sort((a, b) => {
+      if (a[sortBy] > b[sortBy]) return 1
+      if (a[sortBy] < b[sortBy]) return -1
+      return 0
+    })
+
+  useEffect(() => {
+    showPokemon?.length && setShowPokemon(sortPokemon(showPokemon, sortBy))
+  }, [sortBy])
 
   useEffect(() => {
     setShowPokemon([])
@@ -24,8 +38,10 @@ export default function PokemonList() {
       const filteredPokemon = pokemon.filter(
         pokemon => gen === mapIdToGeneration(pokemon.id)
       )
+      // sort
+      const sortedPokemon = sortPokemon(filteredPokemon, sortBy)
       // show state
-      setShowPokemon(filteredPokemon)
+      setShowPokemon(sortedPokemon)
     } else {
       setShowPokemon(pokemon)
     }
@@ -60,6 +76,19 @@ export default function PokemonList() {
                     {genDescription}
                   </option>
                 ))}
+              </Select>
+              <label id="sorting" htmlFor="sort_pokemon">
+                Sort Pokemon:
+              </label>
+              <Select
+                light
+                aria-labelledby="sorting"
+                id="sort_pokemon"
+                value={sortBy}
+                onChange={e => setSortBy(e.target.value)}
+              >
+                <option value="id">Number</option>
+                <option value="name">Name</option>
               </Select>
             </SelectContainer>
             {showPokemon.length > 0 && (

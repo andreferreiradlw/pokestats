@@ -32,6 +32,7 @@
     "prettier": "prettier \"**/*.{js,ts,md,json,yml}\" --ignore-path .gitignore"
   },
   "dependencies": {
+    "@babel/core": "^7.12.10",
     "@reduxjs/toolkit": "^1.5.0",
     "axios": "^0.24.0",
     "express": "^4.17.1",
@@ -44,7 +45,7 @@
     "react-dom": "^17.0.2",
     "react-is": "^17.0.2",
     "react-lazyload": "^3.2.0",
-    "react-redux": "^7.2.2",
+    "react-redux": "^7.2.6",
     "react-tsparticles": "^1.37.2",
     "redux": "^4.1.2",
     "redux-thunk": "^2.4.0",
@@ -52,7 +53,6 @@
     "webpack": "^5.17.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.12.10",
     "@babel/eslint-parser": "^7.16.0",
     "@babel/plugin-transform-runtime": "^7.12.10",
     "@redux-devtools/core": "^3.9.0",
@@ -65,7 +65,6 @@
     "eslint-plugin-module-resolver": "^1.2.0",
     "eslint-plugin-prettier": "^3.3.1",
     "eslint-plugin-react": "^7.22.0",
-    "eslint-plugin-styled-components": "^0.0.0",
     "prettier": "^2.2.1",
     "redux-devtools-extension": "^2.13.9"
   }

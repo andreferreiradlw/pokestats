@@ -3,7 +3,7 @@ import { motion } from 'framer-motion'
 // helpers
 import { scaleInVariant } from '../../helpers/animations'
 // particles
-import { default as ParticlesJS } from 'react-particles-js'
+import { default as ParticlesJS } from 'react-tsparticles'
 // config
 import particleParams from './particleConfig'
 
@@ -34,7 +34,7 @@ export default function Particles() {
       variants={scaleInVariant}
       key="particles"
     >
-      <ParticlesElement width="100%" height="100%" params={particleParams} />
+      <ParticlesElement width="100%" height="100%" options={particleParams} />
     </ParticlesContainer>
   )
 }

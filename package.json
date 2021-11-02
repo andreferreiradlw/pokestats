@@ -32,31 +32,31 @@
     "prettier": "prettier \"**/*.{js,ts,md,json,yml}\" --ignore-path .gitignore"
   },
   "dependencies": {
-    "@babel/core": "^7.12.10",
     "@reduxjs/toolkit": "^1.5.0",
-    "axios": "^0.21.1",
+    "axios": "^0.24.0",
     "express": "^4.17.1",
     "framer-motion": "^3.2.2-rc.1",
     "heroku-ssl-redirect": "^0.1.1",
     "lru-cache": "^6.0.0",
-    "next": "10.0.3",
-    "next-images": "^1.6.2",
-    "react": "^16.9.0",
-    "react-dom": "^16.9.0",
-    "react-is": "^16.9.0",
-    "react-lazyload": "^3.1.0",
-    "react-particles-js": "^3.4.1",
+    "next": "11.1.1",
+    "next-images": "^1.8.2",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-is": "^17.0.2",
+    "react-lazyload": "^3.2.0",
     "react-redux": "^7.2.2",
-    "redux": "^4.0.5",
-    "redux-devtools-extension": "^2.13.8",
-    "redux-thunk": "^2.3.0",
-    "styled-components": "^5.2.1",
+    "react-tsparticles": "^1.37.2",
+    "redux": "^4.1.2",
+    "redux-thunk": "^2.4.0",
+    "styled-components": "^5.3.3",
     "webpack": "^5.17.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.12.10",
+    "@babel/eslint-parser": "^7.16.0",
     "@babel/plugin-transform-runtime": "^7.12.10",
+    "@redux-devtools/core": "^3.9.0",
     "@svgr/webpack": "^5.5.0",
-    "babel-eslint": "^10.1.0",
     "babel-plugin-styled-components": "^1.12.0",
     "eslint": "^7.15.0",
     "eslint-config-prettier": "^7.1.0",
@@ -67,6 +67,6 @@
     "eslint-plugin-react": "^7.22.0",
     "eslint-plugin-styled-components": "^0.0.0",
     "prettier": "^2.2.1",
-    "redux-devtools": "^3.7.0"
+    "redux-devtools-extension": "^2.13.9"
   }
 }

@@ -1,13 +1,19 @@
 import { useEffect } from 'react'
+import { useRouter } from 'next/router'
 import { useSelector, useDispatch } from 'react-redux'
 import { AnimatePresence } from 'framer-motion'
 // redux actions
 import { startLoading, stopLoading } from './homeSlice'
 // heplpers
-import { staggerInitialVariant, fadeInUpVariant } from '../../helpers'
+import {
+  staggerInitialVariant,
+  fadeInUpVariant,
+  getRandomInt,
+} from '../../helpers'
 // components
 import Layout from '../Layout'
 import Autocomplete from '../Autocomplete'
+import { Button } from '../BaseStyles/button'
 import Particles from '../Particles'
 import Loading from '../Loading'
 import PokemonList from './PokemonList'
@@ -18,12 +24,14 @@ import { MainHeading } from '../BaseStyles'
 import Github from '../../assets/svg/github.svg'
 
 export default function Homepage() {
+  // router
+  const router = useRouter()
   // dispatch
   const dispatch = useDispatch()
   // redux state
   const homeState = useSelector(state => state.home)
   // data
-  const { isLoading, pokemonLength } = homeState
+  const { isLoading, pokemonLength, pokemon } = homeState
 
   // start loading again when unmounts
   useEffect(() => {
@@ -33,6 +41,11 @@ export default function Homepage() {
       dispatch(startLoading())
     }
   }, [])
+
+  const routeRandom = () =>
+    router.push(
+      `/pokemon/${pokemon[Math.floor(Math.random() * pokemon.length)].name}`
+    )
 
   return (
     <Layout
@@ -75,6 +88,14 @@ export default function Homepage() {
                 variants={fadeInUpVariant}
                 key="homepage-autocomplete"
               />
+              <Button
+                onClick={routeRandom}
+                dark
+                variants={fadeInUpVariant}
+                key="homepage-random-btn"
+              >
+                Random Pokemon!
+              </Button>
               <ScrollDown
                 variants={fadeInUpVariant}
                 key="homepage-scroll-down"

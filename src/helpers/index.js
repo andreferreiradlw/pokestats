@@ -6,6 +6,8 @@ export * from './box'
 export * from './gameVersion'
 // moves
 export * from './moves'
+//random
+export * from './random'
 // refs
 export * from './refs'
 // types

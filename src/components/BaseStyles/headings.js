@@ -3,28 +3,26 @@ import { motion } from 'framer-motion'
 
 const MainHeading = styled(motion.h1)`
   font-size: 3.5rem;
-  line-height: 4rem;
+  line-height: 3.5rem;
   font-family: 'Josefin Sans', sans-serif;
   color: ${({ theme }) => theme.homepage.heading.color};
   font-weight: 700;
   user-select: none;
-  margin-bottom: 15px;
   text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000,
     2px 2px 0 #000;
 
   ${({ theme }) => css`
     @media ${theme.device.xs} {
       font-size: 5rem;
-      line-height: 5.2rem;
-      margin-bottom: 25px;
+      line-height: 5rem;
     }
     @media ${theme.device.md} {
       font-size: 10rem;
-      line-height: 10.2rem;
+      line-height: 10rem;
     }
     @media ${theme.device.lg} {
       font-size: 13.5rem;
-      line-height: 13.6rem;
+      line-height: 13.5rem;
     }
   `}
 `

@@ -9,6 +9,7 @@ const Container = styled(BoxWrapper)`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  gap: 1em;
   position: relative;
   margin: auto;
   height: 100vh;

@@ -34,7 +34,7 @@
   "dependencies": {
     "@babel/core": "^7.12.10",
     "@reduxjs/toolkit": "^1.5.0",
-    "axios": "^0.21.1",
+    "axios": "^0.21.2",
     "express": "^4.17.1",
     "framer-motion": "^3.2.2-rc.1",
     "heroku-ssl-redirect": "^0.1.1",

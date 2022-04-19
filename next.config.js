@@ -3,6 +3,9 @@ const path = require('path')
 
 module.exports = withImages({
   target: 'serverless',
+  images: {
+    disableStaticImages: true,
+  },
   env: {
     NEXT_PUBLIC_ENV_VAR: process.env.NEXT_PUBLIC_ENV_VAR,
     NEXT_PUBLIC_GA: process.env.NEXT_PUBLIC_GA,

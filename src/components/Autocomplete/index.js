@@ -20,7 +20,6 @@ export default function Autocomplete({
   direction = 'row',
   grow = false,
   margin = '0 auto',
-  noGutter = true,
   ...rest
 }) {
   // router
@@ -123,9 +122,8 @@ export default function Autocomplete({
     <Container
       align={align}
       direction={direction}
-      grow={grow}
+      $flexGrow={grow}
       margin={margin}
-      noGutter={noGutter}
       {...rest}
     >
       <label htmlFor="autocomplete" id="autocomplete_label" aria-hidden="true">

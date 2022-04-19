@@ -22,8 +22,8 @@ export default function Footer({ ...rest }) {
         justify={{ xxs: 'center', sm: 'space-between' }}
         margin="auto"
         sizes={12}
-        constrained
-        withGutter
+        $constrained
+        $withGutter
       >
         <span>
           {`Created by `}{' '}

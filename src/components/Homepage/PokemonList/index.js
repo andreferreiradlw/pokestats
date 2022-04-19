@@ -51,8 +51,8 @@ export default function PokemonList() {
       {showPokemon && (
         <Container>
           <Box
-            constrained
-            withGutter
+            $constrained
+            $withGutter
             margin="3rem 0"
             align="flex-start"
             justify="flex-start"
@@ -61,7 +61,7 @@ export default function PokemonList() {
             <SelectContainer
               direction="row"
               justify={{ xxs: 'center', sm: 'flex-start' }}
-              flexWrap="wrap"
+              $flexWrap="wrap"
             >
               <Box direction="row" justify="flex-start" width="auto">
                 <label id="generation" htmlFor="gen_select">

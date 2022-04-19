@@ -98,8 +98,8 @@ export default function Homepage({ pokemonName }) {
         )}
         {!pokemonInfo.isLoading && (
           <MainContainer
-            constrained
-            withGutter
+            $constrained
+            $withGutter
             initial="hidden"
             animate="visible"
             exit="fade"

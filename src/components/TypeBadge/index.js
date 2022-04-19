@@ -5,7 +5,7 @@ import { capitalize, hoverVariant } from '../../helpers'
 // styles
 import { Badge } from './StyledBadge'
 
-export default function TypeBadge({ type, hideIcon, iconOnly, ...rest }) {
+export default function TypeBadge({ type, hideIcon, $iconOnly, ...rest }) {
   const [Icon, setIcon] = useState()
   // ref
   const _isMounted = useRef(null)
@@ -31,14 +31,14 @@ export default function TypeBadge({ type, hideIcon, iconOnly, ...rest }) {
     <Link as={`/type/${type}`} href="/type/[typeName]" passHref>
       <Badge
         type={type}
-        iconOnly={iconOnly}
+        $iconOnly={$iconOnly}
         whileHover="hover"
         whileTap="tap"
         variants={hoverVariant}
         {...rest}
       >
         {!hideIcon && type && Icon && Icon}
-        {!iconOnly && type && <span>{capitalize(type)}</span>}
+        {!$iconOnly && type && <span>{capitalize(type)}</span>}
       </Badge>
     </Link>
   )

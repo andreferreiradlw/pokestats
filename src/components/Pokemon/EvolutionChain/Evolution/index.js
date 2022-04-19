@@ -69,9 +69,9 @@ export default function Evolution({
           {!noArrow && (
             <BoxWrapper
               width="auto"
-              flexGrow
+              $flexGrow
               direction="column"
-              flexWrap="nowrap"
+              $flexWrap="nowrap"
               justify="center"
               align="center"
             >
@@ -88,8 +88,7 @@ export default function Evolution({
             passHref
           >
             <PokeBox
-              grow={false}
-              dark
+              $dark
               whileHover="hover"
               whileTap="tap"
               variants={fadeInUpVariant}

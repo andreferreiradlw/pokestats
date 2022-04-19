@@ -21,8 +21,8 @@ export default function HeaderComponent({ withGameVersion = true, ...rest }) {
   return (
     <Box as="header" margin="2rem 0" {...rest}>
       <Box
-        constrained
-        withGutter
+        $constrained
+        $withGutter
         direction={{ xxs: 'column', md: 'row' }}
         justify="space-between"
         align={{ xxs: 'center', md: 'flex-start' }}
@@ -58,7 +58,6 @@ export default function HeaderComponent({ withGameVersion = true, ...rest }) {
           justify="flex-end"
           align="flex-start"
           margin="none"
-          debug
         />
       </Box>
     </Box>

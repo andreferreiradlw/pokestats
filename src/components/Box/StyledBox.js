@@ -19,7 +19,7 @@ export default styled(motion.div)`
     margin,
     padding,
     hide,
-    flexWrap,
+    $flexWrap,
     width,
     height,
     minHeight,
@@ -34,7 +34,7 @@ export default styled(motion.div)`
       ${align && responsiveProps('align-items', align)}
       ${justify && responsiveProps('justify-content', justify)}
       ${alignSelf && responsiveProps('align-self', alignSelf)}
-      ${flexWrap && responsiveProps('flex-wrap', flexWrap)}
+      ${$flexWrap && responsiveProps('flex-wrap', $flexWrap)}
       // spacing
       ${margin && responsiveProps('margin', margin)}
       ${padding && responsiveProps('padding', padding)}
@@ -46,8 +46,8 @@ export default styled(motion.div)`
   }}
 
   /** column-based flex size */
-  ${({ constrained, sizes }) =>
-    constrained
+  ${({ $constrained, sizes }) =>
+    $constrained
       ? css`
           // flex-basis: 100%;
         `
@@ -57,19 +57,19 @@ export default styled(motion.div)`
           flex-basis: auto;
         `}
   
-  ${({ constrained, sizes, flexGrow }) =>
-    !constrained &&
+  ${({ $constrained, sizes, $flexGrow }) =>
+    !$constrained &&
     !sizes &&
-    flexGrow &&
+    $flexGrow &&
     css`
       flex-grow: 1;
     `}
   
   /** constrained max-width */
-  ${({ constrained, flexGrow }) =>
-    constrained &&
+  ${({ $constrained, $flexGrow }) =>
+    $constrained &&
     css`
-      ${flexGrow && 'flex-grow: 1;'}
+      ${$flexGrow && 'flex-grow: 1;'}
       max-width: ${boxConfig.constrained};
     `};
 
@@ -81,7 +81,7 @@ export default styled(motion.div)`
     `}
 
   /** gutter */
-  ${({ padding, withGutter }) => !padding && withGutter && gutterStyle()}
+  ${({ padding, $withGutter }) => !padding && $withGutter && gutterStyle()}
 
   /** debug */
   ${({ debug }) => debug && debugStyle()}

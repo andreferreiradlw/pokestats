@@ -31,8 +31,8 @@ const Image = styled(motion.img)`
       min-height: ${height ? `${height}px` : 'auto'};
     `}
 
-  ${({ pixelated }) =>
-    pixelated &&
+  ${({ $pixelated }) =>
+    $pixelated &&
     css`
       image-rendering: pixelated;
     `}

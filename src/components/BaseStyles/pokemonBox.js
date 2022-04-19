@@ -17,8 +17,8 @@ const PokeBox = styled(motion.a)`
       width: 150px;
     `}
 
-  ${({ dark, theme }) =>
-    dark
+  ${({ $dark, theme }) =>
+    $dark
       ? css`
           background-color: ${theme.pokemonBox.dark.backgroundColor};
           color: ${theme.pokemonBox.dark.color};

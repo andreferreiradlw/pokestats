@@ -12,7 +12,7 @@ export default function InfiniteScroll({
   dark,
   direction = 'row',
   align = 'flex-start',
-  flexWrap = 'wrap',
+  $flexWrap = 'wrap',
   ...rest
 }) {
   // current page state
@@ -118,14 +118,14 @@ export default function InfiniteScroll({
           <Box
             direction={direction}
             align={align}
-            flexWrap={flexWrap}
+            $flexWrap={$flexWrap}
             {...rest}
           >
             {showList.map(currPokemon => (
               <PokemonBox
                 key={`infinite-scroll-${currPokemon.id}`}
                 pokemon={currPokemon}
-                dark={dark}
+                $dark={dark}
                 whileHover="hover"
                 whileTap="tap"
                 variants={fadeInUpVariant}

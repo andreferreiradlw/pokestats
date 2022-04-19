@@ -19,8 +19,8 @@ const Badge = styled(motion.a)`
   text-shadow: -0.5px -0.5px 0 #000, 0.5px -0.5px 0 #000, -0.5px 0.5px 0 #000,
     0.5px 0.5px 0 #000;
 
-  ${({ iconOnly, margin }) =>
-    iconOnly
+  ${({ $iconOnly, margin }) =>
+    $iconOnly
       ? css`
           display: inline-flex;
           margin: ${margin || '0.1rem 0.4rem 0.1rem 0'};
@@ -46,8 +46,8 @@ const Badge = styled(motion.a)`
     `}
 
   & svg {
-    ${({ iconOnly, iconWidth, iconHeight }) =>
-      !iconOnly
+    ${({ $iconOnly, iconWidth, iconHeight }) =>
+      !$iconOnly
         ? css`
             width: ${iconWidth || '25px'};
             height: ${iconHeight || '25px'};

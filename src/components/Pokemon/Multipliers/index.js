@@ -52,7 +52,7 @@ export default function Weaknesses({ ...rest }) {
       <Box
         direction={{ xxs: 'column', lg: 'row' }}
         justify="space-between"
-        flexWrap="wrap"
+        $flexWrap="wrap"
       >
         <SectionTitle>Multipliers</SectionTitle>
         <Switch enabled={enabled} onClick={() => setEnabled(!enabled)} />
@@ -79,7 +79,7 @@ export default function Weaknesses({ ...rest }) {
                           <TypeBadge
                             key={`${type}-${relation}-${i}`}
                             type={type}
-                            iconOnly
+                            $iconOnly
                           />
                         ))}
                   </td>

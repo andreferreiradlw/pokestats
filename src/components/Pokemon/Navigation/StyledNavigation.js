@@ -12,7 +12,7 @@ const BtnSpan = styled(motion.span)`
 `
 
 const Arrow = styled(BtnSpan)`
-  ${({ right, left }) =>
+  ${({ $right, $left }) =>
     css`
       &:after {
         position: absolute;
@@ -20,13 +20,13 @@ const Arrow = styled(BtnSpan)`
         border-top: 45px solid transparent;
         border-bottom: 45px solid transparent;
         transition: all 0.15s ease-in-out;
-        ${left &&
+        ${$left &&
         css`
           right: 0;
           border-right: 10px solid black;
           box-shadow: 10px 0 0 0 black, 10px 3px 0 0 black;
         `}
-        ${right &&
+        ${$right &&
         css`
           left: 0;
           border-left: 10px solid black;
@@ -54,8 +54,8 @@ const BtnAnchor = styled(motion.a)`
   border: 2px solid black;
   font-weight: 600;
 
-  ${({ left }) =>
-    left &&
+  ${({ $left }) =>
+    $left &&
     css`
       border-radius: 4px 0 0 4px;
       border-right: 1px solid white;
@@ -65,8 +65,8 @@ const BtnAnchor = styled(motion.a)`
       }
     `}
 
-  ${({ right }) =>
-    right &&
+  ${({ $right }) =>
+    $right &&
     css`
       border-radius: 0 4px 4px 0;
       border-left: 1px solid white;
@@ -79,15 +79,15 @@ const BtnAnchor = styled(motion.a)`
     cursor: pointer;
 
     & ${Arrow} {
-      ${({ right }) =>
-        right &&
+      ${({ $right }) =>
+        $right &&
         css`
           &:after {
             left: 10px;
           }
         `}
-      ${({ left }) =>
-        left &&
+      ${({ $left }) =>
+        $left &&
         css`
           &:after {
             right: 10px;

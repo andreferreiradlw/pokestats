@@ -162,9 +162,9 @@ export default function Moves({ ...rest }) {
     <Box align={{ xxs: 'center', lg: 'flex-start' }} {...rest}>
       <SectionTitle>Move Pool</SectionTitle>
       {/** TABS */}
-      <TabContainer direction="row" justify="space-evenly" flexWrap="wrap">
+      <TabContainer direction="row" justify="space-evenly" $flexWrap="wrap">
         <Button
-          active={activeTab === 1}
+          $active={activeTab === 1}
           onClick={() => setActiveTab(1)}
           whileHover="hover"
           whileTap="tap"
@@ -174,7 +174,7 @@ export default function Moves({ ...rest }) {
           Level Up
         </Button>
         <Button
-          active={activeTab === 2}
+          $active={activeTab === 2}
           onClick={() => setActiveTab(2)}
           whileHover="hover"
           whileTap="tap"
@@ -184,7 +184,7 @@ export default function Moves({ ...rest }) {
           TM / HM
         </Button>
         <Button
-          active={activeTab === 3}
+          $active={activeTab === 3}
           onClick={() => setActiveTab(3)}
           whileHover="hover"
           whileTap="tap"
@@ -194,7 +194,7 @@ export default function Moves({ ...rest }) {
           Egg
         </Button>
         <Button
-          active={activeTab === 4}
+          $active={activeTab === 4}
           onClick={() => setActiveTab(4)}
           whileHover="hover"
           whileTap="tap"
@@ -258,7 +258,7 @@ export default function Moves({ ...rest }) {
                     {learnMethod === 'tutor' && <td>-</td>}
                     <NameTD>{removeDash(move.name)}</NameTD>
                     <td>
-                      <TypeBadge margin="0" iconOnly type={move.type.name} />
+                      <TypeBadge margin="0" $iconOnly type={move.type.name} />
                     </td>
                     <td>{capitalize(move.damage_class.name)}</td>
                     <td>{move.power || '-'}</td>

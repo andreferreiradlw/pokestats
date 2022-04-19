@@ -31,8 +31,8 @@ export default function Navigation({ ...rest }) {
               as={`/pokemon/${allPokemon[id - 2].name}`}
               href="/pokemon/[pokemonId]"
             >
-              <BtnAnchor left>
-                <Arrow left>
+              <BtnAnchor $left>
+                <Arrow $left>
                   <Image
                     src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${
                       id - 1
@@ -40,11 +40,11 @@ export default function Navigation({ ...rest }) {
                     alt={allPokemon[id - 2].name}
                     key={`navigation-left-${allPokemon[id - 2].name}`}
                     width={100}
-                    pixelated
+                    $pixelated
                     notLazy
                   />
                 </Arrow>
-                <Title right>
+                <Title $right>
                   <span>{`#${id - 1}`}</span>
                   {removeDash(allPokemon[id - 2].name)}
                 </Title>
@@ -57,8 +57,8 @@ export default function Navigation({ ...rest }) {
               href="/pokemon/[pokemonId]"
               passHref
             >
-              <BtnAnchor right>
-                <Arrow right>
+              <BtnAnchor $right>
+                <Arrow $right>
                   <Image
                     src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${
                       id + 1
@@ -66,11 +66,11 @@ export default function Navigation({ ...rest }) {
                     alt={allPokemon[id].name}
                     key={`navigation-right-${allPokemon[id].name}`}
                     width={100}
-                    pixelated
+                    $pixelated
                     notLazy
                   />
                 </Arrow>
-                <Title left>
+                <Title $left>
                   <span>{`#${id + 1}`}</span>
                   {removeDash(allPokemon[id].name)}
                 </Title>

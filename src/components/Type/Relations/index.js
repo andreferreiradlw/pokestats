@@ -35,7 +35,7 @@ export default function TypeRelations({ relations, ...rest }) {
                       <TypeBadge
                         key={`${type.name}-${relation}-${i}`}
                         type={type.name}
-                        iconOnly
+                        $iconOnly
                       />
                     ))}
               </td>

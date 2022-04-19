@@ -10,7 +10,7 @@ const Box = forwardRef(
       as = 'div',
       children,
       direction = 'column',
-      flexWrap = 'nowrap',
+      $flexWrap = 'nowrap',
       justify = 'center',
       width = '100%',
       ...rest
@@ -24,7 +24,7 @@ const Box = forwardRef(
         align={align}
         as={as}
         direction={direction}
-        flexWrap={flexWrap}
+        $flexWrap={$flexWrap}
         justify={justify}
         width={width}
         ref={boxRef}

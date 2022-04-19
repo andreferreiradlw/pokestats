@@ -28,7 +28,7 @@ export default function Tabs({ ...rest }) {
       <Box
         direction="row"
         justify="space-evenly"
-        flexWrap="wrap"
+        $flexWrap="wrap"
         margin="0 0 1rem"
       >
         <Button
@@ -64,7 +64,7 @@ export default function Tabs({ ...rest }) {
             <SectionTitle>{`${removeDash(name)} Type Pokemon (${
               pokemonListWithId.length
             })`}</SectionTitle>
-            <InfiniteScroll pokemonList={pokemonListWithId} dark />
+            <InfiniteScroll pokemonList={pokemonListWithId} $dark />
           </TabContainer>
         )}
         {!typeInfo.isLoading && currTab === 'moves' && (

@@ -48,7 +48,7 @@ export default function EvolutionChain({ ...rest }) {
             {chain.evolves_to.length > 0 && (
               <Box
                 direction={{ xxs: 'row', lg: 'column' }}
-                flexWrap={{ xxs: 'wrap', lg: 'nowrap' }}
+                $flexWrap={{ xxs: 'wrap', lg: 'nowrap' }}
                 sizes={9.6}
               >
                 {chain.evolves_to.map((firstEvo, i) => (

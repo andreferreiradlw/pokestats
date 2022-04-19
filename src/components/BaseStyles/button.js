@@ -52,12 +52,12 @@ const Button = styled(motion.button)`
   cursor: pointer;
   transition: box-shadow 0.2s ease-in-out;
 
-  ${({ active, dark, theme }) =>
-    dark
-      ? active
+  ${({ $active, $dark, theme }) =>
+    $dark
+      ? $active
         ? lightValues(theme)
         : darkValues(theme)
-      : active
+      : $active
       ? darkValues(theme)
       : lightValues(theme)}
 

@@ -21,7 +21,7 @@ function ImageComponent({
   width,
   height,
   placeholderwidth = '65%',
-  pixelated,
+  $pixelated,
   src,
   offset,
   notLazy,
@@ -74,7 +74,7 @@ function ImageComponent({
             <Image
               alt={alt}
               src={imgSrc}
-              pixelated={pixelated}
+              $pixelated={$pixelated}
               height={height}
               initial="hidden"
               animate="show"

@@ -24,7 +24,6 @@ const Loading = forwardRef(
   ) => {
     return (
       <LoadingContainer
-        noGutter
         ref={ref}
         justify={justify}
         align={align}

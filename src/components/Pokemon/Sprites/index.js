@@ -29,7 +29,7 @@ export default function Sprites({ ...rest }) {
                 align="flex-end"
                 justify={{ xxs: 'center', lg: 'flex-end' }}
                 margin="0 0 2rem"
-                flexWrap="wrap"
+                $flexWrap="wrap"
               >
                 {Object.keys(sprites).map(
                   (key, i) =>
@@ -41,7 +41,7 @@ export default function Sprites({ ...rest }) {
                           key={`sprite-${key}`}
                           src={sprites[key]}
                           width={115}
-                          pixelated
+                          $pixelated
                           placeholderwidth="40%"
                         />
                         <p>{removeUnderscore(key)}</p>
@@ -57,7 +57,7 @@ export default function Sprites({ ...rest }) {
                     align="flex-end"
                     justify={{ xxs: 'center', lg: 'flex-end' }}
                     margin="0 0 2rem"
-                    flexWrap="wrap"
+                    $flexWrap="wrap"
                   >
                     {Object.keys(
                       sprites.versions['generation-v']['black-white'].animated
@@ -77,7 +77,7 @@ export default function Sprites({ ...rest }) {
                               }
                               width={115}
                               animated
-                              pixelated
+                              $pixelated
                               placeholderwidth="40%"
                             />
                             <p>{removeUnderscore(key)}</p>
@@ -95,7 +95,7 @@ export default function Sprites({ ...rest }) {
                   sprites.other.dream_world.front_female) && (
                   <Box align="center" margin="0 0 2rem" sizes={6}>
                     <SectionSubTitle>Dreamworld Artwork</SectionSubTitle>
-                    <Box direction="row" justify="center" flexWrap="wrap">
+                    <Box direction="row" justify="center" $flexWrap="wrap">
                       {Object.keys(sprites.other.dream_world).map(
                         (key, i) =>
                           sprites.other.dream_world[key] && (

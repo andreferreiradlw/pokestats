@@ -21,9 +21,9 @@ export const MainContainer = styled(motion.main)`
   margin: 0 auto;
   width: 100%;
   flex-grow: 1;
-  ${({ constrained }) => constrained && 'max-width: 1300px;'}
-  ${({ withGutter }) =>
-    withGutter && responsiveProps('padding', boxConfig.gutterWidth)}
+  ${({ $constrained }) => $constrained && 'max-width: 1300px;'}
+  ${({ $withGutter }) =>
+    $withGutter && responsiveProps('padding', boxConfig.gutterWidth)}
 `
 
 export default function Layout({
@@ -36,7 +36,7 @@ export default function Layout({
   ...rest
 }) {
   return (
-    <LayoutContainer direction="column" width="100%" noGutter>
+    <LayoutContainer direction="column" width="100%">
       {withHeader && <Header withGameVersion={withGameVersion} />}
       {withMain ? (
         <MainContainer key={mainKey} {...rest}>

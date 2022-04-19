@@ -103,7 +103,7 @@ export default function Details({ pokemonName, sizes, ...rest }) {
               width="auto"
               direction="row"
               justify="flex-start"
-              flexWrap="wrap"
+              $flexWrap="wrap"
               margin="0 0 0.5rem"
             >
               {types.map(({ type }, i) => {

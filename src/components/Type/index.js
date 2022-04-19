@@ -73,8 +73,8 @@ export default function Type({ typeName }) {
           <MainContainer
             justify="flex-start"
             align="flex-start"
-            constrained
-            withGutter
+            $constrained
+            $withGutter
             initial="hidden"
             animate="visible"
             exit="fade"

@@ -5,11 +5,7 @@ import { AnimatePresence } from 'framer-motion'
 // redux actions
 import { startLoading, stopLoading } from './homeSlice'
 // heplpers
-import {
-  staggerInitialVariant,
-  fadeInUpVariant,
-  getRandomInt,
-} from '../../helpers'
+import { staggerInitialVariant, fadeInUpVariant } from '../../helpers'
 // components
 import Layout from '../Layout'
 import Autocomplete from '../Autocomplete'

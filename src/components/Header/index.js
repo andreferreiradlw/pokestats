@@ -12,7 +12,11 @@ import { Heading, SelectContainer } from './styledHeader'
 // Info
 import { gameVersions } from '../../helpers/gameVersion'
 
-export default function HeaderComponent({ withGameVersion = true, ...rest }) {
+export default function HeaderComponent({
+  withGameVersion = true,
+  withSearch = true,
+  ...rest
+}) {
   // dispatch
   const dispatch = useDispatch()
   // game version
@@ -53,12 +57,14 @@ export default function HeaderComponent({ withGameVersion = true, ...rest }) {
             </SelectContainer>
           )}
         </div>
-        <Autocomplete
-          width="350px"
-          justify="flex-end"
-          align="flex-start"
-          margin="none"
-        />
+        {withSearch && (
+          <Autocomplete
+            width="350px"
+            justify="flex-end"
+            align="flex-start"
+            margin="none"
+          />
+        )}
       </Box>
     </Box>
   )

@@ -31,13 +31,16 @@ export default function Layout({
   withHeader,
   withMain = true,
   withGameVersion = true,
+  withSearch = true,
   children,
   mainKey,
   ...rest
 }) {
   return (
     <LayoutContainer direction="column" width="100%">
-      {withHeader && <Header withGameVersion={withGameVersion} />}
+      {withHeader && (
+        <Header withGameVersion={withGameVersion} withSearch={withSearch} />
+      )}
       {withMain ? (
         <MainContainer key={mainKey} {...rest}>
           {children}

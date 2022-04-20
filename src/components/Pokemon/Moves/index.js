@@ -1,5 +1,5 @@
-import { useSelector } from 'react-redux'
 import { useState, useEffect, useRef } from 'react'
+import { useSelector } from 'react-redux'
 import axios from 'axios'
 // helpers
 import {
@@ -156,10 +156,6 @@ export default function Moves({ ...rest }) {
       }
     }
   }, [currMoves])
-
-  useEffect(() => {
-    console.log(movesLoading)
-  }, [movesLoading])
 
   return (
     <Box align={{ xxs: 'center', lg: 'flex-start' }} {...rest}>

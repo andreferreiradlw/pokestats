@@ -19,6 +19,7 @@ const createSitemap = (
       toUrl(host, `/pokemon/${pokemon.name}`, '0.8')
     )}
     ${typeList.map(type => toUrl(host, `/type/${type.name}`))}
+    ${toUrl(host, '/lab', '0.7')}
   </urlset>`
 
 const Sitemap = () => {}

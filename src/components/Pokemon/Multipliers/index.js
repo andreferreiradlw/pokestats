@@ -59,7 +59,7 @@ export default function Weaknesses({ ...rest }) {
       </Box>
       <AnimatePresence exitBeforeEnter>
         {(pokemonInfo.isLoading || !currMultipliers) && (
-          <Loading height="251px" iconWidth="15%" key="pokemon-multipliers" />
+          <Loading height="251px" $iconWidth="15%" key="pokemon-multipliers" />
         )}
         {!pokemonInfo.isLoading && currMultipliers && (
           <Table

@@ -14,11 +14,11 @@ export default function TypeIcon({ typeName, otherNames, ...rest }) {
       <TypeBadge
         type={typeName}
         key={`type-icon-${typeName}`}
-        iconOnly
+        $iconOnly
         fill="true"
-        float
-        iconWidth="auto"
-        iconHeight="150px"
+        $float
+        $iconWidth="auto"
+        $iconHeight="150px"
       />
       {japanName && <JpnName>{japanName}</JpnName>}
     </Box>

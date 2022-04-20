@@ -39,7 +39,7 @@ export default function Breeding({ ...rest }) {
       <SectionTitle>Breeding</SectionTitle>
       <AnimatePresence exitBeforeEnter>
         {pokemonEvo.isLoading && (
-          <Loading height="251px" iconWidth="15%" key="pokemon-breeding" />
+          <Loading height="251px" $iconWidth="15%" key="pokemon-breeding" />
         )}
         {!pokemonEvo.isLoading && (
           <Table

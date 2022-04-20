@@ -37,8 +37,8 @@ const Badge = styled(motion.a)`
     }
   `}
 
-  ${({ float }) =>
-    float &&
+  ${({ $float }) =>
+    $float &&
     css`
       @media (prefers-reduced-motion: no-preference) {
         animation: ${floatAnim} infinite 3s ease-in-out;
@@ -46,16 +46,16 @@ const Badge = styled(motion.a)`
     `}
 
   & svg {
-    ${({ $iconOnly, iconWidth, iconHeight }) =>
+    ${({ $iconOnly, $iconWidth, $iconHeight }) =>
       !$iconOnly
         ? css`
-            width: ${iconWidth || '25px'};
-            height: ${iconHeight || '25px'};
+            width: ${$iconWidth || '25px'};
+            height: ${$iconHeight || '25px'};
             margin-right: 1rem;
           `
         : css`
-            width: ${iconWidth || '15px'};
-            height: ${iconHeight || '15px'};
+            width: ${$iconWidth || '15px'};
+            height: ${$iconHeight || '15px'};
           `}
 
     & > path {

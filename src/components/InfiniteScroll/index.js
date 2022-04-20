@@ -9,7 +9,7 @@ import PokemonBox from './PokemonBox'
 export default function InfiniteScroll({
   pokemonList,
   itemsPerPage = 35,
-  dark,
+  $dark,
   direction = 'row',
   align = 'flex-start',
   $flexWrap = 'wrap',
@@ -125,7 +125,7 @@ export default function InfiniteScroll({
               <PokemonBox
                 key={`infinite-scroll-${currPokemon.id}`}
                 pokemon={currPokemon}
-                $dark={dark}
+                $dark={$dark}
                 whileHover="hover"
                 whileTap="tap"
                 variants={fadeInUpVariant}
@@ -135,7 +135,7 @@ export default function InfiniteScroll({
           {showList.length > 0 && pokemonList.length != showList.length && (
             <Loading
               height="100px"
-              iconWidth="5%"
+              $iconWidth="5%"
               padding="1rem 0"
               ref={setNode}
             />

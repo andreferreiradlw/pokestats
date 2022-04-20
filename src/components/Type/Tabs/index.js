@@ -32,7 +32,7 @@ export default function Tabs({ ...rest }) {
         margin="0 0 1rem"
       >
         <Button
-          active={currTab === 'pokemon'}
+          $active={currTab === 'pokemon'}
           onClick={() => setCurrTab('pokemon')}
           whileHover="hover"
           whileTap="tap"
@@ -42,7 +42,7 @@ export default function Tabs({ ...rest }) {
           Pokemon
         </Button>
         <Button
-          active={currTab === 'moves'}
+          $active={currTab === 'moves'}
           onClick={() => setCurrTab('moves')}
           whileHover="hover"
           whileTap="tap"

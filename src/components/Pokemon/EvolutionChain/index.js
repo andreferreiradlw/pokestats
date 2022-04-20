@@ -33,7 +33,7 @@ export default function EvolutionChain({ ...rest }) {
         {pokemonEvo.isLoading && (
           <Loading
             height="271px"
-            iconWidth="5%"
+            $iconWidth="5%"
             key={`pokemon-evolution-${chainId}`}
           />
         )}

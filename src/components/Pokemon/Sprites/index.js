@@ -18,7 +18,7 @@ export default function Sprites({ ...rest }) {
     <Box align={{ xxs: 'center', lg: 'flex-start' }} {...rest}>
       <SectionTitle>Sprites</SectionTitle>
       {pokemonInfo.isLoading && (
-        <Loading height="300px" iconWidth="5%" key={`pokemon-sprites`} />
+        <Loading height="300px" $iconWidth="5%" key={`pokemon-sprites`} />
       )}
       {!pokemonInfo.isLoading && (
         <>

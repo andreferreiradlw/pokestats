@@ -51,7 +51,7 @@ export default function BaseStats({ ...rest }) {
       <SectionTitle>Base Stats</SectionTitle>
       <AnimatePresence exitBeforeEnter>
         {pokemonInfo.isLoading && (
-          <Loading height="280px" iconWidth="10%" key="pokemon-stats" />
+          <Loading height="280px" $iconWidth="10%" key="pokemon-stats" />
         )}
         {!pokemonInfo.isLoading && (
           <Table

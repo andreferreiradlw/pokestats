@@ -1,7 +1,6 @@
 import { useSelector } from 'react-redux'
 import { useState, useEffect, useRef } from 'react'
 import axios from 'axios'
-import { AnimatePresence } from 'framer-motion'
 // helpers
 import {
   mapVersionToGroup,
@@ -71,7 +70,7 @@ export default function Moves({ ...rest }) {
           if (_isMounted.current) setMoves(movesData)
         })
         .catch(errors => {
-          console.log(errors)
+          console.error('errors fetching moves data!', errors)
           // no moves
           if (_isMounted.current) setMovesLoading(false)
         })
@@ -158,6 +157,10 @@ export default function Moves({ ...rest }) {
     }
   }, [currMoves])
 
+  useEffect(() => {
+    console.log(movesLoading)
+  }, [movesLoading])
+
   return (
     <Box align={{ xxs: 'center', lg: 'flex-start' }} {...rest}>
       <SectionTitle>Move Pool</SectionTitle>
@@ -204,87 +207,80 @@ export default function Moves({ ...rest }) {
           Tutor
         </Button>
       </TabContainer>
-      <AnimatePresence exitBeforeEnter>
-        {/** LOADING */}
-        {movesLoading && (
-          <Loading
-            height="100%"
-            iconWidth={{ xxs: '20%', xs: '15%', md: '10%', lg: '5%' }}
-            key="pokemon-moves"
-          />
-        )}
-        {/** TABLE */}
-        {!movesLoading && currMoves.length && (
-          <TableContainer
-            initial="hidden"
-            animate="show"
-            exit="exit"
-            variants={fadeInUpVariant}
-            key="pokemon-moves-table-container"
-          >
-            <MovesTable>
-              <thead>
-                <tr>
-                  <th>{learnMethod === 'level-up' ? 'Level' : '-'}</th>
-                  <NameTH>Name</NameTH>
-                  <th>Type</th>
-                  <th>Category</th>
-                  <th>Power</th>
-                  <th>PP</th>
-                  <th>Accuracy</th>
-                  <th>Priority</th>
-                  <th>Generation</th>
-                </tr>
-              </thead>
-              <TableBody
-                key={`moves-tbody`}
-                initial="hidden"
-                animate="show"
-                exit="exit"
-                variants={staggerTableVariant}
-              >
-                {currMoves.map((move, i) => (
-                  <TableRow key={`${move.name}-${i}`}>
-                    {learnMethod === 'level-up' && (
-                      <td>{move.level_learned_at}</td>
-                    )}
-                    {learnMethod === 'machine' &&
-                      (machineNames && machineNames[i] ? (
-                        <td>{machineNames[i].toUpperCase()}</td>
-                      ) : (
-                        <td>{<Loading iconWidth="25px" />}</td>
-                      ))}
-                    {learnMethod === 'egg' && <td>-</td>}
-                    {learnMethod === 'tutor' && <td>-</td>}
-                    <NameTD>{removeDash(move.name)}</NameTD>
-                    <td>
-                      <TypeBadge margin="0" $iconOnly type={move.type.name} />
-                    </td>
-                    <td>{capitalize(move.damage_class.name)}</td>
-                    <td>{move.power || '-'}</td>
-                    <td>{move.pp || '-'}</td>
-                    <td>{move.accuracy || '-'}</td>
-                    <td>{move.priority}</td>
-                    <td>{mapGeneration(move.generation.name)}</td>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </MovesTable>
-          </TableContainer>
-        )}
-        {/** NO MOVES */}
-        {!movesLoading && currMoves.length === 0 && (
-          <SectionMessage
-            initial="hidden"
-            animate="show"
-            exit="exit"
-            variants={fadeInUpVariant}
-            key="pokemon-nomoves-message"
-          >
-            No moves for currently selected game version.
-          </SectionMessage>
-        )}
-      </AnimatePresence>
+      {movesLoading ? (
+        <Loading
+          height="100%"
+          iconWidth={{ xxs: '20%', xs: '15%', md: '10%', lg: '5%' }}
+          passkey={`pokemon-moves-loading`}
+        />
+      ) : currMoves.length ? (
+        <TableContainer
+          initial="hidden"
+          animate="show"
+          exit="exit"
+          variants={fadeInUpVariant}
+          key="pokemon-moves-table-container"
+        >
+          <MovesTable key="pokemon-moves-table">
+            <thead>
+              <tr>
+                <th>{learnMethod === 'level-up' ? 'Level' : '-'}</th>
+                <NameTH>Name</NameTH>
+                <th>Type</th>
+                <th>Category</th>
+                <th>Power</th>
+                <th>PP</th>
+                <th>Accuracy</th>
+                <th>Priority</th>
+                <th>Generation</th>
+              </tr>
+            </thead>
+            <TableBody
+              key={`moves-tbody`}
+              initial="hidden"
+              animate="show"
+              exit="exit"
+              variants={staggerTableVariant}
+            >
+              {currMoves.map((move, i) => (
+                <TableRow key={`${move.name}-${i}`}>
+                  {learnMethod === 'level-up' && (
+                    <td>{move.level_learned_at}</td>
+                  )}
+                  {learnMethod === 'machine' &&
+                    (machineNames && machineNames[i] ? (
+                      <td>{machineNames[i].toUpperCase()}</td>
+                    ) : (
+                      <td>{<Loading iconWidth="25px" />}</td>
+                    ))}
+                  {learnMethod === 'egg' && <td>-</td>}
+                  {learnMethod === 'tutor' && <td>-</td>}
+                  <NameTD>{removeDash(move.name)}</NameTD>
+                  <td>
+                    <TypeBadge margin="0" $iconOnly type={move.type.name} />
+                  </td>
+                  <td>{capitalize(move.damage_class.name)}</td>
+                  <td>{move.power || '-'}</td>
+                  <td>{move.pp || '-'}</td>
+                  <td>{move.accuracy || '-'}</td>
+                  <td>{move.priority}</td>
+                  <td>{mapGeneration(move.generation.name)}</td>
+                </TableRow>
+              ))}
+            </TableBody>
+          </MovesTable>
+        </TableContainer>
+      ) : (
+        <SectionMessage
+          initial="hidden"
+          animate="show"
+          exit="exit"
+          variants={fadeInUpVariant}
+          key="pokemon-nomoves-message"
+        >
+          No moves for currently selected game version.
+        </SectionMessage>
+      )}
     </Box>
   )
 }

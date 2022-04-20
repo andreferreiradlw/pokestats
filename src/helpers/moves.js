@@ -67,7 +67,6 @@ function filterMoves(moves, learnMethod, versionGroup) {
           break
         }
       }
-
       // check if learn method is machine
       if (match && learnMethod === 'machine') {
         for (let x = 0; x < machineDetails.length; x++) {

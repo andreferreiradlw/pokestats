@@ -28,7 +28,7 @@ export default function Moves() {
       {isLoading && (
         <Loading
           height="100%"
-          iconWidth={{ xxs: '20%', xs: '15%', md: '10%', lg: '5%' }}
+          $iconWidth={{ xxs: '20%', xs: '15%', md: '10%', lg: '5%' }}
           key="pokemon-type-moves"
         />
       )}

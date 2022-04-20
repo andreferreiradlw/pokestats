@@ -210,7 +210,7 @@ export default function Moves({ ...rest }) {
       {movesLoading ? (
         <Loading
           height="100%"
-          iconWidth={{ xxs: '20%', xs: '15%', md: '10%', lg: '5%' }}
+          $iconWidth={{ xxs: '20%', xs: '15%', md: '10%', lg: '5%' }}
           passkey={`pokemon-moves-loading`}
         />
       ) : currMoves.length ? (
@@ -251,7 +251,7 @@ export default function Moves({ ...rest }) {
                     (machineNames && machineNames[i] ? (
                       <td>{machineNames[i].toUpperCase()}</td>
                     ) : (
-                      <td>{<Loading iconWidth="25px" />}</td>
+                      <td>{<Loading $iconWidth="25px" />}</td>
                     ))}
                   {learnMethod === 'egg' && <td>-</td>}
                   {learnMethod === 'tutor' && <td>-</td>}
@@ -278,7 +278,7 @@ export default function Moves({ ...rest }) {
           variants={fadeInUpVariant}
           key="pokemon-nomoves-message"
         >
-          No moves for currently selected game version.
+          {`No ${learnMethod} moves for currently selected game version.`}
         </SectionMessage>
       )}
     </Box>

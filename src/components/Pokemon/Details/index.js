@@ -82,7 +82,7 @@ export default function Details({ pokemonName, sizes, ...rest }) {
         <Loading
           sizes={sizes}
           height="558px"
-          iconWidth="15%"
+          $iconWidth="15%"
           key={`pokemon-details-loading-${pokemonName}`}
         />
       )}

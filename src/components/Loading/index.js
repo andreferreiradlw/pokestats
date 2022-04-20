@@ -12,7 +12,7 @@ const Loading = forwardRef(
   (
     {
       height,
-      iconWidth,
+      $iconWidth,
       noIcon,
       text,
       justify = 'center',
@@ -42,7 +42,7 @@ const Loading = forwardRef(
             variants={loadingChild}
             key={`icon-${passKey}`}
           >
-            <PotionIcon iconwidth={iconWidth} />
+            <PotionIcon $iconWidth={$iconWidth} />
           </BoxWrapper>
         )}
         {text && (

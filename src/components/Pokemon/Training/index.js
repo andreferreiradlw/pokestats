@@ -92,7 +92,7 @@ export default function Training({ ...rest }) {
       <SectionTitle>Training</SectionTitle>
       <AnimatePresence exitBeforeEnter>
         {pokemonBio.isLoading && (
-          <Loading height="251px" iconWidth="15%" key="pokemon-training" />
+          <Loading height="251px" $iconWidth="15%" key="pokemon-training" />
         )}
         {!pokemonBio.isLoading && (
           <Table

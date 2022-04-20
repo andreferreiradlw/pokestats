@@ -35,7 +35,7 @@ export default function Forms({ ...rest }) {
       <SectionTitle>Forms</SectionTitle>
       <AnimatePresence exitBeforeEnter>
         {pokemonBio.isLoading && (
-          <Loading height="251px" iconWidth="15%" key="pokemon-forms" />
+          <Loading height="251px" $iconWidth="15%" key="pokemon-forms" />
         )}
         {!pokemonBio.isLoading && (
           <Table

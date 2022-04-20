@@ -29,7 +29,7 @@ const LoadingContainer = styled(BoxWrapper)`
 `
 
 const PotionIcon = styled(Potion)`
-  ${({ iconwidth }) => iconwidth && responsiveProps('width', iconwidth)}
+  ${({ $iconWidth }) => $iconWidth && responsiveProps('width', $iconWidth)}
   height: auto;
   // rotation
   animation: 20s ${rotate} 0ms infinite ease-in-out;

@@ -15,11 +15,15 @@ import {
   PokeID,
 } from './styledAutoComplete'
 
+const ConditionalWrapper = ({ condition, wrapper, children }) =>
+  condition ? wrapper(children) : children
+
 export default function Autocomplete({
   align = 'stretch',
   direction = 'row',
   grow = false,
   margin = '0 auto',
+  onSelect,
   ...rest
 }) {
   // router
@@ -142,14 +146,25 @@ export default function Autocomplete({
       {filtered.length > 0 && (
         <ListWrapper>
           {filtered.map((item, i) => (
-            <Link
-              as={`/${item.type}/${item.name}`}
-              href={`/${item.type}/[${item.type}Id]`}
-              passHref
+            <ConditionalWrapper
               key={`${item.type}-${item.id}-${item.name}-${i}`}
+              condition={!onSelect}
+              wrapper={children => (
+                <Link
+                  as={`/${item.type}/${item.name}`}
+                  href={`/${item.type}/[${item.type}Id]`}
+                  passHref
+                >
+                  {children}
+                </Link>
+              )}
             >
               <OptionWrapper
-                onClick={() => resetStates()}
+                as={!onSelect ? 'a' : 'div'}
+                onClick={() => {
+                  resetStates()
+                  onSelect(item)
+                }}
                 onFocus={() => setActiveOption(i)}
                 onKeyDown={e => handleKeyDown(e)}
                 ref={listOption =>
@@ -170,7 +185,7 @@ export default function Autocomplete({
                 <Option>{removeDash(item.name)}</Option>
                 <PokeID>{`#${item.id}`}</PokeID>
               </OptionWrapper>
-            </Link>
+            </ConditionalWrapper>
           ))}
         </ListWrapper>
       )}

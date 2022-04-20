@@ -1,7 +1,13 @@
 // components
 import Layout from '../Layout'
+import Autocomplete from '../Autocomplete'
 
 const TheLab = () => {
+  // new selection
+  const optionSelected = item => {
+    console.log(item)
+  }
+
   return (
     <Layout
       withHeader
@@ -9,7 +15,9 @@ const TheLab = () => {
       withSearch={false}
       withGameVersion={false}
       key={`layout-lab`}
-    ></Layout>
+    >
+      <Autocomplete onSelect={optionSelected} />
+    </Layout>
   )
 }
 

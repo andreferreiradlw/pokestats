@@ -1,19 +1,11 @@
-import Link from 'next/link'
-import { useRouter } from 'next/router'
-import { useState, useEffect } from 'react'
-import { useSelector } from 'react-redux'
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 // helpers
-import { removeDash } from '../../helpers'
+import { removeDash } from '../../helpers';
 // styles
-import {
-  Container,
-  Input,
-  ListWrapper,
-  OptionWrapper,
-  OptionImg,
-  Option,
-  PokeID,
-} from './styledAutoComplete'
+import { Container, Input, ListWrapper, OptionWrapper, OptionImg, Option, PokeID } from './styledAutoComplete';
 
 export default function Autocomplete({
   align = 'stretch',
@@ -23,61 +15,59 @@ export default function Autocomplete({
   ...rest
 }) {
   // router
-  const router = useRouter()
+  const router = useRouter();
   // selectors
-  const pokemonListError = useSelector(state => state.home.error)
-  const filterList = useSelector(state => state.home.filterList)
+  const pokemonListError = useSelector(state => state.home.error);
+  const filterList = useSelector(state => state.home.filterList);
 
   // search state
-  const [search, setSearch] = useState('')
+  const [search, setSearch] = useState('');
   // filtered state
-  const [filtered, setFiltered] = useState([])
+  const [filtered, setFiltered] = useState([]);
   // active sugestion
-  const [activeOption, setActiveOption] = useState(-1)
+  const [activeOption, setActiveOption] = useState(-1);
 
   // handle error change
   useEffect(() => {
     if (pokemonListError.status !== 'OK') {
-      router.push('/404')
+      router.push('/404');
     }
-  }, [pokemonListError.status])
+  }, [pokemonListError.status]);
 
   // reset states
   const resetStates = () => {
-    setSearch('')
-    setFiltered([])
-    setActiveOption(-1)
-  }
+    setSearch('');
+    setFiltered([]);
+    setActiveOption(-1);
+  };
 
   // reset states
   useEffect(() => {
     // on load
-    resetStates()
+    resetStates();
     // unmount
-    return () => resetStates()
-  }, [])
+    return () => resetStates();
+  }, []);
 
   // input changes
   const handleInputChange = e => {
-    setSearch(e.target.value)
-    handleFilter(e.target.value.toLowerCase())
-  }
+    setSearch(e.target.value);
+    handleFilter(e.target.value.toLowerCase());
+  };
 
   // filter by option
   const handleFilter = value => {
     if (value) {
       const filteredList = filterList.filter(
-        item =>
-          removeDash(item.name).toLowerCase().includes(value) ||
-          item.id.toString().includes(value.toString())
-      )
+        item => removeDash(item.name).toLowerCase().includes(value) || item.id.toString().includes(value.toString()),
+      );
       // update filtered state with first 4 options
-      setFiltered(filteredList.slice(0, 4))
+      setFiltered(filteredList.slice(0, 4));
     } else {
       // set filtered state to empty array
-      setFiltered([])
+      setFiltered([]);
     }
-  }
+  };
 
   // key pressed
   const handleKeyDown = e => {
@@ -87,45 +77,37 @@ export default function Autocomplete({
         ? // trigger router for first suggestion
           router.push(`/${filtered[0].type}/${filtered[0].name}`)
         : // trigger router for active option
-          router.push(
-            `/${filtered[activeOption].type}/${filtered[activeOption].name}`
-          )
+          router.push(`/${filtered[activeOption].type}/${filtered[activeOption].name}`);
       // clean filtered state
-      resetStates()
+      resetStates();
     } // up arrow
     else if (e.keyCode === 38) {
       // stop window from scrolling
-      e.preventDefault()
+      e.preventDefault();
       if (activeOption === -1) {
-        return
+        return;
       }
       // decrement the index
-      setActiveOption(activeOption - 1)
+      setActiveOption(activeOption - 1);
     }
     // down arrow
     else if (e.keyCode === 40) {
       // stop window from scrolling
-      e.preventDefault()
+      e.preventDefault();
       if (activeOption + 1 === filtered.length) {
         // last option, do nothing
-        return
+        return;
       }
       // increment the index
-      setActiveOption(activeOption + 1)
+      setActiveOption(activeOption + 1);
     } else {
       // reset active option
-      setActiveOption(-1)
+      setActiveOption(-1);
     }
-  }
+  };
 
   return (
-    <Container
-      align={align}
-      direction={direction}
-      $flexGrow={grow}
-      margin={margin}
-      {...rest}
-    >
+    <Container align={align} direction={direction} $flexGrow={grow} margin={margin} {...rest}>
       <label htmlFor="autocomplete" id="autocomplete_label" aria-hidden="true">
         {`Search Pokemon or Type Name`}
       </label>
@@ -152,9 +134,7 @@ export default function Autocomplete({
                 onClick={() => resetStates()}
                 onFocus={() => setActiveOption(i)}
                 onKeyDown={e => handleKeyDown(e)}
-                ref={listOption =>
-                  listOption && i === activeOption && listOption.focus()
-                }
+                ref={listOption => listOption && i === activeOption && listOption.focus()}
               >
                 {item.type === 'type' && (
                   <OptionImg
@@ -175,5 +155,5 @@ export default function Autocomplete({
         </ListWrapper>
       )}
     </Container>
-  )
+  );
 }

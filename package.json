@@ -33,12 +33,12 @@
   },
   "dependencies": {
     "@babel/core": "^7.20.5",
-    "next": "12.1.5",
-    "react": "^18.0.0",
-    "react-dom": "^18.0.0",
-    "react-is": "^18.0.0",
+    "next": "^13.0.6",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-is": "^18.2.0",
     "react-particles-js": "^3.4.1",
-    "styled-components": "^5.3.5"
+    "styled-components": "^5.3.6"
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.19.1",
@@ -50,7 +50,7 @@
     "@svgr/webpack": "^5.5.0",
     "axios": "^0.26.1",
     "babel-eslint": "^10.1.0",
-    "babel-plugin-styled-components": "^1.12.0",
+    "babel-plugin-styled-components": "^2.0.7",
     "eslint": "^8.29.0",
     "eslint-config-alloy": "^4.7.0",
     "eslint-plugin-better-styled-components": "^1.1.2",

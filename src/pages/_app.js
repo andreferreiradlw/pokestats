@@ -1,34 +1,31 @@
-import { useEffect } from 'react'
-import { AnimatePresence, motion } from 'framer-motion'
+import { useEffect } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
 // redux
-import { Provider } from 'react-redux'
-import store from '../../redux/store'
-import { fetchPokemonList } from '../components/Homepage/homeSlice'
+import { Provider } from 'react-redux';
+import store from '../../redux/store';
+import { fetchPokemonList } from '../components/Homepage/homeSlice';
 // helpers
-import { pageVariant } from '../helpers/animations'
+import { pageVariant } from '../helpers/animations';
 // theme
-import ThemeProvider from '../components/Theme'
+import ThemeProvider from '../components/Theme';
 // components
-import Head from '../components/Head'
+import Head from '../components/Head';
 
 export default function App({ Component, pageProps, router }) {
   // on mount
   useEffect(() => {
     // register service worker
-    if (
-      process.env.NODE_ENV !== 'development' &&
-      'serviceWorker' in navigator
-    ) {
-      window.addEventListener('load', function () {
+    if (process.env.NODE_ENV !== 'development' && 'serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
         navigator.serviceWorker
           .register('/pokeapi-sw.js')
           .then(() => console.log('PokeStats service worker registered.'))
-          .catch(err => console.dir(err))
-      })
+          .catch(err => console.dir(err));
+      });
     }
     // fetch initial pokemon list on app load
-    store.dispatch(fetchPokemonList())
-  }, [])
+    store.dispatch(fetchPokemonList());
+  }, []);
 
   return (
     <Provider store={store}>
@@ -47,5 +44,5 @@ export default function App({ Component, pageProps, router }) {
         </AnimatePresence>
       </ThemeProvider>
     </Provider>
-  )
+  );
 }

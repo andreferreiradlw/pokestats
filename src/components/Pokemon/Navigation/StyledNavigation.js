@@ -1,5 +1,5 @@
-import styled, { css } from 'styled-components'
-import { motion } from 'framer-motion'
+import styled, { css } from 'styled-components';
+import { motion } from 'framer-motion';
 
 const BtnSpan = styled(motion.span)`
   position: relative;
@@ -9,7 +9,7 @@ const BtnSpan = styled(motion.span)`
   align-items: center;
   justify-content: center;
   padding: 0 0.5rem;
-`
+`;
 
 const Arrow = styled(BtnSpan)`
   ${({ $right, $left }) =>
@@ -20,12 +20,14 @@ const Arrow = styled(BtnSpan)`
         border-top: 45px solid transparent;
         border-bottom: 45px solid transparent;
         transition: all 0.15s ease-in-out;
+
         ${$left &&
         css`
           right: 0;
           border-right: 10px solid black;
           box-shadow: 10px 0 0 0 black, 10px 3px 0 0 black;
         `}
+
         ${$right &&
         css`
           left: 0;
@@ -34,7 +36,7 @@ const Arrow = styled(BtnSpan)`
         `}
       }
     `}
-`
+`;
 
 const Title = styled(BtnSpan)`
   color: white;
@@ -47,11 +49,11 @@ const Title = styled(BtnSpan)`
   & span {
     font-size: 2rem;
   }
-`
+`;
 
 const BtnAnchor = styled(motion.a)`
   overflow: hidden;
-  border: 2px solid black;
+  display: flex;
   font-weight: 600;
 
   ${({ $left }) =>
@@ -59,6 +61,7 @@ const BtnAnchor = styled(motion.a)`
     css`
       border-radius: 4px 0 0 4px;
       border-right: 1px solid white;
+      flex-direction: row;
 
       & ${BtnSpan} {
         float: left;
@@ -71,10 +74,17 @@ const BtnAnchor = styled(motion.a)`
       border-radius: 0 4px 4px 0;
       border-left: 1px solid white;
 
+      flex-direction: row-reverse;
+
       & ${BtnSpan} {
         float: right;
       }
     `}
+
+  img {
+    transition: all 0.15s ease-in-out;
+  }
+
   &:hover {
     cursor: pointer;
 
@@ -99,6 +109,6 @@ const BtnAnchor = styled(motion.a)`
       transform: scale(1.2) !important;
     }
   }
-`
+`;
 
-export { BtnAnchor, Title, Arrow }
+export { BtnAnchor, Title, Arrow };

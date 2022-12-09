@@ -29,7 +29,8 @@
     "export": "next export",
     "tryBuild": "next build && next export",
     "lint": "eslint src -c .eslintrc --ext js",
-    "prettier": "prettier \"**/*.{js,ts,md,json,yml}\" --ignore-path .gitignore"
+    "prettier": "prettier \"**/*.{js,ts,md,json,yml}\" --ignore-path .gitignore",
+    "lint:css": "stylelint './src/**/*.js'"
   },
   "dependencies": {
     "@babel/core": "^7.20.5",
@@ -63,6 +64,10 @@
     "react-redux": "^8.0.0",
     "redux": "^4.2.0",
     "redux-thunk": "^2.4.1",
+    "stylelint": "^14.16.0",
+    "stylelint-config-recommended": "^9.0.0",
+    "stylelint-config-styled-components": "^0.1.1",
+    "stylelint-processor-styled-components": "^1.10.0",
     "webpack": "^5.72.0"
   }
 }

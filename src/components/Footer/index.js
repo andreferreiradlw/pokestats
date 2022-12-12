@@ -5,7 +5,6 @@ import { footerVariant } from '../../helpers/animations';
 import { FooterContainer, FooterA } from './StyledFooter';
 // icons
 import GitHub from '../../assets/svg/github.svg';
-import PokeApi from '../../assets/pokeapi_logo.png';
 
 export default function Footer({ ...rest }) {
   return (

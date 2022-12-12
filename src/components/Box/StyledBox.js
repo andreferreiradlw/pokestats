@@ -1,16 +1,16 @@
-import styled, { css } from 'styled-components'
-import { responsiveProps, flexStyle } from '../../helpers/box'
-import { boxConfig } from './config'
-import { motion } from 'framer-motion'
+import styled, { css } from 'styled-components';
+import { responsiveProps, flexStyle } from '../../helpers/box';
+import { boxConfig } from './config';
+import { motion } from 'framer-motion';
 
 const debugStyle = () => css`
   background-color: #5901ad40;
   outline: #fff solid 1px;
-`
+`;
 
 const gutterStyle = () => css`
   ${responsiveProps('padding', boxConfig.gutterWidth)}
-`
+`;
 
 export default styled(motion.div)`
   /** dynamic styles */
@@ -42,7 +42,7 @@ export default styled(motion.div)`
       ${width && responsiveProps('width', width)}
       ${height && responsiveProps('height', height)}
       ${minHeight && responsiveProps('min-height', minHeight)}
-    `
+    `;
   }}
 
   /** column-based flex size */
@@ -85,4 +85,4 @@ export default styled(motion.div)`
 
   /** debug */
   ${({ debug }) => debug && debugStyle()}
-`
+`;

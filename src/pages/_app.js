@@ -19,7 +19,7 @@ export default function App({ Component, pageProps, router }) {
   useEffect(() => {
     // Initialize Fathom when the app loads
     Fathom.load(process.env.NEXT_PUBLIC_ANALYTICS, {
-      includedDomains: ['pokestats.gg'],
+      includedDomains: ['pokestats.gg', 'www.pokestats.gg'],
     });
 
     function onRouteChangeComplete() {

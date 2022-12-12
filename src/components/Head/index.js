@@ -16,15 +16,6 @@ export default function Heading({ children }) {
 
   return (
     <NextHead>
-      {/* Analytics */}
-      {process.env.NODE_ENV === 'production' && (
-        <script
-          defer
-          src={`https://app.tinyanalytics.io/pixel/${process.env.NEXT_PUBLIC_ANALYTICS}`}
-        />
-      )}
-
-      {/** MUST */}
       <meta charSet="utf-8" />
       <meta httpEquiv="X-UA-Compatible" content="IE=edge,chrome=1" />
       <meta

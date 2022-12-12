@@ -6,14 +6,28 @@ import store from '../../redux/store';
 import { fetchPokemonList } from '../components/Homepage/homeSlice';
 // helpers
 import { pageVariant } from '../helpers/animations';
+import * as Fathom from 'fathom-client';
+import { useRouter } from 'next/router';
 // theme
 import ThemeProvider from '../components/Theme';
 // components
 import Head from '../components/Head';
 
 export default function App({ Component, pageProps, router }) {
-  // on mount
+  const router = useRouter();
+
   useEffect(() => {
+    // Initialize Fathom when the app loads
+    Fathom.load(process.env.NEXT_PUBLIC_ANALYTICS, {
+      includedDomains: ['pokestats.gg'],
+    });
+
+    function onRouteChangeComplete() {
+      Fathom.trackPageview();
+    }
+    // Record a pageview when route changes
+    router.events.on('routeChangeComplete', onRouteChangeComplete);
+
     // register service worker
     if (process.env.NODE_ENV !== 'development' && 'serviceWorker' in navigator) {
       window.addEventListener('load', () => {
@@ -25,6 +39,11 @@ export default function App({ Component, pageProps, router }) {
     }
     // fetch initial pokemon list on app load
     store.dispatch(fetchPokemonList());
+
+    // Unassign event listener
+    return () => {
+      router.events.off('routeChangeComplete', onRouteChangeComplete);
+    };
   }, []);
 
   return (

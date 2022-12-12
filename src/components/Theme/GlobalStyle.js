@@ -6,7 +6,7 @@ const GlobalStyle = createGlobalStyle`
   font-family: 'Montserrat';
   font-style: normal;
   font-weight: 400;
-  font-display: swap;
+  font-display: fallback;
   src: local('Montserrat'), url(/fonts/Montserrat-Regular.ttf) format('truetype');
 }
 
@@ -14,7 +14,7 @@ const GlobalStyle = createGlobalStyle`
   font-family: 'Montserrat';
   font-style: normal;
   font-weight: 500;
-  font-display: swap;
+  font-display: fallback;
   src: local('Montserrat'), url(/fonts/Montserrat-Medium.ttf) format('truetype');
 }
 
@@ -22,7 +22,7 @@ const GlobalStyle = createGlobalStyle`
   font-family: 'Quicksand';
   font-style: normal;
   font-weight: 600;
-  font-display: swap;
+  font-display: fallback;
   src: local('Quicksand'), url(/fonts/Quicksand-SemiBold.ttf) format('truetype');
 }
 
@@ -30,7 +30,7 @@ const GlobalStyle = createGlobalStyle`
   font-family: 'Josefin Sans';
   font-style: normal;
   font-weight: 700;
-  font-display: swap;
+  font-display: fallback;
   src: local('Josefin Sans'), url(/fonts/JosefinSans-Bold.ttf) format('truetype');
 }
 
@@ -38,7 +38,7 @@ const GlobalStyle = createGlobalStyle`
   font-family: 'Josefin Sans';
   font-style: italic;
   font-weight: 700;
-  font-display: swap;
+  font-display: fallback;
   src: local('Josefin Sans'), url(/fonts/JosefinSans-BoldItalic.ttf) format('truetype');
 }
 

@@ -1,30 +1,34 @@
 import { useEffect } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
+// types
+import { AppProps } from 'next/app';
 // redux
 import { Provider } from 'react-redux';
 import store from '../../redux/store';
-import { fetchPokemonList } from '../components/Homepage/homeSlice';
+import { fetchPokemonList } from '@/components/Homepage/homeSlice';
 // helpers
-import { pageVariant } from '../helpers/animations';
+import { pageVariant } from '@/helpers/animations';
 import * as Fathom from 'fathom-client';
 import { useRouter } from 'next/router';
+import getConfig from 'next/config';
 // theme
-import ThemeProvider from '../components/Theme';
+import ThemeProvider from '@/components/Theme';
 // components
-import Head from '../components/Head';
+import Head from '@/components/Head';
 
-export default function App({ Component, pageProps, router }) {
+const App = ({ Component, pageProps, router }: AppProps): JSX.Element => {
   const nextRouter = useRouter();
+  const { publicRuntimeConfig } = getConfig();
 
   useEffect(() => {
-    // Initialize Fathom when the app loads
-    Fathom.load(process.env.NEXT_PUBLIC_ANALYTICS, {
-      includedDomains: ['pokestats.gg', 'www.pokestats.gg'],
-    });
-
     function onRouteChangeComplete() {
       Fathom.trackPageview();
     }
+
+    // Initialize Fathom when the app loads
+    Fathom.load(publicRuntimeConfig.NEXT_PUBLIC_ANALYTICS, {
+      includedDomains: ['pokestats.gg', 'www.pokestats.gg'],
+    });
     // Record a pageview when route changes
     nextRouter.events.on('routeChangeComplete', onRouteChangeComplete);
 
@@ -64,4 +68,6 @@ export default function App({ Component, pageProps, router }) {
       </ThemeProvider>
     </Provider>
   );
-}
+};
+
+export default App;

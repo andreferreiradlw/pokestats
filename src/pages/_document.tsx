@@ -31,41 +31,11 @@ export default class MyDocument extends Document {
     return (
       <Html lang="en">
         <Head>
-          <link
-            rel="preload"
-            href="/fonts/Montserrat-Regular.ttf"
-            as="font"
-            type="truetype"
-            crossOrigin=""
-          />
-          <link
-            rel="preload"
-            href="/fonts/Montserrat-Medium.ttf"
-            as="font"
-            type="truetype"
-            crossOrigin=""
-          />
-          <link
-            rel="preload"
-            href="/fonts/Quicksand-SemiBold.ttf"
-            as="font"
-            type="truetype"
-            crossOrigin=""
-          />
-          <link
-            rel="preload"
-            href="/fonts/JosefinSans-Bold.ttf"
-            as="font"
-            type="truetype"
-            crossOrigin=""
-          />
-          <link
-            rel="preload"
-            href="/fonts/JosefinSans-BoldItalic.ttf"
-            as="font"
-            type="truetype"
-            crossOrigin=""
-          />
+          <link rel="preload" href="/fonts/Montserrat-Regular.ttf" as="font" crossOrigin="" />
+          <link rel="preload" href="/fonts/Montserrat-Medium.ttf" as="font" crossOrigin="" />
+          <link rel="preload" href="/fonts/Quicksand-SemiBold.ttf" as="font" crossOrigin="" />
+          <link rel="preload" href="/fonts/JosefinSans-Bold.ttf" as="font" crossOrigin="" />
+          <link rel="preload" href="/fonts/JosefinSans-BoldItalic.ttf" as="font" crossOrigin="" />
         </Head>
         <body>
           <Main />

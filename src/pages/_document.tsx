@@ -2,7 +2,6 @@ import Document, { Html, Head, Main, NextScript } from 'next/document';
 import { ServerStyleSheet } from 'styled-components';
 
 export default class MyDocument extends Document {
-  //--------------For styled-components only------------//
   static async getInitialProps(ctx) {
     const sheet = new ServerStyleSheet();
     const originalRenderPage = ctx.renderPage;
@@ -27,8 +26,8 @@ export default class MyDocument extends Document {
       sheet.seal();
     }
   }
-  //---------------------------------------------------//
-  render() {
+
+  render(): JSX.Element {
     return (
       <Html lang="en">
         <Head>

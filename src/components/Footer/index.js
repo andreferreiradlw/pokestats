@@ -1,11 +1,11 @@
-import Box from '../Box'
+import Box from '../Box';
 // helpers
-import { footerVariant } from '../../helpers/animations'
+import { footerVariant } from '../../helpers/animations';
 // styles
-import { FooterContainer, FooterA } from './StyledFooter'
+import { FooterContainer, FooterA } from './StyledFooter';
 // icons
-import GitHub from '../../assets/svg/github.svg'
-import PokeApi from '../../assets/pokeapi_logo.png'
+import GitHub from '../../assets/svg/github.svg';
+import PokeApi from '../../assets/pokeapi_logo.png';
 
 export default function Footer({ ...rest }) {
   return (
@@ -27,21 +27,12 @@ export default function Footer({ ...rest }) {
       >
         <span>
           {`Created by `}{' '}
-          <FooterA
-            href="https://andreferreira.tech"
-            target="_blank"
-            rel="noopener"
-          >
+          <FooterA href="https://andreferreira.tech" target="_blank" rel="noopener">
             André
           </FooterA>
           {`, powered by `}{' '}
-          <FooterA
-            href="https://pokeapi.co/"
-            target="_blank"
-            rel="noopener"
-            aria-label="PokeApi"
-          >
-            <img src={PokeApi} alt="PokeApi Logo" />
+          <FooterA href="https://pokeapi.co/" target="_blank" rel="noopener" aria-label="PokeApi">
+            <img src="/static/pokeapi_logo.png" alt="PokeApi Logo" />
           </FooterA>
         </span>
         <span as="span">
@@ -56,5 +47,5 @@ export default function Footer({ ...rest }) {
         </span>
       </Box>
     </FooterContainer>
-  )
+  );
 }

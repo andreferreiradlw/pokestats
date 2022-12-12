@@ -26,6 +26,7 @@ export default styled(motion.div)`
     direction,
     align,
     justify,
+    gap,
   }) => {
     return css`
       // flexbox styles
@@ -37,6 +38,7 @@ export default styled(motion.div)`
       ${$flexWrap && responsiveProps('flex-wrap', $flexWrap)}
       // spacing
       ${margin && responsiveProps('margin', margin)}
+      ${gap && responsiveProps('gap', gap)}
       ${padding && responsiveProps('padding', padding)}
       // sizing
       ${width && responsiveProps('width', width)}

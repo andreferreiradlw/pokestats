@@ -55,13 +55,14 @@ const BtnAnchor = styled(motion.a)`
   overflow: hidden;
   display: flex;
   font-weight: 600;
+  border: 1px solid black;
 
   ${({ $left }) =>
     $left &&
     css`
       border-radius: 4px 0 0 4px;
-      border-right: 1px solid white;
       flex-direction: row;
+      border-right: none;
 
       & ${BtnSpan} {
         float: left;
@@ -72,8 +73,7 @@ const BtnAnchor = styled(motion.a)`
     $right &&
     css`
       border-radius: 0 4px 4px 0;
-      border-left: 1px solid white;
-
+      border-left: none;
       flex-direction: row-reverse;
 
       & ${BtnSpan} {

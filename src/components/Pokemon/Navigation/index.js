@@ -25,6 +25,7 @@ export default function Navigation({ ...rest }) {
       <Box
         direction={{ xxs: 'column', sm: 'row' }}
         justify={{ xxs: 'flex-start', sm: 'center' }}
+        gap="0.5em"
         {...rest}
       >
         {id !== 1 && (

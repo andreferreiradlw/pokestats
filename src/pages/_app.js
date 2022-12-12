@@ -14,7 +14,7 @@ import ThemeProvider from '../components/Theme';
 import Head from '../components/Head';
 
 export default function App({ Component, pageProps, router }) {
-  const router = useRouter();
+  const nextRouter = useRouter();
 
   useEffect(() => {
     // Initialize Fathom when the app loads
@@ -26,7 +26,7 @@ export default function App({ Component, pageProps, router }) {
       Fathom.trackPageview();
     }
     // Record a pageview when route changes
-    router.events.on('routeChangeComplete', onRouteChangeComplete);
+    nextRouter.events.on('routeChangeComplete', onRouteChangeComplete);
 
     // register service worker
     if (process.env.NODE_ENV !== 'development' && 'serviceWorker' in navigator) {
@@ -42,7 +42,7 @@ export default function App({ Component, pageProps, router }) {
 
     // Unassign event listener
     return () => {
-      router.events.off('routeChangeComplete', onRouteChangeComplete);
+      nextRouter.events.off('routeChangeComplete', onRouteChangeComplete);
     };
   }, []);
 

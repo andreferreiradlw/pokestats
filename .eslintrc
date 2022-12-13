@@ -4,7 +4,6 @@
   "plugins": ["prettier", "react", "react-hooks", "@typescript-eslint", "better-styled-components"],
   "rules": {
     "eqeqeq": "error",
-    "no-console": "warn",
     "prettier/prettier": "error",
     "react/display-name": "off",
     "react/no-children-prop": "off",
@@ -19,6 +18,10 @@
     "ecmaFeatures": {
       "jsx": true
     }
+  },
+  "globals": {
+    "JSX": "readonly",
+    "React": true
   },
   "env": {
     "browser": true,

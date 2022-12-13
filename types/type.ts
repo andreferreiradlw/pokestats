@@ -1,4 +1,4 @@
-import type { PokemonType as PokenodeType } from 'pokenode-ts';
+import type { Type as PokenodeType } from 'pokenode-ts';
 
 export interface PokemonType extends PokenodeType {
   assetType: 'type';

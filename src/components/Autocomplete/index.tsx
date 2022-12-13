@@ -1,47 +1,53 @@
-import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
 // helpers
-import { removeDash } from '../../helpers';
+import { removeDash } from '@/helpers';
+// types
+import type { Pokemon, PokemonType } from '@/types';
 // styles
-import { Container, Input, ListWrapper, OptionWrapper, OptionImg, Option, PokeID } from './styledAutoComplete';
+import {
+  Container,
+  Input,
+  ListWrapper,
+  OptionWrapper,
+  OptionImg,
+  Option,
+  PokeID,
+} from './styledAutoComplete';
 
-export default function Autocomplete({
+export interface AutocompleteProps {
+  align?: string;
+  direction?: string;
+  grow?: boolean;
+  margin?: string;
+  filterList: (PokemonType | Pokemon)[];
+}
+
+const Autocomplete = ({
+  filterList,
   align = 'stretch',
   direction = 'row',
   grow = false,
   margin = '0 auto',
   ...rest
-}) {
+}: AutocompleteProps): JSX.Element => {
   // router
   const router = useRouter();
-  // selectors
-  const pokemonListError = useSelector(state => state.home.error);
-  const filterList = useSelector(state => state.home.filterList);
-
   // search state
   const [search, setSearch] = useState('');
   // filtered state
-  const [filtered, setFiltered] = useState([]);
+  const [filtered, setFiltered] = useState<AutocompleteProps['filterList']>([]);
   // active sugestion
   const [activeOption, setActiveOption] = useState(-1);
 
-  // handle error change
-  useEffect(() => {
-    if (pokemonListError.status !== 'OK') {
-      router.push('/404');
-    }
-  }, [pokemonListError.status]);
-
   // reset states
-  const resetStates = () => {
+  const resetStates = (): void => {
     setSearch('');
     setFiltered([]);
     setActiveOption(-1);
   };
 
-  // reset states
+  // reset states on load and unmount
   useEffect(() => {
     // on load
     resetStates();
@@ -50,16 +56,18 @@ export default function Autocomplete({
   }, []);
 
   // input changes
-  const handleInputChange = e => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setSearch(e.target.value);
     handleFilter(e.target.value.toLowerCase());
   };
 
   // filter by option
-  const handleFilter = value => {
+  const handleFilter = (value: string): void => {
     if (value) {
       const filteredList = filterList.filter(
-        item => removeDash(item.name).toLowerCase().includes(value) || item.id.toString().includes(value.toString()),
+        item =>
+          removeDash(item.name).toLowerCase().includes(value) ||
+          item.id.toString().includes(value.toString()),
       );
       // update filtered state with first 4 options
       setFiltered(filteredList.slice(0, 4));
@@ -70,9 +78,9 @@ export default function Autocomplete({
   };
 
   // key pressed
-  const handleKeyDown = e => {
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement | HTMLAnchorElement>): void => {
     // enter
-    if (e.keyCode === 13 && filtered[0] !== undefined) {
+    if (e.key === 'Enter' && filtered[0] !== undefined) {
       activeOption === -1
         ? // trigger router for first suggestion
           router.push(`/${filtered[0].type}/${filtered[0].name}`)
@@ -81,7 +89,7 @@ export default function Autocomplete({
       // clean filtered state
       resetStates();
     } // up arrow
-    else if (e.keyCode === 38) {
+    else if (e.key === 'ArrowUp') {
       // stop window from scrolling
       e.preventDefault();
       if (activeOption === -1) {
@@ -91,7 +99,7 @@ export default function Autocomplete({
       setActiveOption(activeOption - 1);
     }
     // down arrow
-    else if (e.keyCode === 40) {
+    else if (e.key === 'ArrowDown') {
       // stop window from scrolling
       e.preventDefault();
       if (activeOption + 1 === filtered.length) {
@@ -107,42 +115,41 @@ export default function Autocomplete({
   };
 
   return (
-    <Container align={align} direction={direction} $flexGrow={grow} margin={margin} {...rest}>
-      <label htmlFor="autocomplete" id="autocomplete_label" aria-hidden="true">
-        Search Pokemon or Type Name
-      </label>
-      <Input
-        type="text"
-        placeholder="Search Pokemon or Type Name"
-        id="autocomplete"
-        aria-labelledby="autocomplete_label"
-        value={search}
-        onChange={e => handleInputChange(e)}
-        onKeyDown={e => handleKeyDown(e)}
-      />
-      {/** display filtered list */}
-      {filtered.length > 0 && (
-        <ListWrapper>
-          {filtered.map((item, i) => (
-            <Link
-              as={`/${item.type}/${item.name}`}
-              href={`/${item.type}/[${item.type}Id]`}
-              passHref
-              key={`${item.type}-${item.id}-${item.name}-${i}`}
-            >
+    <>
+      {/** @ts-ignore */}
+      <Container align={align} direction={direction} $flexGrow={grow} margin={margin} {...rest}>
+        <label htmlFor="autocomplete" id="autocomplete_label" aria-hidden="true">
+          Search Pokemon or Type Name
+        </label>
+        <Input
+          type="text"
+          autoComplete="off"
+          placeholder="Search Pokemon or Type Name"
+          id="autocomplete"
+          aria-labelledby="autocomplete_label"
+          value={search}
+          onChange={e => handleInputChange(e)}
+          onKeyDown={e => handleKeyDown(e)}
+        />
+        {/** display filtered list */}
+        {!!filtered?.length && (
+          <ListWrapper>
+            {filtered.map((item, i) => (
               <OptionWrapper
+                href={`/${item.assetType}/${item.name}`}
+                key={`${item.assetType}-${item.id}-${item.name}-${i}`}
                 onClick={() => resetStates()}
                 onFocus={() => setActiveOption(i)}
                 onKeyDown={e => handleKeyDown(e)}
-                ref={listOption => listOption && i === activeOption && listOption.focus()}
+                ref={currOption => currOption && i === activeOption && currOption.focus()}
               >
-                {item.type === 'type' && (
+                {item.assetType === 'type' && (
                   <OptionImg
-                    type={item.type}
+                    $type={item.assetType}
                     src={`https://raw.githubusercontent.com/andreferreiradlw/pokestats/main/src/assets/svg/types/${item.name}.svg`}
                   />
                 )}
-                {item.type === 'pokemon' && (
+                {item.assetType === 'pokemon' && (
                   <OptionImg
                     src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${item.id}.png`}
                   />
@@ -150,10 +157,12 @@ export default function Autocomplete({
                 <Option>{removeDash(item.name)}</Option>
                 <PokeID>{`#${item.id}`}</PokeID>
               </OptionWrapper>
-            </Link>
-          ))}
-        </ListWrapper>
-      )}
-    </Container>
+            ))}
+          </ListWrapper>
+        )}
+      </Container>
+    </>
   );
-}
+};
+
+export default Autocomplete;

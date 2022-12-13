@@ -1,6 +1,9 @@
-import styled, { css } from 'styled-components'
+import styled, { css } from 'styled-components';
+// types
+import type { Pokemon, PokemonType } from '@/types';
 // components
-import BoxWrapper from '../Box/StyledBox'
+import BoxWrapper from '@/components/Box/StyledBox';
+import Link from 'next/link';
 
 const Container = styled(BoxWrapper)`
   max-width: 100%;
@@ -26,7 +29,7 @@ const Container = styled(BoxWrapper)`
     visibility: hidden;
     width: 0;
   }
-`
+`;
 
 const Input = styled.input`
   border-radius: 0.25rem;
@@ -47,13 +50,13 @@ const Input = styled.input`
   `}
 
   ${({ theme }) => {
-    let values = theme.autoComplete.input
+    let values = theme.autoComplete.input;
 
     return css`
       background-color: ${values.backgroundColor};
       border: 1px solid ${values.borderColor};
       color: ${values.color};
-    `
+    `;
   }}
 
   &::placeholder {
@@ -61,7 +64,7 @@ const Input = styled.input`
     font-style: italic;
     font-weight: 500;
   }
-`
+`;
 
 const ListWrapper = styled.div`
   background: white;
@@ -72,10 +75,11 @@ const ListWrapper = styled.div`
   position: absolute;
   right: 0;
   z-index: 2;
-`
+`;
 
-const OptionWrapper = styled.a`
+const OptionWrapper = styled(Link)`
   align-items: center;
+  color: black;
   cursor: pointer;
   display: flex;
   flex-direction: row;
@@ -84,7 +88,7 @@ const OptionWrapper = styled.a`
   padding: 0 1rem 0 0.5rem;
 
   ${({ theme }) => {
-    const values = theme.autoComplete.wrapperOption
+    const values = theme.autoComplete.wrapperOption;
 
     return css`
       background-color: ${values.backgroundColor};
@@ -96,37 +100,29 @@ const OptionWrapper = styled.a`
         background-color: ${values.hover.backgroundColor};
         color: ${values.hover.color};
       }
-    `
+    `;
   }}
-`
+`;
 
-const OptionImg = styled.img`
+const OptionImg = styled.img<{ $type?: Pokemon['assetType'] | PokemonType['assetType'] }>`
   width: 50px;
 
-  ${({ type }) =>
-    type === 'type' &&
+  ${({ $type }) =>
+    $type === 'type' &&
     css`
       padding: 10px;
     `}
-`
+`;
 
 const Option = styled.span`
   font-weight: 600;
   padding: 16px 0;
-`
+`;
 
 const PokeID = styled.span`
   font-size: 1.5rem;
   font-weight: 600;
   margin-left: auto;
-`
+`;
 
-export {
-  Container,
-  Input,
-  ListWrapper,
-  OptionWrapper,
-  OptionImg,
-  Option,
-  PokeID,
-}
+export { Container, Input, ListWrapper, OptionWrapper, OptionImg, Option, PokeID };

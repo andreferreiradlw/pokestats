@@ -42,6 +42,7 @@ const App = ({ Component, pageProps, router }: AppProps): JSX.Element => {
       });
     }
     // fetch initial pokemon list on app load
+    // @ts-ignore
     store.dispatch(fetchPokemonList());
 
     // Unassign event listener
@@ -53,6 +54,7 @@ const App = ({ Component, pageProps, router }: AppProps): JSX.Element => {
   return (
     <Provider store={store}>
       <ThemeProvider>
+        {/** @ts-ignore */}
         <Head />
         <AnimatePresence mode="wait">
           <motion.div

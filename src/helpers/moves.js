@@ -31,6 +31,7 @@ function fetchTypeData(moves) {
                   // return
                   return responseData;
                 }
+                return null;
               })
               .filter(data => data);
             resolve(movesData);
@@ -69,10 +70,11 @@ function filterMoves(moves, learnMethod, versionGroup) {
       // check if learn method is machine
       if (match && learnMethod === 'machine') {
         for (let machineMove of machineDetails) {
-          if (machineMove.version_group.name == versionGroup) {
+          if (machineMove.version_group.name === versionGroup[0]) {
             // if machine matches version
             // add url key to pokemon move
             move.current_version_machine = machineMove.machine.url;
+
             break;
           }
         }

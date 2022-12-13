@@ -1,7 +1,7 @@
 const getRandomInt = (min, max) => {
-  min = Math.ceil(min)
-  max = Math.floor(max)
-  return Math.floor(Math.random() * (max - min + 1)) + min
-}
+  const minFormat = Math.ceil(min);
+  const maxFormat = Math.floor(max);
+  return Math.floor(Math.random() * (maxFormat - minFormat + 1)) + minFormat;
+};
 
-export { getRandomInt }
+export { getRandomInt };

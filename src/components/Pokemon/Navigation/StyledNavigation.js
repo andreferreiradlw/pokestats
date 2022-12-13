@@ -2,49 +2,49 @@ import styled, { css } from 'styled-components';
 import { motion } from 'framer-motion';
 
 const BtnSpan = styled(motion.span)`
-  position: relative;
-  height: 90px;
+  align-items: center;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  height: 90px;
   justify-content: center;
   padding: 0 0.5rem;
+  position: relative;
 `;
 
 const Arrow = styled(BtnSpan)`
   ${({ $right, $left }) =>
     css`
       &:after {
-        position: absolute;
-        content: '';
-        border-top: 45px solid transparent;
         border-bottom: 45px solid transparent;
+        border-top: 45px solid transparent;
+        content: '';
+        position: absolute;
         transition: all 0.15s ease-in-out;
 
         ${$left &&
         css`
-          right: 0;
           border-right: 10px solid black;
           box-shadow: 10px 0 0 0 black, 10px 3px 0 0 black;
+          right: 0;
         `}
 
         ${$right &&
         css`
-          left: 0;
           border-left: 10px solid black;
           box-shadow: -10px 0 0 0 black, -10px 3px 0 0 black;
+          left: 0;
         `}
       }
     `}
 `;
 
 const Title = styled(BtnSpan)`
-  color: white;
   background-color: black;
-  width: 130px;
+  color: white;
   max-width: 130px;
   text-align: center;
   transition: all 0.15s ease-in-out;
+  width: 130px;
 
   & span {
     font-size: 2rem;
@@ -52,17 +52,17 @@ const Title = styled(BtnSpan)`
 `;
 
 const BtnAnchor = styled(motion.a)`
-  overflow: hidden;
+  border: 1px solid black;
   display: flex;
   font-weight: 600;
-  border: 1px solid black;
+  overflow: hidden;
 
   ${({ $left }) =>
     $left &&
     css`
       border-radius: 4px 0 0 4px;
-      flex-direction: row;
       border-right: none;
+      flex-direction: row;
 
       & ${BtnSpan} {
         float: left;
@@ -72,8 +72,8 @@ const BtnAnchor = styled(motion.a)`
   ${({ $right }) =>
     $right &&
     css`
-      border-radius: 0 4px 4px 0;
       border-left: none;
+      border-radius: 0 4px 4px 0;
       flex-direction: row-reverse;
 
       & ${BtnSpan} {

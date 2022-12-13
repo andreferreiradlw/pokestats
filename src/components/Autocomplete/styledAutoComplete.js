@@ -21,23 +21,23 @@ const Container = styled(BoxWrapper)`
     `}
 
   label {
-    width: 0;
     height: 0;
     overflow: hidden;
     visibility: hidden;
+    width: 0;
   }
 `
 
 const Input = styled.input`
-  width: 100%;
-  max-width: 100%;
-  padding: 0.2rem 0.5rem;
+  border-radius: 0.25rem;
   font-size: 0.7rem;
   font-weight: 400;
-  line-height: 1.5;
   height: 50px;
-  border-radius: 0.25rem;
+  line-height: 1.5;
+  max-width: 100%;
   outline: none;
+  padding: 0.2rem 0.5rem;
+  width: 100%;
 
   ${({ theme }) => css`
     @media ${theme.device.md} {
@@ -50,45 +50,45 @@ const Input = styled.input`
     let values = theme.autoComplete.input
 
     return css`
-      color: ${values.color};
       background-color: ${values.backgroundColor};
       border: 1px solid ${values.borderColor};
+      color: ${values.color};
     `
   }}
 
   &::placeholder {
     color: #e6e6e6;
-    font-weight: 500;
     font-style: italic;
+    font-weight: 500;
   }
 `
 
 const ListWrapper = styled.div`
-  position: absolute;
-  margin-top: 50px;
-  right: 0;
-  left: 0;
-  z-index: 2;
+  background: white;
   border-radius: 0.25rem;
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
-  background: white;
+  left: 0;
+  margin-top: 50px;
+  position: absolute;
+  right: 0;
+  z-index: 2;
 `
 
 const OptionWrapper = styled.a`
+  align-items: center;
+  cursor: pointer;
   display: flex;
   flex-direction: row;
-  align-items: center;
-  justify-content: flex-start;
   font-size: 0.875rem;
-  cursor: pointer;
+  justify-content: flex-start;
   padding: 0 1rem 0 0.5rem;
 
   ${({ theme }) => {
     const values = theme.autoComplete.wrapperOption
 
     return css`
-      color: ${values.color};
       background-color: ${values.backgroundColor};
+      color: ${values.color};
 
       &:hover,
       &:active,
@@ -116,8 +116,8 @@ const Option = styled.span`
 `
 
 const PokeID = styled.span`
-  font-weight: 600;
   font-size: 1.5rem;
+  font-weight: 600;
   margin-left: auto;
 `
 

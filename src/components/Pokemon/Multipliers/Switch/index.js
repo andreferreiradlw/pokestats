@@ -1,13 +1,13 @@
 import styled from 'styled-components'
 
 const SwitchContainer = styled.div`
-  position: relative;
-  margin-bottom: 0.5rem;
-  width: 108px;
-  -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
+  -webkit-user-select: none;
+  margin-bottom: 0.5rem;
+  position: relative;
   vertical-align: sub;
+  width: 108px;
 
   &:hover {
     cursor: pointer;
@@ -19,62 +19,62 @@ const SwitchInput = styled.input`
 `
 
 const SwitchLabel = styled.label`
+  background-color: rgb(19, 29, 34);
+  border: 2px solid rgb(19, 29, 34);
+  border-radius: 50px;
+  cursor: pointer;
   display: block;
   overflow: hidden;
-  cursor: pointer;
-  border-radius: 50px;
-  border: 2px solid rgb(19, 29, 34);
-  background-color: rgb(19, 29, 34);
 `
 
 const SwitchDisplay = styled.span`
   display: block;
-  width: 200%;
   margin-left: ${({ enabled }) => (enabled ? '-100%' : '0')};
   transition: margin 0.3s ease-in-out;
+  width: 200%;
 
   &:before,
   &:after {
+    box-sizing: border-box;
     display: block;
     float: left;
-    width: 50%;
-    height: 27px;
-    padding: 0;
-    line-height: 27px;
     font-size: 16px;
-    box-sizing: border-box;
+    height: 27px;
+    line-height: 27px;
+    padding: 0;
+    width: 50%;
   }
 
   &:before {
+    background-color: black;
+    color: white;
     content: 'Attack';
     padding-left: 10px;
     text-align: left;
-    background-color: black;
-    color: white;
   }
 
   &:after {
+    background-color: white;
+    color: black;
     content: 'Defense';
     padding-right: 7px;
     text-align: right;
-    background-color: white;
-    color: black;
   }
 `
 
 const SwitchControl = styled.span`
+  background-color: white;
+  border: 2px solid rgb(19, 29, 34);
+  border-radius: 50px;
+  bottom: 0;
   display: block;
-  width: 31px;
   height: 31px;
   margin: 0px;
   position: absolute;
-  top: 0;
-  bottom: 0;
   right: ${({ enabled }) => (enabled ? '77px' : '0')};
-  border-radius: 50px;
+  top: 0;
   transition: all 0.3s ease-in-out;
-  border: 2px solid rgb(19, 29, 34);
-  background-color: white;
+  width: 31px;
 `
 
 export default function Switch({ enabled, onClick, ...rest }) {

@@ -1,57 +1,57 @@
-import { useEffect } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-import { useRouter } from 'next/router'
-import { AnimatePresence } from 'framer-motion'
+import { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { useRouter } from 'next/router';
+import { AnimatePresence } from 'framer-motion';
 // actions
-import { fetchTypeData, cleanData } from './typeSlice'
-//helpers
-import { typeList, removeDash, pageContainerVariant } from '../../helpers'
+import { fetchTypeData, cleanData } from './typeSlice';
+// helpers
+import { typeList, removeDash, pageContainerVariant } from '../../helpers';
 // components
-import Layout, { MainContainer } from '../Layout'
-import Loading from '../Loading'
-import Box from '../Box'
-import TypeInfo from './Info'
-import TypeRelations from './Relations'
-import TypeIcon from './TypeIcon'
-import Tabs from './Tabs'
+import Layout, { MainContainer } from '../Layout';
+import Loading from '../Loading';
+import Box from '../Box';
+import TypeInfo from './Info';
+import TypeRelations from './Relations';
+import TypeIcon from './TypeIcon';
+import Tabs from './Tabs';
 // styles
-import { PageHeading } from '../BaseStyles'
+import { PageHeading } from '../BaseStyles';
 
 export default function Type({ typeName }) {
   // router
-  const router = useRouter()
+  const router = useRouter();
   // dispatch
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   // type selector
-  const typeInfo = useSelector(state => state.type)
+  const typeInfo = useSelector(state => state.type);
   // data
-  const { name, names, damage_relations } = typeInfo.data
+  const { name, names, damage_relations } = typeInfo.data;
 
   useEffect(() => {
     // reset data on unmount
     return () => {
-      dispatch(cleanData())
-    }
-  }, [])
+      dispatch(cleanData());
+    };
+  }, []);
 
   // fetch type data
   useEffect(() => {
-    const validType = typeList.filter(type => type.name === typeName)
+    const validType = typeList.filter(type => type.name === typeName);
     // check if router query is valid
     if (validType.length) {
       // fetch new pokemon data
-      dispatch(fetchTypeData(typeName))
+      dispatch(fetchTypeData(typeName));
     } else {
-      router.push('/404', router.asPath)
+      router.push('/404', router.asPath);
     }
-  }, [typeName])
+  }, [typeName]);
 
   // error handling
   useEffect(() => {
     if (typeInfo.error.status !== 'OK') {
-      router.push('/404', router.asPath)
+      router.push('/404', router.asPath);
     }
-  }, [typeInfo.error])
+  }, [typeInfo.error]);
 
   return (
     <Layout
@@ -59,9 +59,9 @@ export default function Type({ typeName }) {
       withFooter={!typeInfo.isLoading}
       withMain={false}
       withGameVersion={false}
-      key={`layout-type`}
+      key="layout-type"
     >
-      <AnimatePresence exitBeforeEnter>
+      <AnimatePresence mode="wait">
         {typeInfo.isLoading && (
           <Loading
             passKey={`loading-type-${typeName}`}
@@ -111,23 +111,14 @@ export default function Type({ typeName }) {
                   />
                 </Box>
               </Box>
-              <TypeIcon
-                sizes={{ xxs: 12, lg: 4 }}
-                typeName={name}
-                otherNames={names}
-              />
+              <TypeIcon sizes={{ xxs: 12, lg: 4 }} typeName={name} otherNames={names} />
             </Box>
-            <Box
-              as="section"
-              align="flex-start"
-              justify="flex-start"
-              margin="1rem 0"
-            >
+            <Box as="section" align="flex-start" justify="flex-start" margin="1rem 0">
               <Tabs sizes={12} margin="0 0 2rem" />
             </Box>
           </MainContainer>
         )}
       </AnimatePresence>
     </Layout>
-  )
+  );
 }

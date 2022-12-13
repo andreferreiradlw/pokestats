@@ -5,7 +5,7 @@ import BoxWrapper from '../Box/StyledBox'
 import { SectionSubTitle, ellipsis, rotate, riseUp } from '../BaseStyles'
 // helpers
 import { responsiveProps } from '../../helpers/box'
-//svg
+// svg
 import Potion from '../../assets/svg/potion.svg'
 
 const LoadingContainer = styled(BoxWrapper)`
@@ -58,11 +58,11 @@ const Text = styled(SectionSubTitle)`
   margin-top: 2rem;
 
   &:after {
-    display: inline-block;
     animation: ${ellipsis} 1.25s infinite;
     content: '.';
-    width: 1em;
+    display: inline-block;
     text-align: left;
+    width: 1em;
   }
 `
 

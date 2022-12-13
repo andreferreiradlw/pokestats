@@ -2,14 +2,14 @@ import styled, { css } from 'styled-components'
 import { motion } from 'framer-motion'
 
 const MainHeading = styled(motion.h1)`
-  font-size: 3.5rem;
-  line-height: 3.5rem;
-  font-family: 'Josefin Sans', sans-serif;
   color: ${({ theme }) => theme.homepage.heading.color};
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 3.5rem;
   font-weight: 700;
-  user-select: none;
+  line-height: 3.5rem;
   text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000,
     2px 2px 0 #000;
+  user-select: none;
 
   ${({ theme }) => css`
     @media ${theme.device.xs} {
@@ -29,8 +29,8 @@ const MainHeading = styled(motion.h1)`
 
 const PageHeading = styled.h1`
   font-size: 2.5rem;
-  line-height: 3rem;
   font-weight: 600;
+  line-height: 3rem;
   margin-bottom: 0.5rem;
   text-align: center;
 

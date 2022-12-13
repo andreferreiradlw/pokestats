@@ -16,7 +16,7 @@ export default function getMultipliers(types) {
     let double_damage_from = damage_relations.defense.double
 
     no_damage_to.forEach(type => {
-      if (Object.prototype.hasOwnProperty.call(multipliers.attack, type)) {
+      if (Object.hasOwn(multipliers.attack, type)) {
         multipliers.attack[type] = multipliers.attack[type] * 0
       } else {
         multipliers.attack[type] = 0
@@ -24,7 +24,7 @@ export default function getMultipliers(types) {
     })
 
     no_damage_from.forEach(type => {
-      if (Object.prototype.hasOwnProperty.call(multipliers.defense, type)) {
+      if (Object.hasOwn(multipliers.defense, type)) {
         multipliers.defense[type] = multipliers.defense[type] * 0
       } else {
         multipliers.defense[type] = 0
@@ -32,7 +32,7 @@ export default function getMultipliers(types) {
     })
 
     half_damage_to.forEach(type => {
-      if (Object.prototype.hasOwnProperty.call(multipliers.attack, type)) {
+      if (Object.hasOwn(multipliers.attack, type)) {
         multipliers.attack[type] = multipliers.attack[type] * 0.5
       } else {
         multipliers.attack[type] = 0.5
@@ -40,7 +40,7 @@ export default function getMultipliers(types) {
     })
 
     half_damage_from.forEach(type => {
-      if (Object.prototype.hasOwnProperty.call(multipliers.defense, type)) {
+      if (Object.hasOwn(multipliers.defense, type)) {
         multipliers.defense[type] = multipliers.defense[type] * 0.5
       } else {
         multipliers.defense[type] = 0.5
@@ -48,7 +48,7 @@ export default function getMultipliers(types) {
     })
 
     double_damage_to.forEach(type => {
-      if (Object.prototype.hasOwnProperty.call(multipliers.attack, type)) {
+      if (Object.hasOwn(multipliers.attack, type)) {
         multipliers.attack[type] = multipliers.attack[type] * 2
       } else {
         multipliers.attack[type] = 2
@@ -56,7 +56,7 @@ export default function getMultipliers(types) {
     })
 
     double_damage_from.forEach(type => {
-      if (Object.prototype.hasOwnProperty.call(multipliers.defense, type)) {
+      if (Object.hasOwn(multipliers.defense, type)) {
         multipliers.defense[type] = multipliers.defense[type] * 2
       } else {
         multipliers.defense[type] = 2

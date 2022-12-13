@@ -3,8 +3,8 @@ import { motion } from 'framer-motion'
 
 const SectionTitle = styled(motion.h2)`
   font-size: 2rem;
-  line-height: 2.5rem;
   font-weight: 600;
+  line-height: 2.5rem;
   margin-bottom: 1rem;
 
   ${({ theme }) => css`
@@ -21,8 +21,8 @@ const SectionTitle = styled(motion.h2)`
 
 const SectionSubTitle = styled(motion.h3)`
   font-size: 1.3rem;
-  line-height: 1rem;
   font-weight: 600;
+  line-height: 1rem;
   margin-bottom: 1rem;
 
   ${({ theme }) => css`

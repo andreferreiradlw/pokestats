@@ -4,20 +4,20 @@ import { motion } from 'framer-motion'
 import { float as floatAnim } from '../BaseStyles'
 
 const Badge = styled(motion.a)`
-  display: flex;
-  flex-direction: row;
   align-items: center;
-  justify-content: center;
-  width: auto;
   background-color: ${({ theme, type, fill }) =>
     !fill && theme.typeBadge.backgroundColor[type]};
+  border-radius: 4px;
   color: ${({ theme }) => theme.typeBadge.color};
+  display: flex;
+  flex-direction: row;
   font-family: 'Quicksand', sans-serif;
   font-size: 1rem;
   font-weight: 600;
-  border-radius: 4px;
+  justify-content: center;
   text-shadow: -0.5px -0.5px 0 #000, 0.5px -0.5px 0 #000, -0.5px 0.5px 0 #000,
     0.5px 0.5px 0 #000;
+  width: auto;
 
   ${({ $iconOnly, margin }) =>
     $iconOnly
@@ -49,13 +49,13 @@ const Badge = styled(motion.a)`
     ${({ $iconOnly, $iconWidth, $iconHeight }) =>
       !$iconOnly
         ? css`
-            width: ${$iconWidth || '25px'};
             height: ${$iconHeight || '25px'};
             margin-right: 1rem;
+            width: ${$iconWidth || '25px'};
           `
         : css`
-            width: ${$iconWidth || '15px'};
             height: ${$iconHeight || '15px'};
+            width: ${$iconWidth || '15px'};
           `}
 
     & > path {

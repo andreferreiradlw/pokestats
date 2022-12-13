@@ -1,26 +1,18 @@
 // components
-import Image from '../../Image'
+import Image from '../../Image';
 // helpers
-import { scaleInVariant } from '../../../helpers/animations'
+import { scaleInVariant } from '../../../helpers/animations';
 // styles
-import { JpnName } from '../../BaseStyles'
-import { ImageContainer } from './StyledFeatureImage'
+import { JpnName } from '../../BaseStyles';
+import { ImageContainer } from './StyledFeatureImage';
 
-export default function FeaturedImage({
-  pokemonNames,
-  pokemonName,
-  pokemonId,
-  ...rest
-}) {
+export default function FeaturedImage({ pokemonNames, pokemonName, pokemonId, ...rest }) {
   return (
     <ImageContainer {...rest}>
       <Image
         notLazy
         placeholderwidth="20%"
-        alt={
-          pokemonNames &&
-          pokemonNames.find(name => name.language.name === 'en').name
-        }
+        alt={pokemonNames?.find(name => name.language.name === 'en').name}
         key={`featured-${pokemonName}-${pokemonId}`}
         src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemonId}.png`}
       />
@@ -35,5 +27,5 @@ export default function FeaturedImage({
         </JpnName>
       )}
     </ImageContainer>
-  )
+  );
 }

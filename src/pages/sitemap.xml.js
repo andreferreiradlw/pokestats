@@ -26,7 +26,7 @@ const Sitemap = () => {}
 Sitemap.getInitialProps = async ({ req, res }) => {
   // fixed routes
   const routes = ['']
-  //fetch pokemon list
+  // fetch pokemon list
   const pokeapiRes = await fetch('https://pokeapi.co/api/v2/pokemon?limit=809')
   const pokemonList = await pokeapiRes.json()
 

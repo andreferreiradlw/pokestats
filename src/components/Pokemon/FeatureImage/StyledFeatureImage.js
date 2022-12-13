@@ -5,8 +5,8 @@ import Box from '../../Box'
 import { float } from '../../BaseStyles'
 
 const ImageContainer = styled(Box)`
-  position: relative;
   height: 100%;
+  position: relative;
 
   ${({ theme }) => css`
     @media ${theme.device.lg} {
@@ -15,8 +15,8 @@ const ImageContainer = styled(Box)`
   `}
 
   & img {
-    max-width: 80%;
     margin: 1.5rem 0;
+    max-width: 80%;
 
     ${({ theme }) => css`
       @media ${theme.device.xs} {

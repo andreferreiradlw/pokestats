@@ -4,8 +4,8 @@ import { motion } from 'framer-motion'
 import { removeDash } from '../../../../helpers/typography'
 
 const Details = styled(motion.span)`
-  margin-bottom: 1rem;
   font-weight: 600;
+  margin-bottom: 1rem;
   text-align: center;
   word-break: break-word;
 `

@@ -13,8 +13,8 @@ const ImageContainer = styled(Box)`
   `}
 `
 const Image = styled.img`
-  max-width: 80%;
   margin: 1.5rem 0;
+  max-width: 80%;
 
   ${({ theme }) => css`
     @media ${theme.device.xs} {

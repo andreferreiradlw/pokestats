@@ -8,8 +8,8 @@ const NameTH = styled(motion.th)``
 const NameTD = styled(motion.td)``
 
 const TableContainer = styled(motion.div)`
-  width: 100%;
   overflow: auto;
+  width: 100%;
 
   ${({ theme }) => css`
     @media ${theme.device.lg} {
@@ -19,10 +19,10 @@ const TableContainer = styled(motion.div)`
 `
 
 const MovesTable = styled(motion.table)`
-  width: 100%;
-  text-align: center;
   font-size: 0.7rem;
   line-height: 0.7rem;
+  text-align: center;
+  width: 100%;
 
   & thead {
     background-color: black;
@@ -31,12 +31,12 @@ const MovesTable = styled(motion.table)`
 
   & th,
   & td {
+    height: 40px;
+    overflow: hidden;
     padding: 0.5rem;
     text-align: center;
-    overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    height: 40px;
   }
 
   & ${NameTH}, & ${NameTD} {

@@ -4,11 +4,11 @@ import { motion } from 'framer-motion'
 import { float } from './keyframes'
 
 const PokeBox = styled(motion.a)`
+  align-items: center;
+  border: 1px solid transparent;
+  border-radius: 4px;
   display: flex;
   flex-basis: auto;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
 
   ${({ width }) =>
     !width &&
@@ -49,14 +49,14 @@ const PokeBox = styled(motion.a)`
           }
         `}
 
-  padding: 1rem;
-  margin: 0.5rem;
-  border: 1px solid transparent;
-  border-radius: 4px;
-  text-align: center;
+  flex-direction: column;
   font-weight: 600;
-  transition: border 0.1s ease-in-out;
+  justify-content: center;
+  margin: 0.5rem;
+  padding: 1rem;
+  text-align: center;
   transition: box-shadow 0.05s ease-in-out;
+  transition: border 0.1s ease-in-out;
 
   &:hover {
     cursor: pointer;

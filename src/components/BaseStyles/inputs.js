@@ -4,25 +4,25 @@ const Select = styled.select`
   ${({ theme, light }) =>
     light
       ? css`
-          color: ${theme.select.light.color};
           background-color: ${theme.select.light.background} !important;
+          color: ${theme.select.light.color};
         `
       : css`
-          color: ${theme.select.color};
           background-color: ${theme.select.background} !important;
+          color: ${theme.select.color};
         `}
 
-  display: flex;
-  justify-content: center;
   align-items: center;
-  padding: 4px 2px;
   border: none;
   border-radius: 0.25rem;
+  display: flex;
+  justify-content: center;
   outline: none;
+  padding: 4px 2px;
 
   &:focus {
-    outline: none;
     border: none;
+    outline: none;
   }
 `
 

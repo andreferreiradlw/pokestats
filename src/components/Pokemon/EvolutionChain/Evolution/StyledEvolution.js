@@ -3,9 +3,9 @@ import styled, { css } from 'styled-components'
 import Arrow from '../../../../assets/svg/arrows.svg'
 
 const EvoArrow = styled(Arrow)`
-  width: 50px;
   margin: 0.5rem 0 1rem;
   transform: rotateZ(90deg);
+  width: 50px;
 
   ${({ theme }) => css`
     @media ${theme.device.lg} {

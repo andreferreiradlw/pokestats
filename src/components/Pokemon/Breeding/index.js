@@ -1,79 +1,65 @@
-import { useSelector } from 'react-redux'
-import { AnimatePresence } from 'framer-motion'
+import { useSelector } from 'react-redux';
+import { AnimatePresence } from 'framer-motion';
 // components
-import Loading from '../../Loading'
-import Box from '../../Box'
-//helpers
-import { removeDash } from '../../../helpers/typography'
-import { fadeInUpVariant } from '../../../helpers/animations'
+import Loading from '../../Loading';
+import Box from '../../Box';
+// helpers
+import { removeDash } from '../../../helpers/typography';
+import { fadeInUpVariant } from '../../../helpers/animations';
 // styles
-import { SectionTitle, Table, Numbered } from '../../BaseStyles'
+import { SectionTitle, Table, Numbered } from '../../BaseStyles';
 
 export default function Breeding({ ...rest }) {
   // biology
-  const pokemonBio = useSelector(state => state.pokemon.biology)
+  const pokemonBio = useSelector(state => state.pokemon.biology);
   // evolution
-  const pokemonEvo = useSelector(state => state.pokemon.evolution)
+  const pokemonEvo = useSelector(state => state.pokemon.evolution);
   // data
-  const { gender_rate, egg_groups, hatch_counter, habitat } = pokemonBio.data
-  const { baby_trigger_item } = pokemonEvo.data
+  const { gender_rate, egg_groups, hatch_counter, habitat } = pokemonBio.data;
+  const { baby_trigger_item } = pokemonEvo.data;
 
   // gender ratio
-  const genderRatio = rate =>
-    `${12.5 * (8 - rate)}% male, ${12.5 * rate}% female`
+  const genderRatio = rate => `${12.5 * (8 - rate)}% male, ${12.5 * rate}% female`;
 
   // egg groups
   const eggGroups = groups =>
     groups.map((group, i) => (
       <Numbered key={`${group.name}-${i}`}>
-        {`${groups.length > 1 ? `${++i}. ` : ``}${removeDash(group.name)}`}
+        {`${groups.length > 1 ? `${i + 1}. ` : ``}${removeDash(group.name)}`}
       </Numbered>
-    ))
+    ));
 
   // egg hatch cycle
-  const eggCycle = counter =>
-    `${counter} cycles ( ${255 * (hatch_counter + 1)} steps )`
+  const eggCycle = counter => `${counter} cycles ( ${255 * (hatch_counter + 1)} steps )`;
 
   return (
     <Box align={{ xxs: 'center', lg: 'flex-start' }} {...rest}>
       <SectionTitle>Breeding</SectionTitle>
-      <AnimatePresence exitBeforeEnter>
-        {pokemonEvo.isLoading && (
-          <Loading height="251px" $iconWidth="15%" key="pokemon-breeding" />
-        )}
+      <AnimatePresence>
+        {pokemonEvo.isLoading && <Loading height="251px" $iconWidth="15%" key="pokemon-breeding" />}
         {!pokemonEvo.isLoading && (
           <Table
             initial="hidden"
             animate="show"
             variants={fadeInUpVariant}
-            key={`pokemon-breeding-table`}
+            key="pokemon-breeding-table"
           >
             <tbody>
               <tr>
                 <th>Gender Distribution</th>
-                <td>
-                  {gender_rate === -1 ? 'Genderless' : genderRatio(gender_rate)}
-                </td>
+                <td>{gender_rate === -1 ? 'Genderless' : genderRatio(gender_rate)}</td>
               </tr>
               <tr>
                 <th>Egg Groups</th>
-                <td>
-                  {egg_groups.length ? eggGroups(egg_groups) : 'No Egg Groups'}
-                </td>
+                <td>{egg_groups.length ? eggGroups(egg_groups) : 'No Egg Groups'}</td>
               </tr>
               <tr>
                 <th>Egg Cycles</th>
-                <td>
-                  {hatch_counter ? eggCycle(hatch_counter) : 'No Egg Cycles'}
-                </td>
+                <td>{hatch_counter ? eggCycle(hatch_counter) : 'No Egg Cycles'}</td>
               </tr>
               <tr>
                 <th>Baby Trigger Item</th>
-                <td>
-                  {baby_trigger_item
-                    ? removeDash(baby_trigger_item.name)
-                    : 'None'}
-                </td>
+                <td>{baby_trigger_item ? removeDash(baby_trigger_item.name) : 'None'}</td>
               </tr>
               <tr>
                 <th>Habitat</th>
@@ -84,5 +70,5 @@ export default function Breeding({ ...rest }) {
         )}
       </AnimatePresence>
     </Box>
-  )
+  );
 }

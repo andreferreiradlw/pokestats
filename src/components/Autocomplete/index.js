@@ -109,11 +109,11 @@ export default function Autocomplete({
   return (
     <Container align={align} direction={direction} $flexGrow={grow} margin={margin} {...rest}>
       <label htmlFor="autocomplete" id="autocomplete_label" aria-hidden="true">
-        {`Search Pokemon or Type Name`}
+        Search Pokemon or Type Name
       </label>
       <Input
         type="text"
-        placeholder={`Search Pokemon or Type Name`}
+        placeholder="Search Pokemon or Type Name"
         id="autocomplete"
         aria-labelledby="autocomplete_label"
         value={search}

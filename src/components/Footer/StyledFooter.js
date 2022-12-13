@@ -2,12 +2,12 @@ import styled from 'styled-components'
 import { motion } from 'framer-motion'
 
 const FooterContainer = styled(motion.footer)`
-  display: flex;
-  flex-basis: auto;
-  width: 100%;
   background-color: black;
   color: white;
+  display: flex;
+  flex-basis: auto;
   font-weight: 300;
+  width: 100%;
 
   & span {
     margin: 1rem 0;
@@ -22,15 +22,15 @@ const FooterA = styled.a`
   transition: ease-out 0.3s 0.1s;
 
   &:after {
-    height: 2px;
-    width: 100%;
     background: white;
-    content: '';
-    position: absolute;
-    left: 0px;
     bottom: 0;
+    content: '';
+    height: 2px;
+    left: 0px;
+    position: absolute;
     transform: scaleX(0);
     transition: 0.3s;
+    width: 100%;
   }
 
   &:hover:after {
@@ -38,15 +38,15 @@ const FooterA = styled.a`
   }
 
   & img {
-    vertical-align: middle;
     height: 25px;
+    vertical-align: middle;
   }
 
   & svg {
-    width: 20px;
+    fill: white;
     margin-left: 10px;
     vertical-align: bottom;
-    fill: white;
+    width: 20px;
   }
 `
 

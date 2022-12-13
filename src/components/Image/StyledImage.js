@@ -6,9 +6,9 @@ import { tumble } from '../BaseStyles/keyframes'
 import Egg from '../../assets/svg/egg.svg'
 
 const ImageWrapper = styled(motion.div)`
+  align-items: center;
   display: flex;
   justify-content: center;
-  align-items: center;
 
   ${({ width }) =>
     css`
@@ -26,9 +26,9 @@ const Image = styled(motion.img)`
   // adjust to wrapper
   ${({ height }) =>
     css`
-      width: ${height ? `auto` : '100%'};
       height: ${height ? `${height}px` : 'auto'};
       min-height: ${height ? `${height}px` : 'auto'};
+      width: ${height ? `auto` : '100%'};
     `}
 
   ${({ $pixelated }) =>
@@ -39,12 +39,12 @@ const Image = styled(motion.img)`
 `
 
 const Placeholder = styled(motion.div)`
-  display: flex;
-  justify-content: center;
   align-items: center;
+  display: flex;
+  height: 100%;
+  justify-content: center;
   padding: 15px 0;
   width: 100%;
-  height: 100%;
 `
 
 const EggIcon = styled(Egg)`

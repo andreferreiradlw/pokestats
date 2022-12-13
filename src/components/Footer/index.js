@@ -3,6 +3,8 @@ import Box from '../Box';
 import { footerVariant } from '../../helpers/animations';
 // styles
 import { FooterContainer, FooterA } from './StyledFooter';
+// components
+import Image from 'next/image';
 // icons
 import GitHub from '../../assets/svg/github.svg';
 
@@ -31,10 +33,16 @@ export default function Footer({ ...rest }) {
           </FooterA>
           {`, powered by `}{' '}
           <FooterA href="https://pokeapi.co/" target="_blank" rel="noopener" aria-label="PokeApi">
-            <img src="/static/pokeapi_logo.png" alt="PokeApi Logo" />
+            <Image
+              src="/static/pokeapi_logo.png"
+              alt="PokeApi Logo"
+              loading="lazy"
+              width={60}
+              height={25}
+            />
           </FooterA>
         </span>
-        <span as="span">
+        <span>
           <FooterA
             href="https://github.com/andreferreiradlw/pokestats"
             target="_blank"

@@ -3,13 +3,13 @@ import { motion } from 'framer-motion'
 
 const darkValues = theme => css`
   background-color: ${theme.button.dark.backgroundColor};
-  color: ${theme.button.dark.color};
   border: 2px solid ${theme.button.dark.borderColor};
+  color: ${theme.button.dark.color};
   &:hover,
   &:active {
-    color: ${theme.button.dark.hoverColor};
     background-color: ${theme.button.dark.hoverBackground};
     border: 2px solid ${theme.button.dark.hoverBorder};
+    color: ${theme.button.dark.hoverColor};
   }
   &:hover {
     box-shadow: 2px 2px 5px ${theme.button.dark.boxShadow};
@@ -21,13 +21,13 @@ const darkValues = theme => css`
 
 const lightValues = theme => css`
   background-color: ${theme.button.backgroundColor};
-  color: ${theme.button.color};
   border: 2px solid ${theme.button.borderColor};
+  color: ${theme.button.color};
   &:hover,
   &:active {
-    color: ${theme.button.hoverColor};
     background-color: ${theme.button.hoverBackground};
     border: 2px solid ${theme.button.hoverBorder};
+    color: ${theme.button.hoverColor};
   }
   &:hover {
     box-shadow: 2px 2px 5px ${theme.button.boxShadow};
@@ -38,18 +38,18 @@ const lightValues = theme => css`
 `
 
 const Button = styled(motion.button)`
-  padding: 10px 20px;
-  margin: 0 auto;
+  border-radius: 4px;
+  cursor: pointer;
 
   font-size: 1rem;
-  line-height: 1rem;
   font-weight: 700;
-  text-align: center;
+  line-height: 1rem;
+  margin: 0 auto;
 
   outline: none;
-  border-radius: 4px;
+  padding: 10px 20px;
 
-  cursor: pointer;
+  text-align: center;
   transition: box-shadow 0.2s ease-in-out;
 
   ${({ $active, $dark, theme }) =>

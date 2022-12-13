@@ -2,14 +2,14 @@ import styled, { css } from 'styled-components'
 import Box from '../Box'
 
 const Heading = styled.h2`
+  color: ${({ theme }) => theme.homepage.heading.color};
   font-family: 'Josefin Sans', sans-serif;
   font-size: 3.26rem;
-  line-height: 4rem;
-  color: ${({ theme }) => theme.homepage.heading.color};
   font-weight: 700;
-  user-select: none;
+  line-height: 4rem;
   text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
     1px 1px 0 #000;
+  user-select: none;
 
   &:hover {
     cursor: pointer;

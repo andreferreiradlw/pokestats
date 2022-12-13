@@ -1,6 +1,6 @@
-import { css } from 'styled-components'
+import { css } from 'styled-components';
 // config
-import { dimensions, breakpoints } from '../components/Box/config'
+import { dimensions, breakpoints } from '../components/Box/config';
 
 /**
  * Creates the media-query syntax with the provided content inside.
@@ -12,7 +12,7 @@ export const breakpointStyle = (breakpoint, content) => css`
   @media only screen ${breakpoint && `and (min-width: ${breakpoint}rem)`} {
     ${content}
   }
-`
+`;
 
 /**
  * Creates the multiple media-query syntax with the specified css property inside.
@@ -21,25 +21,26 @@ export const breakpointStyle = (breakpoint, content) => css`
  * @returns {string[]} The styles for the multiples breakpoints.
  */
 export const responsiveProps = (property, values) => {
-  if (!values) throw new Error('No values provided for responsive props!')
+  if (!values) throw new Error('No values provided for responsive props!');
   if (typeof values === 'string') {
     // same values for all screen sizes
-    return property ? `${property}: ${values};` : `${values}`
+    return property ? `${property}: ${values};` : `${values}`;
   } else if (typeof values === 'object') {
     return dimensions.map(d => {
       if (breakpoints[d] && values[d] !== undefined) {
         return css`
           ${breakpointStyle(
             breakpoints[d],
-            property ? `${property}: ${values[d]};` : `${values[d]}`
+            property ? `${property}: ${values[d]};` : `${values[d]}`,
           )}
-        `
+        `;
       }
-    })
+      return null;
+    });
   } else {
-    return undefined
+    return undefined;
   }
-}
+};
 
 /**
  * Converts the sizes prop to flex-basis that defines the width of the element inside a flex container.
@@ -51,12 +52,12 @@ export const flexStyle = sizeProp => {
   if (typeof sizeProp === 'number') {
     return css`
       flex-basis: ${(sizeProp / 12) * 100}%;
-    `
+    `;
   } else if (sizeProp === 'auto') {
     return css`
       flex-basis: auto;
       flex-grow: 0;
-    `
+    `;
   } else {
     return dimensions.map(d => {
       if (breakpoints[d] && sizeProp[d] && sizeProp[d] !== 'auto') {
@@ -65,9 +66,9 @@ export const flexStyle = sizeProp => {
             breakpoints[d],
             css`
               flex-basis: ${(sizeProp[d] / 12) * 100}%;
-            `
+            `,
           )}
-        `
+        `;
       } else if (breakpoints[d] && sizeProp[d] === 'auto') {
         return css`
           ${breakpointStyle(
@@ -75,10 +76,11 @@ export const flexStyle = sizeProp => {
             css`
               flex-basis: auto;
               flex-grow: 1;
-            `
+            `,
           )}
-        `
+        `;
       }
-    })
+      return null;
+    });
   }
-}
+};

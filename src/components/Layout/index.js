@@ -14,13 +14,13 @@ const LayoutContainer = styled(BoxWrapper)`
 
 // main container
 export const MainContainer = styled(motion.main)`
+  align-items: ${({ align }) => (align ? align : 'center')};
   display: flex;
   flex-direction: column;
-  align-items: ${({ align }) => (align ? align : 'center')};
+  flex-grow: 1;
   justify-content: ${({ justify }) => (justify ? justify : 'center')};
   margin: 0 auto;
   width: 100%;
-  flex-grow: 1;
   ${({ $constrained }) => $constrained && 'max-width: 1300px;'}
   ${({ $withGutter }) =>
     $withGutter && responsiveProps('padding', boxConfig.gutterWidth)}

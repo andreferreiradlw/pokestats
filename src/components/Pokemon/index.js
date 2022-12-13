@@ -88,7 +88,7 @@ export default function Homepage({ pokemonName }) {
       withMain={false}
       key={`layout-pokemon-${pokemonName}`}
     >
-      <AnimatePresence exitBeforeEnter>
+      <AnimatePresence mode="wait">
         {pokemonInfo.isLoading && (
           <Loading
             passKey={`loading-pokemon-${pokemonName}`}

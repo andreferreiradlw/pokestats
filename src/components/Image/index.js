@@ -1,11 +1,11 @@
-import { useState, useEffect, useRef } from 'react'
-import axios from 'axios'
-import LazyLoad from 'react-lazyload'
-import { AnimatePresence } from 'framer-motion'
+import { useState, useEffect, useRef } from 'react';
+import axios from 'axios';
+import LazyLoad from 'react-lazyload';
+import { AnimatePresence } from 'framer-motion';
 // helpers
-import { placeholderVariant, fadeInUpVariant } from '../../helpers/animations'
+import { placeholderVariant, fadeInUpVariant } from '../../helpers/animations';
 // styles
-import { ImageWrapper, Image, Placeholder, EggIcon } from './StyledImage'
+import { ImageWrapper, Image, Placeholder, EggIcon } from './StyledImage';
 
 const ConditionalWrapper = ({ isLazy, children, offset }) =>
   isLazy ? (
@@ -14,7 +14,7 @@ const ConditionalWrapper = ({ isLazy, children, offset }) =>
     </LazyLoad>
   ) : (
     children
-  )
+  );
 
 function ImageComponent({
   alt,
@@ -28,37 +28,37 @@ function ImageComponent({
   ...rest
 }) {
   // img src
-  const [imgSrc, setImgSrc] = useState(null)
+  const [imgSrc, setImgSrc] = useState(null);
   // ref
-  const _isMounted = useRef(null)
+  const _isMounted = useRef(null);
   // manage mounted state to avoid memory leaks
   useEffect(() => {
-    _isMounted.current = true
+    _isMounted.current = true;
     return () => {
-      _isMounted.current = false
-      setImgSrc(null)
-    }
-  }, [])
+      _isMounted.current = false;
+      setImgSrc(null);
+    };
+  }, []);
 
   useEffect(() => {
     async function fetchImage() {
       await axios.get(src, { responseType: 'arraybuffer' }).then(response => {
         let blob = new Blob([response.data], {
           type: response.headers['content-type'],
-        })
-        let image = URL.createObjectURL(blob)
+        });
+        let image = URL.createObjectURL(blob);
         // check again if mounted before updating the state
-        if (_isMounted.current) setImgSrc(image)
-      })
+        if (_isMounted.current) setImgSrc(image);
+      });
     }
     // fetch if mounted
-    if (_isMounted.current) fetchImage()
-  }, [_isMounted])
+    if (_isMounted.current) fetchImage();
+  }, [_isMounted]);
 
   return (
     <ConditionalWrapper key={alt} isLazy={!notLazy} offset={offset} {...rest}>
       <ImageWrapper width={width} height={height}>
-        <AnimatePresence exitBeforeEnter>
+        <AnimatePresence mode="wait">
           {!imgSrc && (
             <Placeholder
               initial="initial"
@@ -86,7 +86,7 @@ function ImageComponent({
         </AnimatePresence>
       </ImageWrapper>
     </ConditionalWrapper>
-  )
+  );
 }
 
-export default ImageComponent
+export default ImageComponent;

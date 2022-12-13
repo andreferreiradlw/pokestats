@@ -1,20 +1,20 @@
-import { useSelector } from 'react-redux'
-import { AnimatePresence } from 'framer-motion'
+import { useSelector } from 'react-redux';
+import { AnimatePresence } from 'framer-motion';
 // helpers
-import { fadeInUpVariant } from '../../../helpers/animations'
+import { fadeInUpVariant } from '../../../helpers/animations';
 // components
-import Box from '../../Box'
-import BoxWrapper from '../../Box/StyledBox'
-import Loading from '../../Loading'
-import Evolution from './Evolution'
+import Box from '../../Box';
+import BoxWrapper from '../../Box/StyledBox';
+import Loading from '../../Loading';
+import Evolution from './Evolution';
 // styles
-import { SectionTitle, SectionMessage } from '../../BaseStyles'
+import { SectionTitle, SectionMessage } from '../../BaseStyles';
 
 export default function EvolutionChain({ ...rest }) {
   // evolution
-  const pokemonEvo = useSelector(state => state.pokemon.evolution)
+  const pokemonEvo = useSelector(state => state.pokemon.evolution);
   // chain
-  const { chain, id: chainId } = pokemonEvo.data
+  const { chain, id: chainId } = pokemonEvo.data;
 
   return (
     <Box align={{ xxs: 'center', lg: 'flex-start' }} {...rest}>
@@ -29,13 +29,9 @@ export default function EvolutionChain({ ...rest }) {
           This Pokémon does not evolve.
         </SectionMessage>
       )}
-      <AnimatePresence exitBeforeEnter>
+      <AnimatePresence mode="wait">
         {pokemonEvo.isLoading && (
-          <Loading
-            height="271px"
-            $iconWidth="5%"
-            key={`pokemon-evolution-${chainId}`}
-          />
+          <Loading height="271px" $iconWidth="5%" key={`pokemon-evolution-${chainId}`} />
         )}
         {!pokemonEvo.isLoading && chain && (
           <BoxWrapper
@@ -85,5 +81,5 @@ export default function EvolutionChain({ ...rest }) {
         )}
       </AnimatePresence>
     </Box>
-  )
+  );
 }

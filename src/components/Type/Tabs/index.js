@@ -1,36 +1,31 @@
-import { useState } from 'react'
-import { useSelector } from 'react-redux'
-import styled from 'styled-components'
-import { motion, AnimatePresence } from 'framer-motion'
+import { useState } from 'react';
+import { useSelector } from 'react-redux';
+import styled from 'styled-components';
+import { motion, AnimatePresence } from 'framer-motion';
 // helpers
-import { hoverVariant, removeDash, fadeInUpVariant } from '../../../helpers'
+import { hoverVariant, removeDash, fadeInUpVariant } from '../../../helpers';
 // styles
-import { Button, SectionTitle } from '../../BaseStyles'
+import { Button, SectionTitle } from '../../BaseStyles';
 // components
-import Box from '../../Box'
-import InfiniteScroll from '../../InfiniteScroll'
-import Moves from './Moves'
+import Box from '../../Box';
+import InfiniteScroll from '../../InfiniteScroll';
+import Moves from './Moves';
 
 const TabContainer = styled(motion.div)`
   width: 100%;
-`
+`;
 
 export default function Tabs({ ...rest }) {
   // tab state
-  const [currTab, setCurrTab] = useState('pokemon')
+  const [currTab, setCurrTab] = useState('pokemon');
   // type selector
-  const typeInfo = useSelector(state => state.type)
+  const typeInfo = useSelector(state => state.type);
   // data
-  const { name, pokemonListWithId, moves } = typeInfo.data
+  const { name, pokemonListWithId, moves } = typeInfo.data;
 
   return (
     <Box align={{ xxs: 'center', lg: 'flex-start' }} {...rest}>
-      <Box
-        direction="row"
-        justify="space-evenly"
-        $flexWrap="wrap"
-        margin="0 0 1rem"
-      >
+      <Box direction="row" justify="space-evenly" $flexWrap="wrap" margin="0 0 1rem">
         <Button
           $active={currTab === 'pokemon'}
           onClick={() => setCurrTab('pokemon')}
@@ -52,7 +47,7 @@ export default function Tabs({ ...rest }) {
           Moves
         </Button>
       </Box>
-      <AnimatePresence exitBeforeEnter>
+      <AnimatePresence mode="wait">
         {!typeInfo.isLoading && currTab === 'pokemon' && (
           <TabContainer
             initial="hidden"
@@ -75,13 +70,11 @@ export default function Tabs({ ...rest }) {
             variants={fadeInUpVariant}
             key={`${name}-type-moves`}
           >
-            <SectionTitle>{`${removeDash(name)} Type Moves (${
-              moves.length
-            })`}</SectionTitle>{' '}
+            <SectionTitle>{`${removeDash(name)} Type Moves (${moves.length})`}</SectionTitle>{' '}
             <Moves />
           </TabContainer>
         )}
       </AnimatePresence>
     </Box>
-  )
+  );
 }

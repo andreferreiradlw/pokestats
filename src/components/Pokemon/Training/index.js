@@ -91,7 +91,7 @@ export default function Training({ ...rest }) {
   return (
     <Box align={{ xxs: 'center', lg: 'flex-start' }} {...rest}>
       <SectionTitle>Training</SectionTitle>
-      <AnimatePresence exitBeforeEnter>
+      <AnimatePresence mode="wait">
         {pokemonBio.isLoading && <Loading height="251px" $iconWidth="15%" key="pokemon-training" />}
         {!pokemonBio.isLoading && (
           <Table

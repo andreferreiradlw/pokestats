@@ -54,7 +54,7 @@ const App = ({ Component, pageProps, router }: AppProps): JSX.Element => {
     <Provider store={store}>
       <ThemeProvider>
         <Head />
-        <AnimatePresence exitBeforeEnter>
+        <AnimatePresence mode="wait">
           <motion.div
             key={router.route}
             initial="pageInitial"

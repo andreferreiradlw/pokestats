@@ -1,9 +1,9 @@
-import { useSelector } from 'react-redux'
-import { AnimatePresence } from 'framer-motion'
+import { useSelector } from 'react-redux';
+import { AnimatePresence } from 'framer-motion';
 // helpers
-import { removeDash, mapGeneration, fadeInUpVariant } from '../../../helpers'
+import { removeDash, mapGeneration, fadeInUpVariant } from '../../../helpers';
 // styles
-import { SectionMessage } from '../../BaseStyles'
+import { SectionMessage } from '../../BaseStyles';
 import {
   TableContainer,
   MovesTable,
@@ -11,19 +11,19 @@ import {
   NameTD,
   TableRow,
   TableBody,
-} from '../../Pokemon/Moves/StyledMoves'
+} from '../../Pokemon/Moves/StyledMoves';
 // components
-import Loading from '../../Loading'
-import TypeBadge from '../../TypeBadge'
+import Loading from '../../Loading';
+import TypeBadge from '../../TypeBadge';
 
 export default function Moves() {
   // moves selector
-  const typeMoves = useSelector(state => state.type.moves)
+  const typeMoves = useSelector(state => state.type.moves);
   // data
-  const { data, isLoading } = typeMoves
+  const { data, isLoading } = typeMoves;
 
   return (
-    <AnimatePresence exitBeforeEnter>
+    <AnimatePresence mode="wait">
       {/** LOADING */}
       {isLoading && (
         <Loading
@@ -55,11 +55,7 @@ export default function Moves() {
                   <td>
                     <TypeBadge margin="0" $iconOnly type={move.type.name} />
                   </td>
-                  <td>
-                    {move.damage_class
-                      ? removeDash(move.damage_class.name)
-                      : '-'}
-                  </td>
+                  <td>{move.damage_class ? removeDash(move.damage_class.name) : '-'}</td>
                   <td>{move.power || '-'}</td>
                   <td>{move.pp || '-'}</td>
                   <td>{move.accuracy || '-'}</td>
@@ -84,5 +80,5 @@ export default function Moves() {
         </SectionMessage>
       )}
     </AnimatePresence>
-  )
+  );
 }

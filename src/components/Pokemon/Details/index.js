@@ -1,41 +1,34 @@
-import { useSelector } from 'react-redux'
-import { AnimatePresence } from 'framer-motion'
+import { useSelector } from 'react-redux';
+import { AnimatePresence } from 'framer-motion';
 // helpers
-import { capitalize, removeDash } from '../../../helpers/typography'
-import { fadeInUpVariant } from '../../../helpers/animations'
+import { capitalize, removeDash } from '../../../helpers/typography';
+import { fadeInUpVariant } from '../../../helpers/animations';
 // components
-import BoxWrapper from '../../Box/StyledBox'
-import Loading from '../../Loading'
-import TypeBadge from '../../TypeBadge'
+import BoxWrapper from '../../Box/StyledBox';
+import Loading from '../../Loading';
+import TypeBadge from '../../TypeBadge';
 // styles
-import { PageHeading, Table, Numbered } from '../../BaseStyles'
-import { TypeContainer, Genera, Flavor } from './StyledDetails'
+import { PageHeading, Table, Numbered } from '../../BaseStyles';
+import { TypeContainer, Genera, Flavor } from './StyledDetails';
 
 export default function Details({ pokemonName, sizes, ...rest }) {
   // pokemon info
-  const pokemonInfo = useSelector(state => state.pokemon.info)
+  const pokemonInfo = useSelector(state => state.pokemon.info);
   // biology
-  const pokemonBio = useSelector(state => state.pokemon.biology)
+  const pokemonBio = useSelector(state => state.pokemon.biology);
   // game version
-  const gameVersion = useSelector(state => state.game.version)
+  const gameVersion = useSelector(state => state.game.version);
 
   // data
-  const { types, abilities, id, name, weight, height } = pokemonInfo.data
-  const {
-    genera,
-    flavor_text_entries,
-    shape,
-    color,
-    is_baby,
-    is_legendary,
-    is_mythical,
-  } = pokemonBio.data
+  const { types, abilities, id, name, weight, height } = pokemonInfo.data;
+  const { genera, flavor_text_entries, shape, color, is_baby, is_legendary, is_mythical } =
+    pokemonBio.data;
 
   // flavor text
   const flavorText = version => {
     const versionEntry = flavor_text_entries.filter(entry => {
-      return entry.version.name === version
-    })
+      return entry.version.name === version;
+    });
     // return formatted text
     // page breaks are treated just like newlines
     // soft hyphens followed by newlines vanish
@@ -50,22 +43,22 @@ export default function Details({ pokemonName, sizes, ...rest }) {
           .replace(/u' -\n'/, ' - ')
           .replace(/u'-\n'/, '-')
           .replace(/(\r\n|\n|\r)/gm, ' ')
-      : 'No description available for currently selected generation.'
-  }
+      : 'No description available for currently selected generation.';
+  };
 
   // weight
   const pokemonWeight = currWeight =>
-    `${currWeight / 10} kg ( ${Math.round(currWeight * 2.2046) / 10} lbs )`
+    `${currWeight / 10} kg ( ${Math.round(currWeight * 2.2046) / 10} lbs )`;
 
   // height
   const pokemonHeight = currHeight => {
     // calculate height in feet
-    const heightInFeet = Math.round(currHeight * 3.2808) / 10
+    const heightInFeet = Math.round(currHeight * 3.2808) / 10;
     // split number
-    const numbers = heightInFeet.toString().split('.')
+    const numbers = heightInFeet.toString().split('.');
     // return string
-    return `${currHeight / 10} m ( ${numbers[0] || '0'}'${numbers[1] || '0'}" )`
-  }
+    return `${currHeight / 10} m ( ${numbers[0] || '0'}'${numbers[1] || '0'}" )`;
+  };
 
   // abilities
   const pokemonAbilities = currAbilities =>
@@ -74,10 +67,10 @@ export default function Details({ pokemonName, sizes, ...rest }) {
         {`${i + 1}. ${removeDash(ability.name)} `}
         {is_hidden && '( Hidden Ability )'}
       </Numbered>
-    ))
+    ));
 
   return (
-    <AnimatePresence exitBeforeEnter>
+    <AnimatePresence mode="wait">
       {pokemonBio.isLoading && (
         <Loading
           sizes={sizes}
@@ -108,13 +101,10 @@ export default function Details({ pokemonName, sizes, ...rest }) {
             >
               {types.map(({ type }, i) => {
                 return (
-                  <TypeBadge
-                    type={type.name}
-                    key={`${type.name}-${i}-detail-${id}`}
-                  >
+                  <TypeBadge type={type.name} key={`${type.name}-${i}-detail-${id}`}>
                     {type.name}
                   </TypeBadge>
-                )
+                );
               })}
             </TypeContainer>
           )}
@@ -162,5 +152,5 @@ export default function Details({ pokemonName, sizes, ...rest }) {
         </BoxWrapper>
       )}
     </AnimatePresence>
-  )
+  );
 }

@@ -9,7 +9,9 @@
       "@/assets": ["src/assets"],
       "@/assets/*": ["src/assets/*"],
       "@/helpers": ["src/helpers"],
-      "@/helpers/*": ["src/helpers/*"]
+      "@/helpers/*": ["src/helpers/*"],
+      "@/types": ["types"],
+      "@/types/*": ["types/*"]
     },
     "target": "es5",
     "lib": ["dom", "dom.iterable", "esnext"],

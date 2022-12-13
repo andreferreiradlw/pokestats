@@ -1,36 +1,30 @@
 {
-  "extends": [
-    "alloy",
-    "alloy/react",
-    "alloy/typescript",
-    "plugin:@next/next/recommended",
-    "prettier"
-  ],
-  "env": {
-    "jest": true
-  },
-  "globals": {
-    "React": true,
-    "JSX": true
-  },
-  "plugins": [
-    "better-styled-components",
-    "prettier"
-  ],
+  "extends": ["alloy", "alloy/react", "alloy/typescript"],
+
+  "plugins": ["prettier", "react", "react-hooks", "@typescript-eslint", "better-styled-components"],
   "rules": {
-    "@typescript-eslint/no-require-imports": "off",
-    "@typescript-eslint/explicit-member-accessibility": "off",
-    "react/no-unstable-nested-components": [
-      "warn",
-      {
-        "allowAsProps": true
-      }
-    ],
+    "eqeqeq": "error",
+    "no-console": "warn",
+    "prettier/prettier": "error",
+    "react/display-name": "off",
+    "react/no-children-prop": "off",
+    "react/react-in-jsx-scope": "off",
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn",
     "better-styled-components/sort-declarations-alphabetically": 2
   },
-  "settings": {
-    "react": {
-      "version": "detect"
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
     }
-  }
+  },
+  "env": {
+    "browser": true,
+    "node": true,
+    "es6": true,
+    "jest": true
+  },
+  "ignorePatterns": ["node_modules", "build", "dist", "public"]
 }

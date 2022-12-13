@@ -12,16 +12,16 @@ import { default as ParticlesJS } from 'react-particles';
 import particleConfig from './config';
 
 const ParticlesContainer = styled(motion.div)`
+  background-color: ${({ theme }) => theme.particles.backgroundColor};
+  height: 100vh;
+  left: 0;
+  margin: 0;
+  overflow: hidden;
+  padding: 0;
   position: absolute;
   top: 0;
-  left: 0;
   width: 100%;
-  height: 100vh;
   z-index: -1;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  background-color: ${({ theme }) => theme.particles.backgroundColor};
 `;
 
 const ParticlesElement = styled(ParticlesJS)`

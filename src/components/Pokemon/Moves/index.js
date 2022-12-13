@@ -1,6 +1,6 @@
-import { useSelector } from 'react-redux'
-import { useState, useEffect, useRef } from 'react'
-import axios from 'axios'
+import { useSelector } from 'react-redux';
+import { useState, useEffect, useRef } from 'react';
+import axios from 'axios';
 // helpers
 import {
   mapVersionToGroup,
@@ -12,13 +12,13 @@ import {
   removeDash,
   staggerTableVariant,
   fadeInUpVariant,
-} from '../../../helpers'
+} from '../../../helpers';
 // components
-import Box from '../../Box'
-import Loading from '../../Loading'
-import TypeBadge from '../../TypeBadge'
+import Box from '../../Box';
+import Loading from '../../Loading';
+import TypeBadge from '../../TypeBadge';
 // styles
-import { SectionTitle, SectionMessage, Button } from '../../BaseStyles'
+import { SectionTitle, SectionMessage, Button } from '../../BaseStyles';
 import {
   TableContainer,
   MovesTable,
@@ -27,55 +27,55 @@ import {
   TableRow,
   TabContainer,
   TableBody,
-} from './StyledMoves'
+} from './StyledMoves';
 
 export default function Moves({ ...rest }) {
   // pokemon info
-  const pokemonInfo = useSelector(state => state.pokemon.info)
+  const pokemonInfo = useSelector(state => state.pokemon.info);
   // moves data
-  const { moves } = pokemonInfo.data
+  const { moves } = pokemonInfo.data;
   // game version
-  const gameVersion = useSelector(state => state.game.version)
+  const gameVersion = useSelector(state => state.game.version);
 
   // moves data state
-  const [pokemonMoves, setMoves] = useState()
+  const [pokemonMoves, setMoves] = useState();
   // tab state
-  const [activeTab, setActiveTab] = useState(1)
+  const [activeTab, setActiveTab] = useState(1);
   // learn method state
-  const [learnMethod, setLearnMethod] = useState()
+  const [learnMethod, setLearnMethod] = useState();
   // current pokemon moves
-  const [currMoves, setCurrMoves] = useState([])
+  const [currMoves, setCurrMoves] = useState([]);
   // machine names
-  const [machineNames, setMachineNames] = useState()
+  const [machineNames, setMachineNames] = useState();
   // loading
-  const [movesLoading, setMovesLoading] = useState(true)
+  const [movesLoading, setMovesLoading] = useState(true);
 
   // ref
-  const _isMounted = useRef(null)
+  const _isMounted = useRef(null);
   // manage mounted state to avoid memory leaks
   useEffect(() => {
-    _isMounted.current = true
+    _isMounted.current = true;
     return () => {
-      _isMounted.current = false
-    }
-  }, [])
+      _isMounted.current = false;
+    };
+  }, []);
 
   // fetch move data
   useEffect(() => {
     if (_isMounted.current && moves && moves.length) {
-      setMovesLoading(true)
+      setMovesLoading(true);
       // fetch
       fetchTypeData(moves)
         .then(movesData => {
-          if (_isMounted.current) setMoves(movesData)
+          if (_isMounted.current) setMoves(movesData);
         })
         .catch(errors => {
-          console.error('errors fetching moves data!', errors)
+          console.error('errors fetching moves data!', errors);
           // no moves
-          if (_isMounted.current) setMovesLoading(false)
-        })
+          if (_isMounted.current) setMovesLoading(false);
+        });
     }
-  }, [moves])
+  }, [moves]);
 
   // tab changes
   useEffect(() => {
@@ -83,47 +83,43 @@ export default function Moves({ ...rest }) {
       // tab changed! update learn method
       // changing learn method will trigger moves update
       // start loading first
-      setMovesLoading(true)
+      setMovesLoading(true);
       // update learn method state
       if (activeTab === 1) {
-        setLearnMethod('level-up')
+        setLearnMethod('level-up');
       } else if (activeTab === 2) {
-        setLearnMethod('machine')
+        setLearnMethod('machine');
       } else if (activeTab === 3) {
-        setLearnMethod('egg')
+        setLearnMethod('egg');
       } else if (activeTab === 4) {
-        setLearnMethod('tutor')
+        setLearnMethod('tutor');
       }
     }
-  }, [activeTab])
+  }, [activeTab]);
 
   // current pokemon moves
   useEffect(() => {
     if (_isMounted.current && pokemonMoves && learnMethod && gameVersion) {
       // filter moves by learn method and current game version
-      filterMoves(
-        pokemonMoves,
-        learnMethod,
-        mapVersionToGroup(gameVersion)
-      ).then(moves => {
+      filterMoves(pokemonMoves, learnMethod, mapVersionToGroup(gameVersion)).then(moves => {
         if (_isMounted.current) {
           if (moves.length) {
             // clear machine names state
             // when we set new currMoves, these won't match
-            setMachineNames()
+            setMachineNames();
             // update move state to show in table
-            setCurrMoves(moves)
+            setCurrMoves(moves);
             // this will trigger a new machine name search
           } else {
             // empty currMoves
-            setCurrMoves([])
+            setCurrMoves([]);
             // stop loading
-            setMovesLoading(false)
+            setMovesLoading(false);
           }
         }
-      })
+      });
     }
-  }, [pokemonMoves, learnMethod, gameVersion])
+  }, [pokemonMoves, learnMethod, gameVersion]);
 
   // current pokemon moves
   useEffect(() => {
@@ -137,29 +133,29 @@ export default function Moves({ ...rest }) {
             const names = responses.map(res => {
               // if request fails will return null
               if (res === null) {
-                return '❌'
+                return '❌';
               } else {
-                return res.data.item.name
+                return res.data.item.name;
               }
-            })
+            });
             if (_isMounted.current) {
               // update machine names state
-              setMachineNames(names)
+              setMachineNames(names);
               // stop loading
-              setMovesLoading(false)
+              setMovesLoading(false);
             }
-          })
-        )
+          }),
+        );
       } else {
         // if not machine just stop loading instead
-        if (_isMounted.current) setMovesLoading(false)
+        if (_isMounted.current) setMovesLoading(false);
       }
     }
-  }, [currMoves])
+  }, [currMoves]);
 
   useEffect(() => {
-    console.log(movesLoading)
-  }, [movesLoading])
+    console.log('moves loading: ', movesLoading);
+  }, [movesLoading]);
 
   return (
     <Box align={{ xxs: 'center', lg: 'flex-start' }} {...rest}>
@@ -211,7 +207,7 @@ export default function Moves({ ...rest }) {
         <Loading
           height="100%"
           $iconWidth={{ xxs: '20%', xs: '15%', md: '10%', lg: '5%' }}
-          passkey={`pokemon-moves-loading`}
+          passkey="pokemon-moves-loading"
         />
       ) : currMoves.length ? (
         <TableContainer
@@ -236,7 +232,7 @@ export default function Moves({ ...rest }) {
               </tr>
             </thead>
             <TableBody
-              key={`moves-tbody`}
+              key="moves-tbody"
               initial="hidden"
               animate="show"
               exit="exit"
@@ -244,14 +240,14 @@ export default function Moves({ ...rest }) {
             >
               {currMoves.map((move, i) => (
                 <TableRow key={`${move.name}-${i}`}>
-                  {learnMethod === 'level-up' && (
-                    <td>{move.level_learned_at}</td>
-                  )}
+                  {learnMethod === 'level-up' && <td>{move.level_learned_at}</td>}
                   {learnMethod === 'machine' &&
-                    (machineNames && machineNames[i] ? (
+                    (machineNames?.[i] ? (
                       <td>{machineNames[i].toUpperCase()}</td>
                     ) : (
-                      <td>{<Loading $iconWidth="25px" />}</td>
+                      <td>
+                        <Loading $iconWidth="25px" />
+                      </td>
                     ))}
                   {learnMethod === 'egg' && <td>-</td>}
                   {learnMethod === 'tutor' && <td>-</td>}
@@ -282,5 +278,5 @@ export default function Moves({ ...rest }) {
         </SectionMessage>
       )}
     </Box>
-  )
+  );
 }

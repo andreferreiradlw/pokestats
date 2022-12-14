@@ -10,13 +10,7 @@ import GitHub from '../../assets/svg/github.svg';
 
 export default function Footer({ ...rest }) {
   return (
-    <FooterContainer
-      initial="hidden"
-      animate="show"
-      variants={footerVariant}
-      key="layout-footer"
-      {...rest}
-    >
+    <FooterContainer {...rest}>
       <Box
         direction={{ xxs: 'column', sm: 'row' }}
         align={{ xxs: 'flex-start', sm: 'center' }}

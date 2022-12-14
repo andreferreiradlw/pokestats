@@ -1,22 +1,22 @@
 // redux
-import { useDispatch, useSelector } from 'react-redux'
-import { changeVersion } from './gameSlice'
+import { useDispatch, useSelector } from 'react-redux';
+import { changeVersion } from './gameSlice';
 // next
-import Link from 'next/link'
+import Link from 'next/link';
 // components
-import Box from '../Box'
-import Autocomplete from '../Autocomplete'
+import Box from '../Box';
+import Autocomplete from '../Autocomplete';
 // styles
-import { Select } from '../BaseStyles'
-import { Heading, SelectContainer } from './styledHeader'
+import { Select } from '../BaseStyles';
+import { Heading, SelectContainer } from './styledHeader';
 // Info
-import { gameVersions } from '../../helpers/gameVersion'
+import { gameVersions } from '../../helpers/gameVersion';
 
 export default function HeaderComponent({ withGameVersion = true, ...rest }) {
   // dispatch
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   // game version
-  const gameVersion = useSelector(state => state.game.version)
+  const gameVersion = useSelector(state => state.game.version);
 
   return (
     <Box as="header" margin="2rem 0" {...rest}>
@@ -53,13 +53,8 @@ export default function HeaderComponent({ withGameVersion = true, ...rest }) {
             </SelectContainer>
           )}
         </div>
-        <Autocomplete
-          width="350px"
-          justify="flex-end"
-          align="flex-start"
-          margin="none"
-        />
+        {/* <Autocomplete width="350px" justify="flex-end" align="flex-start" margin="none" /> */}
       </Box>
     </Box>
-  )
+  );
 }

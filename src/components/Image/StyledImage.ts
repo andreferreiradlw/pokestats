@@ -1,11 +1,13 @@
-import styled, { css } from 'styled-components'
-import { motion } from 'framer-motion'
+import styled, { css } from 'styled-components';
+import { motion } from 'framer-motion';
 // helpers
-import { tumble } from '../BaseStyles/keyframes'
-// svg
-import Egg from '../../assets/svg/egg.svg'
+import { tumble } from '../BaseStyles/keyframes';
+// components
+import Box from '@/components/Box';
+// assets
+import Egg from '@/assets/svg/egg.svg';
 
-const ImageWrapper = styled(motion.div)`
+const ImageWrapper = styled(Box)`
   align-items: center;
   display: flex;
   justify-content: center;
@@ -19,9 +21,9 @@ const ImageWrapper = styled(motion.div)`
     css`
       height: ${height ? `${height}px` : 'auto'};
     `}
-`
+`;
 
-const Image = styled(motion.img)`
+const Image = styled(motion.img)<{ $pixelated?: boolean; height?: string }>`
   will-change: opacity;
   // adjust to wrapper
   ${({ height }) =>
@@ -36,7 +38,7 @@ const Image = styled(motion.img)`
     css`
       image-rendering: pixelated;
     `}
-`
+`;
 
 const Placeholder = styled(motion.div)`
   align-items: center;
@@ -45,7 +47,7 @@ const Placeholder = styled(motion.div)`
   justify-content: center;
   padding: 15px 0;
   width: 100%;
-`
+`;
 
 const EggIcon = styled(Egg)`
   animation: ${tumble} 5s ease-in-out 0s infinite;
@@ -58,6 +60,6 @@ const EggIcon = styled(Egg)`
     css`
       width: ${placeholderwidth ? `${placeholderwidth}` : 'auto'};
     `}
-`
+`;
 
-export { ImageWrapper, Image, Placeholder, EggIcon }
+export { ImageWrapper, Image, Placeholder, EggIcon };

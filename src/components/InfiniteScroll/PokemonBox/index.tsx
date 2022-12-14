@@ -26,7 +26,7 @@ const PokemonBox = forwardRef(
             crossorigin="anonymous"
             alt={name}
             key={`infinite-scroll-${name}-${id}`}
-            $pixelated
+            pixelated
             width={115}
             height={115}
             offset={300}

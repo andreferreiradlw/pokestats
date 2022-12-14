@@ -1,11 +1,23 @@
 import { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
-import LazyLoad from 'react-lazyload';
-import { AnimatePresence } from 'framer-motion';
+// types
+import type { BoxProps } from '@/components/Box';
 // helpers
-import { placeholderVariant, fadeInUpVariant } from '../../helpers/animations';
+import { AnimatePresence } from 'framer-motion';
+// animations
+import { placeholderVariant, fadeInUpVariant } from '@/helpers/animations';
+// components
+import LazyLoad from 'react-lazyload';
 // styles
 import { ImageWrapper, Image, Placeholder, EggIcon } from './StyledImage';
+
+export interface ImageProps extends BoxProps {
+  pixelated?: boolean;
+  offset?: number;
+  lazy?: boolean;
+  placeholderwidth?: string;
+  height: string;
+}
 
 const ConditionalWrapper = ({ isLazy, children, offset }) =>
   isLazy ? (
@@ -16,17 +28,17 @@ const ConditionalWrapper = ({ isLazy, children, offset }) =>
     children
   );
 
-function ImageComponent({
+const ImageComponent = ({
   alt,
   width,
   height,
   placeholderwidth = '65%',
-  $pixelated,
+  pixelated,
   src,
   offset,
-  notLazy,
+  lazy = true,
   ...rest
-}) {
+}: ImageProps): JSX.Element => {
   // img src
   const [imgSrc, setImgSrc] = useState(null);
   // ref
@@ -34,6 +46,7 @@ function ImageComponent({
   // manage mounted state to avoid memory leaks
   useEffect(() => {
     _isMounted.current = true;
+
     return () => {
       _isMounted.current = false;
       setImgSrc(null);
@@ -53,11 +66,11 @@ function ImageComponent({
     }
     // fetch if mounted
     if (_isMounted.current) fetchImage();
-  }, [_isMounted]);
+  }, [_isMounted, src]);
 
   return (
-    <ConditionalWrapper key={alt} isLazy={!notLazy} offset={offset} {...rest}>
-      <ImageWrapper width={width} height={height}>
+    <ConditionalWrapper key={alt} isLazy={lazy} offset={offset}>
+      <ImageWrapper width={width} height={height} {...rest}>
         <AnimatePresence mode="wait">
           {!imgSrc && (
             <Placeholder
@@ -74,7 +87,7 @@ function ImageComponent({
             <Image
               alt={alt}
               src={imgSrc}
-              $pixelated={$pixelated}
+              $pixelated={pixelated}
               height={height}
               initial="hidden"
               animate="show"
@@ -87,6 +100,6 @@ function ImageComponent({
       </ImageWrapper>
     </ConditionalWrapper>
   );
-}
+};
 
 export default ImageComponent;

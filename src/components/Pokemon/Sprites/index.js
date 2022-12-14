@@ -37,7 +37,7 @@ export default function Sprites({ ...rest }) {
                       key={`sprite-${key}`}
                       src={sprites[key]}
                       width={115}
-                      $pixelated
+                      pixelated
                       placeholderwidth="40%"
                     />
                     <p>{removeUnderscore(key)}</p>
@@ -67,7 +67,7 @@ export default function Sprites({ ...rest }) {
                           src={sprites.versions['generation-v']['black-white'].animated[key]}
                           width={115}
                           animated
-                          $pixelated
+                          pixelated
                           placeholderwidth="40%"
                         />
                         <p>{removeUnderscore(key)}</p>

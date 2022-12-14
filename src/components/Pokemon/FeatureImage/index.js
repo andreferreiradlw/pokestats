@@ -10,7 +10,7 @@ export default function FeaturedImage({ pokemonNames, pokemonName, pokemonId, ..
   return (
     <ImageContainer {...rest}>
       <Image
-        notLazy
+        lazy={false}
         placeholderwidth="20%"
         alt={pokemonNames?.find(name => name.language.name === 'en').name}
         key={`featured-${pokemonName}-${pokemonId}`}

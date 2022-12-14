@@ -91,7 +91,7 @@ export default function Evolution({ noArrow = false, species, details, ...rest }
               src={imgSrc}
               width={115}
               height={115}
-              notLazy
+              lazy={false}
             />
             <NumberId>{`#${currSpecies.id}`}</NumberId>
             <PokeName>{removeDash(currSpecies.name)}</PokeName>

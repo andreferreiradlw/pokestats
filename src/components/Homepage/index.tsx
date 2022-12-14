@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import { AnimatePresence } from 'framer-motion';
 // heplpers
-import { staggerInitialVariant, fadeInUpVariant } from '../../helpers';
+import { staggerInitialVariant, fadeInUpVariant } from '@/helpers';
 // types
 import type { Pokemon, PokemonType } from '@/types';
 // components

@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { removeDash } from '@/helpers';
 // types
 import type { Pokemon, PokemonType } from '@/types';
+import type { BoxProps } from '@/components/Box';
 // styles
 import {
   Container,
@@ -15,11 +16,7 @@ import {
   PokeID,
 } from './styledAutoComplete';
 
-export interface AutocompleteProps {
-  align?: string;
-  direction?: string;
-  grow?: boolean;
-  margin?: string;
+export interface AutocompleteProps extends BoxProps {
   filterList: (PokemonType | Pokemon)[];
 }
 
@@ -27,7 +24,6 @@ const Autocomplete = ({
   filterList,
   align = 'stretch',
   direction = 'row',
-  grow = false,
   margin = '0 auto',
   ...rest
 }: AutocompleteProps): JSX.Element => {
@@ -115,53 +111,50 @@ const Autocomplete = ({
   };
 
   return (
-    <>
-      {/** @ts-ignore */}
-      <Container align={align} direction={direction} $flexGrow={grow} margin={margin} {...rest}>
-        <label htmlFor="autocomplete" id="autocomplete_label" aria-hidden="true">
-          Search Pokemon or Type Name
-        </label>
-        <Input
-          type="text"
-          autoComplete="off"
-          placeholder="Search Pokemon or Type Name"
-          id="autocomplete"
-          aria-labelledby="autocomplete_label"
-          value={search}
-          onChange={e => handleInputChange(e)}
-          onKeyDown={e => handleKeyDown(e)}
-        />
-        {/** display filtered list */}
-        {!!filtered?.length && (
-          <ListWrapper>
-            {filtered.map((item, i) => (
-              <OptionWrapper
-                href={`/${item.assetType}/${item.name}`}
-                key={`${item.assetType}-${item.id}-${item.name}-${i}`}
-                onClick={() => resetStates()}
-                onFocus={() => setActiveOption(i)}
-                onKeyDown={e => handleKeyDown(e)}
-                ref={currOption => currOption && i === activeOption && currOption.focus()}
-              >
-                {item.assetType === 'type' && (
-                  <OptionImg
-                    $type={item.assetType}
-                    src={`https://raw.githubusercontent.com/andreferreiradlw/pokestats/main/src/assets/svg/types/${item.name}.svg`}
-                  />
-                )}
-                {item.assetType === 'pokemon' && (
-                  <OptionImg
-                    src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${item.id}.png`}
-                  />
-                )}
-                <Option>{removeDash(item.name)}</Option>
-                <PokeID>{`#${item.id}`}</PokeID>
-              </OptionWrapper>
-            ))}
-          </ListWrapper>
-        )}
-      </Container>
-    </>
+    <Container align={align} direction={direction} margin={margin} {...rest}>
+      <label htmlFor="autocomplete" id="autocomplete_label" aria-hidden="true">
+        Search Pokemon or Type Name
+      </label>
+      <Input
+        type="text"
+        autoComplete="off"
+        placeholder="Search Pokemon or Type Name"
+        id="autocomplete"
+        aria-labelledby="autocomplete_label"
+        value={search}
+        onChange={e => handleInputChange(e)}
+        onKeyDown={e => handleKeyDown(e)}
+      />
+      {/** display filtered list */}
+      {!!filtered?.length && (
+        <ListWrapper>
+          {filtered.map((item, i) => (
+            <OptionWrapper
+              href={`/${item.assetType}/${item.name}`}
+              key={`${item.assetType}-${item.id}-${item.name}-${i}`}
+              onClick={() => resetStates()}
+              onFocus={() => setActiveOption(i)}
+              onKeyDown={e => handleKeyDown(e)}
+              ref={currOption => currOption && i === activeOption && currOption.focus()}
+            >
+              {item.assetType === 'type' && (
+                <OptionImg
+                  $type={item.assetType}
+                  src={`https://raw.githubusercontent.com/andreferreiradlw/pokestats/main/src/assets/svg/types/${item.name}.svg`}
+                />
+              )}
+              {item.assetType === 'pokemon' && (
+                <OptionImg
+                  src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${item.id}.png`}
+                />
+              )}
+              <Option>{removeDash(item.name)}</Option>
+              <PokeID>{`#${item.id}`}</PokeID>
+            </OptionWrapper>
+          ))}
+        </ListWrapper>
+      )}
+    </Container>
   );
 };
 

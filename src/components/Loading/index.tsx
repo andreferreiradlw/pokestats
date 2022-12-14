@@ -1,12 +1,18 @@
-import { forwardRef } from 'react'
+import { forwardRef } from 'react';
+// types
+import type { BoxProps } from '@/components/Box';
 // styles
-import { LoadingContainer, PotionIcon, Text } from './StyledLoading'
-import BoxWrapper from '../Box/StyledBox'
+import { LoadingContainer, PotionIcon, Text } from './StyledLoading';
+// components
+import BoxWrapper from '@/components/Box/StyledBox';
 // helpers
-import {
-  staggerExitLoadingVariant,
-  loadingChild,
-} from '../../helpers/animations'
+import { staggerExitLoadingVariant, loadingChild } from '@/helpers/animations';
+
+interface LoadingProps extends BoxProps {
+  $iconWidth?: string;
+  noIcon?: boolean;
+  passKey?: string;
+}
 
 const Loading = forwardRef(
   (
@@ -19,9 +25,9 @@ const Loading = forwardRef(
       align = 'center',
       passKey,
       ...rest
-    },
-    ref
-  ) => {
+    }: LoadingProps,
+    ref: any,
+  ): JSX.Element => {
     return (
       <LoadingContainer
         ref={ref}
@@ -36,12 +42,7 @@ const Loading = forwardRef(
         {...rest}
       >
         {!noIcon && (
-          <BoxWrapper
-            width="100%"
-            justify="center"
-            variants={loadingChild}
-            key={`icon-${passKey}`}
-          >
+          <BoxWrapper width="100%" justify="center" variants={loadingChild} key={`icon-${passKey}`}>
             <PotionIcon $iconWidth={$iconWidth} />
           </BoxWrapper>
         )}
@@ -51,10 +52,10 @@ const Loading = forwardRef(
           </BoxWrapper>
         )}
       </LoadingContainer>
-    )
-  }
-)
+    );
+  },
+);
 
-Loading.displayName = 'Loading'
+Loading.displayName = 'Loading';
 
-export default Loading
+export default Loading;

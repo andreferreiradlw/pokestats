@@ -1,21 +1,22 @@
-import styled, { css } from 'styled-components'
+import styled, { css } from 'styled-components';
+// types
+import type { LoadingProps } from './index';
 // components
-import BoxWrapper from '../Box/StyledBox'
+import BoxWrapper from '@/components/Box/StyledBox';
 // styles
-import { SectionSubTitle, ellipsis, rotate, riseUp } from '../BaseStyles'
+import { SectionSubTitle, ellipsis, rotate, riseUp } from '@/components/BaseStyles';
 // helpers
-import { responsiveProps } from '../../helpers/box'
+import { responsiveProps } from '@/helpers/box';
 // svg
-import Potion from '../../assets/svg/potion.svg'
+import Potion from '@/assets/svg/potion.svg';
 
 const LoadingContainer = styled(BoxWrapper)`
-  flex-direction: column;
   align-items: center;
+  flex-direction: column;
+  flex-grow: 1;
   justify-content: center;
   width: 100%;
   z-index: 2;
-  flex-grow 1;
-  // background-color: white;
 
   ${({ height }) =>
     height
@@ -26,11 +27,11 @@ const LoadingContainer = styled(BoxWrapper)`
       : css`
           height: auto;
         `}
-`
+`;
 
-const PotionIcon = styled(Potion)`
-  ${({ $iconWidth }) => $iconWidth && responsiveProps('width', $iconWidth)}
+const PotionIcon = styled(Potion)<{ $iconwidth?: LoadingProps['$iconWidth'] }>`
   height: auto;
+  ${({ $iconWidth }) => $iconWidth && responsiveProps('width', $iconWidth)}
   // rotation
   animation: 20s ${rotate} 0ms infinite ease-in-out;
   // rise up
@@ -52,7 +53,7 @@ const PotionIcon = styled(Potion)`
   .potion_svg__bubble-5 {
     animation-delay: 0.1s;
   }
-`
+`;
 
 const Text = styled(SectionSubTitle)`
   margin-top: 2rem;
@@ -64,6 +65,6 @@ const Text = styled(SectionSubTitle)`
     text-align: left;
     width: 1em;
   }
-`
+`;
 
-export { LoadingContainer, PotionIcon, Text }
+export { LoadingContainer, PotionIcon, Text };

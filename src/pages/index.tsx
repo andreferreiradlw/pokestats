@@ -40,6 +40,7 @@ export const getStaticProps: GetStaticProps = async () => {
     };
   } catch (error) {
     console.error(error);
+    // redirects to 404 page
     return { notFound: true };
   }
 };

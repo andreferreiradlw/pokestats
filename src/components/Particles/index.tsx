@@ -30,7 +30,7 @@ const ParticlesElement = styled(ParticlesJS)`
   width: 100%;
 `;
 
-const Particles = (): JSX.Element => {
+const Particles = ({ ...props }): JSX.Element => {
   const particlesInit = useCallback(async (engine: Engine) => {
     // you can initialize the tsParticles instance (engine) here, adding custom shapes or presets
     // this loads the tsparticles package bundle, it's the easiest method for getting everything ready
@@ -39,7 +39,13 @@ const Particles = (): JSX.Element => {
   }, []);
 
   return (
-    <ParticlesContainer initial="hidden" animate="show" variants={scaleInVariant} key="particles">
+    <ParticlesContainer
+      initial="hidden"
+      animate="show"
+      variants={scaleInVariant}
+      key="particles"
+      {...props}
+    >
       <ParticlesElement
         width="100%"
         height="100%"

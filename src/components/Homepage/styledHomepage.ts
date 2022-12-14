@@ -1,9 +1,9 @@
-import styled from 'styled-components'
-import { motion } from 'framer-motion'
+import styled from 'styled-components';
+import { motion } from 'framer-motion';
 // components
-import BoxWrapper from '../Box/StyledBox'
+import BoxWrapper from '@/components/Box/StyledBox';
 // styles
-import { mouseScroll } from '../BaseStyles'
+import { mouseScroll } from '@/components/BaseStyles';
 
 const Container = styled(BoxWrapper)`
   align-items: center;
@@ -15,7 +15,7 @@ const Container = styled(BoxWrapper)`
   min-height: 100vh;
   position: relative;
   z-index: 1;
-`
+`;
 
 const RepoAnchor = styled(motion.a)`
   position: absolute;
@@ -32,7 +32,7 @@ const RepoAnchor = styled(motion.a)`
     height: auto;
     width: 50px;
   }
-`
+`;
 
 const ScrollDown = styled(motion.span)`
   border: 2px solid black;
@@ -58,6 +58,6 @@ const ScrollDown = styled(motion.span)`
     top: 8px;
     width: 6px;
   }
-`
+`;
 
-export { Container, RepoAnchor, ScrollDown }
+export { Container, RepoAnchor, ScrollDown };

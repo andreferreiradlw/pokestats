@@ -11,9 +11,9 @@ import Particles from '@/components/Particles';
 import PokemonList from './PokemonList';
 // styles
 import { Container, RepoAnchor, ScrollDown } from './styledHomepage';
-import { MainHeading } from '../BaseStyles';
+import { MainHeading } from '@/components/BaseStyles';
 // svg
-import Github from '../../assets/svg/github.svg';
+import Github from '@/assets/svg/github.svg';
 
 interface HomepageProps {
   allPokemon: Pokemon[];
@@ -24,11 +24,13 @@ const Homepage = ({ allPokemon, pokemonTypes }: HomepageProps): JSX.Element => {
   // router
   const router = useRouter();
 
-  const routeRandom = () =>
+  const routeRandom = () => {
+    window.fathom.trackGoal('M4G8VCB4', 0);
     router.push(`/pokemon/${allPokemon[Math.floor(Math.random() * allPokemon.length)].name}`);
+  };
 
   return (
-    <AnimatePresence mode="wait">
+    <AnimatePresence>
       <RepoAnchor
         href="https://github.com/andreferreiradlw/pokestats"
         target="_blank"
@@ -64,8 +66,8 @@ const Homepage = ({ allPokemon, pokemonTypes }: HomepageProps): JSX.Element => {
         </Button>
         <ScrollDown variants={fadeInUpVariant} key="homepage-scroll-down" />
       </Container>
-      {/* <PokemonList /> */}
-      <Particles />
+      <PokemonList pokemon={allPokemon} key="homepage-pokemon-list" />
+      <Particles key="homepage-particles" />
     </AnimatePresence>
   );
 };

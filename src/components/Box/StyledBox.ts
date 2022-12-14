@@ -1,7 +1,11 @@
 import styled, { css } from 'styled-components';
-import { responsiveProps, flexStyle } from '../../helpers/box';
-import { boxConfig } from './config';
+// types
+import type { BoxProps } from './index';
+// helpers
+import { responsiveProps, flexStyle } from '@/helpers';
 import { motion } from 'framer-motion';
+// config
+import { boxConfig } from './config';
 
 const debugStyle = () => css`
   background-color: #5901ad40;
@@ -12,7 +16,7 @@ const gutterStyle = () => css`
   ${responsiveProps('padding', boxConfig.gutterWidth)}
 `;
 
-export default styled(motion.div)`
+export default styled(motion.div)<BoxProps>`
   /** dynamic styles */
   ${({
     alignSelf,

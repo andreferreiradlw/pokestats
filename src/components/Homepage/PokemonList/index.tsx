@@ -15,14 +15,13 @@ interface PokemonListProps extends BoxProps {
   pokemon: Pokemon[];
 }
 
-const sortItems = (list: Pokemon[], sortProperty: string): Pokemon[] => {
-  console.log('sorting pokemon');
-  return [...list].sort((a, b) => {
+const sortItems = (list: Pokemon[], sortProperty: string): Pokemon[] =>
+  [...list].sort((a, b) => {
     if (a[sortProperty] > b[sortProperty]) return 1;
     if (a[sortProperty] < b[sortProperty]) return -1;
     return 0;
   });
-};
+
 const PokemonList = ({ pokemon, ...rest }: PokemonListProps): JSX.Element => {
   // display pokemon list
   const [showPokemon, setShowPokemon] = useState<Pokemon[]>(pokemon);

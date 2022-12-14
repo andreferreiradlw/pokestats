@@ -7,7 +7,7 @@ export const staggerExitVariant = {
       delayChildren: 0.5,
     },
   },
-}
+};
 export const staggerExitLoadingVariant = {
   exit: {
     transition: {
@@ -17,20 +17,20 @@ export const staggerExitLoadingVariant = {
       when: 'afterChildren',
     },
   },
-}
+};
 
 export const staggerInitialVariant = {
   hidden: { opacity: 1 },
   show: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.5,
+      staggerChildren: 0.2,
     },
   },
   exit: {
     opacity: 0,
   },
-}
+};
 
 export const staggerTableVariant = {
   hidden: { opacity: 0 },
@@ -44,7 +44,7 @@ export const staggerTableVariant = {
   exit: {
     opacity: 0,
   },
-}
+};
 
 // PAGES
 export const pageVariant = {
@@ -64,7 +64,7 @@ export const pageVariant = {
     opacity: 0,
     transition: { duration: 0.2, ease: 'easeInOut' },
   },
-}
+};
 
 export const pageContainerVariant = {
   hidden: {
@@ -87,7 +87,7 @@ export const pageContainerVariant = {
     opacity: 0,
     transition: { duration: 0.1, ease: 'easeInOut' },
   },
-}
+};
 
 // LOADING
 export const loadingChild = {
@@ -108,7 +108,7 @@ export const loadingChild = {
       duration: 0.2,
     },
   },
-}
+};
 
 // IMAGE PLACEHOLDER
 export const placeholderVariant = {
@@ -128,7 +128,7 @@ export const placeholderVariant = {
       ease: 'easeInOut',
     },
   },
-}
+};
 
 // ENTER ANIMATIONS
 export const footerVariant = {
@@ -141,7 +141,7 @@ export const footerVariant = {
       delay: 1.5,
     },
   },
-}
+};
 
 export const fadeInUpVariant = {
   hidden: {
@@ -171,7 +171,7 @@ export const fadeInUpVariant = {
     },
   },
   tap: { scale: 0.99 },
-}
+};
 
 export const fadeInRightVariant = {
   hidden: {
@@ -193,7 +193,7 @@ export const fadeInRightVariant = {
     x: 0,
     opacity: 0,
   },
-}
+};
 
 export const scaleInVariant = {
   hidden: {
@@ -211,7 +211,7 @@ export const scaleInVariant = {
       stiffness: 200,
     },
   },
-}
+};
 
 // HOVER ANIMATIONS
 export const hoverVariant = {
@@ -224,11 +224,11 @@ export const hoverVariant = {
     },
   },
   tap: { scale: 0.99 },
-}
+};
 
 export const scaleHoverVariant = {
   initial: { scale: 1 },
   animate: { scale: 1 },
   hover: { scale: 1.5 },
   tap: { scale: 1 },
-}
+};

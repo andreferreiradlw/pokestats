@@ -6,7 +6,8 @@ import { PokemonClient, Pokemon, Type } from 'pokenode-ts';
 const toUrl = (host: string, route: string, priority = '1.0') => `
   <url>
     <loc>${`https://${host}${route}`}</loc>
-    <changefreq>monthly</changefreq>
+    <lastmod>${new Date().toISOString()}</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>${priority}</priority>
   </url>
 `;

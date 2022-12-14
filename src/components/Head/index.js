@@ -34,7 +34,6 @@ export default function Heading({ children }) {
         {`${pageTitle(router.query)}PokeStats.gg - The online open-sourced Pokémon
         encyclopaedia. Pokédex powered by PokeApi.`}
       </title>
-      <link rel="canonical" href={`https://pokestats.gg${router.asPath}`} />
       {/** MANIFEST */}
       <link href="/manifest.json" rel="manifest" />
       {/** ICONS */}

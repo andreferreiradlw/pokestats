@@ -1,8 +1,7 @@
 // types
 import type { GetServerSideProps } from 'next';
 // helpers
-import { PokemonClient, Pokemon } from 'pokenode-ts';
-import { typeList } from '@/helpers';
+import { PokemonClient, Pokemon, Type } from 'pokenode-ts';
 
 const toUrl = (host: string, route: string, priority = '1.0') => `
   <url>
@@ -16,11 +15,12 @@ const createSitemap = (
   host: string,
   routes: string[],
   pokemonList: Pokemon[],
+  pokemonTypes: Type[],
 ) => `<?xml version="1.0" encoding="UTF-8"?>
   <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     ${routes.map(route => toUrl(host, route))}
     ${pokemonList.map(pokemon => toUrl(host, `/pokemon/${pokemon.name}`))}
-    ${typeList.map(type => toUrl(host, `/type/${type.name}`))}
+    ${pokemonTypes.map(type => toUrl(host, `/type/${type.name}`))}
   </urlset>`;
 
 const Sitemap = () => {};
@@ -33,14 +33,18 @@ export const getServerSideProps: GetServerSideProps = async context => {
   const routes = [''];
 
   try {
-    // fetch pokemon list
-    const pokemonList = await api.listPokemons(0, 809);
+    const [pokemonData, typesData] = await Promise.all([api.listPokemons(0, 809), api.listTypes()]);
+
+    if (!pokemonData || !typesData) {
+      return { notFound: true };
+    }
 
     // sitemap
     const sitemap = createSitemap(
       req.headers.host,
       routes,
-      pokemonList.results as unknown as Pokemon[],
+      pokemonData.results as unknown as Pokemon[],
+      typesData.results as unknown as Type[],
     );
 
     // response

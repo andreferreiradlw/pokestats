@@ -1,9 +1,12 @@
 import { forwardRef } from 'react';
+// types
+import type { HTMLMotionProps } from 'framer-motion';
+// helpers
 import { useForwardedRef } from '@/helpers';
 // styles
 import BoxWrapper from './StyledBox';
 
-export interface BoxProps {
+export interface BoxProps extends HTMLMotionProps<'div'> {
   alignSelf?: string | Record<string, any>;
   margin?: string | Record<string, any>;
   padding?: string | Record<string, any>;

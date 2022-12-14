@@ -11,10 +11,12 @@ import PokemonBox from './PokemonBox';
 export interface InfiniteScrollProps extends BoxProps {
   pokemonList: Pokemon[];
   itemsPerPage?: number;
+  dark?: boolean;
 }
 
 export default function InfiniteScroll({
   pokemonList,
+  dark,
   itemsPerPage = 35,
   direction = 'row',
   align = 'flex-start',
@@ -109,6 +111,7 @@ export default function InfiniteScroll({
       <Box direction={direction} align={align} $flexWrap={$flexWrap} {...rest}>
         {showList?.map(currPokemon => (
           <PokemonBox
+            dark={dark}
             key={`infinite-scroll-${currPokemon.id}`}
             pokemon={currPokemon}
             whileHover="hover"

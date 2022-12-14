@@ -59,7 +59,7 @@ export default function Tabs({ ...rest }) {
             <SectionTitle>{`${removeDash(name)} Type Pokemon (${
               pokemonListWithId.length
             })`}</SectionTitle>
-            <InfiniteScroll pokemonList={pokemonListWithId} $dark />
+            <InfiniteScroll pokemonList={pokemonListWithId} dark />
           </TabContainer>
         )}
         {!typeInfo.isLoading && currTab === 'moves' && (

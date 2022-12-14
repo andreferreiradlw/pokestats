@@ -11,16 +11,17 @@ import Image from '../../Image';
 
 interface PokemonBoxProps extends HTMLMotionProps<'div'> {
   pokemon: Pokemon;
+  dark?: boolean;
 }
 
 const PokemonBox = forwardRef(
-  ({ pokemon, ...rest }: PokemonBoxProps, ref: React.Ref<HTMLDivElement>): JSX.Element => {
+  ({ pokemon, dark, ...rest }: PokemonBoxProps, ref: React.Ref<HTMLDivElement>): JSX.Element => {
     // data from prop
     const { name, id } = pokemon;
 
     return (
       <Link href={`/pokemon/${name}`}>
-        <PokeBox ref={ref} {...rest}>
+        <PokeBox ref={ref} $dark={dark} {...rest}>
           <Image
             src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`}
             crossOrigin="anonymous"

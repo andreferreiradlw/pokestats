@@ -1,4 +1,4 @@
-export const dimensions = ['xxs', 'xs', 'sm', 'md', 'lg', 'xl', 'xxl']
+export const dimensions = ['xxs', 'xs', 'sm', 'md', 'lg', 'xl', 'xxl'];
 
 export const breakpoints = {
   xxs: 0.1,
@@ -8,7 +8,7 @@ export const breakpoints = {
   lg: 64, // 1024px
   xl: 90, // 1440px
   xxl: 160, // 2560px
-}
+};
 
 export const boxConfig = {
   // box gutter
@@ -18,4 +18,4 @@ export const boxConfig = {
     lg: '0 2rem',
   },
   constrained: '1300px',
-}
+};

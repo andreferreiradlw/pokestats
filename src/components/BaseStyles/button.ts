@@ -1,5 +1,5 @@
-import styled, { css } from 'styled-components'
-import { motion } from 'framer-motion'
+import styled, { css } from 'styled-components';
+import { motion } from 'framer-motion';
 
 const darkValues = theme => css`
   background-color: ${theme.button.dark.backgroundColor};
@@ -17,7 +17,7 @@ const darkValues = theme => css`
   &:active {
     box-shadow: 1px 1px 2px 0px ${theme.button.dark.activeShadow} inset;
   }
-`
+`;
 
 const lightValues = theme => css`
   background-color: ${theme.button.backgroundColor};
@@ -35,9 +35,9 @@ const lightValues = theme => css`
   &:active {
     box-shadow: 1px 1px 2px 0px ${theme.button.activeShadow} inset;
   }
-`
+`;
 
-const Button = styled(motion.button)`
+const Button = styled(motion.button)<{ $dark?: boolean; $active?: boolean }>`
   border-radius: 4px;
   cursor: pointer;
 
@@ -71,6 +71,6 @@ const Button = styled(motion.button)`
       line-height: 1.4rem;
     }
   `}
-`
+`;
 
-export { Button }
+export { Button };

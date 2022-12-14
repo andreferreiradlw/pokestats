@@ -79,9 +79,9 @@ const Autocomplete = ({
     if (e.key === 'Enter' && filtered[0] !== undefined) {
       activeOption === -1
         ? // trigger router for first suggestion
-          router.push(`/${filtered[0].type}/${filtered[0].name}`)
+          router.push(`/${filtered[0].assetType}/${filtered[0].name}`)
         : // trigger router for active option
-          router.push(`/${filtered[activeOption].type}/${filtered[activeOption].name}`);
+          router.push(`/${filtered[activeOption].assetType}/${filtered[activeOption].name}`);
       // clean filtered state
       resetStates();
     } // up arrow
@@ -125,7 +125,6 @@ const Autocomplete = ({
         onChange={e => handleInputChange(e)}
         onKeyDown={e => handleKeyDown(e)}
       />
-      {/** display filtered list */}
       {!!filtered?.length && (
         <ListWrapper>
           {filtered.map((item, i) => (

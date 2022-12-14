@@ -1,5 +1,7 @@
 import styled, { css } from 'styled-components';
 import { motion } from 'framer-motion';
+// types
+import type { ImageProps } from './index';
 // helpers
 import { tumble } from '../BaseStyles/keyframes';
 // components
@@ -23,7 +25,7 @@ const ImageWrapper = styled(Box)`
     `}
 `;
 
-const Image = styled(motion.img)<{ $pixelated?: boolean; height?: string }>`
+const Image = styled(motion.img)<ImageProps & React.ImgHTMLAttributes<HTMLImageElement>>`
   will-change: opacity;
   // adjust to wrapper
   ${({ height }) =>
@@ -33,8 +35,8 @@ const Image = styled(motion.img)<{ $pixelated?: boolean; height?: string }>`
       width: ${height ? `auto` : '100%'};
     `}
 
-  ${({ $pixelated }) =>
-    $pixelated &&
+  ${({ pixelated }) =>
+    pixelated &&
     css`
       image-rendering: pixelated;
     `}

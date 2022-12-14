@@ -49,7 +49,7 @@ const App = ({ Component, pageProps, router }: AppProps): JSX.Element => {
     return () => {
       nextRouter.events.off('routeChangeComplete', onRouteChangeComplete);
     };
-  }, []);
+  }, [nextRouter, publicRuntimeConfig]);
 
   return (
     <Provider store={store}>

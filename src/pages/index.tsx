@@ -12,14 +12,11 @@ interface PokestatsHomepageProps {
   pokemonTypes: PokemonType[];
 }
 
-const PokestatsHomepage: NextPage<PokestatsHomepageProps> = ({ allPokemon, pokemonTypes }) => {
-  // console.log('types', pokemonTypes);
-  return (
-    <Layout $withGutter={false} withFooter={true}>
-      <Homepage allPokemon={allPokemon} pokemonTypes={pokemonTypes} />
-    </Layout>
-  );
-};
+const PokestatsHomepage: NextPage<PokestatsHomepageProps> = ({ allPokemon, pokemonTypes }) => (
+  <Layout $withGutter={false} withFooter={true}>
+    <Homepage allPokemon={allPokemon} pokemonTypes={pokemonTypes} />
+  </Layout>
+);
 
 export const getStaticProps: GetStaticProps = async () => {
   const api = new PokemonClient();

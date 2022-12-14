@@ -16,7 +16,6 @@ export interface ImageProps extends BoxProps {
   offset?: number;
   lazy?: boolean;
   placeholderwidth?: string;
-  height: string;
 }
 
 const ConditionalWrapper = ({ isLazy, children, offset }) =>
@@ -37,8 +36,9 @@ const ImageComponent = ({
   src,
   offset,
   lazy = true,
+  crossOrigin,
   ...rest
-}: ImageProps): JSX.Element => {
+}: ImageProps & React.ImgHTMLAttributes<HTMLImageElement>): JSX.Element => {
   // img src
   const [imgSrc, setImgSrc] = useState(null);
   // ref
@@ -85,9 +85,10 @@ const ImageComponent = ({
           )}
           {imgSrc && (
             <Image
+              crossOrigin={crossOrigin}
               alt={alt}
               src={imgSrc}
-              $pixelated={pixelated}
+              pixelated={pixelated}
               height={height}
               initial="hidden"
               animate="show"

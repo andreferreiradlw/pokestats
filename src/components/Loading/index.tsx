@@ -8,10 +8,11 @@ import BoxWrapper from '@/components/Box/StyledBox';
 // helpers
 import { staggerExitLoadingVariant, loadingChild } from '@/helpers/animations';
 
-interface LoadingProps extends BoxProps {
+export interface LoadingProps extends BoxProps {
   $iconWidth?: string;
   noIcon?: boolean;
   passKey?: string;
+  text?: string;
 }
 
 const Loading = forwardRef(

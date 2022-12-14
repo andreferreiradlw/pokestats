@@ -1,33 +1,39 @@
 import { useState, useEffect, useRef } from 'react';
 // helpers
-import { fadeInUpVariant } from '../../helpers/animations';
+import { fadeInUpVariant } from '@/helpers';
+// types
+import type { Pokemon } from '@/types';
 // components
-import Box from '../Box';
-import Loading from '../Loading';
+import Box, { BoxProps } from '@/components/Box';
+import Loading from '@/components/Loading';
 import PokemonBox from './PokemonBox';
+
+export interface InfiniteScrollProps extends BoxProps {
+  pokemonList: Pokemon[];
+  itemsPerPage?: number;
+}
 
 export default function InfiniteScroll({
   pokemonList,
   itemsPerPage = 35,
-  $dark,
   direction = 'row',
   align = 'flex-start',
   $flexWrap = 'wrap',
   ...rest
-}) {
+}: InfiniteScrollProps): JSX.Element {
   // current page state
   const [currPage, setCurrPage] = useState(1);
   // y state
   const [prevY, setPrevY] = useState(1);
   // show list state
-  const [showList, setShowList] = useState([]);
+  const [showList, setShowList] = useState<Pokemon[]>([]);
 
   // pokemon observer ref
   let observer = useRef(null);
   // node state for observer
-  const [node, setNode] = useState(null);
+  const [node, setNode] = useState<IntersectionObserver | null>(null);
 
-  function handleObserver(entitites) {
+  const handleObserver = entitites => {
     // entity data
     const { isIntersecting, boundingClientRect, intersectionRatio } = entitites[0];
 
@@ -38,9 +44,9 @@ export default function InfiniteScroll({
       // change page
       setCurrPage(currPage + 1);
     }
-  }
+  };
 
-  function sliceNewPage(page, listUpdated) {
+  const sliceNewPage = (page: number, listUpdated: boolean): void => {
     // slice new page from pokemon array
     const newPage = pokemonList.slice(
       page === 1 ? 0 : (page - 1) * itemsPerPage,
@@ -48,7 +54,7 @@ export default function InfiniteScroll({
     );
     // update show list with sliced array
     listUpdated ? setShowList([...newPage]) : setShowList([...showList, ...newPage]);
-  }
+  };
 
   // pokemon list effect
   useEffect(() => {
@@ -99,24 +105,21 @@ export default function InfiniteScroll({
   }, [currPage]);
 
   return (
-    pokemonList.length > 0 && (
-      <>
-        <Box direction={direction} align={align} $flexWrap={$flexWrap} {...rest}>
-          {showList?.map(currPokemon => (
-            <PokemonBox
-              key={`infinite-scroll-${currPokemon.id}`}
-              pokemon={currPokemon}
-              $dark={$dark}
-              whileHover="hover"
-              whileTap="tap"
-              variants={fadeInUpVariant}
-            />
-          ))}
-        </Box>
-        {showList.length > 0 && pokemonList.length !== showList?.length && (
-          <Loading height="100px" $iconWidth="5%" padding="1rem 0" ref={setNode} />
-        )}
-      </>
-    )
+    <>
+      <Box direction={direction} align={align} $flexWrap={$flexWrap} {...rest}>
+        {showList?.map(currPokemon => (
+          <PokemonBox
+            key={`infinite-scroll-${currPokemon.id}`}
+            pokemon={currPokemon}
+            whileHover="hover"
+            whileTap="tap"
+            variants={fadeInUpVariant}
+          />
+        ))}
+      </Box>
+      {showList.length > 0 && pokemonList.length !== showList?.length && (
+        <Loading height="100px" $iconWidth="5%" padding="1rem 0" ref={setNode} />
+      )}
+    </>
   );
 }

@@ -1,9 +1,9 @@
-import styled, { css } from 'styled-components'
-import { motion } from 'framer-motion'
+import styled, { css } from 'styled-components';
+import { motion } from 'framer-motion';
 // styles
-import { float } from './keyframes'
+import { float } from './keyframes';
 
-const PokeBox = styled(motion.a)`
+const PokeBox = styled(motion.div)<{ width?: string; $dark?: boolean }>`
   align-items: center;
   border: 1px solid transparent;
   border-radius: 4px;
@@ -30,8 +30,7 @@ const PokeBox = styled(motion.a)`
             box-shadow: 1px 1px 3px 0px ${theme.pokemonBox.dark.boxShadow};
           }
           &:active {
-            box-shadow: 1px 1px 2px 0px ${theme.pokemonBox.dark.activeShadow}
-              inset;
+            box-shadow: 1px 1px 2px 0px ${theme.pokemonBox.dark.activeShadow} inset;
           }
         `
       : css`
@@ -71,15 +70,15 @@ const PokeBox = styled(motion.a)`
       }
     }
   }
-`
+`;
 
 const NumberId = styled(motion.span)`
   font-size: 2rem;
-`
+`;
 
 const PokeName = styled(motion.span)`
   font-size: 1.2rem;
   margin-bottom: 0.5rem;
-`
+`;
 
-export { PokeBox, NumberId, PokeName }
+export { PokeBox, NumberId, PokeName };

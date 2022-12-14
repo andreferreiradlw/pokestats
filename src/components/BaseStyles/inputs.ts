@@ -1,6 +1,6 @@
-import styled, { css } from 'styled-components'
+import styled, { css } from 'styled-components';
 
-const Select = styled.select`
+const Select = styled.select<{ light?: boolean }>`
   ${({ theme, light }) =>
     light
       ? css`
@@ -24,6 +24,6 @@ const Select = styled.select`
     border: none;
     outline: none;
   }
-`
+`;
 
-export { Select }
+export { Select };

@@ -43,7 +43,7 @@ const PokemonPage = ({
   // console.log('species', species);
   // console.log('evolution', evolution);
 
-  const { id, game_indices, name, stats, types } = pokemon;
+  const { id, game_indices, name, stats, types, sprites } = pokemon;
   const { generation, names } = species;
   // router
   // const router = useRouter();
@@ -190,9 +190,7 @@ const PokemonPage = ({
         </Box>
         {/** SPRITES */}
         <Box align="flex-start" justify="flex-start" margin="1rem 0">
-          {/* <LazyLoad height={800} once offset={350}>
-                <Sprites sizes={12} margin="0 0 2rem" />
-              </LazyLoad> */}
+          <Sprites pokemonSprites={sprites} pokemonId={id} sizes={12} margin="0 0 2rem" />
         </Box>
         {/** NAVIGATION */}
         <Box align="flex-start" justify="flex-start" margin="1rem 0">

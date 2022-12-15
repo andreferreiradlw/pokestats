@@ -1,24 +1,28 @@
-import { useSelector } from 'react-redux';
+// types
+import type { Pokemon, PokemonSprites } from 'pokenode-ts';
 // helpers
-import { removeUnderscore } from '../../../helpers/typography';
+import { removeUnderscore } from '@/helpers/typography';
 // components
-import Box from '../../Box';
-import Loading from '../../Loading';
+import Box, { BoxProps } from '@/components/Box';
 // styles
-import { SectionTitle, SectionSubTitle } from '../../BaseStyles';
+import { SectionTitle, SectionSubTitle } from '@/components/BaseStyles';
 import { SpriteContainer, Sprite, NoSprites } from './StyledSprites';
 
-export default function Sprites({ ...rest }) {
-  // pokemon info
-  const pokemonInfo = useSelector(state => state.pokemon.info);
-  // data
-  const { sprites, id } = pokemonInfo.data;
+interface SpritesProps extends BoxProps {
+  pokemonSprites: PokemonSprites;
+  pokemonId: Pokemon['id'];
+}
+
+const Sprites = ({ pokemonSprites, pokemonId, ...rest }: SpritesProps): JSX.Element => {
+  // sprites
+  const animatedSprites = pokemonSprites.versions['generation-v']['black-white'].animated;
+  const dreamWorldSprites = pokemonSprites.other.dream_world;
+  const officalArtworkSprites = pokemonSprites.other['official-artwork'];
 
   return (
     <Box align={{ xxs: 'center', lg: 'flex-start' }} {...rest}>
       <SectionTitle>Sprites</SectionTitle>
-      {pokemonInfo.isLoading && <Loading height="300px" $iconWidth="5%" key="pokemon-sprites" />}
-      {!pokemonInfo.isLoading && sprites ? (
+      {pokemonSprites ? (
         <>
           <Box
             direction="row-reverse"
@@ -27,16 +31,16 @@ export default function Sprites({ ...rest }) {
             margin="0 0 2rem"
             $flexWrap="wrap"
           >
-            {Object.keys(sprites).map(
+            {Object.keys(pokemonSprites).map(
               (key, i) =>
-                sprites[key] &&
-                typeof sprites[key] !== 'object' && (
+                pokemonSprites[key] &&
+                typeof pokemonSprites[key] !== 'object' && (
                   <SpriteContainer sizes={1.5} key={`${key}-${i}`}>
                     <Sprite
                       alt={key}
                       key={`sprite-${key}`}
-                      src={sprites[key]}
-                      width={115}
+                      src={pokemonSprites[key]}
+                      width="115"
                       pixelateImg
                       placeholderwidth="40%"
                     />
@@ -45,7 +49,7 @@ export default function Sprites({ ...rest }) {
                 ),
             )}
           </Box>
-          {id < 650 && (
+          {pokemonId < 650 && (
             <Box align={{ xxs: 'center', lg: 'flex-start' }}>
               <SectionSubTitle>Animated Sprites</SectionSubTitle>
               <Box
@@ -55,18 +59,17 @@ export default function Sprites({ ...rest }) {
                 margin="0 0 2rem"
                 $flexWrap="wrap"
               >
-                {Object.keys(sprites.versions['generation-v']['black-white'].animated).map(
+                {Object.keys(animatedSprites).map(
                   (key, i) =>
-                    sprites.versions['generation-v']['black-white'].animated[key] &&
-                    typeof sprites.versions['generation-v']['black-white'].animated[key] !==
-                      'object' && (
+                    animatedSprites[key] &&
+                    typeof animatedSprites[key] !== 'object' && (
                       <SpriteContainer sizes={1.5} key={`${key}-${i}`}>
                         <Sprite
                           alt={key}
                           key={`animated-sprite-${key}`}
-                          src={sprites.versions['generation-v']['black-white'].animated[key]}
-                          width={115}
-                          animated
+                          src={animatedSprites[key]}
+                          width="115"
+                          $animated
                           pixelateImg
                           placeholderwidth="40%"
                         />
@@ -78,21 +81,20 @@ export default function Sprites({ ...rest }) {
             </Box>
           )}
           <Box direction={{ xxs: 'column', md: 'row' }} align={{ xxs: 'center', md: 'flex-start' }}>
-            {(sprites.other.dream_world.front_default ||
-              sprites.other.dream_world.front_female) && (
+            {(dreamWorldSprites.front_default || dreamWorldSprites.front_female) && (
               <Box align="center" margin="0 0 2rem" sizes={6}>
                 <SectionSubTitle>Dreamworld Artwork</SectionSubTitle>
                 <Box direction="row" justify="center" $flexWrap="wrap">
-                  {Object.keys(sprites.other.dream_world).map(
+                  {Object.keys(dreamWorldSprites).map(
                     (key, i) =>
-                      sprites.other.dream_world[key] && (
+                      dreamWorldSprites[key] && (
                         <SpriteContainer key={`${key}-${i}`} sizes={6}>
                           <Sprite
                             alt={`DreamWorld Design ${removeUnderscore(key)}`}
                             key={`dreamworld-sprite-${key}`}
-                            dreamworld
-                            src={sprites.other.dream_world[key]}
-                            height={180}
+                            $dreamworld
+                            src={dreamWorldSprites[key]}
+                            height="180"
                             placeholderwidth="30%"
                           />
                           <p>{removeUnderscore(key)}</p>
@@ -102,16 +104,16 @@ export default function Sprites({ ...rest }) {
                 </Box>
               </Box>
             )}
-            {sprites.other['official-artwork'].front_default && (
+            {officalArtworkSprites.front_default && (
               <Box align="center" sizes={6}>
                 <SectionSubTitle>Official Artwork</SectionSubTitle>
                 <SpriteContainer width={{ xxs: '100%', md: 'auto' }}>
                   <Sprite
                     alt="Official Artwork Front Default"
                     key="official-artwork"
-                    dreamworld
-                    src={sprites.other['official-artwork'].front_default}
-                    height={180}
+                    $dreamworld
+                    src={officalArtworkSprites.front_default}
+                    height="180"
                     placeholderwidth="30%"
                   />
                   <p>Front Default</p>
@@ -125,4 +127,6 @@ export default function Sprites({ ...rest }) {
       )}
     </Box>
   );
-}
+};
+
+export default Sprites;

@@ -25,7 +25,7 @@ import Breeding from './Breeding';
 import Training from './Training';
 import Multipliers from './Multipliers';
 import BaseStats from './BaseStats';
-import Forms from './Forms';
+import PokemonForms from './Forms';
 import Moves from './Moves';
 import Sprites from './Sprites';
 import Navigation from './Navigation';
@@ -180,7 +180,7 @@ const PokemonPage = ({
             margin={{ xxs: '0 0 2rem', lg: '0' }}
             padding={{ xxs: '0', lg: '0 2rem 0 0' }}
           />
-          {/* <Forms sizes={{ xxs: 12, lg: 4 }} /> */}
+          <PokemonForms species={species} sizes={{ xxs: 12, lg: 4 }} />
         </Box>
         {/** MOVES */}
         <Box align="flex-start" justify="flex-start" margin="1rem 0" $minHeight="210px">

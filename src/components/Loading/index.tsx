@@ -9,7 +9,7 @@ import BoxWrapper from '@/components/Box/StyledBox';
 import { staggerExitLoadingVariant, loadingChild } from '@/helpers/animations';
 
 export interface LoadingProps extends BoxProps {
-  $iconWidth?: string;
+  $iconWidth?: string | Record<string, any>;
   noIcon?: boolean;
   passKey?: string;
   text?: string;

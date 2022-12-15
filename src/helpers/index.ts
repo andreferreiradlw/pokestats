@@ -14,3 +14,5 @@ export * from './refs';
 export * from './types';
 // typography
 export * from './typography';
+// id
+export * from './getIdFromUrl';

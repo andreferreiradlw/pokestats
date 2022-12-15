@@ -1,9 +1,10 @@
 // types
 import type { GetStaticPaths, GetStaticProps, NextPage } from 'next';
-import type { Pokemon, PokemonType } from '@/types';
+import type { Pokemon, PokemonType, PokemonMove } from '@/types';
 import type { Pokemon as PokenodePokemon, PokemonSpecies, EvolutionChain } from 'pokenode-ts';
 // helpers
-import { PokemonClient, EvolutionClient } from 'pokenode-ts';
+import { PokemonClient, EvolutionClient, MoveClient, MachineClient } from 'pokenode-ts';
+import { getIdFromEvolutionChain } from '@/helpers';
 // components
 import Layout from '@/components/Layout';
 import PokemonPage from '@/components/Pokemon';
@@ -14,9 +15,13 @@ export interface PokestatsPokemonPageProps {
   pokemon: PokenodePokemon;
   species: PokemonSpecies;
   evolution: EvolutionChain;
+  pokemonMoves: PokemonMove[];
 }
 
-const PokestatsPokemonPage: NextPage<PokestatsPokemonPageProps> = ({ ...props }) => {
+const PokestatsPokemonPage: NextPage<PokestatsPokemonPageProps> = ({
+  allPokemonTypes,
+  ...props
+}) => {
   return (
     <Layout withHeader withFooter={true} withMain={false}>
       <PokemonPage {...props} />
@@ -47,6 +52,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   // clients
   const pokemonClient = new PokemonClient();
   const evolutionClient = new EvolutionClient();
+  const moveClient = new MoveClient();
 
   const pokemonName = params.pokemonId as string;
 
@@ -72,17 +78,28 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
       console.error('Failed to fetch allPokemonData, typesData, pokemonData or pokemonSpecies');
       return { notFound: true };
     }
-    // get evolution chain id from url
-    const evolutionChainId = pokemonSpeciesResults.evolution_chain.url.match(
-      /\/evolution-chain\/(\d+)\//,
-    );
 
+    // get evolution chain id from url
     const evolutionDataResults = await evolutionClient.getEvolutionChainById(
-      Number(evolutionChainId[1]),
+      getIdFromEvolutionChain(pokemonSpeciesResults.evolution_chain.url),
     );
 
     if (!evolutionDataResults) {
       console.error('Failed to fetch evolutionData');
+      return { notFound: true };
+    }
+
+    // move requests array
+    let moveRequests = [];
+    // create an axios request for each move
+    pokemonDataResults.moves.forEach(({ move }) =>
+      moveRequests.push(moveClient.getMoveByName(move.name)),
+    );
+
+    const allPokemonMovesData = await Promise.all(moveRequests);
+
+    if (!allPokemonMovesData) {
+      console.error('Failed to fetch allPokemonMovesData');
       return { notFound: true };
     }
 
@@ -97,15 +114,24 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
     return {
       props: {
-        allPokemon: allPokemonDataResults.map((pokemon, index) => {
-          return { ...pokemon, id: index + 1, assetType: 'pokemon' };
+        allPokemon: allPokemonDataResults.map((currPokemon, i) => {
+          return { ...currPokemon, id: i + 1, assetType: 'pokemon' };
         }),
-        allPokemonTypes: allTypesDataResults.map((type, index) => {
-          return { ...type, id: index + 1, assetType: 'type' };
+        allPokemonTypes: allTypesDataResults.map((currType, i) => {
+          return { ...currType, id: i + 1, assetType: 'type' };
         }),
         pokemon: pokemonDataResults,
         species: pokemonSpeciesResults,
         evolution: evolutionDataResults,
+        pokemonMoves: allPokemonMovesData
+          .map((currMove, i) => {
+            // version details from pokemon moves info
+            return {
+              ...currMove,
+              version_group_details: pokemonDataResults.moves[i].version_group_details,
+            };
+          })
+          .filter(data => data), // filter empty
       },
     };
   } catch (error) {

@@ -161,10 +161,11 @@ const PokemonPage = ({
             margin={{ xxs: '0 0 2rem', lg: '0' }}
             padding={{ xxs: '0', lg: '0 1rem' }}
           />
-          {/* <Multipliers
-                margin={{ xxs: '0 0 2rem', lg: '0' }}
-                padding={{ xxs: '0', lg: '0 0 0 2rem' }}
-              /> */}
+          <Multipliers
+            pokemon={pokemon}
+            margin={{ xxs: '0 0 2rem', lg: '0' }}
+            padding={{ xxs: '0', lg: '0 0 0 2rem' }}
+          />
         </Box>
         {/** BASESTATS, FORMS */}
         <Box

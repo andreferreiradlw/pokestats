@@ -12,7 +12,7 @@ import LazyLoad from 'react-lazyload';
 import { ImageWrapper, Image, Placeholder, EggIcon } from './StyledImage';
 
 export interface ImageProps extends BoxProps {
-  pixelated?: boolean;
+  pixelateImg?: boolean;
   offset?: number;
   lazy?: boolean;
   placeholderwidth?: string;
@@ -32,7 +32,7 @@ const ImageComponent = ({
   width,
   height,
   placeholderwidth = '65%',
-  pixelated,
+  pixelateImg,
   src,
   offset,
   lazy = true,
@@ -88,7 +88,7 @@ const ImageComponent = ({
               crossOrigin={crossOrigin}
               alt={alt}
               src={imgSrc}
-              pixelated={pixelated}
+              $pixelateImg={pixelateImg}
               height={height}
               initial="hidden"
               animate="show"

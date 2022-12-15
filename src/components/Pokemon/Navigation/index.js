@@ -39,7 +39,7 @@ export default function Navigation({ ...rest }) {
                   alt={allPokemon[id - 2].name}
                   key={`navigation-left-${allPokemon[id - 2].name}`}
                   width={100}
-                  pixelated
+                  pixelateImg
                   lazy={false}
                 />
               </Arrow>
@@ -61,7 +61,7 @@ export default function Navigation({ ...rest }) {
                   alt={allPokemon[id].name}
                   key={`navigation-right-${allPokemon[id].name}`}
                   width={100}
-                  pixelated
+                  pixelateImg
                   lazy={false}
                 />
               </Arrow>

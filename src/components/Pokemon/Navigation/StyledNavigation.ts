@@ -1,7 +1,8 @@
 import styled, { css } from 'styled-components';
-import { motion } from 'framer-motion';
+// components
+import Link from 'next/link';
 
-const BtnSpan = styled(motion.span)`
+const BtnSpan = styled.span`
   align-items: center;
   display: flex;
   flex-direction: column;
@@ -11,7 +12,7 @@ const BtnSpan = styled(motion.span)`
   position: relative;
 `;
 
-const Arrow = styled(BtnSpan)`
+const Arrow = styled(BtnSpan)<{ $left?: boolean; $right?: boolean }>`
   ${({ $right, $left }) =>
     css`
       &:after {
@@ -51,7 +52,7 @@ const Title = styled(BtnSpan)`
   }
 `;
 
-const BtnAnchor = styled(motion.a)`
+const BtnAnchor = styled(Link)<{ $left?: boolean; $right?: boolean }>`
   border: 1px solid black;
   display: flex;
   font-weight: 600;

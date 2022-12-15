@@ -196,7 +196,7 @@ const PokemonPage = ({
         </Box>
         {/** NAVIGATION */}
         <Box align="flex-start" justify="flex-start" margin="1rem 0">
-          {/* <Navigation sizes={12} margin="0 0 2rem" /> */}
+          <Navigation allPokemon={allPokemon} pokemonId={id} sizes={12} margin="0 0 2rem" />
         </Box>
       </MainContainer>
     </AnimatePresence>

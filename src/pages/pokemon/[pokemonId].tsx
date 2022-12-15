@@ -1,9 +1,9 @@
 // types
 import type { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 import type { Pokemon, PokemonType, PokemonMove } from '@/types';
-import type { Pokemon as PokenodePokemon, PokemonSpecies, EvolutionChain } from 'pokenode-ts';
+import type { Pokemon as PokenodePokemon, EvolutionChain, PokemonSpecies } from 'pokenode-ts';
 // helpers
-import { PokemonClient, EvolutionClient, MoveClient, MachineClient } from 'pokenode-ts';
+import { PokemonClient, EvolutionClient, MoveClient } from 'pokenode-ts';
 import { getIdFromEvolutionChain } from '@/helpers';
 // components
 import Layout from '@/components/Layout';

@@ -16,7 +16,7 @@ interface LayoutProps extends BoxProps {
   withMain?: boolean;
   withGameVersion?: boolean;
   mainKey?: string;
-  autocompleteList: AutocompleteProps['filterList'];
+  autocompleteList?: AutocompleteProps['filterList'];
 }
 
 const Layout = ({
@@ -43,7 +43,7 @@ const Layout = ({
   return (
     <GameVersionContext.Provider value={VersionContextValue}>
       <LayoutContainer direction="column" width="100%">
-        {withHeader && (
+        {withHeader && autocompleteList && (
           <Header autocompleteList={autocompleteList} withGameVersion={withGameVersion} />
         )}
         {withMain ? (

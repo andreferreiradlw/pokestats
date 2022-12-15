@@ -1,4 +1,6 @@
 import styled from 'styled-components';
+// types
+import type { BoxProps } from '@/components/Box';
 // config
 import { boxConfig } from '@/components/Box/config';
 // helpers

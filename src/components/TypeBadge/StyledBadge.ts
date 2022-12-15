@@ -60,8 +60,8 @@ const Badge = styled(motion.div)<TypeBadgeProps>`
           `}
 
     & > path {
-      fill: ${({ theme, type, fill }) =>
-        fill ? theme.typeBadge.backgroundColor[type] : theme.typeBadge.color};
+      fill: ${({ theme, typename, fill }) =>
+        fill ? theme.typeBadge.backgroundColor[typename] : theme.typeBadge.color};
       stroke: black;
       stroke-width: 5;
     }

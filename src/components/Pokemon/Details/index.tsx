@@ -2,7 +2,7 @@ import { useContext } from 'react';
 // types
 import type { BoxProps } from '@/components/Box';
 import type { PokestatsPokemonPageProps } from '@/pages/pokemon/[pokemonId]';
-import type { PokemonAbility } from 'pokenode-ts';
+import type { PokemonAbility, FlavorText } from 'pokenode-ts';
 // helpers
 import GameVersionContext from '@/components/Layout/gameVersionContext';
 import { AnimatePresence } from 'framer-motion';
@@ -14,6 +14,27 @@ import TypeBadge from '@/components/TypeBadge';
 // styles
 import { PageHeading, Table, Numbered } from '@/components/BaseStyles';
 import { TypeContainer, Genera, Flavor } from './StyledDetails';
+
+// flavor text
+const flavorText = (version: string, textEntries: FlavorText[]) => {
+  const versionEntry = textEntries.filter(entry => {
+    // @ts-ignore
+    return entry.version.name === version;
+  });
+  // return formatted text
+  // page breaks are treated just like newlines
+  // soft hyphens followed by newlines vanish
+  // letter-hyphen-newline becomes letter-hyphen, to preserve real hyphenation
+  // any other newline becomes a space
+  return versionEntry.length
+    ? versionEntry[0].flavor_text
+        .replace(/\u00AD/g, '')
+        .replace(/\u000C/g, ' ')
+        .replace(/u' -\n'/, ' - ')
+        .replace(/u'-\n'/, '-')
+        .replace(/(\r\n|\n|\r)/gm, ' ')
+    : 'No description available for currently selected generation.';
+};
 
 interface PokemonDetailsProps extends BoxProps {
   pokemon: PokestatsPokemonPageProps['pokemon'];
@@ -27,26 +48,6 @@ const PokemonDetails = ({ pokemon, species, ...rest }: PokemonDetailsProps): JSX
   // data
   const { types, abilities, id, name, weight, height } = pokemon;
   const { genera, flavor_text_entries, shape, color, is_baby, is_legendary, is_mythical } = species;
-
-  // flavor text
-  const flavorText = version => {
-    const versionEntry = flavor_text_entries.filter(entry => {
-      return entry.version.name === version;
-    });
-    // return formatted text
-    // page breaks are treated just like newlines
-    // soft hyphens followed by newlines vanish
-    // letter-hyphen-newline becomes letter-hyphen, to preserve real hyphenation
-    // any other newline becomes a space
-    return versionEntry.length
-      ? versionEntry[0].flavor_text
-          .replace(/\u00AD/g, '')
-          .replace(/\u000C/g, ' ')
-          .replace(/u' -\n'/, ' - ')
-          .replace(/u'-\n'/, '-')
-          .replace(/(\r\n|\n|\r)/gm, ' ')
-      : 'No description available for currently selected generation.';
-  };
 
   // weight
   const pokemonWeight = (currWeight: number): string =>
@@ -83,7 +84,7 @@ const PokemonDetails = ({ pokemon, species, ...rest }: PokemonDetailsProps): JSX
         {...rest}
       >
         <PageHeading>{removeDash(name)}</PageHeading>
-        {types.length > 0 && (
+        {types?.length > 0 && (
           <TypeContainer
             width="auto"
             direction="row"
@@ -104,7 +105,7 @@ const PokemonDetails = ({ pokemon, species, ...rest }: PokemonDetailsProps): JSX
             Pokemon
           </Genera>
         )}
-        {gameVersion && <Flavor>{flavorText(gameVersion)}</Flavor>}
+        <Flavor>{flavorText(gameVersion, flavor_text_entries)}</Flavor>
         <Table forwardedAs="table">
           <tbody>
             <tr>

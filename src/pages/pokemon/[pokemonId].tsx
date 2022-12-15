@@ -20,11 +20,17 @@ export interface PokestatsPokemonPageProps {
 
 const PokestatsPokemonPage: NextPage<PokestatsPokemonPageProps> = ({
   allPokemonTypes,
+  allPokemon,
   ...props
 }) => {
   return (
-    <Layout withHeader withFooter={true} withMain={false}>
-      <PokemonPage {...props} />
+    <Layout
+      withHeader
+      withFooter={true}
+      withMain={false}
+      autocompleteList={[...allPokemonTypes, ...allPokemon]}
+    >
+      <PokemonPage allPokemon={allPokemon} {...props} />
     </Layout>
   );
 };

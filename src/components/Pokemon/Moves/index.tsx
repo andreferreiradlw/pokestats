@@ -1,9 +1,9 @@
-import { useSelector } from 'react-redux';
-import { useState, useEffect, useRef, useMemo } from 'react';
+import { useState, useEffect, useRef, useMemo, useContext } from 'react';
 // types
 import type { MoveLearnMethod } from 'pokenode-ts';
 import type { PokemonMove } from '@/types';
 // helpers
+import GameVersionContext from '@/components/Layout/gameVersionContext';
 import {
   mapVersionToGroup,
   mapGeneration,
@@ -17,11 +17,11 @@ import {
 } from '@/helpers';
 // components
 import { AnimatePresence } from 'framer-motion';
-import Box, { BoxProps } from '../../Box';
-import Loading from '../../Loading';
-import TypeBadge from '../../TypeBadge';
+import Box, { BoxProps } from '@/components/Box';
+import Loading from '@/components/Loading';
+import TypeBadge from '@/components/TypeBadge';
 // styles
-import { SectionTitle, SectionMessage, Button } from '../../BaseStyles';
+import { SectionTitle, SectionMessage, Button } from '@/components/BaseStyles';
 import {
   TableContainer,
   MovesTable,
@@ -49,7 +49,7 @@ const mapMethodName = (methodName: MoveLearnMethod['name']): string => {
 
 const PokemonMoves = ({ pokemonMoves, ...rest }: PokemonMovesProps): JSX.Element => {
   // game version
-  const gameVersion = useSelector(state => state.game.version);
+  const { gameVersion } = useContext(GameVersionContext);
   // learn method state
   const [learnMethod, setLearnMethod] = useState<MoveLearnMethod['name']>('level-up');
   // machine names
@@ -61,9 +61,9 @@ const PokemonMoves = ({ pokemonMoves, ...rest }: PokemonMovesProps): JSX.Element
     () => filterMoves(pokemonMoves, learnMethod, mapVersionToGroup(gameVersion)),
     [pokemonMoves, learnMethod, gameVersion],
   );
-
   // ref
   const _isMounted = useRef(null);
+
   // manage mounted state to avoid memory leaks
   useEffect(() => {
     _isMounted.current = true;

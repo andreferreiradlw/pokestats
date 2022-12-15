@@ -1,5 +1,5 @@
-import styled, { css } from 'styled-components'
-import Box from '../Box'
+import styled, { css } from 'styled-components';
+import Box from '@/components/Box';
 
 const Heading = styled.h2`
   color: ${({ theme }) => theme.homepage.heading.color};
@@ -7,14 +7,13 @@ const Heading = styled.h2`
   font-size: 3.26rem;
   font-weight: 700;
   line-height: 4rem;
-  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
-    1px 1px 0 #000;
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
   user-select: none;
 
   &:hover {
     cursor: pointer;
   }
-`
+`;
 
 const SelectContainer = styled(Box)`
   margin-bottom: 1rem;
@@ -27,6 +26,6 @@ const SelectContainer = styled(Box)`
     @media ${theme.device.md} {
       margin-bottom: 0;
   `}
-`
+`;
 
-export { Heading, SelectContainer }
+export { Heading, SelectContainer };

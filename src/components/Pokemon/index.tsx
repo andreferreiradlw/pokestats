@@ -1,17 +1,8 @@
-import { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { useRouter } from 'next/router';
-import LazyLoad from 'react-lazyload';
 import { AnimatePresence } from 'framer-motion';
 // types
 import type { PokestatsPokemonPageProps } from '@/pages/pokemon/[pokemonId]';
-// actions
-import { fetchPokemonData, cleanData } from './pokemonSlice';
-import { changeVersion } from '../Header/gameSlice';
 // helpers
-import { mapGenerationToGame } from '../../helpers/gameVersion';
-import { removeDash } from '../../helpers/typography';
-import { pageContainerVariant } from '../../helpers/animations';
+import { pageContainerVariant } from '@/helpers/animations';
 // components
 import { MainContainer } from '@/components/Layout';
 import Box from '@/components/Box';
@@ -33,7 +24,7 @@ const PokemonPage = ({
   species,
   evolution,
   pokemonMoves,
-}: Omit<PokestatsPokemonPageProps, allPokemonTypes>): JSX.Element => {
+}: Omit<PokestatsPokemonPageProps, 'allPokemonTypes'>): JSX.Element => {
   const { id, name, stats, types, sprites } = pokemon;
   const { names } = species;
 

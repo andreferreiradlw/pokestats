@@ -1,10 +1,10 @@
-import { useSelector } from 'react-redux';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 // types
 import type { Pokemon, PokemonSpecies } from 'pokenode-ts';
 // components
 import Box, { BoxProps } from '@/components/Box';
 // helpers
+import GameVersionContext from '@/components/Layout/gameVersionContext';
 import { removeDash } from '@/helpers/typography';
 // styles
 import { SectionTitle, Table, Numbered } from '@/components/BaseStyles';
@@ -56,7 +56,7 @@ interface TrainingProps extends BoxProps {
 
 const Training = ({ pokemon, species, ...rest }: TrainingProps): JSX.Element => {
   // game version
-  const gameVersion = useSelector(state => state.game.version);
+  const { gameVersion } = useContext(GameVersionContext);
   // data
   const { stats, base_experience, held_items } = pokemon;
   const { capture_rate, base_happiness, growth_rate } = species;

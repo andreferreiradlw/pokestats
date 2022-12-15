@@ -1,25 +1,31 @@
-// redux
-import { useDispatch, useSelector } from 'react-redux';
-import { changeVersion } from './gameSlice';
-// next
-import Link from 'next/link';
+import { useContext } from 'react';
+// helpers
+import GameVersionContext from '@/components/Layout/gameVersionContext';
+import { gameVersions } from '@/helpers/gameVersion';
 // components
-import Box from '../Box';
-import Autocomplete from '../Autocomplete';
+import Link from 'next/link';
+import Box, { BoxProps } from '@/components/Box';
+import Autocomplete, { AutocompleteProps } from '@/components/Autocomplete';
 // styles
-import { Select } from '../BaseStyles';
+import { Select } from '@/components/BaseStyles';
 import { Heading, SelectContainer } from './styledHeader';
-// Info
-import { gameVersions } from '../../helpers/gameVersion';
+// data
 
-export default function HeaderComponent({ withGameVersion = true, ...rest }) {
-  // dispatch
-  const dispatch = useDispatch();
+interface HeaderComponentProps extends BoxProps {
+  autocompleteList: AutocompleteProps['filterList'];
+  withGameVersion?: boolean;
+}
+
+const HeaderComponent = ({
+  autocompleteList,
+  withGameVersion = true,
+  ...rest
+}: HeaderComponentProps): JSX.Element => {
   // game version
-  const gameVersion = useSelector(state => state.game.version);
+  const { gameVersion, setGameVersion } = useContext(GameVersionContext);
 
   return (
-    <Box as="header" margin="2rem 0" {...rest}>
+    <Box margin="2rem 0" {...rest}>
       <Box
         $constrained
         $withGutter
@@ -42,7 +48,7 @@ export default function HeaderComponent({ withGameVersion = true, ...rest }) {
                 aria-labelledby="header_generation"
                 id="header_gen_select"
                 value={gameVersion}
-                onChange={e => dispatch(changeVersion(e.target.value))}
+                onChange={e => setGameVersion(e.target.value)}
               >
                 {gameVersions.map(({ name, value }, index) => (
                   <option key={index} value={value}>
@@ -53,8 +59,10 @@ export default function HeaderComponent({ withGameVersion = true, ...rest }) {
             </SelectContainer>
           )}
         </div>
-        {/* <Autocomplete width="350px" justify="flex-end" align="flex-start" margin="none" /> */}
+        {/* <Autocomplete filterList={autocompleteList} width="350px" justify="flex-end" align="flex-start" margin="none" /> */}
       </Box>
     </Box>
   );
-}
+};
+
+export default HeaderComponent;

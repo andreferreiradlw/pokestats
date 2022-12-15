@@ -1,9 +1,10 @@
-import { useSelector } from 'react-redux';
+import { useContext } from 'react';
 // types
 import type { BoxProps } from '@/components/Box';
 import type { PokestatsPokemonPageProps } from '@/pages/pokemon/[pokemonId]';
 import type { PokemonAbility } from 'pokenode-ts';
 // helpers
+import GameVersionContext from '@/components/Layout/gameVersionContext';
 import { AnimatePresence } from 'framer-motion';
 import { capitalize, removeDash } from '@/helpers/typography';
 import { fadeInUpVariant } from '@/helpers/animations';
@@ -21,7 +22,7 @@ interface PokemonDetailsProps extends BoxProps {
 
 const PokemonDetails = ({ pokemon, species, ...rest }: PokemonDetailsProps): JSX.Element => {
   // game version
-  const gameVersion = useSelector(state => state.game.version);
+  const { gameVersion } = useContext(GameVersionContext);
 
   // data
   const { types, abilities, id, name, weight, height } = pokemon;

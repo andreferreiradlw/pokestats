@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 
 const SwitchContainer = styled.div`
   -moz-user-select: none;
@@ -12,11 +12,11 @@ const SwitchContainer = styled.div`
   &:hover {
     cursor: pointer;
   }
-`
+`;
 
 const SwitchInput = styled.input`
   display: none;
-`
+`;
 
 const SwitchLabel = styled.label`
   background-color: rgb(19, 29, 34);
@@ -25,9 +25,9 @@ const SwitchLabel = styled.label`
   cursor: pointer;
   display: block;
   overflow: hidden;
-`
+`;
 
-const SwitchDisplay = styled.span`
+const SwitchDisplay = styled.span<{ enabled?: MultipliersSwitchProps['enabled'] }>`
   display: block;
   margin-left: ${({ enabled }) => (enabled ? '-100%' : '0')};
   transition: margin 0.3s ease-in-out;
@@ -60,9 +60,9 @@ const SwitchDisplay = styled.span`
     padding-right: 7px;
     text-align: right;
   }
-`
+`;
 
-const SwitchControl = styled.span`
+const SwitchControl = styled.span<{ enabled?: MultipliersSwitchProps['enabled'] }>`
   background-color: white;
   border: 2px solid rgb(19, 29, 34);
   border-radius: 50px;
@@ -75,9 +75,14 @@ const SwitchControl = styled.span`
   top: 0;
   transition: all 0.3s ease-in-out;
   width: 31px;
-`
+`;
 
-export default function Switch({ enabled, onClick, ...rest }) {
+interface MultipliersSwitchProps extends React.HTMLAttributes<HTMLDivElement> {
+  enabled?: boolean;
+  onClick?: React.MouseEventHandler<HTMLInputElement>;
+}
+
+const MultipliersSwitch = ({ enabled, onClick, ...rest }: MultipliersSwitchProps) => {
   return (
     <SwitchContainer {...rest}>
       <SwitchInput onClick={onClick} type="checkbox" id="multiplierswitch" />
@@ -86,5 +91,7 @@ export default function Switch({ enabled, onClick, ...rest }) {
         <SwitchControl enabled={enabled} />
       </SwitchLabel>
     </SwitchContainer>
-  )
-}
+  );
+};
+
+export default MultipliersSwitch;

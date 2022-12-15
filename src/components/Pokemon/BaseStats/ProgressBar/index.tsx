@@ -1,6 +1,6 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 
-const Bar = styled.div`
+const Bar = styled.div<ProgressBarProps>`
   border-bottom: 2px solid ${({ theme }) => theme.progressBar.backgroundColor};
   border-top: 2px solid ${({ theme }) => theme.progressBar.backgroundColor};
   height: 12px;
@@ -27,20 +27,26 @@ const Bar = styled.div`
   }
 
   & span {
-    background-color: ${({ theme, color }) =>
-      color || theme.progressBar.backgroundColor};
+    background-color: ${({ theme, color }) => color || theme.progressBar.backgroundColor};
     height: 8px;
     left: 0;
     position: absolute;
     top: 0;
     width: ${({ progress }) => progress}%;
   }
-`
+`;
 
-export default function ProgressBar({ progress = 60, color }) {
+interface ProgressBarProps {
+  progress?: number;
+  color?: string;
+}
+
+const ProgressBar = ({ progress = 60, color }: ProgressBarProps): JSX.Element => {
   return (
     <Bar progress={progress} color={color}>
       <span />
     </Bar>
-  )
-}
+  );
+};
+
+export default ProgressBar;

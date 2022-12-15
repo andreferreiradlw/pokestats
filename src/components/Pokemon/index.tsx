@@ -43,7 +43,7 @@ const PokemonPage = ({
   // console.log('species', species);
   // console.log('evolution', evolution);
 
-  const { id, game_indices, name } = pokemon;
+  const { id, game_indices, name, stats, types } = pokemon;
   const { generation, names } = species;
   // router
   // const router = useRouter();
@@ -162,7 +162,7 @@ const PokemonPage = ({
             padding={{ xxs: '0', lg: '0 1rem' }}
           />
           <Multipliers
-            pokemon={pokemon}
+            pokemonTypes={types}
             margin={{ xxs: '0 0 2rem', lg: '0' }}
             padding={{ xxs: '0', lg: '0 0 0 2rem' }}
           />
@@ -174,11 +174,12 @@ const PokemonPage = ({
           justify="flex-start"
           margin="1rem 0"
         >
-          {/* <BaseStats
-                sizes={{ xxs: 12, lg: 8 }}
-                margin={{ xxs: '0 0 2rem', lg: '0' }}
-                padding={{ xxs: '0', lg: '0 2rem 0 0' }}
-              /> */}
+          <BaseStats
+            stats={stats}
+            sizes={{ xxs: 12, lg: 8 }}
+            margin={{ xxs: '0 0 2rem', lg: '0' }}
+            padding={{ xxs: '0', lg: '0 2rem 0 0' }}
+          />
           {/* <Forms sizes={{ xxs: 12, lg: 4 }} /> */}
         </Box>
         {/** MOVES */}

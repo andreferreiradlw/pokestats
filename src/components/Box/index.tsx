@@ -20,7 +20,7 @@ export interface BoxProps extends HTMLMotionProps<'div'> {
   gap?: string | Record<string, any>;
   $constrained?: boolean;
   $flexGrow?: boolean;
-  sizes?: number;
+  sizes?: number | Record<string, any>;
   relative?: boolean;
   $withGutter?: boolean;
   debug?: boolean;

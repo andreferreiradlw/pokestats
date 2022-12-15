@@ -1,6 +1,6 @@
 import { useState, useEffect, useMemo } from 'react';
 // types
-import type { Pokemon } from 'pokenode-ts';
+import type { PokemonType } from 'pokenode-ts';
 // helpers
 import getMultipliers, { MultipliersRes } from './damage_multipliers';
 import { removeUnderscore } from '@/helpers';
@@ -12,20 +12,20 @@ import Switch from './Switch';
 import { SectionTitle, Table } from '@/components/BaseStyles';
 
 interface MultipliersProps extends BoxProps {
-  pokemon: Pokemon;
+  pokemonTypes: PokemonType[];
 }
 
-const Multipliers = ({ pokemon, ...rest }: MultipliersProps): JSX.Element => {
+const Multipliers = ({ pokemonTypes, ...rest }: MultipliersProps): JSX.Element => {
   // data
-  const { types } = pokemon;
+  // const { types } = pokemon;
 
   const typeMultipliers = useMemo(() => {
-    let currTypes = types.map(currType => {
+    let currTypes = pokemonTypes.map(currType => {
       return currType.type.name;
     });
     // return multipliers
     return getMultipliers(currTypes);
-  }, [types]);
+  }, [pokemonTypes]);
 
   // current multipliers to show
   const [currMultipliers, setCurrMultipliers] = useState<

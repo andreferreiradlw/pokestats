@@ -11,7 +11,9 @@
       "@/helpers": ["src/helpers"],
       "@/helpers/*": ["src/helpers/*"],
       "@/types": ["types"],
-      "@/types/*": ["types/*"]
+      "@/types/*": ["types/*"],
+      "@/pages": ["src/pages"],
+      "@/pages/*": ["src/pages/*"]
     },
     "target": "es5",
     "lib": ["dom", "dom.iterable", "esnext"],

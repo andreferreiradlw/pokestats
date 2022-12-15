@@ -1,12 +1,14 @@
-import styled, { css } from 'styled-components'
-import { motion } from 'framer-motion'
+import styled, { css } from 'styled-components';
+import { motion } from 'framer-motion';
+// types
+import type { TypeBadgeProps } from './index';
 // styles
-import { float as floatAnim } from '../BaseStyles'
+import { float as floatAnim } from '@/components/BaseStyles';
 
-const Badge = styled(motion.a)`
+const Badge = styled(motion.div)<TypeBadgeProps>`
   align-items: center;
-  background-color: ${({ theme, type, fill }) =>
-    !fill && theme.typeBadge.backgroundColor[type]};
+  background-color: ${({ theme, typename, fill }) =>
+    !fill && theme.typeBadge.backgroundColor[typename]};
   border-radius: 4px;
   color: ${({ theme }) => theme.typeBadge.color};
   display: flex;
@@ -15,8 +17,7 @@ const Badge = styled(motion.a)`
   font-size: 1rem;
   font-weight: 600;
   justify-content: center;
-  text-shadow: -0.5px -0.5px 0 #000, 0.5px -0.5px 0 #000, -0.5px 0.5px 0 #000,
-    0.5px 0.5px 0 #000;
+  text-shadow: -0.5px -0.5px 0 #000, 0.5px -0.5px 0 #000, -0.5px 0.5px 0 #000, 0.5px 0.5px 0 #000;
   width: auto;
 
   ${({ $iconOnly, margin }) =>
@@ -65,6 +66,6 @@ const Badge = styled(motion.a)`
       stroke-width: 5;
     }
   }
-`
+`;
 
-export { Badge }
+export { Badge };

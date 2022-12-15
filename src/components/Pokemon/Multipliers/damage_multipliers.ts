@@ -34,7 +34,7 @@ const getMultipliers = (types: Type['name'][]): MultipliersRes => {
     let double_damage_from = damage_relations.defense.double as Type['name'][];
 
     no_damage_to.forEach(type => {
-      if (Object.hasOwn(multipliers.attack, type)) {
+      if (Object.prototype.hasOwnProperty.call(multipliers.attack, type)) {
         multipliers.attack[type] = multipliers.attack[type] * 0;
       } else {
         multipliers.attack[type] = 0;
@@ -42,7 +42,7 @@ const getMultipliers = (types: Type['name'][]): MultipliersRes => {
     });
 
     no_damage_from.forEach(type => {
-      if (Object.hasOwn(multipliers.defense, type)) {
+      if (Object.prototype.hasOwnProperty.call(multipliers.defense, type)) {
         multipliers.defense[type] = multipliers.defense[type] * 0;
       } else {
         multipliers.defense[type] = 0;
@@ -50,7 +50,7 @@ const getMultipliers = (types: Type['name'][]): MultipliersRes => {
     });
 
     half_damage_to.forEach(type => {
-      if (Object.hasOwn(multipliers.attack, type)) {
+      if (Object.prototype.hasOwnProperty.call(multipliers.attack, type)) {
         multipliers.attack[type] = multipliers.attack[type] * 0.5;
       } else {
         multipliers.attack[type] = 0.5;
@@ -58,7 +58,7 @@ const getMultipliers = (types: Type['name'][]): MultipliersRes => {
     });
 
     half_damage_from.forEach(type => {
-      if (Object.hasOwn(multipliers.defense, type)) {
+      if (Object.prototype.hasOwnProperty.call(multipliers.defense, type)) {
         multipliers.defense[type] = multipliers.defense[type] * 0.5;
       } else {
         multipliers.defense[type] = 0.5;
@@ -66,7 +66,7 @@ const getMultipliers = (types: Type['name'][]): MultipliersRes => {
     });
 
     double_damage_to.forEach(type => {
-      if (Object.hasOwn(multipliers.attack, type)) {
+      if (Object.prototype.hasOwnProperty.call(multipliers.attack, type)) {
         multipliers.attack[type] = multipliers.attack[type] * 2;
       } else {
         multipliers.attack[type] = 2;
@@ -74,7 +74,7 @@ const getMultipliers = (types: Type['name'][]): MultipliersRes => {
     });
 
     double_damage_from.forEach(type => {
-      if (Object.hasOwn(multipliers.defense, type)) {
+      if (Object.prototype.hasOwnProperty.call(multipliers.defense, type)) {
         multipliers.defense[type] = multipliers.defense[type] * 2;
       } else {
         multipliers.defense[type] = 2;

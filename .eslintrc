@@ -4,6 +4,7 @@
   "plugins": ["prettier", "react", "react-hooks", "@typescript-eslint", "better-styled-components"],
   "rules": {
     "eqeqeq": "error",
+    "prefer-object-has-own": "off",
     "max-params": 0,
     "prettier/prettier": "error",
     "react/display-name": "off",

@@ -1,7 +1,6 @@
-import styled from 'styled-components'
-import { motion } from 'framer-motion'
+import styled from 'styled-components';
 
-const FooterContainer = styled(motion.footer)`
+const FooterContainer = styled.footer`
   background-color: black;
   color: white;
   display: flex;
@@ -12,7 +11,12 @@ const FooterContainer = styled(motion.footer)`
   & span {
     margin: 1rem 0;
   }
-`
+`;
+
+const TextContainer = styled.span`
+  display: flex;
+  gap: 0.5em;
+`;
 
 const FooterA = styled.a`
   color: inherit;
@@ -48,6 +52,6 @@ const FooterA = styled.a`
     vertical-align: bottom;
     width: 20px;
   }
-`
+`;
 
-export { FooterContainer, FooterA }
+export { FooterContainer, TextContainer, FooterA };

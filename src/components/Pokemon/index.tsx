@@ -149,10 +149,12 @@ const PokemonPage = ({
           margin="1rem 0"
           $minHeight="347px"
         >
-          {/* <Breeding
-                margin={{ xxs: '0 0 2rem', lg: '0' }}
-                padding={{ xxs: '0', lg: '0 2rem 0 0' }}
-              /> */}
+          <Breeding
+            species={species}
+            evolutionChain={evolution}
+            margin={{ xxs: '0 0 2rem', lg: '0' }}
+            padding={{ xxs: '0', lg: '0 2rem 0 0' }}
+          />
           {/* <Training
                 margin={{ xxs: '0 0 2rem', lg: '0' }}
                 padding={{ xxs: '0', lg: '0 1rem' }}

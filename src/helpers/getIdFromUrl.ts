@@ -9,4 +9,9 @@ const getIdFromMachine = (url: string): number => {
   return Number(matchId[1]);
 };
 
-export { getIdFromEvolutionChain, getIdFromMachine };
+const getIdFromSpecies = (url: string): number => {
+  const matchId = url.match(/\/pokemon-species\/(\d+)\//);
+  return Number(matchId[1]);
+};
+
+export { getIdFromEvolutionChain, getIdFromMachine, getIdFromSpecies };

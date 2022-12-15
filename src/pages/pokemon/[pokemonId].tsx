@@ -4,7 +4,7 @@ import type { Pokemon, PokemonType, PokemonMove } from '@/types';
 import type { Pokemon as PokenodePokemon, EvolutionChain, PokemonSpecies } from 'pokenode-ts';
 // helpers
 import { PokemonClient, EvolutionClient, MoveClient } from 'pokenode-ts';
-import { getIdFromEvolutionChain } from '@/helpers';
+import { getIdFromEvolutionChain, getIdFromSpecies } from '@/helpers';
 // components
 import Layout from '@/components/Layout';
 import PokemonPage from '@/components/Pokemon';
@@ -67,21 +67,24 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
       { results: allPokemonDataResults },
       { results: allTypesDataResults },
       pokemonDataResults,
-      pokemonSpeciesResults,
     ] = await Promise.all([
       pokemonClient.listPokemons(0, 809),
       pokemonClient.listTypes(),
       pokemonClient.getPokemonByName(pokemonName),
-      pokemonClient.getPokemonSpeciesByName(pokemonName),
     ]);
 
-    if (
-      !allPokemonDataResults ||
-      !allTypesDataResults ||
-      !pokemonDataResults ||
-      !pokemonSpeciesResults
-    ) {
+    if (!allPokemonDataResults || !allTypesDataResults || !pokemonDataResults) {
       console.error('Failed to fetch allPokemonData, typesData, pokemonData or pokemonSpecies');
+      return { notFound: true };
+    }
+
+    // get evolution chain id from url
+    const pokemonSpeciesResults = await pokemonClient.getPokemonSpeciesById(
+      getIdFromSpecies(pokemonDataResults.species.url),
+    );
+
+    if (!pokemonSpeciesResults) {
+      console.error('Failed to fetch pokemonSpeciesResults');
       return { notFound: true };
     }
 

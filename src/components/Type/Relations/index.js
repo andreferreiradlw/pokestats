@@ -1,15 +1,15 @@
-import styled, { css } from 'styled-components'
+import styled, { css } from 'styled-components';
 // helpers
-import { removeUnderscore } from '../../../helpers'
+import { removeUnderscore } from '../../../helpers';
 // components
-import Box from '../../Box'
-import TypeBadge from '../../TypeBadge'
+import Box from '../../Box';
+import TypeBadge from '../../TypeBadge';
 // styles
-import { Table, SectionTitle } from '../../BaseStyles'
+import { Table, SectionTitle } from '../../BaseStyles';
 
 const RelationsTable = styled(Table)`
   width: 100%;
-`
+`;
 
 const RelationTitle = styled(SectionTitle)`
   ${({ theme }) => css`
@@ -17,7 +17,7 @@ const RelationTitle = styled(SectionTitle)`
       display: none;
     }
   `}
-`
+`;
 
 export default function TypeRelations({ relations, ...rest }) {
   return (
@@ -34,7 +34,7 @@ export default function TypeRelations({ relations, ...rest }) {
                   : relations[relation].map((type, i) => (
                       <TypeBadge
                         key={`${type.name}-${relation}-${i}`}
-                        type={type.name}
+                        typename={type.name}
                         $iconOnly
                       />
                     ))}
@@ -44,5 +44,5 @@ export default function TypeRelations({ relations, ...rest }) {
         </tbody>
       </RelationsTable>
     </Box>
-  )
+  );
 }

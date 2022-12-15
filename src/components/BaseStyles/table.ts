@@ -1,5 +1,5 @@
-import styled, { css } from 'styled-components'
-import { motion } from 'framer-motion'
+import styled, { css } from 'styled-components';
+import { motion } from 'framer-motion';
 
 const Table = styled(motion.table)`
   border-spacing: 0;
@@ -44,9 +44,9 @@ const Table = styled(motion.table)`
       overflow-x: hidden;
     }
   `}
-`
+`;
 
-const Numbered = styled.span`
+const Numbered = styled.span<{ light?: boolean }>`
   display: block;
   width: 100%;
 
@@ -63,6 +63,6 @@ const Numbered = styled.span`
     css`
       font-weight: 300;
     `}
-`
+`;
 
-export { Table, Numbered }
+export { Table, Numbered };

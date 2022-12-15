@@ -53,7 +53,7 @@ export default function Moves() {
                 <TableRow key={`type-${move.name}-${i}`}>
                   <NameTD>{removeDash(move.name)}</NameTD>
                   <td>
-                    <TypeBadge margin="0" $iconOnly type={move.type.name} />
+                    <TypeBadge margin="0" $iconOnly typename={move.type.name} />
                   </td>
                   <td>{move.damage_class ? removeDash(move.damage_class.name) : '-'}</td>
                   <td>{move.power || '-'}</td>

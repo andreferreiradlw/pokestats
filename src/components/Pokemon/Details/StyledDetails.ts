@@ -1,13 +1,13 @@
-import styled, { css } from 'styled-components'
-import Box from '../../Box'
+import styled, { css } from 'styled-components';
+import Box from '@/components/Box';
 
 // type
-const TypeContainer = styled(Box)``
+const TypeContainer = styled(Box)``;
 
 const Genera = styled.p`
   font-weight: 500;
   margin-bottom: 0.5rem;
-`
+`;
 const Flavor = styled.p`
   margin-bottom: 0.5rem;
   text-align: center;
@@ -17,6 +17,6 @@ const Flavor = styled.p`
       text-align: left;
     }
   `}
-`
+`;
 
-export { TypeContainer, Genera, Flavor }
+export { TypeContainer, Genera, Flavor };

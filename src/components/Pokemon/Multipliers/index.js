@@ -72,7 +72,7 @@ export default function Weaknesses({ ...rest }) {
                     {!currMultipliers[relation].length
                       ? 'None'
                       : currMultipliers[relation].map((type, i) => (
-                          <TypeBadge key={`${type}-${relation}-${i}`} type={type} $iconOnly />
+                          <TypeBadge key={`${type}-${relation}-${i}`} typename={type} $iconOnly />
                         ))}
                   </td>
                 </tr>

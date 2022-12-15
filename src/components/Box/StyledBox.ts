@@ -26,7 +26,7 @@ export default styled(motion.div)<BoxProps>`
     $flexWrap,
     width,
     height,
-    minHeight,
+    $minHeight,
     direction,
     align,
     justify,
@@ -47,7 +47,7 @@ export default styled(motion.div)<BoxProps>`
       // sizing
       ${width && responsiveProps('width', width)}
       ${height && responsiveProps('height', height)}
-      ${minHeight && responsiveProps('min-height', minHeight)}
+      ${$minHeight && responsiveProps('min-height', $minHeight)}
     `;
   }}
 

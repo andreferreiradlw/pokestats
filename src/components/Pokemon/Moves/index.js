@@ -253,7 +253,7 @@ export default function Moves({ ...rest }) {
                   {learnMethod === 'tutor' && <td>-</td>}
                   <NameTD>{removeDash(move.name)}</NameTD>
                   <td>
-                    <TypeBadge margin="0" $iconOnly type={move.type.name} />
+                    <TypeBadge margin="0" $iconOnly typename={move.type.name} />
                   </td>
                   <td>{capitalize(move.damage_class.name)}</td>
                   <td>{move.power || '-'}</td>

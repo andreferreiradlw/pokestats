@@ -114,15 +114,15 @@ const PokemonPage = ({
           align="center"
           justify="flex-start"
           margin="1rem 0"
-          minHeight="533px"
+          $minHeight="533px"
         >
-          Details & Image
-          {/* <Details
-                sizes={5}
-                margin={{ xxs: '0 0 2rem', lg: '0' }}
-                key={`pokemon-details-${pokemonName}`}
-                pokemonName={pokemonName}
-              /> */}
+          <Details
+            sizes={5}
+            margin={{ xxs: '0 0 2rem', lg: '0' }}
+            key={`pokemon-details-${name}`}
+            pokemon={pokemon}
+            species={species}
+          />
           {/* <FeaturedImage
                 sizes={7}
                 margin={{ xxs: '0 0 2rem', lg: '0' }}
@@ -132,7 +132,7 @@ const PokemonPage = ({
               /> */}
         </Box>
         {/** EVOLUTION CHAIN */}
-        <Box align="flex-start" justify="flex-start" margin="1rem 0" minHeight="375px">
+        <Box align="flex-start" justify="flex-start" margin="1rem 0" $minHeight="375px">
           {/* <LazyLoad height={375} once offset={50}>
                 <EvolutionChain
                   sizes={12}
@@ -147,7 +147,7 @@ const PokemonPage = ({
           align="flex-start"
           justify="flex-start"
           margin="1rem 0"
-          minHeight="347px"
+          $minHeight="347px"
         >
           {/* <Breeding
                 margin={{ xxs: '0 0 2rem', lg: '0' }}
@@ -177,7 +177,7 @@ const PokemonPage = ({
           {/* <Forms sizes={{ xxs: 12, lg: 4 }} /> */}
         </Box>
         {/** MOVES */}
-        <Box align="flex-start" justify="flex-start" margin="1rem 0" minHeight="210px">
+        <Box align="flex-start" justify="flex-start" margin="1rem 0" $minHeight="210px">
           {/* <LazyLoad once offset={600}>
                 <Moves sizes={12} margin="0 0 2rem" />
               </LazyLoad> */}

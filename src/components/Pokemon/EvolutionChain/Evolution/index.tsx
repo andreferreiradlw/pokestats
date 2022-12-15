@@ -1,22 +1,34 @@
 import { useState, useEffect, useRef } from 'react';
-import Link from 'next/link';
-import axios from 'axios';
+// types
+import type { BoxProps } from '@/components/Box';
+import type { PokemonSpecies, ChainLink, EvolutionDetail } from 'pokenode-ts';
 // helpers
-import { removeDash } from '../../../../helpers/typography';
-import { mapGeneration } from '../../../../helpers/gameVersion';
-import { fadeInUpVariant } from '../../../../helpers/animations';
+import { PokemonClient } from 'pokenode-ts';
+import { removeDash, mapGeneration, fadeInUpVariant } from '@/helpers';
 // components
-import BoxWrapper from '../../../Box/StyledBox';
-import Image from '../../../Image';
-import EvoDetails from './EvolutionDetails';
+import Link from 'next/link';
+import BoxWrapper from '@/components/Box/StyledBox';
+import Image from '@/components/Image';
+import EvolutionDetails from './EvolutionDetails';
 // styles
-import { PokeBox, NumberId, PokeName } from '../../../BaseStyles';
+import { PokeBox, NumberId, PokeName } from '@/components/BaseStyles';
 import { EvoArrow, PokeGen } from './StyledEvolution';
 
-export default function Evolution({ noArrow = false, species, details, ...rest }) {
+interface EvolutionProps extends BoxProps {
+  noArrow?: boolean;
+  species: ChainLink['species'];
+  evolutionDetails?: EvolutionDetail[];
+}
+
+const Evolution = ({
+  noArrow = false,
+  species,
+  evolutionDetails,
+  ...rest
+}: EvolutionProps): JSX.Element => {
   // species state
-  const [currSpecies, setCurrSpecies] = useState();
-  const [imgSrc, setImgSrc] = useState();
+  const [currSpecies, setCurrSpecies] = useState<PokemonSpecies>();
+  const [imgSrc, setImgSrc] = useState<string>();
   // ref
   const _isMounted = useRef(null);
   // manage mounted state to avoid memory leaks
@@ -30,14 +42,16 @@ export default function Evolution({ noArrow = false, species, details, ...rest }
 
   // fetch species.url data
   useEffect(() => {
+    // client
+    const pokemonClient = new PokemonClient();
     async function fetchImage() {
-      // get data
-      await axios.get(species.url).then(newSpecies => {
+      // get species data
+      await pokemonClient.getPokemonSpeciesByName(species.name).then(newSpecies => {
         // only update states if mounted
         if (_isMounted.current) {
-          setCurrSpecies(newSpecies.data);
+          setCurrSpecies(newSpecies);
           setImgSrc(
-            `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${newSpecies.data.id}.png`,
+            `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${newSpecies.id}.png`,
           );
         }
       });
@@ -70,8 +84,8 @@ export default function Evolution({ noArrow = false, species, details, ...rest }
             justify="center"
             align="center"
           >
-            {details.map((currDetails, i) => (
-              <EvoDetails key={`evo-details-${i}`} details={currDetails} />
+            {evolutionDetails.map((currDetails, i) => (
+              <EvolutionDetails key={`evo-details-${i}`} details={currDetails} />
             ))}
             <EvoArrow />
           </BoxWrapper>
@@ -89,8 +103,8 @@ export default function Evolution({ noArrow = false, species, details, ...rest }
               alt={species.name}
               key={`evolution-img-${species.name}-${imgSrc}`}
               src={imgSrc}
-              width={115}
-              height={115}
+              width="115"
+              height="115"
               lazy={false}
             />
             <NumberId>{`#${currSpecies.id}`}</NumberId>
@@ -103,4 +117,6 @@ export default function Evolution({ noArrow = false, species, details, ...rest }
       </BoxWrapper>
     )
   );
-}
+};
+
+export default Evolution;

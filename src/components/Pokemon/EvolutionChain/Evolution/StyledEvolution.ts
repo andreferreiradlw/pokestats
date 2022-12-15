@@ -1,6 +1,6 @@
-import styled, { css } from 'styled-components'
+import styled, { css } from 'styled-components';
 // svg
-import Arrow from '../../../../assets/svg/arrows.svg'
+import Arrow from '@/assets/svg/arrows.svg';
 
 const EvoArrow = styled(Arrow)`
   margin: 0.5rem 0 1rem;
@@ -12,11 +12,11 @@ const EvoArrow = styled(Arrow)`
       transform: none;
     }
   `}
-`
+`;
 
 const PokeGen = styled.span`
   font-size: 1rem;
   font-weight: 300;
-`
+`;
 
-export { EvoArrow, PokeGen }
+export { EvoArrow, PokeGen };

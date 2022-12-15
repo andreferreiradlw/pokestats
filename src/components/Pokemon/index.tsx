@@ -37,11 +37,11 @@ const PokemonPage = ({
   species,
   evolution,
 }: PokestatsPokemonPageProps): JSX.Element => {
-  console.log('allPokemon', allPokemon);
-  console.log('allPokemonTypes', allPokemonTypes);
-  console.log('pokemon', pokemon);
-  console.log('species', species);
-  console.log('evolution', evolution);
+  // console.log('allPokemon', allPokemon);
+  // console.log('allPokemonTypes', allPokemonTypes);
+  // console.log('pokemon', pokemon);
+  // console.log('species', species);
+  // console.log('evolution', evolution);
 
   const { id, game_indices, name } = pokemon;
   const { generation, names } = species;
@@ -134,13 +134,12 @@ const PokemonPage = ({
         </Box>
         {/** EVOLUTION CHAIN */}
         <Box align="flex-start" justify="flex-start" margin="1rem 0" $minHeight="375px">
-          {/* <LazyLoad height={375} once offset={50}>
-                <EvolutionChain
-                  sizes={12}
-                  margin="0 0 2rem"
-                  key={`pokemon-evolution-${pokemonName}`}
-                />
-              </LazyLoad> */}
+          <EvolutionChain
+            sizes={12}
+            margin="0 0 2rem"
+            key={`pokemon-evolution-${name}`}
+            evolutionChain={evolution}
+          />
         </Box>
         {/** BREEDING, TRAINING, MULTIPLIERS */}
         <Box

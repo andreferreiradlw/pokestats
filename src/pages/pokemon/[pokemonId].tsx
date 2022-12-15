@@ -4,7 +4,7 @@ import type { Pokemon, PokemonType, PokemonMove } from '@/types';
 import type { Pokemon as PokenodePokemon, EvolutionChain, PokemonSpecies } from 'pokenode-ts';
 // helpers
 import { PokemonClient, EvolutionClient, MoveClient } from 'pokenode-ts';
-import { getIdFromEvolutionChain, getIdFromSpecies } from '@/helpers';
+import { getIdFromEvolutionChain, getIdFromSpecies, getIdFromMove } from '@/helpers';
 // components
 import Layout from '@/components/Layout';
 import PokemonPage from '@/components/Pokemon';
@@ -102,7 +102,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     let moveRequests = [];
     // create an axios request for each move
     pokemonDataResults.moves.forEach(({ move }) =>
-      moveRequests.push(moveClient.getMoveByName(move.name)),
+      moveRequests.push(moveClient.getMoveById(getIdFromMove(move.url))),
     );
 
     const allPokemonMovesData = await Promise.all(moveRequests);

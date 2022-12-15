@@ -14,4 +14,9 @@ const getIdFromSpecies = (url: string): number => {
   return Number(matchId[1]);
 };
 
-export { getIdFromEvolutionChain, getIdFromMachine, getIdFromSpecies };
+const getIdFromMove = (url: string): number => {
+  const matchId = url.match(/\/move\/(\d+)\//);
+  return Number(matchId[1]);
+};
+
+export { getIdFromEvolutionChain, getIdFromMachine, getIdFromSpecies, getIdFromMove };

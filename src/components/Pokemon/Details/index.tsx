@@ -104,7 +104,7 @@ const PokemonDetails = ({ pokemon, species, ...rest }: PokemonDetailsProps): JSX
           </Genera>
         )}
         {gameVersion && <Flavor>{flavorText(gameVersion)}</Flavor>}
-        <Table forwardedAs="table" align="flex-start">
+        <Table forwardedAs="table">
           <tbody>
             <tr>
               <th>National №</th>

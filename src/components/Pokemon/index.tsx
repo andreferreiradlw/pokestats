@@ -43,7 +43,8 @@ const PokemonPage = ({
   console.log('species', species);
   console.log('evolution', evolution);
 
-  const { name } = pokemon;
+  const { id, game_indices, name } = pokemon;
+  const { generation, names } = species;
   // router
   // const router = useRouter();
   // dispatch
@@ -123,13 +124,13 @@ const PokemonPage = ({
             pokemon={pokemon}
             species={species}
           />
-          {/* <FeaturedImage
-                sizes={7}
-                margin={{ xxs: '0 0 2rem', lg: '0' }}
-                pokemonNames={names}
-                pokemonName={name}
-                pokemonId={id}
-              /> */}
+          <FeaturedImage
+            sizes={7}
+            margin={{ xxs: '0 0 2rem', lg: '0' }}
+            specieNames={names}
+            pokemonName={name}
+            pokemonId={id}
+          />
         </Box>
         {/** EVOLUTION CHAIN */}
         <Box align="flex-start" justify="flex-start" margin="1rem 0" $minHeight="375px">

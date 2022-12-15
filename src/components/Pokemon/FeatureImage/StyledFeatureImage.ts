@@ -1,8 +1,8 @@
-import styled, { css } from 'styled-components'
+import styled, { css } from 'styled-components';
 // components
-import Box from '../../Box'
+import Box from '../../Box';
 // styles
-import { float } from '../../BaseStyles'
+import { float } from '../../BaseStyles';
 
 const ImageContainer = styled(Box)`
   height: 100%;
@@ -37,6 +37,6 @@ const ImageContainer = styled(Box)`
       animation: ${float} infinite 3s ease-in-out;
     }
   }
-`
+`;
 
-export { ImageContainer }
+export { ImageContainer };

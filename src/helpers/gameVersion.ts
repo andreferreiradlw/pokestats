@@ -178,7 +178,7 @@ const gameVersions = [
     generation: 'Generation VIII',
   },
   */
-]
+];
 
 const generations = [
   {
@@ -223,46 +223,44 @@ const generations = [
     gameVersion: 'sword',
   },
   */
-]
+];
 
-const mapIdToGeneration = id => {
+const mapIdToGeneration = (id: number): string => {
   if (id <= 151) {
-    return 'generation-i'
+    return 'generation-i';
   } else if (id > 151 && id <= 251) {
-    return 'generation-ii'
+    return 'generation-ii';
   } else if (id > 251 && id <= 386) {
-    return 'generation-iii'
+    return 'generation-iii';
   } else if (id > 386 && id <= 493) {
-    return 'generation-iv'
+    return 'generation-iv';
   } else if (id > 483 && id <= 649) {
-    return 'generation-v'
+    return 'generation-v';
   } else if (id > 649 && id <= 721) {
-    return 'generation-vi'
+    return 'generation-vi';
   } else if (id > 721 && id <= 809) {
-    return 'generation-vii'
+    return 'generation-vii';
   } /** else if (id > 809 && id <= 898) {
     return 'generation-viii'
   } */ else {
-    return 'all'
+    return 'all';
   }
-}
+};
 
-const mapVersionToGroup = currentVersion =>
-  gameVersions
-    .filter(version => version.value === currentVersion)
-    .map(version => version.group)
+const mapVersionToGroup = (currentVersion: string): string[] =>
+  gameVersions.filter(version => version.value === currentVersion).map(version => version.group);
 
-const mapGeneration = generationValue =>
+const mapGeneration = (generationValue: string): string =>
   generations
     .filter(gen => gen.genValue === generationValue)
     .map(generation => generation.genDescription)
-    .toString()
+    .toString();
 
-const mapGenerationToGame = value =>
+const mapGenerationToGame = (value: string): string =>
   generations
     .filter(gen => gen.genValue === value)
     .map(generation => generation.gameVersion)
-    .toString()
+    .toString();
 
 export {
   gameVersions,
@@ -271,4 +269,4 @@ export {
   mapVersionToGroup,
   mapGeneration,
   mapGenerationToGame,
-}
+};

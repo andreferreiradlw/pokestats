@@ -13,7 +13,7 @@ export interface FilteredMove extends PokemonMove {
 const filterMoves = (
   moves: PokemonMove[],
   learnMethod: MoveLearnMethod['name'],
-  versionGroup: string,
+  versionGroup: string[],
 ): FilteredMove[] => {
   // filter pokemon moves by learn method and game version
   const groupMoves = moves.filter(move => {

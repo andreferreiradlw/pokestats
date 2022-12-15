@@ -6,8 +6,8 @@ import type { HTMLMotionProps } from 'framer-motion';
 // helpers
 import { removeDash } from '@/helpers/typography';
 // styles
-import { PokeBox, NumberId, PokeName } from '../../BaseStyles';
-import Image from '../../Image';
+import { PokeBox, NumberId, PokeName } from '@/components/BaseStyles';
+import Image from '@/components/Image';
 
 interface PokemonBoxProps extends HTMLMotionProps<'div'> {
   pokemon: Pokemon;

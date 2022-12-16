@@ -21,11 +21,14 @@ export interface PokestatsPokemonPageProps {
 const PokestatsPokemonPage: NextPage<PokestatsPokemonPageProps> = ({
   allPokemonTypes,
   allPokemon,
+  pokemon,
+  species,
   ...props
 }) => {
+  if (!pokemon || !species) return null;
   return (
     <Layout withHeader withMain={false} autocompleteList={[].concat(allPokemon, allPokemonTypes)}>
-      <PokemonPage allPokemon={allPokemon} {...props} />
+      <PokemonPage allPokemon={allPokemon} pokemon={pokemon} species={species} {...props} />
     </Layout>
   );
 };

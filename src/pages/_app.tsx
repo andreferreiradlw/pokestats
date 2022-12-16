@@ -28,16 +28,6 @@ const App = ({ Component, pageProps, router }: AppProps): JSX.Element => {
     // Record a pageview when route changes
     nextRouter.events.on('routeChangeComplete', onRouteChangeComplete);
 
-    // register service worker
-    if (process.env.NODE_ENV !== 'development' && 'serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
-        navigator.serviceWorker
-          .register('/pokeapi-sw.js')
-          .then(() => console.log('PokeStats service worker registered.'))
-          .catch(err => console.dir(err));
-      });
-    }
-
     // Unassign event listener
     return () => {
       nextRouter.events.off('routeChangeComplete', onRouteChangeComplete);

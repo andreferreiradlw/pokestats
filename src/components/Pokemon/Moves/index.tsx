@@ -1,8 +1,8 @@
 import { useState, useEffect, useRef, useMemo, useContext } from 'react';
 // types
-import type { MoveLearnMethod } from 'pokenode-ts';
 import type { PokemonMove } from '@/types';
 // helpers
+import { MoveClient, MoveLearnMethod, Pokemon, Move } from 'pokenode-ts';
 import GameVersionContext from '@/components/Layout/gameVersionContext';
 import {
   mapVersionToGroup,
@@ -14,6 +14,7 @@ import {
   removeDash,
   staggerTableVariant,
   fadeInUpVariant,
+  getIdFromMove,
 } from '@/helpers';
 // components
 import { AnimatePresence } from 'framer-motion';
@@ -33,7 +34,7 @@ import {
 } from './StyledMoves';
 
 interface PokemonMovesProps extends BoxProps {
-  pokemonMoves: PokemonMove[];
+  pokemon: Pokemon;
 }
 
 const mapMethodName = (methodName: MoveLearnMethod['name']): string => {
@@ -47,9 +48,11 @@ const mapMethodName = (methodName: MoveLearnMethod['name']): string => {
   }
 };
 
-const PokemonMoves = ({ pokemonMoves, ...rest }: PokemonMovesProps): JSX.Element => {
+const PokemonMoves = ({ pokemon, ...rest }: PokemonMovesProps): JSX.Element => {
   // game version
   const { gameVersion } = useContext(GameVersionContext);
+  // loading
+  const [pokemonMoves, setPokemonMoves] = useState<PokemonMove[]>();
   // learn method state
   const [learnMethod, setLearnMethod] = useState<MoveLearnMethod['name']>('level-up');
   // machine names
@@ -58,9 +61,10 @@ const PokemonMoves = ({ pokemonMoves, ...rest }: PokemonMovesProps): JSX.Element
   const [movesLoading, setMovesLoading] = useState(true);
 
   const filteredMoves: FilteredMove[] = useMemo(
-    () => filterMoves(pokemonMoves, learnMethod, mapVersionToGroup(gameVersion)),
+    () => pokemonMoves && filterMoves(pokemonMoves, learnMethod, mapVersionToGroup(gameVersion)),
     [pokemonMoves, learnMethod, gameVersion],
   );
+
   // ref
   const _isMounted = useRef(null);
 
@@ -72,9 +76,45 @@ const PokemonMoves = ({ pokemonMoves, ...rest }: PokemonMovesProps): JSX.Element
     };
   }, []);
 
+  useEffect(() => {
+    // start loading
+    setMovesLoading(true);
+    // client
+    const moveClient = new MoveClient();
+
+    const fetchMovesData = async (): Promise<Move[]> => {
+      // move requests array
+      let moveRequests = [];
+      // create an axios request for each move
+      pokemon.moves.forEach(({ move }) =>
+        moveRequests.push(moveClient.getMoveById(getIdFromMove(move.url))),
+      );
+
+      const allPokemonMovesData = await Promise.all(moveRequests);
+
+      return allPokemonMovesData;
+    };
+
+    fetchMovesData()
+      .then(movesData => {
+        const formatMoves = movesData
+          .map((currMove, i) => {
+            // version details from pokemon moves info
+            return {
+              ...currMove,
+              version_group_details: pokemon.moves[i].version_group_details,
+            };
+          })
+          .filter(data => data);
+        // update state
+        setPokemonMoves(formatMoves);
+      })
+      .catch(console.error);
+  }, [pokemon]);
+
   // current pokemon moves
   useEffect(() => {
-    // statt loading
+    // start loading
     setMovesLoading(true);
 
     if (_isMounted.current && filteredMoves?.length) {

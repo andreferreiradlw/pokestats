@@ -76,15 +76,6 @@ Omit<PokestatsPokemonPageProps, 'allPokemonTypes'>): JSX.Element => {
             pokemonId={id}
           />
         </Box>
-        {/** EVOLUTION CHAIN */}
-        <Box align="flex-start" justify="flex-start" margin="1rem 0" $minHeight="375px">
-          <EvolutionChain
-            sizes={12}
-            margin="0 0 2rem"
-            key={`pokemon-evolution-${name}`}
-            evolutionChain={evolution}
-          />
-        </Box>
         {/** BREEDING, TRAINING, MULTIPLIERS */}
         <Box
           direction={{ xxs: 'column', lg: 'row' }}
@@ -111,6 +102,15 @@ Omit<PokestatsPokemonPageProps, 'allPokemonTypes'>): JSX.Element => {
             padding={{ xxs: '0', lg: '0 0 0 2rem' }}
           />
         </Box>
+        {/** EVOLUTION CHAIN */}
+        <Box align="flex-start" justify="flex-start" margin="1rem 0" $minHeight="375px">
+          <EvolutionChain
+            sizes={12}
+            margin="0 0 2rem"
+            key={`pokemon-evolution-${name}`}
+            evolutionChain={evolution}
+          />
+        </Box>
         {/** BASESTATS, FORMS */}
         <Box
           direction={{ xxs: 'column', lg: 'row' }}
@@ -128,7 +128,7 @@ Omit<PokestatsPokemonPageProps, 'allPokemonTypes'>): JSX.Element => {
         </Box>
         {/** MOVES */}
         <Box align="flex-start" justify="flex-start" margin="1rem 0" $minHeight="210px">
-          {/* <Moves pokemonMoves={pokemonMoves} sizes={12} margin="0 0 2rem" /> */}
+          <Moves pokemon={pokemon} sizes={12} margin="0 0 2rem" />
         </Box>
         {/** SPRITES */}
         <Box align="flex-start" justify="flex-start" margin="1rem 0">

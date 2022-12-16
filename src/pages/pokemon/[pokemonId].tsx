@@ -4,8 +4,8 @@ import type { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 import type { Pokemon, PokemonType, PokemonMove } from '@/types';
 import type { Pokemon as PokenodePokemon, EvolutionChain, PokemonSpecies } from 'pokenode-ts';
 // helpers
-import { PokemonClient, EvolutionClient, MoveClient } from 'pokenode-ts';
-import { getIdFromEvolutionChain, getIdFromSpecies, getIdFromMove } from '@/helpers';
+import { PokemonClient, EvolutionClient } from 'pokenode-ts';
+import { getIdFromEvolutionChain, getIdFromSpecies, removeDash } from '@/helpers';
 // components
 import Layout from '@/components/Layout';
 import PokemonPage from '@/components/Pokemon';
@@ -23,17 +23,24 @@ export interface PokestatsPokemonPageProps {
 const PokestatsPokemonPage: NextPage<PokestatsPokemonPageProps> = ({
   allPokemonTypes,
   allPokemon,
+  pokemon,
   ...props
 }) => {
   const router = useRouter();
 
   if (router.isFallback) {
-    return <Loading $iconWidth={{ xxs: '20%', xs: '15%', md: '10%', lg: '5%' }} />;
+    return (
+      <Loading
+        height="100vh"
+        text={`Loading ${removeDash(pokemon.name)}`}
+        $iconWidth={{ xxs: '20%', xs: '15%', md: '10%', lg: '5%' }}
+      />
+    );
   }
 
   return (
     <Layout withHeader withMain={false} autocompleteList={[].concat(allPokemon, allPokemonTypes)}>
-      <PokemonPage allPokemon={allPokemon} {...props} />
+      <PokemonPage allPokemon={allPokemon} pokemon={pokemon} {...props} />
     </Layout>
   );
 };
@@ -61,7 +68,6 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   // clients
   const pokemonClient = new PokemonClient();
   const evolutionClient = new EvolutionClient();
-  const moveClient = new MoveClient();
 
   const pokemonName = params.pokemonId as string;
 
@@ -104,20 +110,6 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
       return { notFound: true };
     }
 
-    // move requests array
-    // let moveRequests = [];
-    // // create an axios request for each move
-    // pokemonDataResults.moves.forEach(({ move }) =>
-    //   moveRequests.push(moveClient.getMoveById(getIdFromMove(move.url))),
-    // );
-
-    // const allPokemonMovesData = await Promise.all(moveRequests);
-
-    // if (!allPokemonMovesData) {
-    //   console.error('Failed to fetch allPokemonMovesData');
-    //   return { notFound: true };
-    // }
-
     // species english flavor text
     pokemonSpeciesResults.flavor_text_entries = pokemonSpeciesResults.flavor_text_entries.filter(
       entry => entry.language.name === 'en',
@@ -142,15 +134,6 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
         pokemon: pokemonDataResults,
         species: pokemonSpeciesResults,
         evolution: evolutionDataResults,
-        // pokemonMoves: allPokemonMovesData
-        //   .map((currMove, i) => {
-        //     // version details from pokemon moves info
-        //     return {
-        //       ...currMove,
-        //       version_group_details: pokemonDataResults.moves[i].version_group_details,
-        //     };
-        //   })
-        //   .filter(data => data), // filter empty
         revalidate: 60,
       },
     };

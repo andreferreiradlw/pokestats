@@ -19,4 +19,15 @@ const getIdFromMove = (url: string): number => {
   return Number(matchId[1]);
 };
 
-export { getIdFromEvolutionChain, getIdFromMachine, getIdFromSpecies, getIdFromMove };
+const getIdFromPokemon = (url: string): number => {
+  const matchId = url.match(/\/pokemon\/(\d+)\//);
+  return Number(matchId[1]);
+};
+
+export {
+  getIdFromEvolutionChain,
+  getIdFromMachine,
+  getIdFromSpecies,
+  getIdFromMove,
+  getIdFromPokemon,
+};

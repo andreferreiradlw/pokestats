@@ -24,7 +24,7 @@ const PokestatsPokemonPage: NextPage<PokestatsPokemonPageProps> = ({
   ...props
 }) => {
   return (
-    <Layout withHeader withMain={false} autocompleteList={[...allPokemon, ...allPokemonTypes]}>
+    <Layout withHeader withMain={false} autocompleteList={[].concat(allPokemon, allPokemonTypes)}>
       <PokemonPage allPokemon={allPokemon} {...props} />
     </Layout>
   );
@@ -143,7 +143,6 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
             };
           })
           .filter(data => data), // filter empty
-        revalidate: 90, // In seconds
       },
     };
   } catch (error) {

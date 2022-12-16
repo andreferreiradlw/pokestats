@@ -30,8 +30,8 @@ const PokemonPage = ({
   // game version
   const { setGameVersion } = useContext(GameVersionContext);
   // data
-  const { id, name, stats, types, sprites, game_indices } = pokemon;
-  const { names, generation } = species;
+  const { id, name, stats, types, sprites, game_indices } = pokemon || {};
+  const { names, generation } = species || {};
 
   useEffect(() => {
     let pokemonGen: string;
@@ -42,6 +42,8 @@ const PokemonPage = ({
 
     setGameVersion(pokemonGen);
   }, [generation, game_indices, setGameVersion]);
+
+  if (!pokemon || !species) return null;
 
   return (
     <AnimatePresence mode="wait">

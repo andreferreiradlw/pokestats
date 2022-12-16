@@ -1,17 +1,23 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
+// types
+import { Type } from 'pokenode-ts';
 // helpers
-import { mapGeneration, removeDash } from '../../../helpers'
+import { mapGeneration, removeDash } from '@/helpers';
 // components
-import Box from '../../Box'
+import Box, { BoxProps } from '@/components/Box';
 // styles
-import { Table } from '../../BaseStyles'
+import { Table } from '@/components/BaseStyles';
 
 const InfoTable = styled(Table)`
   width: 100%;
-`
+`;
 
-export default function TypeInfo({ info, ...rest }) {
-  const { id, generation, move_damage_class } = info
+interface TypeInfoProps extends BoxProps {
+  type: Type;
+}
+
+const TypeInfo = ({ type, ...rest }: TypeInfoProps): JSX.Element => {
+  const { id, generation, move_damage_class } = type;
 
   return (
     <Box {...rest}>
@@ -36,5 +42,7 @@ export default function TypeInfo({ info, ...rest }) {
         </tbody>
       </InfoTable>
     </Box>
-  )
-}
+  );
+};
+
+export default TypeInfo;

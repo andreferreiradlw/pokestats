@@ -56,11 +56,11 @@ const TypePage = ({ typeInfo, typeMoves }: PokestatsTypePageProps): JSX.Element 
                 align={{ xxs: 'center', md: 'flex-start' }}
                 sizes={{ xxs: 12, lg: 8 }}
               >
-                {/* <TypeInfo
+                <TypeInfo
                   margin={{ xxs: '0 0 2rem', lg: '0' }}
                   padding={{ xxs: '0', md: '0 1rem 0 0' }}
-                  info={typeInfo.data}
-                /> */}
+                  type={typeInfo}
+                />
                 {/* <TypeRelations
                   margin={{ xxs: '0 0 2rem', lg: '0' }}
                   padding={{ xxs: '0', md: '0 0 0 1rem', lg: '0 1rem' }}

@@ -105,18 +105,18 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     }
 
     // move requests array
-    let moveRequests = [];
-    // create an axios request for each move
-    pokemonDataResults.moves.forEach(({ move }) =>
-      moveRequests.push(moveClient.getMoveById(getIdFromMove(move.url))),
-    );
+    // let moveRequests = [];
+    // // create an axios request for each move
+    // pokemonDataResults.moves.forEach(({ move }) =>
+    //   moveRequests.push(moveClient.getMoveById(getIdFromMove(move.url))),
+    // );
 
-    const allPokemonMovesData = await Promise.all(moveRequests);
+    // const allPokemonMovesData = await Promise.all(moveRequests);
 
-    if (!allPokemonMovesData) {
-      console.error('Failed to fetch allPokemonMovesData');
-      return { notFound: true };
-    }
+    // if (!allPokemonMovesData) {
+    //   console.error('Failed to fetch allPokemonMovesData');
+    //   return { notFound: true };
+    // }
 
     // species english flavor text
     pokemonSpeciesResults.flavor_text_entries = pokemonSpeciesResults.flavor_text_entries.filter(
@@ -142,15 +142,15 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
         pokemon: pokemonDataResults,
         species: pokemonSpeciesResults,
         evolution: evolutionDataResults,
-        pokemonMoves: allPokemonMovesData
-          .map((currMove, i) => {
-            // version details from pokemon moves info
-            return {
-              ...currMove,
-              version_group_details: pokemonDataResults.moves[i].version_group_details,
-            };
-          })
-          .filter(data => data), // filter empty
+        // pokemonMoves: allPokemonMovesData
+        //   .map((currMove, i) => {
+        //     // version details from pokemon moves info
+        //     return {
+        //       ...currMove,
+        //       version_group_details: pokemonDataResults.moves[i].version_group_details,
+        //     };
+        //   })
+        //   .filter(data => data), // filter empty
         revalidate: 60,
       },
     };

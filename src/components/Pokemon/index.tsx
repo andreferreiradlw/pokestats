@@ -25,8 +25,8 @@ const PokemonPage = ({
   pokemon,
   species,
   evolution,
-  pokemonMoves,
-}: Omit<PokestatsPokemonPageProps, 'allPokemonTypes'>): JSX.Element => {
+}: // pokemonMoves,
+Omit<PokestatsPokemonPageProps, 'allPokemonTypes'>): JSX.Element => {
   // game version
   const { setGameVersion } = useContext(GameVersionContext);
   // data
@@ -128,7 +128,7 @@ const PokemonPage = ({
         </Box>
         {/** MOVES */}
         <Box align="flex-start" justify="flex-start" margin="1rem 0" $minHeight="210px">
-          <Moves pokemonMoves={pokemonMoves} sizes={12} margin="0 0 2rem" />
+          {/* <Moves pokemonMoves={pokemonMoves} sizes={12} margin="0 0 2rem" /> */}
         </Box>
         {/** SPRITES */}
         <Box align="flex-start" justify="flex-start" margin="1rem 0">

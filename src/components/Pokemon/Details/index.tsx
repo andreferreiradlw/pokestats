@@ -130,7 +130,7 @@ const PokemonDetails = ({ pokemon, species, ...rest }: PokemonDetailsProps): JSX
             </tr>
             <tr>
               <th>Shape</th>
-              <td>{capitalize(shape.name)}</td>
+              <td>{shape ? capitalize(shape.name) : 'No shape'}</td>
             </tr>
             <tr>
               <th>Color</th>

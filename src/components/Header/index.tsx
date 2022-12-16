@@ -13,7 +13,7 @@ import { Heading, SelectContainer } from './styledHeader';
 
 interface HeaderComponentProps extends BoxProps {
   autocompleteList: AutocompleteProps['filterList'];
-  pokemonGen: string;
+  pokemonGen?: string;
 }
 
 const HeaderComponent = ({

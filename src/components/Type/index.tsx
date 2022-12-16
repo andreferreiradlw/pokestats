@@ -10,7 +10,6 @@ import { fetchTypeData, cleanData } from './typeSlice';
 import { typeList, removeDash, pageContainerVariant } from '../../helpers';
 // components
 import Layout, { MainContainer } from '../Layout';
-import Loading from '../Loading';
 import Box from '../Box';
 import TypeInfo from './Info';
 import TypeRelations from './Relations';
@@ -61,11 +60,11 @@ const TypePage = ({ typeInfo, typeMoves }: PokestatsTypePageProps): JSX.Element 
                   padding={{ xxs: '0', md: '0 1rem 0 0' }}
                   type={typeInfo}
                 />
-                {/* <TypeRelations
+                <TypeRelations
                   margin={{ xxs: '0 0 2rem', lg: '0' }}
                   padding={{ xxs: '0', md: '0 0 0 1rem', lg: '0 1rem' }}
                   relations={damage_relations}
-                /> */}
+                />
               </Box>
             </Box>
             <TypeIcon sizes={{ xxs: 12, lg: 4 }} typeName={name} otherNames={names} />

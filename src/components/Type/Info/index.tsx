@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 // types
-import { Type } from 'pokenode-ts';
+import type { Type } from 'pokenode-ts';
 // helpers
 import { mapGeneration, removeDash } from '@/helpers';
 // components

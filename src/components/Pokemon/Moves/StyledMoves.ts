@@ -1,11 +1,12 @@
-import styled, { css } from 'styled-components'
-import { motion } from 'framer-motion'
-import Box from '../../Box'
+import styled, { css } from 'styled-components';
+// components
+import { motion } from 'framer-motion';
+import Box from '@/components/Box';
 
-const TableBody = styled(motion.tbody)``
-const TableRow = styled(motion.tr)``
-const NameTH = styled(motion.th)``
-const NameTD = styled(motion.td)``
+const TableBody = styled(motion.tbody)``;
+const TableRow = styled(motion.tr)``;
+const NameTH = styled(motion.th)``;
+const NameTD = styled(motion.td)``;
 
 const TableContainer = styled(motion.div)`
   overflow: auto;
@@ -16,7 +17,7 @@ const TableContainer = styled(motion.div)`
       overflow-x: hidden;
     }
   `}
-`
+`;
 
 const MovesTable = styled(motion.table)`
   font-size: 0.7rem;
@@ -64,18 +65,10 @@ const MovesTable = styled(motion.table)`
       line-height: 1rem;
     }
   `}
-`
+`;
 
 const TabContainer = styled(Box)`
   margin-bottom: 1rem;
-`
+`;
 
-export {
-  TableContainer,
-  MovesTable,
-  TableBody,
-  NameTH,
-  NameTD,
-  TableRow,
-  TabContainer,
-}
+export { TableContainer, MovesTable, TableBody, NameTH, NameTD, TableRow, TabContainer };

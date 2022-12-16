@@ -22,17 +22,7 @@ const EvolutionChain = ({ evolutionChain, ...rest }: EvolutionChainProps): JSX.E
   return (
     <Box align={{ xxs: 'center', lg: 'flex-start' }} {...rest}>
       <SectionTitle>Evolution Chain</SectionTitle>
-      {!chain.evolves_to?.length && (
-        <SectionMessage
-          initial="hidden"
-          animate="show"
-          variants={fadeInUpVariant}
-          key={`no-pokemon-evolution-${chainId}`}
-        >
-          This Pokémon does not evolve.
-        </SectionMessage>
-      )}
-      <AnimatePresence mode="wait">
+      <AnimatePresence>
         <BoxWrapper
           direction={{ xxs: 'column', lg: 'row' }}
           justify="center"
@@ -78,6 +68,16 @@ const EvolutionChain = ({ evolutionChain, ...rest }: EvolutionChainProps): JSX.E
           )}
         </BoxWrapper>
       </AnimatePresence>
+      {!chain.evolves_to?.length && (
+        <SectionMessage
+          initial="hidden"
+          animate="show"
+          variants={fadeInUpVariant}
+          key={`no-pokemon-evolution-${chainId}`}
+        >
+          This Pokémon does not evolve.
+        </SectionMessage>
+      )}
     </Box>
   );
 };

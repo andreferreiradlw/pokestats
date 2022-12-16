@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 // types
 import type { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 import type { Pokemon, PokemonType, PokemonMove } from '@/types';
@@ -8,6 +9,7 @@ import { getIdFromEvolutionChain, getIdFromSpecies, getIdFromMove } from '@/help
 // components
 import Layout from '@/components/Layout';
 import PokemonPage from '@/components/Pokemon';
+import Loading from '@/components/Loading';
 
 export interface PokestatsPokemonPageProps {
   allPokemon: Pokemon[];
@@ -23,6 +25,12 @@ const PokestatsPokemonPage: NextPage<PokestatsPokemonPageProps> = ({
   allPokemon,
   ...props
 }) => {
+  const router = useRouter();
+
+  if (router.isFallback) {
+    return <Loading $iconWidth={{ xxs: '20%', xs: '15%', md: '10%', lg: '5%' }} />;
+  }
+
   return (
     <Layout withHeader withMain={false} autocompleteList={[].concat(allPokemon, allPokemonTypes)}>
       <PokemonPage allPokemon={allPokemon} {...props} />
@@ -33,7 +41,7 @@ const PokestatsPokemonPage: NextPage<PokestatsPokemonPageProps> = ({
 export const getStaticPaths: GetStaticPaths = async () => {
   const api = new PokemonClient();
 
-  const pokemonList = await api.listPokemons(0, 251);
+  const pokemonList = await api.listPokemons(0, 151);
   // paths
   const paths = pokemonList.results.map(pokemon => {
     return {
@@ -45,7 +53,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   // return static paths
   return {
     paths,
-    fallback: 'blocking',
+    fallback: true,
   };
 };
 
@@ -143,6 +151,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
             };
           })
           .filter(data => data), // filter empty
+        revalidate: 60,
       },
     };
   } catch (error) {

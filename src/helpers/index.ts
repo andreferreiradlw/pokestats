@@ -10,8 +10,6 @@ export * from './moves';
 export * from './random';
 // refs
 export * from './refs';
-// types
-export * from './types';
 // typography
 export * from './typography';
 // id

@@ -1,27 +1,28 @@
 import { useState } from 'react';
-import { useSelector } from 'react-redux';
 import styled from 'styled-components';
-import { motion, AnimatePresence } from 'framer-motion';
+// types
+import type { PokestatsTypePageProps } from '@/pages/type/[typeId]';
 // helpers
-import { hoverVariant, removeDash, fadeInUpVariant } from '../../../helpers';
+import { motion, AnimatePresence } from 'framer-motion';
+import { hoverVariant, removeDash, fadeInUpVariant } from '@/helpers';
 // styles
-import { Button, SectionTitle } from '../../BaseStyles';
+import { Button, SectionTitle } from '@/components/BaseStyles';
 // components
-import Box from '../../Box';
-import InfiniteScroll from '../../InfiniteScroll';
-import Moves from './Moves';
+import Box, { BoxProps } from '@/components/Box';
+import InfiniteScroll from '@/components/InfiniteScroll';
+import TypeMoves from './Moves';
 
 const TabContainer = styled(motion.div)`
   width: 100%;
 `;
 
-export default function Tabs({ ...rest }) {
+interface TypeTabsProps extends BoxProps, PokestatsTypePageProps {}
+
+const TypeTabs = ({ typeInfo, typeMoves, ...rest }: TypeTabsProps) => {
   // tab state
   const [currTab, setCurrTab] = useState('pokemon');
-  // type selector
-  const typeInfo = useSelector(state => state.type);
   // data
-  const { name, pokemonListWithId, moves } = typeInfo.data;
+  const { name, pokemon } = typeInfo;
 
   return (
     <Box align={{ xxs: 'center', lg: 'flex-start' }} {...rest}>
@@ -48,7 +49,7 @@ export default function Tabs({ ...rest }) {
         </Button>
       </Box>
       <AnimatePresence mode="wait">
-        {!typeInfo.isLoading && currTab === 'pokemon' && (
+        {currTab === 'pokemon' && (
           <TabContainer
             initial="hidden"
             animate="show"
@@ -56,13 +57,11 @@ export default function Tabs({ ...rest }) {
             variants={fadeInUpVariant}
             key={`${name}-type-pokemon`}
           >
-            <SectionTitle>{`${removeDash(name)} Type Pokemon (${
-              pokemonListWithId.length
-            })`}</SectionTitle>
-            <InfiniteScroll pokemonList={pokemonListWithId} dark />
+            <SectionTitle>{`${removeDash(name)} Type Pokemon (${pokemon.length})`}</SectionTitle>
+            <InfiniteScroll pokemonList={pokemon} dark />
           </TabContainer>
         )}
-        {!typeInfo.isLoading && currTab === 'moves' && (
+        {currTab === 'moves' && (
           <TabContainer
             initial="hidden"
             animate="show"
@@ -70,11 +69,13 @@ export default function Tabs({ ...rest }) {
             variants={fadeInUpVariant}
             key={`${name}-type-moves`}
           >
-            <SectionTitle>{`${removeDash(name)} Type Moves (${moves.length})`}</SectionTitle>{' '}
-            <Moves />
+            <SectionTitle>{`${removeDash(name)} Type Moves (${typeMoves.length})`}</SectionTitle>{' '}
+            <TypeMoves moves={typeMoves} />
           </TabContainer>
         )}
       </AnimatePresence>
     </Box>
   );
-}
+};
+
+export default TypeTabs;

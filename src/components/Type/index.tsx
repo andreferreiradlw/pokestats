@@ -1,26 +1,19 @@
-import { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { useRouter } from 'next/router';
-import { AnimatePresence } from 'framer-motion';
 // types
-import { PokestatsTypePageProps } from '@/pages/type/[typeId]';
-// actions
-import { fetchTypeData, cleanData } from './typeSlice';
+import type { PokestatsTypePageProps } from '@/pages/type/[typeId]';
 // helpers
-import { typeList, removeDash, pageContainerVariant } from '../../helpers';
+import { removeDash, pageContainerVariant } from '@/helpers';
 // components
-import Layout, { MainContainer } from '../Layout';
-import Box from '../Box';
+import { AnimatePresence } from 'framer-motion';
+import Layout, { MainContainer } from '@/components/Layout';
+import Box from '@/components/Box';
 import TypeInfo from './Info';
 import TypeRelations from './Relations';
 import TypeIcon from './TypeIcon';
 import Tabs from './Tabs';
 // styles
-import { PageHeading } from '../BaseStyles';
+import { PageHeading } from '@/components/BaseStyles';
 
 const TypePage = ({ typeInfo, typeMoves }: PokestatsTypePageProps): JSX.Element => {
-  console.log('typeInfo', typeInfo);
-  console.log('typeMoves', typeMoves);
   // data
   const { name, names, damage_relations } = typeInfo;
 
@@ -70,7 +63,7 @@ const TypePage = ({ typeInfo, typeMoves }: PokestatsTypePageProps): JSX.Element 
             <TypeIcon sizes={{ xxs: 12, lg: 4 }} typeName={name} otherNames={names} />
           </Box>
           <Box align="flex-start" justify="flex-start" margin="1rem 0">
-            {/* <Tabs sizes={12} margin="0 0 2rem" /> */}
+            <Tabs typeInfo={typeInfo} typeMoves={typeMoves} sizes={12} margin="0 0 2rem" />
           </Box>
         </MainContainer>
       </AnimatePresence>

@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 // types
-import type { Type } from 'pokenode-ts';
+import type { PokestatsTypePageProps } from '@/pages/type/[typeId]';
 // helpers
 import { mapGeneration, removeDash } from '@/helpers';
 // components
@@ -13,7 +13,7 @@ const InfoTable = styled(Table)`
 `;
 
 interface TypeInfoProps extends BoxProps {
-  type: Type;
+  type: PokestatsTypePageProps['typeInfo'];
 }
 
 const TypeInfo = ({ type, ...rest }: TypeInfoProps): JSX.Element => {

@@ -1,13 +1,18 @@
 // types
 import type { GetStaticPaths, GetStaticProps, NextPage } from 'next';
+import type { Pokemon } from '@/types';
 // helpers
 import { PokemonClient, MoveClient, Type, Move } from 'pokenode-ts';
 import { getIdFromMove, getIdFromPokemon } from '@/helpers';
 // components
 import TypePage from '@/components/Type';
 
+interface PokestatsType extends Omit<Type, 'pokemon'> {
+  pokemon: Pokemon[];
+}
+
 export interface PokestatsTypePageProps {
-  typeInfo: Type;
+  typeInfo: PokestatsType;
   typeMoves: Move[];
 }
 
@@ -28,6 +33,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
       },
     };
   });
+
   // return static paths
   return {
     paths,
@@ -66,6 +72,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
           return {
             ...pokemon,
             id: id,
+            assetType: 'pokemon',
           };
         }
         return null;

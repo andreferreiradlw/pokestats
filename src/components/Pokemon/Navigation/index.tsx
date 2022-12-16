@@ -9,6 +9,16 @@ import Image from '@/components/Image';
 // styles
 import { BtnAnchor, Title, Arrow } from './StyledNavigation';
 
+const nextPokemon = () => {
+  if (process.env.NODE_ENV === 'production' && window?.fathom)
+    window.fathom.trackGoal('Z5UOU36M', 0);
+};
+
+const previousPokemon = () => {
+  if (process.env.NODE_ENV === 'production' && window?.fathom)
+    window.fathom.trackGoal('JGDCHWX3', 0);
+};
+
 interface NavigationProps extends BoxProps {
   allPokemon: PokestatsPokemonPageProps['allPokemon'];
   pokemonId: Pokemon['id'];
@@ -26,7 +36,11 @@ const Navigation = ({ allPokemon, pokemonId, ...rest }: NavigationProps): JSX.El
       {...rest}
     >
       {pokemonId !== 1 && (
-        <BtnAnchor href={`/pokemon/${allPokemon[pokemonId - 2].name}`} $left>
+        <BtnAnchor
+          href={`/pokemon/${allPokemon[pokemonId - 2].name}`}
+          onClick={previousPokemon}
+          $left
+        >
           <Arrow $left>
             <Image
               src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${
@@ -46,7 +60,7 @@ const Navigation = ({ allPokemon, pokemonId, ...rest }: NavigationProps): JSX.El
         </BtnAnchor>
       )}
       {pokemonId !== pokemonLength && (
-        <BtnAnchor href={`/pokemon/${allPokemon[pokemonId].name}`} $right>
+        <BtnAnchor href={`/pokemon/${allPokemon[pokemonId].name}`} onClick={nextPokemon} $right>
           <Arrow $right>
             <Image
               src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${

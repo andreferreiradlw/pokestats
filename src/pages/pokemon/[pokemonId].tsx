@@ -21,14 +21,11 @@ export interface PokestatsPokemonPageProps {
 const PokestatsPokemonPage: NextPage<PokestatsPokemonPageProps> = ({
   allPokemonTypes,
   allPokemon,
-  pokemon,
-  species,
   ...props
 }) => {
-  if (!pokemon || !species) return null;
   return (
     <Layout withHeader withMain={false} autocompleteList={[].concat(allPokemon, allPokemonTypes)}>
-      <PokemonPage allPokemon={allPokemon} pokemon={pokemon} species={species} {...props} />
+      <PokemonPage allPokemon={allPokemon} {...props} />
     </Layout>
   );
 };
@@ -36,7 +33,7 @@ const PokestatsPokemonPage: NextPage<PokestatsPokemonPageProps> = ({
 export const getStaticPaths: GetStaticPaths = async () => {
   const api = new PokemonClient();
 
-  const pokemonList = await api.listPokemons(0, 151);
+  const pokemonList = await api.listPokemons(0, 251);
   // paths
   const paths = pokemonList.results.map(pokemon => {
     return {

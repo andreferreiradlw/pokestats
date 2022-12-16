@@ -1,7 +1,7 @@
 import { createContext } from 'react';
 
 const GameVersionContext = createContext({
-  gameVersion: 'red',
+  gameVersion: null,
   setGameVersion: (version: string) => {},
 });
 

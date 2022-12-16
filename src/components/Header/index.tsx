@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 // helpers
 import GameVersionContext from '@/components/Layout/gameVersionContext';
-import { gameVersions } from '@/helpers/gameVersion';
+import { gameVersions, checkIfEarlierGen } from '@/helpers';
 // components
 import Link from 'next/link';
 import Box, { BoxProps } from '@/components/Box';
@@ -50,11 +50,14 @@ const HeaderComponent = ({
                 value={gameVersion}
                 onChange={e => setGameVersion(e.target.value)}
               >
-                {gameVersions.map(({ name, value }, index) => (
-                  <option key={index} value={value}>
-                    {name}
-                  </option>
-                ))}
+                {gameVersions.map(
+                  ({ name, value }, index) =>
+                    !checkIfEarlierGen(gameVersion, value) && (
+                      <option key={index} value={value}>
+                        {name}
+                      </option>
+                    ),
+                )}
               </Select>
             </SelectContainer>
           )}

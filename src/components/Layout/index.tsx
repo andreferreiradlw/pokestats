@@ -30,7 +30,7 @@ const Layout = ({
   ...rest
 }: LayoutProps): JSX.Element => {
   // game version
-  const [gameVersion, setGameVersion] = useState('red');
+  const [gameVersion, setGameVersion] = useState('');
 
   const VersionContextValue = useMemo(
     () => ({

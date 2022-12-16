@@ -1,9 +1,11 @@
-import { AnimatePresence } from 'framer-motion';
+import { useEffect, useContext } from 'react';
 // types
 import type { PokestatsPokemonPageProps } from '@/pages/pokemon/[pokemonId]';
 // helpers
-import { pageContainerVariant } from '@/helpers/animations';
+import GameVersionContext from '@/components/Layout/gameVersionContext';
+import { mapGenerationToGame, pageContainerVariant } from '@/helpers';
 // components
+import { AnimatePresence } from 'framer-motion';
 import { MainContainer } from '@/components/Layout';
 import Box from '@/components/Box';
 import Details from './Details';
@@ -25,8 +27,21 @@ const PokemonPage = ({
   evolution,
   pokemonMoves,
 }: Omit<PokestatsPokemonPageProps, 'allPokemonTypes'>): JSX.Element => {
-  const { id, name, stats, types, sprites } = pokemon;
-  const { names } = species;
+  // game version
+  const { gameVersion, setGameVersion } = useContext(GameVersionContext);
+  // data
+  const { id, name, stats, types, sprites, game_indices } = pokemon;
+  const { names, generation } = species;
+
+  useEffect(() => {
+    let pokemonGen: string;
+    // set current pokemon gen
+    game_indices?.[0]
+      ? (pokemonGen = game_indices[0].version.name)
+      : (pokemonGen = mapGenerationToGame(generation.name));
+
+    setGameVersion(pokemonGen);
+  }, [generation, game_indices, gameVersion, setGameVersion]);
 
   return (
     <AnimatePresence mode="wait">

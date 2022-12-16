@@ -1,3 +1,5 @@
+import { version } from 'os';
+
 const gameVersions = [
   { name: 'Red', value: 'red', group: 'red-blue', generation: 'Generation I' },
   {
@@ -262,6 +264,12 @@ const mapGenerationToGame = (value: string): string =>
     .map(generation => generation.gameVersion)
     .toString();
 
+const checkIfEarlierGen = (newGen: string, currGen: string): boolean => {
+  const versionValues = gameVersions.map(version => version.value);
+
+  return versionValues.indexOf(newGen) > versionValues.indexOf(currGen);
+};
+
 export {
   gameVersions,
   generations,
@@ -269,4 +277,5 @@ export {
   mapVersionToGroup,
   mapGeneration,
   mapGenerationToGame,
+  checkIfEarlierGen,
 };

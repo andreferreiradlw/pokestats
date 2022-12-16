@@ -1,8 +1,8 @@
-import styled, { css } from 'styled-components'
+import styled, { css } from 'styled-components';
 // components
-import Box from '../Box'
+import Box from '@/components/Box';
 // styles
-import { float } from '../BaseStyles'
+import { float } from '@/components/BaseStyles';
 
 // image
 const ImageContainer = styled(Box)`
@@ -11,7 +11,7 @@ const ImageContainer = styled(Box)`
       min-height: 300px;
     }
   `}
-`
+`;
 const Image = styled.img`
   margin: 1.5rem 0;
   max-width: 80%;
@@ -34,6 +34,6 @@ const Image = styled.img`
   @media (prefers-reduced-motion: no-preference) {
     animation: ${float} infinite 3s ease-in-out;
   }
-`
+`;
 
-export { ImageContainer, Image }
+export { ImageContainer, Image };

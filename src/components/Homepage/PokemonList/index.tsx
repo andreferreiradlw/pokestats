@@ -3,17 +3,13 @@ import { useState, useEffect } from 'react';
 import type { Pokemon } from '@/types';
 import type { BoxProps } from '@/components/Box';
 // helpers
-import { generations, mapIdToGeneration } from '@/helpers/gameVersion';
+import { generations, mapIdToGeneration } from '@/helpers';
 // components
 import Box from '@/components/Box';
 import InfiniteScroll from '@/components/InfiniteScroll';
 // styles
 import { SectionTitle, Select } from '@/components/BaseStyles';
 import { Container, SelectContainer } from './StyledPokemonList';
-
-interface PokemonListProps extends BoxProps {
-  pokemon: Pokemon[];
-}
 
 const sortItems = (list: Pokemon[], sortProperty: string): Pokemon[] =>
   [...list].sort((a, b) => {
@@ -22,6 +18,10 @@ const sortItems = (list: Pokemon[], sortProperty: string): Pokemon[] =>
     return 0;
   });
 
+interface PokemonListProps extends BoxProps {
+  pokemon: Pokemon[];
+}
+
 const PokemonList = ({ pokemon, ...rest }: PokemonListProps): JSX.Element => {
   // display pokemon list
   const [showPokemon, setShowPokemon] = useState<Pokemon[]>(pokemon);
@@ -29,6 +29,15 @@ const PokemonList = ({ pokemon, ...rest }: PokemonListProps): JSX.Element => {
   const [gen, setGen] = useState('all');
   // sort select state
   const [sortBy, setSortBy] = useState('id');
+
+  useEffect(() => {
+    // Access initial value from session storage
+    const genSelect = sessionStorage.getItem('genSelect');
+    const sortSelect = sessionStorage.getItem('sortSelect');
+    // update states
+    if (genSelect) setGen(genSelect);
+    if (sortSelect) setSortBy(sortSelect);
+  }, []);
 
   useEffect(() => {
     if (gen !== 'all') {
@@ -58,7 +67,10 @@ const PokemonList = ({ pokemon, ...rest }: PokemonListProps): JSX.Element => {
               aria-labelledby="generation"
               id="gen_select"
               value={gen}
-              onChange={e => setGen(e.target.value)}
+              onChange={e => {
+                setGen(e.target.value);
+                sessionStorage.setItem('genSelect', e.target.value);
+              }}
             >
               <option value="all">All</option>
               {generations.map(({ genDescription, genValue }, i) => (
@@ -77,7 +89,10 @@ const PokemonList = ({ pokemon, ...rest }: PokemonListProps): JSX.Element => {
               aria-labelledby="sorting"
               id="sort_pokemon"
               value={sortBy}
-              onChange={e => setSortBy(e.target.value)}
+              onChange={e => {
+                setSortBy(e.target.value);
+                sessionStorage.setItem('sortSelect', e.target.value);
+              }}
             >
               <option value="id">Number</option>
               <option value="name">Name</option>

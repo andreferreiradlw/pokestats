@@ -41,7 +41,7 @@ const PokemonPage = ({
       : (pokemonGen = mapGenerationToGame(generation.name));
 
     setGameVersion(pokemonGen);
-  }, [generation, game_indices, gameVersion, setGameVersion]);
+  }, [generation, game_indices, setGameVersion]);
 
   return (
     <AnimatePresence mode="wait">

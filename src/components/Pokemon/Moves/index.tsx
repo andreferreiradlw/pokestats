@@ -80,7 +80,9 @@ const PokemonMoves = ({ pokemon, ...rest }: PokemonMovesProps): JSX.Element => {
     // start loading
     setMovesLoading(true);
     // client
-    const moveClient = new MoveClient();
+    const moveClient = new MoveClient({
+      cacheOptions: { maxAge: 0, limit: false },
+    });
 
     const fetchMovesData = async (): Promise<Move[]> => {
       // move requests array

@@ -58,7 +58,9 @@ const filterMoves = (
 };
 
 const getMachineNames = async (machineMoves: FilteredMove[]): Promise<string[]> => {
-  const machineClient = new MachineClient();
+  const machineClient = new MachineClient({
+    cacheOptions: { maxAge: 0, limit: false },
+  });
   // requests array
   const machineRequests = [];
   // create a request for each move

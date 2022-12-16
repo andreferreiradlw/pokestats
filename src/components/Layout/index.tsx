@@ -11,7 +11,6 @@ import Footer from '@/components/Footer';
 
 interface LayoutProps extends BoxProps {
   children?: React.ReactNode;
-  withFooter?: boolean;
   withHeader?: boolean;
   withMain?: boolean;
   withGameVersion?: boolean;
@@ -20,7 +19,6 @@ interface LayoutProps extends BoxProps {
 }
 
 const Layout = ({
-  withFooter,
   withHeader,
   withMain = true,
   withGameVersion = true,
@@ -53,7 +51,7 @@ const Layout = ({
         ) : (
           children
         )}
-        {withFooter && <Footer />}
+        <Footer />
       </LayoutContainer>
     </GameVersionContext.Provider>
   );

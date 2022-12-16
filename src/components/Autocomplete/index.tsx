@@ -148,7 +148,7 @@ const Autocomplete = ({
                 />
               )}
               <Option>{removeDash(item.name)}</Option>
-              <PokeID>{`#${item.id}`}</PokeID>
+              {item.assetType === 'pokemon' && <PokeID>{`#${item.id}`}</PokeID>}
             </OptionWrapper>
           ))}
         </ListWrapper>

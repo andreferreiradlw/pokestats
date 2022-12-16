@@ -1,10 +1,11 @@
 // types
 import type { GetStaticPaths, GetStaticProps, NextPage } from 'next';
-import type { Pokemon } from '@/types';
+import type { Pokemon, PokemonType } from '@/types';
 // helpers
 import { PokemonClient, MoveClient, Type, Move } from 'pokenode-ts';
 import { getIdFromMove, getIdFromPokemon } from '@/helpers';
 // components
+import Layout from '@/components/Layout';
 import TypePage from '@/components/Type';
 
 interface PokestatsType extends Omit<Type, 'pokemon'> {
@@ -12,12 +13,17 @@ interface PokestatsType extends Omit<Type, 'pokemon'> {
 }
 
 export interface PokestatsTypePageProps {
+  autocompleteList: (Pokemon | PokemonType)[];
   typeInfo: PokestatsType;
   typeMoves: Move[];
 }
 
-const PokestatsTypePage: NextPage<PokestatsTypePageProps> = ({ ...props }) => {
-  return <TypePage {...props} />;
+const PokestatsTypePage: NextPage<PokestatsTypePageProps> = ({ autocompleteList, ...props }) => {
+  return (
+    <Layout withHeader withMain={false} withGameVersion={false} autocompleteList={autocompleteList}>
+      <TypePage {...props} />
+    </Layout>
+  );
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
@@ -47,10 +53,17 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   const moveClient = new MoveClient();
 
   const typeName = params.typeId as string;
-  try {
-    const typeData: Type = await pokemonClient.getTypeByName(typeName);
 
-    if (!typeData) {
+  try {
+    // fetch data
+    const [{ results: allPokemonDataResults }, { results: allTypesDataResults }, typeData] =
+      await Promise.all([
+        pokemonClient.listPokemons(0, 809),
+        pokemonClient.listTypes(),
+        pokemonClient.getTypeByName(typeName),
+      ]);
+
+    if (!allPokemonDataResults || !allTypesDataResults || !typeData) {
       console.error('Failed to fetch typeData');
       return { notFound: true };
     }
@@ -81,6 +94,18 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
     return {
       props: {
+        autocompleteList: [
+          ...allPokemonDataResults.map((currPokemon, i) => ({
+            ...currPokemon,
+            id: i + 1,
+            assetType: 'pokemon',
+          })),
+          ...allTypesDataResults.map((currType, i) => ({
+            ...currType,
+            id: i + 1,
+            assetType: 'type',
+          })),
+        ],
         typeInfo: { ...typeData, pokemon: pokemonListWithId },
         typeMoves: allPokemonMovesData,
       },

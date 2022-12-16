@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import styled from 'styled-components';
 // types
-import type { PokestatsTypePageProps } from '@/pages/type/[typeId]';
+import type { TypePageProps } from '../index';
 // helpers
 import { motion, AnimatePresence } from 'framer-motion';
 import { hoverVariant, removeDash, fadeInUpVariant } from '@/helpers';
@@ -16,7 +16,7 @@ const TabContainer = styled(motion.div)`
   width: 100%;
 `;
 
-interface TypeTabsProps extends BoxProps, PokestatsTypePageProps {}
+interface TypeTabsProps extends BoxProps, TypePageProps {}
 
 const TypeTabs = ({ typeInfo, typeMoves, ...rest }: TypeTabsProps) => {
   // tab state

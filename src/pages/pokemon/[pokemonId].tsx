@@ -24,12 +24,7 @@ const PokestatsPokemonPage: NextPage<PokestatsPokemonPageProps> = ({
   ...props
 }) => {
   return (
-    <Layout
-      withHeader
-      withFooter={true}
-      withMain={false}
-      autocompleteList={[...allPokemonTypes, ...allPokemon]}
-    >
+    <Layout withHeader withMain={false} autocompleteList={[...allPokemon, ...allPokemonTypes]}>
       <PokemonPage allPokemon={allPokemon} {...props} />
     </Layout>
   );
@@ -63,6 +58,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   const pokemonName = params.pokemonId as string;
 
   try {
+    // fetch data
     const [
       { results: allPokemonDataResults },
       { results: allTypesDataResults },
@@ -123,12 +119,16 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
     return {
       props: {
-        allPokemon: allPokemonDataResults.map((currPokemon, i) => {
-          return { ...currPokemon, id: i + 1, assetType: 'pokemon' };
-        }),
-        allPokemonTypes: allTypesDataResults.map((currType, i) => {
-          return { ...currType, id: i + 1, assetType: 'type' };
-        }),
+        allPokemon: allPokemonDataResults.map((currPokemon, i) => ({
+          ...currPokemon,
+          id: i + 1,
+          assetType: 'pokemon',
+        })),
+        allPokemonTypes: allTypesDataResults.map((currType, i) => ({
+          ...currType,
+          id: i + 1,
+          assetType: 'type',
+        })),
         pokemon: pokemonDataResults,
         species: pokemonSpeciesResults,
         evolution: evolutionDataResults,

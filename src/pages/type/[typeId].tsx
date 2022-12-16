@@ -20,7 +20,7 @@ export interface PokestatsTypePageProps {
 
 const PokestatsTypePage: NextPage<PokestatsTypePageProps> = ({ autocompleteList, ...props }) => {
   return (
-    <Layout withHeader withMain={false} withGameVersion={false} autocompleteList={autocompleteList}>
+    <Layout withHeader={{ autocompleteList: autocompleteList }}>
       <TypePage {...props} />
     </Layout>
   );

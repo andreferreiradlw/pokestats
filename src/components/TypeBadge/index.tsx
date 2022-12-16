@@ -15,7 +15,7 @@ export interface TypeBadgeProps {
   typename: Type['name'];
   hideIcon?: boolean;
   margin?: string;
-  fill?: boolean;
+  $fill?: boolean;
 }
 
 const TypeBadge = ({ typename, hideIcon, $iconOnly, ...rest }: TypeBadgeProps): JSX.Element => {

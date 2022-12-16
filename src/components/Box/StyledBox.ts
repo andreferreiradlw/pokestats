@@ -80,8 +80,8 @@ export default styled(motion.div)<BoxProps>`
     `};
 
   /** Position */
-  ${({ relative }) =>
-    relative &&
+  ${({ $relative }) =>
+    $relative &&
     css`
       position: relative;
     `}

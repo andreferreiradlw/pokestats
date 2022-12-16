@@ -10,25 +10,18 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 
 interface LayoutProps extends BoxProps {
-  children?: React.ReactNode;
-  withHeader?: boolean;
-  withMain?: boolean;
-  withGameVersion?: boolean;
-  mainKey?: string;
-  autocompleteList?: AutocompleteProps['filterList'];
+  withHeader?: {
+    pokemonGen?: string;
+    autocompleteList: AutocompleteProps['filterList'];
+  };
+  withMain?: {
+    mainKey: string;
+  };
 }
 
-const Layout = ({
-  withHeader,
-  withMain = true,
-  withGameVersion = true,
-  children,
-  mainKey,
-  autocompleteList,
-  ...rest
-}: LayoutProps): JSX.Element => {
+const Layout = ({ withHeader, withMain, children, ...rest }: LayoutProps): JSX.Element => {
   // game version
-  const [gameVersion, setGameVersion] = useState('');
+  const [gameVersion, setGameVersion] = useState(withHeader?.pokemonGen);
 
   const VersionContextValue = useMemo(
     () => ({
@@ -41,11 +34,14 @@ const Layout = ({
   return (
     <GameVersionContext.Provider value={VersionContextValue}>
       <LayoutContainer direction="column" width="100%">
-        {withHeader && autocompleteList && (
-          <Header autocompleteList={autocompleteList} withGameVersion={withGameVersion} />
+        {withHeader && (
+          <Header
+            autocompleteList={withHeader.autocompleteList}
+            pokemonGen={withHeader?.pokemonGen}
+          />
         )}
         {withMain ? (
-          <MainContainer key={mainKey} {...rest}>
+          <MainContainer key={withMain.mainKey} {...rest}>
             {children}
           </MainContainer>
         ) : (

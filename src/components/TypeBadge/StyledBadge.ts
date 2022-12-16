@@ -7,8 +7,8 @@ import { float as floatAnim } from '@/components/BaseStyles';
 
 const Badge = styled(motion.div)<TypeBadgeProps>`
   align-items: center;
-  background-color: ${({ theme, typename, fill }) =>
-    !fill && theme.typeBadge.backgroundColor[typename]};
+  background-color: ${({ theme, typename, $fill }) =>
+    !$fill && theme.typeBadge.backgroundColor[typename]};
   border-radius: 4px;
   color: ${({ theme }) => theme.typeBadge.color};
   display: flex;
@@ -60,8 +60,8 @@ const Badge = styled(motion.div)<TypeBadgeProps>`
           `}
 
     & > path {
-      fill: ${({ theme, typename, fill }) =>
-        fill ? theme.typeBadge.backgroundColor[typename] : theme.typeBadge.color};
+      fill: ${({ theme, typename, $fill }) =>
+        $fill ? theme.typeBadge.backgroundColor[typename] : theme.typeBadge.color};
       stroke: black;
       stroke-width: 5;
     }

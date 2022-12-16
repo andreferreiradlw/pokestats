@@ -21,7 +21,7 @@ export interface BoxProps extends HTMLMotionProps<'div'> {
   $constrained?: boolean;
   $flexGrow?: boolean;
   sizes?: number | Record<string, any>;
-  relative?: boolean;
+  $relative?: boolean;
   $withGutter?: boolean;
   debug?: boolean;
   hide?: boolean;

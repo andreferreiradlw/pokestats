@@ -2,10 +2,15 @@ import { useRouter } from 'next/router';
 // types
 import type { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 import type { Pokemon, PokemonType, PokemonMove } from '@/types';
-import type { Pokemon as PokenodePokemon, EvolutionChain, PokemonSpecies } from 'pokenode-ts';
+import type {
+  Pokemon as PokenodePokemon,
+  EvolutionChain,
+  PokemonSpecies,
+  VersionGroup,
+} from 'pokenode-ts';
 // helpers
 import { PokemonClient, EvolutionClient } from 'pokenode-ts';
-import { getIdFromEvolutionChain, getIdFromSpecies, removeDash } from '@/helpers';
+import { getIdFromEvolutionChain, getIdFromSpecies, mapGenerationToGame } from '@/helpers';
 // components
 import Layout from '@/components/Layout';
 import PokemonPage from '@/components/Pokemon';
@@ -18,11 +23,13 @@ export interface PokestatsPokemonPageProps {
   species: PokemonSpecies;
   evolution: EvolutionChain;
   pokemonMoves: PokemonMove[];
+  pokemonGen: VersionGroup['name'];
 }
 
 const PokestatsPokemonPage: NextPage<PokestatsPokemonPageProps> = ({
   allPokemonTypes,
   allPokemon,
+  pokemonGen,
   ...props
 }) => {
   const router = useRouter();
@@ -38,7 +45,12 @@ const PokestatsPokemonPage: NextPage<PokestatsPokemonPageProps> = ({
   }
 
   return (
-    <Layout withHeader withMain={false} autocompleteList={[].concat(allPokemon, allPokemonTypes)}>
+    <Layout
+      withHeader={{
+        autocompleteList: [].concat(allPokemon, allPokemonTypes),
+        pokemonGen: pokemonGen,
+      }}
+    >
       <PokemonPage allPokemon={allPokemon} {...props} />
     </Layout>
   );
@@ -118,6 +130,12 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
       entry => entry.language.name === 'en',
     );
 
+    const { game_indices } = pokemonDataResults;
+    const { generation } = pokemonSpeciesResults;
+    const pokemonGen = game_indices?.[0]
+      ? game_indices[0].version.name
+      : mapGenerationToGame(generation.name);
+
     return {
       props: {
         allPokemon: allPokemonDataResults.map((currPokemon, i) => ({
@@ -133,6 +151,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
         pokemon: pokemonDataResults,
         species: pokemonSpeciesResults,
         evolution: evolutionDataResults,
+        pokemonGen,
         revalidate: 60,
       },
     };

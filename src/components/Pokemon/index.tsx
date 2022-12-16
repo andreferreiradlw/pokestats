@@ -26,7 +26,7 @@ const PokemonPage = ({
   species,
   evolution,
 }: // pokemonMoves,
-Omit<PokestatsPokemonPageProps, 'allPokemonTypes'>): JSX.Element => {
+Omit<PokestatsPokemonPageProps, 'allPokemonTypes' | 'pokemonGen'>): JSX.Element => {
   // game version
   const { setGameVersion } = useContext(GameVersionContext);
   // data

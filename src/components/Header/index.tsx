@@ -13,12 +13,12 @@ import { Heading, SelectContainer } from './styledHeader';
 
 interface HeaderComponentProps extends BoxProps {
   autocompleteList: AutocompleteProps['filterList'];
-  withGameVersion?: boolean;
+  pokemonGen: string;
 }
 
 const HeaderComponent = ({
   autocompleteList,
-  withGameVersion = true,
+  pokemonGen,
   ...rest
 }: HeaderComponentProps): JSX.Element => {
   // game version
@@ -39,7 +39,7 @@ const HeaderComponent = ({
             <Heading>PokeStats</Heading>
           </Link>
           {/** Select */}
-          {withGameVersion && (
+          {pokemonGen && (
             <SelectContainer direction="row" justify="flex-start">
               <label id="header_generation" htmlFor="header_gen_select">
                 Game Version:
@@ -52,7 +52,7 @@ const HeaderComponent = ({
               >
                 {gameVersions.map(
                   ({ name, value }, index) =>
-                    !checkIfEarlierGen(gameVersion, value) && (
+                    !checkIfEarlierGen(pokemonGen, value) && (
                       <option key={index} value={value}>
                         {name}
                       </option>

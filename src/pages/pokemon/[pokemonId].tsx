@@ -23,7 +23,6 @@ export interface PokestatsPokemonPageProps {
 const PokestatsPokemonPage: NextPage<PokestatsPokemonPageProps> = ({
   allPokemonTypes,
   allPokemon,
-  pokemon,
   ...props
 }) => {
   const router = useRouter();
@@ -32,7 +31,7 @@ const PokestatsPokemonPage: NextPage<PokestatsPokemonPageProps> = ({
     return (
       <Loading
         height="100vh"
-        text={`Loading ${removeDash(pokemon.name)}`}
+        text="Loading Pokemon"
         $iconWidth={{ xxs: '20%', xs: '15%', md: '10%', lg: '5%' }}
       />
     );
@@ -40,7 +39,7 @@ const PokestatsPokemonPage: NextPage<PokestatsPokemonPageProps> = ({
 
   return (
     <Layout withHeader withMain={false} autocompleteList={[].concat(allPokemon, allPokemonTypes)}>
-      <PokemonPage allPokemon={allPokemon} pokemon={pokemon} {...props} />
+      <PokemonPage allPokemon={allPokemon} {...props} />
     </Layout>
   );
 };

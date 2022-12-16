@@ -33,7 +33,7 @@ const PokestatsPokemonPage: NextPage<PokestatsPokemonPageProps> = ({
 export const getStaticPaths: GetStaticPaths = async () => {
   const api = new PokemonClient();
 
-  const pokemonList = await api.listPokemons(0, 809);
+  const pokemonList = await api.listPokemons(0, 151);
   // paths
   const paths = pokemonList.results.map(pokemon => {
     return {
@@ -45,7 +45,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   // return static paths
   return {
     paths,
-    fallback: false,
+    fallback: true,
   };
 };
 
@@ -73,6 +73,8 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
       console.error('Failed to fetch allPokemonData, typesData, pokemonData or pokemonSpecies');
       return { notFound: true };
     }
+
+    if (pokemonDataResults.id > 809) return { notFound: true };
 
     // get evolution chain id from url
     const pokemonSpeciesResults = await pokemonClient.getPokemonSpeciesById(
@@ -141,6 +143,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
             };
           })
           .filter(data => data), // filter empty
+        revalidate: 90, // In seconds
       },
     };
   } catch (error) {

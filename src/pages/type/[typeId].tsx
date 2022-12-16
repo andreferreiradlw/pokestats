@@ -108,6 +108,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
         ],
         typeInfo: { ...typeData, pokemon: pokemonListWithId },
         typeMoves: allPokemonMovesData,
+        revalidate: 90, // In seconds
       },
     };
   } catch (error) {

@@ -4,7 +4,7 @@ module.exports = {
   publicRuntimeConfig: {
     NEXT_PUBLIC_ANALYTICS: process.env.NEXT_PUBLIC_ANALYTICS,
   },
-  staticPageGenerationTimeout: 1000,
+  staticPageGenerationTimeout: 90,
   experimental: {
     largePageDataBytes: 300 * 100000,
   },

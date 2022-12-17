@@ -32,31 +32,11 @@
 </div>
 
 <div align="center">
-  <strong><a href="https://pokestats.gg" target="_blank">PokeStats.gg</a> is an online encyclopaedia of Pokémon species containing information such as Pokédex entries, descriptions, evolution chains, moves, stats and much more. It also works offline! 🔌</strong>
+  <strong><a href="https://pokestats.gg" target="_blank">PokeStats.gg</a> is an online encyclopaedia of Pokémon species containing information such as Pokédex entries, descriptions, evolution chains, moves, stats and much more!</strong>
   <br />
 </div>
 
-## Roadmap
-
-✅ Autocomplete <br />
-✅ Infinite Scroll <br />
-✅ Pokemon Page <br />
-✅ Offline Support <br />
-✅ Loading & 404 Components <br />
-✅ Framer Motion Animations <br />
-✅ Type Page <br />
-🛠️ Berry Page <br />
-🧶 Item Page <br />
-🧶 Move Details <br />
-🧶 Dark Mode <br />
-🧶 Testing / Code Coverage <br />
-🚫 Generation 8 Pokemon (waiting on [PokéApi's issue](https://github.com/PokeAPI/pokeapi/issues/520)) <br />
-✏ Locations <br />
-❓ SSR Support <br />
-
 ## Getting Started
-
-Checkout [PokeStats.gg](https://pokestats.gg) for the live version. 🌍
 
 ### Install dependencies
 
@@ -82,6 +62,21 @@ Checkout [PokeStats.gg](https://pokestats.gg) for the live version. 🌍
   $ yarn run prettier
 ```
 
+## Roadmap
+
+✅ Homepage (Autocomplete + Infinity Scroll) <br />
+✅ Pokemon Page <br />
+✅ Type Page <br />
+✅ Static Generated Pages <br />
+🚫 Generation 8 Pokemon Ready (waiting on [PokéApi's issue](https://github.com/PokeAPI/pokeapi/issues/520)) <br />
+🛠️ Typescript Refactoring <br />
+🧶 Unit Tests <br />
+🧶 Dark Mode <br />
+🧶 Move Page <br />
+🧶 Item Page <br />
+🧶 Berry Page <br />
+✏ Pokemon & Item Locations Page <br />
+
 ## Contributing
 
 [PokeStats.gg](https://pokestats.gg) is an open source project, and contributions of any kind are welcome and appreciated. Open issues, bugs, and feature requests will be listed on the [issues tab](https://github.com/andreferreiradlw/pokestats/issues) and labeled accordingly. Feel free to open bug tickets and make feature requests that aren't already on the roadmap. Easy bugs and features will be tagged with the good first issue label.
@@ -99,3 +94,17 @@ MIT
 ## Copyright Notice
 
 This is an unofficial, non-commercial, fan-made app and is NOT affiliated, endorsed or supported by Nintendo, Game Freak and The Pokémon Company in any way. Many images used in this app are copyrighted and are supported under fair use. Pokémon and Pokémon character names are trademarks of Nintendo. No copyright infringement intended.
+
+## Donate
+
+Please consider donating if you think pokestats is helpful to you and want to support the project ❤️
+
+<a href="https://www.buymeacoffee.com/pokestats">
+  <img alt="bmc-button" src="https://img.shields.io/badge/Buy_Me_A_Coffee-FFDD00?style=for-the-badge&logo=buy-me-a-coffee&logoColor=black">
+</a>
+<a href="https://buy.stripe.com/8wMeXm5Wwac8dfG6oo">
+  <img alt="stripe-button" src="https://img.shields.io/badge/Stripe-008cdd?style=for-the-badge&logo=stripe&logoColor=white">
+</a>
+<a href="https://www.paypal.com/donate/?hosted_button_id=ZBQKDGC7ZGH98">
+  <img alt="paypal-button" src="https://img.shields.io/badge/PayPal-00457C?style=for-the-badge&logo=paypal&logoColor=white">
+</a>

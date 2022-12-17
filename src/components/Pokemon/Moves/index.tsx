@@ -33,9 +33,12 @@ import {
   TableBody,
 } from './StyledMoves';
 
-interface PokemonMovesProps extends BoxProps {
-  pokemon: Pokemon;
-}
+const TabsData = [
+  { title: 'Level Up', value: 'level-up' },
+  { title: 'Machines', value: 'machine' },
+  { title: 'Egg', value: 'egg' },
+  { title: 'Tutor', value: 'tutor' },
+];
 
 const mapMethodName = (methodName: MoveLearnMethod['name']): string => {
   switch (methodName) {
@@ -47,6 +50,10 @@ const mapMethodName = (methodName: MoveLearnMethod['name']): string => {
       return '-';
   }
 };
+
+interface PokemonMovesProps extends BoxProps {
+  pokemon: Pokemon;
+}
 
 const PokemonMoves = ({ pokemon, ...rest }: PokemonMovesProps): JSX.Element => {
   // game version
@@ -116,7 +123,6 @@ const PokemonMoves = ({ pokemon, ...rest }: PokemonMovesProps): JSX.Element => {
 
   // current pokemon moves
   useEffect(() => {
-    // start loading
     setMovesLoading(true);
 
     if (_isMounted.current && filteredMoves?.length) {
@@ -146,46 +152,20 @@ const PokemonMoves = ({ pokemon, ...rest }: PokemonMovesProps): JSX.Element => {
       <SectionTitle>Move Pool</SectionTitle>
       {/** TABS */}
       <TabContainer direction="row" justify="space-evenly" $flexWrap="wrap">
-        <Button
-          $active={learnMethod === 'level-up'}
-          onClick={() => setLearnMethod('level-up')}
-          whileHover="hover"
-          whileTap="tap"
-          variants={fadeInUpVariant}
-          key="pokemon-moves-lvlup-btn"
-        >
-          Level Up
-        </Button>
-        <Button
-          $active={learnMethod === 'machine'}
-          onClick={() => setLearnMethod('machine')}
-          whileHover="hover"
-          whileTap="tap"
-          variants={fadeInUpVariant}
-          key="pokemon-moves-tmhm-btn"
-        >
-          TM / HM
-        </Button>
-        <Button
-          $active={learnMethod === 'egg'}
-          onClick={() => setLearnMethod('egg')}
-          whileHover="hover"
-          whileTap="tap"
-          variants={fadeInUpVariant}
-          key="pokemon-moves-egg-btn"
-        >
-          Egg
-        </Button>
-        <Button
-          $active={learnMethod === 'tutor'}
-          onClick={() => setLearnMethod('tutor')}
-          whileHover="hover"
-          whileTap="tap"
-          variants={fadeInUpVariant}
-          key="pokemon-moves-tutor-btn"
-        >
-          Tutor
-        </Button>
+        {TabsData.map(({ title, value }) => (
+          <Button
+            $active={learnMethod === value}
+            onClick={() => {
+              setLearnMethod(value);
+            }}
+            whileHover="hover"
+            whileTap="tap"
+            variants={fadeInUpVariant}
+            key={`pokemon-moves-${value}-btn`}
+          >
+            {title}
+          </Button>
+        ))}
       </TabContainer>
       <AnimatePresence mode="wait">
         {movesLoading ? (

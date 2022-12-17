@@ -1,6 +1,10 @@
 import Head from 'next/head';
 
-const PokestatsHead = () => (
+interface PokestatsHeadProps {
+  children?: React.ReactNode;
+}
+
+const PokestatsHead = ({ children }: PokestatsHeadProps): JSX.Element => (
   <Head>
     <meta charSet="utf-8" />
     <meta httpEquiv="X-UA-Compatible" content="IE=edge,chrome=1" />
@@ -19,6 +23,12 @@ const PokestatsHead = () => (
     <title>
       PokeStats.gg - The online open-sourced Pokémon encyclopaedia. Pokédex powered by PokeApi.
     </title>
+    {/** FONTS */}
+    <link rel="preload" href="/fonts/Montserrat-Regular.ttf" as="font" crossOrigin="" />
+    <link rel="preload" href="/fonts/Montserrat-Medium.ttf" as="font" crossOrigin="" />
+    <link rel="preload" href="/fonts/Quicksand-SemiBold.ttf" as="font" crossOrigin="" />
+    <link rel="preload" href="/fonts/JosefinSans-Bold.ttf" as="font" crossOrigin="" />
+    <link rel="preload" href="/fonts/JosefinSans-BoldItalic.ttf" as="font" crossOrigin="" />
     {/** MANIFEST */}
     <link href="/manifest.json" rel="manifest" />
     {/** ICONS */}
@@ -67,6 +77,7 @@ const PokestatsHead = () => (
     <meta name="imagemode" content="force" />
     {/** Orientation */}
     <meta name="screen-orientation" content="portrait" />
+    {children}
   </Head>
 );
 

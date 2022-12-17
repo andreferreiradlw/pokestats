@@ -1,6 +1,9 @@
 import styled, { css } from 'styled-components';
 // components
+import { motion } from 'framer-motion';
 import Link from 'next/link';
+
+const BtnContainer = styled(motion.div)``;
 
 const BtnSpan = styled.span`
   align-items: center;
@@ -112,4 +115,4 @@ const BtnAnchor = styled(Link)<{ $left?: boolean; $right?: boolean }>`
   }
 `;
 
-export { BtnAnchor, Title, Arrow };
+export { BtnContainer, BtnAnchor, Title, Arrow };

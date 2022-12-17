@@ -2,12 +2,12 @@
 import type { PokestatsPokemonPageProps } from '@/pages/pokemon/[pokemonId]';
 import type { Pokemon } from 'pokenode-ts';
 // helpers
-import { removeDash } from '@/helpers';
+import { removeDash, fadeInUpVariant } from '@/helpers';
 // components
 import Box, { BoxProps } from '@/components/Box';
 import Image from '@/components/Image';
 // styles
-import { BtnAnchor, Title, Arrow } from './StyledNavigation';
+import { BtnContainer, BtnAnchor, Title, Arrow } from './StyledNavigation';
 
 const nextPokemon = () => {
   if (process.env.NODE_ENV === 'production' && window?.fathom)
@@ -36,48 +36,62 @@ const Navigation = ({ allPokemon, pokemonId, ...rest }: NavigationProps): JSX.El
       {...rest}
     >
       {pokemonId !== 1 && (
-        <BtnAnchor
-          href={`/pokemon/${allPokemon[pokemonId - 2].name}`}
-          onClick={previousPokemon}
-          $left
+        <BtnContainer
+          whileHover="hover"
+          whileTap="tap"
+          variants={fadeInUpVariant}
+          key={`previous-pokemon-${allPokemon[pokemonId - 2].name}`}
         >
-          <Arrow $left>
-            <Image
-              src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${
-                pokemonId - 1
-              }.png`}
-              alt={allPokemon[pokemonId - 2].name}
-              key={`navigation-left-${allPokemon[pokemonId - 2].name}`}
-              width="100"
-              pixelateImg
-              lazy={false}
-            />
-          </Arrow>
-          <Title>
-            <span>{`#${pokemonId - 1}`}</span>
-            {removeDash(allPokemon[pokemonId - 2].name)}
-          </Title>
-        </BtnAnchor>
+          <BtnAnchor
+            href={`/pokemon/${allPokemon[pokemonId - 2].name}`}
+            onClick={previousPokemon}
+            $left
+          >
+            <Arrow $left>
+              <Image
+                src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${
+                  pokemonId - 1
+                }.png`}
+                alt={allPokemon[pokemonId - 2].name}
+                key={`navigation-left-${allPokemon[pokemonId - 2].name}`}
+                width="100"
+                pixelateImg
+                lazy={false}
+              />
+            </Arrow>
+            <Title>
+              <span>{`#${pokemonId - 1}`}</span>
+              {removeDash(allPokemon[pokemonId - 2].name)}
+            </Title>
+          </BtnAnchor>
+        </BtnContainer>
       )}
       {pokemonId !== pokemonLength && (
-        <BtnAnchor href={`/pokemon/${allPokemon[pokemonId].name}`} onClick={nextPokemon} $right>
-          <Arrow $right>
-            <Image
-              src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${
-                pokemonId + 1
-              }.png`}
-              alt={allPokemon[pokemonId].name}
-              key={`navigation-right-${allPokemon[pokemonId].name}`}
-              width="100"
-              pixelateImg
-              lazy={false}
-            />
-          </Arrow>
-          <Title>
-            <span>{`#${pokemonId + 1}`}</span>
-            {removeDash(allPokemon[pokemonId].name)}
-          </Title>
-        </BtnAnchor>
+        <BtnContainer
+          whileHover="hover"
+          whileTap="tap"
+          variants={fadeInUpVariant}
+          key={`previous-pokemon-${allPokemon[pokemonId].name}`}
+        >
+          <BtnAnchor href={`/pokemon/${allPokemon[pokemonId].name}`} onClick={nextPokemon} $right>
+            <Arrow $right>
+              <Image
+                src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${
+                  pokemonId + 1
+                }.png`}
+                alt={allPokemon[pokemonId].name}
+                key={`navigation-right-${allPokemon[pokemonId].name}`}
+                width="100"
+                pixelateImg
+                lazy={false}
+              />
+            </Arrow>
+            <Title>
+              <span>{`#${pokemonId + 1}`}</span>
+              {removeDash(allPokemon[pokemonId].name)}
+            </Title>
+          </BtnAnchor>
+        </BtnContainer>
       )}
     </Box>
   );

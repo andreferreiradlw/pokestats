@@ -3,8 +3,9 @@ import type { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 import type { Pokemon, PokemonType } from '@/types';
 // helpers
 import { PokemonClient, MoveClient, Type, Move } from 'pokenode-ts';
-import { getIdFromMove, getIdFromPokemon } from '@/helpers';
+import { getIdFromMove, getIdFromPokemon, removeDash } from '@/helpers';
 // components
+import Head from 'next/head';
 import Layout from '@/components/Layout';
 import TypePage from '@/components/Type';
 
@@ -18,13 +19,20 @@ export interface PokestatsTypePageProps {
   typeMoves: Move[];
 }
 
-const PokestatsTypePage: NextPage<PokestatsTypePageProps> = ({ autocompleteList, ...props }) => {
-  return (
+const PokestatsTypePage: NextPage<PokestatsTypePageProps> = ({ autocompleteList, ...props }) => (
+  <>
+    <Head>
+      <title>
+        {`${removeDash(
+          props.typeInfo.name,
+        )} (Type) - PokeStats.gg - The online open-sourced Pokémon encyclopaedia. Pokédex powered by PokeApi.`}
+      </title>
+    </Head>
     <Layout withHeader={{ autocompleteList: autocompleteList }}>
       <TypePage {...props} />
     </Layout>
-  );
-};
+  </>
+);
 
 export const getStaticPaths: GetStaticPaths = async () => {
   // clients

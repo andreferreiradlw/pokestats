@@ -1,9 +1,9 @@
-import { useEffect, useContext, useState } from 'react';
+import { useEffect, useContext, useState, useRef } from 'react';
 // types
 import type { PokestatsPokemonPageProps } from '@/pages/pokemon/[pokemonId]';
 // helpers
 import dynamic from 'next/dynamic';
-import { useIntersect } from '@/hooks';
+import { useIntersectionObserver } from '@/hooks';
 // import LazyLoad from 'react-lazyload';
 import GameVersionContext from '@/components/Layout/gameVersionContext';
 import { mapGenerationToGame, pageContainerVariant } from '@/helpers';
@@ -37,21 +37,9 @@ Omit<PokestatsPokemonPageProps, 'allPokemonTypes' | 'pokemonGen'>): JSX.Element 
   const { id, name, stats, types, sprites, game_indices } = pokemon;
   const { names, generation } = species;
   // lazy load moves
-  // const movesRef = useRef();
-  const [ref, entry] = useIntersect({});
-
-  // const movesRefValue = useOnScreen(movesRef);
-  const [isMovesRef, setIsMovesRef] = useState<IntersectionObserverEntry>();
-
-  useEffect(() => {
-    if (!isMovesRef) setIsMovesRef(entry);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [entry]);
-
-  // useEffect(() => {
-  //   if (!isMovesRef) setIsMovesRef(movesRefValue);
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [movesRefValue]);
+  const ref = useRef<HTMLDivElement | null>(null);
+  const entry = useIntersectionObserver(ref, { freezeOnceVisible: true });
+  const isMovesVisible = !!entry?.isIntersecting;
 
   useEffect(() => {
     let pokemonGen: string;
@@ -148,7 +136,7 @@ Omit<PokestatsPokemonPageProps, 'allPokemonTypes' | 'pokemonGen'>): JSX.Element 
         </Box>
         {/** MOVES */}
         <Box align="flex-start" justify="flex-start" margin="1rem 0" $minHeight="210px" ref={ref}>
-          {!!entry?.isIntersecting && <Moves pokemon={pokemon} sizes={12} margin="0 0 2rem" />}
+          {isMovesVisible && <Moves pokemon={pokemon} sizes={12} margin="0 0 2rem" />}
         </Box>
         {/** SPRITES */}
         <Box align="flex-start" justify="flex-start" margin="1rem 0">

@@ -141,9 +141,6 @@ const PokemonMoves = ({ pokemon, ...rest }: PokemonMovesProps): JSX.Element => {
         // if not machine just stop loading instead
         if (_isMounted.current) setMovesLoading(false);
       }
-    } else {
-      // if not machine just stop loading instead
-      if (_isMounted.current) setMovesLoading(false);
     }
   }, [filteredMoves, learnMethod]);
 

@@ -13,7 +13,9 @@
       "@/types": ["types"],
       "@/types/*": ["types/*"],
       "@/pages": ["src/pages"],
-      "@/pages/*": ["src/pages/*"]
+      "@/pages/*": ["src/pages/*"],
+      "@/hooks": ["src/hooks"],
+      "@/hooks/*": ["src/hooks/*"]
     },
     "target": "es5",
     "lib": ["dom", "dom.iterable", "esnext"],

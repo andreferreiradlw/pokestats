@@ -16,6 +16,7 @@ import {
   mapGenerationToGame,
   removeDash,
 } from '@/helpers';
+import { PokestatsPageTitle } from '@/components/Head';
 // components
 import Head from 'next/head';
 import Layout from '@/components/Layout';
@@ -53,11 +54,7 @@ const PokestatsPokemonPage: NextPage<PokestatsPokemonPageProps> = ({
   return (
     <>
       <Head>
-        <title>
-          {`${removeDash(
-            props.pokemon.name,
-          )} (Pokemon) - PokeStats.gg - The online open-sourced Pokémon encyclopaedia. Pokédex powered by PokeApi.`}
-        </title>
+        <title>{`${removeDash(props.pokemon.name)} (Pokemon) - ${PokestatsPageTitle}`}</title>
       </Head>
       <Layout
         withHeader={{

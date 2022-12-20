@@ -11,11 +11,11 @@ const useIntersect = ({
   rootMargin = '0px',
   threshold = 0,
 }: UseIntersectProps): [
-  React.Dispatch<React.SetStateAction<React.Ref<unknown>>>,
+  React.Dispatch<React.SetStateAction<Element>>,
   IntersectionObserverEntry,
 ] => {
   const [entry, updateEntry] = useState<IntersectionObserverEntry>();
-  const [node, setNode] = useState<React.Ref<unknown>>(null);
+  const [node, setNode] = useState<Element>(null);
 
   const observer = useRef(
     // https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API#creating_an_intersection_observer

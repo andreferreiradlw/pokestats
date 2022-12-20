@@ -1,10 +1,9 @@
-import { useEffect, useContext, useState, useRef } from 'react';
+import { useEffect, useContext, useRef } from 'react';
 // types
 import type { PokestatsPokemonPageProps } from '@/pages/pokemon/[pokemonId]';
 // helpers
 import dynamic from 'next/dynamic';
 import { useIntersectionObserver } from '@/hooks';
-// import LazyLoad from 'react-lazyload';
 import GameVersionContext from '@/components/Layout/gameVersionContext';
 import { mapGenerationToGame, pageContainerVariant } from '@/helpers';
 // components
@@ -20,7 +19,6 @@ import Multipliers from './Multipliers';
 import BaseStats from './BaseStats';
 import PokemonForms from './Forms';
 const Moves = dynamic(() => import('./Moves'));
-// import Moves from './Moves';
 import Sprites from './Sprites';
 import Navigation from './Navigation';
 

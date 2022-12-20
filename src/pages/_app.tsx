@@ -17,7 +17,7 @@ const App = ({ Component, pageProps, router }: AppProps): JSX.Element => {
     <ThemeProvider>
       <Script
         src="https://instant-the-passenger.pokestats.gg/script.js"
-        data-site={publicRuntimeConfig.NEXT_PUBLIC_ANALYTICS}
+        data-site={publicRuntimeConfig?.NEXT_PUBLIC_ANALYTICS}
         defer
       />
       <PokestatsHead />

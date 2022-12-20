@@ -1,7 +1,12 @@
 {
-  "extends": ["alloy", "alloy/react", "alloy/typescript"],
-
-  "plugins": ["prettier", "react", "react-hooks", "@typescript-eslint", "better-styled-components"],
+  "extends": ["alloy", "alloy/react", "alloy/typescript", "plugin:jsx-a11y/recommended"],
+  "plugins": [
+    "prettier",
+    "react",
+    "react-hooks",=
+    "@typescript-eslint",
+    "better-styled-components"
+  ],
   "rules": {
     "eqeqeq": "error",
     "prefer-object-has-own": "off",
@@ -24,6 +29,11 @@
   "globals": {
     "JSX": "readonly",
     "React": true
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
   },
   "env": {
     "browser": true,

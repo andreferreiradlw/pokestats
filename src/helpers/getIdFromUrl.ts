@@ -24,10 +24,17 @@ const getIdFromPokemon = (url: string): number => {
   return Number(matchId[1]);
 };
 
+const getIdFromURL = (url: string, matcher: string): number => {
+  const regex = new RegExp(`\\/${matcher}\\/(\\d+)\\/`);
+  const matchId = url.match(regex);
+  return Number(matchId?.[1]);
+};
+
 export {
   getIdFromEvolutionChain,
   getIdFromMachine,
   getIdFromSpecies,
   getIdFromMove,
   getIdFromPokemon,
+  getIdFromURL,
 };

@@ -201,7 +201,7 @@ const PokemonMoves = ({ pokemon, ...rest }: PokemonMovesProps): JSX.Element => {
                 variants={staggerTableVariant}
               >
                 {filteredMoves.map((move, i) => (
-                  <TableRow key={`${move.name}-${i}`}>
+                  <TableRow href={`/move/${move.name}`} key={`${move.name}-${i}`}>
                     {learnMethod === 'level-up' && <td>{move.level_learned_at}</td>}
                     {learnMethod === 'machine' &&
                       (machineNames?.[i] ? <td>{machineNames[i].toUpperCase()}</td> : <td>...</td>)}

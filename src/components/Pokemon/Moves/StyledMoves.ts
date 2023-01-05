@@ -2,9 +2,13 @@ import styled, { css } from 'styled-components';
 // components
 import { motion } from 'framer-motion';
 import Box from '@/components/Box';
+import Link from 'next/link';
 
 const TableBody = styled(motion.tbody)``;
-const TableRow = styled(motion.tr)``;
+const TableRow = styled(Link)`
+  display: table-row;
+  color: black;
+`;
 const NameTH = styled(motion.th)``;
 const NameTD = styled(motion.td)``;
 
@@ -45,7 +49,7 @@ const MovesTable = styled(motion.table)`
     width: 25%;
   }
 
-  & tr:not(:last-of-type) {
+  & ${TableRow}:not(:last-of-type) {
     border-bottom: 1px solid #ececec;
   }
 

@@ -60,7 +60,7 @@ const renderAbilities = (
       {`${i + 1}. ${removeDash(ability.name)}`}
       {is_hidden && ' ( Hidden Ability )'}
       <br />
-      <span>{abilitiesData[i].effect_entries[0].short_effect}</span>
+      <span>{abilitiesData[i].effect_entries[0]?.short_effect}</span>
     </Numbered>
   ));
 

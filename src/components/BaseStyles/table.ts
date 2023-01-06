@@ -66,8 +66,8 @@ const Numbered = styled.span<{ light?: boolean }>`
 
 const TypesCell = styled.td`
   display: flex;
-  gap: 0.5em;
   flex-wrap: wrap;
+  gap: 0.5em;
 `;
 
 export { Table, Numbered, TypesCell };

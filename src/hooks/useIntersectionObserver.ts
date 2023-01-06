@@ -1,5 +1,6 @@
 import { RefObject, useEffect, useState } from 'react';
 
+// eslint-disable-next-line
 interface Args extends IntersectionObserverInit {
   freezeOnceVisible?: boolean;
 }

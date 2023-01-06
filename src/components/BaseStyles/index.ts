@@ -1,14 +1,14 @@
 // keyframes
-export * from './keyframes'
+export * from './keyframes';
 // typography
-export * from './typography'
+export * from './typography';
 // table
-export * from './table'
+export * from './table';
 // pokemon box
-export * from './pokemonBox'
+export * from './pokemonBox';
 // headings
-export * from './headings'
+export * from './headings';
 // buttons
-export * from './button'
+export * from './button';
 // inputs
-export * from './inputs'
+export * from './inputs';

@@ -1,12 +1,6 @@
 {
   "extends": ["alloy", "alloy/react", "alloy/typescript", "plugin:jsx-a11y/recommended"],
-  "plugins": [
-    "prettier",
-    "react",
-    "react-hooks",=
-    "@typescript-eslint",
-    "better-styled-components"
-  ],
+  "plugins": ["prettier", "react", "react-hooks", "@typescript-eslint", "better-styled-components"],
   "rules": {
     "eqeqeq": "error",
     "prefer-object-has-own": "off",

@@ -1,4 +1,4 @@
-import { keyframes } from 'styled-components'
+import { keyframes } from 'styled-components';
 
 // Create the keyframes for floating img
 const float = keyframes`
@@ -11,7 +11,7 @@ const float = keyframes`
   100% {
     transform: translateY(-5px)
   }
-`
+`;
 
 const ellipsis = keyframes`
   0% {
@@ -23,7 +23,7 @@ const ellipsis = keyframes`
   66% {
     content: '...';
   }
-`
+`;
 
 const rotate = keyframes`
   0% { -webkit-transform: translate(0px, 0px) rotate(0deg); }
@@ -76,7 +76,7 @@ const rotate = keyframes`
   94% { -webkit-transform: translate(0px, 0px) rotate(-2.5deg); }
   96% { -webkit-transform: translate(0px, 0px) rotate(0.5deg); }
   98% { -webkit-transform: translate(0px, 0px) rotate(4.5deg); } 
-`
+`;
 
 const riseUp = keyframes`
   0% {
@@ -95,7 +95,7 @@ const riseUp = keyframes`
     transform: translateY(-25%);
     opacity: 0;
   }
-`
+`;
 
 const tumble = keyframes`
 	0% { transform: rotateZ( 0deg ); }
@@ -125,7 +125,7 @@ const tumble = keyframes`
 	96% { transform: rotateZ( 0deg ); }	
   97% { transform: rotateZ( -10deg ); }
 	98% { transform: rotateZ( 0deg ); }
-`
+`;
 
 const mouseScroll = keyframes`
   0% {
@@ -142,6 +142,6 @@ const mouseScroll = keyframes`
   100% {
     opacity: 0;
   }
-`
+`;
 
-export { float, ellipsis, rotate, riseUp, tumble, mouseScroll }
+export { float, ellipsis, rotate, riseUp, tumble, mouseScroll };

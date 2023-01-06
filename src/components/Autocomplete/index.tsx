@@ -118,7 +118,7 @@ const Autocomplete = ({
       <Input
         type="text"
         autoComplete="off"
-        placeholder="Search Pokemon or Type Name"
+        placeholder="Search PokeStats"
         id="autocomplete"
         aria-labelledby="autocomplete_label"
         value={search}

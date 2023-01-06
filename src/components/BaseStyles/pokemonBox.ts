@@ -20,7 +20,7 @@ const PokeBox = styled(motion.div)<{ width?: string; $dark?: boolean }>`
   ${({ $dark, theme }) =>
     $dark
       ? css`
-          background-color: ${theme.colors.white};
+          background-color: ${theme.colors.black};
           color: ${theme.colors.white};
           &::hover,
           &:active {

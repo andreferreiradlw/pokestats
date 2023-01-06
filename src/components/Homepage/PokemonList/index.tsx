@@ -51,7 +51,14 @@ const PokemonList = ({ pokemon, ...rest }: PokemonListProps): JSX.Element => {
 
   return (
     <Container {...rest}>
-      <Box $constrained $withGutter margin="3rem 0" align="flex-start" justify="flex-start">
+      <Box
+        $constrained
+        $withGutter
+        margin="3rem 0"
+        align="flex-start"
+        justify="flex-start"
+        $gap="1em"
+      >
         <SectionTitle>{`Select your Pokemon (${showPokemon.length})`}</SectionTitle>
         <SelectContainer
           direction="row"

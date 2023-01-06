@@ -141,11 +141,13 @@ const PokemonMoves = ({ pokemon, ...rest }: PokemonMovesProps): JSX.Element => {
         // if not machine just stop loading instead
         if (_isMounted.current) setMovesLoading(false);
       }
+    } else {
+      setMovesLoading(false);
     }
   }, [filteredMoves, learnMethod]);
 
   return (
-    <Box align={{ xxs: 'center', lg: 'flex-start' }} $gap="1em" {...rest}>
+    <Box align={{ xxs: 'center', lg: 'flex-start' }} $gap="2em" {...rest}>
       <SectionTitle>Move Pool</SectionTitle>
       {/** TABS */}
       <TabContainer direction="row" justify="space-evenly" $flexWrap="wrap">

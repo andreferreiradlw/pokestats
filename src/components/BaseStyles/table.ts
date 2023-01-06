@@ -21,7 +21,7 @@ const Table = styled(motion.table)`
   & th {
     font-size: 0.875rem;
     font-weight: normal;
-    padding: 6px 0;
+    padding: 8px 0;
     text-align: left;
     vertical-align: initial;
     white-space: nowrap;
@@ -30,7 +30,7 @@ const Table = styled(motion.table)`
   & td {
     font-weight: 500;
     height: 40px;
-    padding: 6px 16px;
+    padding: 8px 16px;
     white-space: pre-line;
   }
 

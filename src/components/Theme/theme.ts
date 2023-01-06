@@ -1,7 +1,7 @@
-import { breakpoints } from '../Box/config'
+import { breakpoints } from '../Box/config';
 
-const white = '#FFF'
-const black = '#000'
+const white = '#FFF';
+const black = '#000';
 
 const theme = {
   device: {
@@ -135,6 +135,7 @@ const theme = {
       background: white,
     },
   },
-}
+};
 
-export default theme
+export default theme;
+export type ThemeType = typeof theme;

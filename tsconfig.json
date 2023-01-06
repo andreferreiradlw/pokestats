@@ -6,6 +6,8 @@
       "@/BaseStyles/*": ["src/components/BaseStyles/*"],
       "@/components": ["src/components"],
       "@/components/*": ["src/components/*"],
+      "@/theme": ["src/components/theme"],
+      "@/cothememponents/*": ["src/components/theme/*"],
       "@/assets": ["src/assets"],
       "@/assets/*": ["src/assets/*"],
       "@/helpers": ["src/helpers"],
@@ -38,6 +40,7 @@
     "types/next-env.d.ts",
     "types/environment.d.ts",
     "types/index.d.ts",
+    "types/styled.d.ts",
     "src/**/*.ts",
     "src/**/*.tsx"
   ],

@@ -108,7 +108,14 @@ export default function InfiniteScroll({
 
   return (
     <>
-      <Box direction={direction} align={align} $flexWrap={$flexWrap} {...rest}>
+      <Box
+        direction={direction}
+        align={align}
+        $flexWrap={$flexWrap}
+        justify="space-between"
+        $gap="1em"
+        {...rest}
+      >
         {showList?.map(currPokemon => (
           <PokemonBox
             dark={dark}

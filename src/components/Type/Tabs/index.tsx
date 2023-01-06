@@ -14,6 +14,9 @@ import InfiniteScroll from '@/components/InfiniteScroll';
 import TypeMoves from './Moves';
 
 const TabContainer = styled(BoxWrapper)`
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
   width: 100%;
 `;
 
@@ -64,8 +67,6 @@ const TypeTabs = ({ typeInfo, typeMoves, ...rest }: TypeTabsProps) => {
         )}
         {currTab === 'moves' && (
           <TabContainer
-            direction="column"
-            $gap="1em"
             initial="hidden"
             animate="show"
             exit="exit"

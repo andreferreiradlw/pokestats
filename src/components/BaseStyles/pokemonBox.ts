@@ -51,7 +51,6 @@ const PokeBox = styled(motion.div)<{ width?: string; $dark?: boolean }>`
   flex-direction: column;
   font-weight: 600;
   justify-content: center;
-  margin: 0.5rem;
   padding: 1rem;
   text-align: center;
   transition: box-shadow 0.05s ease-in-out;

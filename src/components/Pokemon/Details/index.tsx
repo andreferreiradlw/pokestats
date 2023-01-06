@@ -2,7 +2,7 @@ import { useContext } from 'react';
 // types
 import type { BoxProps } from '@/components/Box';
 import type { PokestatsPokemonPageProps } from '@/pages/pokemon/[pokemonId]';
-import type { PokemonAbility, FlavorText } from 'pokenode-ts';
+import type { PokemonAbility, FlavorText, Ability } from 'pokenode-ts';
 // helpers
 import GameVersionContext from '@/components/Layout/gameVersionContext';
 import { AnimatePresence } from 'framer-motion';
@@ -36,41 +36,51 @@ const flavorText = (version: string, textEntries: FlavorText[]) => {
     : 'No description available for currently selected generation.';
 };
 
+// weight
+const pokemonWeight = (currWeight: number): string =>
+  `${currWeight / 10} kg ( ${Math.round(currWeight * 2.2046) / 10} lbs )`;
+
+// height
+const pokemonHeight = (currHeight: number): string => {
+  // calculate height in feet
+  const heightInFeet = Math.round(currHeight * 3.2808) / 10;
+  // split number
+  const numbers = heightInFeet.toString().split('.');
+  // return string
+  return `${currHeight / 10} m ( ${numbers[0] || '0'}'${numbers[1] || '0'}" )`;
+};
+
+// abilities
+const renderAbilities = (
+  currAbilities: PokemonAbility[],
+  abilitiesData: Ability[],
+): JSX.Element[] =>
+  currAbilities.map(({ ability, is_hidden }, i) => (
+    <Numbered key={`${ability}-${i}`}>
+      {`${i + 1}. ${removeDash(ability.name)}`}
+      {is_hidden && ' ( Hidden Ability )'}
+      <br />
+      <span>{abilitiesData[i].effect_entries[0].short_effect}</span>
+    </Numbered>
+  ));
+
 interface PokemonDetailsProps extends BoxProps {
   pokemon: PokestatsPokemonPageProps['pokemon'];
+  abilities: Ability[];
   species: PokestatsPokemonPageProps['species'];
 }
 
-const PokemonDetails = ({ pokemon, species, ...rest }: PokemonDetailsProps): JSX.Element => {
+const PokemonDetails = ({
+  pokemon,
+  abilities,
+  species,
+  ...rest
+}: PokemonDetailsProps): JSX.Element => {
   // game version
   const { gameVersion } = useContext(GameVersionContext);
-
   // data
-  const { types, abilities, id, name, weight, height } = pokemon;
+  const { types, abilities: pokemonAbilities, id, name, weight, height } = pokemon;
   const { genera, flavor_text_entries, shape, color, is_baby, is_legendary, is_mythical } = species;
-
-  // weight
-  const pokemonWeight = (currWeight: number): string =>
-    `${currWeight / 10} kg ( ${Math.round(currWeight * 2.2046) / 10} lbs )`;
-
-  // height
-  const pokemonHeight = (currHeight: number): string => {
-    // calculate height in feet
-    const heightInFeet = Math.round(currHeight * 3.2808) / 10;
-    // split number
-    const numbers = heightInFeet.toString().split('.');
-    // return string
-    return `${currHeight / 10} m ( ${numbers[0] || '0'}'${numbers[1] || '0'}" )`;
-  };
-
-  // abilities
-  const pokemonAbilities = (currAbilities: PokemonAbility[]): JSX.Element[] =>
-    currAbilities.map(({ ability, is_hidden }, i) => (
-      <Numbered light={is_hidden} key={`${ability}-${i}`}>
-        {`${i + 1}. ${removeDash(ability.name)} `}
-        {is_hidden && '( Hidden Ability )'}
-      </Numbered>
-    ));
 
   return (
     <AnimatePresence mode="wait">
@@ -126,7 +136,7 @@ const PokemonDetails = ({ pokemon, species, ...rest }: PokemonDetailsProps): JSX
             </tr>
             <tr>
               <th>Abilities</th>
-              <td>{pokemonAbilities(abilities)}</td>
+              <td>{renderAbilities(pokemonAbilities, abilities)}</td>
             </tr>
             <tr>
               <th>Shape</th>

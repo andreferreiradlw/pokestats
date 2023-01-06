@@ -1,7 +1,4 @@
-import { breakpoints } from '../Box/config';
-
-const white = '#FFF';
-const black = '#000';
+import { breakpoints } from '@/components/Box/config';
 
 const theme = {
   device: {

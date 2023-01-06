@@ -7,6 +7,7 @@ import type {
   EvolutionChain,
   PokemonSpecies,
   VersionGroup,
+  Ability,
 } from 'pokenode-ts';
 // helpers
 import { PokemonClient, EvolutionClient } from 'pokenode-ts';
@@ -27,6 +28,7 @@ export interface PokestatsPokemonPageProps {
   allPokemon: Pokemon[];
   allPokemonTypes: PokemonType[];
   pokemon: PokenodePokemon;
+  abilities: Ability[];
   species: PokemonSpecies;
   evolution: EvolutionChain;
   pokemonMoves: PokemonMove[];
@@ -114,12 +116,23 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     if (pokemonDataResults.id > 809) return { notFound: true };
 
     // get evolution chain id from url
+    // move requests array
+    let pokemonAbilities = [];
+    // create an axios request for each move
+    pokemonDataResults.abilities.forEach(({ ability }) =>
+      pokemonAbilities.push(pokemonClient.getAbilityByName(ability.name)),
+    );
+
+    const pokemonAbilitiesResults = await Promise.all(pokemonAbilities);
+
     const pokemonSpeciesResults = await pokemonClient.getPokemonSpeciesById(
       getIdFromSpecies(pokemonDataResults.species.url),
     );
 
-    if (!pokemonSpeciesResults) {
-      console.error('Failed to fetch pokemonSpeciesResults');
+    console.log('pokemonAbilitiesResults', pokemonAbilitiesResults);
+
+    if (!pokemonSpeciesResults || !pokemonAbilitiesResults) {
+      console.error('Failed to fetch pokemonSpeciesResults or pokemonAbilitiesResults');
       return { notFound: true };
     }
 
@@ -161,6 +174,10 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
           assetType: 'type',
         })),
         pokemon: pokemonDataResults,
+        abilities: pokemonAbilitiesResults.map(ability => ({
+          name: ability.name,
+          effect_entries: ability.effect_entries.filter(entry => entry.language.name === 'en'),
+        })),
         species: pokemonSpeciesResults,
         evolution: evolutionDataResults,
         pokemonGen,

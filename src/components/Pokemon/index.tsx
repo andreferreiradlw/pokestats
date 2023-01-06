@@ -25,10 +25,10 @@ import Navigation from './Navigation';
 const PokemonPage = ({
   allPokemon,
   pokemon,
+  abilities,
   species,
   evolution,
-}: // pokemonMoves,
-Omit<PokestatsPokemonPageProps, 'allPokemonTypes' | 'pokemonGen'>): JSX.Element => {
+}: Omit<PokestatsPokemonPageProps, 'allPokemonTypes' | 'pokemonGen'>): JSX.Element => {
   // game version
   const { setGameVersion } = useContext(GameVersionContext);
   // data
@@ -72,6 +72,7 @@ Omit<PokestatsPokemonPageProps, 'allPokemonTypes' | 'pokemonGen'>): JSX.Element 
             margin={{ xxs: '0 0 2rem', lg: '0' }}
             key={`pokemon-details-${name}`}
             pokemon={pokemon}
+            abilities={abilities}
             species={species}
           />
           <FeaturedImage
@@ -130,7 +131,7 @@ Omit<PokestatsPokemonPageProps, 'allPokemonTypes' | 'pokemonGen'>): JSX.Element 
             margin={{ xxs: '0 0 2rem', lg: '0' }}
             padding={{ xxs: '0', lg: '0 2rem 0 0' }}
           />
-          <PokemonForms species={species} sizes={{ xxs: 12, lg: 4 }} />
+          <PokemonForms pokemonId={id} species={species} sizes={{ xxs: 12, lg: 4 }} />
         </Box>
         {/** MOVES */}
         <Box align="flex-start" justify="flex-start" margin="1rem 0" $minHeight="210px" ref={ref}>

@@ -1,5 +1,7 @@
 // types
 import type { PokemonSpecies, PokemonSpeciesVariety } from 'pokenode-ts';
+// data
+import genderDescriptions from './genderDescriptions.json';
 // components
 import Box, { BoxProps } from '@/components/Box';
 // helpers
@@ -17,10 +19,11 @@ const currForms = (forms: PokemonSpeciesVariety[]): JSX.Element[] =>
   ));
 
 interface PokemonFormsProps extends BoxProps {
+  pokemonId: number;
   species: PokemonSpecies;
 }
 
-const PokemonForms = ({ species, ...rest }: PokemonFormsProps): JSX.Element => {
+const PokemonForms = ({ pokemonId, species, ...rest }: PokemonFormsProps): JSX.Element => {
   // data
   const { forms_switchable, varieties, has_gender_differences } = species;
 
@@ -39,7 +42,7 @@ const PokemonForms = ({ species, ...rest }: PokemonFormsProps): JSX.Element => {
           </tr>
           <tr>
             <th>Gender Differences</th>
-            <td>{has_gender_differences ? 'Yes' : 'None'}</td>
+            <td>{has_gender_differences ? genderDescriptions[pokemonId] : 'None'}</td>
           </tr>
         </tbody>
       </Table>

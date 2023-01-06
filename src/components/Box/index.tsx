@@ -1,4 +1,4 @@
-import { forwardRef } from 'react';
+import { CSSProperties, forwardRef } from 'react';
 // types
 import type { HTMLMotionProps } from 'framer-motion';
 // helpers
@@ -7,17 +7,19 @@ import { useForwardedRef } from '@/helpers';
 import BoxWrapper from './StyledBox';
 
 export interface BoxProps extends HTMLMotionProps<'div'> {
-  alignSelf?: string | Record<string, any>;
-  margin?: string | Record<string, any>;
-  padding?: string | Record<string, any>;
-  $flexWrap?: string | Record<string, any>;
-  width?: string | Record<string, any>;
-  height?: string | Record<string, any>;
-  $minHeight?: string | Record<string, any>;
-  direction?: string | Record<string, any>;
-  align?: string | Record<string, any>;
-  justify?: string | Record<string, any>;
-  gap?: string | Record<string, any>;
+  alignSelf?: CSSProperties['alignSelf'] | Record<string, CSSProperties['alignSelf']>;
+  margin?: CSSProperties['margin'] | Record<string, CSSProperties['margin']>;
+  padding?: CSSProperties['padding'] | Record<string, CSSProperties['padding']>;
+  $flexWrap?: CSSProperties['flexWrap'] | Record<string, CSSProperties['flexWrap']>;
+  width?: CSSProperties['width'] | Record<string, CSSProperties['width']>;
+  height?: CSSProperties['height'] | Record<string, CSSProperties['height']>;
+  $minHeight?: CSSProperties['minHeight'] | Record<string, CSSProperties['minHeight']>;
+  direction?: CSSProperties['flexDirection'] | Record<string, CSSProperties['flexDirection']>;
+  align?: CSSProperties['alignItems'] | Record<string, CSSProperties['alignItems']>;
+  justify?: CSSProperties['justifyContent'] | Record<string, CSSProperties['justifyContent']>;
+  gap?: CSSProperties['gap'] | Record<string, CSSProperties['gap']>;
+  $borderRadius?: CSSProperties['borderRadius'] | Record<string, CSSProperties['borderRadius']>;
+  $background?: CSSProperties['background'] | Record<string, CSSProperties['background']>;
   $constrained?: boolean;
   $flexGrow?: boolean;
   sizes?: number | Record<string, any>;

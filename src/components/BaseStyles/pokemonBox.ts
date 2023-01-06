@@ -20,31 +20,31 @@ const PokeBox = styled(motion.div)<{ width?: string; $dark?: boolean }>`
   ${({ $dark, theme }) =>
     $dark
       ? css`
-          background-color: ${theme.pokemonBox.dark.backgroundColor};
-          color: ${theme.pokemonBox.dark.color};
+          background-color: ${theme.colors.white};
+          color: ${theme.colors.white};
           &::hover,
           &:active {
-            border: 1px solid ${theme.pokemonBox.dark.hoverBorder};
+            border: 1px solid ${theme.colors.white};
           }
           &:hover {
-            box-shadow: 1px 1px 3px 0px ${theme.pokemonBox.dark.boxShadow};
+            box-shadow: 1px 1px 3px 0px ${theme.colors.darkerShadow};
           }
           &:active {
-            box-shadow: 1px 1px 2px 0px ${theme.pokemonBox.dark.activeShadow} inset;
+            box-shadow: 1px 1px 2px 0px ${theme.colors.lighterShadow} inset;
           }
         `
       : css`
-          background-color: ${theme.pokemonBox.backgroundColor};
-          color: ${theme.pokemonBox.color};
+          background-color: ${theme.colors.white};
+          color: ${theme.colors.black};
           &::hover,
           &:active {
-            border: 1px solid ${theme.pokemonBox.hoverBorder};
+            border: 1px solid ${theme.colors.black};
           }
           &:hover {
-            box-shadow: 1px 1px 3px 0px ${theme.pokemonBox.boxShadow};
+            box-shadow: 1px 1px 3px 0px ${theme.colors.lighterShadow};
           }
           &:active {
-            box-shadow: 1px 1px 2px 0px ${theme.pokemonBox.activeShadow} inset;
+            box-shadow: 1px 1px 2px 0px ${theme.colors.darkerShadow} inset;
           }
         `}
 

@@ -3,8 +3,8 @@ import Box from '@/components/Box';
 
 const Container = styled(Box)`
   ${({ theme }) => css`
-    background-color: ${theme.homepage.pokemonList.backgroundColor};
-    color: ${theme.homepage.pokemonList.color};
+    background-color: ${theme.colors.black};
+    color: ${theme.colors.white};
   `}
 `;
 

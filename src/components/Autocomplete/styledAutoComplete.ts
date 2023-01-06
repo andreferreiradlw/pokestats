@@ -43,31 +43,25 @@ const Input = styled.input`
   width: 100%;
 
   ${({ theme }) => css`
+    background-color: ${theme.colors.black};
+    border: 1px solid ${theme.colors.black};
+    color: ${theme.colors.white};
+
+    &::placeholder {
+      color: ${theme.colors.mercury};
+      font-style: italic;
+      font-weight: 500;
+    }
+
     @media ${theme.device.md} {
       font-size: 1rem;
       padding: 0.375rem 0.75rem;
     }
   `}
-
-  ${({ theme }) => {
-    let values = theme.autoComplete.input;
-
-    return css`
-      background-color: ${values.backgroundColor};
-      border: 1px solid ${values.borderColor};
-      color: ${values.color};
-    `;
-  }}
-
-  &::placeholder {
-    color: #e6e6e6;
-    font-style: italic;
-    font-weight: 500;
-  }
 `;
 
 const ListWrapper = styled.div`
-  background: white;
+  background: ${({ theme }) => theme.colors.white};
   border-radius: 0.25rem;
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
   left: 0;
@@ -79,7 +73,6 @@ const ListWrapper = styled.div`
 
 const OptionWrapper = styled(Link)`
   align-items: center;
-  color: black;
   cursor: pointer;
   display: flex;
   flex-direction: row;
@@ -87,21 +80,17 @@ const OptionWrapper = styled(Link)`
   justify-content: flex-start;
   padding: 0 1rem 0 0.5rem;
 
-  ${({ theme }) => {
-    const values = theme.autoComplete.wrapperOption;
+  ${({ theme }) => css`
+    background-color: ${theme.colors.white};
+    color: ${theme.colors.black};
 
-    return css`
-      background-color: ${values.backgroundColor};
-      color: ${values.color};
-
-      &:hover,
-      &:active,
-      &:focus {
-        background-color: ${values.hover.backgroundColor};
-        color: ${values.hover.color};
-      }
-    `;
-  }}
+    &:hover,
+    &:active,
+    &:focus {
+      background-color: ${theme.colors.black};
+      color: ${theme.colors.white};
+    }
+  `}
 `;
 
 const OptionImg = styled.img<{ $type?: Pokemon['assetType'] | PokemonType['assetType'] }>`

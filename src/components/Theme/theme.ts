@@ -17,95 +17,15 @@ const theme = {
     maxWidth: '1200px',
     padding: '0 2rem',
   },
-  autoComplete: {
-    input: {
-      color: white,
-      backgroundColor: black,
-      borderColor: black,
-      hover: {
-        color: black,
-        backgroundColor: white,
-      },
-    },
-    button: {
-      color: white,
-      backgroundColor: black,
-      borderColor: black,
-      hover: {
-        color: black,
-        backgroundColor: white,
-      },
-      disabled: {
-        color: 'lightgrey',
-        backgroundColor: white,
-      },
-    },
-    wrapperOption: {
-      color: black,
-      backgroundColor: white,
-      hover: {
-        color: white,
-        backgroundColor: black,
-      },
-    },
-  },
-  button: {
-    activeShadow: 'rgba(255, 255, 255, 0.75)',
-    backgroundColor: white,
-    borderColor: white,
-    boxShadow: 'rgba(255, 255, 255, 0.3)',
-    color: black,
-    hoverBackground: black,
-    hoverBorder: black,
-    hoverColor: white,
-    dark: {
-      activeShadow: 'rgba(0, 0, 0, 0.75)',
-      backgroundColor: black,
-      borderColor: black,
-      boxShadow: 'rgba(0, 0, 0, 0.3)',
-      color: white,
-      hoverBackground: white,
-      hoverBorder: black,
-      hoverColor: black,
-    },
-  },
-  header: {
-    backgroundColor: white,
-  },
-  homepage: {
-    heading: {
-      color: white,
-    },
-    pokemonList: {
-      backgroundColor: black,
-      color: white,
-    },
-  },
-  jpnName: {
-    color: black,
-  },
-  particles: {
-    backgroundColor: white,
-  },
-  pokemonBox: {
-    activeShadow: 'rgba(0, 0, 0, 0.75)',
-    backgroundColor: white,
-    boxShadow: 'rgba(255, 255, 255, 0.75)',
-    color: black,
-    hoverBorder: black,
-    dark: {
-      activeShadow: 'rgba(255, 255, 255, 0.75)',
-      backgroundColor: black,
-      boxShadow: 'rgba(0, 0, 0, 0.75)',
-      color: white,
-      hoverBorder: white,
-    },
-  },
-  progressBar: {
-    backgroundColor: black,
-  },
-  typeBadge: {
-    backgroundColor: {
+  colors: {
+    white: 'white',
+    black: 'black',
+    darkShadow: 'rgba(0, 0, 0, 0.3)',
+    darkerShadow: 'rgba(0, 0, 0, 0.75)',
+    lightShadow: 'rgba(255, 255, 255, 0.3)',
+    lighterShadow: 'rgba(255, 255, 255, 0.75)',
+    mercury: '#e6e6e6',
+    types: {
       bug: '#A6B91A',
       dark: '#705746',
       dragon: '#6F35FC',
@@ -124,15 +44,6 @@ const theme = {
       rock: '#B6A136',
       steel: '#B7B7CE',
       water: '#6390F0',
-    },
-    color: white,
-  },
-  select: {
-    color: white,
-    background: black,
-    light: {
-      color: black,
-      background: white,
     },
   },
 };

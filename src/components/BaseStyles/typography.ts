@@ -72,7 +72,7 @@ const JpnName = styled(motion.span)`
   width: 1em;
 
   ${({ theme }) => css`
-    color: ${theme.jpnName.color};
+    color: ${theme.colors.black};
 
     @media ${theme.device.xxs} {
       display: none;

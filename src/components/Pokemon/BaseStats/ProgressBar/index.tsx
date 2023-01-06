@@ -1,15 +1,23 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+
+interface ProgressBarProps {
+  progress?: number;
+  color?: string;
+}
 
 const Bar = styled.div<ProgressBarProps>`
-  border-bottom: 2px solid ${({ theme }) => theme.progressBar.backgroundColor};
-  border-top: 2px solid ${({ theme }) => theme.progressBar.backgroundColor};
+  ${({ theme }) =>
+    css`
+      border-bottom: 2px solid ${theme.colors.black};
+      border-top: 2px solid ${theme.colors.black};
+    `};
   height: 12px;
   position: relative;
   width: 100%;
 
   &::before,
   &::after {
-    background-color: ${({ theme }) => theme.progressBar.backgroundColor};
+    background-color: ${({ theme }) => theme.colors.black};
     content: '';
     height: 8px;
     position: absolute;
@@ -27,7 +35,7 @@ const Bar = styled.div<ProgressBarProps>`
   }
 
   & span {
-    background-color: ${({ theme, color }) => color || theme.progressBar.backgroundColor};
+    background-color: ${({ theme, color }) => color || theme.colors.black};
     height: 8px;
     left: 0;
     position: absolute;
@@ -35,11 +43,6 @@ const Bar = styled.div<ProgressBarProps>`
     width: ${({ progress }) => progress}%;
   }
 `;
-
-interface ProgressBarProps {
-  progress?: number;
-  color?: string;
-}
 
 const ProgressBar = ({ progress = 60, color }: ProgressBarProps): JSX.Element => {
   return (

@@ -7,10 +7,9 @@ import { float as floatAnim } from '@/components/BaseStyles';
 
 const Badge = styled(motion.div)<TypeBadgeProps>`
   align-items: center;
-  background-color: ${({ theme, typename, $fill }) =>
-    !$fill && theme.typeBadge.backgroundColor[typename]};
+  background-color: ${({ theme, typename, $fill }) => !$fill && theme.colors.types[typename]};
   border-radius: 4px;
-  color: ${({ theme }) => theme.typeBadge.color};
+  color: ${({ theme }) => theme.colors.white};
   display: flex;
   flex-direction: row;
   font-family: 'Quicksand', sans-serif;
@@ -61,7 +60,7 @@ const Badge = styled(motion.div)<TypeBadgeProps>`
 
     & > path {
       fill: ${({ theme, typename, $fill }) =>
-        $fill ? theme.typeBadge.backgroundColor[typename] : theme.typeBadge.color};
+        $fill ? theme.colors.types[typename] : theme.colors.white};
       stroke: black;
       stroke-width: 5;
     }

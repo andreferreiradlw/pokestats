@@ -20,7 +20,7 @@ const Sprites = ({ pokemonSprites, pokemonId, ...rest }: SpritesProps): JSX.Elem
   const officalArtworkSprites = pokemonSprites.other['official-artwork'];
 
   return (
-    <Box align={{ xxs: 'center', lg: 'flex-start' }} {...rest}>
+    <Box align={{ xxs: 'center', lg: 'flex-start' }} $gap="2em" {...rest}>
       <SectionTitle>Sprites</SectionTitle>
       {pokemonSprites ? (
         <>
@@ -28,7 +28,7 @@ const Sprites = ({ pokemonSprites, pokemonId, ...rest }: SpritesProps): JSX.Elem
             direction="row-reverse"
             align="flex-end"
             justify={{ xxs: 'center', lg: 'flex-end' }}
-            margin="0 0 2rem"
+            $gap="1em"
             $flexWrap="wrap"
           >
             {Object.keys(pokemonSprites).map(
@@ -50,14 +50,14 @@ const Sprites = ({ pokemonSprites, pokemonId, ...rest }: SpritesProps): JSX.Elem
             )}
           </Box>
           {pokemonId < 650 && (
-            <Box align={{ xxs: 'center', lg: 'flex-start' }}>
+            <Box align={{ xxs: 'center', lg: 'flex-start' }} $gap="1em">
               <SectionSubTitle>Animated Sprites</SectionSubTitle>
               <Box
                 direction="row-reverse"
                 align="flex-end"
                 justify={{ xxs: 'center', lg: 'flex-end' }}
-                margin="0 0 2rem"
                 $flexWrap="wrap"
+                $gap="1em"
               >
                 {Object.keys(animatedSprites).map(
                   (key, i) =>
@@ -80,9 +80,13 @@ const Sprites = ({ pokemonSprites, pokemonId, ...rest }: SpritesProps): JSX.Elem
               </Box>
             </Box>
           )}
-          <Box direction={{ xxs: 'column', md: 'row' }} align={{ xxs: 'center', md: 'flex-start' }}>
+          <Box
+            direction={{ xxs: 'column', md: 'row' }}
+            align={{ xxs: 'center', md: 'flex-start' }}
+            $gap="1em"
+          >
             {(dreamWorldSprites.front_default || dreamWorldSprites.front_female) && (
-              <Box align="center" margin="0 0 2rem" sizes={6}>
+              <Box align="center" sizes={6} $gap="1em">
                 <SectionSubTitle>Dreamworld Artwork</SectionSubTitle>
                 <Box direction="row" justify="center" $flexWrap="wrap">
                   {Object.keys(dreamWorldSprites).map(
@@ -105,7 +109,7 @@ const Sprites = ({ pokemonSprites, pokemonId, ...rest }: SpritesProps): JSX.Elem
               </Box>
             )}
             {officalArtworkSprites.front_default && (
-              <Box align="center" sizes={6}>
+              <Box align="center" sizes={6} $gap="1em">
                 <SectionSubTitle>Official Artwork</SectionSubTitle>
                 <SpriteContainer width={{ xxs: '100%', md: 'auto' }}>
                   <Sprite

@@ -11,6 +11,7 @@ import BoxWrapper from '@/components/Box/StyledBox';
 
 const LayoutContainer = styled(BoxWrapper)`
   min-height: 100vh;
+  gap: 3em;
 `;
 
 // main container
@@ -27,6 +28,7 @@ const MainContainer = styled(motion.main)<{
   justify-content: ${({ justify }) => (justify ? justify : 'center')};
   margin: 0 auto;
   width: 100%;
+  gap: 3em;
 
   ${({ $constrained }) => $constrained && `max-width: ${boxConfig.constrained};`}
   ${({ $withGutter }) => $withGutter && responsiveProps('padding', boxConfig.gutterWidth)}

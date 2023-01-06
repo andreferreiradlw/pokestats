@@ -6,7 +6,6 @@ const Table = styled(motion.table)`
   display: table;
   font-size: 1rem;
   line-height: 1.2rem;
-  margin: 0 0 1.5rem;
   width: 100%;
   word-break: keep-all;
 
@@ -24,7 +23,7 @@ const Table = styled(motion.table)`
     font-weight: normal;
     padding: 6px 0;
     text-align: left;
-    vertical-align: middle;
+    vertical-align: initial;
     white-space: nowrap;
   }
 
@@ -65,4 +64,10 @@ const Numbered = styled.span<{ light?: boolean }>`
     `}
 `;
 
-export { Table, Numbered };
+const TypesCell = styled.td`
+  display: flex;
+  gap: 0.5em;
+  flex-wrap: wrap;
+`;
+
+export { Table, Numbered, TypesCell };

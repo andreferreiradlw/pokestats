@@ -9,7 +9,7 @@ import Box, { BoxProps } from '@/components/Box';
 import TypeBadge from '@/components/TypeBadge';
 import Switch from './Switch';
 // styles
-import { SectionTitle, Table } from '@/components/BaseStyles';
+import { SectionTitle, Table, TypesCell } from '@/components/BaseStyles';
 
 interface MultipliersProps extends BoxProps {
   pokemonTypes: PokemonType[];
@@ -43,8 +43,13 @@ const Multipliers = ({ pokemonTypes, ...rest }: MultipliersProps): JSX.Element =
   }, [typeMultipliers, enabled]);
 
   return (
-    <Box align={{ xxs: 'center', lg: 'flex-start' }} {...rest}>
-      <Box direction={{ xxs: 'column', lg: 'row' }} justify="space-between" $flexWrap="wrap">
+    <Box align={{ xxs: 'center', lg: 'flex-start' }} $gap="1em" {...rest}>
+      <Box
+        direction={{ xxs: 'column', lg: 'row' }}
+        justify="space-between"
+        $flexWrap="wrap"
+        $gap="0.5em"
+      >
         <SectionTitle>Multipliers</SectionTitle>
         <Switch enabled={enabled} onClick={() => setEnabled(prev => !prev)} />
       </Box>
@@ -53,13 +58,13 @@ const Multipliers = ({ pokemonTypes, ...rest }: MultipliersProps): JSX.Element =
           {Object.keys(currMultipliers).map((relation, i) => (
             <tr key={`type-relation-${i}`}>
               <th>{removeUnderscore(relation)}</th>
-              <td>
+              <TypesCell>
                 {!currMultipliers[relation].length
                   ? 'None'
                   : currMultipliers[relation].map((type: string, i: number) => (
                       <TypeBadge key={`${type}-${relation}-${i}`} typename={type} $iconOnly />
                     ))}
-              </td>
+              </TypesCell>
             </tr>
           ))}
         </tbody>

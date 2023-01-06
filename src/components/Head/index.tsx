@@ -4,7 +4,7 @@ interface PokestatsHeadProps {
   children?: React.ReactNode;
 }
 
-const PokestatsPageTitle = 'PokeStats.gg - The pokedex powered by PokeApi.';
+const PokestatsPageTitle = 'PokeStats.gg - The Pokédex powered by PokeApi';
 
 const PokestatsHead = ({ children }: PokestatsHeadProps): JSX.Element => (
   <Head>
@@ -20,7 +20,7 @@ const PokestatsHead = ({ children }: PokestatsHeadProps): JSX.Element => (
     />
     <meta
       name="keywords"
-      content="pokemon, Pokémon, stats, pokedex, Pokédex, pokestats, database, pokeapi, moves, abilities, evolutions, locations, Pokestats, Pokémon, Pocket Monsters, Pokémon Sun, Pokémon Moon, Pokémon Ultra Sun, Pokémon Ultra Moon, Pokémon GO, Pokémon Let's Go Pikachu, Pokémon Let's Go Eevee, Pokemon Anime, Anime, TCG, Pokémon TCG"
+      content="pokemon, Pokémon, stats, pokedex, Pokédex, pokestats, poke stats, pokestats gg, database, pokeapi, moves, abilities, evolutions, locations, Pokestats, Pokémon, Pocket Monsters, Pokémon Sun, Pokémon Moon, Pokémon Ultra Sun, Pokémon Ultra Moon, Pokémon GO, Pokémon Let's Go Pikachu, Pokémon Let's Go Eevee, Pokemon Anime, Anime, TCG, Pokémon TCG"
     />
     <title>{PokestatsPageTitle}</title>
     {/** FONTS */}

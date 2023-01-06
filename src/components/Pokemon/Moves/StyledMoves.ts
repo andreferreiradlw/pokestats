@@ -67,8 +67,6 @@ const MovesTable = styled(motion.table)`
   `}
 `;
 
-const TabContainer = styled(Box)`
-  margin-bottom: 1rem;
-`;
+const TabContainer = styled(Box)``;
 
 export { TableContainer, MovesTable, TableBody, NameTH, NameTD, TableRow, TabContainer };

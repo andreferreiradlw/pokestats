@@ -8,7 +8,7 @@ import Box, { BoxProps } from '@/components/Box';
 import Autocomplete, { AutocompleteProps } from '@/components/Autocomplete';
 // styles
 import { Select } from '@/components/BaseStyles';
-import { Heading, SelectContainer } from './styledHeader';
+import { HeaderContainer, Heading, SelectContainer } from './styledHeader';
 // data
 
 interface HeaderComponentProps extends BoxProps {
@@ -25,7 +25,7 @@ const HeaderComponent = ({
   const { gameVersion, setGameVersion } = useContext(GameVersionContext);
 
   return (
-    <Box margin="2rem 0" {...rest}>
+    <HeaderContainer {...rest}>
       <Box
         $constrained
         $withGutter
@@ -70,7 +70,7 @@ const HeaderComponent = ({
           margin="none"
         />
       </Box>
-    </Box>
+    </HeaderContainer>
   );
 };
 

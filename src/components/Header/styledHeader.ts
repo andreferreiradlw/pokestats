@@ -1,6 +1,10 @@
 import styled, { css } from 'styled-components';
 import Box from '@/components/Box';
 
+const HeaderContainer = styled(Box)`
+  margin-top: 2em;
+`;
+
 const Heading = styled.h2`
   color: ${({ theme }) => theme.colors.white};
   font-family: 'Josefin Sans', sans-serif;
@@ -28,4 +32,4 @@ const SelectContainer = styled(Box)`
   `}
 `;
 
-export { Heading, SelectContainer };
+export { HeaderContainer, Heading, SelectContainer };

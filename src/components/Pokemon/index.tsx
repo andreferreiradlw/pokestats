@@ -64,20 +64,17 @@ const PokemonPage = ({
           direction={{ xxs: 'column-reverse', lg: 'row' }}
           align="center"
           justify="flex-start"
-          margin="1rem 0"
-          $minHeight="533px"
+          $gap="2em"
         >
           <Details
-            sizes={5}
-            margin={{ xxs: '0 0 2rem', lg: '0' }}
+            sizes={{ xxs: 12, lg: 5 }}
             key={`pokemon-details-${name}`}
             pokemon={pokemon}
             abilities={abilities}
             species={species}
           />
           <FeaturedImage
-            sizes={7}
-            margin={{ xxs: '0 0 2rem', lg: '0' }}
+            sizes={{ xxs: 12, lg: 7 }}
             specieNames={names}
             pokemonName={name}
             pokemonId={id}
@@ -88,33 +85,18 @@ const PokemonPage = ({
           direction={{ xxs: 'column', lg: 'row' }}
           align="flex-start"
           justify="flex-start"
-          margin="1rem 0"
-          $minHeight="347px"
+          $gap="2em"
         >
-          <Breeding
-            species={species}
-            evolutionChain={evolution}
-            margin={{ xxs: '0 0 2rem', lg: '0' }}
-            padding={{ xxs: '0', lg: '0 2rem 0 0' }}
-          />
-          <Training
-            pokemon={pokemon}
-            species={species}
-            margin={{ xxs: '0 0 2rem', lg: '0' }}
-            padding={{ xxs: '0', lg: '0 1rem' }}
-          />
-          <Multipliers
-            pokemonTypes={types}
-            margin={{ xxs: '0 0 2rem', lg: '0' }}
-            padding={{ xxs: '0', lg: '0 0 0 2rem' }}
-          />
+          <Breeding species={species} evolutionChain={evolution} />
+          <Training pokemon={pokemon} species={species} />
+          <Multipliers pokemonTypes={types} />
         </Box>
         {/** EVOLUTION CHAIN */}
-        <Box align="flex-start" justify="flex-start" margin="1rem 0" $minHeight="375px">
+        <Box align="flex-start" justify="flex-start">
           <EvolutionChain
             sizes={12}
-            margin="0 0 2rem"
             key={`pokemon-evolution-${name}`}
+            pokemonName={name}
             evolutionChain={evolution}
           />
         </Box>
@@ -123,27 +105,22 @@ const PokemonPage = ({
           direction={{ xxs: 'column', lg: 'row' }}
           align="flex-start"
           justify="flex-start"
-          margin="1rem 0"
+          $gap="2em"
         >
-          <BaseStats
-            stats={stats}
-            sizes={{ xxs: 12, lg: 8 }}
-            margin={{ xxs: '0 0 2rem', lg: '0' }}
-            padding={{ xxs: '0', lg: '0 2rem 0 0' }}
-          />
+          <BaseStats stats={stats} sizes={{ xxs: 12, lg: 8 }} />
           <PokemonForms pokemonId={id} species={species} sizes={{ xxs: 12, lg: 4 }} />
         </Box>
         {/** MOVES */}
-        <Box align="flex-start" justify="flex-start" margin="1rem 0" $minHeight="210px" ref={ref}>
-          {isMovesVisible && <Moves pokemon={pokemon} sizes={12} margin="0 0 2rem" />}
+        <Box align="flex-start" justify="flex-start" ref={ref}>
+          {isMovesVisible && <Moves pokemon={pokemon} sizes={12} />}
         </Box>
         {/** SPRITES */}
-        <Box align="flex-start" justify="flex-start" margin="1rem 0">
-          <Sprites pokemonSprites={sprites} pokemonId={id} sizes={12} margin="0 0 2rem" />
+        <Box align="flex-start" justify="flex-start">
+          <Sprites pokemonSprites={sprites} pokemonId={id} sizes={12} />
         </Box>
         {/** NAVIGATION */}
-        <Box align="flex-start" justify="flex-start" margin="1rem 0">
-          <Navigation allPokemon={allPokemon} pokemonId={id} sizes={12} margin="0 0 2rem" />
+        <Box align="flex-start" justify="flex-start">
+          <Navigation allPokemon={allPokemon} pokemonId={id} sizes={12} />
         </Box>
       </MainContainer>
     </AnimatePresence>

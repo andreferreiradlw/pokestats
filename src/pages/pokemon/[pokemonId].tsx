@@ -109,27 +109,25 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     ]);
 
     if (!allPokemonDataResults || !allTypesDataResults || !pokemonDataResults) {
-      console.error('Failed to fetch allPokemonData, typesData, pokemonData or pokemonSpecies');
+      console.error('Failed to fetch allPokemonData, typesData, pokemonData');
       return { notFound: true };
     }
 
     if (pokemonDataResults.id > 809) return { notFound: true };
 
-    // get evolution chain id from url
-    // move requests array
+    // abilities requests array
     let pokemonAbilities = [];
-    // create an axios request for each move
+    // create an axios request for each ability
     pokemonDataResults.abilities.forEach(({ ability }) =>
       pokemonAbilities.push(pokemonClient.getAbilityByName(ability.name)),
     );
 
     const pokemonAbilitiesResults = await Promise.all(pokemonAbilities);
 
+    // get evolution chain id from url
     const pokemonSpeciesResults = await pokemonClient.getPokemonSpeciesById(
       getIdFromSpecies(pokemonDataResults.species.url),
     );
-
-    console.log('pokemonAbilitiesResults', pokemonAbilitiesResults);
 
     if (!pokemonSpeciesResults || !pokemonAbilitiesResults) {
       console.error('Failed to fetch pokemonSpeciesResults or pokemonAbilitiesResults');
@@ -150,7 +148,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     pokemonSpeciesResults.flavor_text_entries = pokemonSpeciesResults.flavor_text_entries.filter(
       entry => entry.language.name === 'en',
     );
-    // species genus
+    // species english genus
     pokemonSpeciesResults.genera = pokemonSpeciesResults.genera.filter(
       entry => entry.language.name === 'en',
     );

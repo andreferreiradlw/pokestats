@@ -17,7 +17,7 @@ export interface BoxProps extends HTMLMotionProps<'div'> {
   direction?: CSSProperties['flexDirection'] | Record<string, CSSProperties['flexDirection']>;
   align?: CSSProperties['alignItems'] | Record<string, CSSProperties['alignItems']>;
   justify?: CSSProperties['justifyContent'] | Record<string, CSSProperties['justifyContent']>;
-  gap?: CSSProperties['gap'] | Record<string, CSSProperties['gap']>;
+  $gap?: CSSProperties['gap'] | Record<string, CSSProperties['gap']>;
   $borderRadius?: CSSProperties['borderRadius'] | Record<string, CSSProperties['borderRadius']>;
   $background?: CSSProperties['background'] | Record<string, CSSProperties['background']>;
   $constrained?: boolean;

@@ -4,6 +4,7 @@ import type { EvolutionChain as EvolutionChainType } from 'pokenode-ts';
 // helpers
 import { AnimatePresence } from 'framer-motion';
 import { fadeInUpVariant } from '@/helpers/animations';
+import { removeDash } from '@/helpers/typography';
 // components
 import Box from '@/components/Box';
 import BoxWrapper from '@/components/Box/StyledBox';
@@ -12,15 +13,20 @@ import Evolution from './Evolution';
 import { SectionTitle, SectionMessage } from '@/components/BaseStyles';
 
 interface EvolutionChainProps extends BoxProps {
+  pokemonName: string;
   evolutionChain: EvolutionChainType;
 }
 
-const EvolutionChain = ({ evolutionChain, ...rest }: EvolutionChainProps): JSX.Element => {
+const EvolutionChain = ({
+  pokemonName,
+  evolutionChain,
+  ...rest
+}: EvolutionChainProps): JSX.Element => {
   // data
   const { chain, id: chainId } = evolutionChain;
 
   return (
-    <Box align={{ xxs: 'center', lg: 'flex-start' }} {...rest}>
+    <Box align={{ xxs: 'center', lg: 'flex-start' }} $gap="1em" {...rest}>
       <SectionTitle>Evolution Chain</SectionTitle>
       <AnimatePresence>
         <BoxWrapper
@@ -75,7 +81,7 @@ const EvolutionChain = ({ evolutionChain, ...rest }: EvolutionChainProps): JSX.E
           variants={fadeInUpVariant}
           key={`no-pokemon-evolution-${chainId}`}
         >
-          This Pokémon does not evolve.
+          {`${removeDash(pokemonName)} does not evolve.`}
         </SectionMessage>
       )}
     </Box>

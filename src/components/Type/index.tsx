@@ -36,11 +36,12 @@ const TypePage = ({ typeInfo, typeMoves }: TypePageProps): JSX.Element => {
           direction={{ xxs: 'column-reverse', lg: 'row' }}
           align="flex-start"
           justify="flex-start"
-          margin="1rem 0"
+          $gap="2em"
         >
           <Box
             justify={{ xxs: 'center', lg: 'flex-start' }}
             align={{ xxs: 'center', lg: 'flex-start' }}
+            $gap="2em"
           >
             <PageHeading>{removeDash(name)}</PageHeading>
             <Box
@@ -48,23 +49,16 @@ const TypePage = ({ typeInfo, typeMoves }: TypePageProps): JSX.Element => {
               justify={{ xxs: 'center', md: 'flex-start' }}
               align={{ xxs: 'center', md: 'flex-start' }}
               sizes={{ xxs: 12, lg: 8 }}
+              $gap="2em"
             >
-              <TypeInfo
-                margin={{ xxs: '0 0 2rem', lg: '0' }}
-                padding={{ xxs: '0', md: '0 1rem 0 0' }}
-                type={typeInfo}
-              />
-              <TypeRelations
-                margin={{ xxs: '0 0 2rem', lg: '0' }}
-                padding={{ xxs: '0', md: '0 0 0 1rem', lg: '0 1rem' }}
-                relations={damage_relations}
-              />
+              <TypeInfo type={typeInfo} />
+              <TypeRelations relations={damage_relations} />
             </Box>
           </Box>
           <TypeIcon sizes={{ xxs: 12, lg: 4 }} typeName={name} otherNames={names} />
         </Box>
-        <Box align="flex-start" justify="flex-start" margin="1rem 0">
-          <Tabs typeInfo={typeInfo} typeMoves={typeMoves} sizes={12} margin="0 0 2rem" />
+        <Box align="flex-start" justify="flex-start">
+          <Tabs typeInfo={typeInfo} typeMoves={typeMoves} sizes={12} />
         </Box>
       </MainContainer>
     </AnimatePresence>

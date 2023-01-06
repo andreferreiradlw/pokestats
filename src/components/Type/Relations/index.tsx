@@ -7,7 +7,7 @@ import { removeUnderscore } from '@/helpers';
 import Box, { BoxProps } from '@/components/Box';
 import TypeBadge from '@/components/TypeBadge';
 // styles
-import { Table, SectionTitle } from '@/components/BaseStyles';
+import { Table, SectionTitle, TypesCell } from '@/components/BaseStyles';
 
 const RelationsTable = styled(Table)`
   width: 100%;
@@ -33,7 +33,7 @@ const TypeRelations = ({ relations, ...rest }: TypeRelationsProps): JSX.Element 
         {Object.keys(relations).map((relation, i) => (
           <tr key={`type-relation-${i}`}>
             <th>{removeUnderscore(relation)}</th>
-            <td>
+            <TypesCell>
               {!relations[relation].length
                 ? 'None'
                 : relations[relation].map((type, i) => (
@@ -43,7 +43,7 @@ const TypeRelations = ({ relations, ...rest }: TypeRelationsProps): JSX.Element 
                       $iconOnly
                     />
                   ))}
-            </td>
+            </TypesCell>
           </tr>
         ))}
       </tbody>

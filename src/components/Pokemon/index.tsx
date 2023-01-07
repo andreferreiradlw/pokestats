@@ -61,7 +61,7 @@ const PokemonPage = ({
         key={`pokemon-${name}`}
       >
         <Box
-          direction={{ xxs: 'column-reverse', lg: 'row' }}
+          $direction={{ xxs: 'column-reverse', lg: 'row' }}
           align="center"
           justify="flex-start"
           $gap="2em"
@@ -82,7 +82,7 @@ const PokemonPage = ({
         </Box>
         {/** BREEDING, TRAINING, MULTIPLIERS */}
         <Box
-          direction={{ xxs: 'column', lg: 'row' }}
+          $direction={{ xxs: 'column', lg: 'row' }}
           align="flex-start"
           justify="flex-start"
           $gap="2em"
@@ -102,7 +102,7 @@ const PokemonPage = ({
         </Box>
         {/** BASESTATS, FORMS */}
         <Box
-          direction={{ xxs: 'column', lg: 'row' }}
+          $direction={{ xxs: 'column', lg: 'row' }}
           align="flex-start"
           justify="flex-start"
           $gap="2em"

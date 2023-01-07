@@ -30,7 +30,7 @@ const TypeTabs = ({ typeInfo, typeMoves, ...rest }: TypeTabsProps) => {
 
   return (
     <Box align={{ xxs: 'center', lg: 'flex-start' }} $gap="1em" {...rest}>
-      <Box direction="row" justify="space-evenly" $flexWrap="wrap">
+      <Box $direction="row" justify="space-evenly" $flexWrap="wrap">
         <Button
           $active={currTab === 'pokemon'}
           onClick={() => setCurrTab('pokemon')}

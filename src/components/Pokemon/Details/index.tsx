@@ -85,7 +85,7 @@ const PokemonDetails = ({
   return (
     <AnimatePresence mode="wait">
       <BoxWrapper
-        direction="column"
+        $direction="column"
         align={{ xxs: 'center', lg: 'flex-start' }}
         $gap="1em"
         $width="100%"
@@ -97,7 +97,7 @@ const PokemonDetails = ({
       >
         <PageHeading>{removeDash(name)}</PageHeading>
         {types?.length > 0 && (
-          <TypeContainer direction="row" justify="flex-start" $flexWrap="wrap">
+          <TypeContainer $direction="row" justify="flex-start" $flexWrap="wrap">
             {types.map(({ type }, i) => {
               return <TypeBadge typename={type.name} key={`${type.name}-${i}-detail-${id}`} />;
             })}

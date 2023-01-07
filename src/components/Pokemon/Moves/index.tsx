@@ -150,7 +150,7 @@ const PokemonMoves = ({ pokemon, ...rest }: PokemonMovesProps): JSX.Element => {
     <Box align={{ xxs: 'center', lg: 'flex-start' }} $gap="2em" {...rest}>
       <SectionTitle>Move Pool</SectionTitle>
       {/** TABS */}
-      <TabContainer direction="row" justify="space-evenly" $flexWrap="wrap">
+      <TabContainer $direction="row" justify="space-evenly" $flexWrap="wrap">
         {TabsData.map(({ title, value }) => (
           <Button
             $active={learnMethod === value}

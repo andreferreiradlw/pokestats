@@ -64,7 +64,7 @@ const Evolution = ({
     currSpecies &&
     imgSrc && (
       <BoxWrapper
-        direction={{ xxs: 'column', lg: 'row' }}
+        $direction={{ xxs: 'column', lg: 'row' }}
         align="center"
         $width={{ xxs: 'auto', lg: '100%' }}
         $margin={{ xxs: '0 auto 1rem', lg: 'auto' }}
@@ -79,7 +79,7 @@ const Evolution = ({
           <BoxWrapper
             $width="auto"
             $flexGrow
-            direction="column"
+            $direction="column"
             $flexWrap="nowrap"
             justify="center"
             align="center"

@@ -27,7 +27,7 @@ export default styled(motion.div)<BoxProps>`
     $width,
     $height,
     $minHeight,
-    direction,
+    $direction,
     align,
     justify,
     $gap,
@@ -37,7 +37,7 @@ export default styled(motion.div)<BoxProps>`
     return css`
       // flexbox styles
       display: ${hide ? 'none' : 'flex'};
-      ${direction && responsiveProps('flex-direction', direction)}
+      ${$direction && responsiveProps('flex-direction', $direction)}
       ${align && responsiveProps('align-items', align)}
       ${justify && responsiveProps('justify-content', justify)}
       ${$alignSelf && responsiveProps('align-self', $alignSelf)}

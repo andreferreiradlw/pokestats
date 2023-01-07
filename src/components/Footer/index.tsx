@@ -9,7 +9,7 @@ import GitHub from '@/assets/svg/github.svg';
 const Footer = (): JSX.Element => (
   <FooterContainer>
     <Box
-      direction={{ xxs: 'column', sm: 'row' }}
+      $direction={{ xxs: 'column', sm: 'row' }}
       align={{ xxs: 'flex-start', sm: 'center' }}
       justify={{ xxs: 'center', sm: 'space-between' }}
       $margin="auto"

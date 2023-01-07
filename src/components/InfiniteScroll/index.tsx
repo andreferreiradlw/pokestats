@@ -109,7 +109,7 @@ export default function InfiniteScroll({
   return (
     <>
       <Box
-        direction={direction}
+        $direction={direction}
         align={align}
         $flexWrap={$flexWrap}
         justify="space-between"

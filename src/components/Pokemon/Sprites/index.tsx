@@ -25,7 +25,7 @@ const Sprites = ({ pokemonSprites, pokemonId, ...rest }: SpritesProps): JSX.Elem
       {pokemonSprites ? (
         <>
           <Box
-            direction="row-reverse"
+            $direction="row-reverse"
             align="flex-end"
             justify={{ xxs: 'center', lg: 'flex-end' }}
             $gap="1em"
@@ -53,7 +53,7 @@ const Sprites = ({ pokemonSprites, pokemonId, ...rest }: SpritesProps): JSX.Elem
             <Box align={{ xxs: 'center', lg: 'flex-start' }} $gap="1em">
               <SectionSubTitle>Animated Sprites</SectionSubTitle>
               <Box
-                direction="row-reverse"
+                $direction="row-reverse"
                 align="flex-end"
                 justify={{ xxs: 'center', lg: 'flex-end' }}
                 $flexWrap="wrap"
@@ -81,14 +81,14 @@ const Sprites = ({ pokemonSprites, pokemonId, ...rest }: SpritesProps): JSX.Elem
             </Box>
           )}
           <Box
-            direction={{ xxs: 'column', md: 'row' }}
+            $direction={{ xxs: 'column', md: 'row' }}
             align={{ xxs: 'center', md: 'flex-start' }}
             $gap="1em"
           >
             {(dreamWorldSprites.front_default || dreamWorldSprites.front_female) && (
               <Box align="center" sizes={6} $gap="1em">
                 <SectionSubTitle>Dreamworld Artwork</SectionSubTitle>
-                <Box direction="row" justify="center" $flexWrap="wrap">
+                <Box $direction="row" justify="center" $flexWrap="wrap">
                   {Object.keys(dreamWorldSprites).map(
                     (key, i) =>
                       dreamWorldSprites[key] && (

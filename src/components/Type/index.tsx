@@ -33,7 +33,7 @@ const TypePage = ({ typeInfo, typeMoves }: TypePageProps): JSX.Element => {
         key={`type-${name}`}
       >
         <Box
-          direction={{ xxs: 'column-reverse', lg: 'row' }}
+          $direction={{ xxs: 'column-reverse', lg: 'row' }}
           align="flex-start"
           justify="flex-start"
           $gap="2em"
@@ -45,7 +45,7 @@ const TypePage = ({ typeInfo, typeMoves }: TypePageProps): JSX.Element => {
           >
             <PageHeading>{removeDash(name)}</PageHeading>
             <Box
-              direction={{ xxs: 'column', md: 'row' }}
+              $direction={{ xxs: 'column', md: 'row' }}
               justify={{ xxs: 'center', md: 'flex-start' }}
               align={{ xxs: 'center', md: 'flex-start' }}
               sizes={{ xxs: 12, lg: 8 }}

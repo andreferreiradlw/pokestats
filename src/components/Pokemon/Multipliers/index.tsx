@@ -46,7 +46,7 @@ const Multipliers = ({ pokemonTypes, ...rest }: MultipliersProps): JSX.Element =
     <Box $align={{ xxs: 'center', lg: 'flex-start' }} $gap="1em" {...rest}>
       <Box
         $direction={{ xxs: 'column', lg: 'row' }}
-        justify="space-between"
+        $justify="space-between"
         $flexWrap="wrap"
         $gap="0.5em"
       >

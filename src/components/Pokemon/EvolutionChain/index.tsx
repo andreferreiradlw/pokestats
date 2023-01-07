@@ -31,7 +31,7 @@ const EvolutionChain = ({
       <AnimatePresence>
         <BoxWrapper
           $direction={{ xxs: 'column', lg: 'row' }}
-          justify="center"
+          $justify="center"
           $align="center"
           $width="100%"
         >

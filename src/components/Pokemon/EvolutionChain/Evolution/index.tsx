@@ -81,7 +81,7 @@ const Evolution = ({
             $flexGrow
             $direction="column"
             $flexWrap="nowrap"
-            justify="center"
+            $justify="center"
             $align="center"
           >
             {evolutionDetails.map((currDetails, i) => (

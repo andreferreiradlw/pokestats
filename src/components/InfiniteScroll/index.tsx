@@ -112,7 +112,7 @@ export default function InfiniteScroll({
         $direction={$direction}
         $align={$align}
         $flexWrap={$flexWrap}
-        justify="space-between"
+        $justify="space-between"
         $gap="1em"
         {...rest}
       >

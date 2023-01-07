@@ -17,7 +17,7 @@ const LayoutContainer = styled(BoxWrapper)`
 // main container
 const MainContainer = styled(motion.main)<{
   $align?: BoxProps['$align'];
-  justify?: BoxProps['justify'];
+  $justify?: BoxProps['$justify'];
   $constrained?: BoxProps['$constrained'];
   $withGutter?: BoxProps['$withGutter'];
 }>`
@@ -26,7 +26,7 @@ const MainContainer = styled(motion.main)<{
   flex-direction: column;
   flex-grow: 1;
   gap: 3em;
-  justify-content: ${({ justify }) => (justify ? justify : 'center')};
+  justify-content: ${({ $justify }) => $justify || 'center'};
   margin: 0 auto;
   width: 100%;
 

@@ -7,26 +7,26 @@ import { useForwardedRef } from '@/helpers';
 import BoxWrapper from './StyledBox';
 
 export interface BoxProps extends HTMLMotionProps<'div'> {
-  $alignSelf?: CSSProperties['alignSelf'] | Record<string, CSSProperties['alignSelf']>;
-  $margin?: CSSProperties['margin'] | Record<string, CSSProperties['margin']>;
-  $padding?: CSSProperties['padding'] | Record<string, CSSProperties['padding']>;
-  $flexWrap?: CSSProperties['flexWrap'] | Record<string, CSSProperties['flexWrap']>;
-  $width?: CSSProperties['width'] | Record<string, CSSProperties['width']>;
-  $height?: CSSProperties['height'] | Record<string, CSSProperties['height']>;
-  $minHeight?: CSSProperties['minHeight'] | Record<string, CSSProperties['minHeight']>;
-  $direction?: CSSProperties['flexDirection'] | Record<string, CSSProperties['flexDirection']>;
   $align?: CSSProperties['alignItems'] | Record<string, CSSProperties['alignItems']>;
-  $justify?: CSSProperties['justifyContent'] | Record<string, CSSProperties['justifyContent']>;
-  $gap?: CSSProperties['gap'] | Record<string, CSSProperties['gap']>;
-  $borderRadius?: CSSProperties['borderRadius'] | Record<string, CSSProperties['borderRadius']>;
+  $alignSelf?: CSSProperties['alignSelf'] | Record<string, CSSProperties['alignSelf']>;
   $background?: CSSProperties['background'] | Record<string, CSSProperties['background']>;
+  $borderRadius?: CSSProperties['borderRadius'] | Record<string, CSSProperties['borderRadius']>;
   $constrained?: boolean;
-  $flexGrow?: boolean;
-  $sizes?: number | Record<string, number>;
-  $relative?: boolean;
-  $withGutter?: boolean;
   $debug?: boolean;
+  $direction?: CSSProperties['flexDirection'] | Record<string, CSSProperties['flexDirection']>;
+  $flexGrow?: boolean;
+  $flexWrap?: CSSProperties['flexWrap'] | Record<string, CSSProperties['flexWrap']>;
+  $gap?: CSSProperties['gap'] | Record<string, CSSProperties['gap']>;
+  $height?: CSSProperties['height'] | Record<string, CSSProperties['height']>;
   $hide?: boolean;
+  $justify?: CSSProperties['justifyContent'] | Record<string, CSSProperties['justifyContent']>;
+  $margin?: CSSProperties['margin'] | Record<string, CSSProperties['margin']>;
+  $minHeight?: CSSProperties['minHeight'] | Record<string, CSSProperties['minHeight']>;
+  $padding?: CSSProperties['padding'] | Record<string, CSSProperties['padding']>;
+  $relative?: boolean;
+  $sizes?: number | Record<string, number>;
+  $width?: CSSProperties['width'] | Record<string, CSSProperties['width']>;
+  $withGutter?: boolean;
   children?: React.ReactNode;
 }
 
@@ -34,11 +34,11 @@ const Box = forwardRef(
   (
     {
       $align = 'center',
-      children,
       $direction = 'column',
       $flexWrap = 'nowrap',
       $justify = 'center',
       $width = '100%',
+      children,
       ...rest
     }: BoxProps,
     ref,

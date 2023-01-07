@@ -19,40 +19,40 @@ const gutterStyle = () => css`
 export default styled(motion.div)<BoxProps>`
   /** dynamic styles */
   ${({
-    $alignSelf,
-    $margin,
-    $padding,
-    $hide,
-    $flexWrap,
-    $width,
-    $height,
-    $minHeight,
-    $direction,
     $align,
-    $justify,
-    $gap,
-    $borderRadius,
+    $alignSelf,
     $background,
+    $borderRadius,
+    $direction,
+    $flexWrap,
+    $gap,
+    $height,
+    $hide,
+    $justify,
+    $margin,
+    $minHeight,
+    $padding,
+    $width,
   }) => {
     return css`
       // flexbox styles
       display: ${$hide ? 'none' : 'flex'};
-      ${$direction && responsiveProps('flex-direction', $direction)}
       ${$align && responsiveProps('align-items', $align)}
-      ${$justify && responsiveProps('justify-content', $justify)}
       ${$alignSelf && responsiveProps('align-self', $alignSelf)}
+      ${$direction && responsiveProps('flex-direction', $direction)}
       ${$flexWrap && responsiveProps('flex-wrap', $flexWrap)}
+      ${$gap && responsiveProps('gap', $gap)}
+      ${$justify && responsiveProps('justify-content', $justify)}
       // spacing
       ${$margin && responsiveProps('margin', $margin)}
-      ${$gap && responsiveProps('gap', $gap)}
       ${$padding && responsiveProps('padding', $padding)}
       // sizing
-      ${$width && responsiveProps('width', $width)}
       ${$height && responsiveProps('height', $height)}
       ${$minHeight && responsiveProps('min-height', $minHeight)}
+      ${$width && responsiveProps('width', $width)}
       // others
-      ${$borderRadius && responsiveProps('border-radius', $borderRadius)}
       ${$background && responsiveProps('background', $background)}
+      ${$borderRadius && responsiveProps('border-radius', $borderRadius)}
     `;
   }}
 

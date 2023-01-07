@@ -28,7 +28,7 @@ const PokemonForms = ({ pokemonId, species, ...rest }: PokemonFormsProps): JSX.E
   const { forms_switchable, varieties, has_gender_differences } = species;
 
   return (
-    <Box align={{ xxs: 'center', lg: 'flex-start' }} $gap="1em" {...rest}>
+    <Box $align={{ xxs: 'center', lg: 'flex-start' }} $gap="1em" {...rest}>
       <SectionTitle>Forms</SectionTitle>
       <Table>
         <tbody>

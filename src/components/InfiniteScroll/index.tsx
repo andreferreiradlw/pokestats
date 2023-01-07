@@ -18,8 +18,8 @@ export default function InfiniteScroll({
   pokemonList,
   dark,
   itemsPerPage = 35,
-  direction = 'row',
-  align = 'flex-start',
+  $direction = 'row',
+  $align = 'flex-start',
   $flexWrap = 'wrap',
   ...rest
 }: InfiniteScrollProps): JSX.Element {
@@ -109,8 +109,8 @@ export default function InfiniteScroll({
   return (
     <>
       <Box
-        $direction={direction}
-        align={align}
+        $direction={$direction}
+        $align={$align}
         $flexWrap={$flexWrap}
         justify="space-between"
         $gap="1em"

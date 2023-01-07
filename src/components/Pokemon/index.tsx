@@ -62,7 +62,7 @@ const PokemonPage = ({
       >
         <Box
           $direction={{ xxs: 'column-reverse', lg: 'row' }}
-          align="center"
+          $align="center"
           justify="flex-start"
           $gap="2em"
         >
@@ -83,7 +83,7 @@ const PokemonPage = ({
         {/** BREEDING, TRAINING, MULTIPLIERS */}
         <Box
           $direction={{ xxs: 'column', lg: 'row' }}
-          align="flex-start"
+          $align="flex-start"
           justify="flex-start"
           $gap="2em"
         >
@@ -92,7 +92,7 @@ const PokemonPage = ({
           <Multipliers pokemonTypes={types} />
         </Box>
         {/** EVOLUTION CHAIN */}
-        <Box align="flex-start" justify="flex-start">
+        <Box $align="flex-start" justify="flex-start">
           <EvolutionChain
             sizes={12}
             key={`pokemon-evolution-${name}`}
@@ -103,7 +103,7 @@ const PokemonPage = ({
         {/** BASESTATS, FORMS */}
         <Box
           $direction={{ xxs: 'column', lg: 'row' }}
-          align="flex-start"
+          $align="flex-start"
           justify="flex-start"
           $gap="2em"
         >
@@ -111,15 +111,15 @@ const PokemonPage = ({
           <PokemonForms pokemonId={id} species={species} sizes={{ xxs: 12, lg: 4 }} />
         </Box>
         {/** MOVES */}
-        <Box align="flex-start" justify="flex-start" ref={ref}>
+        <Box $align="flex-start" justify="flex-start" ref={ref}>
           {isMovesVisible && <Moves pokemon={pokemon} sizes={12} />}
         </Box>
         {/** SPRITES */}
-        <Box align="flex-start" justify="flex-start">
+        <Box $align="flex-start" justify="flex-start">
           <Sprites pokemonSprites={sprites} pokemonId={id} sizes={12} />
         </Box>
         {/** NAVIGATION */}
-        <Box align="flex-start" justify="flex-start">
+        <Box $align="flex-start" justify="flex-start">
           <Navigation allPokemon={allPokemon} pokemonId={id} sizes={12} />
         </Box>
       </MainContainer>

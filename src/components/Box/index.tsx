@@ -15,7 +15,7 @@ export interface BoxProps extends HTMLMotionProps<'div'> {
   $height?: CSSProperties['height'] | Record<string, CSSProperties['height']>;
   $minHeight?: CSSProperties['minHeight'] | Record<string, CSSProperties['minHeight']>;
   $direction?: CSSProperties['flexDirection'] | Record<string, CSSProperties['flexDirection']>;
-  align?: CSSProperties['alignItems'] | Record<string, CSSProperties['alignItems']>;
+  $align?: CSSProperties['alignItems'] | Record<string, CSSProperties['alignItems']>;
   justify?: CSSProperties['justifyContent'] | Record<string, CSSProperties['justifyContent']>;
   $gap?: CSSProperties['gap'] | Record<string, CSSProperties['gap']>;
   $borderRadius?: CSSProperties['borderRadius'] | Record<string, CSSProperties['borderRadius']>;
@@ -33,7 +33,7 @@ export interface BoxProps extends HTMLMotionProps<'div'> {
 const Box = forwardRef(
   (
     {
-      align = 'center',
+      $align = 'center',
       children,
       $direction = 'column',
       $flexWrap = 'nowrap',
@@ -47,7 +47,7 @@ const Box = forwardRef(
 
     return (
       <BoxWrapper
-        align={align}
+        $align={$align}
         $direction={$direction}
         $flexWrap={$flexWrap}
         justify={justify}

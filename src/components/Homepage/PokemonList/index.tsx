@@ -55,7 +55,7 @@ const PokemonList = ({ pokemon, ...rest }: PokemonListProps): JSX.Element => {
         $constrained
         $withGutter
         $margin="3rem 0"
-        align="flex-start"
+        $align="flex-start"
         justify="flex-start"
         $gap="1em"
       >

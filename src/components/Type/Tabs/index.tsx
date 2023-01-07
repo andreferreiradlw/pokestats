@@ -29,7 +29,7 @@ const TypeTabs = ({ typeInfo, typeMoves, ...rest }: TypeTabsProps) => {
   const { name, pokemon } = typeInfo;
 
   return (
-    <Box align={{ xxs: 'center', lg: 'flex-start' }} $gap="1em" {...rest}>
+    <Box $align={{ xxs: 'center', lg: 'flex-start' }} $gap="1em" {...rest}>
       <Box $direction="row" justify="space-evenly" $flexWrap="wrap">
         <Button
           $active={currTab === 'pokemon'}

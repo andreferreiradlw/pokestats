@@ -86,7 +86,7 @@ const PokemonDetails = ({
     <AnimatePresence mode="wait">
       <BoxWrapper
         $direction="column"
-        align={{ xxs: 'center', lg: 'flex-start' }}
+        $align={{ xxs: 'center', lg: 'flex-start' }}
         $gap="1em"
         $width="100%"
         initial="hidden"

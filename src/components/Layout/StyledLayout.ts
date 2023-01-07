@@ -16,12 +16,12 @@ const LayoutContainer = styled(BoxWrapper)`
 
 // main container
 const MainContainer = styled(motion.main)<{
-  align?: BoxProps['align'];
+  $align?: BoxProps['$align'];
   justify?: BoxProps['justify'];
   $constrained?: BoxProps['$constrained'];
   $withGutter?: BoxProps['$withGutter'];
 }>`
-  align-items: ${({ align }) => (align ? align : 'center')};
+  align-items: ${({ $align }) => $align || 'center'};
   display: flex;
   flex-direction: column;
   flex-grow: 1;

@@ -31,7 +31,7 @@ const HeaderComponent = ({
         $withGutter
         $direction={{ xxs: 'column', md: 'row' }}
         justify="space-between"
-        align={{ xxs: 'center', md: 'flex-start' }}
+        $align={{ xxs: 'center', md: 'flex-start' }}
         $margin="auto"
       >
         <div>
@@ -66,7 +66,7 @@ const HeaderComponent = ({
           filterList={autocompleteList}
           $width="350px"
           justify="flex-end"
-          align="flex-start"
+          $align="flex-start"
           $margin="none"
         />
       </Box>

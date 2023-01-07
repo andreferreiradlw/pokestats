@@ -46,7 +46,7 @@ const PokestatsPokemonPage: NextPage<PokestatsPokemonPageProps> = ({
   if (router.isFallback) {
     return (
       <Loading
-        height="100vh"
+        $height="100vh"
         text="Loading Pokemon"
         $iconWidth={{ xxs: '20%', xs: '15%', md: '10%', lg: '5%' }}
       />

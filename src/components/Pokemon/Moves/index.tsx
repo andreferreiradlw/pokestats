@@ -169,7 +169,7 @@ const PokemonMoves = ({ pokemon, ...rest }: PokemonMovesProps): JSX.Element => {
       <AnimatePresence mode="wait">
         {movesLoading ? (
           <Loading
-            height="100%"
+            $height="100%"
             $iconWidth={{ xxs: '20%', xs: '15%', md: '10%', lg: '5%' }}
             passKey="pokemon-moves-loading"
           />

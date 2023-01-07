@@ -25,7 +25,7 @@ export default styled(motion.div)<BoxProps>`
     hide,
     $flexWrap,
     $width,
-    height,
+    $height,
     $minHeight,
     direction,
     align,
@@ -48,7 +48,7 @@ export default styled(motion.div)<BoxProps>`
       ${$padding && responsiveProps('padding', $padding)}
       // sizing
       ${$width && responsiveProps('width', $width)}
-      ${height && responsiveProps('height', height)}
+      ${$height && responsiveProps('height', $height)}
       ${$minHeight && responsiveProps('min-height', $minHeight)}
       // others
       ${$borderRadius && responsiveProps('border-radius', $borderRadius)}

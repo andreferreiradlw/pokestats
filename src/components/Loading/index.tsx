@@ -18,7 +18,7 @@ export interface LoadingProps extends BoxProps {
 const Loading = forwardRef(
   (
     {
-      height,
+      $height,
       $iconWidth,
       noIcon,
       text,
@@ -34,7 +34,7 @@ const Loading = forwardRef(
         ref={ref}
         justify={justify}
         align={align}
-        height={height}
+        $height={$height}
         initial="initial"
         animate="animate"
         exit="exit"

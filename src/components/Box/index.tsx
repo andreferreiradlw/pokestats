@@ -12,7 +12,7 @@ export interface BoxProps extends HTMLMotionProps<'div'> {
   $padding?: CSSProperties['padding'] | Record<string, CSSProperties['padding']>;
   $flexWrap?: CSSProperties['flexWrap'] | Record<string, CSSProperties['flexWrap']>;
   $width?: CSSProperties['width'] | Record<string, CSSProperties['width']>;
-  height?: CSSProperties['height'] | Record<string, CSSProperties['height']>;
+  $height?: CSSProperties['height'] | Record<string, CSSProperties['height']>;
   $minHeight?: CSSProperties['minHeight'] | Record<string, CSSProperties['minHeight']>;
   direction?: CSSProperties['flexDirection'] | Record<string, CSSProperties['flexDirection']>;
   align?: CSSProperties['alignItems'] | Record<string, CSSProperties['alignItems']>;

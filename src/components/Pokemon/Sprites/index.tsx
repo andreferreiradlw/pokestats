@@ -111,7 +111,7 @@ const Sprites = ({ pokemonSprites, pokemonId, ...rest }: SpritesProps): JSX.Elem
             {officalArtworkSprites.front_default && (
               <Box align="center" sizes={6} $gap="1em">
                 <SectionSubTitle>Official Artwork</SectionSubTitle>
-                <SpriteContainer width={{ xxs: '100%', md: 'auto' }}>
+                <SpriteContainer $width={{ xxs: '100%', md: 'auto' }}>
                   <Sprite
                     alt="Official Artwork Front Default"
                     key="official-artwork"

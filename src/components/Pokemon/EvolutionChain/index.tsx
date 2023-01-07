@@ -33,9 +33,9 @@ const EvolutionChain = ({
           direction={{ xxs: 'column', lg: 'row' }}
           justify="center"
           align="center"
-          width="100%"
+          $width="100%"
         >
-          <Evolution noArrow species={chain.species} width="auto" />
+          <Evolution noArrow species={chain.species} $width="auto" />
           {chain.evolves_to.length > 0 && (
             <Box
               direction={{ xxs: 'row', lg: 'column' }}
@@ -47,7 +47,7 @@ const EvolutionChain = ({
                   direction={{ xxs: 'column', lg: 'row' }}
                   align={{ xxs: 'flex-end', lg: 'center' }}
                   key={`first-evo-box-${i}-${chainId}`}
-                  width={{ xxs: '200px', lg: '100%' }}
+                  $width={{ xxs: '200px', lg: '100%' }}
                 >
                   <Evolution
                     species={firstEvo.species}

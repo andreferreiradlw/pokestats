@@ -24,7 +24,7 @@ export default styled(motion.div)<BoxProps>`
     $padding,
     hide,
     $flexWrap,
-    width,
+    $width,
     height,
     $minHeight,
     direction,
@@ -47,7 +47,7 @@ export default styled(motion.div)<BoxProps>`
       ${$gap && responsiveProps('gap', $gap)}
       ${$padding && responsiveProps('padding', $padding)}
       // sizing
-      ${width && responsiveProps('width', width)}
+      ${$width && responsiveProps('width', $width)}
       ${height && responsiveProps('height', height)}
       ${$minHeight && responsiveProps('min-height', $minHeight)}
       // others
@@ -92,7 +92,7 @@ export default styled(motion.div)<BoxProps>`
     `}
 
   /** gutter */
-  ${({ padding, $withGutter }) => !padding && $withGutter && gutterStyle()}
+  ${({ $padding, $withGutter }) => !$padding && $withGutter && gutterStyle()}
 
   /** debug */
   ${({ debug }) => debug && debugStyle()}

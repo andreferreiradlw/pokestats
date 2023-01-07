@@ -64,7 +64,7 @@ const HeaderComponent = ({
         </div>
         <Autocomplete
           filterList={autocompleteList}
-          width="350px"
+          $width="350px"
           justify="flex-end"
           align="flex-start"
           $margin="none"

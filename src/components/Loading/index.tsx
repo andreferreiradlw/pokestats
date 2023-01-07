@@ -43,7 +43,12 @@ const Loading = forwardRef(
         {...rest}
       >
         {!noIcon && (
-          <BoxWrapper width="100%" justify="center" variants={loadingChild} key={`icon-${passKey}`}>
+          <BoxWrapper
+            $width="100%"
+            justify="center"
+            variants={loadingChild}
+            key={`icon-${passKey}`}
+          >
             <PotionIcon $iconWidth={$iconWidth} />
           </BoxWrapper>
         )}

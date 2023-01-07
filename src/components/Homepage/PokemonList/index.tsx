@@ -65,7 +65,7 @@ const PokemonList = ({ pokemon, ...rest }: PokemonListProps): JSX.Element => {
           justify={{ xxs: 'center', sm: 'flex-start' }}
           $flexWrap="wrap"
         >
-          <Box direction="row" justify="flex-start" width="auto">
+          <Box direction="row" justify="flex-start" $width="auto">
             <label id="generation" htmlFor="gen_select">
               Game Generation:
             </label>
@@ -87,7 +87,7 @@ const PokemonList = ({ pokemon, ...rest }: PokemonListProps): JSX.Element => {
               ))}
             </Select>
           </Box>
-          <Box direction="row" justify="flex-start" width="auto">
+          <Box direction="row" justify="flex-start" $width="auto">
             <label id="sorting" htmlFor="sort_pokemon">
               Sort Pokemon:
             </label>

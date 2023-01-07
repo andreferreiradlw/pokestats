@@ -9,8 +9,8 @@ const Container = styled(BoxWrapper)`
   max-width: 100%;
   position: relative;
 
-  ${({ theme, width }) =>
-    !width &&
+  ${({ theme, $width }) =>
+    !$width &&
     css`
       width: 90%;
 

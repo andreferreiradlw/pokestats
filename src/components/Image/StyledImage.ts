@@ -14,14 +14,14 @@ const ImageWrapper = styled(Box)`
   display: flex;
   justify-content: center;
 
-  ${({ width }) =>
+  ${({ $width }) =>
     css`
-      width: ${width ? `${width}px` : '100%'};
+      width: ${$width ? `${$width}px` : '100%'};
     `}
 
-  ${({ height }) =>
+  ${({ $height }) =>
     css`
-      height: ${height ? `${height}px` : 'auto'};
+      height: ${$height ? `${$height}px` : 'auto'};
     `}
 `;
 

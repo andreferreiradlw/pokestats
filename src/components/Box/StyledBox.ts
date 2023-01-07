@@ -21,7 +21,7 @@ export default styled(motion.div)<BoxProps>`
   ${({
     $alignSelf,
     $margin,
-    padding,
+    $padding,
     hide,
     $flexWrap,
     width,
@@ -45,7 +45,7 @@ export default styled(motion.div)<BoxProps>`
       // spacing
       ${$margin && responsiveProps('margin', $margin)}
       ${$gap && responsiveProps('gap', $gap)}
-      ${padding && responsiveProps('padding', padding)}
+      ${$padding && responsiveProps('padding', $padding)}
       // sizing
       ${width && responsiveProps('width', width)}
       ${height && responsiveProps('height', height)}

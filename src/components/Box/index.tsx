@@ -9,7 +9,7 @@ import BoxWrapper from './StyledBox';
 export interface BoxProps extends HTMLMotionProps<'div'> {
   $alignSelf?: CSSProperties['alignSelf'] | Record<string, CSSProperties['alignSelf']>;
   $margin?: CSSProperties['margin'] | Record<string, CSSProperties['margin']>;
-  padding?: CSSProperties['padding'] | Record<string, CSSProperties['padding']>;
+  $padding?: CSSProperties['padding'] | Record<string, CSSProperties['padding']>;
   $flexWrap?: CSSProperties['flexWrap'] | Record<string, CSSProperties['flexWrap']>;
   width?: CSSProperties['width'] | Record<string, CSSProperties['width']>;
   height?: CSSProperties['height'] | Record<string, CSSProperties['height']>;

@@ -25,8 +25,8 @@ export interface BoxProps extends HTMLMotionProps<'div'> {
   $sizes?: number | Record<string, number>;
   $relative?: boolean;
   $withGutter?: boolean;
-  debug?: boolean;
-  hide?: boolean;
+  $debug?: boolean;
+  $hide?: boolean;
   children?: React.ReactNode;
 }
 

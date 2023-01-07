@@ -22,7 +22,7 @@ export default styled(motion.div)<BoxProps>`
     $alignSelf,
     $margin,
     $padding,
-    hide,
+    $hide,
     $flexWrap,
     $width,
     $height,
@@ -36,7 +36,7 @@ export default styled(motion.div)<BoxProps>`
   }) => {
     return css`
       // flexbox styles
-      display: ${hide ? 'none' : 'flex'};
+      display: ${$hide ? 'none' : 'flex'};
       ${$direction && responsiveProps('flex-direction', $direction)}
       ${$align && responsiveProps('align-items', $align)}
       ${$justify && responsiveProps('justify-content', $justify)}
@@ -95,5 +95,5 @@ export default styled(motion.div)<BoxProps>`
   ${({ $padding, $withGutter }) => !$padding && $withGutter && gutterStyle()}
 
   /** debug */
-  ${({ debug }) => debug && debugStyle()}
+  ${({ $debug }) => $debug && debugStyle()}
 `;

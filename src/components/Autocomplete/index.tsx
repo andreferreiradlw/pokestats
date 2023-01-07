@@ -111,7 +111,7 @@ const Autocomplete = ({
   };
 
   return (
-    <Container align={align} direction={direction} margin={margin} {...rest}>
+    <Container align={align} direction={direction} $margin={margin} {...rest}>
       <label htmlFor="autocomplete" id="autocomplete_label" aria-hidden="true">
         Search Pokemon or Type Name
       </label>

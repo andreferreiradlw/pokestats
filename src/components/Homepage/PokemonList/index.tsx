@@ -54,7 +54,7 @@ const PokemonList = ({ pokemon, ...rest }: PokemonListProps): JSX.Element => {
       <Box
         $constrained
         $withGutter
-        margin="3rem 0"
+        $margin="3rem 0"
         align="flex-start"
         justify="flex-start"
         $gap="1em"

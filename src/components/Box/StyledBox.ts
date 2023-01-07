@@ -19,8 +19,8 @@ const gutterStyle = () => css`
 export default styled(motion.div)<BoxProps>`
   /** dynamic styles */
   ${({
-    alignSelf,
-    margin,
+    $alignSelf,
+    $margin,
     padding,
     hide,
     $flexWrap,
@@ -40,10 +40,10 @@ export default styled(motion.div)<BoxProps>`
       ${direction && responsiveProps('flex-direction', direction)}
       ${align && responsiveProps('align-items', align)}
       ${justify && responsiveProps('justify-content', justify)}
-      ${alignSelf && responsiveProps('align-self', alignSelf)}
+      ${$alignSelf && responsiveProps('align-self', $alignSelf)}
       ${$flexWrap && responsiveProps('flex-wrap', $flexWrap)}
       // spacing
-      ${margin && responsiveProps('margin', margin)}
+      ${$margin && responsiveProps('margin', $margin)}
       ${$gap && responsiveProps('gap', $gap)}
       ${padding && responsiveProps('padding', padding)}
       // sizing

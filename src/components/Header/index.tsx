@@ -32,7 +32,7 @@ const HeaderComponent = ({
         direction={{ xxs: 'column', md: 'row' }}
         justify="space-between"
         align={{ xxs: 'center', md: 'flex-start' }}
-        margin="auto"
+        $margin="auto"
       >
         <div>
           <Link href="/">
@@ -67,7 +67,7 @@ const HeaderComponent = ({
           width="350px"
           justify="flex-end"
           align="flex-start"
-          margin="none"
+          $margin="none"
         />
       </Box>
     </HeaderContainer>

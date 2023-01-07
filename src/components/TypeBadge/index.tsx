@@ -14,7 +14,7 @@ export interface TypeBadgeProps {
   $iconHeight?: string;
   typename: Type['name'];
   hideIcon?: boolean;
-  margin?: string;
+  $margin?: string;
   $fill?: boolean;
 }
 

@@ -7,8 +7,8 @@ import { useForwardedRef } from '@/helpers';
 import BoxWrapper from './StyledBox';
 
 export interface BoxProps extends HTMLMotionProps<'div'> {
-  alignSelf?: CSSProperties['alignSelf'] | Record<string, CSSProperties['alignSelf']>;
-  margin?: CSSProperties['margin'] | Record<string, CSSProperties['margin']>;
+  $alignSelf?: CSSProperties['alignSelf'] | Record<string, CSSProperties['alignSelf']>;
+  $margin?: CSSProperties['margin'] | Record<string, CSSProperties['margin']>;
   padding?: CSSProperties['padding'] | Record<string, CSSProperties['padding']>;
   $flexWrap?: CSSProperties['flexWrap'] | Record<string, CSSProperties['flexWrap']>;
   width?: CSSProperties['width'] | Record<string, CSSProperties['width']>;

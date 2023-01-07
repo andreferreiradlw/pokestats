@@ -13,7 +13,7 @@ const Footer = (): JSX.Element => (
       $align={{ xxs: 'flex-start', sm: 'center' }}
       $justify={{ xxs: 'center', sm: 'space-between' }}
       $margin="auto"
-      sizes={12}
+      $sizes={12}
       $constrained
       $withGutter
     >

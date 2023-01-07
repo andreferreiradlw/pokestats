@@ -57,20 +57,20 @@ export default styled(motion.div)<BoxProps>`
   }}
 
   /** column-based flex size */
-  ${({ $constrained, sizes }) =>
+  ${({ $constrained, $sizes }) =>
     $constrained
       ? css`
           // flex-basis: 100%;
         `
-      : sizes
-      ? flexStyle(sizes)
+      : $sizes
+      ? flexStyle($sizes)
       : css`
           flex-basis: auto;
         `}
   
-  ${({ $constrained, sizes, $flexGrow }) =>
+  ${({ $constrained, $sizes, $flexGrow }) =>
     !$constrained &&
-    !sizes &&
+    !$sizes &&
     $flexGrow &&
     css`
       flex-grow: 1;

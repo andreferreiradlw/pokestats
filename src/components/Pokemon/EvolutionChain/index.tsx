@@ -40,7 +40,7 @@ const EvolutionChain = ({
             <Box
               $direction={{ xxs: 'row', lg: 'column' }}
               $flexWrap={{ xxs: 'wrap', lg: 'nowrap' }}
-              sizes={9.6}
+              $sizes={9.6}
             >
               {chain.evolves_to.map((firstEvo, i) => (
                 <Box

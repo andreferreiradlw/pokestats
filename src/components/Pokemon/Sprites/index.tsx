@@ -35,7 +35,7 @@ const Sprites = ({ pokemonSprites, pokemonId, ...rest }: SpritesProps): JSX.Elem
               (key, i) =>
                 pokemonSprites[key] &&
                 typeof pokemonSprites[key] !== 'object' && (
-                  <SpriteContainer sizes={1.5} key={`${key}-${i}`}>
+                  <SpriteContainer $sizes={1.5} key={`${key}-${i}`}>
                     <Sprite
                       alt={key}
                       key={`sprite-${key}`}
@@ -63,7 +63,7 @@ const Sprites = ({ pokemonSprites, pokemonId, ...rest }: SpritesProps): JSX.Elem
                   (key, i) =>
                     animatedSprites[key] &&
                     typeof animatedSprites[key] !== 'object' && (
-                      <SpriteContainer sizes={1.5} key={`${key}-${i}`}>
+                      <SpriteContainer $sizes={1.5} key={`${key}-${i}`}>
                         <Sprite
                           alt={key}
                           key={`animated-sprite-${key}`}
@@ -86,13 +86,13 @@ const Sprites = ({ pokemonSprites, pokemonId, ...rest }: SpritesProps): JSX.Elem
             $gap="1em"
           >
             {(dreamWorldSprites.front_default || dreamWorldSprites.front_female) && (
-              <Box $align="center" sizes={6} $gap="1em">
+              <Box $align="center" $sizes={6} $gap="1em">
                 <SectionSubTitle>Dreamworld Artwork</SectionSubTitle>
                 <Box $direction="row" $justify="center" $flexWrap="wrap">
                   {Object.keys(dreamWorldSprites).map(
                     (key, i) =>
                       dreamWorldSprites[key] && (
-                        <SpriteContainer key={`${key}-${i}`} sizes={6}>
+                        <SpriteContainer key={`${key}-${i}`} $sizes={6}>
                           <Sprite
                             alt={`DreamWorld Design ${removeUnderscore(key)}`}
                             key={`dreamworld-sprite-${key}`}
@@ -109,7 +109,7 @@ const Sprites = ({ pokemonSprites, pokemonId, ...rest }: SpritesProps): JSX.Elem
               </Box>
             )}
             {officalArtworkSprites.front_default && (
-              <Box $align="center" sizes={6} $gap="1em">
+              <Box $align="center" $sizes={6} $gap="1em">
                 <SectionSubTitle>Official Artwork</SectionSubTitle>
                 <SpriteContainer $width={{ xxs: '100%', md: 'auto' }}>
                   <Sprite

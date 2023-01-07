@@ -22,7 +22,7 @@ export interface BoxProps extends HTMLMotionProps<'div'> {
   $background?: CSSProperties['background'] | Record<string, CSSProperties['background']>;
   $constrained?: boolean;
   $flexGrow?: boolean;
-  sizes?: number | Record<string, any>;
+  $sizes?: number | Record<string, number>;
   $relative?: boolean;
   $withGutter?: boolean;
   debug?: boolean;

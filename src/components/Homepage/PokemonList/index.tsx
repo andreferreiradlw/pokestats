@@ -106,7 +106,7 @@ const PokemonList = ({ pokemon, ...rest }: PokemonListProps): JSX.Element => {
             </Select>
           </Box>
         </SelectContainer>
-        {showPokemon.length > 0 && <InfiniteScroll sizes={12} pokemonList={showPokemon} />}
+        {showPokemon.length > 0 && <InfiniteScroll $sizes={12} pokemonList={showPokemon} />}
       </Box>
     </Container>
   );

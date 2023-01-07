@@ -67,14 +67,14 @@ const PokemonPage = ({
           $gap="2em"
         >
           <Details
-            sizes={{ xxs: 12, lg: 5 }}
+            $sizes={{ xxs: 12, lg: 5 }}
             key={`pokemon-details-${name}`}
             pokemon={pokemon}
             abilities={abilities}
             species={species}
           />
           <FeaturedImage
-            sizes={{ xxs: 12, lg: 7 }}
+            $sizes={{ xxs: 12, lg: 7 }}
             specieNames={names}
             pokemonName={name}
             pokemonId={id}
@@ -94,7 +94,7 @@ const PokemonPage = ({
         {/** EVOLUTION CHAIN */}
         <Box $align="flex-start" $justify="flex-start">
           <EvolutionChain
-            sizes={12}
+            $sizes={12}
             key={`pokemon-evolution-${name}`}
             pokemonName={name}
             evolutionChain={evolution}
@@ -107,20 +107,20 @@ const PokemonPage = ({
           $justify="flex-start"
           $gap="2em"
         >
-          <BaseStats stats={stats} sizes={{ xxs: 12, lg: 8 }} />
-          <PokemonForms pokemonId={id} species={species} sizes={{ xxs: 12, lg: 4 }} />
+          <BaseStats stats={stats} $sizes={{ xxs: 12, lg: 8 }} />
+          <PokemonForms pokemonId={id} species={species} $sizes={{ xxs: 12, lg: 4 }} />
         </Box>
         {/** MOVES */}
         <Box $align="flex-start" $justify="flex-start" ref={ref}>
-          {isMovesVisible && <Moves pokemon={pokemon} sizes={12} />}
+          {isMovesVisible && <Moves pokemon={pokemon} $sizes={12} />}
         </Box>
         {/** SPRITES */}
         <Box $align="flex-start" $justify="flex-start">
-          <Sprites pokemonSprites={sprites} pokemonId={id} sizes={12} />
+          <Sprites pokemonSprites={sprites} pokemonId={id} $sizes={12} />
         </Box>
         {/** NAVIGATION */}
         <Box $align="flex-start" $justify="flex-start">
-          <Navigation allPokemon={allPokemon} pokemonId={id} sizes={12} />
+          <Navigation allPokemon={allPokemon} pokemonId={id} $sizes={12} />
         </Box>
       </MainContainer>
     </AnimatePresence>

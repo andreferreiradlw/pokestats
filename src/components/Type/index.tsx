@@ -48,17 +48,17 @@ const TypePage = ({ typeInfo, typeMoves }: TypePageProps): JSX.Element => {
               $direction={{ xxs: 'column', md: 'row' }}
               $justify={{ xxs: 'center', md: 'flex-start' }}
               $align={{ xxs: 'center', md: 'flex-start' }}
-              sizes={{ xxs: 12, lg: 8 }}
+              $sizes={{ xxs: 12, lg: 8 }}
               $gap="2em"
             >
               <TypeInfo type={typeInfo} />
               <TypeRelations relations={damage_relations} />
             </Box>
           </Box>
-          <TypeIcon sizes={{ xxs: 12, lg: 4 }} typeName={name} otherNames={names} />
+          <TypeIcon $sizes={{ xxs: 12, lg: 4 }} typeName={name} otherNames={names} />
         </Box>
         <Box $align="flex-start" $justify="flex-start">
-          <Tabs typeInfo={typeInfo} typeMoves={typeMoves} sizes={12} />
+          <Tabs typeInfo={typeInfo} typeMoves={typeMoves} $sizes={12} />
         </Box>
       </MainContainer>
     </AnimatePresence>

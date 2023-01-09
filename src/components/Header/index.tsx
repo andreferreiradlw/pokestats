@@ -32,14 +32,15 @@ const HeaderComponent = ({
         flexjustify="space-between"
         flexalign={{ xxs: 'center', md: 'flex-start' }}
         flexmargin="auto"
+        flexgap="1em"
       >
-        <Box width="auto">
+        <Box width="auto" flexjustify="flex-start" flexalign="flex-start">
           <Link href="/">
             <Heading>PokeStats</Heading>
           </Link>
           {/** Select */}
           {pokemonGen && (
-            <SelectContainer flexdirection="row" flexjustify="flex-start" flexgap="1em">
+            <SelectContainer flexdirection="row" flexjustify="flex-start" flexgap="0.5em">
               <label id="header_generation" htmlFor="header_gen_select">
                 Game Version:
               </label>

@@ -23,7 +23,7 @@ const Loading = forwardRef(
       noIcon,
       text,
       $justify = 'center',
-      $align = 'center',
+      flexAlign = 'center',
       passKey,
       ...rest
     }: LoadingProps,
@@ -33,7 +33,7 @@ const Loading = forwardRef(
       <LoadingContainer
         ref={ref}
         $justify={$justify}
-        $align={$align}
+        flexAlign={flexAlign}
         $height={$height}
         initial="initial"
         animate="animate"

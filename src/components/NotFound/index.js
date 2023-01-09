@@ -13,7 +13,7 @@ export default function NotFound() {
   const router = useRouter();
 
   return (
-    <Container $justify="center" $align="center">
+    <Container $justify="center" flexAlign="center">
       <Image src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/shiny/250.gif" />
       <Title>HO-OH!</Title>
       <Message>

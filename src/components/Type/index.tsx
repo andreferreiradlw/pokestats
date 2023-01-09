@@ -23,7 +23,7 @@ const TypePage = ({ typeInfo, typeMoves }: TypePageProps): JSX.Element => {
     <AnimatePresence mode="wait">
       <MainContainer
         $justify="flex-start"
-        $align="flex-start"
+        flexAlign="flex-start"
         $constrained
         $withGutter
         initial="hidden"
@@ -34,20 +34,20 @@ const TypePage = ({ typeInfo, typeMoves }: TypePageProps): JSX.Element => {
       >
         <Box
           $direction={{ xxs: 'column-reverse', lg: 'row' }}
-          $align="flex-start"
+          flexAlign="flex-start"
           $justify="flex-start"
           $gap="2em"
         >
           <Box
             $justify={{ xxs: 'center', lg: 'flex-start' }}
-            $align={{ xxs: 'center', lg: 'flex-start' }}
+            flexAlign={{ xxs: 'center', lg: 'flex-start' }}
             $gap="2em"
           >
             <PageHeading>{removeDash(name)}</PageHeading>
             <Box
               $direction={{ xxs: 'column', md: 'row' }}
               $justify={{ xxs: 'center', md: 'flex-start' }}
-              $align={{ xxs: 'center', md: 'flex-start' }}
+              flexAlign={{ xxs: 'center', md: 'flex-start' }}
               $sizes={{ xxs: 12, lg: 8 }}
               $gap="2em"
             >
@@ -57,7 +57,7 @@ const TypePage = ({ typeInfo, typeMoves }: TypePageProps): JSX.Element => {
           </Box>
           <TypeIcon $sizes={{ xxs: 12, lg: 4 }} typeName={name} otherNames={names} />
         </Box>
-        <Box $align="flex-start" $justify="flex-start">
+        <Box flexAlign="flex-start" $justify="flex-start">
           <Tabs typeInfo={typeInfo} typeMoves={typeMoves} $sizes={12} />
         </Box>
       </MainContainer>

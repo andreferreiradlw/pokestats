@@ -65,7 +65,7 @@ const Evolution = ({
     imgSrc && (
       <BoxWrapper
         $direction={{ xxs: 'column', lg: 'row' }}
-        $align="center"
+        flexAlign="center"
         $width={{ xxs: 'auto', lg: '100%' }}
         initial="hidden"
         animate="show"
@@ -81,7 +81,7 @@ const Evolution = ({
             $direction="column"
             $flexWrap="nowrap"
             $justify="center"
-            $align="center"
+            flexAlign="center"
           >
             {evolutionDetails.map((currDetails, i) => (
               <EvolutionDetails key={`evo-details-${i}`} details={currDetails} />

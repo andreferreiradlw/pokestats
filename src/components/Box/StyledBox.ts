@@ -16,10 +16,10 @@ const gutterStyle = () => css`
   ${responsiveProps('padding', boxConfig.gutterWidth)}
 `;
 
-export default styled(motion.div)<BoxProps>`
+const BoxWrapper = styled(motion.div)<BoxProps>`
   /** dynamic styles */
   ${({
-    $align,
+    flexAlign,
     $alignSelf,
     $background,
     $borderRadius,
@@ -33,28 +33,26 @@ export default styled(motion.div)<BoxProps>`
     $minHeight,
     $padding,
     $width,
-  }) => {
-    return css`
-      // flexbox styles
-      display: ${$hide ? 'none' : 'flex'};
-      ${$align && responsiveProps('align-items', $align)}
-      ${$alignSelf && responsiveProps('align-self', $alignSelf)}
-      ${$direction && responsiveProps('flex-direction', $direction)}
-      ${$flexWrap && responsiveProps('flex-wrap', $flexWrap)}
-      ${$gap && responsiveProps('gap', $gap)}
-      ${$justify && responsiveProps('justify-content', $justify)}
-      // spacing
-      ${$margin && responsiveProps('margin', $margin)}
-      ${$padding && responsiveProps('padding', $padding)}
-      // sizing
-      ${$height && responsiveProps('height', $height)}
-      ${$minHeight && responsiveProps('min-height', $minHeight)}
-      ${$width && responsiveProps('width', $width)}
-      // others
-      ${$background && responsiveProps('background', $background)}
-      ${$borderRadius && responsiveProps('border-radius', $borderRadius)}
-    `;
-  }}
+  }) => css`
+    // flexbox styles
+    display: ${$hide ? 'none' : 'flex'};
+    ${flexAlign && responsiveProps('align-items', flexAlign)}
+    ${$alignSelf && responsiveProps('align-self', $alignSelf)}
+    ${$direction && responsiveProps('flex-direction', $direction)}
+    ${$flexWrap && responsiveProps('flex-wrap', $flexWrap)}
+    ${$gap && responsiveProps('gap', $gap)}
+    ${$justify && responsiveProps('justify-content', $justify)}
+    // spacing
+    ${$margin && responsiveProps('margin', $margin)}
+    ${$padding && responsiveProps('padding', $padding)}
+    // sizing
+    ${$height && responsiveProps('height', $height)}
+    ${$minHeight && responsiveProps('min-height', $minHeight)}
+    ${$width && responsiveProps('width', $width)}
+    // others
+    ${$background && responsiveProps('background', $background)}
+    ${$borderRadius && responsiveProps('border-radius', $borderRadius)}
+  `}
 
   /** column-based flex size */
   ${({ $constrained, $sizes }) =>
@@ -97,3 +95,5 @@ export default styled(motion.div)<BoxProps>`
   /** debug */
   ${({ $debug }) => $debug && debugStyle()}
 `;
+
+export default BoxWrapper;

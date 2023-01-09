@@ -7,7 +7,7 @@ import { useForwardedRef } from '@/helpers';
 import BoxWrapper from './StyledBox';
 
 export interface BoxProps extends HTMLMotionProps<'div'> {
-  $align?: CSSProperties['alignItems'] | Record<string, CSSProperties['alignItems']>;
+  flexAlign?: CSSProperties['alignItems'] | Record<string, CSSProperties['alignItems']>;
   $alignSelf?: CSSProperties['alignSelf'] | Record<string, CSSProperties['alignSelf']>;
   $background?: CSSProperties['background'] | Record<string, CSSProperties['background']>;
   $borderRadius?: CSSProperties['borderRadius'] | Record<string, CSSProperties['borderRadius']>;
@@ -30,37 +30,20 @@ export interface BoxProps extends HTMLMotionProps<'div'> {
   children?: React.ReactNode;
 }
 
-const Box = forwardRef(
-  (
-    {
-      $align = 'center',
-      $direction = 'column',
-      $flexWrap = 'nowrap',
-      $justify = 'center',
-      $width = '100%',
-      children,
-      ...rest
-    }: BoxProps,
-    ref,
-  ): JSX.Element => {
-    const boxRef = useForwardedRef(ref);
+const Box = forwardRef((props: BoxProps, ref): JSX.Element => {
+  const boxRef = useForwardedRef(ref);
 
-    return (
-      <BoxWrapper
-        $align={$align}
-        $direction={$direction}
-        $flexWrap={$flexWrap}
-        $justify={$justify}
-        $width={$width}
-        ref={boxRef}
-        {...rest}
-      >
-        {children}
-      </BoxWrapper>
-    );
-  },
-);
+  return <BoxWrapper ref={boxRef} {...props} />;
+});
 
 Box.displayName = 'Box';
+
+Box.defaultProps = {
+  flexAlign: 'center',
+  $direction: 'column',
+  $flexWrap: 'nowrap',
+  $justify: 'center',
+  $width: '100%',
+};
 
 export default Box;

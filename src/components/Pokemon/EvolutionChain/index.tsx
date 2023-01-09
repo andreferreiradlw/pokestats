@@ -26,13 +26,13 @@ const EvolutionChain = ({
   const { chain, id: chainId } = evolutionChain;
 
   return (
-    <Box $align={{ xxs: 'center', lg: 'flex-start' }} $gap="1em" {...rest}>
+    <Box flexAlign={{ xxs: 'center', lg: 'flex-start' }} $gap="1em" {...rest}>
       <SectionTitle>Evolution Chain</SectionTitle>
       <AnimatePresence>
         <BoxWrapper
           $direction={{ xxs: 'column', lg: 'row' }}
           $justify="center"
-          $align="center"
+          flexAlign="center"
           $width="100%"
           $gap="1em"
         >
@@ -47,7 +47,7 @@ const EvolutionChain = ({
               {chain.evolves_to.map((firstEvo, i) => (
                 <Box
                   $direction={{ xxs: 'column', lg: 'row' }}
-                  $align={{ xxs: 'flex-end', lg: 'center' }}
+                  flexAlign={{ xxs: 'flex-end', lg: 'center' }}
                   key={`first-evo-box-${i}-${chainId}`}
                   $width={{ xxs: '200px', lg: '100%' }}
                   $gap="1em"
@@ -60,7 +60,7 @@ const EvolutionChain = ({
                   {firstEvo.evolves_to.length > 0 && (
                     <Box
                       $direction={{ xxs: 'row', lg: 'column' }}
-                      $align={{ xxs: 'flex-end', lg: 'center' }}
+                      flexAlign={{ xxs: 'flex-end', lg: 'center' }}
                       $gap="1em"
                     >
                       {firstEvo.evolves_to.map((secondEvo, x) => (

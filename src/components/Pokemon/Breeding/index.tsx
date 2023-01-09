@@ -34,7 +34,7 @@ const Breeding = ({ species, evolutionChain, ...rest }: BreedingProps): JSX.Elem
   const { baby_trigger_item } = evolutionChain;
 
   return (
-    <Box $align={{ xxs: 'center', lg: 'flex-start' }} $gap="1em" {...rest}>
+    <Box flexAlign={{ xxs: 'center', lg: 'flex-start' }} $gap="1em" {...rest}>
       <SectionTitle>Breeding</SectionTitle>
       <Table>
         <tbody>

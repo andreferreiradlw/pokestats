@@ -19,7 +19,7 @@ export default function InfiniteScroll({
   dark,
   itemsPerPage = 35,
   $direction = 'row',
-  $align = 'flex-start',
+  flexAlign = 'flex-start',
   $flexWrap = 'wrap',
   ...rest
 }: InfiniteScrollProps): JSX.Element {
@@ -110,7 +110,7 @@ export default function InfiniteScroll({
     <>
       <Box
         $direction={$direction}
-        $align={$align}
+        flexAlign={flexAlign}
         $flexWrap={$flexWrap}
         $justify="space-between"
         $gap="1em"

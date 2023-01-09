@@ -144,7 +144,9 @@ const Autocomplete = ({
               )}
               {item.assetType === 'pokemon' && (
                 <OptionImg
-                  src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${item.id}.png`}
+                  src={`https://raw.githubusercontent.com/HybridShivam/Pokemon/master/assets/images/${item.id
+                    .toString()
+                    .padStart(3, '0')}.png`}
                 />
               )}
               <Option>{removeDash(item.name)}</Option>

@@ -51,7 +51,9 @@ const Evolution = ({
         if (_isMounted.current) {
           setCurrSpecies(newSpecies);
           setImgSrc(
-            `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${newSpecies.id}.png`,
+            `https://raw.githubusercontent.com/HybridShivam/Pokemon/master/assets/images/${newSpecies.id
+              .toString()
+              .padStart(3, '0')}.png`,
           );
         }
       });

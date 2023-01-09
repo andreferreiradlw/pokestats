@@ -49,9 +49,11 @@ const Navigation = ({ allPokemon, pokemonId, ...rest }: NavigationProps): JSX.El
           >
             <Arrow $left>
               <Image
-                src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${
+                src={`https://raw.githubusercontent.com/HybridShivam/Pokemon/master/assets/images/${(
                   pokemonId - 1
-                }.png`}
+                )
+                  .toString()
+                  .padStart(3, '0')}.png`}
                 alt={allPokemon[pokemonId - 2].name}
                 key={`navigation-left-${allPokemon[pokemonId - 2].name}`}
                 width="100"
@@ -76,9 +78,11 @@ const Navigation = ({ allPokemon, pokemonId, ...rest }: NavigationProps): JSX.El
           <BtnAnchor href={`/pokemon/${allPokemon[pokemonId].name}`} onClick={nextPokemon} $right>
             <Arrow $right>
               <Image
-                src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${
+                src={`https://raw.githubusercontent.com/HybridShivam/Pokemon/master/assets/images/${(
                   pokemonId + 1
-                }.png`}
+                )
+                  .toString()
+                  .padStart(3, '0')}.png`}
                 alt={allPokemon[pokemonId].name}
                 key={`navigation-right-${allPokemon[pokemonId].name}`}
                 width="100"

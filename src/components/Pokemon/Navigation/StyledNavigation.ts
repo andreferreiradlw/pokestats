@@ -86,6 +86,7 @@ const BtnAnchor = styled(Link)<{ $left?: boolean; $right?: boolean }>`
     `}
 
   img {
+    padding: 10px;
     transition: all 0.15s ease-in-out;
   }
 

@@ -9,7 +9,6 @@ import Autocomplete, { AutocompleteProps } from '@/components/Autocomplete';
 // styles
 import { Select } from '@/components/BaseStyles';
 import { HeaderContainer, Heading, SelectContainer } from './styledHeader';
-// data
 
 interface HeaderComponentProps extends BoxProps {
   autocompleteList: AutocompleteProps['filterList'];
@@ -25,7 +24,7 @@ const HeaderComponent = ({
   const { gameVersion, setGameVersion } = useContext(GameVersionContext);
 
   return (
-    <HeaderContainer {...rest}>
+    <Box className={HeaderContainer} {...rest}>
       <Box
         $constrained
         $withGutter
@@ -34,13 +33,13 @@ const HeaderComponent = ({
         $flexalign={{ xxs: 'center', md: 'flex-start' }}
         $margin="auto"
       >
-        <div>
+        <Box $width="auto">
           <Link href="/">
             <Heading>PokeStats</Heading>
           </Link>
           {/** Select */}
           {pokemonGen && (
-            <SelectContainer $direction="row" $flexjustify="flex-start">
+            <SelectContainer $direction="row" $flexjustify="flex-start" $gap="1em">
               <label id="header_generation" htmlFor="header_gen_select">
                 Game Version:
               </label>
@@ -61,7 +60,7 @@ const HeaderComponent = ({
               </Select>
             </SelectContainer>
           )}
-        </div>
+        </Box>
         <Autocomplete
           filterList={autocompleteList}
           $width="350px"
@@ -70,7 +69,7 @@ const HeaderComponent = ({
           $margin="none"
         />
       </Box>
-    </HeaderContainer>
+    </Box>
   );
 };
 

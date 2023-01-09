@@ -28,7 +28,9 @@ const FeaturedImage = ({
         placeholderwidth="20%"
         alt={specieNames?.find(name => name.language.name === 'en').name}
         key={`featured-${pokemonName}-${pokemonId}`}
-        src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemonId}.png`}
+        src={`https://raw.githubusercontent.com/HybridShivam/Pokemon/master/assets/images/${pokemonId
+          .toString()
+          .padStart(3, '0')}.png`}
       />
       {specieNames && (
         <JpnName

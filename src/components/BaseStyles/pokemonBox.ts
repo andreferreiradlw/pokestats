@@ -56,6 +56,10 @@ const PokeBox = styled(motion.div)<{ width?: string; $dark?: boolean }>`
   transition: box-shadow 0.05s ease-in-out;
   transition: border 0.1s ease-in-out;
 
+  img {
+    margin-bottom: 1em;
+  }
+
   &:hover {
     cursor: pointer;
 
@@ -63,7 +67,7 @@ const PokeBox = styled(motion.div)<{ width?: string; $dark?: boolean }>`
       transition: box-shadow 0.01s ease-in-out;
     }
 
-    & img {
+    img {
       @media (prefers-reduced-motion: no-preference) {
         animation: ${float} infinite 3s ease-in-out;
       }

@@ -42,7 +42,7 @@ const TypeMoves = ({ moves }: TypeMovesProps): JSX.Element => (
               <TableRow key={`type-${move.name}-${i}`}>
                 <NameTD>{removeDash(move.name)}</NameTD>
                 <td>
-                  <TypeBadge flexmargin="0" $iconOnly typename={move.type.name} />
+                  <TypeBadge flexmargin="0" $iconOnly $typename={move.type.name} />
                 </td>
                 <td>{move.damage_class ? removeDash(move.damage_class.name) : '-'}</td>
                 <td>{move.power || '-'}</td>

@@ -39,7 +39,7 @@ const TypeRelations = ({ relations, ...rest }: TypeRelationsProps): JSX.Element 
                 : relations[relation].map((type, i) => (
                     <TypeBadge
                       key={`${type.name}-${relation}-${i}`}
-                      typename={type.name}
+                      $typename={type.name}
                       $iconOnly
                     />
                   ))}

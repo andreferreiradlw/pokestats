@@ -1,7 +1,6 @@
 import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
 // helpers
-import dynamic from 'next/dynamic';
 import { removeDash } from '@/helpers';
 // types
 import type { Pokemon, PokemonType } from '@/types';
@@ -19,8 +18,6 @@ import {
 // components
 import Box from '@/components/Box';
 import TypeIcon from '@/components/TypeIcon';
-// icons
-const Fire = dynamic(() => import('public/static/typeIcons/fire.svg'));
 
 export interface AutocompleteProps extends BoxProps {
   filterList: (PokemonType | Pokemon)[];
@@ -124,7 +121,7 @@ const Autocomplete = ({
       {...rest}
     >
       <label htmlFor="autocomplete" id="autocomplete_label" aria-hidden="true">
-        Search Pokemon or Type Name
+        Search Pokestats
       </label>
       <Input
         type="text"
@@ -158,7 +155,6 @@ const Autocomplete = ({
                 )}
                 <Option>{removeDash(item.name)}</Option>
               </Box>
-
               {item.assetType === 'pokemon' && <PokeID>{`#${item.id}`}</PokeID>}
             </OptionWrapper>
           ))}

@@ -18,7 +18,7 @@ const TypeIcon = ({ typeName, otherNames, ...rest }: TypeIconProps): JSX.Element
   return (
     <Box relative minheight={{ xxs: '250px', lg: '350px' }} {...rest}>
       <TypeBadge
-        typename={typeName}
+        $typename={typeName}
         key={`type-icon-${typeName}`}
         $iconOnly
         $fill

@@ -62,7 +62,7 @@ const Multipliers = ({ pokemonTypes, ...rest }: MultipliersProps): JSX.Element =
                 {!currMultipliers[relation].length
                   ? 'None'
                   : currMultipliers[relation].map((type: string, i: number) => (
-                      <TypeBadge key={`${type}-${relation}-${i}`} typename={type} $iconOnly />
+                      <TypeBadge key={`${type}-${relation}-${i}`} $typename={type} $iconOnly />
                     ))}
               </TypesCell>
             </tr>

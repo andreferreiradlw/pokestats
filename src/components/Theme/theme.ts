@@ -24,19 +24,19 @@ const theme = {
     mercury: '#e6e6e6',
     types: {
       bug: '#A6B91A',
-      dark: '#705746',
-      dragon: '#6F35FC',
+      dark: '#705746', // light
+      dragon: '#6F35FC', // light
       electric: '#F7D02C',
       fairy: '#D685AD',
-      fighting: '#C22E28',
+      fighting: '#C22E28', // light
       fire: '#EE8130',
       flying: '#A98FF3',
-      ghost: '#735797',
+      ghost: '#735797', // light
       grass: '#7AC74C',
       ground: '#E2BF65',
       ice: '#96D9D6',
       normal: '#A8A77A',
-      poison: '#A33EA1',
+      poison: '#A33EA1', // light
       psychic: '#F95587',
       rock: '#B6A136',
       steel: '#B7B7CE',

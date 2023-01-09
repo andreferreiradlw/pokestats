@@ -13,25 +13,28 @@ export interface TypeBadgeProps {
   $float?: boolean;
   $iconWidth?: string;
   $iconHeight?: string;
-  typename: Type['name'];
+  $typename: Type['name'];
   hideIcon?: boolean;
   flexmargin?: string;
   $fill?: boolean;
 }
 
-const TypeBadge = ({ typename, hideIcon, $iconOnly, ...rest }: TypeBadgeProps): JSX.Element => {
+const TypeBadge = ({ $typename, hideIcon, $iconOnly, ...rest }: TypeBadgeProps): JSX.Element => {
+  if (!$typename) return null;
+
   return (
-    <Link href={`/type/${typename}`}>
+    <Link href={`/type/${$typename}`}>
       <Badge
-        typename={typename}
+        $typename={$typename}
         $iconOnly={$iconOnly}
         whileHover="hover"
         whileTap="tap"
         variants={hoverVariant}
+        title={$iconOnly && capitalize($typename)}
         {...rest}
       >
-        {!hideIcon && typename && <TypeIcon type={typename} />}
-        {!$iconOnly && typename && <span>{capitalize(typename)}</span>}
+        {!hideIcon && <TypeIcon type={$typename} />}
+        {!$iconOnly && <span>{capitalize($typename)}</span>}
       </Badge>
     </Link>
   );

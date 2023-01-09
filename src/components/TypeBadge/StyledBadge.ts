@@ -5,18 +5,22 @@ import type { TypeBadgeProps } from './index';
 // styles
 import { float as floatAnim } from '@/components/BaseStyles';
 
+const isDarkBackground = (type: string): boolean =>
+  !!type.match(/^(dark|dragon|fighting|ghost|poison)$/);
+
 const Badge = styled(motion.div)<TypeBadgeProps>`
   align-items: center;
-  background-color: ${({ theme, typename, $fill }) => !$fill && theme.colors.types[typename]};
+  background-color: ${({ theme, $typename, $fill }) => !$fill && theme.colors.types[$typename]};
   border-radius: 4px;
-  color: ${({ theme }) => theme.colors.white};
+  color: ${({ theme, $typename }) =>
+    isDarkBackground($typename) ? theme.colors.white : theme.colors.black};
   display: flex;
   flex-direction: row;
   font-family: 'Quicksand', sans-serif;
-  font-size: 1rem;
+  font-size: 1em;
   font-weight: 600;
+  gap: 0.5em;
   justify-content: center;
-  text-shadow: -0.5px -0.5px 0 #000, 0.5px -0.5px 0 #000, -0.5px 0.5px 0 #000, 0.5px 0.5px 0 #000;
   width: auto;
 
   ${({ $iconOnly, flexmargin }) =>
@@ -24,16 +28,16 @@ const Badge = styled(motion.div)<TypeBadgeProps>`
       ? css`
           display: inline-flex;
           ${flexmargin && `margin: ${flexmargin};`}
-          padding: 0.3rem;
+          padding: 0.3em;
         `
       : css`
           ${flexmargin && `margin: ${flexmargin};`}
-          padding: 0.5rem;
+          padding: 0.5em;
         `}
 
   ${({ theme }) => css`
     @media ${theme.device.lg} {
-      font-size: 1.2rem;
+      font-size: 1.2em;
     }
   `}
 
@@ -50,7 +54,6 @@ const Badge = styled(motion.div)<TypeBadgeProps>`
       !$iconOnly
         ? css`
             height: ${$iconHeight || '25px'};
-            margin-right: 1rem;
             width: ${$iconWidth || '25px'};
           `
         : css`
@@ -59,10 +62,14 @@ const Badge = styled(motion.div)<TypeBadgeProps>`
           `}
 
     & > path {
-      fill: ${({ theme, typename, $fill }) =>
-        $fill ? theme.colors.types[typename] : theme.colors.white};
-      stroke: black;
-      stroke-width: 5;
+      ${({ theme, $typename, $fill }) => css`
+        fill: ${$fill
+          ? theme.colors.types[$typename]
+          : isDarkBackground($typename)
+          ? theme.colors.white
+          : theme.colors.black};
+        stroke: ${isDarkBackground($typename) ? theme.colors.black : theme.colors.white};
+      `};
     }
   }
 `;

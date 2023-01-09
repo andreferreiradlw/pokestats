@@ -211,7 +211,7 @@ const PokemonMoves = ({ pokemon, ...rest }: PokemonMovesProps): JSX.Element => {
                     {learnMethod === 'tutor' && <td>-</td>}
                     <NameTD>{removeDash(move.name)}</NameTD>
                     <td>
-                      <TypeBadge flexmargin="0" $iconOnly typename={move.type.name} />
+                      <TypeBadge flexmargin="0" $iconOnly $typename={move.type.name} />
                     </td>
                     <td>{capitalize(move.damage_class.name)}</td>
                     <td>{move.power || '-'}</td>

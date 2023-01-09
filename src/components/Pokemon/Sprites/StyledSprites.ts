@@ -1,29 +1,17 @@
 import styled, { css } from 'styled-components';
 // components
-import Box from '../../Box';
-import Image from '../../Image';
+import Box from '@/components/Box';
+import Image from '@/components/Image';
+import { SectionSubTitle } from '@/components/BaseStyles';
 
 const SpriteContainer = styled(Box)`
-  margin: 0 1.5rem;
-
-  & p {
-    margin-top: 1rem;
-    text-align: center;
-  }
+  text-align: center;
 `;
 
-const Sprite = styled(Image)<{ $dreamworld?: boolean; $animated?: boolean }>`
-  ${({ $dreamworld }) =>
-    $dreamworld &&
-    css`
-      margin-bottom: 1rem;
-    `}
+const Sprite = styled(Image)``;
 
-  ${({ $animated }) =>
-    $animated &&
-    css`
-      margin: 1rem 0;
-    `}
+const SpriteSubtitle = styled(SectionSubTitle)`
+  text-align: center;
 `;
 
 const NoSprites = styled(Box)`
@@ -32,4 +20,4 @@ const NoSprites = styled(Box)`
   text-align: center;
 `;
 
-export { SpriteContainer, Sprite, NoSprites };
+export { SpriteContainer, Sprite, SpriteSubtitle, NoSprites };

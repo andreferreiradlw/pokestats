@@ -33,7 +33,7 @@ const PokemonPage = ({
   const { setGameVersion } = useContext(GameVersionContext);
   // data
   const { id, name, stats, types, sprites, game_indices } = pokemon;
-  const { names, generation } = species;
+  const { names, generation, varieties } = species;
   // lazy load moves
   const movesRef = useRef<HTMLDivElement | null>(null);
   const entry = useIntersectionObserver(movesRef, { freezeOnceVisible: true });
@@ -116,7 +116,7 @@ const PokemonPage = ({
         </Box>
         {/** SPRITES */}
         <Box flexalign="flex-start" flexjustify="flex-start">
-          <Sprites pokemonSprites={sprites} pokemonId={id} screensizes={12} />
+          <Sprites pokemonSprites={sprites} pokemonId={id} forms={varieties} screensizes={12} />
         </Box>
         {/** NAVIGATION */}
         <Box flexalign="flex-start" flexjustify="flex-start">

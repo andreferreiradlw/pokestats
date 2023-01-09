@@ -1,5 +1,6 @@
+import { useMemo } from 'react';
 // types
-import type { Pokemon, PokemonSprites } from 'pokenode-ts';
+import type { Pokemon, PokemonSpecies, PokemonSprites } from 'pokenode-ts';
 // helpers
 import { removeUnderscore } from '@/helpers/typography';
 // components
@@ -11,51 +12,73 @@ import { SpriteContainer, Sprite, SpriteSubtitle, NoSprites } from './StyledSpri
 interface SpritesProps extends BoxProps {
   pokemonSprites: PokemonSprites;
   pokemonId: Pokemon['id'];
+  forms: PokemonSpecies['varieties'];
 }
 
-const Sprites = ({ pokemonSprites, pokemonId, ...rest }: SpritesProps): JSX.Element => {
+const Sprites = ({ pokemonSprites, pokemonId, forms, ...rest }: SpritesProps): JSX.Element => {
   // sprites
   const animatedSprites = pokemonSprites.versions['generation-v']['black-white'].animated;
   const dreamWorldSprites = pokemonSprites.other.dream_world;
   const officalArtworkSprites = pokemonSprites.other['official-artwork'];
+
+  const alternativeForms = useMemo(
+    () =>
+      forms
+        .filter(form => !form.is_default)
+        ?.map(form => {
+          const uppercased = form.pokemon.name.replace(/\-[a-z]/g, match => match.toUpperCase());
+          let arr = uppercased.split('-');
+          arr.shift();
+
+          return {
+            name: arr.join('-'),
+          };
+        }),
+    [forms],
+  );
+
+  console.log('alternativeForms', alternativeForms);
 
   return (
     <Box flexalign={{ xxs: 'center', lg: 'flex-start' }} flexgap="2em" {...rest}>
       <SectionTitle>Sprites</SectionTitle>
       {pokemonSprites ? (
         <>
-          <Box
-            flexdirection="row"
-            flexalign="flex-start"
-            flexjustify={{ xxs: 'center', lg: 'flex-start' }}
-            flexgap="2em"
-            flexwrap="wrap"
-          >
-            {Object.keys(pokemonSprites).map(
-              (key, i) =>
-                pokemonSprites[key] &&
-                typeof pokemonSprites[key] !== 'object' && (
-                  <SpriteContainer screensizes={1.5} key={`${key}-${i}`}>
-                    <Sprite
-                      alt={key}
-                      key={`sprite-${key}`}
-                      src={pokemonSprites[key]}
-                      width="125"
-                      pixelateImg
-                      placeholderwidth="40%"
-                    />
-                    <p>{removeUnderscore(key)}</p>
-                  </SpriteContainer>
-                ),
-            )}
+          <Box flexalign={{ xxs: 'center', lg: 'flex-start' }} flexgap="1em">
+            <SectionSubTitle>Static Sprites</SectionSubTitle>
+            <Box
+              flexdirection="row-reverse"
+              flexalign="flex-start"
+              flexjustify={{ xxs: 'center', lg: 'flex-end' }}
+              flexgap="2em"
+              flexwrap="wrap"
+            >
+              {Object.keys(pokemonSprites).map(
+                (key, i) =>
+                  pokemonSprites[key] &&
+                  typeof pokemonSprites[key] !== 'object' && (
+                    <SpriteContainer screensizes={1.5} key={`${key}-${i}`}>
+                      <Sprite
+                        alt={key}
+                        key={`sprite-${key}`}
+                        src={pokemonSprites[key]}
+                        width="140"
+                        pixelateImg
+                        placeholderwidth="40%"
+                      />
+                      <p>{removeUnderscore(key)}</p>
+                    </SpriteContainer>
+                  ),
+              )}
+            </Box>
           </Box>
           {pokemonId < 650 && (
-            <Box flexalign={{ xxs: 'center', lg: 'flex-start' }} flexgap="2em">
+            <Box flexalign={{ xxs: 'center', lg: 'flex-start' }} flexgap="1em">
               <SectionSubTitle>Animated Sprites</SectionSubTitle>
               <Box
-                flexdirection="row"
+                flexdirection="row-reverse"
                 flexalign="flex-start"
-                flexjustify={{ xxs: 'center', lg: 'flex-start' }}
+                flexjustify={{ xxs: 'center', lg: 'flex-end' }}
                 flexgap="2em"
                 flexwrap="wrap"
               >
@@ -68,7 +91,7 @@ const Sprites = ({ pokemonSprites, pokemonId, ...rest }: SpritesProps): JSX.Elem
                           alt={key}
                           key={`animated-sprite-${key}`}
                           src={animatedSprites[key]}
-                          width="100"
+                          height="100"
                           pixelateImg
                           placeholderwidth="40%"
                         />
@@ -79,38 +102,18 @@ const Sprites = ({ pokemonSprites, pokemonId, ...rest }: SpritesProps): JSX.Elem
               </Box>
             </Box>
           )}
+          <SectionTitle>Varieties</SectionTitle>
           <Box
-            flexdirection={{ xxs: 'column', md: 'row' }}
-            flexalign={{ xxs: 'center', md: 'flex-start' }}
+            flexdirection={{ xxs: 'column', sm: 'row' }}
+            flexalign={{ xxs: 'center', md: 'stretch' }}
             flexjustify={{ xxs: 'center', md: 'space-around' }}
-            flexgap="1em"
+            flexgap="3em"
+            flexwrap="wrap"
           >
-            {(dreamWorldSprites.front_default || dreamWorldSprites.front_female) && (
-              <Box flexalign="center" screensizes={4} flexgap="2em">
-                <SpriteSubtitle>Dreamworld Artwork</SpriteSubtitle>
-                <Box flexdirection="row" flexjustify="center" flexwrap="wrap">
-                  {Object.keys(dreamWorldSprites).map(
-                    (key, i) =>
-                      dreamWorldSprites[key] && (
-                        <SpriteContainer key={`${key}-${i}`} screensizes={6} flexgap="1em">
-                          <Sprite
-                            alt={`DreamWorld Design ${removeUnderscore(key)}`}
-                            key={`dreamworld-sprite-${key}`}
-                            src={dreamWorldSprites[key]}
-                            height="180"
-                            placeholderwidth="30%"
-                          />
-                          <p>{removeUnderscore(key)}</p>
-                        </SpriteContainer>
-                      ),
-                  )}
-                </Box>
-              </Box>
-            )}
             {officalArtworkSprites.front_default && (
-              <Box flexalign="center" screensizes={4} flexgap="2em">
-                <SpriteSubtitle>Official Artwork</SpriteSubtitle>
-                <SpriteContainer width={{ xxs: '100%', md: 'auto' }} flexgap="1em">
+              <Box flexalign="center" flexjustify="space-between" screensizes={3} flexgap="1em">
+                <SpriteSubtitle>Official</SpriteSubtitle>
+                <SpriteContainer width={{ xxs: '100%', md: 'auto' }}>
                   <Sprite
                     alt="Official Artwork Front Default"
                     key="official-artwork"
@@ -118,10 +121,54 @@ const Sprites = ({ pokemonSprites, pokemonId, ...rest }: SpritesProps): JSX.Elem
                     height="180"
                     placeholderwidth="30%"
                   />
-                  <p>Front Default</p>
                 </SpriteContainer>
               </Box>
             )}
+            {(dreamWorldSprites.front_default || dreamWorldSprites.front_female) && (
+              <Box flexalign="center" flexjustify="space-between" screensizes={3} flexgap="1em">
+                <SpriteSubtitle>Dreamworld</SpriteSubtitle>
+                <Box flexdirection="row" flexjustify="center" flexwrap="wrap">
+                  {Object.keys(dreamWorldSprites).map(
+                    (key, i) =>
+                      dreamWorldSprites[key] && (
+                        <SpriteContainer key={`${key}-${i}`}>
+                          <Sprite
+                            alt={`DreamWorld Design ${removeUnderscore(key)}`}
+                            key={`dreamworld-sprite-${key}`}
+                            src={dreamWorldSprites[key]}
+                            height="170"
+                            placeholderwidth="30%"
+                          />
+                        </SpriteContainer>
+                      ),
+                  )}
+                </Box>
+              </Box>
+            )}
+            {!!alternativeForms?.length &&
+              alternativeForms.map(({ name }) => (
+                <Box
+                  flexalign="center"
+                  flexjustify="space-between"
+                  screensizes={3}
+                  flexgap="1em"
+                  key={`pokemon-variety-${name}`}
+                  width="auto"
+                >
+                  <SpriteSubtitle>{name.replace(/-/g, ' ')}</SpriteSubtitle>
+                  <SpriteContainer width={{ xxs: '100%', md: 'auto' }}>
+                    <Sprite
+                      alt="Official Artwork Front Default"
+                      key="official-artwork"
+                      src={`https://raw.githubusercontent.com/HybridShivam/Pokemon/master/assets/images/${pokemonId
+                        .toString()
+                        .padStart(3, '0')}-${name}.png`}
+                      height="180"
+                      placeholderwidth="30%"
+                    />
+                  </SpriteContainer>
+                </Box>
+              ))}
           </Box>
         </>
       ) : (

@@ -88,7 +88,7 @@ const PokemonDetails = ({
       <BoxWrapper
         flexdirection="column"
         flexalign={{ xxs: 'center', lg: 'flex-start' }}
-        flexgap="1em"
+        flexgap="0.5em"
         width="100%"
         initial="hidden"
         animate="show"
@@ -96,14 +96,14 @@ const PokemonDetails = ({
         key={`pokemon-details-${name}`}
         {...rest}
       >
-        <PageHeading>{removeDash(name)}</PageHeading>
-        {types?.length > 0 && (
+        {!!types?.length > 0 && (
           <TypeContainer flexdirection="row" flexjustify="flex-start" flexwrap="wrap">
             {types.map(({ type }, i) => {
               return <TypeBadge $typename={type.name} key={`${type.name}-${i}-detail-${id}`} />;
             })}
           </TypeContainer>
         )}
+        <PageHeading>{removeDash(name)}</PageHeading>
         {(is_baby || is_legendary || is_mythical) && (
           <Genera>
             {is_baby && `Baby `}

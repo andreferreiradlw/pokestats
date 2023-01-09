@@ -37,8 +37,6 @@ const Sprites = ({ pokemonSprites, pokemonId, forms, ...rest }: SpritesProps): J
     [forms],
   );
 
-  console.log('alternativeForms', alternativeForms);
-
   return (
     <Box flexalign={{ xxs: 'center', lg: 'flex-start' }} flexgap="2em" {...rest}>
       <SectionTitle>Sprites</SectionTitle>

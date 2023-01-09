@@ -18,9 +18,9 @@ export default function InfiniteScroll({
   pokemonList,
   dark,
   itemsPerPage = 35,
-  $direction = 'row',
-  $flexalign = 'flex-start',
-  $flexWrap = 'wrap',
+  flexdirection = 'row',
+  flexalign = 'flex-start',
+  flexwrap = 'wrap',
   ...rest
 }: InfiniteScrollProps): JSX.Element {
   // current page state
@@ -109,11 +109,11 @@ export default function InfiniteScroll({
   return (
     <>
       <Box
-        $direction={$direction}
-        $flexalign={$flexalign}
-        $flexWrap={$flexWrap}
-        $flexjustify="space-between"
-        $gap="1em"
+        flexdirection={flexdirection}
+        flexalign={flexalign}
+        flexwrap={flexwrap}
+        flexjustify="center"
+        flexgap="1em"
         {...rest}
       >
         {showList?.map(currPokemon => (
@@ -128,7 +128,7 @@ export default function InfiniteScroll({
         ))}
       </Box>
       {showList.length > 0 && pokemonList.length !== showList?.length && (
-        <Loading $height="100px" $iconWidth="5%" $padding="1rem 0" ref={setNode} />
+        <Loading flexheight="100px" $iconWidth="5%" flexpadding="1rem 0" ref={setNode} />
       )}
     </>
   );

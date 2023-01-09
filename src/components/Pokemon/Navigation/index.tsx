@@ -30,9 +30,9 @@ const Navigation = ({ allPokemon, pokemonId, ...rest }: NavigationProps): JSX.El
 
   return (
     <Box
-      $direction={{ xxs: 'column', sm: 'row' }}
-      $flexjustify={{ xxs: 'flex-start', sm: 'center' }}
-      $gap="1em"
+      flexdirection={{ xxs: 'column', sm: 'row' }}
+      flexjustify={{ xxs: 'flex-start', sm: 'center' }}
+      flexgap="1em"
       {...rest}
     >
       {pokemonId !== 1 && (

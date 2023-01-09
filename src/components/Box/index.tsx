@@ -7,26 +7,26 @@ import { useForwardedRef } from '@/helpers';
 import BoxWrapper from './StyledBox';
 
 export interface BoxProps extends HTMLMotionProps<'div'> {
-  $flexalign?: CSSProperties['alignItems'] | Record<string, CSSProperties['alignItems']>;
-  $alignSelf?: CSSProperties['alignSelf'] | Record<string, CSSProperties['alignSelf']>;
-  $background?: CSSProperties['background'] | Record<string, CSSProperties['background']>;
-  $borderRadius?: CSSProperties['borderRadius'] | Record<string, CSSProperties['borderRadius']>;
-  $constrained?: boolean;
+  flexalign?: CSSProperties['alignItems'] | Record<string, CSSProperties['alignItems']>;
+  flexalignself?: CSSProperties['alignSelf'] | Record<string, CSSProperties['alignSelf']>;
+  backgroundcolor?: CSSProperties['background'] | Record<string, CSSProperties['background']>;
+  borderradius?: CSSProperties['borderRadius'] | Record<string, CSSProperties['borderRadius']>;
+  constrained?: boolean;
   $debug?: boolean;
-  $direction?: CSSProperties['flexDirection'] | Record<string, CSSProperties['flexDirection']>;
-  $flexGrow?: boolean;
-  $flexWrap?: CSSProperties['flexWrap'] | Record<string, CSSProperties['flexWrap']>;
-  $gap?: CSSProperties['gap'] | Record<string, CSSProperties['gap']>;
-  $height?: CSSProperties['height'] | Record<string, CSSProperties['height']>;
+  flexdirection?: CSSProperties['flexDirection'] | Record<string, CSSProperties['flexDirection']>;
+  flexgrow?: boolean;
+  flexwrap?: CSSProperties['flexWrap'] | Record<string, CSSProperties['flexWrap']>;
+  flexgap?: CSSProperties['gap'] | Record<string, CSSProperties['gap']>;
+  flexheight?: CSSProperties['height'] | Record<string, CSSProperties['height']>;
   $hide?: boolean;
-  $flexjustify?: CSSProperties['justifyContent'] | Record<string, CSSProperties['justifyContent']>;
-  $margin?: CSSProperties['margin'] | Record<string, CSSProperties['margin']>;
-  $minHeight?: CSSProperties['minHeight'] | Record<string, CSSProperties['minHeight']>;
-  $padding?: CSSProperties['padding'] | Record<string, CSSProperties['padding']>;
-  $relative?: boolean;
-  $sizes?: number | Record<string, number>;
-  $width?: CSSProperties['width'] | Record<string, CSSProperties['width']>;
-  $withGutter?: boolean;
+  flexjustify?: CSSProperties['justifyContent'] | Record<string, CSSProperties['justifyContent']>;
+  flexmargin?: CSSProperties['margin'] | Record<string, CSSProperties['margin']>;
+  minheight?: CSSProperties['minHeight'] | Record<string, CSSProperties['minHeight']>;
+  flexpadding?: CSSProperties['padding'] | Record<string, CSSProperties['padding']>;
+  relative?: boolean;
+  screensizes?: number | Record<string, number>;
+  width?: CSSProperties['width'] | Record<string, CSSProperties['width']>;
+  flexgutter?: boolean;
   children?: React.ReactNode;
 }
 
@@ -39,11 +39,11 @@ const Box = forwardRef((props: BoxProps, ref): JSX.Element => {
 Box.displayName = 'Box';
 
 Box.defaultProps = {
-  $flexalign: 'center',
-  $direction: 'column',
-  $flexWrap: 'nowrap',
-  $flexjustify: 'center',
-  $width: '100%',
+  flexalign: 'center',
+  flexdirection: 'column',
+  flexwrap: 'nowrap',
+  flexjustify: 'center',
+  width: '100%',
 };
 
 export default Box;

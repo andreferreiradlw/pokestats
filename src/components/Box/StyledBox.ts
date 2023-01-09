@@ -19,78 +19,78 @@ const gutterStyle = () => css`
 const BoxWrapper = styled(motion.div)<BoxProps>`
   /** dynamic styles */
   ${({
-    $flexalign,
-    $alignSelf,
-    $background,
-    $borderRadius,
-    $direction,
-    $flexWrap,
-    $gap,
-    $height,
     $hide,
-    $flexjustify,
-    $margin,
-    $minHeight,
-    $padding,
-    $width,
+    backgroundcolor,
+    borderradius,
+    flexalign,
+    flexalignself,
+    flexdirection,
+    flexgap,
+    flexheight,
+    flexjustify,
+    flexmargin,
+    flexpadding,
+    flexwrap,
+    minheight,
+    width,
   }) => css`
     // flexbox styles
     display: ${$hide ? 'none' : 'flex'};
-    ${$flexalign && responsiveProps('align-items', $flexalign)}
-    ${$alignSelf && responsiveProps('align-self', $alignSelf)}
-    ${$direction && responsiveProps('flex-direction', $direction)}
-    ${$flexWrap && responsiveProps('flex-wrap', $flexWrap)}
-    ${$gap && responsiveProps('gap', $gap)}
-    ${$flexjustify && responsiveProps('justify-content', $flexjustify)}
+    ${flexalign && responsiveProps('align-items', flexalign)}
+    ${flexalignself && responsiveProps('align-self', flexalignself)}
+    ${flexdirection && responsiveProps('flex-direction', flexdirection)}
+    ${flexwrap && responsiveProps('flex-wrap', flexwrap)}
+    ${flexgap && responsiveProps('gap', flexgap)}
+    ${flexjustify && responsiveProps('justify-content', flexjustify)}
     // spacing
-    ${$margin && responsiveProps('margin', $margin)}
-    ${$padding && responsiveProps('padding', $padding)}
+    ${flexmargin && responsiveProps('margin', flexmargin)}
+    ${flexpadding && responsiveProps('padding', flexpadding)}
     // sizing
-    ${$height && responsiveProps('height', $height)}
-    ${$minHeight && responsiveProps('min-height', $minHeight)}
-    ${$width && responsiveProps('width', $width)}
+    ${flexheight && responsiveProps('height', flexheight)}
+    ${minheight && responsiveProps('min-height', minheight)}
+    ${width && responsiveProps('width', width)}
     // others
-    ${$background && responsiveProps('background', $background)}
-    ${$borderRadius && responsiveProps('border-radius', $borderRadius)}
+    ${backgroundcolor && responsiveProps('background', backgroundcolor)}
+    ${borderradius && responsiveProps('border-radius', borderradius)}
   `}
 
   /** column-based flex size */
-  ${({ $constrained, $sizes }) =>
-    $constrained
+  ${({ constrained, screensizes }) =>
+    constrained
       ? css`
           // flex-basis: 100%;
         `
-      : $sizes
-      ? flexStyle($sizes)
+      : screensizes
+      ? flexStyle(screensizes)
       : css`
           flex-basis: auto;
         `}
   
-  ${({ $constrained, $sizes, $flexGrow }) =>
-    !$constrained &&
-    !$sizes &&
-    $flexGrow &&
+  ${({ constrained, screensizes, flexgrow }) =>
+    !constrained &&
+    !screensizes &&
+    flexgrow &&
     css`
       flex-grow: 1;
     `}
   
   /** constrained max-width */
-  ${({ $constrained, $flexGrow }) =>
-    $constrained &&
+  ${({ constrained, flexgrow }) =>
+    constrained &&
     css`
-      ${$flexGrow && 'flex-grow: 1;'}
+      ${flexgrow && 'flex-grow: 1;'}
       max-width: ${boxConfig.constrained};
     `};
 
   /** Position */
-  ${({ $relative }) =>
-    $relative &&
+  ${({ relative }) =>
+    relative &&
     css`
       position: relative;
     `}
 
   /** gutter */
-  ${({ $padding, $withGutter }) => !$padding && $withGutter && gutterStyle()}
+  ${({ flexpadding, flexgutter }) => !flexpadding && flexgutter && gutterStyle()}
 
   /** debug */
   ${({ $debug }) => $debug && debugStyle()}

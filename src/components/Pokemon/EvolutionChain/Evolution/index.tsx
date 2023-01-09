@@ -66,9 +66,9 @@ const Evolution = ({
     currSpecies &&
     imgSrc && (
       <BoxWrapper
-        $direction={{ xxs: 'column', lg: 'row' }}
-        $flexalign="center"
-        $width={{ xxs: 'auto', lg: '100%' }}
+        flexdirection={{ xxs: 'column', lg: 'row' }}
+        flexalign="center"
+        width={{ xxs: 'auto', lg: '100%' }}
         initial="hidden"
         animate="show"
         variants={fadeInUpVariant}
@@ -78,12 +78,12 @@ const Evolution = ({
         {/** Arrow with evolution details */}
         {!noArrow && (
           <BoxWrapper
-            $width="auto"
-            $flexGrow
-            $direction="column"
-            $flexWrap="nowrap"
-            $flexjustify="center"
-            $flexalign="center"
+            width="auto"
+            flexgrow
+            flexdirection="column"
+            flexwrap="nowrap"
+            flexjustify="center"
+            flexalign="center"
           >
             {evolutionDetails.map((currDetails, i) => (
               <EvolutionDetails key={`evo-details-${i}`} details={currDetails} />

@@ -86,10 +86,10 @@ const PokemonDetails = ({
   return (
     <AnimatePresence mode="wait">
       <BoxWrapper
-        $direction="column"
-        $flexalign={{ xxs: 'center', lg: 'flex-start' }}
-        $gap="1em"
-        $width="100%"
+        flexdirection="column"
+        flexalign={{ xxs: 'center', lg: 'flex-start' }}
+        flexgap="1em"
+        width="100%"
         initial="hidden"
         animate="show"
         variants={fadeInUpVariant}
@@ -98,16 +98,11 @@ const PokemonDetails = ({
       >
         <PageHeading>{removeDash(name)}</PageHeading>
         {types?.length > 0 && (
-          <Box
-            className={TypeContainer}
-            $direction="row"
-            $flexjustify="flex-start"
-            $flexWrap="wrap"
-          >
+          <TypeContainer flexdirection="row" flexjustify="flex-start" flexwrap="wrap">
             {types.map(({ type }, i) => {
               return <TypeBadge typename={type.name} key={`${type.name}-${i}-detail-${id}`} />;
             })}
-          </Box>
+          </TypeContainer>
         )}
         {(is_baby || is_legendary || is_mythical) && (
           <Genera>

@@ -24,22 +24,22 @@ const HeaderComponent = ({
   const { gameVersion, setGameVersion } = useContext(GameVersionContext);
 
   return (
-    <Box className={HeaderContainer} {...rest}>
+    <HeaderContainer {...rest}>
       <Box
-        $constrained
-        $withGutter
-        $direction={{ xxs: 'column', md: 'row' }}
-        $flexjustify="space-between"
-        $flexalign={{ xxs: 'center', md: 'flex-start' }}
-        $margin="auto"
+        constrained
+        flexgutter
+        flexdirection={{ xxs: 'column', md: 'row' }}
+        flexjustify="space-between"
+        flexalign={{ xxs: 'center', md: 'flex-start' }}
+        flexmargin="auto"
       >
-        <Box $width="auto">
+        <Box width="auto">
           <Link href="/">
             <Heading>PokeStats</Heading>
           </Link>
           {/** Select */}
           {pokemonGen && (
-            <SelectContainer $direction="row" $flexjustify="flex-start" $gap="1em">
+            <SelectContainer flexdirection="row" flexjustify="flex-start" flexgap="1em">
               <label id="header_generation" htmlFor="header_gen_select">
                 Game Version:
               </label>
@@ -63,13 +63,13 @@ const HeaderComponent = ({
         </Box>
         <Autocomplete
           filterList={autocompleteList}
-          $width="350px"
-          $flexjustify="flex-end"
-          $flexalign="flex-start"
-          $margin="none"
+          width="350px"
+          flexjustify="flex-end"
+          flexalign="flex-start"
+          flexmargin="none"
         />
       </Box>
-    </Box>
+    </HeaderContainer>
   );
 };
 

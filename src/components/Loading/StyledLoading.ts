@@ -18,11 +18,11 @@ const LoadingContainer = styled(BoxWrapper)`
   width: 100%;
   z-index: 2;
 
-  ${({ $height }) =>
-    $height
+  ${({ flexheight }) =>
+    flexheight
       ? css`
-          height: ${$height};
-          max-height: ${$height};
+          height: ${flexheight};
+          max-height: ${flexheight};
         `
       : css`
           height: auto;

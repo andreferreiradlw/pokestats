@@ -18,12 +18,12 @@ export interface LoadingProps extends BoxProps {
 const Loading = forwardRef(
   (
     {
-      $height,
+      flexheight,
       $iconWidth,
       noIcon,
       text,
-      $flexjustify = 'center',
-      $flexalign = 'center',
+      flexjustify = 'center',
+      flexalign = 'center',
       passKey,
       ...rest
     }: LoadingProps,
@@ -32,9 +32,9 @@ const Loading = forwardRef(
     return (
       <LoadingContainer
         ref={ref}
-        $flexjustify={$flexjustify}
-        $flexalign={$flexalign}
-        $height={$height}
+        flexjustify={flexjustify}
+        flexalign={flexalign}
+        flexheight={flexheight}
         initial="initial"
         animate="animate"
         exit="exit"
@@ -44,8 +44,8 @@ const Loading = forwardRef(
       >
         {!noIcon && (
           <BoxWrapper
-            $width="100%"
-            $flexjustify="center"
+            width="100%"
+            flexjustify="center"
             variants={loadingChild}
             key={`icon-${passKey}`}
           >

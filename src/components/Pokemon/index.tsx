@@ -52,8 +52,8 @@ const PokemonPage = ({
   return (
     <AnimatePresence mode="wait">
       <MainContainer
-        $constrained
-        $withGutter
+        constrained
+        flexgutter
         initial="hidden"
         animate="visible"
         exit="fade"
@@ -61,20 +61,20 @@ const PokemonPage = ({
         key={`pokemon-${name}`}
       >
         <Box
-          $direction={{ xxs: 'column-reverse', lg: 'row' }}
-          $flexalign="center"
-          $flexjustify="flex-start"
-          $gap="2em"
+          flexdirection={{ xxs: 'column-reverse', lg: 'row' }}
+          flexalign="center"
+          flexjustify="flex-start"
+          flexgap="2em"
         >
           <Details
-            $sizes={{ xxs: 12, lg: 5 }}
+            screensizes={{ xxs: 12, lg: 5 }}
             key={`pokemon-details-${name}`}
             pokemon={pokemon}
             abilities={abilities}
             species={species}
           />
           <FeaturedImage
-            $sizes={{ xxs: 12, lg: 7 }}
+            screensizes={{ xxs: 12, lg: 7 }}
             specieNames={names}
             pokemonName={name}
             pokemonId={id}
@@ -82,19 +82,19 @@ const PokemonPage = ({
         </Box>
         {/** BREEDING, TRAINING, MULTIPLIERS */}
         <Box
-          $direction={{ xxs: 'column', lg: 'row' }}
-          $flexalign="flex-start"
-          $flexjustify="flex-start"
-          $gap="2em"
+          flexdirection={{ xxs: 'column', lg: 'row' }}
+          flexalign="flex-start"
+          flexjustify="flex-start"
+          flexgap="2em"
         >
           <Breeding species={species} evolutionChain={evolution} />
           <Training pokemon={pokemon} species={species} />
           <Multipliers pokemonTypes={types} />
         </Box>
         {/** EVOLUTION CHAIN */}
-        <Box $flexalign="flex-start" $flexjustify="flex-start">
+        <Box flexalign="flex-start" flexjustify="flex-start">
           <EvolutionChain
-            $sizes={12}
+            screensizes={12}
             key={`pokemon-evolution-${name}`}
             pokemonName={name}
             evolutionChain={evolution}
@@ -102,25 +102,25 @@ const PokemonPage = ({
         </Box>
         {/** BASESTATS, FORMS */}
         <Box
-          $direction={{ xxs: 'column', lg: 'row' }}
-          $flexalign="flex-start"
-          $flexjustify="flex-start"
-          $gap="2em"
+          flexdirection={{ xxs: 'column', lg: 'row' }}
+          flexalign="flex-start"
+          flexjustify="flex-start"
+          flexgap="2em"
         >
-          <BaseStats stats={stats} $sizes={{ xxs: 12, lg: 8 }} />
-          <PokemonForms pokemonId={id} species={species} $sizes={{ xxs: 12, lg: 4 }} />
+          <BaseStats stats={stats} screensizes={{ xxs: 12, lg: 8 }} />
+          <PokemonForms pokemonId={id} species={species} screensizes={{ xxs: 12, lg: 4 }} />
         </Box>
         {/** MOVES */}
-        <Box $flexalign="flex-start" $flexjustify="flex-start" ref={movesRef}>
-          {isMovesVisible && <Moves pokemon={pokemon} $sizes={12} />}
+        <Box flexalign="flex-start" flexjustify="flex-start" ref={movesRef}>
+          {isMovesVisible && <Moves pokemon={pokemon} screensizes={12} />}
         </Box>
         {/** SPRITES */}
-        <Box $flexalign="flex-start" $flexjustify="flex-start">
-          <Sprites pokemonSprites={sprites} pokemonId={id} $sizes={12} />
+        <Box flexalign="flex-start" flexjustify="flex-start">
+          <Sprites pokemonSprites={sprites} pokemonId={id} screensizes={12} />
         </Box>
         {/** NAVIGATION */}
-        <Box $flexalign="flex-start" $flexjustify="flex-start">
-          <Navigation allPokemon={allPokemon} pokemonId={id} $sizes={12} />
+        <Box flexalign="flex-start" flexjustify="flex-start">
+          <Navigation allPokemon={allPokemon} pokemonId={id} screensizes={12} />
         </Box>
       </MainContainer>
     </AnimatePresence>

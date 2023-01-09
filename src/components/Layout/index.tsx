@@ -33,7 +33,7 @@ const Layout = ({ withHeader, withMain, children, ...rest }: LayoutProps): JSX.E
 
   return (
     <GameVersionContext.Provider value={VersionContextValue}>
-      <LayoutContainer $direction="column" $width="100%">
+      <LayoutContainer flexdirection="column" width="100%">
         {withHeader && (
           <Header
             autocompleteList={withHeader.autocompleteList}

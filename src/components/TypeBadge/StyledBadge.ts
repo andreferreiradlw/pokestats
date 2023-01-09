@@ -19,15 +19,15 @@ const Badge = styled(motion.div)<TypeBadgeProps>`
   text-shadow: -0.5px -0.5px 0 #000, 0.5px -0.5px 0 #000, -0.5px 0.5px 0 #000, 0.5px 0.5px 0 #000;
   width: auto;
 
-  ${({ $iconOnly, $margin }) =>
+  ${({ $iconOnly, flexmargin }) =>
     $iconOnly
       ? css`
           display: inline-flex;
-          ${$margin && `margin: ${$margin};`}
+          ${flexmargin && `margin: ${flexmargin};`}
           padding: 0.3rem;
         `
       : css`
-          ${$margin && `margin: ${$margin};`}
+          ${flexmargin && `margin: ${flexmargin};`}
           padding: 0.5rem;
         `}
 

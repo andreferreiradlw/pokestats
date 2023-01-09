@@ -70,7 +70,7 @@ const ImageComponent = ({
 
   return (
     <ConditionalWrapper key={alt} isLazy={lazy} offset={offset}>
-      <ImageWrapper $width={width} $height={height} {...rest}>
+      <ImageWrapper width={width} flexheight={height} {...rest}>
         <AnimatePresence mode="wait">
           {!imgSrc && (
             <Placeholder

@@ -43,12 +43,12 @@ const Multipliers = ({ pokemonTypes, ...rest }: MultipliersProps): JSX.Element =
   }, [typeMultipliers, enabled]);
 
   return (
-    <Box $flexalign={{ xxs: 'center', lg: 'flex-start' }} $gap="1em" {...rest}>
+    <Box flexalign={{ xxs: 'center', lg: 'flex-start' }} flexgap="1em" {...rest}>
       <Box
-        $direction={{ xxs: 'column', lg: 'row' }}
-        $flexjustify="space-between"
-        $flexWrap="wrap"
-        $gap="0.5em"
+        flexdirection={{ xxs: 'column', lg: 'row' }}
+        flexjustify="space-between"
+        flexwrap="wrap"
+        flexgap="0.5em"
       >
         <SectionTitle>Multipliers</SectionTitle>
         <Switch enabled={enabled} onClick={() => setEnabled(prev => !prev)} />

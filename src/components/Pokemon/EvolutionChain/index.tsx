@@ -26,31 +26,31 @@ const EvolutionChain = ({
   const { chain, id: chainId } = evolutionChain;
 
   return (
-    <Box $flexalign={{ xxs: 'center', lg: 'flex-start' }} $gap="1em" {...rest}>
+    <Box flexalign={{ xxs: 'center', lg: 'flex-start' }} flexgap="1em" {...rest}>
       <SectionTitle>Evolution Chain</SectionTitle>
       <AnimatePresence>
         <BoxWrapper
-          $direction={{ xxs: 'column', lg: 'row' }}
-          $flexjustify="center"
-          $flexalign="center"
-          $width="100%"
-          $gap="1em"
+          flexdirection={{ xxs: 'column', lg: 'row' }}
+          flexjustify="center"
+          flexalign="center"
+          width="100%"
+          flexgap="1em"
         >
-          <Evolution noArrow species={chain.species} $width="auto" />
+          <Evolution noArrow species={chain.species} width="auto" />
           {chain.evolves_to.length > 0 && (
             <Box
-              $direction={{ xxs: 'row', lg: 'column' }}
-              $flexWrap={{ xxs: 'wrap', lg: 'nowrap' }}
-              $sizes={9.6}
-              $gap="1em"
+              flexdirection={{ xxs: 'row', lg: 'column' }}
+              flexwrap={{ xxs: 'wrap', lg: 'nowrap' }}
+              screensizes={9.6}
+              flexgap="1em"
             >
               {chain.evolves_to.map((firstEvo, i) => (
                 <Box
-                  $direction={{ xxs: 'column', lg: 'row' }}
-                  $flexalign={{ xxs: 'flex-end', lg: 'center' }}
+                  flexdirection={{ xxs: 'column', lg: 'row' }}
+                  flexalign={{ xxs: 'flex-end', lg: 'center' }}
                   key={`first-evo-box-${i}-${chainId}`}
-                  $width={{ xxs: '200px', lg: '100%' }}
-                  $gap="1em"
+                  width={{ xxs: '200px', lg: '100%' }}
+                  flexgap="1em"
                 >
                   <Evolution
                     species={firstEvo.species}
@@ -59,9 +59,9 @@ const EvolutionChain = ({
                   />
                   {firstEvo.evolves_to.length > 0 && (
                     <Box
-                      $direction={{ xxs: 'row', lg: 'column' }}
-                      $flexalign={{ xxs: 'flex-end', lg: 'center' }}
-                      $gap="1em"
+                      flexdirection={{ xxs: 'row', lg: 'column' }}
+                      flexalign={{ xxs: 'flex-end', lg: 'center' }}
+                      flexgap="1em"
                     >
                       {firstEvo.evolves_to.map((secondEvo, x) => (
                         <Evolution

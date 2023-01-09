@@ -46,9 +46,9 @@ const Homepage = ({ allPokemon, pokemonTypes }: HomepageProps): JSX.Element => {
         <Github />
       </RepoAnchor>
       <Container
-        $height="100vh"
-        $constrained
-        $withGutter
+        flexheight="100vh"
+        constrained
+        flexgutter
         initial="hidden"
         animate="show"
         variants={staggerInitialVariant}

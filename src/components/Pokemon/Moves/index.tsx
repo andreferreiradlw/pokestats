@@ -147,10 +147,10 @@ const PokemonMoves = ({ pokemon, ...rest }: PokemonMovesProps): JSX.Element => {
   }, [filteredMoves, learnMethod]);
 
   return (
-    <Box $flexalign={{ xxs: 'center', lg: 'flex-start' }} $gap="2em" {...rest}>
+    <Box flexalign={{ xxs: 'center', lg: 'flex-start' }} flexgap="2em" {...rest}>
       <SectionTitle>Move Pool</SectionTitle>
       {/** TABS */}
-      <TabContainer $direction="row" $flexjustify="space-evenly" $flexWrap="wrap">
+      <TabContainer flexdirection="row" flexjustify="space-evenly" flexwrap="wrap">
         {TabsData.map(({ title, value }) => (
           <Button
             $active={learnMethod === value}
@@ -169,7 +169,7 @@ const PokemonMoves = ({ pokemon, ...rest }: PokemonMovesProps): JSX.Element => {
       <AnimatePresence mode="wait">
         {movesLoading ? (
           <Loading
-            $height="100%"
+            flexheight="100%"
             $iconWidth={{ xxs: '20%', xs: '15%', md: '10%', lg: '5%' }}
             passKey="pokemon-moves-loading"
           />
@@ -211,7 +211,7 @@ const PokemonMoves = ({ pokemon, ...rest }: PokemonMovesProps): JSX.Element => {
                     {learnMethod === 'tutor' && <td>-</td>}
                     <NameTD>{removeDash(move.name)}</NameTD>
                     <td>
-                      <TypeBadge $margin="0" $iconOnly typename={move.type.name} />
+                      <TypeBadge flexmargin="0" $iconOnly typename={move.type.name} />
                     </td>
                     <td>{capitalize(move.damage_class.name)}</td>
                     <td>{move.power || '-'}</td>

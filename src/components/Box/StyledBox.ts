@@ -19,7 +19,7 @@ const gutterStyle = () => css`
 const BoxWrapper = styled(motion.div)<BoxProps>`
   /** dynamic styles */
   ${({
-    flexAlign,
+    $flexalign,
     $alignSelf,
     $background,
     $borderRadius,
@@ -28,7 +28,7 @@ const BoxWrapper = styled(motion.div)<BoxProps>`
     $gap,
     $height,
     $hide,
-    $justify,
+    $flexjustify,
     $margin,
     $minHeight,
     $padding,
@@ -36,12 +36,12 @@ const BoxWrapper = styled(motion.div)<BoxProps>`
   }) => css`
     // flexbox styles
     display: ${$hide ? 'none' : 'flex'};
-    ${flexAlign && responsiveProps('align-items', flexAlign)}
+    ${$flexalign && responsiveProps('align-items', $flexalign)}
     ${$alignSelf && responsiveProps('align-self', $alignSelf)}
     ${$direction && responsiveProps('flex-direction', $direction)}
     ${$flexWrap && responsiveProps('flex-wrap', $flexWrap)}
     ${$gap && responsiveProps('gap', $gap)}
-    ${$justify && responsiveProps('justify-content', $justify)}
+    ${$flexjustify && responsiveProps('justify-content', $flexjustify)}
     // spacing
     ${$margin && responsiveProps('margin', $margin)}
     ${$padding && responsiveProps('padding', $padding)}

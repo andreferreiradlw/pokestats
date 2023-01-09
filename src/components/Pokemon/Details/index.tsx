@@ -9,6 +9,7 @@ import { AnimatePresence } from 'framer-motion';
 import { capitalize, removeDash } from '@/helpers/typography';
 import { fadeInUpVariant } from '@/helpers/animations';
 // components
+import Box from '@/components/Box';
 import BoxWrapper from '@/components/Box/StyledBox';
 import TypeBadge from '@/components/TypeBadge';
 // styles
@@ -86,7 +87,7 @@ const PokemonDetails = ({
     <AnimatePresence mode="wait">
       <BoxWrapper
         $direction="column"
-        flexAlign={{ xxs: 'center', lg: 'flex-start' }}
+        $flexalign={{ xxs: 'center', lg: 'flex-start' }}
         $gap="1em"
         $width="100%"
         initial="hidden"
@@ -97,11 +98,16 @@ const PokemonDetails = ({
       >
         <PageHeading>{removeDash(name)}</PageHeading>
         {types?.length > 0 && (
-          <TypeContainer $direction="row" $justify="flex-start" $flexWrap="wrap">
+          <Box
+            className={TypeContainer}
+            $direction="row"
+            $flexjustify="flex-start"
+            $flexWrap="wrap"
+          >
             {types.map(({ type }, i) => {
               return <TypeBadge typename={type.name} key={`${type.name}-${i}-detail-${id}`} />;
             })}
-          </TypeContainer>
+          </Box>
         )}
         {(is_baby || is_legendary || is_mythical) && (
           <Genera>

@@ -16,17 +16,17 @@ const LayoutContainer = styled(BoxWrapper)`
 
 // main container
 const MainContainer = styled(motion.main)<{
-  flexAlign?: BoxProps['flexAlign'];
-  $justify?: BoxProps['$justify'];
+  $flexalign?: BoxProps['$flexalign'];
+  $flexjustify?: BoxProps['$flexjustify'];
   $constrained?: BoxProps['$constrained'];
   $withGutter?: BoxProps['$withGutter'];
 }>`
-  align-items: ${({ flexAlign }) => flexAlign || 'center'};
+  align-items: ${({ $flexalign }) => $flexalign || 'center'};
   display: flex;
   flex-direction: column;
   flex-grow: 1;
   gap: 3em;
-  justify-content: ${({ $justify }) => $justify || 'center'};
+  justify-content: ${({ $flexjustify }) => $flexjustify || 'center'};
   margin: 0 auto;
   width: 100%;
 

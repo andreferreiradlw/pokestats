@@ -30,8 +30,8 @@ const HeaderComponent = ({
         $constrained
         $withGutter
         $direction={{ xxs: 'column', md: 'row' }}
-        $justify="space-between"
-        flexAlign={{ xxs: 'center', md: 'flex-start' }}
+        $flexjustify="space-between"
+        $flexalign={{ xxs: 'center', md: 'flex-start' }}
         $margin="auto"
       >
         <div>
@@ -40,7 +40,7 @@ const HeaderComponent = ({
           </Link>
           {/** Select */}
           {pokemonGen && (
-            <SelectContainer $direction="row" $justify="flex-start">
+            <SelectContainer $direction="row" $flexjustify="flex-start">
               <label id="header_generation" htmlFor="header_gen_select">
                 Game Version:
               </label>
@@ -65,8 +65,8 @@ const HeaderComponent = ({
         <Autocomplete
           filterList={autocompleteList}
           $width="350px"
-          $justify="flex-end"
-          flexAlign="flex-start"
+          $flexjustify="flex-end"
+          $flexalign="flex-start"
           $margin="none"
         />
       </Box>

@@ -7,7 +7,7 @@ import { useForwardedRef } from '@/helpers';
 import BoxWrapper from './StyledBox';
 
 export interface BoxProps extends HTMLMotionProps<'div'> {
-  flexAlign?: CSSProperties['alignItems'] | Record<string, CSSProperties['alignItems']>;
+  $flexalign?: CSSProperties['alignItems'] | Record<string, CSSProperties['alignItems']>;
   $alignSelf?: CSSProperties['alignSelf'] | Record<string, CSSProperties['alignSelf']>;
   $background?: CSSProperties['background'] | Record<string, CSSProperties['background']>;
   $borderRadius?: CSSProperties['borderRadius'] | Record<string, CSSProperties['borderRadius']>;
@@ -19,7 +19,7 @@ export interface BoxProps extends HTMLMotionProps<'div'> {
   $gap?: CSSProperties['gap'] | Record<string, CSSProperties['gap']>;
   $height?: CSSProperties['height'] | Record<string, CSSProperties['height']>;
   $hide?: boolean;
-  $justify?: CSSProperties['justifyContent'] | Record<string, CSSProperties['justifyContent']>;
+  $flexjustify?: CSSProperties['justifyContent'] | Record<string, CSSProperties['justifyContent']>;
   $margin?: CSSProperties['margin'] | Record<string, CSSProperties['margin']>;
   $minHeight?: CSSProperties['minHeight'] | Record<string, CSSProperties['minHeight']>;
   $padding?: CSSProperties['padding'] | Record<string, CSSProperties['padding']>;
@@ -39,10 +39,10 @@ const Box = forwardRef((props: BoxProps, ref): JSX.Element => {
 Box.displayName = 'Box';
 
 Box.defaultProps = {
-  flexAlign: 'center',
+  $flexalign: 'center',
   $direction: 'column',
   $flexWrap: 'nowrap',
-  $justify: 'center',
+  $flexjustify: 'center',
   $width: '100%',
 };
 

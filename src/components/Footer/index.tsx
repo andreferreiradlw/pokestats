@@ -10,8 +10,8 @@ const Footer = (): JSX.Element => (
   <FooterContainer>
     <Box
       $direction={{ xxs: 'column', sm: 'row' }}
-      flexAlign={{ xxs: 'flex-start', sm: 'center' }}
-      $justify={{ xxs: 'center', sm: 'space-between' }}
+      $flexalign={{ xxs: 'flex-start', sm: 'center' }}
+      $flexjustify={{ xxs: 'center', sm: 'space-between' }}
       $margin="auto"
       $sizes={12}
       $constrained

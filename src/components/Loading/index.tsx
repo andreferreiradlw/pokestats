@@ -22,8 +22,8 @@ const Loading = forwardRef(
       $iconWidth,
       noIcon,
       text,
-      $justify = 'center',
-      flexAlign = 'center',
+      $flexjustify = 'center',
+      $flexalign = 'center',
       passKey,
       ...rest
     }: LoadingProps,
@@ -32,8 +32,8 @@ const Loading = forwardRef(
     return (
       <LoadingContainer
         ref={ref}
-        $justify={$justify}
-        flexAlign={flexAlign}
+        $flexjustify={$flexjustify}
+        $flexalign={$flexalign}
         $height={$height}
         initial="initial"
         animate="animate"
@@ -45,7 +45,7 @@ const Loading = forwardRef(
         {!noIcon && (
           <BoxWrapper
             $width="100%"
-            $justify="center"
+            $flexjustify="center"
             variants={loadingChild}
             key={`icon-${passKey}`}
           >

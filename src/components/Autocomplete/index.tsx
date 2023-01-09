@@ -22,7 +22,7 @@ export interface AutocompleteProps extends BoxProps {
 
 const Autocomplete = ({
   filterList,
-  flexAlign = 'stretch',
+  $flexalign = 'stretch',
   $direction = 'row',
   $margin = '0 auto',
   ...rest
@@ -111,7 +111,7 @@ const Autocomplete = ({
   };
 
   return (
-    <Container flexAlign={flexAlign} $direction={$direction} $margin={$margin} {...rest}>
+    <Container $flexalign={$flexalign} $direction={$direction} $margin={$margin} {...rest}>
       <label htmlFor="autocomplete" id="autocomplete_label" aria-hidden="true">
         Search Pokemon or Type Name
       </label>

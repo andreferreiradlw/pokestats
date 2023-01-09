@@ -147,10 +147,10 @@ const PokemonMoves = ({ pokemon, ...rest }: PokemonMovesProps): JSX.Element => {
   }, [filteredMoves, learnMethod]);
 
   return (
-    <Box flexAlign={{ xxs: 'center', lg: 'flex-start' }} $gap="2em" {...rest}>
+    <Box $flexalign={{ xxs: 'center', lg: 'flex-start' }} $gap="2em" {...rest}>
       <SectionTitle>Move Pool</SectionTitle>
       {/** TABS */}
-      <TabContainer $direction="row" $justify="space-evenly" $flexWrap="wrap">
+      <TabContainer $direction="row" $flexjustify="space-evenly" $flexWrap="wrap">
         {TabsData.map(({ title, value }) => (
           <Button
             $active={learnMethod === value}

@@ -62,8 +62,8 @@ const PokemonPage = ({
       >
         <Box
           $direction={{ xxs: 'column-reverse', lg: 'row' }}
-          flexAlign="center"
-          $justify="flex-start"
+          $flexalign="center"
+          $flexjustify="flex-start"
           $gap="2em"
         >
           <Details
@@ -83,8 +83,8 @@ const PokemonPage = ({
         {/** BREEDING, TRAINING, MULTIPLIERS */}
         <Box
           $direction={{ xxs: 'column', lg: 'row' }}
-          flexAlign="flex-start"
-          $justify="flex-start"
+          $flexalign="flex-start"
+          $flexjustify="flex-start"
           $gap="2em"
         >
           <Breeding species={species} evolutionChain={evolution} />
@@ -92,7 +92,7 @@ const PokemonPage = ({
           <Multipliers pokemonTypes={types} />
         </Box>
         {/** EVOLUTION CHAIN */}
-        <Box flexAlign="flex-start" $justify="flex-start">
+        <Box $flexalign="flex-start" $flexjustify="flex-start">
           <EvolutionChain
             $sizes={12}
             key={`pokemon-evolution-${name}`}
@@ -103,23 +103,23 @@ const PokemonPage = ({
         {/** BASESTATS, FORMS */}
         <Box
           $direction={{ xxs: 'column', lg: 'row' }}
-          flexAlign="flex-start"
-          $justify="flex-start"
+          $flexalign="flex-start"
+          $flexjustify="flex-start"
           $gap="2em"
         >
           <BaseStats stats={stats} $sizes={{ xxs: 12, lg: 8 }} />
           <PokemonForms pokemonId={id} species={species} $sizes={{ xxs: 12, lg: 4 }} />
         </Box>
         {/** MOVES */}
-        <Box flexAlign="flex-start" $justify="flex-start" ref={movesRef}>
+        <Box $flexalign="flex-start" $flexjustify="flex-start" ref={movesRef}>
           {isMovesVisible && <Moves pokemon={pokemon} $sizes={12} />}
         </Box>
         {/** SPRITES */}
-        <Box flexAlign="flex-start" $justify="flex-start">
+        <Box $flexalign="flex-start" $flexjustify="flex-start">
           <Sprites pokemonSprites={sprites} pokemonId={id} $sizes={12} />
         </Box>
         {/** NAVIGATION */}
-        <Box flexAlign="flex-start" $justify="flex-start">
+        <Box $flexalign="flex-start" $flexjustify="flex-start">
           <Navigation allPokemon={allPokemon} pokemonId={id} $sizes={12} />
         </Box>
       </MainContainer>

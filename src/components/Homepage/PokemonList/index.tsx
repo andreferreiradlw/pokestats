@@ -55,17 +55,17 @@ const PokemonList = ({ pokemon, ...rest }: PokemonListProps): JSX.Element => {
         $constrained
         $withGutter
         $margin="3rem 0"
-        flexAlign="flex-start"
-        $justify="flex-start"
+        $flexalign="flex-start"
+        $flexjustify="flex-start"
         $gap="1em"
       >
         <SectionTitle>{`Select your Pokemon (${showPokemon.length})`}</SectionTitle>
         <SelectContainer
           $direction="row"
-          $justify={{ xxs: 'center', sm: 'flex-start' }}
+          $flexjustify={{ xxs: 'center', sm: 'flex-start' }}
           $flexWrap="wrap"
         >
-          <Box $direction="row" $justify="flex-start" $width="auto">
+          <Box $direction="row" $flexjustify="flex-start" $width="auto">
             <label id="generation" htmlFor="gen_select">
               Game Generation:
             </label>
@@ -87,7 +87,7 @@ const PokemonList = ({ pokemon, ...rest }: PokemonListProps): JSX.Element => {
               ))}
             </Select>
           </Box>
-          <Box $direction="row" $justify="flex-start" $width="auto">
+          <Box $direction="row" $flexjustify="flex-start" $width="auto">
             <label id="sorting" htmlFor="sort_pokemon">
               Sort Pokemon:
             </label>

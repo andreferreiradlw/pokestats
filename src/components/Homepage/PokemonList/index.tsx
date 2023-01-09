@@ -61,11 +61,11 @@ const PokemonList = ({ pokemon, ...rest }: PokemonListProps): JSX.Element => {
       >
         <SectionTitle>{`Select your Pokemon (${showPokemon.length})`}</SectionTitle>
         <SelectContainer
-         flexdirection="row"
+          flexdirection="row"
           flexjustify={{ xxs: 'center', sm: 'flex-start' }}
           flexwrap="wrap"
         >
-          <Boxflexdirection="row" flexjustify="flex-start" width="auto">
+          <Box flexdirection="row" flexjustify="flex-start" width="auto">
             <label id="generation" htmlFor="gen_select">
               Game Generation:
             </label>
@@ -87,7 +87,7 @@ const PokemonList = ({ pokemon, ...rest }: PokemonListProps): JSX.Element => {
               ))}
             </Select>
           </Box>
-          <Boxflexdirection="row" flexjustify="flex-start" width="auto">
+          <Box flexdirection="row" flexjustify="flex-start" width="auto">
             <label id="sorting" htmlFor="sort_pokemon">
               Sort Pokemon:
             </label>

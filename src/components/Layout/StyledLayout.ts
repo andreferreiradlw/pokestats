@@ -17,7 +17,7 @@ const LayoutContainer = styled(BoxWrapper)`
 // main container
 const MainContainer = styled(motion.main)<{
   flexalign?: BoxProps['flexalign'];
-  flexjustify?: BoxProps['$flexjustify'];
+  flexjustify?: BoxProps['flexjustify'];
   constrained?: BoxProps['constrained'];
   flexgutter?: BoxProps['flexgutter'];
 }>`

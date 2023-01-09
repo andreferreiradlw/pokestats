@@ -34,6 +34,7 @@ const EvolutionChain = ({
           $justify="center"
           $align="center"
           $width="100%"
+          $gap="1em"
         >
           <Evolution noArrow species={chain.species} $width="auto" />
           {chain.evolves_to.length > 0 && (
@@ -41,6 +42,7 @@ const EvolutionChain = ({
               $direction={{ xxs: 'row', lg: 'column' }}
               $flexWrap={{ xxs: 'wrap', lg: 'nowrap' }}
               $sizes={9.6}
+              $gap="1em"
             >
               {chain.evolves_to.map((firstEvo, i) => (
                 <Box
@@ -48,6 +50,7 @@ const EvolutionChain = ({
                   $align={{ xxs: 'flex-end', lg: 'center' }}
                   key={`first-evo-box-${i}-${chainId}`}
                   $width={{ xxs: '200px', lg: '100%' }}
+                  $gap="1em"
                 >
                   <Evolution
                     species={firstEvo.species}
@@ -58,6 +61,7 @@ const EvolutionChain = ({
                     <Box
                       $direction={{ xxs: 'row', lg: 'column' }}
                       $align={{ xxs: 'flex-end', lg: 'center' }}
+                      $gap="1em"
                     >
                       {firstEvo.evolves_to.map((secondEvo, x) => (
                         <Evolution

@@ -8,6 +8,7 @@ import type {
   PokemonSpecies,
   VersionGroup,
   Ability,
+  EvolutionDetail,
 } from 'pokenode-ts';
 // helpers
 import { PokemonClient, EvolutionClient } from 'pokenode-ts';
@@ -30,9 +31,21 @@ export interface PokestatsPokemonPageProps {
   pokemon: PokenodePokemon;
   abilities: Ability[];
   species: PokemonSpecies;
-  evolution: EvolutionChain;
   pokemonMoves: PokemonMove[];
   pokemonGen: VersionGroup['name'];
+  evolutionChain: {
+    chainId: number;
+    babyTriggerItem: EvolutionChain['baby_trigger_item'];
+    firstEvolution: PokemonSpecies;
+    secondEvolution: {
+      species: PokemonSpecies;
+      evolutionDetails: EvolutionDetail[];
+    }[];
+    thirdEvolution: {
+      species: PokemonSpecies;
+      evolutionDetails: EvolutionDetail[];
+    }[];
+  };
 }
 
 const PokestatsPokemonPage: NextPage<PokestatsPokemonPageProps> = ({
@@ -144,6 +157,60 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
       return { notFound: true };
     }
 
+    // get evolution data based on chain
+    let evolutionChainPokemon = {
+      chainId: evolutionDataResults.id,
+      babyTriggerItem: evolutionDataResults.baby_trigger_item,
+      firstEvolution: null,
+      secondEvolution: [],
+      thirdEvolution: [],
+    };
+
+    // first evolution
+    if (evolutionDataResults.chain.species.name === pokemonName) {
+      evolutionChainPokemon.firstEvolution = pokemonSpeciesResults;
+    } else {
+      const firstEvoData = await pokemonClient.getPokemonSpeciesByName(
+        evolutionDataResults.chain.species.name,
+      );
+      evolutionChainPokemon.firstEvolution = firstEvoData;
+    }
+
+    for (const second_evolution of evolutionDataResults.chain.evolves_to) {
+      // second evolution
+      if (second_evolution.species.name === pokemonName) {
+        evolutionChainPokemon.secondEvolution.push({
+          species: pokemonSpeciesResults,
+          evolutionDetails: second_evolution.evolution_details,
+        });
+      } else {
+        const secondEvoData = await pokemonClient.getPokemonSpeciesByName(
+          second_evolution.species.name,
+        );
+        evolutionChainPokemon.secondEvolution.push({
+          species: secondEvoData,
+          evolutionDetails: second_evolution.evolution_details,
+        });
+      }
+      // third evolution
+      for (const third_evolution of second_evolution.evolves_to) {
+        if (third_evolution.species.name === pokemonName) {
+          evolutionChainPokemon.thirdEvolution.push({
+            species: pokemonSpeciesResults,
+            evolutionDetails: third_evolution.evolution_details,
+          });
+        } else {
+          const thirdEvoData = await pokemonClient.getPokemonSpeciesByName(
+            third_evolution.species.name,
+          );
+          evolutionChainPokemon.thirdEvolution.push({
+            species: thirdEvoData,
+            evolutionDetails: third_evolution.evolution_details,
+          });
+        }
+      }
+    }
+
     // species english flavor text
     pokemonSpeciesResults.flavor_text_entries = pokemonSpeciesResults.flavor_text_entries.filter(
       entry => entry.language.name === 'en',
@@ -177,9 +244,9 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
           effect_entries: ability.effect_entries.filter(entry => entry.language.name === 'en'),
         })),
         species: pokemonSpeciesResults,
-        evolution: evolutionDataResults,
+        evolutionChain: evolutionChainPokemon,
         pokemonGen,
-        revalidate: 60,
+        revalidate: 120,
       },
     };
   } catch (error) {

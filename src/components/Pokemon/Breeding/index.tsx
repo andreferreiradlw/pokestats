@@ -21,13 +21,12 @@ const Ratio = styled.span`
 
 interface BreedingProps extends BoxProps {
   species: PokemonSpecies;
-  evolutionChain: EvolutionChain;
+  babyTriggerItem: EvolutionChain['baby_trigger_item'];
 }
 
-const Breeding = ({ species, evolutionChain, ...rest }: BreedingProps): JSX.Element => {
+const Breeding = ({ species, babyTriggerItem, ...rest }: BreedingProps): JSX.Element => {
   // data
   const { gender_rate, egg_groups, hatch_counter, habitat } = species;
-  const { baby_trigger_item } = evolutionChain;
   // memo
   const genderRatio = useMemo(
     () => (
@@ -73,7 +72,7 @@ const Breeding = ({ species, evolutionChain, ...rest }: BreedingProps): JSX.Elem
           </tr>
           <tr>
             <th>Baby Trigger Item</th>
-            <td>{baby_trigger_item ? removeDash(baby_trigger_item.name) : 'None'}</td>
+            <td>{babyTriggerItem ? removeDash(babyTriggerItem.name) : 'None'}</td>
           </tr>
           <tr>
             <th>Habitat</th>

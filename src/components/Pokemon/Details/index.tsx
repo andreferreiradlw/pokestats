@@ -6,8 +6,7 @@ import type { Ability } from 'pokenode-ts';
 // helpers
 import GameVersionContext from '@/components/Layout/gameVersionContext';
 import { AnimatePresence } from 'framer-motion';
-import { capitalize, removeDash } from '@/helpers/typography';
-import { fadeInUpVariant } from '@/helpers/animations';
+import { capitalize, removeDash, fadeInUpVariant, mapGeneration } from '@/helpers';
 // components
 import BoxWrapper from '@/components/Box/StyledBox';
 import TypeBadge from '@/components/TypeBadge';
@@ -31,8 +30,18 @@ const PokemonDetails = ({
   const { gameVersion } = useContext(GameVersionContext);
   // data
   const { types, abilities: pokemonAbilities, id, name, weight, height } = pokemon;
-  const { genera, flavor_text_entries, shape, color, is_baby, is_legendary, is_mythical } = species;
+  const {
+    genera,
+    flavor_text_entries,
+    shape,
+    color,
+    is_baby,
+    is_legendary,
+    is_mythical,
+    generation,
+  } = species;
   // memo
+  const generationName = useMemo(() => mapGeneration(generation?.name), [generation]);
   const flavorText = useMemo(() => {
     // @ts-ignore
     const versionEntry = flavor_text_entries.filter(entry => entry.version.name === gameVersion);
@@ -113,6 +122,10 @@ const PokemonDetails = ({
             <tr>
               <th>Pokédex №</th>
               <td>{`#${id}`}</td>
+            </tr>
+            <tr>
+              <th>Generation</th>
+              <td>{generationName}</td>
             </tr>
             <tr>
               <th>Category</th>

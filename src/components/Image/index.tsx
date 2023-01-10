@@ -9,7 +9,7 @@ import { placeholderVariant, fadeInUpVariant } from '@/helpers/animations';
 // components
 import LazyLoad from 'react-lazyload';
 // styles
-import { ImageWrapper, Image, Placeholder, EggIcon } from './StyledImage';
+import { ImageWrapper, Image, Placeholder, EggIcon, ErrorIcon } from './StyledImage';
 
 export interface ImageProps extends BoxProps {
   pixelateImg?: boolean;
@@ -39,8 +39,9 @@ const ImageComponent = ({
   crossOrigin,
   ...rest
 }: ImageProps & React.ImgHTMLAttributes<HTMLImageElement>): JSX.Element => {
-  // img src
+  // states
   const [imgSrc, setImgSrc] = useState(null);
+  const [fetchError, setFetchError] = useState(false);
   // ref
   const _isMounted = useRef(null);
   // manage mounted state to avoid memory leaks
@@ -55,14 +56,20 @@ const ImageComponent = ({
 
   useEffect(() => {
     async function fetchImage() {
-      await axios.get(src, { responseType: 'arraybuffer' }).then(response => {
-        let blob = new Blob([response.data], {
-          type: response.headers['content-type'],
+      await axios
+        .get(src, { responseType: 'arraybuffer' })
+        .then(response => {
+          let blob = new Blob([response.data], {
+            type: response.headers['content-type'],
+          });
+          let image = URL.createObjectURL(blob);
+          // check again if mounted before updating the state
+          if (_isMounted.current) setImgSrc(image);
+        })
+        .catch(err => {
+          setFetchError(true);
+          console.log('error fetching image', err);
         });
-        let image = URL.createObjectURL(blob);
-        // check again if mounted before updating the state
-        if (_isMounted.current) setImgSrc(image);
-      });
     }
     // fetch if mounted
     if (_isMounted.current) fetchImage();
@@ -72,15 +79,28 @@ const ImageComponent = ({
     <ConditionalWrapper key={alt} isLazy={lazy} offset={offset}>
       <ImageWrapper width={width} flexheight={height} {...rest}>
         <AnimatePresence mode="wait">
-          {!imgSrc && (
+          {fetchError && (
             <Placeholder
               initial="initial"
               animate="animate"
               exit="exit"
               key={`image-placeholder-${src}`}
               variants={placeholderVariant}
+              placeholderwidth={placeholderwidth}
             >
-              <EggIcon placeholderwidth={placeholderwidth} height={height} />
+              <ErrorIcon />
+            </Placeholder>
+          )}
+          {!imgSrc && !fetchError && (
+            <Placeholder
+              initial="initial"
+              animate="animate"
+              exit="exit"
+              key={`image-placeholder-${src}`}
+              variants={placeholderVariant}
+              placeholderwidth={placeholderwidth}
+            >
+              <EggIcon height={height} />
             </Placeholder>
           )}
           {imgSrc && (

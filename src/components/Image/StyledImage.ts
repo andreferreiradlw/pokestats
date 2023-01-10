@@ -8,6 +8,7 @@ import { tumble } from '../BaseStyles/keyframes';
 import Box from '@/components/Box';
 // assets
 import Egg from '@/assets/svg/egg.svg';
+import CloudError from 'public/static/iconLibrary/404_error.svg';
 
 const ImageWrapper = styled(Box)`
   align-items: center;
@@ -44,26 +45,32 @@ const Image = styled(motion.img)<
     `}
 `;
 
-const Placeholder = styled(motion.div)`
+const EggIcon = styled(Egg)`
+  animation: ${tumble} 5s ease-in-out 0s infinite;
+
+  ${({ height }) =>
+    css`
+      height: ${height ? `${height}px` : 'auto'};
+    `}
+`;
+
+const ErrorIcon = styled(CloudError)``;
+
+const Placeholder = styled(motion.div)<{ placeholderwidth?: ImageProps['placeholderwidth'] }>`
   align-items: center;
   display: flex;
   height: 100%;
   justify-content: center;
   padding: 15px 0;
   width: 100%;
+
+  ${EggIcon}, ${ErrorIcon} {
+    // width relative to container
+    ${({ placeholderwidth }) =>
+      css`
+        width: ${placeholderwidth ? `${placeholderwidth}` : 'auto'};
+      `}
+  }
 `;
 
-const EggIcon = styled(Egg)`
-  animation: ${tumble} 5s ease-in-out 0s infinite;
-  ${({ height }) =>
-    css`
-      height: ${height ? `${height}px` : 'auto'};
-    `}
-  // width relative to container
-  ${({ placeholderwidth }) =>
-    css`
-      width: ${placeholderwidth ? `${placeholderwidth}` : 'auto'};
-    `}
-`;
-
-export { ImageWrapper, Image, Placeholder, EggIcon };
+export { ImageWrapper, Image, Placeholder, EggIcon, ErrorIcon };

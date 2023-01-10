@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useMemo } from 'react';
 // types
 import type { BoxProps } from '@/components/Box';
 import type { PokemonSpecies, ChainLink, EvolutionDetail } from 'pokenode-ts';
@@ -39,7 +39,6 @@ const Evolution = ({
       setImgSrc(null);
     };
   }, []);
-
   // fetch species.url data
   useEffect(() => {
     // client
@@ -62,6 +61,11 @@ const Evolution = ({
     // fetch if mounted
     if (_isMounted.current && species) fetchImage();
   }, [species]);
+  // memo
+  const generationName = useMemo(
+    () => currSpecies && mapGeneration(currSpecies.generation.name),
+    [currSpecies],
+  );
 
   return (
     currSpecies &&
@@ -111,9 +115,7 @@ const Evolution = ({
             />
             <NumberId>{`#${currSpecies.id}`}</NumberId>
             <PokeName>{removeDash(currSpecies.name)}</PokeName>
-            {currSpecies.generation.name && (
-              <PokeGen>{mapGeneration(currSpecies.generation.name)}</PokeGen>
-            )}
+            {currSpecies?.generation?.name && <PokeGen>{generationName}</PokeGen>}
           </PokeBox>
         </Link>
       </BoxWrapper>

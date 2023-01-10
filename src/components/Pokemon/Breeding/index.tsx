@@ -17,7 +17,6 @@ const Breeding = ({ species, evolutionChain, ...rest }: BreedingProps): JSX.Elem
   // data
   const { gender_rate, egg_groups, hatch_counter, habitat } = species;
   const { baby_trigger_item } = evolutionChain;
-
   // memo
   const genderRatio = useMemo(
     () => `${12.5 * (8 - gender_rate)}% male, ${12.5 * gender_rate}% female`,

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 // types
 import type { TypePageProps } from '../index';
 // helpers
-import { motion, AnimatePresence } from 'framer-motion';
+import { AnimatePresence } from 'framer-motion';
 import { hoverVariant, removeDash, fadeInUpVariant } from '@/helpers';
 // styles
 import { Button, SectionTitle } from '@/components/BaseStyles';

@@ -1,4 +1,4 @@
-import React from 'react';
+import { useMemo } from 'react';
 // types
 import type { Name } from 'pokenode-ts';
 // components
@@ -13,7 +13,11 @@ interface TypeIconProps extends BoxProps {
 }
 
 const TypeIcon = ({ typeName, otherNames, ...rest }: TypeIconProps): JSX.Element => {
-  const japanName = otherNames.find(name => name.language.name === 'ja-Hrkt').name;
+  // memo
+  const japanName = useMemo(
+    () => otherNames.find(name => name.language.name === 'ja-Hrkt').name,
+    [otherNames],
+  );
 
   return (
     <Box $isRelative minheight={{ xxs: '250px', lg: '350px' }} {...rest}>

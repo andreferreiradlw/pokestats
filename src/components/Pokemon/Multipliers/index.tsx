@@ -16,9 +16,6 @@ interface MultipliersProps extends BoxProps {
 }
 
 const Multipliers = ({ pokemonTypes, ...rest }: MultipliersProps): JSX.Element => {
-  // data
-  // const { types } = pokemon;
-
   const typeMultipliers = useMemo(() => {
     let currTypes = pokemonTypes.map(currType => {
       return currType.type.name;

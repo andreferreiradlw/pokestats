@@ -48,14 +48,14 @@ const EvolutionChain = ({
                 <Box
                   flexdirection={{ xxs: 'column', lg: 'row' }}
                   flexalign={{ xxs: 'flex-end', lg: 'center' }}
-                  key={`first-evo-box-${i}-${chainId}`}
+                  key={`second-evo-container-${i}-${chainId}`}
                   width={{ xxs: '200px', lg: '100%' }}
                   flexgap="1em"
                 >
                   <Evolution
                     species={species}
                     evolutionDetails={evolutionDetails}
-                    key={`first-evo-${i}-${chainId}`}
+                    key={`second-evo-${i}-${chainId}`}
                   />
                   {thirdEvolution.length > 0 && (
                     <Box
@@ -65,7 +65,7 @@ const EvolutionChain = ({
                     >
                       {thirdEvolution.map(({ species, evolutionDetails }, x) => (
                         <Evolution
-                          key={`second-evo-${x}-${chainId}`}
+                          key={`third-evo-${x}-${chainId}`}
                           species={species}
                           evolutionDetails={evolutionDetails}
                         />
@@ -83,7 +83,7 @@ const EvolutionChain = ({
           initial="hidden"
           animate="show"
           variants={fadeInUpVariant}
-          key={`no-pokemon-evolution-${chainId}`}
+          key={`no-evo-${chainId}`}
         >
           {`${removeDash(pokemonName)} does not evolve.`}
         </SectionMessage>

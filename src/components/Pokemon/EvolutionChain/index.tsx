@@ -60,7 +60,7 @@ const EvolutionChain = ({
                   {firstEvo.evolves_to.length > 0 && (
                     <Box
                       flexdirection={{ xxs: 'row', lg: 'column' }}
-                      flexalign={{ xxs: 'flex-end', lg: 'center' }}
+                      flexalign="center"
                       flexgap="1em"
                     >
                       {firstEvo.evolves_to.map((secondEvo, x) => (

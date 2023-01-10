@@ -13,8 +13,8 @@ const PokeBox = styled(motion.div)<{ width?: string; $dark?: boolean }>`
   ${({ width }) =>
     !width &&
     css`
-      max-width: 150px;
-      width: 150px;
+      max-width: 155px;
+      width: 155px;
     `}
 
   ${({ $dark, theme }) =>

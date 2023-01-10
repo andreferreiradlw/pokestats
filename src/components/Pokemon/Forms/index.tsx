@@ -21,12 +21,17 @@ const PokemonForms = ({ pokemonId, species, ...rest }: PokemonFormsProps): JSX.E
   // memo
   const currForms = useMemo(
     () =>
-      varieties?.map((form, i) => (
-        <Numbered key={`${form.pokemon.name}-${i}`}>
-          {`${varieties.length > 1 ? `${i + 1}. ` : ``}${removeDash(form.pokemon.name)}`}
-          {form.is_default && <span>{` ( default )`}</span>}
-        </Numbered>
-      )),
+      varieties?.map((form, i) => {
+        const varietyName = removeDash(form.pokemon.name);
+        return (
+          <Numbered key={`${form.pokemon.name}-${i}`}>
+            {`${varieties.length > 1 ? `${i + 1}. ` : ``}${varietyName.substr(
+              varietyName.indexOf(' ') + 1,
+            )}`}
+            {form.is_default && <span>{` ( default )`}</span>}
+          </Numbered>
+        );
+      }),
     [varieties],
   );
 

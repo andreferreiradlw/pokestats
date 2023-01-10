@@ -1,14 +1,13 @@
 import styled, { css } from 'styled-components';
 // components
-import { motion } from 'framer-motion';
 import Box from '@/components/Box';
 
-const TableBody = styled(motion.tbody)``;
-const TableRow = styled(motion.tr)``;
-const NameTH = styled(motion.th)``;
-const NameTD = styled(motion.td)``;
+const TableBody = styled.tbody``;
+const TableRow = styled.tr``;
+const NameTH = styled.th``;
+const NameTD = styled.td``;
 
-const TableContainer = styled(motion.div)`
+const TableContainer = styled.div`
   overflow: auto;
   width: 100%;
 
@@ -19,9 +18,9 @@ const TableContainer = styled(motion.div)`
   `}
 `;
 
-const MovesTable = styled(motion.table)`
-  font-size: 0.7rem;
-  line-height: 0.7rem;
+const MovesTable = styled.table`
+  font-size: 0.7em;
+  line-height: 0.7em;
   text-align: center;
   width: 100%;
 
@@ -34,7 +33,7 @@ const MovesTable = styled(motion.table)`
   & td {
     height: 40px;
     overflow: hidden;
-    padding: 0.5rem;
+    padding: 0.5em;
     text-align: center;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -45,24 +44,25 @@ const MovesTable = styled(motion.table)`
     width: 25%;
   }
 
-  & tr:not(:last-of-type) {
-    border-bottom: 1px solid #ececec;
-  }
-
-  & ${TableRow} {
-    &:hover {
-      background-color: #ececec;
-    }
-  }
-
   ${({ theme }) => css`
-    @media ${theme.device.md} {
-      font-size: 0.8rem;
-      line-height: 0.8rem;
+    & tr:not(:last-of-type) {
+      border-bottom: 1px solid ${theme.colors.mercury};
     }
+
+    & ${TableRow} {
+      &:hover {
+        background-color: ${theme.colors.mercury};
+      }
+    }
+
+    @media ${theme.device.md} {
+      font-size: 0.8em;
+      line-height: 0.8em;
+    }
+
     @media ${theme.device.lg} {
-      font-size: 1rem;
-      line-height: 1rem;
+      font-size: 1em;
+      line-height: 1em;
     }
   `}
 `;

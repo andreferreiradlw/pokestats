@@ -218,13 +218,11 @@ const generations = [
     genDescription: 'Generation VII',
     gameVersion: 'sun',
   },
-  /** 
   {
     genValue: 'generation-viii',
     genDescription: 'Generation VIII',
     gameVersion: 'sword',
   },
-  */
 ];
 
 const mapIdToGeneration = (id: number): string => {

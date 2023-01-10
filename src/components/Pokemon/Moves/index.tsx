@@ -12,12 +12,10 @@ import {
   getMachineNames,
   capitalize,
   removeDash,
-  staggerTableVariant,
   fadeInUpVariant,
   getIdFromMove,
 } from '@/helpers';
 // components
-import { AnimatePresence } from 'framer-motion';
 import Box, { BoxProps } from '@/components/Box';
 import Loading from '@/components/Loading';
 import TypeBadge from '@/components/TypeBadge';
@@ -166,76 +164,52 @@ const PokemonMoves = ({ pokemon, ...rest }: PokemonMovesProps): JSX.Element => {
           </Button>
         ))}
       </TabContainer>
-      <AnimatePresence mode="wait">
-        {movesLoading ? (
-          <Loading
-            flexheight="100%"
-            $iconWidth={{ xxs: '20%', xs: '15%', md: '10%', lg: '5%' }}
-            passKey="pokemon-moves-loading"
-          />
-        ) : filteredMoves?.length ? (
-          <TableContainer
-            initial="hidden"
-            animate="show"
-            exit="exit"
-            variants={fadeInUpVariant}
-            key="pokemon-moves-table-container"
-          >
-            <MovesTable key="pokemon-moves-table">
-              <thead>
-                <tr>
-                  <th>{mapMethodName(learnMethod)}</th>
-                  <NameTH>Name</NameTH>
-                  <th>Type</th>
-                  <th>Category</th>
-                  <th>Power</th>
-                  <th>PP</th>
-                  <th>Accuracy</th>
-                  <th>Priority</th>
-                  <th>Generation</th>
-                </tr>
-              </thead>
-              <TableBody
-                key="moves-tbody"
-                initial="hidden"
-                animate="show"
-                exit="exit"
-                variants={staggerTableVariant}
-              >
-                {filteredMoves.map((move, i) => (
-                  <TableRow key={`${move.name}-${i}`}>
-                    {learnMethod === 'level-up' && <td>{move.level_learned_at}</td>}
-                    {learnMethod === 'machine' &&
-                      (machineNames?.[i] ? <td>{machineNames[i].toUpperCase()}</td> : <td>...</td>)}
-                    {learnMethod === 'egg' && <td>-</td>}
-                    {learnMethod === 'tutor' && <td>-</td>}
-                    <NameTD>{removeDash(move.name)}</NameTD>
-                    <td>
-                      <TypeBadge flexmargin="0" $iconOnly $typename={move.type.name} />
-                    </td>
-                    <td>{capitalize(move.damage_class.name)}</td>
-                    <td>{move.power || '-'}</td>
-                    <td>{move.pp || '-'}</td>
-                    <td>{move.accuracy || '-'}</td>
-                    <td>{move.priority}</td>
-                    <td>{mapGeneration(move.generation.name)}</td>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </MovesTable>
-          </TableContainer>
-        ) : (
-          <SectionMessage
-            initial="hidden"
-            animate="show"
-            exit="exit"
-            variants={fadeInUpVariant}
-            key="pokemon-nomoves-message"
-          >
-            {`No ${learnMethod} moves for currently selected game version.`}
-          </SectionMessage>
-        )}
-      </AnimatePresence>
+      {movesLoading ? (
+        <Loading flexheight="100%" $iconWidth={{ xxs: '20%', xs: '15%', md: '10%', lg: '5%' }} />
+      ) : filteredMoves?.length ? (
+        <TableContainer>
+          <MovesTable>
+            <thead>
+              <tr>
+                <th>{mapMethodName(learnMethod)}</th>
+                <NameTH>Name</NameTH>
+                <th>Type</th>
+                <th>Category</th>
+                <th>Power</th>
+                <th>PP</th>
+                <th>Accuracy</th>
+                <th>Priority</th>
+                <th>Generation</th>
+              </tr>
+            </thead>
+            <TableBody>
+              {filteredMoves.map((move, i) => (
+                <TableRow key={`${move.name}-${i}`}>
+                  {learnMethod === 'level-up' && <td>{move.level_learned_at}</td>}
+                  {learnMethod === 'machine' &&
+                    (machineNames?.[i] ? <td>{machineNames[i].toUpperCase()}</td> : <td>...</td>)}
+                  {learnMethod === 'egg' && <td>-</td>}
+                  {learnMethod === 'tutor' && <td>-</td>}
+                  <NameTD>{removeDash(move.name)}</NameTD>
+                  <td>
+                    <TypeBadge flexmargin="0" $iconOnly $typename={move.type.name} />
+                  </td>
+                  <td>{capitalize(move.damage_class.name)}</td>
+                  <td>{move.power || '-'}</td>
+                  <td>{move.pp || '-'}</td>
+                  <td>{move.accuracy || '-'}</td>
+                  <td>{move.priority}</td>
+                  <td>{mapGeneration(move.generation.name)}</td>
+                </TableRow>
+              ))}
+            </TableBody>
+          </MovesTable>
+        </TableContainer>
+      ) : (
+        <SectionMessage>
+          {`No ${learnMethod} moves for currently selected game version.`}
+        </SectionMessage>
+      )}
     </Box>
   );
 };

@@ -48,7 +48,7 @@ const Input = styled.input`
     color: ${theme.colors.white};
 
     &::placeholder {
-      color: ${theme.colors.mercury};
+      color: ${theme.colors.white};
       font-style: italic;
       font-weight: 500;
     }

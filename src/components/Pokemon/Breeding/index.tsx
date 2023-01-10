@@ -47,7 +47,7 @@ const Breeding = ({ species, evolutionChain, ...rest }: BreedingProps): JSX.Elem
           </tr>
           <tr>
             <th>Egg Groups</th>
-            <td>{egg_groups.length ? eggGroups : 'No Egg Groups'}</td>
+            <td>{egg_groups?.length ? eggGroups : 'No Egg Groups'}</td>
           </tr>
           <tr>
             <th>Egg Cycles</th>

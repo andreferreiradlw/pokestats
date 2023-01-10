@@ -4,7 +4,7 @@ import { FooterContainer, FooterA, TextContainer } from './StyledFooter';
 import Box from '@/components/Box';
 import Image from 'next/image';
 // icons
-import GitHub from '@/assets/svg/github.svg';
+import GitHub from 'public/static/iconLibrary/github.svg';
 
 const Footer = (): JSX.Element => (
   <FooterContainer>

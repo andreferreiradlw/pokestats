@@ -13,7 +13,7 @@ import PokemonList from './PokemonList';
 import { Container, RepoAnchor, ScrollDown } from './styledHomepage';
 import { MainHeading } from '@/components/BaseStyles';
 // svg
-import Github from '@/assets/svg/github.svg';
+import Github from 'public/static/iconLibrary/github.svg';
 
 interface HomepageProps {
   allPokemon: Pokemon[];

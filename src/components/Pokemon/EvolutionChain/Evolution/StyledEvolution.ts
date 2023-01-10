@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 // svg
-import Arrow from '@/assets/svg/arrows.svg';
+import Arrow from 'public/static/iconLibrary/arrows.svg';
 
 const EvoArrow = styled(Arrow)`
   margin: 0.5rem 0 1rem;

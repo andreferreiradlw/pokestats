@@ -135,27 +135,27 @@ const Autocomplete = ({
       />
       {!!filtered?.length && (
         <ListWrapper>
-          {filtered.map((item, i) => (
+          {filtered.map(({ assetType, name, id }, i) => (
             <OptionWrapper
-              href={`/${item.assetType}/${item.name}`}
-              key={`${item.assetType}-${item.id}-${item.name}-${i}`}
+              href={`/${assetType}/${name}`}
+              key={`${assetType}-${id}-${name}-${i}`}
               onClick={() => resetStates()}
               onFocus={() => setActiveOption(i)}
               onKeyDown={e => handleKeyDown(e)}
               ref={currOption => currOption && i === activeOption && currOption.focus()}
             >
               <Box flexdirection="row" flexjustify="flex-start" flexgap="1em">
-                {item.assetType === 'type' && <TypeIcon type={item.name} />}
-                {item.assetType === 'pokemon' && (
+                {assetType === 'type' && <TypeIcon type={name} />}
+                {assetType === 'pokemon' && (
                   <OptionImg
-                    src={`https://raw.githubusercontent.com/HybridShivam/Pokemon/master/assets/images/${item.id
+                    src={`https://raw.githubusercontent.com/HybridShivam/Pokemon/master/assets/images/${id
                       .toString()
                       .padStart(3, '0')}.png`}
                   />
                 )}
-                <Option>{removeDash(item.name)}</Option>
+                <Option>{removeDash(name)}</Option>
               </Box>
-              {item.assetType === 'pokemon' && <PokeID>{`#${item.id}`}</PokeID>}
+              {assetType === 'pokemon' && <PokeID>{`#${id}`}</PokeID>}
             </OptionWrapper>
           ))}
         </ListWrapper>

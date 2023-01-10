@@ -8,7 +8,7 @@ import { SectionSubTitle, ellipsis, rotate, riseUp } from '@/components/BaseStyl
 // helpers
 import { responsiveProps } from '@/helpers/box';
 // svg
-import Potion from '@/assets/svg/potion.svg';
+import Potion from 'public/static/iconLibrary/potion.svg';
 
 const LoadingContainer = styled(BoxWrapper)`
   align-items: center;

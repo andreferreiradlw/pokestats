@@ -7,7 +7,7 @@ import { tumble } from '../BaseStyles/keyframes';
 // components
 import Box from '@/components/Box';
 // assets
-import Egg from '@/assets/svg/egg.svg';
+import Egg from 'public/static/iconLibrary/egg.svg';
 import CloudError from 'public/static/iconLibrary/404_error.svg';
 
 const ImageWrapper = styled(Box)`

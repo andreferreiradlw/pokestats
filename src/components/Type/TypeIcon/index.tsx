@@ -16,7 +16,7 @@ const TypeIcon = ({ typeName, otherNames, ...rest }: TypeIconProps): JSX.Element
   const japanName = otherNames.find(name => name.language.name === 'ja-Hrkt').name;
 
   return (
-    <Box relative minheight={{ xxs: '250px', lg: '350px' }} {...rest}>
+    <Box isrelative minheight={{ xxs: '250px', lg: '350px' }} {...rest}>
       <TypeBadge
         $typename={typeName}
         key={`type-icon-${typeName}`}

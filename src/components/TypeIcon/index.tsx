@@ -48,6 +48,8 @@ interface TypeIconProps {
 const TypeIcon = ({ type, ...rest }: TypeIconProps): JSX.Element => {
   let Icon = iconTypes[type];
 
+  if (!Icon) return null;
+
   return <Icon {...rest} />;
 };
 

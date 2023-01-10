@@ -3,7 +3,7 @@ import { useEffect, useContext, useRef } from 'react';
 import type { PokestatsPokemonPageProps } from '@/pages/pokemon/[pokemonId]';
 // helpers
 import dynamic from 'next/dynamic';
-import { useIntersectionObserver } from '@/hooks';
+// import { useIntersectionObserver } from '@/hooks';
 import GameVersionContext from '@/components/Layout/gameVersionContext';
 import { mapGenerationToGame, pageContainerVariant } from '@/helpers';
 // components
@@ -18,7 +18,8 @@ import Training from './Training';
 import Multipliers from './Multipliers';
 import BaseStats from './BaseStats';
 import PokemonForms from './Forms';
-const Moves = dynamic(() => import('./Moves'));
+// const Moves = dynamic(() => import('./Moves'));
+import Moves from './Moves';
 import Sprites from './Sprites';
 import Navigation from './Navigation';
 
@@ -35,9 +36,9 @@ const PokemonPage = ({
   const { id, name, stats, types, sprites, game_indices } = pokemon;
   const { names, generation, varieties } = species;
   // lazy load moves
-  const movesRef = useRef<HTMLDivElement | null>(null);
-  const entry = useIntersectionObserver(movesRef, { freezeOnceVisible: true });
-  const isMovesVisible = !!entry?.isIntersecting;
+  // const movesRef = useRef<HTMLDivElement | null>(null);
+  // const entry = useIntersectionObserver(movesRef, { freezeOnceVisible: true });
+  // const isMovesVisible = !!entry?.isIntersecting;
 
   useEffect(() => {
     let pokemonGen: string;
@@ -52,8 +53,8 @@ const PokemonPage = ({
   return (
     <AnimatePresence mode="wait">
       <MainContainer
-        constrained
-        flexgutter
+        isconstrained
+        withgutter
         initial="hidden"
         animate="visible"
         exit="fade"
@@ -111,8 +112,8 @@ const PokemonPage = ({
           <PokemonForms pokemonId={id} species={species} screensizes={{ xxs: 12, lg: 4 }} />
         </Box>
         {/** MOVES */}
-        <Box flexalign="flex-start" flexjustify="flex-start" ref={movesRef}>
-          {isMovesVisible && <Moves pokemon={pokemon} screensizes={12} />}
+        <Box flexalign="flex-start" flexjustify="flex-start">
+          <Moves pokemon={pokemon} screensizes={12} />
         </Box>
         {/** SPRITES */}
         <Box flexalign="flex-start" flexjustify="flex-start">

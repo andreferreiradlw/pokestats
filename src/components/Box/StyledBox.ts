@@ -55,8 +55,8 @@ const BoxWrapper = styled(motion.div)<BoxProps>`
   `}
 
   /** column-based flex size */
-  ${({ constrained, screensizes }) =>
-    constrained
+  ${({ isconstrained, screensizes }) =>
+    isconstrained
       ? css`
           // flex-basis: 100%;
         `
@@ -66,31 +66,31 @@ const BoxWrapper = styled(motion.div)<BoxProps>`
           flex-basis: auto;
         `}
   
-  ${({ constrained, screensizes, flexgrow }) =>
-    !constrained &&
+  ${({ isconstrained, screensizes, flexgrow }) =>
+    !isconstrained &&
     !screensizes &&
     flexgrow &&
     css`
       flex-grow: 1;
     `}
   
-  /** constrained max-width */
-  ${({ constrained, flexgrow }) =>
-    constrained &&
+  /** isconstrained max-width */
+  ${({ isconstrained, flexgrow }) =>
+    isconstrained &&
     css`
       ${flexgrow && 'flex-grow: 1;'}
-      max-width: ${boxConfig.constrained};
+      max-width: ${boxConfig.isconstrained};
     `};
 
   /** Position */
-  ${({ relative }) =>
-    relative &&
+  ${({ isrelative }) =>
+    isrelative &&
     css`
       position: relative;
     `}
 
   /** gutter */
-  ${({ flexpadding, flexgutter }) => !flexpadding && flexgutter && gutterStyle()}
+  ${({ flexpadding, withgutter }) => !flexpadding && withgutter && gutterStyle()}
 
   /** debug */
   ${({ $debug }) => $debug && debugStyle()}

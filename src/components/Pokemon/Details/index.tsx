@@ -98,9 +98,9 @@ const PokemonDetails = ({
       >
         {types?.length > 0 && (
           <TypeContainer flexdirection="row" flexjustify="flex-start" flexwrap="wrap">
-            {types.map(({ type }, i) => {
-              return <TypeBadge $typename={type.name} key={`${type.name}-${i}-detail-${id}`} />;
-            })}
+            {types.map(({ type }, i) => (
+              <TypeBadge $typename={type.name} key={`${type.name}-${i}-detail-${id}`} />
+            ))}
           </TypeContainer>
         )}
         <PageHeading>{removeDash(name)}</PageHeading>

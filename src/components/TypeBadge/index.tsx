@@ -22,6 +22,8 @@ export interface TypeBadgeProps {
 const TypeBadge = ({ $typename, hideIcon, $iconOnly, ...rest }: TypeBadgeProps): JSX.Element => {
   if (!$typename) return null;
 
+  const formattedName = capitalize($typename);
+
   return (
     <Link href={`/type/${$typename}`}>
       <Badge
@@ -30,11 +32,11 @@ const TypeBadge = ({ $typename, hideIcon, $iconOnly, ...rest }: TypeBadgeProps):
         whileHover="hover"
         whileTap="tap"
         variants={hoverVariant}
-        title={$iconOnly && capitalize($typename)}
+        title={$iconOnly && formattedName}
         {...rest}
       >
         {!hideIcon && <TypeIcon type={$typename} />}
-        {!$iconOnly && <span>{capitalize($typename)}</span>}
+        {!$iconOnly && <span>{formattedName}</span>}
       </Badge>
     </Link>
   );

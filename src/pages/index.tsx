@@ -13,7 +13,7 @@ interface PokestatsHomepageProps {
 }
 
 const PokestatsHomepage: NextPage<PokestatsHomepageProps> = ({ allPokemon, pokemonTypes }) => (
-  <Layout flexgutter={false}>
+  <Layout withgutter={false}>
     <Homepage allPokemon={allPokemon} pokemonTypes={pokemonTypes} />
   </Layout>
 );

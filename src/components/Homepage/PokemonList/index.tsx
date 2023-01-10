@@ -52,8 +52,8 @@ const PokemonList = ({ pokemon, ...rest }: PokemonListProps): JSX.Element => {
   return (
     <Container {...rest}>
       <Box
-        constrained
-        flexgutter
+        isconstrained
+        withgutter
         flexmargin="3rem 0"
         flexalign="flex-start"
         flexjustify="flex-start"

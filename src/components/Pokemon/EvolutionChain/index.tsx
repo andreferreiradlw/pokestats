@@ -58,11 +58,7 @@ const EvolutionChain = ({
                     key={`first-evo-${i}-${chainId}`}
                   />
                   {firstEvo.evolves_to.length > 0 && (
-                    <Box
-                      flexdirection={{ xxs: 'row', lg: 'column' }}
-                      flexalign="center"
-                      flexgap="1em"
-                    >
+                    <Box flexdirection={{ xxs: 'row', lg: 'column' }} flexalign="center">
                       {firstEvo.evolves_to.map((secondEvo, x) => (
                         <Evolution
                           key={`second-evo-${x}-${chainId}`}

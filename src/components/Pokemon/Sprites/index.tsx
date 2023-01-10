@@ -124,7 +124,7 @@ const Sprites = ({ pokemonSprites, pokemonId, forms, ...rest }: SpritesProps): J
             )}
             {(dreamWorldSprites.front_default || dreamWorldSprites.front_female) && (
               <Box flexalign="center" flexjustify="space-between" screensizes={3} flexgap="1em">
-                <SpriteSubtitle>Dreamworld</SpriteSubtitle>
+                <SpriteSubtitle>Dream World</SpriteSubtitle>
                 <Box flexdirection="row" flexjustify="center" flexwrap="wrap">
                   {Object.keys(dreamWorldSprites).map(
                     (key, i) =>

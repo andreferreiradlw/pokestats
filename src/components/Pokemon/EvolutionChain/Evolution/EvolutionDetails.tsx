@@ -7,7 +7,6 @@ import { removeDash } from '@/helpers/typography';
 
 const Details = styled(motion.span)`
   font-weight: 600;
-  margin-bottom: 1rem;
   text-align: center;
   word-break: break-word;
 `;

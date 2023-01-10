@@ -1,12 +1,23 @@
 import { useMemo } from 'react';
+import styled from 'styled-components';
 // types
 import type { PokemonSpecies, EvolutionChain } from 'pokenode-ts';
-// components
-import Box, { BoxProps } from '@/components/Box';
 // helpers
 import { removeDash } from '@/helpers/typography';
 // styles
 import { SectionTitle, Table, Numbered } from '@/components/BaseStyles';
+// components
+import Box, { BoxProps } from '@/components/Box';
+// icons
+import MaleIcon from 'public/static/iconLibrary/male.svg';
+import FemaleIcon from 'public/static/iconLibrary/female.svg';
+
+const Ratio = styled.span`
+  svg {
+    margin-left: 0.2em;
+    width: 1em;
+  }
+`;
 
 interface BreedingProps extends BoxProps {
   species: PokemonSpecies;
@@ -19,7 +30,14 @@ const Breeding = ({ species, evolutionChain, ...rest }: BreedingProps): JSX.Elem
   const { baby_trigger_item } = evolutionChain;
   // memo
   const genderRatio = useMemo(
-    () => `${12.5 * (8 - gender_rate)}% male, ${12.5 * gender_rate}% female`,
+    () => (
+      <Ratio>
+        {`${12.5 * (8 - gender_rate)}%`}
+        <MaleIcon />
+        {`, ${12.5 * gender_rate}%`}
+        <FemaleIcon />
+      </Ratio>
+    ),
     [gender_rate],
   );
   const eggGroups = useMemo(

@@ -48,7 +48,7 @@ const PageHeading = styled.h1`
     @media ${theme.device.lg} {
       text-align: left;
       font-size: 5.3rem;
-      line-height: 5.5rem;
+      line-height: 6rem;
     }
   `}
 `;

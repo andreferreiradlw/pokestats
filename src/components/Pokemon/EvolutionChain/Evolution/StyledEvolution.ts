@@ -3,7 +3,6 @@ import styled, { css } from 'styled-components';
 import Arrow from 'public/static/iconLibrary/arrows.svg';
 
 const EvoArrow = styled(Arrow)`
-  margin: 0.5rem 0 1rem;
   transform: rotateZ(90deg);
   width: 50px;
 

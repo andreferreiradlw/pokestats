@@ -83,8 +83,8 @@ const BoxWrapper = styled(motion.div)<BoxProps>`
     `};
 
   /** Position */
-  ${({ isrelative }) =>
-    isrelative &&
+  ${({ $isRelative }) =>
+    $isRelative &&
     css`
       position: relative;
     `}

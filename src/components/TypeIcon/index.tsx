@@ -1,5 +1,6 @@
 import dynamic from 'next/dynamic';
-import { Type } from 'pokenode-ts';
+// types
+import type { Type } from 'pokenode-ts';
 // icons
 const Bug = dynamic(() => import('public/static/typeIcons/bug.svg'));
 const Dark = dynamic(() => import('public/static/typeIcons/dark.svg'));

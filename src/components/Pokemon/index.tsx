@@ -1,9 +1,7 @@
-import { useEffect, useContext, useRef } from 'react';
+import { useEffect, useContext } from 'react';
 // types
 import type { PokestatsPokemonPageProps } from '@/pages/pokemon/[pokemonId]';
 // helpers
-import dynamic from 'next/dynamic';
-// import { useIntersectionObserver } from '@/hooks';
 import GameVersionContext from '@/components/Layout/gameVersionContext';
 import { mapGenerationToGame, pageContainerVariant } from '@/helpers';
 // components
@@ -35,10 +33,6 @@ const PokemonPage = ({
   // data
   const { id, name, stats, types, sprites, game_indices } = pokemon;
   const { names, generation, varieties } = species;
-  // lazy load moves
-  // const movesRef = useRef<HTMLDivElement | null>(null);
-  // const entry = useIntersectionObserver(movesRef, { freezeOnceVisible: true });
-  // const isMovesVisible = !!entry?.isIntersecting;
 
   useEffect(() => {
     let pokemonGen: string;

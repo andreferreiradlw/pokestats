@@ -23,7 +23,7 @@ export interface BoxProps extends HTMLMotionProps<'div'> {
   flexmargin?: CSSProperties['margin'] | Record<string, CSSProperties['margin']>;
   minheight?: CSSProperties['minHeight'] | Record<string, CSSProperties['minHeight']>;
   flexpadding?: CSSProperties['padding'] | Record<string, CSSProperties['padding']>;
-  isrelative?: boolean;
+  $isRelative?: boolean;
   screensizes?: number | Record<string, number>;
   width?: CSSProperties['width'] | Record<string, CSSProperties['width']>;
   $withGutter?: boolean;

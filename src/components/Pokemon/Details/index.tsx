@@ -2,7 +2,7 @@ import { useContext, useMemo } from 'react';
 // types
 import type { BoxProps } from '@/components/Box';
 import type { PokestatsPokemonPageProps } from '@/pages/pokemon/[pokemonId]';
-import type { PokemonAbility, FlavorText, Ability } from 'pokenode-ts';
+import type { Ability } from 'pokenode-ts';
 // helpers
 import GameVersionContext from '@/components/Layout/gameVersionContext';
 import { AnimatePresence } from 'framer-motion';

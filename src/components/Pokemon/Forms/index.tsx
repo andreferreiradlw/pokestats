@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 // types
-import type { PokemonSpecies, PokemonSpeciesVariety } from 'pokenode-ts';
+import type { PokemonSpecies } from 'pokenode-ts';
 // data
 import genderDescriptions from './genderDescriptions.json';
 // components

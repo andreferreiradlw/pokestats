@@ -18,8 +18,8 @@ const LayoutContainer = styled(BoxWrapper)`
 const MainContainer = styled(motion.main)<{
   flexalign?: BoxProps['flexalign'];
   flexjustify?: BoxProps['flexjustify'];
-  isconstrained?: BoxProps['isconstrained'];
-  withgutter?: BoxProps['withgutter'];
+  $constrained?: BoxProps['$constrained'];
+  $withGutter?: BoxProps['$withGutter'];
 }>`
   align-items: ${({ flexalign }) => flexalign || 'center'};
   display: flex;
@@ -30,8 +30,8 @@ const MainContainer = styled(motion.main)<{
   margin: 0 auto;
   width: 100%;
 
-  ${({ isconstrained }) => isconstrained && `max-width: ${boxConfig.isconstrained};`}
-  ${({ withgutter }) => withgutter && responsiveProps('padding', boxConfig.gutterWidth)}
+  ${({ $constrained }) => $constrained && `max-width: ${boxConfig.$constrained};`}
+  ${({ $withGutter }) => $withGutter && responsiveProps('padding', boxConfig.gutterWidth)}
 `;
 
 export { LayoutContainer, MainContainer };

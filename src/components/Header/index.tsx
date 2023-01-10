@@ -26,8 +26,8 @@ const HeaderComponent = ({
   return (
     <HeaderContainer {...rest}>
       <Box
-        isconstrained
-        withgutter
+        $constrained
+        $withGutter
         flexdirection={{ xxs: 'column', md: 'row' }}
         flexjustify="space-between"
         flexalign={{ xxs: 'center', md: 'flex-start' }}

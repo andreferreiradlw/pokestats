@@ -79,7 +79,7 @@ const Evolution = ({
         {!noArrow && (
           <BoxWrapper
             width="auto"
-            flexgrow
+            $flexgrow
             flexdirection="column"
             flexwrap="nowrap"
             flexjustify="center"

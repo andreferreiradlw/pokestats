@@ -14,8 +14,8 @@ const Footer = (): JSX.Element => (
       flexjustify={{ xxs: 'center', sm: 'space-between' }}
       flexmargin="auto"
       screensizes={12}
-      isconstrained
-      withgutter
+      $constrained
+      $withGutter
     >
       <TextContainer>
         <FooterA href="https://pokeapi.co/" target="_blank" rel="noopener" aria-label="PokeApi">

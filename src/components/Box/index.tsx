@@ -11,10 +11,10 @@ export interface BoxProps extends HTMLMotionProps<'div'> {
   flexalignself?: CSSProperties['alignSelf'] | Record<string, CSSProperties['alignSelf']>;
   backgroundcolor?: CSSProperties['background'] | Record<string, CSSProperties['background']>;
   borderradius?: CSSProperties['borderRadius'] | Record<string, CSSProperties['borderRadius']>;
-  isconstrained?: boolean;
+  $constrained?: boolean;
   $debug?: boolean;
   flexdirection?: CSSProperties['flexDirection'] | Record<string, CSSProperties['flexDirection']>;
-  flexgrow?: boolean;
+  $flexgrow?: boolean;
   flexwrap?: CSSProperties['flexWrap'] | Record<string, CSSProperties['flexWrap']>;
   flexgap?: CSSProperties['gap'] | Record<string, CSSProperties['gap']>;
   flexheight?: CSSProperties['height'] | Record<string, CSSProperties['height']>;
@@ -26,7 +26,7 @@ export interface BoxProps extends HTMLMotionProps<'div'> {
   isrelative?: boolean;
   screensizes?: number | Record<string, number>;
   width?: CSSProperties['width'] | Record<string, CSSProperties['width']>;
-  withgutter?: boolean;
+  $withGutter?: boolean;
   children?: React.ReactNode;
 }
 

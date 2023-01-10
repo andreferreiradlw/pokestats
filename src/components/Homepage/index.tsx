@@ -47,8 +47,8 @@ const Homepage = ({ allPokemon, pokemonTypes }: HomepageProps): JSX.Element => {
       </RepoAnchor>
       <Container
         flexheight="100vh"
-        isconstrained
-        withgutter
+        $constrained
+        $withGutter
         initial="hidden"
         animate="show"
         variants={staggerInitialVariant}

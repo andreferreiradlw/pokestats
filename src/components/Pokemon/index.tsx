@@ -53,8 +53,8 @@ const PokemonPage = ({
   return (
     <AnimatePresence mode="wait">
       <MainContainer
-        isconstrained
-        withgutter
+        $constrained
+        $withGutter
         initial="hidden"
         animate="visible"
         exit="fade"

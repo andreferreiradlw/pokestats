@@ -20,30 +20,28 @@ const FeaturedImage = ({
   pokemonName,
   pokemonId,
   ...rest
-}: FeaturedImageProps): JSX.Element => {
-  return (
-    <ImageContainer {...rest}>
-      <Image
-        lazy={false}
-        placeholderwidth="20%"
-        alt={specieNames?.find(name => name.language.name === 'en').name}
-        key={`featured-${pokemonName}-${pokemonId}`}
-        src={`https://raw.githubusercontent.com/HybridShivam/Pokemon/master/assets/images/${pokemonId
-          .toString()
-          .padStart(3, '0')}.png`}
-      />
-      {specieNames && (
-        <JpnName
-          initial="hidden"
-          animate="show"
-          variants={scaleInVariant}
-          key={`jpn-name-${pokemonId}`}
-        >
-          {specieNames.find(name => name.language.name === 'ja').name}
-        </JpnName>
-      )}
-    </ImageContainer>
-  );
-};
+}: FeaturedImageProps): JSX.Element => (
+  <ImageContainer {...rest}>
+    <Image
+      lazy={false}
+      placeholderwidth="20%"
+      alt={specieNames?.find(name => name.language.name === 'en').name}
+      key={`featured-${pokemonName}-${pokemonId}`}
+      src={`https://raw.githubusercontent.com/HybridShivam/Pokemon/master/assets/images/${pokemonId
+        .toString()
+        .padStart(3, '0')}.png`}
+    />
+    {specieNames && (
+      <JpnName
+        initial="hidden"
+        animate="show"
+        variants={scaleInVariant}
+        key={`jpn-name-${pokemonId}`}
+      >
+        {specieNames.find(name => name.language.name === 'ja').name}
+      </JpnName>
+    )}
+  </ImageContainer>
+);
 
 export default FeaturedImage;

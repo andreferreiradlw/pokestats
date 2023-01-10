@@ -44,6 +44,7 @@ const Evolution = ({
   useEffect(() => {
     // client
     const pokemonClient = new PokemonClient();
+
     async function fetchImage() {
       // get species data
       await pokemonClient.getPokemonSpeciesByName(species.name).then(newSpecies => {

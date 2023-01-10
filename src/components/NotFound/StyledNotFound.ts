@@ -1,8 +1,8 @@
-import styled, { css } from 'styled-components'
+import styled, { css } from 'styled-components';
 // components
-import Box from '../Box'
+import Box from '@/components/Box';
 // styles
-import { MainHeading, SectionMessage } from '../BaseStyles'
+import { MainHeading, SectionMessage } from '@/components/BaseStyles';
 
 const Container = styled(Box)`
   background-color: rgba(0, 0, 0, 0.7);
@@ -11,12 +11,12 @@ const Container = styled(Box)`
   margin: auto;
   min-height: 100vh;
   z-index: 1;
-`
+`;
 
 const Title = styled(MainHeading)`
   font-style: italic;
   margin-bottom: 0;
-`
+`;
 
 const Message = styled(SectionMessage)`
   font-weight: 500;
@@ -37,7 +37,7 @@ const Message = styled(SectionMessage)`
       margin: 0 auto 2rem;
     }
   `}
-`
+`;
 
 const Image = styled.img`
   image-rendering: pixelated;
@@ -49,6 +49,6 @@ const Image = styled.img`
       width: 200px;
     }
   `}
-`
+`;
 
-export { Container, Title, Message, Image }
+export { Container, Title, Message, Image };

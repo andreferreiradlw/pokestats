@@ -1,14 +1,14 @@
-import Link from 'next/link';
 import { useRouter } from 'next/router';
-// components
-import Particles from '../Particles';
 // helpers
-import { fadeInUpVariant } from '../../helpers/animations';
+import { fadeInUpVariant } from '@/helpers/animations';
 // styles
 import { Container, Title, Message, Image } from './StyledNotFound';
-import { Button } from '../BaseStyles';
+import { Button } from '@/components/BaseStyles';
+// components
+import Link from 'next/link';
+import Particles from '@/components/Particles';
 
-export default function NotFound() {
+const NotFound = (): JSX.Element => {
   // router
   const router = useRouter();
 
@@ -22,17 +22,13 @@ export default function NotFound() {
         Check that you typed the URL correctly!
       </Message>
       <Link href="/" passHref>
-        <Button
-          as="a"
-          whileHover="hover"
-          whileTap="tap"
-          variants={fadeInUpVariant}
-          key="404-notfound-btn"
-        >
+        <Button whileHover="hover" whileTap="tap" variants={fadeInUpVariant} key="404-notfound-btn">
           Go back home
         </Button>
       </Link>
       <Particles />
     </Container>
   );
-}
+};
+
+export default NotFound;

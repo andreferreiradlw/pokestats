@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from 'react';
+import { useState, useEffect, useContext, useMemo } from 'react';
 // types
 import type { Pokemon, PokemonSpecies } from 'pokenode-ts';
 // components
@@ -8,46 +8,6 @@ import GameVersionContext from '@/components/Layout/gameVersionContext';
 import { removeDash } from '@/helpers/typography';
 // styles
 import { SectionTitle, Table, Numbered } from '@/components/BaseStyles';
-
-// EV yield
-const EVYield = (pokemonStats: Pokemon['stats']): JSX.Element[] =>
-  pokemonStats.map(
-    (currStat, i) =>
-      currStat.effort > 0 && (
-        <Numbered key={`${currStat.stat.name}-${i}`}>{`${currStat.effort} ${removeDash(
-          currStat.stat.name,
-        )}`}</Numbered>
-      ),
-  );
-
-// catch rate
-const catchRate = (rate: PokemonSpecies['capture_rate']): JSX.Element => {
-  const rateChance = Math.round((33.33 / 255) * rate);
-
-  return (
-    <>
-      {rate}
-      <Numbered light>{`( ${rateChance}% with pokeball, full HP )`}</Numbered>
-    </>
-  );
-};
-
-// base happiness
-const baseHappiness = (happiness: PokemonSpecies['base_happiness']): string => {
-  let happinessRate: string;
-
-  if (happiness <= 69) {
-    happinessRate = 'Lower than normal';
-  } else if (happiness === 70) {
-    happinessRate = 'Normal';
-  } else if (happiness >= 71 && happiness <= 139) {
-    happinessRate = 'Higher than normal';
-  } else if (happiness >= 140) {
-    happinessRate = 'Very high';
-  }
-
-  return `${happiness} ( ${happinessRate} )`;
-};
 
 interface TrainingProps extends BoxProps {
   pokemon: Pokemon;
@@ -60,9 +20,42 @@ const Training = ({ pokemon, species, ...rest }: TrainingProps): JSX.Element => 
   // data
   const { stats, base_experience, held_items } = pokemon;
   const { capture_rate, base_happiness, growth_rate } = species;
-
   // held items
   const [items, setItems] = useState([]);
+  // memo
+  const EVYield = useMemo(
+    () =>
+      stats.map(
+        (currStat, i) =>
+          currStat.effort > 0 && (
+            <Numbered key={`${currStat.stat.name}-${i}`}>{`${currStat.effort} ${removeDash(
+              currStat.stat.name,
+            )}`}</Numbered>
+          ),
+      ),
+    [stats],
+  );
+  const catchRate = useMemo(
+    () => (
+      <>
+        {capture_rate}
+        <Numbered light>{`( ${Math.round(
+          (33.33 / 255) * capture_rate,
+        )}% with pokeball, full HP )`}</Numbered>
+      </>
+    ),
+    [capture_rate],
+  );
+  const baseHappiness = useMemo(() => {
+    let happinessRate: string;
+
+    if (base_happiness <= 69) happinessRate = 'Lower than normal';
+    if (base_happiness === 70) happinessRate = 'Normal';
+    if (base_happiness >= 71 && base_happiness <= 139) happinessRate = 'Higher than normal';
+    if (base_happiness >= 140) happinessRate = 'Very high';
+
+    return `${base_happiness} ( ${happinessRate} )`;
+  }, [base_happiness]);
 
   useEffect(() => {
     if (held_items?.length && gameVersion) {
@@ -94,15 +87,15 @@ const Training = ({ pokemon, species, ...rest }: TrainingProps): JSX.Element => 
         <tbody>
           <tr>
             <th>EV Yield</th>
-            <td>{EVYield(stats)}</td>
+            <td>{EVYield}</td>
           </tr>
           <tr>
             <th>Catch Rate</th>
-            <td>{catchRate(capture_rate)}</td>
+            <td>{catchRate}</td>
           </tr>
           <tr>
             <th>Base Happiness</th>
-            <td>{baseHappiness(base_happiness)}</td>
+            <td>{baseHappiness}</td>
           </tr>
           <tr>
             <th>Base Exp.</th>

@@ -1,5 +1,4 @@
 import Head from 'next/head';
-import Script from 'next/script';
 // helpers
 import getConfig from 'next/config';
 
@@ -14,14 +13,6 @@ const PokestatsHead = ({ children }: PokestatsHeadProps): JSX.Element => {
 
   return (
     <Head>
-      <Script>
-        {`!function(g,s,q,r,d){r=g[r]=g[r]||function(){(r.q=r.q||[]).push(arguments)};
-  d=s.createElement(q);d.src='//d1l6p2sc9645hc.cloudfront.net/gosquared.js';q=
-  s.getElementsByTagName(q)[0];q.parentNode.insertBefore(d,q)}(window,document
-  ,'script','_gs');
-
-  _gs('${publicRuntimeConfig.NEXT_PUBLIC_ANALYTICS}');`}
-      </Script>
       <meta charSet="utf-8" />
       <meta httpEquiv="X-UA-Compatible" content="IE=edge,chrome=1" />
       <meta
@@ -92,6 +83,14 @@ const PokestatsHead = ({ children }: PokestatsHeadProps): JSX.Element => {
       {/** Orientation */}
       <meta name="screen-orientation" content="portrait" />
       {children}
+      <script>
+        {`!function(g,s,q,r,d){r=g[r]=g[r]||function(){(r.q=r.q||[]).push(arguments)};
+  d=s.createElement(q);d.src='//d1l6p2sc9645hc.cloudfront.net/gosquared.js';q=
+  s.getElementsByTagName(q)[0];q.parentNode.insertBefore(d,q)}(window,document
+  ,'script','_gs');
+
+  _gs('${publicRuntimeConfig.NEXT_PUBLIC_ANALYTICS}');`}
+      </script>
     </Head>
   );
 };

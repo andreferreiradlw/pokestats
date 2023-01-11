@@ -17,6 +17,8 @@ import {
   getIdFromSpecies,
   mapGenerationToGame,
   removeDash,
+  formatFlavorText,
+  gameVersions,
 } from '@/helpers';
 import { PokestatsPageTitle } from '@/components/Head';
 // components
@@ -66,10 +68,32 @@ const PokestatsPokemonPage: NextPage<PokestatsPokemonPageProps> = ({
     );
   }
 
+  const pokemonName = removeDash(props.pokemon.name);
+  const pageTitle = `${pokemonName} (Pokémon) - ${PokestatsPageTitle}`;
+  const pageDescription = formatFlavorText(props.species.flavor_text_entries[0]?.flavor_text);
+  const generationDescriptions = gameVersions
+    .filter(version => version.genValue === props.species.generation.name)
+    .map(game => game.name)
+    .join(', ');
+
   return (
     <>
       <Head>
-        <title>{`${removeDash(props.pokemon.name)} (Pokemon) - ${PokestatsPageTitle}`}</title>
+        <title>{pageTitle}</title>
+        <meta name="description" content={pageDescription} />
+        <meta
+          name="keywords"
+          content={`${pokemonName}, Pokemon, Pokémon, Pokédex, Pokestats, ${generationDescriptions}`}
+        />
+        {/** Open Graph */}
+        <meta property="og:title" content={pageTitle} />
+        <meta property="og:description" content={pageDescription} />
+        <meta
+          property="og:image"
+          content={`https://raw.githubusercontent.com/HybridShivam/Pokemon/master/assets/images/${props.pokemon.id
+            .toString()
+            .padStart(3, '0')}.png`}
+        />
       </Head>
       <Layout
         withHeader={{

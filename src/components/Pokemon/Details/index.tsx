@@ -6,7 +6,13 @@ import type { Ability } from 'pokenode-ts';
 // helpers
 import GameVersionContext from '@/components/Layout/gameVersionContext';
 import { AnimatePresence } from 'framer-motion';
-import { capitalize, removeDash, fadeInUpVariant, mapGeneration } from '@/helpers';
+import {
+  capitalize,
+  removeDash,
+  fadeInUpVariant,
+  mapGeneration,
+  formatFlavorText,
+} from '@/helpers';
 // components
 import BoxWrapper from '@/components/Box/StyledBox';
 import TypeBadge from '@/components/TypeBadge';
@@ -51,12 +57,7 @@ const PokemonDetails = ({
     // letter-hyphen-newline becomes letter-hyphen, to preserve real hyphenation
     // any other newline becomes a space
     return versionEntry.length
-      ? versionEntry[0].flavor_text
-          .replace(/\u00AD/g, '')
-          .replace(/\u000C/g, ' ')
-          .replace(/u' -\n'/, ' - ')
-          .replace(/u'-\n'/, '-')
-          .replace(/(\r\n|\n|\r)/gm, ' ')
+      ? formatFlavorText(versionEntry[0].flavor_text)
       : 'No description available for currently selected generation.';
   }, [gameVersion, flavor_text_entries]);
 

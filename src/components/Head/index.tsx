@@ -1,7 +1,5 @@
 import Head from 'next/head';
 import Script from 'next/script';
-// helpers
-import getConfig from 'next/config';
 
 interface PokestatsHeadProps {
   children?: React.ReactNode;
@@ -10,17 +8,12 @@ interface PokestatsHeadProps {
 const PokestatsPageTitle = 'PokeStats.gg - The Pokédex powered by PokeApi';
 
 const PokestatsHead = ({ children }: PokestatsHeadProps): JSX.Element => {
-  const { publicRuntimeConfig } = getConfig();
-
   return (
     <Head>
       <Script>{`window.sa_event=window.sa_event||function(){var a=[].slice.call(arguments);window.sa_event.q?window.sa_event.q.push(a):window.sa_event.q=[a]};`}</Script>
       <meta charSet="utf-8" />
       <meta httpEquiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-      <meta
-        name="viewport"
-        content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"
-      />
+      <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
       <meta
         name="description"
         content="PokeStats.gg is an online encyclopedia of Pokémon species containing information such as Pokédex entries, descriptions, abilities, evolution chains, moves learned, stats and much more!"
@@ -30,6 +23,7 @@ const PokestatsHead = ({ children }: PokestatsHeadProps): JSX.Element => {
         content="pokemon, Pokémon, stats, pokedex, Pokédex, pokestats, poke stats, pokestats gg, database, pokeapi, moves, abilities, evolutions, locations, Pokestats, Pokémon, Pocket Monsters, Pokémon Sun, Pokémon Moon, Pokémon Ultra Sun, Pokémon Ultra Moon, Pokémon GO, Pokémon Let's Go Pikachu, Pokémon Let's Go Eevee, Pokemon Anime, Anime, TCG, Pokémon TCG"
       />
       <title>{PokestatsPageTitle}</title>
+      <meta name="robots" content="max-image-preview:large" />
       {/** FONTS */}
       <link rel="preload" href="/fonts/Montserrat-Regular.ttf" as="font" crossOrigin="" />
       <link rel="preload" href="/fonts/Montserrat-Medium.ttf" as="font" crossOrigin="" />
@@ -55,12 +49,15 @@ const PokestatsHead = ({ children }: PokestatsHeadProps): JSX.Element => {
       <link rel="icon" type="image/png" sizes="32x32" href="/static/favicon-32x32.png" />
       <link rel="icon" type="image/png" sizes="96x96" href="/static/favicon-96x96.png" />
       <link rel="icon" type="image/png" sizes="16x16" href="/static/favicon-16x16.png" />
-      {/** WINDOWS */}
+      {/** Open Graph */}
+      <meta property="og:image:width" content="512" />
+      <meta property="og:image:height" content="512" />
+      {/** Windows */}
       <meta name="msapplication-navbutton-color" content="red" />
       <meta name="msapplication-TileColor" content="blue" />
       <meta name="msapplication-TileImage" content="/static/ms-icon-144x144.png" />
       <meta name="msapplication-config" content="browserconfig.xml" />
-      {/** ANDROID */}
+      {/** Android */}
       <meta name="theme-color" content="black" />
       <meta name="mobile-web-app-capable" content="yes" />
       {/** IOS */}
@@ -71,6 +68,9 @@ const PokestatsHead = ({ children }: PokestatsHeadProps): JSX.Element => {
       <meta name="application-name" content="PokeStats" />
       <meta name="msapplication-tooltip" content="Online encyclopedia of Pokémon species." />
       <meta name="msapplication-starturl" content="/" />
+      {/** Twitter */}
+      <meta name="twitter:card" content="summary" />
+      <meta name="twitter:image" content="/static/android-icon-512x512.png" />
       {/** Tap highlighting */}
       <meta name="msapplication-tap-highlight" content="no" />
       {/** UC Mobile Browser */}

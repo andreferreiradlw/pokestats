@@ -15,11 +15,6 @@ const App = ({ Component, pageProps, router }: AppProps): JSX.Element => {
 
   return (
     <ThemeProvider>
-      <Script
-        src="https://instant-the-passenger.pokestats.gg/script.js"
-        data-site={publicRuntimeConfig?.NEXT_PUBLIC_ANALYTICS}
-        defer
-      />
       <PokestatsHead />
       <AnimatePresence mode="wait">
         <motion.div
@@ -32,6 +27,19 @@ const App = ({ Component, pageProps, router }: AppProps): JSX.Element => {
           <Component {...pageProps} />
         </motion.div>
       </AnimatePresence>
+      <Script
+        async
+        defer
+        id="waa"
+        data-waa-late-init="true"
+        src={`https://stats.wideangle.co/script/${publicRuntimeConfig?.NEXT_PUBLIC_ANALYTICS}.js`}
+      />
+      <Script type="application/javascript">
+        {`var waaScript = document.querySelector('#waa');
+  waaScript.addEventListener('load', function() {
+    waaCreate().then(waa => { window.waa = waa; });
+  });`}
+      </Script>
     </ThemeProvider>
   );
 };

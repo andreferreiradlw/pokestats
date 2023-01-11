@@ -25,8 +25,7 @@ const Homepage = ({ allPokemon, pokemonTypes }: HomepageProps): JSX.Element => {
   const router = useRouter();
 
   const routeRandom = () => {
-    if (process.env.NODE_ENV === 'production' && window?.fathom)
-      window.fathom.trackGoal('M4G8VCB4', 0);
+    if (process.env.NODE_ENV === 'production' && window?.waa) window.waa.dispatch('Random Pokemon');
     router.push(`/pokemon/${allPokemon[Math.floor(Math.random() * allPokemon.length)].name}`);
   };
 

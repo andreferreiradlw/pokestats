@@ -89,7 +89,7 @@ const PokestatsHead = ({ children }: PokestatsHeadProps): JSX.Element => {
   s.getElementsByTagName(q)[0];q.parentNode.insertBefore(d,q)}(window,document
   ,'script','_gs');
 
-  _gs('${publicRuntimeConfig.NEXT_PUBLIC_ANALYTICS}');`}
+  _gs('${publicRuntimeConfig?.NEXT_PUBLIC_ANALYTICS}');`}
       </script>
     </Head>
   );

@@ -2,6 +2,7 @@ export {};
 
 declare global {
   interface Window {
-    waa?: any;
+    sa_loaded?: any;
+    sa_event?: any;
   }
 }

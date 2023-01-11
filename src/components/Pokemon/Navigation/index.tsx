@@ -10,11 +10,12 @@ import Image from '@/components/Image';
 import { BtnContainer, BtnAnchor, Title, Arrow } from './StyledNavigation';
 
 const nextPokemon = () => {
-  // if (process.env.NODE_ENV === 'production' && window?.waa) window.waa.dispatch('Next Pokemon');
+  if (process.env.NODE_ENV === 'production' && window?.sa_loaded) window.sa_event('next_pokemon');
 };
 
 const previousPokemon = () => {
-  // if (process.env.NODE_ENV === 'production' && window?.waa) window.waa.dispatch('Previous Pokemon');
+  if (process.env.NODE_ENV === 'production' && window?.sa_loaded)
+    window.sa_event('previous_pokemon');
 };
 
 interface NavigationProps extends BoxProps {

@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import Script from 'next/script';
 // helpers
 import getConfig from 'next/config';
 
@@ -13,6 +14,7 @@ const PokestatsHead = ({ children }: PokestatsHeadProps): JSX.Element => {
 
   return (
     <Head>
+      <Script>{`window.sa_event=window.sa_event||function(){var a=[].slice.call(arguments);window.sa_event.q?window.sa_event.q.push(a):window.sa_event.q=[a]};`}</Script>
       <meta charSet="utf-8" />
       <meta httpEquiv="X-UA-Compatible" content="IE=edge,chrome=1" />
       <meta

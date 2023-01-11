@@ -24,7 +24,12 @@ const App = ({ Component, pageProps, router }: AppProps): JSX.Element => {
           <Component {...pageProps} />
         </motion.div>
       </AnimatePresence>
-      <Script src="https://scripts.simpleanalyticscdn.com/latest.js" />
+      <Script
+        data-collect-dnt="true"
+        async
+        defer
+        src="https://scripts.simpleanalyticscdn.com/latest.js"
+      />
       <noscript>
         <img
           src="https://queue.simpleanalyticscdn.com/noscript.gif"

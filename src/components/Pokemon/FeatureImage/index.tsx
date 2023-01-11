@@ -8,7 +8,7 @@ import { scaleInVariant } from '@/helpers/animations';
 import { JpnName } from '@/components/BaseStyles';
 import { ImageContainer } from './StyledFeatureImage';
 // components
-import Image from '@/components/Image';
+import ImageNext from '@/components/ImageNext';
 
 interface FeaturedImageProps extends BoxProps {
   specieNames: PokemonSpecies['names'];
@@ -34,11 +34,11 @@ const FeaturedImage = ({
 
   return (
     <ImageContainer {...rest}>
-      <Image
-        lazy={false}
+      <ImageNext
+        priority
+        loading="eager"
         placeholderwidth="20%"
         alt={englishName}
-        key={`featured-${pokemonName}-${pokemonId}`}
         src={`https://raw.githubusercontent.com/HybridShivam/Pokemon/master/assets/images/${pokemonId
           .toString()
           .padStart(3, '0')}.png`}

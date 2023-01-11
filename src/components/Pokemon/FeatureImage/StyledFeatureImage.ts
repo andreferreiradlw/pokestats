@@ -1,8 +1,8 @@
 import styled, { css } from 'styled-components';
 // components
-import Box from '../../Box';
+import Box from '@/components/Box';
 // styles
-import { float } from '../../BaseStyles';
+import { float } from '@/components/BaseStyles';
 
 const ImageContainer = styled(Box)`
   height: 100%;
@@ -29,7 +29,7 @@ const ImageContainer = styled(Box)`
         max-width: 55%;
       }
       @media ${theme.device.lg} {
-        max-width: 65%;
+        max-width: 80%;
       }
     `}
 

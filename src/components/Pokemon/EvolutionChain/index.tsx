@@ -45,7 +45,7 @@ const EvolutionChain = ({
             {secondEvolution.map(({ species, evolutionDetails }, i) => (
               <Box
                 flexdirection={{ xxs: 'column', lg: 'row' }}
-                flexalign={{ xxs: 'flex-end', lg: 'center' }}
+                flexalign="center"
                 key={`second-evo-container-${i}-${chainId}`}
                 width={{ xxs: '200px', lg: '100%' }}
                 flexgap="1em"

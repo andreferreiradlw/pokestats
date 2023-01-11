@@ -1,14 +1,14 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 // components
 import Box from '@/components/Box';
-import Image from '@/components/Image';
+import ImageNext from '@/components/ImageNext';
 import { SectionSubTitle } from '@/components/BaseStyles';
 
 const SpriteContainer = styled(Box)`
   text-align: center;
 `;
 
-const Sprite = styled(Image)``;
+const Sprite = styled(ImageNext)``;
 
 const SpriteSubtitle = styled(SectionSubTitle)`
   text-align: center;

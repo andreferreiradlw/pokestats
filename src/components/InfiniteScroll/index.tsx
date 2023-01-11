@@ -6,7 +6,7 @@ import type { Pokemon } from '@/types';
 // components
 import Box, { BoxProps } from '@/components/Box';
 import Loading from '@/components/Loading';
-import PokemonBox from './PokemonBox';
+import PokemonBox from '@/components/PokemonBox';
 
 export interface InfiniteScrollProps extends BoxProps {
   pokemonList: Pokemon[];
@@ -118,9 +118,10 @@ export default function InfiniteScroll({
       >
         {showList?.map(currPokemon => (
           <PokemonBox
-            dark={dark}
+            $dark={dark}
             key={`infinite-scroll-${currPokemon.id}`}
-            pokemon={currPokemon}
+            pokemonName={currPokemon.name}
+            pokemonId={currPokemon.id}
             whileHover="hover"
             whileTap="tap"
             variants={fadeInUpVariant}

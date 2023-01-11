@@ -3,11 +3,11 @@ import { useMemo } from 'react';
 import type { Pokemon, PokemonSpecies, PokemonSprites } from 'pokenode-ts';
 // helpers
 import { removeUnderscore } from '@/helpers/typography';
-// components
-import Box, { BoxProps } from '@/components/Box';
 // styles
 import { SectionTitle, SectionSubTitle } from '@/components/BaseStyles';
 import { SpriteContainer, Sprite, SpriteSubtitle, NoSprites } from './StyledSprites';
+// components
+import Box, { BoxProps } from '@/components/Box';
 
 interface SpritesProps extends BoxProps {
   pokemonSprites: PokemonSprites;
@@ -61,8 +61,7 @@ const Sprites = ({ pokemonSprites, pokemonId, forms, ...rest }: SpritesProps): J
                         key={`sprite-${key}`}
                         src={pokemonSprites[key]}
                         width="140"
-                        pixelateImg
-                        placeholderwidth="40%"
+                        $pixelatedImg
                       />
                       <p>{removeUnderscore(key)}</p>
                     </SpriteContainer>
@@ -90,8 +89,7 @@ const Sprites = ({ pokemonSprites, pokemonId, forms, ...rest }: SpritesProps): J
                           key={`animated-sprite-${key}`}
                           src={animatedSprites[key]}
                           height="100"
-                          pixelateImg
-                          placeholderwidth="40%"
+                          $pixelatedImg
                         />
                         <p>{removeUnderscore(key)}</p>
                       </SpriteContainer>
@@ -117,7 +115,6 @@ const Sprites = ({ pokemonSprites, pokemonId, forms, ...rest }: SpritesProps): J
                     key="official-artwork"
                     src={officalArtworkSprites.front_default}
                     height="180"
-                    placeholderwidth="30%"
                   />
                 </SpriteContainer>
               </Box>
@@ -135,7 +132,6 @@ const Sprites = ({ pokemonSprites, pokemonId, forms, ...rest }: SpritesProps): J
                             key={`dreamworld-sprite-${key}`}
                             src={dreamWorldSprites[key]}
                             height="170"
-                            placeholderwidth="30%"
                           />
                         </SpriteContainer>
                       ),
@@ -162,7 +158,6 @@ const Sprites = ({ pokemonSprites, pokemonId, forms, ...rest }: SpritesProps): J
                         .toString()
                         .padStart(3, '0')}-${name}.png`}
                       height="180"
-                      placeholderwidth="30%"
                     />
                   </SpriteContainer>
                 </Box>

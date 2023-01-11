@@ -13,9 +13,4 @@ const EvoArrow = styled(Arrow)`
   `}
 `;
 
-const PokeGen = styled.span`
-  font-size: 1rem;
-  font-weight: 300;
-`;
-
-export { EvoArrow, PokeGen };
+export { EvoArrow };

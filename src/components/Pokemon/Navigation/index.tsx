@@ -3,11 +3,11 @@ import type { PokestatsPokemonPageProps } from '@/pages/pokemon/[pokemonId]';
 import type { Pokemon } from 'pokenode-ts';
 // helpers
 import { removeDash, fadeInUpVariant } from '@/helpers';
-// components
-import Box, { BoxProps } from '@/components/Box';
-import Image from '@/components/Image';
 // styles
 import { BtnContainer, BtnAnchor, Title, Arrow } from './StyledNavigation';
+// components
+import Box, { BoxProps } from '@/components/Box';
+import ImageNext from '@/components/ImageNext';
 
 const nextPokemon = () => {
   if (process.env.NODE_ENV === 'production' && window?.sa_loaded) window.sa_event('next_pokemon');
@@ -47,7 +47,7 @@ const Navigation = ({ allPokemon, pokemonId, ...rest }: NavigationProps): JSX.El
             $left
           >
             <Arrow $left>
-              <Image
+              <ImageNext
                 src={`https://raw.githubusercontent.com/HybridShivam/Pokemon/master/assets/images/${(
                   pokemonId - 1
                 )
@@ -56,8 +56,7 @@ const Navigation = ({ allPokemon, pokemonId, ...rest }: NavigationProps): JSX.El
                 alt={allPokemon[pokemonId - 2].name}
                 key={`navigation-left-${allPokemon[pokemonId - 2].name}`}
                 width="100"
-                pixelateImg
-                lazy={false}
+                $pixelatedImg
               />
             </Arrow>
             <Title>
@@ -76,7 +75,7 @@ const Navigation = ({ allPokemon, pokemonId, ...rest }: NavigationProps): JSX.El
         >
           <BtnAnchor href={`/pokemon/${allPokemon[pokemonId].name}`} onClick={nextPokemon} $right>
             <Arrow $right>
-              <Image
+              <ImageNext
                 src={`https://raw.githubusercontent.com/HybridShivam/Pokemon/master/assets/images/${(
                   pokemonId + 1
                 )
@@ -85,8 +84,7 @@ const Navigation = ({ allPokemon, pokemonId, ...rest }: NavigationProps): JSX.El
                 alt={allPokemon[pokemonId].name}
                 key={`navigation-right-${allPokemon[pokemonId].name}`}
                 width="100"
-                pixelateImg
-                lazy={false}
+                $pixelatedImg
               />
             </Arrow>
             <Title>

@@ -24,15 +24,10 @@ const App = ({ Component, pageProps, router }: AppProps): JSX.Element => {
           <Component {...pageProps} />
         </motion.div>
       </AnimatePresence>
-      <Script
-        data-collect-dnt="true"
-        async
-        defer
-        src="https://scripts.simpleanalyticscdn.com/latest.js"
-      />
+      <Script data-collect-dnt="true" async defer src="https://sa.pokestats.gg/latest.js" />
       <noscript>
         <img
-          src="https://queue.simpleanalyticscdn.com/noscript.gif"
+          src="https://sa.pokestats.gg/noscript.gif"
           alt=""
           referrerPolicy="no-referrer-when-downgrade"
         />

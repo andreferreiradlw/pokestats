@@ -22,8 +22,8 @@ const TypePage = ({ typeInfo, typeMoves }: TypePageProps): JSX.Element => {
   return (
     <AnimatePresence mode="wait">
       <MainContainer
-        justify="flex-start"
-        align="flex-start"
+        flexjustify="flex-start"
+        flexalign="flex-start"
         $constrained
         $withGutter
         initial="hidden"
@@ -33,32 +33,32 @@ const TypePage = ({ typeInfo, typeMoves }: TypePageProps): JSX.Element => {
         key={`type-${name}`}
       >
         <Box
-          direction={{ xxs: 'column-reverse', lg: 'row' }}
-          align="flex-start"
-          justify="flex-start"
-          $gap="2em"
+          flexdirection={{ xxs: 'column-reverse', lg: 'row' }}
+          flexalign="flex-start"
+          flexjustify="flex-start"
+          flexgap="2em"
         >
           <Box
-            justify={{ xxs: 'center', lg: 'flex-start' }}
-            align={{ xxs: 'center', lg: 'flex-start' }}
-            $gap="2em"
+            flexjustify={{ xxs: 'center', lg: 'flex-start' }}
+            flexalign={{ xxs: 'center', lg: 'flex-start' }}
+            flexgap="2em"
           >
             <PageHeading>{removeDash(name)}</PageHeading>
             <Box
-              direction={{ xxs: 'column', md: 'row' }}
-              justify={{ xxs: 'center', md: 'flex-start' }}
-              align={{ xxs: 'center', md: 'flex-start' }}
-              sizes={{ xxs: 12, lg: 8 }}
-              $gap="2em"
+              flexdirection={{ xxs: 'column', md: 'row' }}
+              flexjustify={{ xxs: 'center', md: 'flex-start' }}
+              flexalign={{ xxs: 'center', md: 'flex-start' }}
+              screensizes={{ xxs: 12, lg: 8 }}
+              flexgap="2em"
             >
               <TypeInfo type={typeInfo} />
               <TypeRelations relations={damage_relations} />
             </Box>
           </Box>
-          <TypeIcon sizes={{ xxs: 12, lg: 4 }} typeName={name} otherNames={names} />
+          <TypeIcon screensizes={{ xxs: 12, lg: 4 }} typeName={name} otherNames={names} />
         </Box>
-        <Box align="flex-start" justify="flex-start">
-          <Tabs typeInfo={typeInfo} typeMoves={typeMoves} sizes={12} />
+        <Box flexalign="flex-start" flexjustify="flex-start">
+          <Tabs typeInfo={typeInfo} typeMoves={typeMoves} screensizes={12} />
         </Box>
       </MainContainer>
     </AnimatePresence>

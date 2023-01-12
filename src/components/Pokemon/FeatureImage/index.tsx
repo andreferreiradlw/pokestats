@@ -1,13 +1,14 @@
 // types
 import type { Pokemon, PokemonSpecies } from 'pokenode-ts';
 import type { BoxProps } from '@/components/Box';
-// components
-import Image from '@/components/Image';
+import { useMemo } from 'react';
 // helpers
 import { scaleInVariant } from '@/helpers/animations';
 // styles
 import { JpnName } from '@/components/BaseStyles';
 import { ImageContainer } from './StyledFeatureImage';
+// components
+import ImageNext from '@/components/ImageNext';
 
 interface FeaturedImageProps extends BoxProps {
   specieNames: PokemonSpecies['names'];
@@ -21,14 +22,26 @@ const FeaturedImage = ({
   pokemonId,
   ...rest
 }: FeaturedImageProps): JSX.Element => {
+  // memo
+  const englishName = useMemo(
+    () => specieNames?.find(name => name.language.name === 'en').name,
+    [specieNames],
+  );
+  const hiraganaName = useMemo(
+    () => specieNames?.find(name => name.language.name === 'ja').name,
+    [specieNames],
+  );
+
   return (
     <ImageContainer {...rest}>
-      <Image
-        lazy={false}
+      <ImageNext
+        priority
+        loading="eager"
         placeholderwidth="20%"
-        alt={specieNames?.find(name => name.language.name === 'en').name}
-        key={`featured-${pokemonName}-${pokemonId}`}
-        src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemonId}.png`}
+        alt={englishName}
+        src={`https://raw.githubusercontent.com/HybridShivam/Pokemon/master/assets/images/${pokemonId
+          .toString()
+          .padStart(3, '0')}.png`}
       />
       {specieNames && (
         <JpnName
@@ -37,7 +50,7 @@ const FeaturedImage = ({
           variants={scaleInVariant}
           key={`jpn-name-${pokemonId}`}
         >
-          {specieNames.find(name => name.language.name === 'ja').name}
+          {hiraganaName}
         </JpnName>
       )}
     </ImageContainer>

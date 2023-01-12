@@ -4,16 +4,16 @@ import { AnimatePresence } from 'framer-motion';
 import { staggerInitialVariant, fadeInUpVariant } from '@/helpers';
 // types
 import type { Pokemon, PokemonType } from '@/types';
+// styles
+import { Container, GithubLink, ScrollDown, ListContainer } from './styledHomepage';
+import { MainHeading, Button } from '@/components/BaseStyles';
 // components
 import Autocomplete from '@/components/Autocomplete';
-import { Button } from '@/components/BaseStyles/button';
 import Particles from '@/components/Particles';
 import PokemonList from './PokemonList';
-// styles
-import { Container, RepoAnchor, ScrollDown } from './styledHomepage';
-import { MainHeading } from '@/components/BaseStyles';
-// svg
-import Github from '@/assets/svg/github.svg';
+import TypeList from './TypeList';
+// icons
+import Github from 'public/static/iconLibrary/github.svg';
 
 interface HomepageProps {
   allPokemon: Pokemon[];
@@ -25,14 +25,19 @@ const Homepage = ({ allPokemon, pokemonTypes }: HomepageProps): JSX.Element => {
   const router = useRouter();
 
   const routeRandom = () => {
-    if (process.env.NODE_ENV === 'production' && window?.fathom)
-      window.fathom.trackGoal('M4G8VCB4', 0);
+    if (process.env.NODE_ENV === 'production' && window?.sa_loaded)
+      window.sa_event('random_pokemon');
     router.push(`/pokemon/${allPokemon[Math.floor(Math.random() * allPokemon.length)].name}`);
+  };
+
+  const githubClick = () => {
+    if (process.env.NODE_ENV === 'production' && window?.sa_loaded)
+      window.sa_event('github_homepage');
   };
 
   return (
     <AnimatePresence>
-      <RepoAnchor
+      <GithubLink
         href="https://github.com/andreferreiradlw/pokestats"
         target="_blank"
         rel="noopener"
@@ -42,11 +47,12 @@ const Homepage = ({ allPokemon, pokemonTypes }: HomepageProps): JSX.Element => {
         whileTap="tap"
         variants={fadeInUpVariant}
         key="homepage-github"
+        onClick={githubClick}
       >
         <Github />
-      </RepoAnchor>
+      </GithubLink>
       <Container
-        height="100vh"
+        flexheight="100vh"
         $constrained
         $withGutter
         initial="hidden"
@@ -67,7 +73,10 @@ const Homepage = ({ allPokemon, pokemonTypes }: HomepageProps): JSX.Element => {
         </Button>
         <ScrollDown variants={fadeInUpVariant} key="homepage-scroll-down" />
       </Container>
-      <PokemonList pokemon={allPokemon} key="homepage-pokemon-list" />
+      <ListContainer flexgap="2em" flexpadding="3em 0">
+        <TypeList types={pokemonTypes} />
+        <PokemonList pokemon={allPokemon} key="homepage-pokemon-list" />
+      </ListContainer>
       <Particles key="homepage-particles" />
     </AnimatePresence>
   );

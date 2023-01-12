@@ -1,9 +1,7 @@
-import { useEffect, useContext, useRef } from 'react';
+import { useEffect, useContext } from 'react';
 // types
 import type { PokestatsPokemonPageProps } from '@/pages/pokemon/[pokemonId]';
 // helpers
-import dynamic from 'next/dynamic';
-import { useIntersectionObserver } from '@/hooks';
 import GameVersionContext from '@/components/Layout/gameVersionContext';
 import { mapGenerationToGame, pageContainerVariant } from '@/helpers';
 // components
@@ -18,7 +16,7 @@ import Training from './Training';
 import Multipliers from './Multipliers';
 import BaseStats from './BaseStats';
 import PokemonForms from './Forms';
-const Moves = dynamic(() => import('./Moves'));
+import Moves from './Moves';
 import Sprites from './Sprites';
 import Navigation from './Navigation';
 
@@ -27,17 +25,14 @@ const PokemonPage = ({
   pokemon,
   abilities,
   species,
-  evolution,
+  evolutionChain,
 }: Omit<PokestatsPokemonPageProps, 'allPokemonTypes' | 'pokemonGen'>): JSX.Element => {
   // game version
   const { setGameVersion } = useContext(GameVersionContext);
   // data
   const { id, name, stats, types, sprites, game_indices } = pokemon;
-  const { names, generation } = species;
-  // lazy load moves
-  const ref = useRef<HTMLDivElement | null>(null);
-  const entry = useIntersectionObserver(ref, { freezeOnceVisible: true });
-  const isMovesVisible = !!entry?.isIntersecting;
+  const { names, generation, varieties } = species;
+  const { babyTriggerItem } = evolutionChain;
 
   useEffect(() => {
     let pokemonGen: string;
@@ -61,20 +56,20 @@ const PokemonPage = ({
         key={`pokemon-${name}`}
       >
         <Box
-          direction={{ xxs: 'column-reverse', lg: 'row' }}
-          align="center"
-          justify="flex-start"
-          $gap="2em"
+          flexdirection={{ xxs: 'column-reverse', lg: 'row' }}
+          flexalign="center"
+          flexjustify="flex-start"
+          flexgap="2em"
         >
           <Details
-            sizes={{ xxs: 12, lg: 5 }}
+            screensizes={{ xxs: 12, lg: 5 }}
             key={`pokemon-details-${name}`}
             pokemon={pokemon}
             abilities={abilities}
             species={species}
           />
           <FeaturedImage
-            sizes={{ xxs: 12, lg: 7 }}
+            screensizes={{ xxs: 12, lg: 7 }}
             specieNames={names}
             pokemonName={name}
             pokemonId={id}
@@ -82,45 +77,45 @@ const PokemonPage = ({
         </Box>
         {/** BREEDING, TRAINING, MULTIPLIERS */}
         <Box
-          direction={{ xxs: 'column', lg: 'row' }}
-          align="flex-start"
-          justify="flex-start"
-          $gap="2em"
+          flexdirection={{ xxs: 'column', lg: 'row' }}
+          flexalign="flex-start"
+          flexjustify="flex-start"
+          flexgap="2em"
         >
-          <Breeding species={species} evolutionChain={evolution} />
+          <Breeding species={species} babyTriggerItem={babyTriggerItem} />
           <Training pokemon={pokemon} species={species} />
           <Multipliers pokemonTypes={types} />
         </Box>
         {/** EVOLUTION CHAIN */}
-        <Box align="flex-start" justify="flex-start">
+        <Box flexalign="flex-start" flexjustify="flex-start">
           <EvolutionChain
-            sizes={12}
+            screensizes={12}
             key={`pokemon-evolution-${name}`}
             pokemonName={name}
-            evolutionChain={evolution}
+            evolutionChain={evolutionChain}
           />
         </Box>
         {/** BASESTATS, FORMS */}
         <Box
-          direction={{ xxs: 'column', lg: 'row' }}
-          align="flex-start"
-          justify="flex-start"
-          $gap="2em"
+          flexdirection={{ xxs: 'column', lg: 'row' }}
+          flexalign="flex-start"
+          flexjustify="flex-start"
+          flexgap="2em"
         >
-          <BaseStats stats={stats} sizes={{ xxs: 12, lg: 8 }} />
-          <PokemonForms pokemonId={id} species={species} sizes={{ xxs: 12, lg: 4 }} />
+          <BaseStats stats={stats} screensizes={{ xxs: 12, lg: 8 }} />
+          <PokemonForms pokemonId={id} species={species} screensizes={{ xxs: 12, lg: 4 }} />
         </Box>
         {/** MOVES */}
-        <Box align="flex-start" justify="flex-start" ref={ref}>
-          {isMovesVisible && <Moves pokemon={pokemon} sizes={12} />}
+        <Box flexalign="flex-start" flexjustify="flex-start">
+          <Moves pokemon={pokemon} screensizes={12} />
         </Box>
         {/** SPRITES */}
-        <Box align="flex-start" justify="flex-start">
-          <Sprites pokemonSprites={sprites} pokemonId={id} sizes={12} />
+        <Box flexalign="flex-start" flexjustify="flex-start">
+          <Sprites pokemonSprites={sprites} pokemonId={id} forms={varieties} screensizes={12} />
         </Box>
         {/** NAVIGATION */}
-        <Box align="flex-start" justify="flex-start">
-          <Navigation allPokemon={allPokemon} pokemonId={id} sizes={12} />
+        <Box flexalign="flex-start" flexjustify="flex-start">
+          <Navigation allPokemon={allPokemon} pokemonId={id} screensizes={12} />
         </Box>
       </MainContainer>
     </AnimatePresence>

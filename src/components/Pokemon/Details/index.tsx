@@ -1,68 +1,24 @@
-import { useContext } from 'react';
+import { useContext, useMemo } from 'react';
 // types
 import type { BoxProps } from '@/components/Box';
 import type { PokestatsPokemonPageProps } from '@/pages/pokemon/[pokemonId]';
-import type { PokemonAbility, FlavorText, Ability } from 'pokenode-ts';
+import type { Ability } from 'pokenode-ts';
 // helpers
 import GameVersionContext from '@/components/Layout/gameVersionContext';
 import { AnimatePresence } from 'framer-motion';
-import { capitalize, removeDash } from '@/helpers/typography';
-import { fadeInUpVariant } from '@/helpers/animations';
+import {
+  capitalize,
+  removeDash,
+  fadeInUpVariant,
+  mapGeneration,
+  formatFlavorText,
+} from '@/helpers';
 // components
 import BoxWrapper from '@/components/Box/StyledBox';
 import TypeBadge from '@/components/TypeBadge';
 // styles
 import { PageHeading, Table, Numbered } from '@/components/BaseStyles';
 import { TypeContainer, Genera, Flavor } from './StyledDetails';
-
-// flavor text
-const flavorText = (version: string, textEntries: FlavorText[]) => {
-  const versionEntry = textEntries.filter(entry => {
-    // @ts-ignore
-    return entry.version.name === version;
-  });
-  // return formatted text
-  // page breaks are treated just like newlines
-  // soft hyphens followed by newlines vanish
-  // letter-hyphen-newline becomes letter-hyphen, to preserve real hyphenation
-  // any other newline becomes a space
-  return versionEntry.length
-    ? versionEntry[0].flavor_text
-        .replace(/\u00AD/g, '')
-        .replace(/\u000C/g, ' ')
-        .replace(/u' -\n'/, ' - ')
-        .replace(/u'-\n'/, '-')
-        .replace(/(\r\n|\n|\r)/gm, ' ')
-    : 'No description available for currently selected generation.';
-};
-
-// weight
-const pokemonWeight = (currWeight: number): string =>
-  `${currWeight / 10} kg ( ${Math.round(currWeight * 2.2046) / 10} lbs )`;
-
-// height
-const pokemonHeight = (currHeight: number): string => {
-  // calculate height in feet
-  const heightInFeet = Math.round(currHeight * 3.2808) / 10;
-  // split number
-  const numbers = heightInFeet.toString().split('.');
-  // return string
-  return `${currHeight / 10} m ( ${numbers[0] || '0'}'${numbers[1] || '0'}" )`;
-};
-
-// abilities
-const renderAbilities = (
-  currAbilities: PokemonAbility[],
-  abilitiesData: Ability[],
-): JSX.Element[] =>
-  currAbilities.map(({ ability, is_hidden }, i) => (
-    <Numbered key={`${ability}-${i}`}>
-      {`${i + 1}. ${removeDash(ability.name)}`}
-      {is_hidden && ' ( Hidden Ability )'}
-      <br />
-      <span>{abilitiesData[i].effect_entries[0]?.short_effect}</span>
-    </Numbered>
-  ));
 
 interface PokemonDetailsProps extends BoxProps {
   pokemon: PokestatsPokemonPageProps['pokemon'];
@@ -80,14 +36,64 @@ const PokemonDetails = ({
   const { gameVersion } = useContext(GameVersionContext);
   // data
   const { types, abilities: pokemonAbilities, id, name, weight, height } = pokemon;
-  const { genera, flavor_text_entries, shape, color, is_baby, is_legendary, is_mythical } = species;
+  const {
+    genera,
+    flavor_text_entries,
+    shape,
+    color,
+    is_baby,
+    is_legendary,
+    is_mythical,
+    generation,
+  } = species;
+  // memo
+  const generationName = useMemo(() => mapGeneration(generation?.name), [generation]);
+  const flavorText = useMemo(() => {
+    // @ts-ignore
+    const versionEntry = flavor_text_entries.filter(entry => entry.version.name === gameVersion);
+    // return formatted text
+    // page breaks are treated just like newlines
+    // soft hyphens followed by newlines vanish
+    // letter-hyphen-newline becomes letter-hyphen, to preserve real hyphenation
+    // any other newline becomes a space
+    return versionEntry.length
+      ? formatFlavorText(versionEntry[0].flavor_text)
+      : 'No description available for currently selected generation.';
+  }, [gameVersion, flavor_text_entries]);
+
+  const pokemonWeight = useMemo(
+    () => `${weight / 10} kg ( ${Math.round(weight * 2.2046) / 10} lbs )`,
+    [weight],
+  );
+
+  const pokemonHeight = useMemo(() => {
+    // calculate height in feet
+    const heightInFeet = Math.round(height * 3.2808) / 10;
+    // split number
+    const numbers = heightInFeet.toString().split('.');
+    // return string
+    return `${height / 10} m ( ${numbers[0] || '0'}'${numbers[1] || '0'}" )`;
+  }, [height]);
+
+  const renderAbilities = useMemo(
+    () =>
+      pokemonAbilities.map(({ ability, is_hidden }, i) => (
+        <Numbered key={`${ability}-${i}`}>
+          {`${i + 1}. ${removeDash(ability.name)}`}
+          {is_hidden && ' ( Hidden Ability )'}
+          <br />
+          <span>{abilities[i].effect_entries[0]?.short_effect}</span>
+        </Numbered>
+      )),
+    [pokemonAbilities, abilities],
+  );
 
   return (
     <AnimatePresence mode="wait">
       <BoxWrapper
-        direction="column"
-        align={{ xxs: 'center', lg: 'flex-start' }}
-        $gap="1em"
+        flexdirection="column"
+        flexalign={{ xxs: 'center', lg: 'flex-start' }}
+        flexgap="0.5em"
         width="100%"
         initial="hidden"
         animate="show"
@@ -95,14 +101,14 @@ const PokemonDetails = ({
         key={`pokemon-details-${name}`}
         {...rest}
       >
-        <PageHeading>{removeDash(name)}</PageHeading>
         {types?.length > 0 && (
-          <TypeContainer direction="row" justify="flex-start" $flexWrap="wrap">
-            {types.map(({ type }, i) => {
-              return <TypeBadge typename={type.name} key={`${type.name}-${i}-detail-${id}`} />;
-            })}
+          <TypeContainer flexdirection="row" flexjustify="flex-start" flexwrap="wrap">
+            {types.map(({ type }, i) => (
+              <TypeBadge $typename={type.name} key={`${type.name}-${i}-detail-${id}`} />
+            ))}
           </TypeContainer>
         )}
+        <PageHeading>{removeDash(name)}</PageHeading>
         {(is_baby || is_legendary || is_mythical) && (
           <Genera>
             {is_baby && `Baby `}
@@ -111,7 +117,7 @@ const PokemonDetails = ({
             Pokemon
           </Genera>
         )}
-        <Flavor>{flavorText(gameVersion, flavor_text_entries)}</Flavor>
+        <Flavor>{flavorText}</Flavor>
         <Table forwardedAs="table">
           <tbody>
             <tr>
@@ -119,20 +125,24 @@ const PokemonDetails = ({
               <td>{`#${id}`}</td>
             </tr>
             <tr>
+              <th>Generation</th>
+              <td>{generationName}</td>
+            </tr>
+            <tr>
               <th>Category</th>
               <td>{genera[0].genus}</td>
             </tr>
             <tr>
               <th>Weight</th>
-              <td>{pokemonWeight(weight)}</td>
+              <td>{pokemonWeight}</td>
             </tr>
             <tr>
               <th>Height</th>
-              <td>{pokemonHeight(height)}</td>
+              <td>{pokemonHeight}</td>
             </tr>
             <tr>
               <th>Abilities</th>
-              <td>{renderAbilities(pokemonAbilities, abilities)}</td>
+              <td>{renderAbilities}</td>
             </tr>
             <tr>
               <th>Shape</th>

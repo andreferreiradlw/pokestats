@@ -1,20 +1,20 @@
 import styled from 'styled-components';
 
 const FooterContainer = styled.footer`
+  align-items: center;
   background-color: black;
   color: white;
   display: flex;
   flex-basis: auto;
   font-weight: 300;
-  width: 100%;
-
-  & span {
-    margin: 1rem 0;
-  }
+  justify-content: center;
+  padding: 1em 0;
+  width: 100%; ;
 `;
 
 const TextContainer = styled.span`
   display: flex;
+  flex-wrap: wrap;
   gap: 0.5em;
 `;
 

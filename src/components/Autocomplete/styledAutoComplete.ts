@@ -44,11 +44,11 @@ const Input = styled.input`
 
   ${({ theme }) => css`
     background-color: ${theme.colors.black};
-    border: 1px solid ${theme.colors.black};
+    border: 1px solid ${theme.colors.white};
     color: ${theme.colors.white};
 
     &::placeholder {
-      color: ${theme.colors.mercury};
+      color: ${theme.colors.white};
       font-style: italic;
       font-weight: 500;
     }
@@ -71,14 +71,23 @@ const ListWrapper = styled.div`
   z-index: 2;
 `;
 
+const OptionImg = styled.img`
+  width: 40px;
+`;
+
 const OptionWrapper = styled(Link)`
   align-items: center;
   cursor: pointer;
   display: flex;
   flex-direction: row;
   font-size: 0.875rem;
-  justify-content: flex-start;
-  padding: 0 1rem 0 0.5rem;
+  justify-content: space-between;
+  padding: 0.5em 1em;
+
+  svg {
+    padding: 5px;
+    width: 40px;
+  }
 
   ${({ theme }) => css`
     background-color: ${theme.colors.white};
@@ -89,18 +98,13 @@ const OptionWrapper = styled(Link)`
     &:focus {
       background-color: ${theme.colors.black};
       color: ${theme.colors.white};
+
+      svg path {
+        fill: ${theme.colors.white};
+        stroke: ${theme.colors.black};
+      }
     }
   `}
-`;
-
-const OptionImg = styled.img<{ $type?: Pokemon['assetType'] | PokemonType['assetType'] }>`
-  width: 50px;
-
-  ${({ $type }) =>
-    $type === 'type' &&
-    css`
-      padding: 10px;
-    `}
 `;
 
 const Option = styled.span`

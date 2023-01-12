@@ -17,5 +17,5 @@ export const boxConfig = {
     md: '0 1.5rem',
     lg: '0 2rem',
   },
-  constrained: '1300px',
+  $constrained: '1300px',
 };

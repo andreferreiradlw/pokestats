@@ -20,16 +20,35 @@ export interface PokestatsTypePageProps {
   typeMoves: Move[];
 }
 
-const PokestatsTypePage: NextPage<PokestatsTypePageProps> = ({ autocompleteList, ...props }) => (
-  <>
-    <Head>
-      <title>{`${removeDash(props.typeInfo.name)} (Type) - ${PokestatsPageTitle}`}</title>
-    </Head>
-    <Layout withHeader={{ autocompleteList: autocompleteList }}>
-      <TypePage {...props} />
-    </Layout>
-  </>
-);
+const PokestatsTypePage: NextPage<PokestatsTypePageProps> = ({ autocompleteList, ...props }) => {
+  const typeName = removeDash(props.typeInfo.name);
+  const pageTitle = `${typeName} (Type) - ${PokestatsPageTitle}`;
+  const pageDescription = `The ${typeName} type ( Japanese: ${
+    props.typeInfo.names.find(name => name.language.name === 'ja-Hrkt').name
+  }タイプ ) is one of the eighteen elemental types in the Pokémon world.`;
+
+  console.log(props);
+
+  return (
+    <>
+      <Head>
+        <title>{pageTitle}</title>
+        <meta name="description" content={pageDescription} />
+        <meta name="keywords" content={`${typeName}, Pokemon, Pokémon, Pokédex, Pokestats, Type`} />
+        {/** Open Graph */}
+        <meta property="og:title" content={pageTitle} />
+        <meta property="og:description" content={pageDescription} />
+        <meta
+          property="og:image"
+          content={`public/static/typeIcons/${props.typeInfo.name.toLocaleLowerCase()}.svg`}
+        />
+      </Head>
+      <Layout withHeader={{ autocompleteList: autocompleteList }}>
+        <TypePage {...props} />
+      </Layout>
+    </>
+  );
+};
 
 export const getStaticPaths: GetStaticPaths = async () => {
   // clients

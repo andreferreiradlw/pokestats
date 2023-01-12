@@ -1,57 +1,42 @@
-import { useState, useEffect, useRef } from 'react';
-import Link from 'next/link';
 // types
 import type { Type } from 'pokenode-ts';
 // helpers
 import { capitalize, hoverVariant } from '@/helpers';
 // styles
 import { Badge } from './StyledBadge';
+// components
+import Link from 'next/link';
+import TypeIcon from '@/components/TypeIcon';
 
 export interface TypeBadgeProps {
   $iconOnly?: boolean;
   $float?: boolean;
   $iconWidth?: string;
   $iconHeight?: string;
-  typename: Type['name'];
+  $typename: Type['name'];
   hideIcon?: boolean;
-  margin?: string;
+  flexmargin?: string;
   $fill?: boolean;
 }
 
-const TypeBadge = ({ typename, hideIcon, $iconOnly, ...rest }: TypeBadgeProps): JSX.Element => {
-  const [Icon, setIcon] = useState();
-  // ref
-  const _isMounted = useRef(null);
-  // manage mounted state to avoid memory leaks
-  useEffect(() => {
-    _isMounted.current = true;
-    return () => {
-      _isMounted.current = false;
-      setIcon(null);
-    };
-  }, []);
+const TypeBadge = ({ $typename, hideIcon, $iconOnly, ...rest }: TypeBadgeProps): JSX.Element => {
+  if (!$typename) return null;
 
-  useEffect(() => {
-    async function fetchSVG() {
-      const importedIcon = await import(`../../assets/svg/types/${typename}.svg`);
-      // if mounted, set icon state
-      if (_isMounted.current) setIcon(importedIcon.default);
-    }
-    if (_isMounted.current) fetchSVG();
-  }, [_isMounted, typename]);
+  const formattedName = capitalize($typename);
 
   return (
-    <Link href={`/type/${typename}`}>
+    <Link href={`/type/${$typename}`}>
       <Badge
-        typename={typename}
+        $typename={$typename}
         $iconOnly={$iconOnly}
         whileHover="hover"
         whileTap="tap"
         variants={hoverVariant}
+        title={$iconOnly && formattedName}
         {...rest}
       >
-        {!hideIcon && typename && Icon && Icon}
-        {!$iconOnly && typename && <span>{capitalize(typename)}</span>}
+        {!hideIcon && <TypeIcon type={$typename} />}
+        {!$iconOnly && <span>{formattedName}</span>}
       </Badge>
     </Link>
   );

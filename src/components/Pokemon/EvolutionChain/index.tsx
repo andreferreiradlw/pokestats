@@ -1,8 +1,7 @@
 // types
+import type { PokestatsPokemonPageProps } from '@/pages/pokemon/[pokemonId]';
 import type { BoxProps } from '@/components/Box';
-import type { EvolutionChain as EvolutionChainType } from 'pokenode-ts';
 // helpers
-import { AnimatePresence } from 'framer-motion';
 import { fadeInUpVariant } from '@/helpers/animations';
 import { removeDash } from '@/helpers/typography';
 // components
@@ -14,7 +13,7 @@ import { SectionTitle, SectionMessage } from '@/components/BaseStyles';
 
 interface EvolutionChainProps extends BoxProps {
   pokemonName: string;
-  evolutionChain: EvolutionChainType;
+  evolutionChain: PokestatsPokemonPageProps['evolutionChain'];
 }
 
 const EvolutionChain = ({
@@ -23,63 +22,65 @@ const EvolutionChain = ({
   ...rest
 }: EvolutionChainProps): JSX.Element => {
   // data
-  const { chain, id: chainId } = evolutionChain;
+  const { chainId, firstEvolution, secondEvolution, thirdEvolution } = evolutionChain;
 
   return (
-    <Box align={{ xxs: 'center', lg: 'flex-start' }} $gap="1em" {...rest}>
+    <Box flexalign={{ xxs: 'center', lg: 'flex-start' }} flexgap="1em" {...rest}>
       <SectionTitle>Evolution Chain</SectionTitle>
-      <AnimatePresence>
-        <BoxWrapper
-          direction={{ xxs: 'column', lg: 'row' }}
-          justify="center"
-          align="center"
-          width="100%"
-        >
-          <Evolution noArrow species={chain.species} width="auto" />
-          {chain.evolves_to.length > 0 && (
-            <Box
-              direction={{ xxs: 'row', lg: 'column' }}
-              $flexWrap={{ xxs: 'wrap', lg: 'nowrap' }}
-              sizes={9.6}
-            >
-              {chain.evolves_to.map((firstEvo, i) => (
-                <Box
-                  direction={{ xxs: 'column', lg: 'row' }}
-                  align={{ xxs: 'flex-end', lg: 'center' }}
-                  key={`first-evo-box-${i}-${chainId}`}
-                  width={{ xxs: '200px', lg: '100%' }}
-                >
-                  <Evolution
-                    species={firstEvo.species}
-                    evolutionDetails={firstEvo.evolution_details}
-                    key={`first-evo-${i}-${chainId}`}
-                  />
-                  {firstEvo.evolves_to.length > 0 && (
-                    <Box
-                      direction={{ xxs: 'row', lg: 'column' }}
-                      align={{ xxs: 'flex-end', lg: 'center' }}
-                    >
-                      {firstEvo.evolves_to.map((secondEvo, x) => (
-                        <Evolution
-                          key={`second-evo-${x}-${chainId}`}
-                          species={secondEvo.species}
-                          evolutionDetails={secondEvo.evolution_details}
-                        />
-                      ))}
-                    </Box>
-                  )}
-                </Box>
-              ))}
-            </Box>
-          )}
-        </BoxWrapper>
-      </AnimatePresence>
-      {!chain.evolves_to?.length && (
+      <BoxWrapper
+        flexdirection={{ xxs: 'column', lg: 'row' }}
+        flexjustify="center"
+        flexalign="center"
+        width="100%"
+        flexgap="1em"
+      >
+        <Evolution noArrow species={firstEvolution} width="auto" />
+        {secondEvolution.length > 0 && (
+          <Box
+            flexdirection={{ xxs: 'row', lg: 'column' }}
+            flexwrap={{ xxs: 'wrap', lg: 'nowrap' }}
+            screensizes={9.6}
+            flexgap="1em"
+          >
+            {secondEvolution.map(({ species, evolutionDetails }, i) => (
+              <Box
+                flexdirection={{ xxs: 'column', lg: 'row' }}
+                flexalign="center"
+                key={`second-evo-container-${i}-${chainId}`}
+                width={{ xxs: '200px', lg: '100%' }}
+                flexgap="1em"
+              >
+                <Evolution
+                  species={species}
+                  evolutionDetails={evolutionDetails}
+                  key={`second-evo-${i}-${chainId}`}
+                />
+                {thirdEvolution.length > 0 && (
+                  <Box
+                    flexdirection={{ xxs: 'row', lg: 'column' }}
+                    flexalign="center"
+                    flexgap="1em"
+                  >
+                    {thirdEvolution.map(({ species, evolutionDetails }, x) => (
+                      <Evolution
+                        key={`third-evo-${x}-${chainId}`}
+                        species={species}
+                        evolutionDetails={evolutionDetails}
+                      />
+                    ))}
+                  </Box>
+                )}
+              </Box>
+            ))}
+          </Box>
+        )}
+      </BoxWrapper>
+      {!secondEvolution.length && !thirdEvolution.length && (
         <SectionMessage
           initial="hidden"
           animate="show"
           variants={fadeInUpVariant}
-          key={`no-pokemon-evolution-${chainId}`}
+          key={`no-evo-${chainId}`}
         >
           {`${removeDash(pokemonName)} does not evolve.`}
         </SectionMessage>

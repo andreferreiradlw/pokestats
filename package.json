@@ -38,6 +38,7 @@
     "react-dom": "^18.2.0",
     "react-is": "^18.2.0",
     "react-particles": "^2.6.0",
+    "sharp": "^0.31.3",
     "styled-components": "^5.3.6",
     "tsparticles": "^2.6.0"
   },
@@ -61,7 +62,6 @@
     "express": "^4.17.3",
     "lru-cache": "^7.8.1",
     "prettier": "^2.8.1",
-    "react-lazyload": "^3.2.0",
     "stylelint": "^14.16.0",
     "stylelint-config-idiomatic-order": "^9.0.0",
     "stylelint-config-prettier": "^9.0.4",

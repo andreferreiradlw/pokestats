@@ -8,8 +8,6 @@
       "@/components/*": ["src/components/*"],
       "@/theme": ["src/components/theme"],
       "@/cothememponents/*": ["src/components/theme/*"],
-      "@/assets": ["src/assets"],
-      "@/assets/*": ["src/assets/*"],
       "@/helpers": ["src/helpers"],
       "@/helpers/*": ["src/helpers/*"],
       "@/types": ["types"],

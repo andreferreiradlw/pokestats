@@ -8,6 +8,7 @@ import type {
   PokemonSpecies,
   VersionGroup,
   Ability,
+  EvolutionDetail,
 } from 'pokenode-ts';
 // helpers
 import { PokemonClient, EvolutionClient } from 'pokenode-ts';
@@ -16,6 +17,8 @@ import {
   getIdFromSpecies,
   mapGenerationToGame,
   removeDash,
+  formatFlavorText,
+  gameVersions,
 } from '@/helpers';
 import { PokestatsPageTitle } from '@/components/Head';
 // components
@@ -30,9 +33,21 @@ export interface PokestatsPokemonPageProps {
   pokemon: PokenodePokemon;
   abilities: Ability[];
   species: PokemonSpecies;
-  evolution: EvolutionChain;
   pokemonMoves: PokemonMove[];
   pokemonGen: VersionGroup['name'];
+  evolutionChain: {
+    chainId: number;
+    babyTriggerItem: EvolutionChain['baby_trigger_item'];
+    firstEvolution: PokemonSpecies;
+    secondEvolution: {
+      species: PokemonSpecies;
+      evolutionDetails: EvolutionDetail[];
+    }[];
+    thirdEvolution: {
+      species: PokemonSpecies;
+      evolutionDetails: EvolutionDetail[];
+    }[];
+  };
 }
 
 const PokestatsPokemonPage: NextPage<PokestatsPokemonPageProps> = ({
@@ -46,17 +61,39 @@ const PokestatsPokemonPage: NextPage<PokestatsPokemonPageProps> = ({
   if (router.isFallback) {
     return (
       <Loading
-        height="100vh"
+        flexheight="100vh"
         text="Loading Pokemon"
         $iconWidth={{ xxs: '20%', xs: '15%', md: '10%', lg: '5%' }}
       />
     );
   }
 
+  const pokemonName = removeDash(props.pokemon.name);
+  const pageTitle = `${pokemonName} (Pokémon) - ${PokestatsPageTitle}`;
+  const pageDescription = formatFlavorText(props.species.flavor_text_entries[0]?.flavor_text);
+  const generationDescriptions = gameVersions
+    .filter(version => version.genValue === props.species.generation.name)
+    .map(game => game.name)
+    .join(', ');
+
   return (
     <>
       <Head>
-        <title>{`${removeDash(props.pokemon.name)} (Pokemon) - ${PokestatsPageTitle}`}</title>
+        <title>{pageTitle}</title>
+        <meta name="description" content={pageDescription} />
+        <meta
+          name="keywords"
+          content={`${pokemonName}, Pokemon, Pokémon, Pokédex, Pokestats, ${generationDescriptions}`}
+        />
+        {/** Open Graph */}
+        <meta property="og:title" content={pageTitle} />
+        <meta property="og:description" content={pageDescription} />
+        <meta
+          property="og:image"
+          content={`https://raw.githubusercontent.com/HybridShivam/Pokemon/master/assets/images/${props.pokemon.id
+            .toString()
+            .padStart(3, '0')}.png`}
+        />
       </Head>
       <Layout
         withHeader={{
@@ -144,6 +181,60 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
       return { notFound: true };
     }
 
+    // get evolution data based on chain
+    let evolutionChainPokemon = {
+      chainId: evolutionDataResults.id,
+      babyTriggerItem: evolutionDataResults.baby_trigger_item,
+      firstEvolution: null,
+      secondEvolution: [],
+      thirdEvolution: [],
+    };
+
+    // first evolution
+    if (evolutionDataResults.chain.species.name === pokemonName) {
+      evolutionChainPokemon.firstEvolution = pokemonSpeciesResults;
+    } else {
+      const firstEvoData = await pokemonClient.getPokemonSpeciesByName(
+        evolutionDataResults.chain.species.name,
+      );
+      evolutionChainPokemon.firstEvolution = firstEvoData;
+    }
+
+    for (const second_evolution of evolutionDataResults.chain.evolves_to) {
+      // second evolution
+      if (second_evolution.species.name === pokemonName) {
+        evolutionChainPokemon.secondEvolution.push({
+          species: pokemonSpeciesResults,
+          evolutionDetails: second_evolution.evolution_details,
+        });
+      } else {
+        const secondEvoData = await pokemonClient.getPokemonSpeciesByName(
+          second_evolution.species.name,
+        );
+        evolutionChainPokemon.secondEvolution.push({
+          species: secondEvoData,
+          evolutionDetails: second_evolution.evolution_details,
+        });
+      }
+      // third evolution
+      for (const third_evolution of second_evolution.evolves_to) {
+        if (third_evolution.species.name === pokemonName) {
+          evolutionChainPokemon.thirdEvolution.push({
+            species: pokemonSpeciesResults,
+            evolutionDetails: third_evolution.evolution_details,
+          });
+        } else {
+          const thirdEvoData = await pokemonClient.getPokemonSpeciesByName(
+            third_evolution.species.name,
+          );
+          evolutionChainPokemon.thirdEvolution.push({
+            species: thirdEvoData,
+            evolutionDetails: third_evolution.evolution_details,
+          });
+        }
+      }
+    }
+
     // species english flavor text
     pokemonSpeciesResults.flavor_text_entries = pokemonSpeciesResults.flavor_text_entries.filter(
       entry => entry.language.name === 'en',
@@ -177,9 +268,9 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
           effect_entries: ability.effect_entries.filter(entry => entry.language.name === 'en'),
         })),
         species: pokemonSpeciesResults,
-        evolution: evolutionDataResults,
+        evolutionChain: evolutionChainPokemon,
         pokemonGen,
-        revalidate: 60,
+        revalidate: 120,
       },
     };
   } catch (error) {

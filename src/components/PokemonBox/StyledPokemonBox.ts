@@ -1,21 +1,45 @@
 import styled, { css } from 'styled-components';
-import { motion } from 'framer-motion';
+// types
+import type { PokemonBoxProps } from './index';
 // styles
-import { float } from './keyframes';
+import { float } from '@/components/BaseStyles';
+// components
+import { motion } from 'framer-motion';
 
-const PokeBox = styled(motion.div)<{ width?: string; $dark?: boolean }>`
+const PokeBox = styled(motion.div)<{
+  $dark?: PokemonBoxProps['$dark'];
+}>`
   align-items: center;
   border: 1px solid transparent;
   border-radius: 4px;
   display: flex;
   flex-basis: auto;
+  flex-direction: column;
+  font-weight: 600;
+  gap: 0.5em;
+  justify-content: center;
+  max-width: 155px;
+  overflow: hidden;
+  padding: 1rem;
+  position: relative;
+  text-align: center;
+  transition: border 0.1s ease-in-out;
+  transition: box-shadow 0.05s ease-in-out;
+  width: 155px;
 
-  ${({ width }) =>
-    !width &&
-    css`
-      max-width: 150px;
-      width: 150px;
-    `}
+  &:hover {
+    cursor: pointer;
+
+    &:active {
+      transition: box-shadow 0.01s ease-in-out;
+    }
+
+    img {
+      @media (prefers-reduced-motion: no-preference) {
+        animation: ${float} infinite 3s ease-in-out;
+      }
+    }
+  }
 
   ${({ $dark, theme }) =>
     $dark
@@ -47,37 +71,19 @@ const PokeBox = styled(motion.div)<{ width?: string; $dark?: boolean }>`
             box-shadow: 1px 1px 2px 0px ${theme.colors.darkerShadow} inset;
           }
         `}
-
-  flex-direction: column;
-  font-weight: 600;
-  justify-content: center;
-  padding: 1rem;
-  text-align: center;
-  transition: box-shadow 0.05s ease-in-out;
-  transition: border 0.1s ease-in-out;
-
-  &:hover {
-    cursor: pointer;
-
-    &:active {
-      transition: box-shadow 0.01s ease-in-out;
-    }
-
-    & img {
-      @media (prefers-reduced-motion: no-preference) {
-        animation: ${float} infinite 3s ease-in-out;
-      }
-    }
-  }
 `;
 
-const NumberId = styled(motion.span)`
+const NumberId = styled.span`
   font-size: 2rem;
 `;
 
-const PokeName = styled(motion.span)`
+const PokeName = styled.span`
   font-size: 1.2rem;
-  margin-bottom: 0.5rem;
 `;
 
-export { PokeBox, NumberId, PokeName };
+const PokeGen = styled.span`
+  font-size: 1rem;
+  font-weight: 300;
+`;
+
+export { PokeBox, NumberId, PokeName, PokeGen };

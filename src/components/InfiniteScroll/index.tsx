@@ -6,7 +6,7 @@ import type { Pokemon } from '@/types';
 // components
 import Box, { BoxProps } from '@/components/Box';
 import Loading from '@/components/Loading';
-import PokemonBox from './PokemonBox';
+import PokemonBox from '@/components/PokemonBox';
 
 export interface InfiniteScrollProps extends BoxProps {
   pokemonList: Pokemon[];
@@ -18,9 +18,9 @@ export default function InfiniteScroll({
   pokemonList,
   dark,
   itemsPerPage = 35,
-  direction = 'row',
-  align = 'flex-start',
-  $flexWrap = 'wrap',
+  flexdirection = 'row',
+  flexalign = 'flex-start',
+  flexwrap = 'wrap',
   ...rest
 }: InfiniteScrollProps): JSX.Element {
   // current page state
@@ -109,18 +109,19 @@ export default function InfiniteScroll({
   return (
     <>
       <Box
-        direction={direction}
-        align={align}
-        $flexWrap={$flexWrap}
-        justify="space-between"
-        $gap="1em"
+        flexdirection={flexdirection}
+        flexalign={flexalign}
+        flexwrap={flexwrap}
+        flexjustify="center"
+        flexgap="1em"
         {...rest}
       >
         {showList?.map(currPokemon => (
           <PokemonBox
-            dark={dark}
+            $dark={dark}
             key={`infinite-scroll-${currPokemon.id}`}
-            pokemon={currPokemon}
+            pokemonName={currPokemon.name}
+            pokemonId={currPokemon.id}
             whileHover="hover"
             whileTap="tap"
             variants={fadeInUpVariant}
@@ -128,7 +129,7 @@ export default function InfiniteScroll({
         ))}
       </Box>
       {showList.length > 0 && pokemonList.length !== showList?.length && (
-        <Loading height="100px" $iconWidth="5%" padding="1rem 0" ref={setNode} />
+        <Loading flexheight="100px" $iconWidth="5%" flexpadding="1rem 0" ref={setNode} />
       )}
     </>
   );

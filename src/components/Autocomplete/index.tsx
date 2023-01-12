@@ -15,6 +15,9 @@ import {
   Option,
   PokeID,
 } from './styledAutoComplete';
+// components
+import Box from '@/components/Box';
+import TypeIcon from '@/components/TypeIcon';
 
 export interface AutocompleteProps extends BoxProps {
   filterList: (PokemonType | Pokemon)[];
@@ -22,9 +25,9 @@ export interface AutocompleteProps extends BoxProps {
 
 const Autocomplete = ({
   filterList,
-  align = 'stretch',
-  direction = 'row',
-  margin = '0 auto',
+  flexalign = 'stretch',
+  flexdirection = 'row',
+  flexmargin = '0 auto',
   ...rest
 }: AutocompleteProps): JSX.Element => {
   // router
@@ -111,9 +114,14 @@ const Autocomplete = ({
   };
 
   return (
-    <Container align={align} direction={direction} margin={margin} {...rest}>
+    <Container
+      flexalign={flexalign}
+      flexdirection={flexdirection}
+      flexmargin={flexmargin}
+      {...rest}
+    >
       <label htmlFor="autocomplete" id="autocomplete_label" aria-hidden="true">
-        Search Pokemon or Type Name
+        Search Pokestats
       </label>
       <Input
         type="text"
@@ -127,28 +135,27 @@ const Autocomplete = ({
       />
       {!!filtered?.length && (
         <ListWrapper>
-          {filtered.map((item, i) => (
+          {filtered.map(({ assetType, name, id }, i) => (
             <OptionWrapper
-              href={`/${item.assetType}/${item.name}`}
-              key={`${item.assetType}-${item.id}-${item.name}-${i}`}
+              href={`/${assetType}/${name}`}
+              key={`${assetType}-${id}-${name}-${i}`}
               onClick={() => resetStates()}
               onFocus={() => setActiveOption(i)}
               onKeyDown={e => handleKeyDown(e)}
               ref={currOption => currOption && i === activeOption && currOption.focus()}
             >
-              {item.assetType === 'type' && (
-                <OptionImg
-                  $type={item.assetType}
-                  src={`https://raw.githubusercontent.com/andreferreiradlw/pokestats/main/src/assets/svg/types/${item.name}.svg`}
-                />
-              )}
-              {item.assetType === 'pokemon' && (
-                <OptionImg
-                  src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${item.id}.png`}
-                />
-              )}
-              <Option>{removeDash(item.name)}</Option>
-              {item.assetType === 'pokemon' && <PokeID>{`#${item.id}`}</PokeID>}
+              <Box flexdirection="row" flexjustify="flex-start" flexgap="1em">
+                {assetType === 'type' && <TypeIcon type={name} />}
+                {assetType === 'pokemon' && (
+                  <OptionImg
+                    src={`https://raw.githubusercontent.com/HybridShivam/Pokemon/master/assets/images/${id
+                      .toString()
+                      .padStart(3, '0')}.png`}
+                  />
+                )}
+                <Option>{removeDash(name)}</Option>
+              </Box>
+              {assetType === 'pokemon' && <PokeID>{`#${id}`}</PokeID>}
             </OptionWrapper>
           ))}
         </ListWrapper>

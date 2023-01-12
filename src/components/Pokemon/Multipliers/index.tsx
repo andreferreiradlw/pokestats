@@ -16,9 +16,6 @@ interface MultipliersProps extends BoxProps {
 }
 
 const Multipliers = ({ pokemonTypes, ...rest }: MultipliersProps): JSX.Element => {
-  // data
-  // const { types } = pokemon;
-
   const typeMultipliers = useMemo(() => {
     let currTypes = pokemonTypes.map(currType => {
       return currType.type.name;
@@ -43,12 +40,12 @@ const Multipliers = ({ pokemonTypes, ...rest }: MultipliersProps): JSX.Element =
   }, [typeMultipliers, enabled]);
 
   return (
-    <Box align={{ xxs: 'center', lg: 'flex-start' }} $gap="1em" {...rest}>
+    <Box flexalign={{ xxs: 'center', lg: 'flex-start' }} flexgap="1em" {...rest}>
       <Box
-        direction={{ xxs: 'column', lg: 'row' }}
-        justify="space-between"
-        $flexWrap="wrap"
-        $gap="0.5em"
+        flexdirection={{ xxs: 'column', lg: 'row' }}
+        flexjustify="space-between"
+        flexwrap="wrap"
+        flexgap="0.5em"
       >
         <SectionTitle>Multipliers</SectionTitle>
         <Switch enabled={enabled} onClick={() => setEnabled(prev => !prev)} />
@@ -62,7 +59,7 @@ const Multipliers = ({ pokemonTypes, ...rest }: MultipliersProps): JSX.Element =
                 {!currMultipliers[relation].length
                   ? 'None'
                   : currMultipliers[relation].map((type: string, i: number) => (
-                      <TypeBadge key={`${type}-${relation}-${i}`} typename={type} $iconOnly />
+                      <TypeBadge key={`${type}-${relation}-${i}`} $typename={type} $iconOnly />
                     ))}
               </TypesCell>
             </tr>

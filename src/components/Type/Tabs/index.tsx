@@ -3,7 +3,7 @@ import styled from 'styled-components';
 // types
 import type { TypePageProps } from '../index';
 // helpers
-import { motion, AnimatePresence } from 'framer-motion';
+import { AnimatePresence } from 'framer-motion';
 import { hoverVariant, removeDash, fadeInUpVariant } from '@/helpers';
 // styles
 import { Button, SectionTitle } from '@/components/BaseStyles';
@@ -29,8 +29,8 @@ const TypeTabs = ({ typeInfo, typeMoves, ...rest }: TypeTabsProps) => {
   const { name, pokemon } = typeInfo;
 
   return (
-    <Box align={{ xxs: 'center', lg: 'flex-start' }} $gap="1em" {...rest}>
-      <Box direction="row" justify="space-evenly" $flexWrap="wrap">
+    <Box flexalign={{ xxs: 'center', lg: 'flex-start' }} flexgap="1em" {...rest}>
+      <Box flexdirection="row" flexjustify="space-evenly" flexwrap="wrap">
         <Button
           $active={currTab === 'pokemon'}
           onClick={() => setCurrTab('pokemon')}

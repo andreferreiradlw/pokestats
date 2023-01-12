@@ -2,7 +2,7 @@ import { useState } from 'react';
 // types
 import type { ImageProps } from 'next/image';
 // helpers
-import { placeholderVariant } from '@/helpers';
+import { placeholderVariant, fadeInUpVariant } from '@/helpers';
 // styles
 import {
   ImageElement,
@@ -11,6 +11,7 @@ import {
   ErrorIcon,
   PlaceholderContainer,
   LoadingContainer,
+  ImageWrapper,
 } from './StyledImageNext';
 // components
 import { AnimatePresence } from 'framer-motion';
@@ -41,7 +42,37 @@ const ImageNext = ({
       key={`image-container-${src}`}
     >
       <AnimatePresence>
-        {hasError && (
+        {showPlaceholder && !hasError && (
+          <LoadingContainer
+            initial="initial"
+            animate="animate"
+            key={`loading-placeholder-${src}`}
+            variants={placeholderVariant}
+            placeholderwidth={placeholderwidth}
+            height={height}
+          >
+            <LoadingIcon />
+          </LoadingContainer>
+        )}
+        {!hasError ? (
+          <ImageWrapper
+            initial="hidden"
+            animate="show"
+            variants={fadeInUpVariant}
+            key={`image-${src}`}
+          >
+            <ImageElement
+              loading={priority ? 'eager' : 'lazy'}
+              fill={fill}
+              sizes={fill && '(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'}
+              src={src}
+              draggable={false}
+              onLoadingComplete={() => setShowPlaceholder(false)}
+              onError={() => setHasError(true)}
+              {...rest}
+            />
+          </ImageWrapper>
+        ) : (
           <PlaceholderContainer
             initial="initial"
             animate="animate"
@@ -53,32 +84,6 @@ const ImageNext = ({
           >
             <ErrorIcon />
           </PlaceholderContainer>
-        )}
-        {showPlaceholder && !hasError && (
-          <LoadingContainer
-            initial="initial"
-            animate="animate"
-            exit="exit"
-            key={`loading-placeholder-${src}`}
-            variants={placeholderVariant}
-            placeholderwidth={placeholderwidth}
-            height={height}
-          >
-            <LoadingIcon />
-          </LoadingContainer>
-        )}
-        {!hasError && (
-          <ImageElement
-            loading={priority ? 'eager' : 'lazy'}
-            fill={fill}
-            sizes={fill && '(max-width: 1200px) 100vw, (max-width: 768px) 50vw, 33vw'}
-            src={src}
-            draggable={false}
-            onLoadingComplete={() => setShowPlaceholder(false)}
-            onError={() => setHasError(true)}
-            style={{}}
-            {...rest}
-          />
         )}
       </AnimatePresence>
     </ImageContainer>

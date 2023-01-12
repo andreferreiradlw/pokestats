@@ -10,7 +10,6 @@ import { motion } from 'framer-motion';
 import BoxWrapper from '@/components/Box/StyledBox';
 
 const LayoutContainer = styled(BoxWrapper)`
-  gap: 3em;
   min-height: 100vh;
 `;
 

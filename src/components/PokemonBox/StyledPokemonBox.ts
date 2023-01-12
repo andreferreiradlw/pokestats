@@ -21,9 +21,10 @@ const PokeBox = styled(motion.div)<{
   max-width: 155px;
   overflow: hidden;
   padding: 1rem;
+  position: relative;
   text-align: center;
-  transition: box-shadow 0.05s ease-in-out;
   transition: border 0.1s ease-in-out;
+  transition: box-shadow 0.05s ease-in-out;
   width: 155px;
 
   &:hover {

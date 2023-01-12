@@ -88,6 +88,10 @@ const LoadingContainer = styled(PlaceholderContainer)`
   transform: translate(-50%, -50%) !important;
 `;
 
+const ImageWrapper = styled(motion.span)`
+  position: relative;
+`;
+
 export {
   ImageElement,
   ImageContainer,
@@ -95,4 +99,5 @@ export {
   ErrorIcon,
   PlaceholderContainer,
   LoadingContainer,
+  ImageWrapper,
 };

@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, CSSProperties } from 'react';
 // types
 import type { AutocompleteProps } from '@/components/Autocomplete';
 import type { BoxProps } from '@/components/Box';
@@ -10,6 +10,7 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 
 interface LayoutProps extends BoxProps {
+  layoutGap?: CSSProperties['gap'];
   withHeader?: {
     pokemonGen?: string;
     autocompleteList: AutocompleteProps['filterList'];
@@ -19,7 +20,13 @@ interface LayoutProps extends BoxProps {
   };
 }
 
-const Layout = ({ withHeader, withMain, children, ...rest }: LayoutProps): JSX.Element => {
+const Layout = ({
+  layoutGap = '3em',
+  withHeader,
+  withMain,
+  children,
+  ...rest
+}: LayoutProps): JSX.Element => {
   // game version
   const [gameVersion, setGameVersion] = useState(withHeader?.pokemonGen);
 
@@ -33,7 +40,7 @@ const Layout = ({ withHeader, withMain, children, ...rest }: LayoutProps): JSX.E
 
   return (
     <GameVersionContext.Provider value={VersionContextValue}>
-      <LayoutContainer flexdirection="column" width="100%">
+      <LayoutContainer flexdirection="column" width="100%" flexgap={layoutGap}>
         {withHeader && (
           <Header
             autocompleteList={withHeader.autocompleteList}

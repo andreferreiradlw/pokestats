@@ -24,7 +24,7 @@ const PokestatsHomepage: NextPage<PokestatsHomepageProps> = ({ allPokemon, pokem
       />
       <meta property="og:image" content="/static/android-icon-512x512.png" />
     </Head>
-    <Layout $withGutter={false}>
+    <Layout $withGutter={false} layoutGap="0">
       <Homepage allPokemon={allPokemon} pokemonTypes={pokemonTypes} />
     </Layout>
   </>

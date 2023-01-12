@@ -1,11 +1,10 @@
 import { useState, useEffect } from 'react';
 // types
 import type { Pokemon } from '@/types';
-import type { BoxProps } from '@/components/Box';
 // helpers
 import { generations, mapIdToGeneration } from '@/helpers';
 // components
-import Box from '@/components/Box';
+import Box, { BoxProps } from '@/components/Box';
 import InfiniteScroll from '@/components/InfiniteScroll';
 // styles
 import { SectionTitle, Select } from '@/components/BaseStyles';
@@ -53,58 +52,61 @@ const PokemonList = ({ pokemon, ...rest }: PokemonListProps): JSX.Element => {
     <Box
       $constrained
       $withGutter
-      flexmargin="3rem 0"
       flexalign="flex-start"
       flexjustify="flex-start"
-      flexgap="1em"
+      flexgap="3em"
+      {...rest}
     >
-      <SectionTitle>{`Select your Pokemon (${showPokemon.length})`}</SectionTitle>
-      <SelectContainer
-        flexdirection="row"
-        flexjustify={{ xxs: 'center', sm: 'flex-start' }}
-        flexwrap="wrap"
-      >
-        <Box flexdirection="row" flexjustify="flex-start" width="auto">
-          <label id="generation" htmlFor="gen_select">
-            Game Generation:
-          </label>
-          <Select
-            light
-            aria-labelledby="generation"
-            id="gen_select"
-            value={gen}
-            onChange={e => {
-              setGen(e.target.value);
-              sessionStorage.setItem('genSelect', e.target.value);
-            }}
-          >
-            <option value="all">All</option>
-            {generations.map(({ genDescription, genValue }, i) => (
-              <option key={`${genValue}-${i}`} value={genValue}>
-                {genDescription}
-              </option>
-            ))}
-          </Select>
-        </Box>
-        <Box flexdirection="row" flexjustify="flex-start" width="auto">
-          <label id="sorting" htmlFor="sort_pokemon">
-            Sort Pokemon:
-          </label>
-          <Select
-            light
-            aria-labelledby="sorting"
-            id="sort_pokemon"
-            value={sortBy}
-            onChange={e => {
-              setSortBy(e.target.value);
-              sessionStorage.setItem('sortSelect', e.target.value);
-            }}
-          >
-            <option value="id">Number</option>
-            <option value="name">Name</option>
-          </Select>
-        </Box>
-      </SelectContainer>
+      <Box flexalign="flex-start" flexjustify="flex-start" flexgap="1em">
+        <SectionTitle>{`Select your Pokemon (${showPokemon.length})`}</SectionTitle>
+        <SelectContainer
+          flexdirection="row"
+          flexjustify={{ xxs: 'center', sm: 'flex-start' }}
+          flexwrap="wrap"
+          flexgap="2em"
+        >
+          <Box flexdirection="row" flexjustify="flex-start" width="auto" flexgap="0.5em">
+            <label id="generation" htmlFor="gen_select">
+              Game Generation:
+            </label>
+            <Select
+              light
+              aria-labelledby="generation"
+              id="gen_select"
+              value={gen}
+              onChange={e => {
+                setGen(e.target.value);
+                sessionStorage.setItem('genSelect', e.target.value);
+              }}
+            >
+              <option value="all">All</option>
+              {generations.map(({ genDescription, genValue }, i) => (
+                <option key={`${genValue}-${i}`} value={genValue}>
+                  {genDescription}
+                </option>
+              ))}
+            </Select>
+          </Box>
+          <Box flexdirection="row" flexjustify="flex-start" width="auto" flexgap="0.5em">
+            <label id="sorting" htmlFor="sort_pokemon">
+              Sort Pokemon:
+            </label>
+            <Select
+              light
+              aria-labelledby="sorting"
+              id="sort_pokemon"
+              value={sortBy}
+              onChange={e => {
+                setSortBy(e.target.value);
+                sessionStorage.setItem('sortSelect', e.target.value);
+              }}
+            >
+              <option value="id">Number</option>
+              <option value="name">Name</option>
+            </Select>
+          </Box>
+        </SelectContainer>
+      </Box>
       {showPokemon.length > 0 && <InfiniteScroll screensizes={12} pokemonList={showPokemon} />}
     </Box>
   );

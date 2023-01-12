@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import Box from '@/components/Box';
 
 const SelectContainer = styled(Box)`
-  div {
+  /* div {
     margin-bottom: 1.5rem;
 
     label {
@@ -13,7 +13,7 @@ const SelectContainer = styled(Box)`
 
   div:nth-of-type(1) {
     margin-right: 1.5rem;
-  }
+  } */
 `;
 
 export { SelectContainer };

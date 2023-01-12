@@ -11,6 +11,7 @@ import { MainHeading, Button } from '@/components/BaseStyles';
 import Autocomplete from '@/components/Autocomplete';
 import Particles from '@/components/Particles';
 import PokemonList from './PokemonList';
+import TypeList from './TypeList';
 // icons
 import Github from 'public/static/iconLibrary/github.svg';
 
@@ -72,7 +73,8 @@ const Homepage = ({ allPokemon, pokemonTypes }: HomepageProps): JSX.Element => {
         </Button>
         <ScrollDown variants={fadeInUpVariant} key="homepage-scroll-down" />
       </Container>
-      <ListContainer flexgap="2em">
+      <ListContainer flexgap="2em" flexpadding="3em 0">
+        <TypeList types={pokemonTypes} />
         <PokemonList pokemon={allPokemon} key="homepage-pokemon-list" />
       </ListContainer>
       <Particles key="homepage-particles" />

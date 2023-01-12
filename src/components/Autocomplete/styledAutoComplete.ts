@@ -44,7 +44,7 @@ const Input = styled.input`
 
   ${({ theme }) => css`
     background-color: ${theme.colors.black};
-    border: 1px solid ${theme.colors.black};
+    border: 1px solid ${theme.colors.white};
     color: ${theme.colors.white};
 
     &::placeholder {

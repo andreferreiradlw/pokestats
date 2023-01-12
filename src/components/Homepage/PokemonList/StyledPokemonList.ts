@@ -1,12 +1,6 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
+// components
 import Box from '@/components/Box';
-
-const Container = styled(Box)`
-  ${({ theme }) => css`
-    background-color: ${theme.colors.black};
-    color: ${theme.colors.white};
-  `}
-`;
 
 const SelectContainer = styled(Box)`
   div {
@@ -22,4 +16,4 @@ const SelectContainer = styled(Box)`
   }
 `;
 
-export { Container, SelectContainer };
+export { SelectContainer };

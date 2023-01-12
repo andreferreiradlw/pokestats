@@ -1,11 +1,12 @@
 import styled, { css } from 'styled-components';
 import { motion } from 'framer-motion';
 // types
+import type { Type } from 'pokenode-ts';
 import type { TypeBadgeProps } from './index';
 // styles
 import { float as floatAnim } from '@/components/BaseStyles';
 
-const isDarkBackground = (type: string): boolean =>
+const isDarkBackground = (type: Type['name']): boolean =>
   !!type.match(/^(dark|dragon|fighting|ghost|poison)$/);
 
 const Badge = styled(motion.div)<TypeBadgeProps>`

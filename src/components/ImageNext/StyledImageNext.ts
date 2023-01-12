@@ -90,6 +90,7 @@ const LoadingContainer = styled(PlaceholderContainer)`
 
 const ImageWrapper = styled(motion.span)`
   position: relative;
+  width: 100%;
 `;
 
 export {

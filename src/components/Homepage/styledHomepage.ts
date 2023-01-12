@@ -1,8 +1,9 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 // helpers
 import { bounce } from '@/components/BaseStyles';
 // components
 import { motion } from 'framer-motion';
+import Box from '@/components/Box';
 import BoxWrapper from '@/components/Box/StyledBox';
 // icons
 import ArrowDownIcon from 'public/static/iconLibrary/arrow_down.svg';
@@ -19,7 +20,7 @@ const Container = styled(BoxWrapper)`
   z-index: 1;
 `;
 
-const RepoAnchor = styled(motion.a)`
+const GithubLink = styled(motion.a)`
   position: absolute;
   right: 20px;
   top: 20px;
@@ -45,4 +46,11 @@ const ScrollDown = styled(ArrowDownIcon)`
   width: 40px;
 `;
 
-export { Container, RepoAnchor, ScrollDown };
+const ListContainer = styled(Box)`
+  ${({ theme }) => css`
+    background-color: ${theme.colors.black};
+    color: ${theme.colors.white};
+  `}
+`;
+
+export { Container, GithubLink, ScrollDown, ListContainer };

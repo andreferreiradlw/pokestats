@@ -39,7 +39,10 @@ const theme = {
       poison: '#A33EA1', // light
       psychic: '#F95587',
       rock: '#B6A136',
+      shadow: '#000000', // light
       steel: '#B7B7CE',
+      unknown:
+        'repeating-linear-gradient( 45deg, #606dbc, #606dbc 10px, #465298 10px, #465298 20px)', // light
       water: '#6390F0',
     },
   },

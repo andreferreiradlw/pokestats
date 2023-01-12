@@ -34,7 +34,10 @@ export const getStaticProps: GetStaticProps = async () => {
   const api = new PokemonClient();
 
   try {
-    const [pokemonData, typesData] = await Promise.all([api.listPokemons(0, 809), api.listTypes()]);
+    const [pokemonData, typesData] = await Promise.all([
+      api.listPokemons(0, 809),
+      api.listTypes(0, 18),
+    ]);
 
     if (!pokemonData || !typesData) {
       return { notFound: true };

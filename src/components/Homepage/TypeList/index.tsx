@@ -1,4 +1,3 @@
-// import React from 'react';
 // types
 import type { Type } from 'pokenode-ts';
 // styles

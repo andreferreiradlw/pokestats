@@ -7,11 +7,12 @@ import type { TypeBadgeProps } from './index';
 import { float as floatAnim } from '@/components/BaseStyles';
 
 const isDarkBackground = (type: Type['name']): boolean =>
-  !!type.match(/^(dark|dragon|fighting|ghost|poison)$/);
+  !!type.match(/^(dark|dragon|fighting|ghost|poison|shadow|unknown)$/);
 
 const Badge = styled(motion.div)<TypeBadgeProps>`
   align-items: center;
-  background-color: ${({ theme, $typename, $fill }) => !$fill && theme.colors.types[$typename]};
+  background: ${({ theme, $typename, $fill }) => !$fill && theme.colors.types[$typename]};
+  border: 1px solid ${({ theme }) => theme.colors.white};
   border-radius: 4px;
   color: ${({ theme, $typename }) =>
     isDarkBackground($typename) ? theme.colors.white : theme.colors.black};

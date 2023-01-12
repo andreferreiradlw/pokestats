@@ -18,7 +18,9 @@ const Normal = dynamic(() => import('public/static/typeIcons/normal.svg'));
 const Poison = dynamic(() => import('public/static/typeIcons/poison.svg'));
 const Psychic = dynamic(() => import('public/static/typeIcons/psychic.svg'));
 const Rock = dynamic(() => import('public/static/typeIcons/rock.svg'));
+const Shadow = dynamic(() => import('public/static/typeIcons/shadow.svg'));
 const Steel = dynamic(() => import('public/static/typeIcons/steel.svg'));
+const Unknown = dynamic(() => import('public/static/typeIcons/unknown.svg'));
 const Water = dynamic(() => import('public/static/typeIcons/water.svg'));
 
 const iconTypes = {
@@ -38,7 +40,9 @@ const iconTypes = {
   poison: Poison,
   psychic: Psychic,
   rock: Rock,
+  shadow: Shadow,
   steel: Steel,
+  unknown: Unknown,
   water: Water,
 };
 

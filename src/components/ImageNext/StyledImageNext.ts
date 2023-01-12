@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components';
 // types
 import type { ImageNextProps } from './index';
 // helpers
-import { tumble } from '@/components/BaseStyles/keyframes';
+import { tumble } from '@/components/BaseStyles';
 // components
 import { motion } from 'framer-motion';
 import Image from 'next/image';

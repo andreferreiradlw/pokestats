@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-// styles
-import { mouseScroll } from '@/components/BaseStyles';
+// helpers
+import { bounce } from '@/components/BaseStyles';
 // components
 import { motion } from 'framer-motion';
 import BoxWrapper from '@/components/Box/StyledBox';
@@ -36,34 +36,9 @@ const RepoAnchor = styled(motion.a)`
   }
 `;
 
-// const ScrollDown = styled(motion.span)`
-//   border: 2px solid black;
-//   border-radius: 25px;
-//   bottom: 20px;
-//   height: 45px;
-//   left: 0;
-//   margin-left: auto;
-//   margin-right: auto;
-//   position: absolute;
-//   right: 0;
-//   width: 30px;
-
-//   &:before {
-//     animation: ${mouseScroll} 2s linear infinite;
-//     background-color: black;
-//     border-radius: 100%;
-//     content: '';
-//     height: 6px;
-//     left: 50%;
-//     margin-left: -3px;
-//     position: absolute;
-//     top: 8px;
-//     width: 6px;
-//   }
-// `;
-
 const ScrollDown = styled(ArrowDownIcon)`
-  bottom: 0;
+  animation: ${bounce} 1.5s ease-in-out 0s infinite;
+  bottom: 10px;
   left: 50%;
   position: absolute;
   transform: translate(-50%, -50%);

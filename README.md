@@ -69,10 +69,10 @@
 ✅ Type Page <br />
 ✅ Static Generated Pages <br />
 🚫 Generation 8 Pokemon Ready (waiting on [PokéApi's issue](https://github.com/PokeAPI/pokeapi/issues/520)) <br />
-🛠️ Typescript Refactoring <br />
+✅ Typescript Refactoring <br />
+🛠️ Move Page <br />
 🧶 Unit Tests <br />
 🧶 Dark Mode <br />
-🧶 Move Page <br />
 🧶 Item Page <br />
 🧶 Berry Page <br />
 ✏ Pokemon & Item Locations Page <br />

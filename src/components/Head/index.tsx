@@ -10,8 +10,12 @@ const PokestatsPageTitle = 'PokeStats.gg - The Pokédex powered by PokeApi';
 const PokestatsHead = ({ children }: PokestatsHeadProps): JSX.Element => {
   return (
     <Head>
-      <Script defer data-domain="pokestats.gg" src="https://plausible.io/js/script.js" />
-      <Script>{`window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }`}</Script>
+      {process.env.NODE_ENV === 'production' && (
+        <>
+          <script defer data-domain="pokestats.gg" src="https://plausible.io/js/script.js" />
+          <Script>{`window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }`}</Script>
+        </>
+      )}
       <meta charSet="utf-8" />
       <meta httpEquiv="X-UA-Compatible" content="IE=edge,chrome=1" />
       <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />

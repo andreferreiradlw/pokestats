@@ -10,12 +10,12 @@ import Box, { BoxProps } from '@/components/Box';
 import ImageNext from '@/components/ImageNext';
 
 const nextPokemon = () => {
-  if (process.env.NODE_ENV === 'production' && window?.sa_loaded) window.sa_event('next_pokemon');
+  if (process.env.NODE_ENV === 'production' && window?.plausible) window.plausible('Next Pokemon');
 };
 
 const previousPokemon = () => {
-  if (process.env.NODE_ENV === 'production' && window?.sa_loaded)
-    window.sa_event('previous_pokemon');
+  if (process.env.NODE_ENV === 'production' && window?.plausible)
+    window.plausible('Previous Pokemon');
 };
 
 interface NavigationProps extends BoxProps {

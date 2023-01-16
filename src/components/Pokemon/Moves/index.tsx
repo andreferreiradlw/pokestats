@@ -8,6 +8,7 @@ import {
   mapVersionToGroup,
   mapGeneration,
   filterMoves,
+  FilteredMove,
   getMachineNames,
   capitalize,
   removeDash,
@@ -58,10 +59,10 @@ const PokemonMoves = ({ pokemon, ...rest }: PokemonMovesProps): JSX.Element => {
   // moves
   const [allMoves, setAllMoves] = useState<PokemonMove[]>();
   const [genMoves, setGenMoves] = useState<{
-    'level-up': PokemonMove[];
-    machine: PokemonMove[];
-    egg: PokemonMove[];
-    tutor: PokemonMove[];
+    'level-up': FilteredMove[];
+    machine: FilteredMove[];
+    egg: FilteredMove[];
+    tutor: FilteredMove[];
   }>();
   // learn method state
   const [learnMethod, setLearnMethod] = useState<MoveLearnMethod['name']>('level-up');
@@ -119,7 +120,7 @@ const PokemonMoves = ({ pokemon, ...rest }: PokemonMovesProps): JSX.Element => {
     if (allMoves) {
       setMachineNames([]);
 
-      const fetchMachineNames = async (moves: Move[]): Promise<void> => {
+      const fetchMachineNames = async (moves: FilteredMove[]): Promise<void> => {
         await getMachineNames(moves).then(names => {
           if (!_isMounted.current) return;
           setMachineNames(names);

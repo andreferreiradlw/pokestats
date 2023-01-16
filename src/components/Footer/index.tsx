@@ -8,8 +8,8 @@ import GitHub from 'public/static/iconLibrary/github.svg';
 
 const Footer = (): JSX.Element => {
   const githubClick = () => {
-    if (process.env.NODE_ENV === 'production' && window?.sa_loaded)
-      window.sa_event('github_homepage');
+    if (process.env.NODE_ENV === 'production' && window?.plausible)
+      window.plausible('Github Footer');
   };
 
   return (

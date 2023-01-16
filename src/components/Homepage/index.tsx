@@ -25,14 +25,14 @@ const Homepage = ({ allPokemon, pokemonTypes }: HomepageProps): JSX.Element => {
   const router = useRouter();
 
   const routeRandom = () => {
-    if (process.env.NODE_ENV === 'production' && window?.sa_loaded)
-      window.sa_event('random_pokemon');
+    if (process.env.NODE_ENV === 'production' && window?.plausible)
+      window.plausible('Random Pokemon');
     router.push(`/pokemon/${allPokemon[Math.floor(Math.random() * allPokemon.length)].name}`);
   };
 
   const githubClick = () => {
-    if (process.env.NODE_ENV === 'production' && window?.sa_loaded)
-      window.sa_event('github_homepage');
+    if (process.env.NODE_ENV === 'production' && window?.plausible)
+      window.plausible('Github Homepage');
   };
 
   return (

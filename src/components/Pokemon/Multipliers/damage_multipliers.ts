@@ -104,13 +104,17 @@ const getMultipliers = (types: Type['name'][]): MultipliersRes => {
   for (const [key, value] of Object.entries(multipliers.attack)) {
     if (value === 0) {
       multipliersObj.attack.no_damage.push(key);
-    } else if (value === 0.25) {
+    }
+    if (value === 0.25) {
       multipliersObj.attack.quarter_damage.push(key);
-    } else if (value === 0.5) {
+    }
+    if (value === 0.5) {
       multipliersObj.attack.half_damage.push(key);
-    } else if (value === 2) {
+    }
+    if (value === 2) {
       multipliersObj.attack.double_damage.push(key);
-    } else if (value === 4) {
+    }
+    if (value === 4) {
       multipliersObj.attack.quadruple_damage.push(key);
     }
   }
@@ -119,13 +123,17 @@ const getMultipliers = (types: Type['name'][]): MultipliersRes => {
   for (const [key, value] of Object.entries(multipliers.defense)) {
     if (value === 0) {
       multipliersObj.defense.no_damage.push(key);
-    } else if (value === 0.25) {
+    }
+    if (value === 0.25) {
       multipliersObj.defense.quarter_damage.push(key);
-    } else if (value === 0.5) {
+    }
+    if (value === 0.5) {
       multipliersObj.defense.half_damage.push(key);
-    } else if (value === 2) {
+    }
+    if (value === 2) {
       multipliersObj.defense.double_damage.push(key);
-    } else if (value === 4) {
+    }
+    if (value === 4) {
       multipliersObj.defense.quadruple_damage.push(key);
     }
   }

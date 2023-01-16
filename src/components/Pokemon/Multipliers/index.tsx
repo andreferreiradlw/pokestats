@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect } from 'react';
 // types
 import type { PokemonType } from 'pokenode-ts';
 // helpers
@@ -15,30 +15,50 @@ interface MultipliersProps extends BoxProps {
   pokemonTypes: PokemonType[];
 }
 
+interface TypesTableProps {
+  multipliers: MultipliersRes['attack'] | MultipliersRes['defense'];
+  multiplierType: 'attack' | 'defense';
+}
+
+const TypesTable = ({ multipliers, multiplierType }: TypesTableProps): JSX.Element => (
+  <Table>
+    <tbody>
+      {Object.keys(multipliers).map((relation, i) => (
+        <tr key={`multiplier-${multiplierType}-${i}`}>
+          <th>{removeUnderscore(relation)}</th>
+          <TypesCell>
+            {!multipliers[relation]?.length
+              ? 'None'
+              : multipliers[relation].map((type: string, i: number) => (
+                  <TypeBadge
+                    key={`${multiplierType}-${type}-${relation}-${i}`}
+                    $typename={type}
+                    $iconOnly
+                  />
+                ))}
+          </TypesCell>
+        </tr>
+      ))}
+    </tbody>
+  </Table>
+);
+
 const Multipliers = ({ pokemonTypes, ...rest }: MultipliersProps): JSX.Element => {
   // switch state
   const [enabled, setEnabled] = useState(true);
+  // multipliers
+  const [attackMultipliers, setAttackMultipliers] = useState<MultipliersRes['attack']>();
+  const [defenseMultipliers, setDefenseMultipliers] = useState<MultipliersRes['defense']>();
 
-  const typeMultipliers = useMemo(() => {
+  useEffect(() => {
     let currTypes = pokemonTypes.map(currType => {
       return currType.type.name;
     });
-    // return multipliers
-    return getMultipliers(currTypes);
-  }, [pokemonTypes]);
-
-  // current multipliers to show
-  const [currMultipliers, setCurrMultipliers] = useState<
-    MultipliersRes['defense'] | MultipliersRes['attack']
-  >(typeMultipliers.defense);
-
-  useEffect(() => {
-    if (typeMultipliers) {
-      enabled
-        ? setCurrMultipliers(typeMultipliers.defense)
-        : setCurrMultipliers(typeMultipliers.attack);
-    }
-  }, [typeMultipliers, enabled]);
+    const currMultipliers = getMultipliers(currTypes);
+    // updates states
+    setAttackMultipliers(currMultipliers.attack);
+    setDefenseMultipliers(currMultipliers.defense);
+  }, []);
 
   return (
     <Box flexalign={{ xxs: 'center', lg: 'flex-start' }} flexgap="1em" {...rest}>
@@ -51,22 +71,12 @@ const Multipliers = ({ pokemonTypes, ...rest }: MultipliersProps): JSX.Element =
         <SectionTitle>Multipliers</SectionTitle>
         <Switch enabled={enabled} onClick={() => setEnabled(prev => !prev)} />
       </Box>
-      <Table>
-        <tbody>
-          {Object.keys(currMultipliers).map((relation, i) => (
-            <tr key={`type-relation-${i}`}>
-              <th>{removeUnderscore(relation)}</th>
-              <TypesCell>
-                {!currMultipliers[relation].length
-                  ? 'None'
-                  : currMultipliers[relation].map((type: string, i: number) => (
-                      <TypeBadge key={`${type}-${relation}-${i}`} $typename={type} $iconOnly />
-                    ))}
-              </TypesCell>
-            </tr>
-          ))}
-        </tbody>
-      </Table>
+      {defenseMultipliers && attackMultipliers && (
+        <TypesTable
+          multipliers={enabled ? defenseMultipliers : attackMultipliers}
+          multiplierType={enabled ? 'defense' : 'attack'}
+        />
+      )}
     </Box>
   );
 };

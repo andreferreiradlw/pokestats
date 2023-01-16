@@ -63,6 +63,7 @@ const ImageNext = ({
           >
             <ImageElement
               loading={priority ? 'eager' : 'lazy'}
+              priority={priority}
               fill={fill}
               sizes={fill && '(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'}
               src={src}

@@ -187,7 +187,7 @@ const PokemonMoves = ({ pokemon, ...rest }: PokemonMovesProps): JSX.Element => {
             </thead>
             <TableBody>
               {genMoves[learnMethod].map((move: PokemonMove, i: number) => (
-                <TableRow key={`${move.name}-${i}`}>
+                <TableRow key={`${learnMethod}-${move.name}-${i}`}>
                   {/* @ts-ignore **/}
                   {learnMethod === 'level-up' && <td>{move.level_learned_at}</td>}
                   {learnMethod === 'machine' &&

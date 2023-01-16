@@ -30,11 +30,14 @@ const PokestatsHead = ({ children }: PokestatsHeadProps): JSX.Element => {
       <title>{PokestatsPageTitle}</title>
       <meta name="robots" content="max-image-preview:large" />
       {/** FONTS */}
-      <link rel="preload" href="/fonts/Montserrat-Regular.ttf" as="font" crossOrigin="" />
-      <link rel="preload" href="/fonts/Montserrat-Medium.ttf" as="font" crossOrigin="" />
-      <link rel="preload" href="/fonts/Quicksand-SemiBold.ttf" as="font" crossOrigin="" />
-      <link rel="preload" href="/fonts/JosefinSans-Bold.ttf" as="font" crossOrigin="" />
-      <link rel="preload" href="/fonts/JosefinSans-BoldItalic.ttf" as="font" crossOrigin="" />
+      <link rel="preconnect" href="https://fonts.googleapis.com" />
+      <link rel="preconnect" href="https://fonts.gstatic.com" />
+      <link
+        href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,700;1,700&family=Montserrat:wght@400;500&family=Quicksand:wght@600&display=block"
+        rel="stylesheet"
+        id="generate-googlefonts-css"
+        crossOrigin="true"
+      />
       {/** MANIFEST */}
       <link href="/manifest.json" rel="manifest" />
       {/** ICONS */}

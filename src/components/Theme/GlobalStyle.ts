@@ -1,47 +1,6 @@
 import { createGlobalStyle } from 'styled-components';
 
-const GlobalStyle = createGlobalStyle`
-
-@font-face {
-  font-family: 'Montserrat';
-  font-style: normal;
-  font-weight: 400;
-  font-display: block;
-  src: local('Montserrat'), url(/fonts/Montserrat-Regular.ttf) format('truetype');
-}
-
-@font-face {
-  font-family: 'Montserrat';
-  font-style: normal;
-  font-weight: 500;
-  font-display: block;
-  src: local('Montserrat'), url(/fonts/Montserrat-Medium.ttf) format('truetype');
-}
-
-@font-face {
-  font-family: 'Quicksand';
-  font-style: normal;
-  font-weight: 600;
-  font-display: block;
-  src: local('Quicksand'), url(/fonts/Quicksand-SemiBold.ttf) format('truetype');
-}
-
-@font-face {
-  font-family: 'Josefin Sans';
-  font-style: normal;
-  font-weight: 700;
-  font-display: block;
-  src: local('Josefin Sans'), url(/fonts/JosefinSans-Bold.ttf) format('truetype');
-}
-
-@font-face {
-  font-family: 'Josefin Sans';
-  font-style: italic;
-  font-weight: 700;
-  font-display: block;
-  src: local('Josefin Sans'), url(/fonts/JosefinSans-BoldItalic.ttf) format('truetype');
-}
-
+const GlobalStyle = createGlobalStyle` 
   // Resetting margins, paddings, and borders
   html, body,
   h1, h2, h3, h4, h5, h6,

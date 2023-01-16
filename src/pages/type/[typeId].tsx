@@ -27,8 +27,6 @@ const PokestatsTypePage: NextPage<PokestatsTypePageProps> = ({ autocompleteList,
     props.typeInfo.names.find(name => name.language.name === 'ja-Hrkt').name
   }タイプ ) is one of the eighteen elemental types in the Pokémon world.`;
 
-  console.log(props);
-
   return (
     <>
       <Head>

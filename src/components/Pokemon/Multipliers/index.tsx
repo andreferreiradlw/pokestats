@@ -16,6 +16,9 @@ interface MultipliersProps extends BoxProps {
 }
 
 const Multipliers = ({ pokemonTypes, ...rest }: MultipliersProps): JSX.Element => {
+  // switch state
+  const [enabled, setEnabled] = useState(true);
+
   const typeMultipliers = useMemo(() => {
     let currTypes = pokemonTypes.map(currType => {
       return currType.type.name;
@@ -28,8 +31,6 @@ const Multipliers = ({ pokemonTypes, ...rest }: MultipliersProps): JSX.Element =
   const [currMultipliers, setCurrMultipliers] = useState<
     MultipliersRes['defense'] | MultipliersRes['attack']
   >(typeMultipliers.defense);
-  // switch state
-  const [enabled, setEnabled] = useState(true);
 
   useEffect(() => {
     if (typeMultipliers) {

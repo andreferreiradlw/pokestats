@@ -30,7 +30,7 @@ const TypeIcon = ({ typeName, otherNames, ...rest }: TypeIconProps): JSX.Element
         $iconWidth="auto"
         $iconHeight="150px"
       />
-      {japanName && <JpnName>{japanName}</JpnName>}
+      {japanName && <JpnName>{`${japanName}タイプ`}</JpnName>}
     </Box>
   );
 };

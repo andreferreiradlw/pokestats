@@ -13,39 +13,43 @@ export interface FilteredMove extends PokemonMove {
 const filterMoves = (
   moves: PokemonMove[],
   learnMethod: MoveLearnMethod['name'],
-  versionGroup: string[],
+  versionGroup: string,
 ): FilteredMove[] => {
   // filter pokemon moves by learn method and game version
   const groupMoves = moves.filter(move => {
     const groupDetails = move.version_group_details;
-    const machineDetails = move.machines;
     let match = false;
 
     for (let moveGroup of groupDetails) {
       // check if version and learn method match
       if (
-        moveGroup.version_group.name === versionGroup[0] &&
+        moveGroup.version_group.name === versionGroup &&
         moveGroup.move_learn_method.name === learnMethod
       ) {
-        // add level key to move
-        move['level_learned_at'] = moveGroup.level_learned_at;
+        if (learnMethod === 'level-up') {
+          // add level key to move
+          move['level_learned_at'] = moveGroup.level_learned_at;
+        }
         // matched!
         match = true;
         break;
       }
     }
+
     // check if learn method is machine
     if (match && learnMethod === 'machine') {
+      const machineDetails = move.machines;
+
       for (let machineMove of machineDetails) {
-        if (machineMove.version_group.name === versionGroup[0]) {
+        if (machineMove.version_group.name === versionGroup) {
           // if machine matches version
           // add url key to pokemon move
           move['current_version_machine'] = machineMove.machine.url;
-
           break;
         }
       }
     }
+
     return match;
   });
 

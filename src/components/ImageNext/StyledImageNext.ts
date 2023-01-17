@@ -88,7 +88,10 @@ const LoadingContainer = styled(PlaceholderContainer)`
   transform: translate(-50%, -50%) !important;
 `;
 
-const ImageWrapper = styled(motion.span)`
+const ImageWrapper = styled(motion.div)`
+  align-items: center;
+  display: flex;
+  justify-content: center;
   position: relative;
   width: 100%;
 `;

@@ -29,7 +29,7 @@ const ImageContainer = styled(Box)`
         max-width: 55%;
       }
       @media ${theme.device.lg} {
-        max-width: 80%;
+        max-width: 69%;
       }
     `}
 

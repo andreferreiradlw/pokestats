@@ -7,7 +7,7 @@ import Box, { BoxProps } from '@/components/Box';
 import GameVersionContext from '@/components/Layout/gameVersionContext';
 import { removeDash } from '@/helpers/typography';
 // styles
-import { SectionTitle, Table, Numbered } from '@/components/BaseStyles';
+import { SectionTitle, Table, Numbered, UppercasedTd } from '@/components/BaseStyles';
 
 interface TrainingProps extends BoxProps {
   pokemon: Pokemon;
@@ -28,9 +28,9 @@ const Training = ({ pokemon, species, ...rest }: TrainingProps): JSX.Element => 
       stats.map(
         (currStat, i) =>
           currStat.effort > 0 && (
-            <Numbered key={`${currStat.stat.name}-${i}`}>{`${currStat.effort} ${removeDash(
-              currStat.stat.name,
-            )}`}</Numbered>
+            <UppercasedTd as="p" key={`${currStat.stat.name}-${i}`}>{`${
+              currStat.effort
+            } ${removeDash(currStat.stat.name)}`}</UppercasedTd>
           ),
       ),
     [stats],
@@ -38,10 +38,8 @@ const Training = ({ pokemon, species, ...rest }: TrainingProps): JSX.Element => 
   const catchRate = useMemo(
     () => (
       <>
-        {capture_rate}
-        <Numbered light>{`( ${Math.round(
-          (33.33 / 255) * capture_rate,
-        )}% with pokeball, full HP )`}</Numbered>
+        <p>{capture_rate}</p>
+        <span>{`(${Math.round((33.33 / 255) * capture_rate)}% with pokeball, full HP)`}</span>
       </>
     ),
     [capture_rate],
@@ -54,7 +52,12 @@ const Training = ({ pokemon, species, ...rest }: TrainingProps): JSX.Element => 
     if (base_happiness >= 71 && base_happiness <= 139) happinessRate = 'Higher than normal';
     if (base_happiness >= 140) happinessRate = 'Very high';
 
-    return `${base_happiness} ( ${happinessRate} )`;
+    return (
+      <>
+        <p>{`${base_happiness}`}</p>
+        <span>{`(${happinessRate})`}</span>
+      </>
+    );
   }, [base_happiness]);
 
   useEffect(() => {
@@ -103,7 +106,7 @@ const Training = ({ pokemon, species, ...rest }: TrainingProps): JSX.Element => 
           </tr>
           <tr>
             <th>Growth Rate</th>
-            <td>{removeDash(growth_rate.name)}</td>
+            <UppercasedTd>{removeDash(growth_rate.name)}</UppercasedTd>
           </tr>
           <tr>
             <th>Held Items</th>
@@ -112,9 +115,10 @@ const Training = ({ pokemon, species, ...rest }: TrainingProps): JSX.Element => 
                 ? 'None'
                 : items.map((item, i) => (
                     <Numbered key={`${item.item_details.name}-${i}`}>
-                      {`${items.length > 1 ? `${i + 1}. ` : ``}${removeDash(
+                      <UppercasedTd as="p">{`${items.length > 1 ? `${i + 1}. ` : ``}${removeDash(
                         item.item_details.name,
-                      )} ( ${item.version_details.rarity}% chance )`}
+                      )}`}</UppercasedTd>
+                      <span>{`( ${item.version_details.rarity}% chance )`}</span>
                     </Numbered>
                   ))}
             </td>

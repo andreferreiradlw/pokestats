@@ -5,7 +5,9 @@ import Box from '@/components/Box';
 const TableBody = styled.tbody``;
 const TableRow = styled.tr``;
 const NameTH = styled.th``;
-const NameTD = styled.td``;
+const NameTD = styled.td`
+  text-transform: capitalize;
+`;
 
 const TableContainer = styled.div`
   overflow: auto;
@@ -40,7 +42,6 @@ const MovesTable = styled.table`
   }
 
   & ${NameTH}, & ${NameTD} {
-    text-align: left;
     width: 25%;
   }
 

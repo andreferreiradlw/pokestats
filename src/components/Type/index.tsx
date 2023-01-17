@@ -1,7 +1,7 @@
 // types
 import type { PokestatsTypePageProps } from '@/pages/type/[typeId]';
 // helpers
-import { removeDash, pageContainerVariant } from '@/helpers';
+import { pageContainerVariant } from '@/helpers';
 // components
 import { AnimatePresence } from 'framer-motion';
 import { MainContainer } from '@/components/Layout';
@@ -18,6 +18,8 @@ export type TypePageProps = Omit<PokestatsTypePageProps, 'autocompleteList'>;
 const TypePage = ({ typeInfo, typeMoves }: TypePageProps): JSX.Element => {
   // data
   const { name, names, damage_relations } = typeInfo;
+
+  const typeName = names.find(name => name.language.name === 'en').name;
 
   return (
     <AnimatePresence mode="wait">
@@ -43,7 +45,7 @@ const TypePage = ({ typeInfo, typeMoves }: TypePageProps): JSX.Element => {
             flexalign={{ xxs: 'center', lg: 'flex-start' }}
             flexgap="2em"
           >
-            <PageHeading>{removeDash(name)}</PageHeading>
+            <PageHeading>{typeName}</PageHeading>
             <Box
               flexdirection={{ xxs: 'column', md: 'row' }}
               flexjustify={{ xxs: 'center', md: 'flex-start' }}
@@ -58,7 +60,7 @@ const TypePage = ({ typeInfo, typeMoves }: TypePageProps): JSX.Element => {
           <TypeIcon screensizes={{ xxs: 12, lg: 4 }} typeName={name} otherNames={names} />
         </Box>
         <Box flexalign="flex-start" flexjustify="flex-start">
-          <Tabs typeInfo={typeInfo} typeMoves={typeMoves} screensizes={12} />
+          <Tabs typeInfo={typeInfo} typeMoves={typeMoves} typeName={typeName} screensizes={12} />
         </Box>
       </MainContainer>
     </AnimatePresence>

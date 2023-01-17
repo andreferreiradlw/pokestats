@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import type { TypePageProps } from '../index';
 // helpers
 import { AnimatePresence } from 'framer-motion';
-import { hoverVariant, removeDash, fadeInUpVariant } from '@/helpers';
+import { hoverVariant, fadeInUpVariant } from '@/helpers';
 // styles
 import { Button, SectionTitle } from '@/components/BaseStyles';
 // components
@@ -20,9 +20,11 @@ const TabContainer = styled(BoxWrapper)`
   width: 100%;
 `;
 
-interface TypeTabsProps extends BoxProps, TypePageProps {}
+interface TypeTabsProps extends BoxProps, TypePageProps {
+  typeName: string;
+}
 
-const TypeTabs = ({ typeInfo, typeMoves, ...rest }: TypeTabsProps) => {
+const TypeTabs = ({ typeInfo, typeMoves, typeName, ...rest }: TypeTabsProps) => {
   // tab state
   const [currTab, setCurrTab] = useState('pokemon');
   // data
@@ -61,7 +63,7 @@ const TypeTabs = ({ typeInfo, typeMoves, ...rest }: TypeTabsProps) => {
             variants={fadeInUpVariant}
             key={`${name}-type-pokemon`}
           >
-            <SectionTitle>{`${removeDash(name)} Type Pokemon (${pokemon.length})`}</SectionTitle>
+            <SectionTitle>{`${typeName} Type Pokemon (${pokemon.length})`}</SectionTitle>
             <InfiniteScroll pokemonList={pokemon} dark />
           </TabContainer>
         )}
@@ -73,7 +75,7 @@ const TypeTabs = ({ typeInfo, typeMoves, ...rest }: TypeTabsProps) => {
             variants={fadeInUpVariant}
             key={`${name}-type-moves`}
           >
-            <SectionTitle>{`${removeDash(name)} Type Moves (${typeMoves.length})`}</SectionTitle>{' '}
+            <SectionTitle>{`${typeName} Type Moves (${typeMoves.length})`}</SectionTitle>{' '}
             <TypeMoves moves={typeMoves} />
           </TabContainer>
         )}

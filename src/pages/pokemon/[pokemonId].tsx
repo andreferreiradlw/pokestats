@@ -19,6 +19,7 @@ import {
   removeDash,
   formatFlavorText,
   gameVersions,
+  findPokemonName,
 } from '@/helpers';
 import { PokestatsPageTitle } from '@/components/Head';
 // components
@@ -68,7 +69,7 @@ const PokestatsPokemonPage: NextPage<PokestatsPokemonPageProps> = ({
     );
   }
 
-  const pokemonName = removeDash(props.pokemon.name);
+  const pokemonName = findPokemonName(props.species);
   const pageTitle = `${pokemonName} (Pokémon) - ${PokestatsPageTitle}`;
   const pageDescription = formatFlavorText(props.species.flavor_text_entries[0]?.flavor_text);
   const generationDescriptions = gameVersions

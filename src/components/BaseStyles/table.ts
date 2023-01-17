@@ -9,29 +9,36 @@ const Table = styled(motion.table)`
   width: 100%;
   word-break: keep-all;
 
-  & tbody {
+  tbody {
     flex-grow: 1;
   }
 
-  & tr:not(:last-of-type) {
+  tr span {
+    font-weight: 400;
+  }
+
+  tr:not(:last-of-type) {
     border-bottom: 1px solid #ececec;
     width: 100%;
   }
 
-  & th {
+  th {
     font-size: 0.875rem;
     font-weight: normal;
-    padding: 8px 0;
     text-align: left;
-    vertical-align: initial;
     white-space: nowrap;
+    min-height: 45px;
   }
 
-  & td {
+  td {
     font-weight: 500;
-    min-height: 40px;
+    min-height: 45px;
     padding: 8px 16px;
     white-space: pre-line;
+
+    p {
+      line-height: 1.5em;
+    }
   }
 
   ${({ theme }) => css`
@@ -45,11 +52,11 @@ const Table = styled(motion.table)`
   `}
 `;
 
-const Numbered = styled.span<{ light?: boolean }>`
+const Numbered = styled.div<{ light?: boolean }>`
   display: block;
   width: 100%;
 
-  & span {
+  span {
     font-weight: 300;
   }
 
@@ -65,9 +72,14 @@ const Numbered = styled.span<{ light?: boolean }>`
 `;
 
 const TypesCell = styled.td`
+  align-items: center;
   display: flex;
   flex-wrap: wrap;
   gap: 0.5em;
 `;
 
-export { Table, Numbered, TypesCell };
+const UppercasedTd = styled.td`
+  text-transform: capitalize;
+`;
+
+export { Table, Numbered, TypesCell, UppercasedTd };

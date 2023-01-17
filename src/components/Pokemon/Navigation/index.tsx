@@ -4,7 +4,7 @@ import type { Pokemon } from 'pokenode-ts';
 // helpers
 import { removeDash, fadeInUpVariant } from '@/helpers';
 // styles
-import { BtnContainer, BtnAnchor, Title, Arrow } from './StyledNavigation';
+import { BtnContainer, BtnAnchor, Title, Arrow, PokemonID, PokemonName } from './StyledNavigation';
 // components
 import Box, { BoxProps } from '@/components/Box';
 import ImageNext from '@/components/ImageNext';
@@ -60,8 +60,8 @@ const Navigation = ({ allPokemon, pokemonId, ...rest }: NavigationProps): JSX.El
               />
             </Arrow>
             <Title>
-              <span>{`#${pokemonId - 1}`}</span>
-              {removeDash(allPokemon[pokemonId - 2].name)}
+              <PokemonID>{`#${pokemonId - 1}`}</PokemonID>
+              <PokemonName>{removeDash(allPokemon[pokemonId - 2].name)}</PokemonName>
             </Title>
           </BtnAnchor>
         </BtnContainer>
@@ -88,8 +88,8 @@ const Navigation = ({ allPokemon, pokemonId, ...rest }: NavigationProps): JSX.El
               />
             </Arrow>
             <Title>
-              <span>{`#${pokemonId + 1}`}</span>
-              {removeDash(allPokemon[pokemonId].name)}
+              <PokemonID>{`#${pokemonId + 1}`}</PokemonID>
+              <PokemonName>{removeDash(allPokemon[pokemonId].name)}</PokemonName>
             </Title>
           </BtnAnchor>
         </BtnContainer>

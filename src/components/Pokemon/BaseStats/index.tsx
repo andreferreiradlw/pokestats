@@ -6,7 +6,7 @@ import { removeDash, fadeInUpVariant } from '@/helpers';
 import Box, { BoxProps } from '@/components/Box';
 import ProgressBar from './ProgressBar';
 // styles
-import { SectionTitle, Table } from '@/components/BaseStyles';
+import { SectionTitle, Table, UppercasedTd } from '@/components/BaseStyles';
 import { BarCell } from './StyledBaseStats';
 
 // total stats
@@ -49,7 +49,7 @@ const BaseStats = ({ stats, ...rest }: BaseStatsProps): JSX.Element => (
       <tbody>
         {stats.map(({ base_stat, stat }, i) => (
           <tr key={`${stat.name}-${i}`}>
-            <th>{removeDash(stat.name)}</th>
+            <UppercasedTd as="th">{removeDash(stat.name)}</UppercasedTd>
             <td>{base_stat}</td>
             <BarCell>
               <ProgressBar progress={progressCalc(base_stat)} />

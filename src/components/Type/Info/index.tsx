@@ -7,7 +7,7 @@ import { mapGeneration, removeDash } from '@/helpers';
 // components
 import Box, { BoxProps } from '@/components/Box';
 // styles
-import { Table } from '@/components/BaseStyles';
+import { Table, UppercasedTd } from '@/components/BaseStyles';
 
 const InfoTable = styled(Table)`
   width: 100%;
@@ -39,7 +39,7 @@ const TypeInfo = ({ type, ...rest }: TypeInfoProps): JSX.Element => {
           {move_damage_class && (
             <tr>
               <th>Move Damage Class</th>
-              <td>{removeDash(move_damage_class.name)}</td>
+              <UppercasedTd>{removeDash(move_damage_class.name)}</UppercasedTd>
             </tr>
           )}
         </tbody>

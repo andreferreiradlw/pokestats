@@ -81,7 +81,9 @@ const OptionWrapper = styled(Link)`
   display: flex;
   flex-direction: row;
   font-size: 0.875rem;
+  gap: 1em;
   justify-content: space-between;
+  min-height: 55px;
   padding: 0.5em 1em;
 
   svg {
@@ -108,14 +110,14 @@ const OptionWrapper = styled(Link)`
 `;
 
 const Option = styled.span`
+  font-size: 1.3em;
   font-weight: 600;
-  padding: 16px 0;
+  text-transform: capitalize;
 `;
 
-const PokeID = styled.span`
-  font-size: 1.5rem;
+const PokeID = styled(Option)`
+  font-size: 1.5em;
   font-weight: 600;
-  margin-left: auto;
 `;
 
 export { Container, Input, ListWrapper, OptionWrapper, OptionImg, Option, PokeID };

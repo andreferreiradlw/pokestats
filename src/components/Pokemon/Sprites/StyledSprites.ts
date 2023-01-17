@@ -6,6 +6,7 @@ import { SectionSubTitle } from '@/components/BaseStyles';
 
 const SpriteContainer = styled(Box)`
   text-align: center;
+  text-transform: capitalize;
 `;
 
 const Sprite = styled(ImageNext)``;

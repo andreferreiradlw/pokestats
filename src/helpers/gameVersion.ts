@@ -1,5 +1,3 @@
-import { version } from 'os';
-
 const gameVersions = [
   {
     name: 'Red',

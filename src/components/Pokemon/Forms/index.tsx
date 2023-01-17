@@ -8,7 +8,7 @@ import Box, { BoxProps } from '@/components/Box';
 // helpers
 import { removeDash } from '@/helpers';
 // styles
-import { SectionTitle, Table, Numbered } from '@/components/BaseStyles';
+import { SectionTitle, Table, Numbered, UppercasedTd } from '@/components/BaseStyles';
 
 interface PokemonFormsProps extends BoxProps {
   pokemonId: number;
@@ -25,10 +25,10 @@ const PokemonForms = ({ pokemonId, species, ...rest }: PokemonFormsProps): JSX.E
         const varietyName = removeDash(form.pokemon.name);
         return (
           <Numbered key={`${form.pokemon.name}-${i}`}>
-            {`${varieties.length > 1 ? `${i + 1}. ` : ``}${varietyName.substr(
+            {`${varieties.length > 1 ? `${i + 1}. ` : ``}${varietyName.substring(
               varietyName.indexOf(' ') + 1,
             )}`}
-            {form.is_default && <span>{` ( default )`}</span>}
+            {form.is_default && <span>{` (Default)`}</span>}
           </Numbered>
         );
       }),
@@ -46,7 +46,7 @@ const PokemonForms = ({ pokemonId, species, ...rest }: PokemonFormsProps): JSX.E
           </tr>
           <tr>
             <th>Varieties</th>
-            <td>{currForms}</td>
+            <UppercasedTd>{currForms}</UppercasedTd>
           </tr>
           <tr>
             <th>Gender Differences</th>

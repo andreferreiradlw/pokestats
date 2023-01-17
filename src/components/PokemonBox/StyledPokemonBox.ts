@@ -11,21 +11,21 @@ const PokeBox = styled(motion.div)<{
 }>`
   align-items: center;
   border: 1px solid transparent;
-  border-radius: 4px;
+  border-radius: 5px;
   display: flex;
   flex-basis: auto;
   flex-direction: column;
   font-weight: 600;
   gap: 0.5em;
   justify-content: center;
-  max-width: 155px;
+  max-width: 175px;
   overflow: hidden;
   padding: 1rem;
   position: relative;
   text-align: center;
   transition: border 0.1s ease-in-out;
   transition: box-shadow 0.05s ease-in-out;
-  width: 155px;
+  width: 175px;
 
   &:hover {
     cursor: pointer;
@@ -74,15 +74,16 @@ const PokeBox = styled(motion.div)<{
 `;
 
 const NumberId = styled.span`
-  font-size: 2rem;
+  font-size: 2em;
 `;
 
 const PokeName = styled.span`
-  font-size: 1.2rem;
+  font-size: 1.5em;
+  text-transform: capitalize;
 `;
 
 const PokeGen = styled.span`
-  font-size: 1rem;
+  font-size: 1em;
   font-weight: 300;
 `;
 

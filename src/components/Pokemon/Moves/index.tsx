@@ -10,7 +10,6 @@ import {
   filterMoves,
   FilteredMove,
   getMachineNames,
-  capitalize,
   removeDash,
   fadeInUpVariant,
   getIdFromMove,
@@ -20,7 +19,7 @@ import Box, { BoxProps } from '@/components/Box';
 import Loading from '@/components/Loading';
 import TypeBadge from '@/components/TypeBadge';
 // styles
-import { SectionTitle, SectionMessage, Button } from '@/components/BaseStyles';
+import { SectionTitle, SectionMessage, Button, UppercasedTd } from '@/components/BaseStyles';
 import {
   TableContainer,
   MovesTable,
@@ -70,7 +69,6 @@ const PokemonMoves = ({ pokemon, ...rest }: PokemonMovesProps): JSX.Element => {
   const [machineNames, setMachineNames] = useState<string[]>();
   // loading
   const [movesLoading, setMovesLoading] = useState(true);
-
   // ref
   const _isMounted = useRef(null);
   // manage mounted state to avoid memory leaks
@@ -126,12 +124,14 @@ const PokemonMoves = ({ pokemon, ...rest }: PokemonMovesProps): JSX.Element => {
           setMachineNames(names);
         });
       };
-
-      const levelMoves = filterMoves(allMoves, 'level-up', mapVersionToGroup(gameVersion));
-      const tmMoves = filterMoves(allMoves, 'machine', mapVersionToGroup(gameVersion));
+      // current group to filter
+      const gameGroup = mapVersionToGroup(gameVersion);
+      // filter moves
+      const levelMoves = filterMoves(allMoves, 'level-up', gameGroup);
+      const tmMoves = filterMoves(allMoves, 'machine', gameGroup);
       fetchMachineNames(tmMoves);
-      const breedingMoves = filterMoves(allMoves, 'egg', mapVersionToGroup(gameVersion));
-      const professorMoves = filterMoves(allMoves, 'tutor', mapVersionToGroup(gameVersion));
+      const breedingMoves = filterMoves(allMoves, 'egg', gameGroup);
+      const professorMoves = filterMoves(allMoves, 'tutor', gameGroup);
 
       if (!_isMounted.current) return;
       // update state
@@ -198,7 +198,7 @@ const PokemonMoves = ({ pokemon, ...rest }: PokemonMovesProps): JSX.Element => {
                   <td>
                     <TypeBadge flexmargin="0" $iconOnly $typename={move.type.name} />
                   </td>
-                  <td>{capitalize(move.damage_class.name)}</td>
+                  <UppercasedTd>{move.damage_class.name}</UppercasedTd>
                   <td>{move.power || '-'}</td>
                   <td>{move.pp || '-'}</td>
                   <td>{move.accuracy || '-'}</td>

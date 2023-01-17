@@ -1,7 +1,7 @@
 // types
 import type { Type } from 'pokenode-ts';
 // helpers
-import { capitalize, hoverVariant } from '@/helpers';
+import { hoverVariant } from '@/helpers';
 // styles
 import { Badge } from './StyledBadge';
 // components
@@ -22,8 +22,6 @@ export interface TypeBadgeProps {
 const TypeBadge = ({ $typename, hideIcon, $iconOnly, ...rest }: TypeBadgeProps): JSX.Element => {
   if (!$typename) return null;
 
-  const formattedName = capitalize($typename);
-
   return (
     <Link href={`/type/${$typename}`}>
       <Badge
@@ -32,11 +30,11 @@ const TypeBadge = ({ $typename, hideIcon, $iconOnly, ...rest }: TypeBadgeProps):
         whileHover="hover"
         whileTap="tap"
         variants={hoverVariant}
-        title={$iconOnly && formattedName}
+        title={$iconOnly && $typename.toUpperCase()}
         {...rest}
       >
         {!hideIcon && <TypeIcon type={$typename} />}
-        {!$iconOnly && <span>{formattedName}</span>}
+        {!$iconOnly && <span>{$typename}</span>}
       </Badge>
     </Link>
   );

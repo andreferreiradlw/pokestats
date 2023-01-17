@@ -3,6 +3,7 @@ import { AnimatePresence } from 'framer-motion';
 // heplpers
 import { staggerInitialVariant, fadeInUpVariant } from '@/helpers';
 // types
+import type { PokestatsHomepageProps } from '@/pages/index';
 import type { Pokemon, PokemonType } from '@/types';
 // styles
 import { Container, GithubLink, ScrollDown, ListContainer } from './styledHomepage';
@@ -15,12 +16,7 @@ import TypeList from './TypeList';
 // icons
 import Github from 'public/static/iconLibrary/github.svg';
 
-interface HomepageProps {
-  allPokemon: Pokemon[];
-  pokemonTypes: PokemonType[];
-}
-
-const Homepage = ({ allPokemon, pokemonTypes }: HomepageProps): JSX.Element => {
+const Homepage = ({ allPokemon, pokemonTypes }: PokestatsHomepageProps): JSX.Element => {
   // router
   const router = useRouter();
 

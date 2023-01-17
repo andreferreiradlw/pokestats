@@ -9,12 +9,12 @@ import Head from 'next/head';
 import Layout from '@/components/Layout';
 import Homepage from '@/components/Homepage';
 
-interface PokestatsHomepageProps {
+export interface PokestatsHomepageProps {
   allPokemon: Pokemon[];
   pokemonTypes: PokemonType[];
 }
 
-const PokestatsHomepage: NextPage<PokestatsHomepageProps> = ({ allPokemon, pokemonTypes }) => (
+const PokestatsHomepage: NextPage<PokestatsHomepageProps> = props => (
   <>
     <Head>
       <meta property="og:title" content={PokestatsPageTitle} />
@@ -25,7 +25,7 @@ const PokestatsHomepage: NextPage<PokestatsHomepageProps> = ({ allPokemon, pokem
       <meta property="og:image" content="/static/android-icon-512x512.png" />
     </Head>
     <Layout $withGutter={false} layoutGap="0">
-      <Homepage allPokemon={allPokemon} pokemonTypes={pokemonTypes} />
+      <Homepage {...props} />
     </Layout>
   </>
 );

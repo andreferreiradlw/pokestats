@@ -1,18 +1,18 @@
 import { useMemo } from 'react';
 import styled from 'styled-components';
+// helpers
+import { removeDash } from '@/helpers';
 // types
 import type { PokemonSpecies, EvolutionChain } from 'pokenode-ts';
-// helpers
-import { removeDash } from '@/helpers/typography';
 // styles
-import { SectionTitle, Table, Numbered } from '@/components/BaseStyles';
+import { SectionTitle, Table, Numbered, UppercasedTd } from '@/components/BaseStyles';
 // components
 import Box, { BoxProps } from '@/components/Box';
 // icons
 import MaleIcon from 'public/static/iconLibrary/male.svg';
 import FemaleIcon from 'public/static/iconLibrary/female.svg';
 
-const Ratio = styled.span`
+const Ratio = styled.p`
   svg {
     margin-left: 0.2em;
     width: 1em;
@@ -43,13 +43,20 @@ const Breeding = ({ species, babyTriggerItem, ...rest }: BreedingProps): JSX.Ele
     () =>
       egg_groups?.map((group, i) => (
         <Numbered key={`${group.name}-${i}`}>
-          {`${egg_groups.length > 1 ? `${i + 1}. ` : ``}${removeDash(group.name)}`}
+          <UppercasedTd as="p">{`${egg_groups.length > 1 ? `${i + 1}. ` : ``}${
+            group.name
+          }`}</UppercasedTd>
         </Numbered>
       )),
     [egg_groups],
   );
   const eggCycle = useMemo(
-    () => `${hatch_counter} cycles ( ${255 * (hatch_counter + 1)} steps )`,
+    () => (
+      <>
+        <p>{`${hatch_counter} cycles`}</p>
+        <span>{`(${255 * (hatch_counter + 1)} steps)`}</span>
+      </>
+    ),
     [hatch_counter],
   );
 
@@ -64,19 +71,21 @@ const Breeding = ({ species, babyTriggerItem, ...rest }: BreedingProps): JSX.Ele
           </tr>
           <tr>
             <th>Egg Groups</th>
-            <td>{egg_groups?.length ? eggGroups : 'No Egg Groups'}</td>
+            <UppercasedTd>{egg_groups?.length ? eggGroups : 'No Egg Groups'}</UppercasedTd>
           </tr>
           <tr>
             <th>Egg Cycles</th>
-            <td>{hatch_counter ? eggCycle : 'No Egg Cycles'}</td>
+            <UppercasedTd>{hatch_counter ? eggCycle : 'No Egg Cycles'}</UppercasedTd>
           </tr>
           <tr>
             <th>Baby Trigger Item</th>
-            <td>{babyTriggerItem ? removeDash(babyTriggerItem.name) : 'None'}</td>
+            <UppercasedTd>
+              {babyTriggerItem ? removeDash(babyTriggerItem.name) : 'None'}
+            </UppercasedTd>
           </tr>
           <tr>
             <th>Habitat</th>
-            <td>{habitat ? removeDash(habitat.name) : 'None'}</td>
+            <UppercasedTd>{habitat ? habitat.name : 'None'}</UppercasedTd>
           </tr>
         </tbody>
       </Table>

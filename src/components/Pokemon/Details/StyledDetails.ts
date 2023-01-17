@@ -9,6 +9,7 @@ const TypeContainer = styled(Box)`
 const Genera = styled.p`
   font-weight: 700;
 `;
+
 const Flavor = styled.p`
   text-align: center;
 

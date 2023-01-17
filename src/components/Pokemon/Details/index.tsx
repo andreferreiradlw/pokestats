@@ -7,17 +7,17 @@ import type { Ability } from 'pokenode-ts';
 import GameVersionContext from '@/components/Layout/gameVersionContext';
 import { AnimatePresence } from 'framer-motion';
 import {
-  capitalize,
   removeDash,
   fadeInUpVariant,
   mapGeneration,
   formatFlavorText,
+  findPokemonName,
 } from '@/helpers';
 // components
 import BoxWrapper from '@/components/Box/StyledBox';
 import TypeBadge from '@/components/TypeBadge';
 // styles
-import { PageHeading, Table, Numbered } from '@/components/BaseStyles';
+import { PageHeading, Table, Numbered, UppercasedTd } from '@/components/BaseStyles';
 import { TypeContainer, Genera, Flavor } from './StyledDetails';
 
 interface PokemonDetailsProps extends BoxProps {
@@ -62,7 +62,7 @@ const PokemonDetails = ({
   }, [gameVersion, flavor_text_entries]);
 
   const pokemonWeight = useMemo(
-    () => `${weight / 10} kg ( ${Math.round(weight * 2.2046) / 10} lbs )`,
+    () => `${weight / 10} kg (${Math.round(weight * 2.2046) / 10} lbs)`,
     [weight],
   );
 
@@ -72,16 +72,17 @@ const PokemonDetails = ({
     // split number
     const numbers = heightInFeet.toString().split('.');
     // return string
-    return `${height / 10} m ( ${numbers[0] || '0'}'${numbers[1] || '0'}" )`;
+    return `${height / 10} m (${numbers[0] || '0'}'${numbers[1] || '0'}")`;
   }, [height]);
 
   const renderAbilities = useMemo(
     () =>
       pokemonAbilities.map(({ ability, is_hidden }, i) => (
         <Numbered key={`${ability}-${i}`}>
-          {`${i + 1}. ${removeDash(ability.name)}`}
-          {is_hidden && ' ( Hidden Ability )'}
-          <br />
+          <UppercasedTd as="p">
+            {`${i + 1}. ${removeDash(ability.name)}`}
+            {is_hidden && ' (Hidden Ability)'}
+          </UppercasedTd>
           <span>{abilities[i].effect_entries[0]?.short_effect}</span>
         </Numbered>
       )),
@@ -108,7 +109,7 @@ const PokemonDetails = ({
             ))}
           </TypeContainer>
         )}
-        <PageHeading>{removeDash(name)}</PageHeading>
+        <PageHeading>{findPokemonName(species)}</PageHeading>
         {(is_baby || is_legendary || is_mythical) && (
           <Genera>
             {is_baby && `Baby `}
@@ -146,11 +147,11 @@ const PokemonDetails = ({
             </tr>
             <tr>
               <th>Shape</th>
-              <td>{shape ? capitalize(shape.name) : 'No shape'}</td>
+              <UppercasedTd>{shape ? removeDash(shape.name) : 'No shape'}</UppercasedTd>
             </tr>
             <tr>
               <th>Color</th>
-              <td>{capitalize(color.name)}</td>
+              <UppercasedTd>{color.name}</UppercasedTd>
             </tr>
           </tbody>
         </Table>

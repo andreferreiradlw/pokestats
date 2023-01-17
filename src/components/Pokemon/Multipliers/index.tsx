@@ -9,7 +9,7 @@ import Box, { BoxProps } from '@/components/Box';
 import TypeBadge from '@/components/TypeBadge';
 import Switch from './Switch';
 // styles
-import { SectionTitle, Table, TypesCell } from '@/components/BaseStyles';
+import { SectionTitle, Table, TypesCell, UppercasedTd } from '@/components/BaseStyles';
 
 interface MultipliersProps extends BoxProps {
   pokemonTypes: PokemonType[];
@@ -25,7 +25,7 @@ const TypesTable = ({ multipliers, multiplierType }: TypesTableProps): JSX.Eleme
     <tbody>
       {Object.keys(multipliers).map((relation, i) => (
         <tr key={`multiplier-${multiplierType}-${i}`}>
-          <th>{removeUnderscore(relation)}</th>
+          <UppercasedTd as="th">{removeUnderscore(relation)}</UppercasedTd>
           <TypesCell>
             {!multipliers[relation]?.length
               ? 'None'

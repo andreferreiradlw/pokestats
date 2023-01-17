@@ -23,6 +23,7 @@ const Badge = styled(motion.div)<TypeBadgeProps>`
   font-weight: 600;
   gap: 0.5em;
   justify-content: center;
+  text-transform: capitalize;
   width: auto;
 
   ${({ $iconOnly, flexmargin }) =>

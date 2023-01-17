@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components';
+import { motion } from 'framer-motion';
 // components
 import Box from '@/components/Box';
 
@@ -9,7 +10,7 @@ const NameTD = styled.td`
   text-transform: capitalize;
 `;
 
-const TableContainer = styled.div`
+const TableContainer = styled(motion.div)`
   overflow: auto;
   width: 100%;
 

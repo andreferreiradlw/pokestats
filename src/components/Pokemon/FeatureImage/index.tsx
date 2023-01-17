@@ -3,7 +3,7 @@ import type { Pokemon, PokemonSpecies } from 'pokenode-ts';
 import type { BoxProps } from '@/components/Box';
 import { useMemo } from 'react';
 // helpers
-import { scaleInVariant } from '@/helpers/animations';
+import { scaleInVariant, padPokemonId } from '@/helpers';
 // styles
 import { JpnName } from '@/components/BaseStyles';
 import { ImageContainer } from './StyledFeatureImage';
@@ -39,9 +39,9 @@ const FeaturedImage = ({
         loading="eager"
         placeholderwidth="20%"
         alt={englishName}
-        src={`https://raw.githubusercontent.com/andreferreiradlw/pokestats_media/main/assets/images/${pokemonId
-          .toString()
-          .padStart(3, '0')}.png`}
+        src={`https://raw.githubusercontent.com/andreferreiradlw/pokestats_media/main/assets/images/${padPokemonId(
+          pokemonId,
+        )}.png`}
       />
       {specieNames && (
         <JpnName

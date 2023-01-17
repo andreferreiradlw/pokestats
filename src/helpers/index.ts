@@ -12,8 +12,6 @@ export * from './moves';
 export * from './random';
 // refs
 export * from './refs';
-// strings
-export * from './string';
 // typography
 export * from './typography';
 // id

@@ -2,7 +2,7 @@
 import type { PokestatsPokemonPageProps } from '@/pages/pokemon/[pokemonId]';
 import type { Pokemon } from 'pokenode-ts';
 // helpers
-import { removeDash, fadeInUpVariant } from '@/helpers';
+import { removeDash, fadeInUpVariant, padPokemonId } from '@/helpers';
 // styles
 import { BtnContainer, BtnAnchor, Title, Arrow, PokemonID, PokemonName } from './StyledNavigation';
 // components
@@ -48,11 +48,9 @@ const Navigation = ({ allPokemon, pokemonId, ...rest }: NavigationProps): JSX.El
           >
             <Arrow $left>
               <ImageNext
-                src={`https://raw.githubusercontent.com/andreferreiradlw/pokestats_media/main/assets/images/${(
-                  pokemonId - 1
-                )
-                  .toString()
-                  .padStart(3, '0')}.png`}
+                src={`https://raw.githubusercontent.com/andreferreiradlw/pokestats_media/main/assets/images/${padPokemonId(
+                  pokemonId - 1,
+                )}.png`}
                 alt={allPokemon[pokemonId - 2].name}
                 key={`navigation-left-${allPokemon[pokemonId - 2].name}`}
                 width="100"
@@ -76,11 +74,9 @@ const Navigation = ({ allPokemon, pokemonId, ...rest }: NavigationProps): JSX.El
           <BtnAnchor href={`/pokemon/${allPokemon[pokemonId].name}`} onClick={nextPokemon} $right>
             <Arrow $right>
               <ImageNext
-                src={`https://raw.githubusercontent.com/andreferreiradlw/pokestats_media/main/assets/images/${(
-                  pokemonId + 1
-                )
-                  .toString()
-                  .padStart(3, '0')}.png`}
+                src={`https://raw.githubusercontent.com/andreferreiradlw/pokestats_media/main/assets/images/${padPokemonId(
+                  pokemonId + 1,
+                )}.png`}
                 alt={allPokemon[pokemonId].name}
                 key={`navigation-right-${allPokemon[pokemonId].name}`}
                 width="100"

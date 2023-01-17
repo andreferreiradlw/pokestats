@@ -148,7 +148,7 @@ const Autocomplete = ({
                 {assetType === 'type' && <TypeIcon type={name} />}
                 {assetType === 'pokemon' && (
                   <OptionImg
-                    src={`https://raw.githubusercontent.com/HybridShivam/Pokemon/master/assets/images/${id
+                    src={`https://raw.githubusercontent.com/andreferreiradlw/pokestats_media/main/assets/images/${id
                       .toString()
                       .padStart(3, '0')}.png`}
                   />

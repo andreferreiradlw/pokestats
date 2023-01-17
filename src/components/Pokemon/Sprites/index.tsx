@@ -154,7 +154,7 @@ const Sprites = ({ pokemonSprites, pokemonId, forms, ...rest }: SpritesProps): J
                     <Sprite
                       alt="Official Artwork Front Default"
                       key="official-artwork"
-                      src={`https://raw.githubusercontent.com/HybridShivam/Pokemon/master/assets/images/${pokemonId
+                      src={`https://raw.githubusercontent.com/andreferreiradlw/pokestats_media/main/assets/images/${pokemonId
                         .toString()
                         .padStart(3, '0')}-${name}.png`}
                       height="180"

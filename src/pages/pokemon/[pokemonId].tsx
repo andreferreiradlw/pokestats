@@ -91,7 +91,7 @@ const PokestatsPokemonPage: NextPage<PokestatsPokemonPageProps> = ({
         <meta property="og:description" content={pageDescription} />
         <meta
           property="og:image"
-          content={`https://raw.githubusercontent.com/HybridShivam/Pokemon/master/assets/images/${props.pokemon.id
+          content={`https://raw.githubusercontent.com/andreferreiradlw/pokestats_media/main/assets/images/${props.pokemon.id
             .toString()
             .padStart(3, '0')}.png`}
         />

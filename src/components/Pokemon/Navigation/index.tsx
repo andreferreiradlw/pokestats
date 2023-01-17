@@ -48,7 +48,7 @@ const Navigation = ({ allPokemon, pokemonId, ...rest }: NavigationProps): JSX.El
           >
             <Arrow $left>
               <ImageNext
-                src={`https://raw.githubusercontent.com/HybridShivam/Pokemon/master/assets/images/${(
+                src={`https://raw.githubusercontent.com/andreferreiradlw/pokestats_media/main/assets/images/${(
                   pokemonId - 1
                 )
                   .toString()
@@ -76,7 +76,7 @@ const Navigation = ({ allPokemon, pokemonId, ...rest }: NavigationProps): JSX.El
           <BtnAnchor href={`/pokemon/${allPokemon[pokemonId].name}`} onClick={nextPokemon} $right>
             <Arrow $right>
               <ImageNext
-                src={`https://raw.githubusercontent.com/HybridShivam/Pokemon/master/assets/images/${(
+                src={`https://raw.githubusercontent.com/andreferreiradlw/pokestats_media/main/assets/images/${(
                   pokemonId + 1
                 )
                   .toString()

@@ -39,7 +39,7 @@ const FeaturedImage = ({
         loading="eager"
         placeholderwidth="20%"
         alt={englishName}
-        src={`https://raw.githubusercontent.com/HybridShivam/Pokemon/master/assets/images/${pokemonId
+        src={`https://raw.githubusercontent.com/andreferreiradlw/pokestats_media/main/assets/images/${pokemonId
           .toString()
           .padStart(3, '0')}.png`}
       />

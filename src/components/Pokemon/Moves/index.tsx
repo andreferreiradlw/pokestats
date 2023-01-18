@@ -13,30 +13,30 @@ import {
   removeDash,
   fadeInUpVariant,
   getIdFromMove,
-  staggerTableVariant,
 } from '@/helpers';
 // components
 import { AnimatePresence } from 'framer-motion';
 import Box, { BoxProps } from '@/components/Box';
 import Loading from '@/components/Loading';
 import TypeBadge from '@/components/TypeBadge';
+import Dropdown from '@/components/Dropdown';
 // styles
-import { SectionTitle, SectionMessage, Button, UppercasedTd } from '@/components/BaseStyles';
+import { SectionTitle, SectionMessage, UppercasedTd } from '@/components/BaseStyles';
 import {
   TableContainer,
   MovesTable,
   NameTH,
   NameTD,
   TableRow,
-  TabContainer,
+  TitleContainer,
   TableBody,
 } from './StyledMoves';
 
-const TabsData = [
-  { title: 'Level Up', value: 'level-up' },
-  { title: 'Machines', value: 'machine' },
-  { title: 'Egg', value: 'egg' },
-  { title: 'Tutor', value: 'tutor' },
+const LearnMethodOptions = [
+  { label: 'Level Up', value: 'level-up' },
+  { label: 'Machines', value: 'machine' },
+  { label: 'Egg', value: 'egg' },
+  { label: 'Tutor', value: 'tutor' },
 ];
 
 const mapMethodName = (methodName: MoveLearnMethod['name']): string => {
@@ -150,24 +150,20 @@ const PokemonMoves = ({ pokemon, ...rest }: PokemonMovesProps): JSX.Element => {
 
   return (
     <Box flexalign={{ xxs: 'center', lg: 'flex-start' }} flexgap="2em" {...rest}>
-      <SectionTitle>Move Pool</SectionTitle>
-      {/** TABS */}
-      <TabContainer flexdirection="row" flexjustify="space-evenly" flexwrap="wrap">
-        {TabsData.map(({ title, value }) => (
-          <Button
-            $active={learnMethod === value}
-            onClick={() => {
-              setLearnMethod(value);
-            }}
-            whileHover="hover"
-            whileTap="tap"
-            variants={fadeInUpVariant}
-            key={`pokemon-moves-${value}-btn`}
-          >
-            {title}
-          </Button>
-        ))}
-      </TabContainer>
+      <TitleContainer
+        flexdirection="row"
+        flexjustify={{ xxs: 'center', lg: 'flex-start' }}
+        flexwrap="wrap"
+        flexgap="1em"
+      >
+        <SectionTitle>Move Pool</SectionTitle>
+        <Dropdown
+          options={LearnMethodOptions}
+          onChange={e => setLearnMethod(e.target.value)}
+          value={learnMethod}
+          minWidth="125px"
+        />
+      </TitleContainer>
       {movesLoading && (
         <Loading flexheight="100%" $iconWidth={{ xxs: '20%', xs: '15%', md: '10%', lg: '5%' }} />
       )}

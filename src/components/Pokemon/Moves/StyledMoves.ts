@@ -69,6 +69,6 @@ const MovesTable = styled.table`
   `}
 `;
 
-const TabContainer = styled(Box)``;
+const TitleContainer = styled(Box)``;
 
-export { TableContainer, MovesTable, TableBody, NameTH, NameTD, TableRow, TabContainer };
+export { TableContainer, MovesTable, TableBody, NameTH, NameTD, TableRow, TitleContainer };

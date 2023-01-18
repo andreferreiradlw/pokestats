@@ -23,7 +23,6 @@ const EvolutionChain = ({
 }: EvolutionChainProps): JSX.Element => {
   // data
   const { chainId, firstEvolution, secondEvolution } = evolutionChain;
-  console.log(evolutionChain);
 
   return (
     <Box flexalign={{ xxs: 'center', lg: 'flex-start' }} flexgap="1em" {...rest}>
@@ -76,7 +75,7 @@ const EvolutionChain = ({
           </Box>
         )}
       </BoxWrapper>
-      {!secondEvolution.length && !thirdEvolution.length && (
+      {!secondEvolution.length && (
         <SectionMessage
           initial="hidden"
           animate="show"

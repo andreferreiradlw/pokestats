@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useMemo } from 'react';
 // helpers
 import GameVersionContext from '@/components/Layout/gameVersionContext';
 import { gameVersions, checkIfEarlierGen } from '@/helpers';
@@ -6,9 +6,9 @@ import { gameVersions, checkIfEarlierGen } from '@/helpers';
 import Link from 'next/link';
 import Box, { BoxProps } from '@/components/Box';
 import Autocomplete, { AutocompleteProps } from '@/components/Autocomplete';
+import Dropdown from '@/components/Dropdown';
 // styles
-import { Select } from '@/components/BaseStyles';
-import { HeaderContainer, Heading, SelectContainer } from './styledHeader';
+import { HeaderContainer, PokestatsLogo } from './styledHeader';
 
 interface HeaderComponentProps extends BoxProps {
   autocompleteList: AutocompleteProps['filterList'];
@@ -23,6 +23,20 @@ const HeaderComponent = ({
   // game version
   const { gameVersion, setGameVersion } = useContext(GameVersionContext);
 
+  const versionOptions = useMemo(
+    () =>
+      gameVersions
+        .map(
+          version =>
+            !checkIfEarlierGen(pokemonGen, version.value) && {
+              label: version.label,
+              value: version.value,
+            },
+        )
+        .filter(a => a), // filter empty
+    [pokemonGen],
+  );
+
   return (
     <HeaderContainer {...rest}>
       <Box
@@ -36,30 +50,18 @@ const HeaderComponent = ({
       >
         <Box width="auto" flexjustify="flex-start" flexalign="flex-start">
           <Link href="/">
-            <Heading>PokeStats</Heading>
+            <PokestatsLogo>PokeStats</PokestatsLogo>
           </Link>
           {/** Select */}
-          {pokemonGen && (
-            <SelectContainer flexdirection="row" flexjustify="flex-start" flexgap="0.5em">
-              <label id="header_generation" htmlFor="header_gen_select">
-                Game Version:
-              </label>
-              <Select
-                aria-labelledby="header_generation"
-                id="header_gen_select"
-                value={gameVersion}
-                onChange={e => setGameVersion(e.target.value)}
-              >
-                {gameVersions.map(
-                  ({ name, value }, index) =>
-                    !checkIfEarlierGen(pokemonGen, value) && (
-                      <option key={index} value={value}>
-                        {name}
-                      </option>
-                    ),
-                )}
-              </Select>
-            </SelectContainer>
+          {!!versionOptions?.length && (
+            <Dropdown
+              label="Game Version"
+              options={versionOptions}
+              value={gameVersion}
+              onChange={e => setGameVersion(e.target.value)}
+              sizeSmall
+              minWidth="190px"
+            />
           )}
         </Box>
         <Autocomplete

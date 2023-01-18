@@ -8,7 +8,9 @@ import Chevron from 'public/static/iconLibrary/chevron.svg';
 
 const DropDownContainer = styled(Box)``;
 
-const Label = styled.label``;
+const Label = styled.label`
+  font-weight: 500;
+`;
 
 const SelectContainer = styled.div<{ minWidth?: DropdownProps['minWidth'] }>`
   position: relative;
@@ -36,7 +38,6 @@ const SelectButton = styled.button<{ $isOpen: Boolean; $isSmall?: DropdownProps[
   position: relative;
   transition: background 0.2s ease-in-out;
   width: 100%;
-  z-index: 1;
 
   ${({ theme }) => css`
     background: ${theme.colors.white};
@@ -72,7 +73,7 @@ const SelectDropdown = styled.ul`
   min-width: 100%;
   padding: 0;
   position: absolute;
-  z-index: 0;
+  z-index: 1;
 
   ${({ theme }) => css`
     background: ${theme.colors.white};

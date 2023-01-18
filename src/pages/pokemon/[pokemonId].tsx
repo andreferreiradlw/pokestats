@@ -74,7 +74,7 @@ const PokestatsPokemonPage: NextPage<PokestatsPokemonPageProps> = ({
   const pageDescription = formatFlavorText(props.species.flavor_text_entries[0]?.flavor_text);
   const generationDescriptions = gameVersions
     .filter(version => version.genValue === props.species.generation.name)
-    .map(game => game.name)
+    .map(game => game.label)
     .join(', ');
 
   return (

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 // types
 import type { Pokemon } from '@/types';
 // helpers
@@ -6,16 +6,10 @@ import { generations, mapIdToGeneration } from '@/helpers';
 // components
 import Box, { BoxProps } from '@/components/Box';
 import InfiniteScroll from '@/components/InfiniteScroll';
+import Dropdown from '@/components/Dropdown';
 // styles
-import { SectionTitle, Select } from '@/components/BaseStyles';
+import { SectionTitle } from '@/components/BaseStyles';
 import { SelectContainer } from './StyledPokemonList';
-
-const sortItems = (list: Pokemon[], sortProperty: string): Pokemon[] =>
-  [...list].sort((a, b) => {
-    if (a[sortProperty] > b[sortProperty]) return 1;
-    if (a[sortProperty] < b[sortProperty]) return -1;
-    return 0;
-  });
 
 interface PokemonListProps extends BoxProps {
   pokemon: Pokemon[];
@@ -28,6 +22,21 @@ const PokemonList = ({ pokemon, ...rest }: PokemonListProps): JSX.Element => {
   const [gen, setGen] = useState('all');
   // sort select state
   const [sortBy, setSortBy] = useState('id');
+  // memo
+  const sortItems = useCallback(
+    (list: Pokemon[], sortProperty: string): Pokemon[] =>
+      [...list].sort((a, b) => {
+        if (a[sortProperty] > b[sortProperty]) return 1;
+        if (a[sortProperty] < b[sortProperty]) return -1;
+        return 0;
+      }),
+    [],
+  );
+  const filterByGen = useCallback(
+    (pokemonToFilter: Pokemon[]): Pokemon[] =>
+      pokemonToFilter.filter(pokemon => gen === mapIdToGeneration(pokemon.id)),
+    [gen],
+  );
 
   useEffect(() => {
     // Access initial value from session storage
@@ -40,8 +49,7 @@ const PokemonList = ({ pokemon, ...rest }: PokemonListProps): JSX.Element => {
 
   useEffect(() => {
     if (gen !== 'all') {
-      const filteredPokemon = pokemon.filter(pokemon => gen === mapIdToGeneration(pokemon.id));
-
+      const filteredPokemon = filterByGen(pokemon);
       setShowPokemon(sortItems(filteredPokemon, sortBy));
     } else {
       setShowPokemon(sortItems(pokemon, sortBy));
@@ -65,46 +73,30 @@ const PokemonList = ({ pokemon, ...rest }: PokemonListProps): JSX.Element => {
           flexwrap="wrap"
           flexgap="2em"
         >
-          <Box flexdirection="row" flexjustify="flex-start" width="auto" flexgap="0.5em">
-            <label id="generation" htmlFor="gen_select">
-              Game Generation:
-            </label>
-            <Select
-              light
-              aria-labelledby="generation"
-              id="gen_select"
-              value={gen}
-              onChange={e => {
-                setGen(e.target.value);
-                sessionStorage.setItem('genSelect', e.target.value);
-              }}
-            >
-              <option value="all">All</option>
-              {generations.map(({ genDescription, genValue }, i) => (
-                <option key={`${genValue}-${i}`} value={genValue}>
-                  {genDescription}
-                </option>
-              ))}
-            </Select>
-          </Box>
-          <Box flexdirection="row" flexjustify="flex-start" width="auto" flexgap="0.5em">
-            <label id="sorting" htmlFor="sort_pokemon">
-              Sort Pokemon:
-            </label>
-            <Select
-              light
-              aria-labelledby="sorting"
-              id="sort_pokemon"
-              value={sortBy}
-              onChange={e => {
-                setSortBy(e.target.value);
-                sessionStorage.setItem('sortSelect', e.target.value);
-              }}
-            >
-              <option value="id">Number</option>
-              <option value="name">Name</option>
-            </Select>
-          </Box>
+          <Dropdown
+            label="Game Generation"
+            options={[{ value: 'all', label: 'All' }, ...generations]}
+            value={gen}
+            onChange={e => {
+              setGen(e.target.value);
+              sessionStorage.setItem('genSelect', e.target.value);
+            }}
+            sizeSmall
+            minWidth="175px"
+          />
+          <Dropdown
+            label="Sort Pokemon"
+            options={[
+              { value: 'id', label: 'Number' },
+              { value: 'name', label: 'Name' },
+            ]}
+            value={sortBy}
+            onChange={e => {
+              setSortBy(e.target.value);
+              sessionStorage.setItem('sortSelect', e.target.value);
+            }}
+            sizeSmall
+          />
         </SelectContainer>
       </Box>
       {showPokemon.length > 0 && <InfiniteScroll screensizes={12} pokemonList={showPokemon} />}

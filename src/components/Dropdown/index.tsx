@@ -204,11 +204,11 @@ const Dropdown = ({
       flexdirection="row"
       flexalign="center"
       flexjustify="center"
-      flexgap="1em"
+      flexgap="0.5em"
       width="auto"
       {...rest}
     >
-      {label && <Label id={`${namespace}_label`}>{label}</Label>}
+      {label && <Label id={`${namespace}_label`}>{`${label}:`}</Label>}
       <SelectContainer data-namespace={`${namespace}-dropdown-root`} minWidth={minWidth}>
         <SelectButton
           onClick={() => setIsDropdownOpen(!isDropdownOpen)}

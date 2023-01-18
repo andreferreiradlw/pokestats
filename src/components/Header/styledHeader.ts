@@ -1,16 +1,16 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import Box from '@/components/Box';
 
 const HeaderContainer = styled(Box)`
   margin-top: 2em;
 `;
 
-const Heading = styled.h2`
+const PokestatsLogo = styled.h2`
   color: ${({ theme }) => theme.colors.white};
   font-family: 'Josefin Sans', sans-serif;
-  font-size: 3.26rem;
+  font-size: 4.2rem;
   font-weight: 700;
-  line-height: 4rem;
+  line-height: 4.2rem;
   text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
   user-select: none;
 
@@ -19,6 +19,4 @@ const Heading = styled.h2`
   }
 `;
 
-const SelectContainer = styled(Box)``;
-
-export { HeaderContainer, Heading, SelectContainer };
+export { HeaderContainer, PokestatsLogo };

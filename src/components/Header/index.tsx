@@ -24,16 +24,7 @@ const HeaderComponent = ({
   const { gameVersion, setGameVersion } = useContext(GameVersionContext);
 
   const versionOptions = useMemo(
-    () =>
-      gameVersions
-        .map(
-          version =>
-            !checkIfEarlierGen(pokemonGen, version.value) && {
-              label: version.label,
-              value: version.value,
-            },
-        )
-        .filter(a => a), // filter empty
+    () => gameVersions.filter(version => !checkIfEarlierGen(pokemonGen, version.value)),
     [pokemonGen],
   );
 

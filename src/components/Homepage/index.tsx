@@ -2,7 +2,7 @@ import { useMemo, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { AnimatePresence } from 'framer-motion';
 // heplpers
-import { staggerInitialVariant, fadeInUpVariant } from '@/helpers';
+import { staggerInitialVariant, fadeInUpVariant, getRandomInt } from '@/helpers';
 // types
 import type { PokestatsHomepageProps } from '@/pages/index';
 // styles
@@ -21,7 +21,7 @@ const Homepage = ({ allPokemon, pokemonTypes }: PokestatsHomepageProps): JSX.Ele
   const router = useRouter();
   // memo
   const randomPokemonUrl = useMemo(
-    () => `/pokemon/${allPokemon[Math.floor(Math.random() * allPokemon.length)].name}`,
+    () => `/pokemon/${allPokemon[getRandomInt(1, allPokemon.length)].name}`,
     [allPokemon],
   );
   // prefetch random pokemon page

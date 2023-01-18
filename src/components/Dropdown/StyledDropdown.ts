@@ -2,6 +2,7 @@ import styled, { css } from 'styled-components';
 // types
 import type { DropdownProps } from './index';
 // components
+import { motion } from 'framer-motion';
 import Box from '@/components/Box';
 // icons
 import Chevron from 'public/static/iconLibrary/chevron.svg';
@@ -63,7 +64,7 @@ const SelectButton = styled.button<{ $isOpen: Boolean; $isSmall?: DropdownProps[
   }
 `;
 
-const SelectDropdown = styled.ul`
+const SelectDropdown = styled(motion.ul)`
   border-radius: 0 0 5px 5px;
   border-top: none;
   font-size: 1em;

@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
-import { motion } from 'framer-motion';
 // components
+import { motion } from 'framer-motion';
 import Box from '@/components/Box';
 
 const TableBody = styled.tbody``;

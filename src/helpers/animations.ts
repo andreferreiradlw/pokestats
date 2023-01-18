@@ -195,6 +195,28 @@ export const fadeInRightVariant = {
   },
 };
 
+export const fadeInDownVariant = {
+  hidden: {
+    y: -20,
+    opacity: 0,
+  },
+  show: {
+    y: 0,
+    opacity: 1,
+    transition: {
+      type: 'spring',
+      mass: 1,
+      damping: 15,
+      stiffness: 200,
+    },
+  },
+  exit: {
+    y: 0,
+    opacity: 0,
+  },
+  tap: { scale: 0.99 },
+};
+
 export const scaleInVariant = {
   hidden: {
     scale: 0,

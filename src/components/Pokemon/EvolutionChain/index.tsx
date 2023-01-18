@@ -22,7 +22,8 @@ const EvolutionChain = ({
   ...rest
 }: EvolutionChainProps): JSX.Element => {
   // data
-  const { chainId, firstEvolution, secondEvolution, thirdEvolution } = evolutionChain;
+  const { chainId, firstEvolution, secondEvolution } = evolutionChain;
+  console.log(evolutionChain);
 
   return (
     <Box flexalign={{ xxs: 'center', lg: 'flex-start' }} flexgap="1em" {...rest}>
@@ -42,7 +43,7 @@ const EvolutionChain = ({
             screensizes={9.6}
             flexgap="1em"
           >
-            {secondEvolution.map(({ species, evolutionDetails }, i) => (
+            {secondEvolution.map(({ species, evolutionDetails, thirdEvolution }, i) => (
               <Box
                 flexdirection={{ xxs: 'column', lg: 'row' }}
                 flexalign="center"

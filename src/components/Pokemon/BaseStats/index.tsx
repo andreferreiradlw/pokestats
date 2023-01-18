@@ -43,7 +43,13 @@ interface BaseStatsProps extends BoxProps {
 }
 
 const BaseStats = ({ stats, ...rest }: BaseStatsProps): JSX.Element => (
-  <Box flexalign={{ xxs: 'center', lg: 'flex-start' }} flexgap="1em" {...rest}>
+  <Box
+    flexalign={{ xxs: 'center', lg: 'flex-start' }}
+    flexjustify="flex-start"
+    flexgap="1em"
+    flexalignself="flex-start"
+    {...rest}
+  >
     <SectionTitle>Base Stats</SectionTitle>
     <Table initial="hidden" animate="show" variants={fadeInUpVariant} key="pokemon-basestats-table">
       <tbody>

@@ -61,7 +61,12 @@ const Breeding = ({ species, babyTriggerItem, ...rest }: BreedingProps): JSX.Ele
   );
 
   return (
-    <Box flexalign={{ xxs: 'center', lg: 'flex-start' }} flexgap="1em" {...rest}>
+    <Box
+      flexalign={{ xxs: 'center', lg: 'flex-start' }}
+      flexjustify="flex-start"
+      flexgap="1em"
+      {...rest}
+    >
       <SectionTitle>Breeding</SectionTitle>
       <Table>
         <tbody>

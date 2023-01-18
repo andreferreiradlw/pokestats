@@ -81,8 +81,8 @@ const PokemonPage = ({
         {/** BREEDING, TRAINING, MULTIPLIERS */}
         <Box
           flexdirection={{ xxs: 'column', lg: 'row' }}
-          flexalign="flex-start"
-          flexjustify="flex-start"
+          flexalign="stretch"
+          flexjustify="space-between"
           flexgap="2em"
         >
           <Breeding species={species} babyTriggerItem={babyTriggerItem} emphasizedBg={mainType} />
@@ -102,8 +102,8 @@ const PokemonPage = ({
         {/** BASESTATS, FORMS */}
         <Box
           flexdirection={{ xxs: 'column', lg: 'row' }}
-          flexalign="flex-start"
-          flexjustify="flex-start"
+          flexalign="stretch"
+          flexjustify="space-between"
           flexgap="2em"
         >
           <BaseStats stats={stats} screensizes={{ xxs: 12, lg: 8 }} emphasizedBg={mainType} />

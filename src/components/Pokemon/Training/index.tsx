@@ -84,7 +84,12 @@ const Training = ({ pokemon, species, ...rest }: TrainingProps): JSX.Element => 
   }, [gameVersion, held_items]);
 
   return (
-    <Box flexalign={{ xxs: 'center', lg: 'flex-start' }} flexgap="1em" {...rest}>
+    <Box
+      flexalign={{ xxs: 'center', lg: 'flex-start' }}
+      flexjustify="flex-start"
+      flexgap="1em"
+      {...rest}
+    >
       <SectionTitle>Training</SectionTitle>
       <Table>
         <tbody>

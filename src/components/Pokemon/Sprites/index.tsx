@@ -47,7 +47,7 @@ const Sprites = ({ pokemonSprites, pokemonId, forms, ...rest }: SpritesProps): J
             <Box
               flexdirection="row-reverse"
               flexalign="flex-start"
-              flexjustify={{ xxs: 'center', lg: 'flex-end' }}
+              flexjustify={{ xxs: 'center', lg: 'space-evenly' }}
               flexgap="2em"
               flexwrap="wrap"
             >
@@ -75,7 +75,7 @@ const Sprites = ({ pokemonSprites, pokemonId, forms, ...rest }: SpritesProps): J
               <Box
                 flexdirection="row-reverse"
                 flexalign="flex-start"
-                flexjustify={{ xxs: 'center', lg: 'flex-end' }}
+                flexjustify={{ xxs: 'center', lg: 'space-evenly' }}
                 flexgap="2em"
                 flexwrap="wrap"
               >

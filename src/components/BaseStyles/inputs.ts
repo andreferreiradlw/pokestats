@@ -4,12 +4,12 @@ const Select = styled.select<{ light?: boolean }>`
   ${({ theme, light }) =>
     light
       ? css`
-          background-color: ${theme.select.light.background} !important;
-          color: ${theme.select.light.color};
+          background-color: ${theme.colors.white} !important;
+          color: ${theme.colors.black};
         `
       : css`
-          background-color: ${theme.select.background} !important;
-          color: ${theme.select.color};
+          background-color: ${theme.colors.black} !important;
+          color: ${theme.colors.white};
         `}
 
   align-items: center;

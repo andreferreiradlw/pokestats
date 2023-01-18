@@ -6,7 +6,7 @@ import { removeDash, fadeInUpVariant } from '@/helpers';
 import Box, { BoxProps } from '@/components/Box';
 import ProgressBar from './ProgressBar';
 // styles
-import { SectionTitle, Table } from '@/components/BaseStyles';
+import { SectionTitle, Table, UppercasedTd } from '@/components/BaseStyles';
 import { BarCell } from './StyledBaseStats';
 
 // total stats
@@ -43,13 +43,13 @@ interface BaseStatsProps extends BoxProps {
 }
 
 const BaseStats = ({ stats, ...rest }: BaseStatsProps): JSX.Element => (
-  <Box align={{ xxs: 'center', lg: 'flex-start' }} {...rest}>
+  <Box flexalign={{ xxs: 'center', lg: 'flex-start' }} flexgap="1em" {...rest}>
     <SectionTitle>Base Stats</SectionTitle>
     <Table initial="hidden" animate="show" variants={fadeInUpVariant} key="pokemon-basestats-table">
       <tbody>
         {stats.map(({ base_stat, stat }, i) => (
           <tr key={`${stat.name}-${i}`}>
-            <th>{removeDash(stat.name)}</th>
+            <UppercasedTd as="th">{removeDash(stat.name)}</UppercasedTd>
             <td>{base_stat}</td>
             <BarCell>
               <ProgressBar progress={progressCalc(base_stat)} />

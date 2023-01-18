@@ -15,20 +15,21 @@ const LayoutContainer = styled(BoxWrapper)`
 
 // main container
 const MainContainer = styled(motion.main)<{
-  align?: BoxProps['align'];
-  justify?: BoxProps['justify'];
+  flexalign?: BoxProps['flexalign'];
+  flexjustify?: BoxProps['flexjustify'];
   $constrained?: BoxProps['$constrained'];
   $withGutter?: BoxProps['$withGutter'];
 }>`
-  align-items: ${({ align }) => (align ? align : 'center')};
+  align-items: ${({ flexalign }) => flexalign || 'center'};
   display: flex;
   flex-direction: column;
   flex-grow: 1;
-  justify-content: ${({ justify }) => (justify ? justify : 'center')};
+  gap: 3em;
+  justify-content: ${({ flexjustify }) => flexjustify || 'center'};
   margin: 0 auto;
   width: 100%;
 
-  ${({ $constrained }) => $constrained && `max-width: ${boxConfig.constrained};`}
+  ${({ $constrained }) => $constrained && `max-width: ${boxConfig.$constrained};`}
   ${({ $withGutter }) => $withGutter && responsiveProps('padding', boxConfig.gutterWidth)}
 `;
 

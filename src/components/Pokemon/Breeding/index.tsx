@@ -1,62 +1,95 @@
+import { useMemo } from 'react';
+import styled from 'styled-components';
+// helpers
+import { removeDash } from '@/helpers';
 // types
 import type { PokemonSpecies, EvolutionChain } from 'pokenode-ts';
+// styles
+import { SectionTitle, Table, Numbered, UppercasedTd } from '@/components/BaseStyles';
 // components
 import Box, { BoxProps } from '@/components/Box';
-// helpers
-import { removeDash } from '@/helpers/typography';
-// styles
-import { SectionTitle, Table, Numbered } from '@/components/BaseStyles';
+// icons
+import MaleIcon from 'public/static/iconLibrary/male.svg';
+import FemaleIcon from 'public/static/iconLibrary/female.svg';
 
-// gender ratio
-const genderRatio = (rate: PokemonSpecies['gender_rate']): string =>
-  `${12.5 * (8 - rate)}% male, ${12.5 * rate}% female`;
-
-// egg groups
-const eggGroups = (groups: PokemonSpecies['egg_groups']): JSX.Element[] =>
-  groups.map((group, i) => (
-    <Numbered key={`${group.name}-${i}`}>
-      {`${groups.length > 1 ? `${i + 1}. ` : ``}${removeDash(group.name)}`}
-    </Numbered>
-  ));
-
-// egg hatch cycle
-const eggCycle = (counter: PokemonSpecies['hatch_counter']): string =>
-  `${counter} cycles ( ${255 * (counter + 1)} steps )`;
+const Ratio = styled.p`
+  svg {
+    margin-left: 0.2em;
+    width: 1em;
+  }
+`;
 
 interface BreedingProps extends BoxProps {
   species: PokemonSpecies;
-  evolutionChain: EvolutionChain;
+  babyTriggerItem: EvolutionChain['baby_trigger_item'];
 }
 
-const Breeding = ({ species, evolutionChain, ...rest }: BreedingProps): JSX.Element => {
+const Breeding = ({ species, babyTriggerItem, ...rest }: BreedingProps): JSX.Element => {
   // data
-  const { gender_rate, egg_groups, hatch_counter, habitat } = species;
-  const { baby_trigger_item } = evolutionChain;
+  const { gender_rate, egg_groups, hatch_counter, habitat, growth_rate } = species;
+  // memo
+  const genderRatio = useMemo(
+    () => (
+      <Ratio>
+        {`${12.5 * (8 - gender_rate)}%`}
+        <MaleIcon />
+        {`, ${12.5 * gender_rate}%`}
+        <FemaleIcon />
+      </Ratio>
+    ),
+    [gender_rate],
+  );
+  const eggGroups = useMemo(
+    () =>
+      egg_groups?.map((group, i) => (
+        <Numbered key={`${group.name}-${i}`}>
+          <UppercasedTd as="p">{`${egg_groups.length > 1 ? `${i + 1}. ` : ``}${removeDash(
+            group.name,
+          )}`}</UppercasedTd>
+        </Numbered>
+      )),
+    [egg_groups],
+  );
+  const eggCycle = useMemo(
+    () => (
+      <>
+        <p>{`${hatch_counter} cycles`}</p>
+        <span>{`(${255 * (hatch_counter + 1)} steps)`}</span>
+      </>
+    ),
+    [hatch_counter],
+  );
 
   return (
-    <Box align={{ xxs: 'center', lg: 'flex-start' }} {...rest}>
+    <Box flexalign={{ xxs: 'center', lg: 'flex-start' }} flexgap="1em" {...rest}>
       <SectionTitle>Breeding</SectionTitle>
       <Table>
         <tbody>
           <tr>
             <th>Gender Distribution</th>
-            <td>{gender_rate === -1 ? 'Genderless' : genderRatio(gender_rate)}</td>
+            <td>{gender_rate === -1 ? 'Genderless' : genderRatio}</td>
+          </tr>
+          <tr>
+            <th>Growth Rate</th>
+            <UppercasedTd>{removeDash(growth_rate.name)}</UppercasedTd>
           </tr>
           <tr>
             <th>Egg Groups</th>
-            <td>{egg_groups.length ? eggGroups(egg_groups) : 'No Egg Groups'}</td>
+            <UppercasedTd>{egg_groups?.length ? eggGroups : 'No Egg Groups'}</UppercasedTd>
           </tr>
           <tr>
             <th>Egg Cycles</th>
-            <td>{hatch_counter ? eggCycle(hatch_counter) : 'No Egg Cycles'}</td>
+            <UppercasedTd>{hatch_counter ? eggCycle : 'No Egg Cycles'}</UppercasedTd>
           </tr>
           <tr>
             <th>Baby Trigger Item</th>
-            <td>{baby_trigger_item ? removeDash(baby_trigger_item.name) : 'None'}</td>
+            <UppercasedTd>
+              {babyTriggerItem ? removeDash(babyTriggerItem.name) : 'None'}
+            </UppercasedTd>
           </tr>
           <tr>
             <th>Habitat</th>
-            <td>{habitat ? removeDash(habitat.name) : 'None'}</td>
+            <UppercasedTd>{habitat ? habitat.name : 'None'}</UppercasedTd>
           </tr>
         </tbody>
       </Table>

@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import styled from 'styled-components';
 // types
 import type { PokestatsTypePageProps } from '@/pages/type/[typeId]';
@@ -6,7 +7,7 @@ import { mapGeneration, removeDash } from '@/helpers';
 // components
 import Box, { BoxProps } from '@/components/Box';
 // styles
-import { Table } from '@/components/BaseStyles';
+import { Table, UppercasedTd } from '@/components/BaseStyles';
 
 const InfoTable = styled(Table)`
   width: 100%;
@@ -18,6 +19,8 @@ interface TypeInfoProps extends BoxProps {
 
 const TypeInfo = ({ type, ...rest }: TypeInfoProps): JSX.Element => {
   const { id, generation, move_damage_class } = type;
+  // memo
+  const generationName = useMemo(() => mapGeneration(generation.name), [generation.name]);
 
   return (
     <Box {...rest}>
@@ -30,13 +33,13 @@ const TypeInfo = ({ type, ...rest }: TypeInfoProps): JSX.Element => {
           {generation && (
             <tr>
               <th>Generation</th>
-              <td>{mapGeneration(generation.name)}</td>
+              <td>{generationName}</td>
             </tr>
           )}
           {move_damage_class && (
             <tr>
               <th>Move Damage Class</th>
-              <td>{removeDash(move_damage_class.name)}</td>
+              <UppercasedTd>{removeDash(move_damage_class.name)}</UppercasedTd>
             </tr>
           )}
         </tbody>

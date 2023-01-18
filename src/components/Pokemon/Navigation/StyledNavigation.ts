@@ -49,10 +49,6 @@ const Title = styled(BtnSpan)`
   text-align: center;
   transition: all 0.15s ease-in-out;
   width: 130px;
-
-  & span {
-    font-size: 2rem;
-  }
 `;
 
 const BtnAnchor = styled(Link)<{ $left?: boolean; $right?: boolean }>`
@@ -86,6 +82,7 @@ const BtnAnchor = styled(Link)<{ $left?: boolean; $right?: boolean }>`
     `}
 
   img {
+    padding: 10px;
     transition: all 0.15s ease-in-out;
   }
 
@@ -115,4 +112,13 @@ const BtnAnchor = styled(Link)<{ $left?: boolean; $right?: boolean }>`
   }
 `;
 
-export { BtnContainer, BtnAnchor, Title, Arrow };
+const PokemonID = styled.p`
+  font-size: 2em;
+`;
+
+const PokemonName = styled.p`
+  font-size: 1.1em;
+  text-transform: capitalize;
+`;
+
+export { BtnContainer, BtnAnchor, Title, Arrow, PokemonID, PokemonName };

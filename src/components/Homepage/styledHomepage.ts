@@ -1,9 +1,12 @@
-import styled from 'styled-components';
-import { motion } from 'framer-motion';
+import styled, { css } from 'styled-components';
+// helpers
+import { bounce } from '@/components/BaseStyles';
 // components
+import { motion } from 'framer-motion';
+import Box from '@/components/Box';
 import BoxWrapper from '@/components/Box/StyledBox';
-// styles
-import { mouseScroll } from '@/components/BaseStyles';
+// icons
+import ArrowDownIcon from 'public/static/iconLibrary/arrow_down.svg';
 
 const Container = styled(BoxWrapper)`
   align-items: center;
@@ -17,7 +20,7 @@ const Container = styled(BoxWrapper)`
   z-index: 1;
 `;
 
-const RepoAnchor = styled(motion.a)`
+const GithubLink = styled(motion.a)`
   position: absolute;
   right: 20px;
   top: 20px;
@@ -34,30 +37,20 @@ const RepoAnchor = styled(motion.a)`
   }
 `;
 
-const ScrollDown = styled(motion.span)`
-  border: 2px solid black;
-  border-radius: 25px;
-  bottom: 20px;
-  height: 45px;
-  left: 0;
-  margin-left: auto;
-  margin-right: auto;
+const ScrollDown = styled(ArrowDownIcon)`
+  animation: ${bounce} 1.5s ease-in-out 0s infinite;
+  bottom: 10px;
+  left: 50%;
   position: absolute;
-  right: 0;
-  width: 30px;
-
-  &:before {
-    animation: ${mouseScroll} 2s linear infinite;
-    background-color: black;
-    border-radius: 100%;
-    content: '';
-    height: 6px;
-    left: 50%;
-    margin-left: -3px;
-    position: absolute;
-    top: 8px;
-    width: 6px;
-  }
+  transform: translate(-50%, -50%);
+  width: 40px;
 `;
 
-export { Container, RepoAnchor, ScrollDown };
+const ListContainer = styled(Box)`
+  ${({ theme }) => css`
+    background-color: ${theme.colors.black};
+    color: ${theme.colors.white};
+  `}
+`;
+
+export { Container, GithubLink, ScrollDown, ListContainer };

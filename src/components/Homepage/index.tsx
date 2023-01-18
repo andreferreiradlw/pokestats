@@ -1,38 +1,48 @@
+import { useMemo, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { AnimatePresence } from 'framer-motion';
 // heplpers
-import { staggerInitialVariant, fadeInUpVariant } from '@/helpers';
+import { staggerInitialVariant, fadeInUpVariant, getRandomInt } from '@/helpers';
 // types
-import type { Pokemon, PokemonType } from '@/types';
+import type { PokestatsHomepageProps } from '@/pages/index';
+// styles
+import { Container, GithubLink, ScrollDown, ListContainer } from './styledHomepage';
+import { MainHeading, Button } from '@/components/BaseStyles';
 // components
 import Autocomplete from '@/components/Autocomplete';
-import { Button } from '@/components/BaseStyles/button';
 import Particles from '@/components/Particles';
 import PokemonList from './PokemonList';
-// styles
-import { Container, RepoAnchor, ScrollDown } from './styledHomepage';
-import { MainHeading } from '@/components/BaseStyles';
-// svg
-import Github from '@/assets/svg/github.svg';
+import TypeList from './TypeList';
+// icons
+import Github from 'public/static/iconLibrary/github.svg';
 
-interface HomepageProps {
-  allPokemon: Pokemon[];
-  pokemonTypes: PokemonType[];
-}
-
-const Homepage = ({ allPokemon, pokemonTypes }: HomepageProps): JSX.Element => {
+const Homepage = ({ allPokemon, pokemonTypes }: PokestatsHomepageProps): JSX.Element => {
   // router
   const router = useRouter();
+  // memo
+  const randomPokemonUrl = useMemo(
+    () => `/pokemon/${allPokemon[getRandomInt(1, allPokemon.length)].name}`,
+    [allPokemon],
+  );
+  // prefetch random pokemon page
+  useEffect(() => {
+    if (router && randomPokemonUrl) router.prefetch(randomPokemonUrl);
+  }, [randomPokemonUrl, router]);
 
   const routeRandom = () => {
-    if (process.env.NODE_ENV === 'production' && window?.fathom)
-      window.fathom.trackGoal('M4G8VCB4', 0);
-    router.push(`/pokemon/${allPokemon[Math.floor(Math.random() * allPokemon.length)].name}`);
+    if (process.env.NODE_ENV === 'production' && window?.plausible)
+      window.plausible('Random Pokemon');
+    router.push(randomPokemonUrl);
+  };
+
+  const githubClick = () => {
+    if (process.env.NODE_ENV === 'production' && window?.plausible)
+      window.plausible('Github Homepage');
   };
 
   return (
     <AnimatePresence>
-      <RepoAnchor
+      <GithubLink
         href="https://github.com/andreferreiradlw/pokestats"
         target="_blank"
         rel="noopener"
@@ -42,11 +52,12 @@ const Homepage = ({ allPokemon, pokemonTypes }: HomepageProps): JSX.Element => {
         whileTap="tap"
         variants={fadeInUpVariant}
         key="homepage-github"
+        onClick={githubClick}
       >
         <Github />
-      </RepoAnchor>
+      </GithubLink>
       <Container
-        height="100vh"
+        flexheight="100vh"
         $constrained
         $withGutter
         initial="hidden"
@@ -67,7 +78,10 @@ const Homepage = ({ allPokemon, pokemonTypes }: HomepageProps): JSX.Element => {
         </Button>
         <ScrollDown variants={fadeInUpVariant} key="homepage-scroll-down" />
       </Container>
-      <PokemonList pokemon={allPokemon} key="homepage-pokemon-list" />
+      <ListContainer flexgap="2em" flexpadding="3em 0">
+        <TypeList types={pokemonTypes} />
+        <PokemonList pokemon={allPokemon} key="homepage-pokemon-list" />
+      </ListContainer>
       <Particles key="homepage-particles" />
     </AnimatePresence>
   );

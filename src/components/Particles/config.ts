@@ -1,7 +1,7 @@
 const particleConfig = {
   particles: {
     number: {
-      value: 10,
+      value: 15,
       density: {
         enable: true,
         value_area: 1500,
@@ -13,7 +13,7 @@ const particleConfig = {
     shape: {
       type: 'image',
       image: {
-        src: '../static/pokeball.svg',
+        src: '../static/iconLibrary/pokeball.svg',
         width: 100,
         height: 100,
       },
@@ -37,12 +37,18 @@ const particleConfig = {
     },
     move: {
       enable: true,
-      speed: 0.2,
-      direction: 'right',
+      speed: 0.5,
       random: true,
       straight: false,
       out_mode: 'out',
       bounce: true,
+      drift: 0,
+      gravity: {
+        acceleration: 9.81,
+        enable: false,
+        inverse: false,
+        maxSpeed: 50,
+      },
       attract: {
         enable: false,
         rotateX: 3687.8477399907024,

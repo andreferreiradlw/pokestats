@@ -43,31 +43,25 @@ const Input = styled.input`
   width: 100%;
 
   ${({ theme }) => css`
+    background-color: ${theme.colors.black};
+    border: 1px solid ${theme.colors.white};
+    color: ${theme.colors.white};
+
+    &::placeholder {
+      color: ${theme.colors.white};
+      font-style: italic;
+      font-weight: 500;
+    }
+
     @media ${theme.device.md} {
       font-size: 1rem;
       padding: 0.375rem 0.75rem;
     }
   `}
-
-  ${({ theme }) => {
-    let values = theme.autoComplete.input;
-
-    return css`
-      background-color: ${values.backgroundColor};
-      border: 1px solid ${values.borderColor};
-      color: ${values.color};
-    `;
-  }}
-
-  &::placeholder {
-    color: #e6e6e6;
-    font-style: italic;
-    font-weight: 500;
-  }
 `;
 
 const ListWrapper = styled.div`
-  background: white;
+  background: ${({ theme }) => theme.colors.white};
   border-radius: 0.25rem;
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
   left: 0;
@@ -77,52 +71,53 @@ const ListWrapper = styled.div`
   z-index: 2;
 `;
 
+const OptionImg = styled.img`
+  width: 40px;
+`;
+
 const OptionWrapper = styled(Link)`
   align-items: center;
-  color: black;
   cursor: pointer;
   display: flex;
   flex-direction: row;
   font-size: 0.875rem;
-  justify-content: flex-start;
-  padding: 0 1rem 0 0.5rem;
+  gap: 1em;
+  justify-content: space-between;
+  min-height: 55px;
+  padding: 0.5em 1em;
 
-  ${({ theme }) => {
-    const values = theme.autoComplete.wrapperOption;
+  svg {
+    padding: 5px;
+    width: 40px;
+  }
 
-    return css`
-      background-color: ${values.backgroundColor};
-      color: ${values.color};
+  ${({ theme }) => css`
+    background-color: ${theme.colors.white};
+    color: ${theme.colors.black};
 
-      &:hover,
-      &:active,
-      &:focus {
-        background-color: ${values.hover.backgroundColor};
-        color: ${values.hover.color};
+    &:hover,
+    &:active,
+    &:focus {
+      background-color: ${theme.colors.black};
+      color: ${theme.colors.white};
+
+      svg path {
+        fill: ${theme.colors.white};
+        stroke: ${theme.colors.black};
       }
-    `;
-  }}
-`;
-
-const OptionImg = styled.img<{ $type?: Pokemon['assetType'] | PokemonType['assetType'] }>`
-  width: 50px;
-
-  ${({ $type }) =>
-    $type === 'type' &&
-    css`
-      padding: 10px;
-    `}
+    }
+  `}
 `;
 
 const Option = styled.span`
+  font-size: 1.3em;
   font-weight: 600;
-  padding: 16px 0;
+  text-transform: capitalize;
 `;
 
-const PokeID = styled.span`
-  font-size: 1.5rem;
+const PokeID = styled(Option)`
+  font-size: 1.5em;
   font-weight: 600;
-  margin-left: auto;
 `;
 
 export { Container, Input, ListWrapper, OptionWrapper, OptionImg, Option, PokeID };

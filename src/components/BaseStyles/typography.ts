@@ -5,7 +5,6 @@ const SectionTitle = styled(motion.h2)`
   font-size: 2rem;
   font-weight: 600;
   line-height: 2.5rem;
-  margin-bottom: 1rem;
 
   ${({ theme }) => css`
     @media ${theme.device.xs} {
@@ -23,7 +22,6 @@ const SectionSubTitle = styled(motion.h3)`
   font-size: 1.3rem;
   font-weight: 600;
   line-height: 1rem;
-  margin-bottom: 1rem;
 
   ${({ theme }) => css`
     @media ${theme.device.xs} {
@@ -40,7 +38,6 @@ const SectionSubTitle = styled(motion.h3)`
 const SectionMessage = styled(motion.p)`
   font-size: 0.8rem;
   line-height: 1.1rem;
-  margin: 1.5rem 0;
   text-align: center;
   width: 100%;
 
@@ -66,13 +63,13 @@ const JpnName = styled(motion.span)`
   line-height: 1;
   text-transform: uppercase;
   text-align: center;
-  font-size: 3rem;
+  font-size: 2.5em;
   font-weight: bold;
   user-select: none;
   width: 1em;
 
   ${({ theme }) => css`
-    color: ${theme.jpnName.color};
+    color: ${theme.colors.black};
 
     @media ${theme.device.xxs} {
       display: none;

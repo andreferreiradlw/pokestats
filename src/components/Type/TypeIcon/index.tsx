@@ -1,4 +1,4 @@
-import React from 'react';
+import { useMemo } from 'react';
 // types
 import type { Name } from 'pokenode-ts';
 // components
@@ -13,12 +13,16 @@ interface TypeIconProps extends BoxProps {
 }
 
 const TypeIcon = ({ typeName, otherNames, ...rest }: TypeIconProps): JSX.Element => {
-  const japanName = otherNames.find(name => name.language.name === 'ja-Hrkt').name;
+  // memo
+  const japanName = useMemo(
+    () => otherNames.find(name => name.language.name === 'ja-Hrkt').name,
+    [otherNames],
+  );
 
   return (
-    <Box $relative $minHeight={{ xxs: '250px', lg: '350px' }} {...rest}>
+    <Box $isRelative minheight={{ xxs: '250px', lg: '350px' }} {...rest}>
       <TypeBadge
-        typename={typeName}
+        $typename={typeName}
         key={`type-icon-${typeName}`}
         $iconOnly
         $fill
@@ -26,7 +30,7 @@ const TypeIcon = ({ typeName, otherNames, ...rest }: TypeIconProps): JSX.Element
         $iconWidth="auto"
         $iconHeight="150px"
       />
-      {japanName && <JpnName>{japanName}</JpnName>}
+      {japanName && <JpnName>{`${japanName}タイプ`}</JpnName>}
     </Box>
   );
 };

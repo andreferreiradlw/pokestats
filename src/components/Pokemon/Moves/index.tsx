@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useMemo, useContext } from 'react';
+import { useState, useEffect, useRef, useContext } from 'react';
 // types
 import type { PokemonMove } from '@/types';
 // helpers
@@ -10,11 +10,10 @@ import {
   filterMoves,
   FilteredMove,
   getMachineNames,
-  capitalize,
   removeDash,
-  staggerTableVariant,
   fadeInUpVariant,
   getIdFromMove,
+  staggerTableVariant,
 } from '@/helpers';
 // components
 import { AnimatePresence } from 'framer-motion';
@@ -22,7 +21,7 @@ import Box, { BoxProps } from '@/components/Box';
 import Loading from '@/components/Loading';
 import TypeBadge from '@/components/TypeBadge';
 // styles
-import { SectionTitle, SectionMessage, Button } from '@/components/BaseStyles';
+import { SectionTitle, SectionMessage, Button, UppercasedTd } from '@/components/BaseStyles';
 import {
   TableContainer,
   MovesTable,
@@ -58,23 +57,22 @@ interface PokemonMovesProps extends BoxProps {
 const PokemonMoves = ({ pokemon, ...rest }: PokemonMovesProps): JSX.Element => {
   // game version
   const { gameVersion } = useContext(GameVersionContext);
-  // loading
-  const [pokemonMoves, setPokemonMoves] = useState<PokemonMove[]>();
+  // moves
+  const [allMoves, setAllMoves] = useState<PokemonMove[]>();
+  const [genMoves, setGenMoves] = useState<{
+    'level-up': FilteredMove[];
+    machine: FilteredMove[];
+    egg: FilteredMove[];
+    tutor: FilteredMove[];
+  }>();
   // learn method state
   const [learnMethod, setLearnMethod] = useState<MoveLearnMethod['name']>('level-up');
   // machine names
   const [machineNames, setMachineNames] = useState<string[]>();
   // loading
   const [movesLoading, setMovesLoading] = useState(true);
-
-  const filteredMoves: FilteredMove[] = useMemo(
-    () => pokemonMoves && filterMoves(pokemonMoves, learnMethod, mapVersionToGroup(gameVersion)),
-    [pokemonMoves, learnMethod, gameVersion],
-  );
-
   // ref
   const _isMounted = useRef(null);
-
   // manage mounted state to avoid memory leaks
   useEffect(() => {
     _isMounted.current = true;
@@ -84,23 +82,18 @@ const PokemonMoves = ({ pokemon, ...rest }: PokemonMovesProps): JSX.Element => {
   }, []);
 
   useEffect(() => {
-    // start loading
-    setMovesLoading(true);
-    // client
-    const moveClient = new MoveClient({
-      cacheOptions: { maxAge: 0, limit: false },
-    });
+    if (!movesLoading) setMovesLoading(true);
+
+    const moveClient = new MoveClient();
 
     const fetchMovesData = async (): Promise<Move[]> => {
-      // move requests array
       let moveRequests = [];
       // create an axios request for each move
       pokemon.moves.forEach(({ move }) =>
         moveRequests.push(moveClient.getMoveById(getIdFromMove(move.url))),
       );
-
       const allPokemonMovesData = await Promise.all(moveRequests);
-
+      if (!_isMounted.current) return;
       return allPokemonMovesData;
     };
 
@@ -115,40 +108,51 @@ const PokemonMoves = ({ pokemon, ...rest }: PokemonMovesProps): JSX.Element => {
             };
           })
           .filter(data => data);
-        // update state
-        setPokemonMoves(formatMoves);
+        if (!_isMounted.current) return;
+        setAllMoves(formatMoves);
       })
       .catch(console.error);
-  }, [pokemon]);
+  }, []);
 
-  // current pokemon moves
   useEffect(() => {
-    setMovesLoading(true);
+    if (!movesLoading) setMovesLoading(true);
 
-    if (_isMounted.current && filteredMoves?.length) {
-      // if move is machine then get machine names
-      if (learnMethod === 'machine') {
-        // requests from current moves machines
-        getMachineNames(filteredMoves).then(names => {
-          if (_isMounted.current) {
-            // update machine names state
-            setMachineNames(names);
-            // stop loading
-            setMovesLoading(false);
-          }
+    if (allMoves) {
+      setMachineNames([]);
+
+      const fetchMachineNames = async (moves: FilteredMove[]): Promise<void> => {
+        await getMachineNames(moves).then(names => {
+          if (!_isMounted.current) return;
+          setMachineNames(names);
         });
-      } else {
-        // if not machine just stop loading instead
-        if (_isMounted.current) setMovesLoading(false);
-      }
+      };
+      // current group to filter
+      const gameGroup = mapVersionToGroup(gameVersion);
+      // filter moves
+      const levelMoves = filterMoves(allMoves, 'level-up', gameGroup);
+      const tmMoves = filterMoves(allMoves, 'machine', gameGroup);
+      fetchMachineNames(tmMoves);
+      const breedingMoves = filterMoves(allMoves, 'egg', gameGroup);
+      const professorMoves = filterMoves(allMoves, 'tutor', gameGroup);
+
+      if (!_isMounted.current) return;
+      // update state
+      setGenMoves({
+        'level-up': levelMoves,
+        machine: tmMoves,
+        egg: breedingMoves,
+        tutor: professorMoves,
+      });
     }
-  }, [filteredMoves, learnMethod]);
+    // stop loading
+    setMovesLoading(false);
+  }, [allMoves, gameVersion]);
 
   return (
-    <Box align={{ xxs: 'center', lg: 'flex-start' }} {...rest}>
+    <Box flexalign={{ xxs: 'center', lg: 'flex-start' }} flexgap="2em" {...rest}>
       <SectionTitle>Move Pool</SectionTitle>
       {/** TABS */}
-      <TabContainer direction="row" justify="space-evenly" $flexWrap="wrap">
+      <TabContainer flexdirection="row" flexjustify="space-evenly" flexwrap="wrap">
         {TabsData.map(({ title, value }) => (
           <Button
             $active={learnMethod === value}
@@ -164,22 +168,19 @@ const PokemonMoves = ({ pokemon, ...rest }: PokemonMovesProps): JSX.Element => {
           </Button>
         ))}
       </TabContainer>
+      {movesLoading && (
+        <Loading flexheight="100%" $iconWidth={{ xxs: '20%', xs: '15%', md: '10%', lg: '5%' }} />
+      )}
       <AnimatePresence mode="wait">
-        {movesLoading ? (
-          <Loading
-            height="100%"
-            $iconWidth={{ xxs: '20%', xs: '15%', md: '10%', lg: '5%' }}
-            passKey="pokemon-moves-loading"
-          />
-        ) : filteredMoves?.length ? (
+        {genMoves?.[learnMethod]?.length ? (
           <TableContainer
             initial="hidden"
             animate="show"
             exit="exit"
             variants={fadeInUpVariant}
-            key="pokemon-moves-table-container"
+            key={`moves-${learnMethod}-table-container`}
           >
-            <MovesTable key="pokemon-moves-table">
+            <MovesTable>
               <thead>
                 <tr>
                   <th>{mapMethodName(learnMethod)}</th>
@@ -200,8 +201,9 @@ const PokemonMoves = ({ pokemon, ...rest }: PokemonMovesProps): JSX.Element => {
                 exit="exit"
                 variants={staggerTableVariant}
               >
-                {filteredMoves.map((move, i) => (
-                  <TableRow href={`/move/${move.name}`} key={`${move.name}-${i}`}>
+                {genMoves[learnMethod].map((move: PokemonMove, i: number) => (
+                  <TableRow key={`${learnMethod}-${move.name}-${i}`} href={`/move/${move.name}`}>
+                    {/* @ts-ignore **/}
                     {learnMethod === 'level-up' && <td>{move.level_learned_at}</td>}
                     {learnMethod === 'machine' &&
                       (machineNames?.[i] ? <td>{machineNames[i].toUpperCase()}</td> : <td>...</td>)}
@@ -209,9 +211,9 @@ const PokemonMoves = ({ pokemon, ...rest }: PokemonMovesProps): JSX.Element => {
                     {learnMethod === 'tutor' && <td>-</td>}
                     <NameTD>{removeDash(move.name)}</NameTD>
                     <td>
-                      <TypeBadge margin="0" $iconOnly typename={move.type.name} />
+                      <TypeBadge flexmargin="0" $iconOnly $typename={move.type.name} />
                     </td>
-                    <td>{capitalize(move.damage_class.name)}</td>
+                    <UppercasedTd>{move.damage_class.name}</UppercasedTd>
                     <td>{move.power || '-'}</td>
                     <td>{move.pp || '-'}</td>
                     <td>{move.accuracy || '-'}</td>
@@ -228,7 +230,7 @@ const PokemonMoves = ({ pokemon, ...rest }: PokemonMovesProps): JSX.Element => {
             animate="show"
             exit="exit"
             variants={fadeInUpVariant}
-            key="pokemon-nomoves-message"
+            key={`moves-${learnMethod}-nomoves-message`}
           >
             {`No ${learnMethod} moves for currently selected game version.`}
           </SectionMessage>

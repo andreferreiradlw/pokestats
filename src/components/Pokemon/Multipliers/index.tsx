@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect } from 'react';
 // types
 import type { PokemonType } from 'pokenode-ts';
 // helpers
@@ -9,61 +9,74 @@ import Box, { BoxProps } from '@/components/Box';
 import TypeBadge from '@/components/TypeBadge';
 import Switch from './Switch';
 // styles
-import { SectionTitle, Table } from '@/components/BaseStyles';
+import { SectionTitle, Table, TypesCell, UppercasedTd } from '@/components/BaseStyles';
 
 interface MultipliersProps extends BoxProps {
   pokemonTypes: PokemonType[];
 }
 
-const Multipliers = ({ pokemonTypes, ...rest }: MultipliersProps): JSX.Element => {
-  // data
-  // const { types } = pokemon;
+interface TypesTableProps {
+  multipliers: MultipliersRes['attack'] | MultipliersRes['defense'];
+  multiplierType: 'attack' | 'defense';
+}
 
-  const typeMultipliers = useMemo(() => {
+const TypesTable = ({ multipliers, multiplierType }: TypesTableProps): JSX.Element => (
+  <Table>
+    <tbody>
+      {Object.keys(multipliers).map((relation, i) => (
+        <tr key={`multiplier-${multiplierType}-${i}`}>
+          <UppercasedTd as="th">{removeUnderscore(relation)}</UppercasedTd>
+          <TypesCell>
+            {!multipliers[relation]?.length
+              ? 'None'
+              : multipliers[relation].map((type: string, i: number) => (
+                  <TypeBadge
+                    key={`${multiplierType}-${type}-${relation}-${i}`}
+                    $typename={type}
+                    $iconOnly
+                  />
+                ))}
+          </TypesCell>
+        </tr>
+      ))}
+    </tbody>
+  </Table>
+);
+
+const Multipliers = ({ pokemonTypes, ...rest }: MultipliersProps): JSX.Element => {
+  // switch state
+  const [enabled, setEnabled] = useState(true);
+  // multipliers
+  const [attackMultipliers, setAttackMultipliers] = useState<MultipliersRes['attack']>();
+  const [defenseMultipliers, setDefenseMultipliers] = useState<MultipliersRes['defense']>();
+
+  useEffect(() => {
     let currTypes = pokemonTypes.map(currType => {
       return currType.type.name;
     });
-    // return multipliers
-    return getMultipliers(currTypes);
-  }, [pokemonTypes]);
-
-  // current multipliers to show
-  const [currMultipliers, setCurrMultipliers] = useState<
-    MultipliersRes['defense'] | MultipliersRes['attack']
-  >(typeMultipliers.defense);
-  // switch state
-  const [enabled, setEnabled] = useState(true);
-
-  useEffect(() => {
-    if (typeMultipliers) {
-      enabled
-        ? setCurrMultipliers(typeMultipliers.defense)
-        : setCurrMultipliers(typeMultipliers.attack);
-    }
-  }, [typeMultipliers, enabled]);
+    const currMultipliers = getMultipliers(currTypes);
+    // updates states
+    setAttackMultipliers(currMultipliers.attack);
+    setDefenseMultipliers(currMultipliers.defense);
+  }, []);
 
   return (
-    <Box align={{ xxs: 'center', lg: 'flex-start' }} {...rest}>
-      <Box direction={{ xxs: 'column', lg: 'row' }} justify="space-between" $flexWrap="wrap">
+    <Box flexalign={{ xxs: 'center', lg: 'flex-start' }} flexgap="1em" {...rest}>
+      <Box
+        flexdirection={{ xxs: 'column', lg: 'row' }}
+        flexjustify="space-between"
+        flexwrap="wrap"
+        flexgap="0.5em"
+      >
         <SectionTitle>Multipliers</SectionTitle>
         <Switch enabled={enabled} onClick={() => setEnabled(prev => !prev)} />
       </Box>
-      <Table>
-        <tbody>
-          {Object.keys(currMultipliers).map((relation, i) => (
-            <tr key={`type-relation-${i}`}>
-              <th>{removeUnderscore(relation)}</th>
-              <td>
-                {!currMultipliers[relation].length
-                  ? 'None'
-                  : currMultipliers[relation].map((type: string, i: number) => (
-                      <TypeBadge key={`${type}-${relation}-${i}`} typename={type} $iconOnly />
-                    ))}
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </Table>
+      {defenseMultipliers && attackMultipliers && (
+        <TypesTable
+          multipliers={enabled ? defenseMultipliers : attackMultipliers}
+          multiplierType={enabled ? 'defense' : 'attack'}
+        />
+      )}
     </Box>
   );
 };

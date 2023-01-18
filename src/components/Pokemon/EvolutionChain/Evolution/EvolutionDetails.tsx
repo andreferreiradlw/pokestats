@@ -7,12 +7,13 @@ import { removeDash } from '@/helpers/typography';
 
 const Details = styled(motion.span)`
   font-weight: 600;
-  margin-bottom: 1rem;
   text-align: center;
   word-break: break-word;
 `;
 
-const mapTriggerName = (triggerName: EvolutionTrigger['name']): string => {
+type TriggerNameProps = EvolutionTrigger['name'] | 'three-critical-hits';
+
+const mapTriggerName = (triggerName: TriggerNameProps): string => {
   switch (triggerName) {
     case 'level-up':
       return 'Level up';
@@ -22,6 +23,8 @@ const mapTriggerName = (triggerName: EvolutionTrigger['name']): string => {
       return 'Trade';
     case 'shed':
       return 'Level 20, with empty PokéBall and an open slot in party';
+    case 'three-critical-hits':
+      return 'Perform three critical hits';
     case 'other':
       return 'Other';
     default:
@@ -71,7 +74,7 @@ const EvolutionDetails = ({ details }: EvolutionDetailsProps): JSX.Element => {
 
   return (
     <Details>
-      {min_level ? `Level ${min_level}` : mapTriggerName(trigger.name as EvolutionTrigger['name'])}
+      {min_level ? `Level ${min_level}` : mapTriggerName(trigger.name as TriggerNameProps)}
       {held_item && ` holding ${removeDash(held_item.name)}`}
       {item && ` ${removeDash(item.name)}`}
       {known_move && ` by learning ${removeDash(known_move.name)}`}

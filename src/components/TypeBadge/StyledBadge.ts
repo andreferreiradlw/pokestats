@@ -1,40 +1,46 @@
 import styled, { css } from 'styled-components';
 import { motion } from 'framer-motion';
 // types
+import type { Type } from 'pokenode-ts';
 import type { TypeBadgeProps } from './index';
 // styles
 import { float as floatAnim } from '@/components/BaseStyles';
 
+const isDarkBackground = (type: Type['name']): boolean =>
+  !!type.match(/^(dark|dragon|fighting|ghost|poison|shadow|unknown)$/);
+
 const Badge = styled(motion.div)<TypeBadgeProps>`
   align-items: center;
-  background-color: ${({ theme, typename, $fill }) =>
-    !$fill && theme.typeBadge.backgroundColor[typename]};
+  background: ${({ theme, $typename, $fill }) => !$fill && theme.colors.types[$typename]};
+  border: 1px solid ${({ theme }) => theme.colors.white};
   border-radius: 4px;
-  color: ${({ theme }) => theme.typeBadge.color};
+  color: ${({ theme, $typename }) =>
+    isDarkBackground($typename) ? theme.colors.white : theme.colors.black};
   display: flex;
   flex-direction: row;
   font-family: 'Quicksand', sans-serif;
-  font-size: 1rem;
+  font-size: 1em;
   font-weight: 600;
+  gap: 0.5em;
   justify-content: center;
-  text-shadow: -0.5px -0.5px 0 #000, 0.5px -0.5px 0 #000, -0.5px 0.5px 0 #000, 0.5px 0.5px 0 #000;
+  text-transform: capitalize;
   width: auto;
 
-  ${({ $iconOnly, margin }) =>
+  ${({ $iconOnly, flexmargin }) =>
     $iconOnly
       ? css`
           display: inline-flex;
-          margin: ${margin || '0.1rem 0.4rem 0.1rem 0'};
-          padding: 0.3rem;
+          ${flexmargin && `margin: ${flexmargin};`}
+          padding: 0.3em;
         `
       : css`
-          margin: ${margin || '0.5rem 0.5rem 0.5rem 0'};
-          padding: 0.5rem;
+          ${flexmargin && `margin: ${flexmargin};`}
+          padding: 0.5em;
         `}
 
   ${({ theme }) => css`
     @media ${theme.device.lg} {
-      font-size: 1.2rem;
+      font-size: 1.2em;
     }
   `}
 
@@ -51,7 +57,6 @@ const Badge = styled(motion.div)<TypeBadgeProps>`
       !$iconOnly
         ? css`
             height: ${$iconHeight || '25px'};
-            margin-right: 1rem;
             width: ${$iconWidth || '25px'};
           `
         : css`
@@ -60,10 +65,10 @@ const Badge = styled(motion.div)<TypeBadgeProps>`
           `}
 
     & > path {
-      fill: ${({ theme, typename, $fill }) =>
-        $fill ? theme.typeBadge.backgroundColor[typename] : theme.typeBadge.color};
-      stroke: black;
-      stroke-width: 5;
+      ${({ theme, $typename, $fill }) => css`
+        fill: ${$fill ? theme.colors.types[$typename] : theme.colors.white};
+        stroke: ${theme.colors.black};
+      `};
     }
   }
 `;

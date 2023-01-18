@@ -69,13 +69,14 @@
 ✅ Type Page <br />
 ✅ Static Generated Pages <br />
 🚫 Generation 8 Pokemon Ready (waiting on [PokéApi's issue](https://github.com/PokeAPI/pokeapi/issues/520)) <br />
-🛠️ Typescript Refactoring <br />
-🧶 Unit Tests <br />
-🧶 Dark Mode <br />
-🧶 Move Page <br />
-🧶 Item Page <br />
-🧶 Berry Page <br />
-✏ Pokemon & Item Locations Page <br />
+✅ Typescript Refactoring <br />
+🛠️ [Move Page](https://pokeapi.api-docs.io/v2.0/moves/rNQ5oSyuW7AJ3mqEe) <br />
+🗒️ [Headbutt Tree Encounters](https://bulbapedia.bulbagarden.net/wiki/Headbutt_tree) <br />
+🗒️ Unit Tests <br />
+🗒️ Dark Mode <br />
+🗒️ [Item Page](https://pokeapi.api-docs.io/v2.0/items/kBoBXQHp45mFi4oNb) <br />
+🗒️ [Berry Page](https://pokeapi.api-docs.io/v2.0/berries/pHc3vWdv6Pkyk377Q) <br />
+💡 [Encounters](https://pokeapi.api-docs.io/v2.0/encounters) & [Item](https://pokeapi.api-docs.io/v2.0/locations/h6KztxeJv67pvfT5F) Locations Map <br />
 
 ## Contributing
 

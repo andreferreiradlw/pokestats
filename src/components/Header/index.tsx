@@ -8,8 +8,7 @@ import Box, { BoxProps } from '@/components/Box';
 import Autocomplete, { AutocompleteProps } from '@/components/Autocomplete';
 // styles
 import { Select } from '@/components/BaseStyles';
-import { Heading, SelectContainer } from './styledHeader';
-// data
+import { HeaderContainer, Heading, SelectContainer } from './styledHeader';
 
 interface HeaderComponentProps extends BoxProps {
   autocompleteList: AutocompleteProps['filterList'];
@@ -25,22 +24,23 @@ const HeaderComponent = ({
   const { gameVersion, setGameVersion } = useContext(GameVersionContext);
 
   return (
-    <Box margin="2rem 0" {...rest}>
+    <HeaderContainer {...rest}>
       <Box
         $constrained
         $withGutter
-        direction={{ xxs: 'column', md: 'row' }}
-        justify="space-between"
-        align={{ xxs: 'center', md: 'flex-start' }}
-        margin="auto"
+        flexdirection={{ xxs: 'column', md: 'row' }}
+        flexjustify="space-between"
+        flexalign={{ xxs: 'center', md: 'flex-start' }}
+        flexmargin="auto"
+        flexgap="1em"
       >
-        <div>
+        <Box width="auto" flexjustify="flex-start" flexalign="flex-start">
           <Link href="/">
             <Heading>PokeStats</Heading>
           </Link>
           {/** Select */}
           {pokemonGen && (
-            <SelectContainer direction="row" justify="flex-start">
+            <SelectContainer flexdirection="row" flexjustify="flex-start" flexgap="0.5em">
               <label id="header_generation" htmlFor="header_gen_select">
                 Game Version:
               </label>
@@ -61,16 +61,16 @@ const HeaderComponent = ({
               </Select>
             </SelectContainer>
           )}
-        </div>
+        </Box>
         <Autocomplete
           filterList={autocompleteList}
           width="350px"
-          justify="flex-end"
-          align="flex-start"
-          margin="none"
+          flexjustify="flex-end"
+          flexalign="flex-start"
+          flexmargin="none"
         />
       </Box>
-    </Box>
+    </HeaderContainer>
   );
 };
 

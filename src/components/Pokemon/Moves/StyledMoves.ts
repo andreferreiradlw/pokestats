@@ -1,16 +1,18 @@
 import styled, { css } from 'styled-components';
-// components
 import { motion } from 'framer-motion';
+// components
 import Box from '@/components/Box';
 import Link from 'next/link';
 
 const TableBody = styled(motion.tbody)``;
 const TableRow = styled(Link)`
-  display: table-row;
   color: black;
+  display: table-row;
 `;
 const NameTH = styled(motion.th)``;
-const NameTD = styled(motion.td)``;
+const NameTD = styled.td`
+  text-transform: capitalize;
+`;
 
 const TableContainer = styled(motion.div)`
   overflow: auto;
@@ -23,9 +25,9 @@ const TableContainer = styled(motion.div)`
   `}
 `;
 
-const MovesTable = styled(motion.table)`
-  font-size: 0.7rem;
-  line-height: 0.7rem;
+const MovesTable = styled.table`
+  font-size: 0.7em;
+  line-height: 0.7em;
   text-align: center;
   width: 100%;
 
@@ -38,41 +40,39 @@ const MovesTable = styled(motion.table)`
   & td {
     height: 40px;
     overflow: hidden;
-    padding: 0.5rem;
+    padding: 0.5em;
     text-align: center;
     text-overflow: ellipsis;
     white-space: nowrap;
   }
 
   & ${NameTH}, & ${NameTD} {
-    text-align: left;
     width: 25%;
   }
 
-  & ${TableRow}:not(:last-of-type) {
-    border-bottom: 1px solid #ececec;
-  }
-
-  & ${TableRow} {
-    &:hover {
-      background-color: #ececec;
-    }
-  }
-
   ${({ theme }) => css`
-    @media ${theme.device.md} {
-      font-size: 0.8rem;
-      line-height: 0.8rem;
+    & ${TableRow}:not(:last-of-type) {
+      border-bottom: 1px solid ${theme.colors.mercury};
     }
+
+    & ${TableRow} {
+      &:hover {
+        background-color: ${theme.colors.mercury};
+      }
+    }
+
+    @media ${theme.device.md} {
+      font-size: 0.8em;
+      line-height: 0.8em;
+    }
+
     @media ${theme.device.lg} {
-      font-size: 1rem;
-      line-height: 1rem;
+      font-size: 1em;
+      line-height: 1em;
     }
   `}
 `;
 
-const TabContainer = styled(Box)`
-  margin-bottom: 1rem;
-`;
+const TabContainer = styled(Box)``;
 
 export { TableContainer, MovesTable, TableBody, NameTH, NameTD, TableRow, TabContainer };

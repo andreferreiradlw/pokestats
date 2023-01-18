@@ -1,4 +1,4 @@
-import { forwardRef } from 'react';
+import { CSSProperties, forwardRef } from 'react';
 // types
 import type { HTMLMotionProps } from 'framer-motion';
 // helpers
@@ -7,58 +7,43 @@ import { useForwardedRef } from '@/helpers';
 import BoxWrapper from './StyledBox';
 
 export interface BoxProps extends HTMLMotionProps<'div'> {
-  alignSelf?: string | Record<string, any>;
-  margin?: string | Record<string, any>;
-  padding?: string | Record<string, any>;
-  $flexWrap?: string | Record<string, any>;
-  width?: string | Record<string, any>;
-  height?: string | Record<string, any>;
-  $minHeight?: string | Record<string, any>;
-  direction?: string | Record<string, any>;
-  align?: string | Record<string, any>;
-  justify?: string | Record<string, any>;
-  gap?: string | Record<string, any>;
+  flexalign?: CSSProperties['alignItems'] | Record<string, CSSProperties['alignItems']>;
+  flexalignself?: CSSProperties['alignSelf'] | Record<string, CSSProperties['alignSelf']>;
+  backgroundcolor?: CSSProperties['background'] | Record<string, CSSProperties['background']>;
+  borderradius?: CSSProperties['borderRadius'] | Record<string, CSSProperties['borderRadius']>;
   $constrained?: boolean;
-  $flexGrow?: boolean;
-  sizes?: number | Record<string, any>;
-  $relative?: boolean;
+  $debug?: boolean;
+  flexdirection?: CSSProperties['flexDirection'] | Record<string, CSSProperties['flexDirection']>;
+  $flexgrow?: boolean;
+  flexwrap?: CSSProperties['flexWrap'] | Record<string, CSSProperties['flexWrap']>;
+  flexgap?: CSSProperties['gap'] | Record<string, CSSProperties['gap']>;
+  flexheight?: CSSProperties['height'] | Record<string, CSSProperties['height']>;
+  $hide?: boolean;
+  flexjustify?: CSSProperties['justifyContent'] | Record<string, CSSProperties['justifyContent']>;
+  flexmargin?: CSSProperties['margin'] | Record<string, CSSProperties['margin']>;
+  minheight?: CSSProperties['minHeight'] | Record<string, CSSProperties['minHeight']>;
+  flexpadding?: CSSProperties['padding'] | Record<string, CSSProperties['padding']>;
+  $isRelative?: boolean;
+  screensizes?: number | Record<string, number>;
+  width?: CSSProperties['width'] | Record<string, CSSProperties['width']>;
   $withGutter?: boolean;
-  debug?: boolean;
-  hide?: boolean;
   children?: React.ReactNode;
 }
 
-const Box = forwardRef(
-  (
-    {
-      align = 'center',
-      children,
-      direction = 'column',
-      $flexWrap = 'nowrap',
-      justify = 'center',
-      width = '100%',
-      ...rest
-    }: BoxProps,
-    ref,
-  ): JSX.Element => {
-    const boxRef = useForwardedRef(ref);
+const Box = forwardRef((props: BoxProps, ref): JSX.Element => {
+  const boxRef = useForwardedRef(ref);
 
-    return (
-      <BoxWrapper
-        align={align}
-        direction={direction}
-        $flexWrap={$flexWrap}
-        justify={justify}
-        width={width}
-        ref={boxRef}
-        {...rest}
-      >
-        {children}
-      </BoxWrapper>
-    );
-  },
-);
+  return <BoxWrapper ref={boxRef} {...props} />;
+});
 
 Box.displayName = 'Box';
+
+Box.defaultProps = {
+  flexalign: 'center',
+  flexdirection: 'column',
+  flexwrap: 'nowrap',
+  flexjustify: 'center',
+  width: '100%',
+};
 
 export default Box;

@@ -2,21 +2,20 @@
 import type { PokestatsPokemonPageProps } from '@/pages/pokemon/[pokemonId]';
 import type { Pokemon } from 'pokenode-ts';
 // helpers
-import { removeDash, fadeInUpVariant } from '@/helpers';
+import { removeDash, fadeInUpVariant, padPokemonId } from '@/helpers';
+// styles
+import { BtnContainer, BtnAnchor, Title, Arrow, PokemonID, PokemonName } from './StyledNavigation';
 // components
 import Box, { BoxProps } from '@/components/Box';
-import Image from '@/components/Image';
-// styles
-import { BtnContainer, BtnAnchor, Title, Arrow } from './StyledNavigation';
+import ImageNext from '@/components/ImageNext';
 
 const nextPokemon = () => {
-  if (process.env.NODE_ENV === 'production' && window?.fathom)
-    window.fathom.trackGoal('Z5UOU36M', 0);
+  if (process.env.NODE_ENV === 'production' && window?.plausible) window.plausible('Next Pokemon');
 };
 
 const previousPokemon = () => {
-  if (process.env.NODE_ENV === 'production' && window?.fathom)
-    window.fathom.trackGoal('JGDCHWX3', 0);
+  if (process.env.NODE_ENV === 'production' && window?.plausible)
+    window.plausible('Previous Pokemon');
 };
 
 interface NavigationProps extends BoxProps {
@@ -30,9 +29,9 @@ const Navigation = ({ allPokemon, pokemonId, ...rest }: NavigationProps): JSX.El
 
   return (
     <Box
-      direction={{ xxs: 'column', sm: 'row' }}
-      justify={{ xxs: 'flex-start', sm: 'center' }}
-      gap="0.5em"
+      flexdirection={{ xxs: 'column', sm: 'row' }}
+      flexjustify={{ xxs: 'flex-start', sm: 'center' }}
+      flexgap="1em"
       {...rest}
     >
       {pokemonId !== 1 && (
@@ -48,20 +47,19 @@ const Navigation = ({ allPokemon, pokemonId, ...rest }: NavigationProps): JSX.El
             $left
           >
             <Arrow $left>
-              <Image
-                src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${
-                  pokemonId - 1
-                }.png`}
+              <ImageNext
+                src={`https://raw.githubusercontent.com/andreferreiradlw/pokestats_media/main/assets/images/${padPokemonId(
+                  pokemonId - 1,
+                )}.png`}
                 alt={allPokemon[pokemonId - 2].name}
                 key={`navigation-left-${allPokemon[pokemonId - 2].name}`}
                 width="100"
-                pixelateImg
-                lazy={false}
+                $pixelatedImg
               />
             </Arrow>
             <Title>
-              <span>{`#${pokemonId - 1}`}</span>
-              {removeDash(allPokemon[pokemonId - 2].name)}
+              <PokemonID>{`#${pokemonId - 1}`}</PokemonID>
+              <PokemonName>{removeDash(allPokemon[pokemonId - 2].name)}</PokemonName>
             </Title>
           </BtnAnchor>
         </BtnContainer>
@@ -75,20 +73,19 @@ const Navigation = ({ allPokemon, pokemonId, ...rest }: NavigationProps): JSX.El
         >
           <BtnAnchor href={`/pokemon/${allPokemon[pokemonId].name}`} onClick={nextPokemon} $right>
             <Arrow $right>
-              <Image
-                src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${
-                  pokemonId + 1
-                }.png`}
+              <ImageNext
+                src={`https://raw.githubusercontent.com/andreferreiradlw/pokestats_media/main/assets/images/${padPokemonId(
+                  pokemonId + 1,
+                )}.png`}
                 alt={allPokemon[pokemonId].name}
                 key={`navigation-right-${allPokemon[pokemonId].name}`}
                 width="100"
-                pixelateImg
-                lazy={false}
+                $pixelatedImg
               />
             </Arrow>
             <Title>
-              <span>{`#${pokemonId + 1}`}</span>
-              {removeDash(allPokemon[pokemonId].name)}
+              <PokemonID>{`#${pokemonId + 1}`}</PokemonID>
+              <PokemonName>{removeDash(allPokemon[pokemonId].name)}</PokemonName>
             </Title>
           </BtnAnchor>
         </BtnContainer>

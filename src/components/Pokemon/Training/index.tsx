@@ -19,7 +19,7 @@ const Training = ({ pokemon, species, ...rest }: TrainingProps): JSX.Element => 
   const { gameVersion } = useContext(GameVersionContext);
   // data
   const { stats, base_experience, held_items } = pokemon;
-  const { capture_rate, base_happiness, growth_rate } = species;
+  const { capture_rate, base_happiness } = species;
   // held items
   const [items, setItems] = useState([]);
   // memo
@@ -103,10 +103,6 @@ const Training = ({ pokemon, species, ...rest }: TrainingProps): JSX.Element => 
           <tr>
             <th>Base Exp.</th>
             <td>{base_experience}</td>
-          </tr>
-          <tr>
-            <th>Growth Rate</th>
-            <UppercasedTd>{removeDash(growth_rate.name)}</UppercasedTd>
           </tr>
           <tr>
             <th>Held Items</th>

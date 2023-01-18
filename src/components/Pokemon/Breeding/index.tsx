@@ -26,7 +26,7 @@ interface BreedingProps extends BoxProps {
 
 const Breeding = ({ species, babyTriggerItem, ...rest }: BreedingProps): JSX.Element => {
   // data
-  const { gender_rate, egg_groups, hatch_counter, habitat } = species;
+  const { gender_rate, egg_groups, hatch_counter, habitat, growth_rate } = species;
   // memo
   const genderRatio = useMemo(
     () => (
@@ -43,9 +43,9 @@ const Breeding = ({ species, babyTriggerItem, ...rest }: BreedingProps): JSX.Ele
     () =>
       egg_groups?.map((group, i) => (
         <Numbered key={`${group.name}-${i}`}>
-          <UppercasedTd as="p">{`${egg_groups.length > 1 ? `${i + 1}. ` : ``}${
-            group.name
-          }`}</UppercasedTd>
+          <UppercasedTd as="p">{`${egg_groups.length > 1 ? `${i + 1}. ` : ``}${removeDash(
+            group.name,
+          )}`}</UppercasedTd>
         </Numbered>
       )),
     [egg_groups],
@@ -68,6 +68,10 @@ const Breeding = ({ species, babyTriggerItem, ...rest }: BreedingProps): JSX.Ele
           <tr>
             <th>Gender Distribution</th>
             <td>{gender_rate === -1 ? 'Genderless' : genderRatio}</td>
+          </tr>
+          <tr>
+            <th>Growth Rate</th>
+            <UppercasedTd>{removeDash(growth_rate.name)}</UppercasedTd>
           </tr>
           <tr>
             <th>Egg Groups</th>

@@ -21,7 +21,7 @@ const theme = {
     darkerShadow: 'rgba(0, 0, 0, 0.75)',
     lightShadow: 'rgba(255, 255, 255, 0.3)',
     lighterShadow: 'rgba(255, 255, 255, 0.75)',
-    mercury: '#e6e6e6',
+    mercury: '#fafafa',
     types: {
       bug: '#A6B91A',
       dark: '#705746', // light

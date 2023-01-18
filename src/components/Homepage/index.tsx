@@ -1,10 +1,10 @@
+import { useMemo, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { AnimatePresence } from 'framer-motion';
 // heplpers
 import { staggerInitialVariant, fadeInUpVariant } from '@/helpers';
 // types
 import type { PokestatsHomepageProps } from '@/pages/index';
-import type { Pokemon, PokemonType } from '@/types';
 // styles
 import { Container, GithubLink, ScrollDown, ListContainer } from './styledHomepage';
 import { MainHeading, Button } from '@/components/BaseStyles';
@@ -19,11 +19,20 @@ import Github from 'public/static/iconLibrary/github.svg';
 const Homepage = ({ allPokemon, pokemonTypes }: PokestatsHomepageProps): JSX.Element => {
   // router
   const router = useRouter();
+  // memo
+  const randomPokemonUrl = useMemo(
+    () => `/pokemon/${allPokemon[Math.floor(Math.random() * allPokemon.length)].name}`,
+    [allPokemon],
+  );
+  // prefetch random pokemon page
+  useEffect(() => {
+    if (router && randomPokemonUrl) router.prefetch(randomPokemonUrl);
+  }, [randomPokemonUrl, router]);
 
   const routeRandom = () => {
     if (process.env.NODE_ENV === 'production' && window?.plausible)
       window.plausible('Random Pokemon');
-    router.push(`/pokemon/${allPokemon[Math.floor(Math.random() * allPokemon.length)].name}`);
+    router.push(randomPokemonUrl);
   };
 
   const githubClick = () => {

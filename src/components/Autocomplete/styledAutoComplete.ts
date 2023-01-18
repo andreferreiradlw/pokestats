@@ -1,7 +1,6 @@
 import styled, { css } from 'styled-components';
-// types
-import type { Pokemon, PokemonType } from '@/types';
 // components
+import { motion } from 'framer-motion';
 import BoxWrapper from '@/components/Box/StyledBox';
 import Link from 'next/link';
 
@@ -31,8 +30,7 @@ const Container = styled(BoxWrapper)`
   }
 `;
 
-const Input = styled.input`
-  border-radius: 0.25rem;
+const Input = styled.input<{ $isOpen: Boolean }>`
   font-size: 0.7rem;
   font-weight: 400;
   height: 50px;
@@ -42,9 +40,10 @@ const Input = styled.input`
   padding: 0.2rem 0.5rem;
   width: 100%;
 
-  ${({ theme }) => css`
+  ${({ theme, $isOpen }) => css`
     background-color: ${theme.colors.black};
-    border: 1px solid ${theme.colors.white};
+    border: ${theme.colors.black};
+    border-radius: ${$isOpen ? '0.25rem 0.25rem 0 0' : '0.25rem'};
     color: ${theme.colors.white};
 
     &::placeholder {
@@ -60,15 +59,21 @@ const Input = styled.input`
   `}
 `;
 
-const ListWrapper = styled.div`
-  background: ${({ theme }) => theme.colors.white};
-  border-radius: 0.25rem;
+const ListWrapper = styled(motion.div)`
+  border-radius: 0 0 0.25rem 0.25rem;
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
   left: 0;
   margin-top: 50px;
   position: absolute;
   right: 0;
   z-index: 2;
+
+  ${({ theme }) =>
+    css`
+      background: ${theme.colors.white};
+      border: 1px solid ${theme.colors.white};
+      border-top: none;
+    `}
 `;
 
 const OptionImg = styled.img`

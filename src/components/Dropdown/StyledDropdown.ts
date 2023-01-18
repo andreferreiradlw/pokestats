@@ -39,6 +39,7 @@ const SelectButton = styled.button<{ $isOpen: Boolean; $isSmall?: DropdownProps[
   position: relative;
   transition: background 0.2s ease-in-out;
   width: 100%;
+  z-index: 2;
 
   ${({ theme }) => css`
     background: ${theme.colors.white};

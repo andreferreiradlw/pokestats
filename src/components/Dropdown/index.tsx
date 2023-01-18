@@ -131,15 +131,17 @@ const useAccessibleDropdown = ({ options, value, onChange, namespace }) => {
         (option: { value: string; label: string }) => option.value === value,
       );
       setActiveIndex(selected < 0 ? 0 : selected);
-      if (listRef.current && isSafari()) {
+      if (listRef?.current && isSafari()) {
         requestAnimationFrame(() => {
-          if (listRef?.current) listRef.current.focus();
+          // @ts-ignore
+          listRef.current.focus();
         });
       }
     } else {
-      if (listRef.current && isSafari()) {
+      if (listRef?.current && isSafari()) {
         requestAnimationFrame(() => {
-          if (listRef?.current) listRef.current.previousSibling.focus();
+          // @ts-ignore
+          listRef.current.previousSibling.focus();
         });
       }
     }

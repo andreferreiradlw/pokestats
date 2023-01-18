@@ -62,7 +62,7 @@ const PokemonPage = ({
           flexalign="center"
           flexjustify="flex-start"
           flexgap="2em"
-          emphasizedBg={mainType}
+          $emphasizedBg={mainType}
         >
           <Details
             screensizes={{ xxs: 12, lg: 5 }}
@@ -85,9 +85,9 @@ const PokemonPage = ({
           flexjustify="space-between"
           flexgap="2em"
         >
-          <Breeding species={species} babyTriggerItem={babyTriggerItem} emphasizedBg={mainType} />
-          <Training pokemon={pokemon} species={species} emphasizedBg={mainType} />
-          <Multipliers pokemonTypes={types} emphasizedBg={mainType} />
+          <Breeding species={species} babyTriggerItem={babyTriggerItem} $emphasizedBg={mainType} />
+          <Training pokemon={pokemon} species={species} $emphasizedBg={mainType} />
+          <Multipliers pokemonTypes={types} $emphasizedBg={mainType} />
         </Box>
         {/** EVOLUTION CHAIN */}
         <Box flexalign="flex-start" flexjustify="flex-start">
@@ -96,7 +96,7 @@ const PokemonPage = ({
             key={`pokemon-evolution-${name}`}
             pokemonName={name}
             evolutionChain={evolutionChain}
-            emphasizedBg={mainType}
+            $emphasizedBg={mainType}
           />
         </Box>
         {/** BASESTATS, FORMS */}
@@ -106,12 +106,12 @@ const PokemonPage = ({
           flexjustify="space-between"
           flexgap="2em"
         >
-          <BaseStats stats={stats} screensizes={{ xxs: 12, lg: 8 }} emphasizedBg={mainType} />
+          <BaseStats stats={stats} screensizes={{ xxs: 12, lg: 8 }} $emphasizedBg={mainType} />
           <PokemonForms
             pokemonId={id}
             species={species}
             screensizes={{ xxs: 12, lg: 4 }}
-            emphasizedBg={mainType}
+            $emphasizedBg={mainType}
           />
         </Box>
         {/** MOVES */}

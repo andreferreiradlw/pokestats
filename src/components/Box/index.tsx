@@ -16,7 +16,7 @@ export interface BoxProps extends HTMLMotionProps<'div'> {
   backgroundcolor?: CSSProperties['background'] | Record<string, CSSProperties['background']>;
   borderradius?: CSSProperties['borderRadius'] | Record<string, CSSProperties['borderRadius']>;
   children?: React.ReactNode;
-  emphasizedBg?: Type['name'];
+  $emphasizedBg?: Type['name'];
   flexalign?: CSSProperties['alignItems'] | Record<string, CSSProperties['alignItems']>;
   flexalignself?: CSSProperties['alignSelf'] | Record<string, CSSProperties['alignSelf']>;
   flexdirection?: CSSProperties['flexDirection'] | Record<string, CSSProperties['flexDirection']>;

@@ -53,12 +53,12 @@ const BoxWrapper = styled(motion.div)<BoxProps>`
   `}
 
   /** emphasized background */
-  ${({ theme, emphasizedBg, flexpadding, borderradius, backgroundcolor }) =>
-    emphasizedBg &&
+  ${({ theme, $emphasizedBg, flexpadding, borderradius, backgroundcolor }) =>
+    $emphasizedBg &&
     css`
       ${!backgroundcolor &&
       css`
-        background: ${theme.colors.emphasizedBg[emphasizedBg]};
+        background: ${theme.colors.$emphasizedBg[$emphasizedBg]};
       `}
       ${!borderradius &&
       css`

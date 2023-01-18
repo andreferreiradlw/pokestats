@@ -45,7 +45,7 @@ const theme = {
         'repeating-linear-gradient( 45deg, #606dbc, #606dbc 10px, #465298 10px, #465298 20px)', // light
       water: '#6390F0',
     },
-    emphasizedBg: {
+    $emphasizedBg: {
       bug: 'rgba(166, 185, 26, 0.1)',
       dark: 'rgba(112, 87, 70, 0.1)', // light
       dragon: 'rgba(111, 53, 252, 0.1)', // light

@@ -57,7 +57,7 @@ const Multipliers = ({ pokemonTypes, ...rest }: MultipliersProps): JSX.Element =
     useState<TypesTableProps['multiplierType']>('defense');
 
   useEffect(() => {
-    let currTypes = pokemonTypes.map(currType => {
+    const currTypes = pokemonTypes.map(currType => {
       return currType.type.name;
     });
     const currMultipliers = getMultipliers(currTypes);

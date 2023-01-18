@@ -8,5 +8,3 @@ export * from './table';
 export * from './headings';
 // buttons
 export * from './button';
-// inputs
-export * from './inputs';

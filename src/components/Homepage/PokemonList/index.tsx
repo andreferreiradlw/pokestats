@@ -96,6 +96,7 @@ const PokemonList = ({ pokemon, ...rest }: PokemonListProps): JSX.Element => {
               sessionStorage.setItem('sortSelect', e.target.value);
             }}
             sizeSmall
+            minWidth="125px"
           />
         </SelectContainer>
       </Box>

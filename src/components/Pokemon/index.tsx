@@ -34,6 +34,8 @@ const PokemonPage = ({
   const { names, generation, varieties } = species;
   const { babyTriggerItem } = evolutionChain;
 
+  const mainType = types[0].type.name;
+
   useEffect(() => {
     let pokemonGen: string;
     // set current pokemon gen
@@ -60,6 +62,7 @@ const PokemonPage = ({
           flexalign="center"
           flexjustify="flex-start"
           flexgap="2em"
+          emphasizedBg={mainType}
         >
           <Details
             screensizes={{ xxs: 12, lg: 5 }}
@@ -82,9 +85,9 @@ const PokemonPage = ({
           flexjustify="flex-start"
           flexgap="2em"
         >
-          <Breeding species={species} babyTriggerItem={babyTriggerItem} />
-          <Training pokemon={pokemon} species={species} />
-          <Multipliers pokemonTypes={types} />
+          <Breeding species={species} babyTriggerItem={babyTriggerItem} emphasizedBg={mainType} />
+          <Training pokemon={pokemon} species={species} emphasizedBg={mainType} />
+          <Multipliers pokemonTypes={types} emphasizedBg={mainType} />
         </Box>
         {/** EVOLUTION CHAIN */}
         <Box flexalign="flex-start" flexjustify="flex-start">
@@ -93,6 +96,7 @@ const PokemonPage = ({
             key={`pokemon-evolution-${name}`}
             pokemonName={name}
             evolutionChain={evolutionChain}
+            emphasizedBg={mainType}
           />
         </Box>
         {/** BASESTATS, FORMS */}
@@ -102,8 +106,13 @@ const PokemonPage = ({
           flexjustify="flex-start"
           flexgap="2em"
         >
-          <BaseStats stats={stats} screensizes={{ xxs: 12, lg: 8 }} />
-          <PokemonForms pokemonId={id} species={species} screensizes={{ xxs: 12, lg: 4 }} />
+          <BaseStats stats={stats} screensizes={{ xxs: 12, lg: 8 }} emphasizedBg={mainType} />
+          <PokemonForms
+            pokemonId={id}
+            species={species}
+            screensizes={{ xxs: 12, lg: 4 }}
+            emphasizedBg={mainType}
+          />
         </Box>
         {/** MOVES */}
         <Box flexalign="flex-start" flexjustify="flex-start">

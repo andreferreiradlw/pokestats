@@ -1,20 +1,18 @@
 import styled, { css } from 'styled-components';
 // types
 import type { BoxProps } from './index';
+import type { Type } from 'pokenode-ts';
 // helpers
 import { responsiveProps, flexStyle } from '@/helpers';
 import { motion } from 'framer-motion';
 // config
 import { boxConfig } from './config';
 
-const debugStyle = () => css`
-  background-color: #5901ad40;
-  outline: #fff solid 1px;
-`;
-
 const gutterStyle = () => css`
   ${responsiveProps('padding', boxConfig.gutterWidth)}
 `;
+
+const emphasizedBgColor = (typeName: Type['name']) => {};
 
 const BoxWrapper = styled(motion.div)<BoxProps>`
   /** dynamic styles */
@@ -54,6 +52,24 @@ const BoxWrapper = styled(motion.div)<BoxProps>`
     ${borderradius && responsiveProps('border-radius', borderradius)}
   `}
 
+  /** emphasized background */
+  ${({ theme, emphasizedBg, flexpadding, borderradius, backgroundcolor }) =>
+    emphasizedBg &&
+    css`
+      ${!backgroundcolor &&
+      css`
+        background: ${theme.colors.emphasizedBg[emphasizedBg]};
+      `}
+      ${!borderradius &&
+      css`
+        border-radius: 10px;
+      `}
+    ${!flexpadding &&
+      css`
+        padding: 1em;
+      `}
+    `}
+
   /** column-based flex size */
   ${({ $constrained, screensizes }) =>
     $constrained
@@ -91,9 +107,6 @@ const BoxWrapper = styled(motion.div)<BoxProps>`
 
   /** gutter */
   ${({ flexpadding, $withGutter }) => !flexpadding && $withGutter && gutterStyle()}
-
-  /** debug */
-  ${({ $debug }) => $debug && debugStyle()}
 `;
 
 export default BoxWrapper;

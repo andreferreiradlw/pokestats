@@ -43,7 +43,7 @@ const HeaderComponent = ({
           <Link href="/">
             <PokestatsLogo>PokeStats</PokestatsLogo>
           </Link>
-          {!!versionOptions?.length && (
+          {pokemonGen && !!versionOptions?.length && (
             <Dropdown
               label="Game Version"
               options={versionOptions}

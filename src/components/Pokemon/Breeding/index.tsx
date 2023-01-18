@@ -42,7 +42,7 @@ const Breeding = ({ species, babyTriggerItem, ...rest }: BreedingProps): JSX.Ele
   const eggGroups = useMemo(
     () =>
       egg_groups?.map((group, i) => (
-        <Numbered key={`${group.name}-${i}`}>
+        <Numbered key={`${group.name}-${i}`} style={{ paddingBottom: 0 }}>
           <UppercasedTd as="p">{`${egg_groups.length > 1 ? `${i + 1}. ` : ``}${removeDash(
             group.name,
           )}`}</UppercasedTd>

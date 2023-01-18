@@ -7,7 +7,7 @@ import { removeUnderscore } from '@/helpers';
 // components
 import Box, { BoxProps } from '@/components/Box';
 import TypeBadge from '@/components/TypeBadge';
-import Switch from './Switch';
+import Dropdown from '@/components/Dropdown';
 // styles
 import { SectionTitle, Table, TypesCell, UppercasedTd } from '@/components/BaseStyles';
 
@@ -19,6 +19,11 @@ interface TypesTableProps {
   multipliers: MultipliersRes['attack'] | MultipliersRes['defense'];
   multiplierType: 'attack' | 'defense';
 }
+
+const dropdownOptions = [
+  { label: 'Defense', value: 'defense' },
+  { label: 'Attack', value: 'attack' },
+];
 
 const TypesTable = ({ multipliers, multiplierType }: TypesTableProps): JSX.Element => (
   <Table>
@@ -44,11 +49,12 @@ const TypesTable = ({ multipliers, multiplierType }: TypesTableProps): JSX.Eleme
 );
 
 const Multipliers = ({ pokemonTypes, ...rest }: MultipliersProps): JSX.Element => {
-  // switch state
-  const [enabled, setEnabled] = useState(true);
   // multipliers
   const [attackMultipliers, setAttackMultipliers] = useState<MultipliersRes['attack']>();
   const [defenseMultipliers, setDefenseMultipliers] = useState<MultipliersRes['defense']>();
+  // select
+  const [optionSelected, setOptionSelected] =
+    useState<TypesTableProps['multiplierType']>('defense');
 
   useEffect(() => {
     let currTypes = pokemonTypes.map(currType => {
@@ -68,13 +74,18 @@ const Multipliers = ({ pokemonTypes, ...rest }: MultipliersProps): JSX.Element =
         flexwrap="wrap"
         flexgap="0.5em"
       >
-        <SectionTitle>Multipliers</SectionTitle>
-        <Switch enabled={enabled} onClick={() => setEnabled(prev => !prev)} />
+        <SectionTitle>Relations</SectionTitle>
+        <Dropdown
+          options={dropdownOptions}
+          onChange={e => setOptionSelected(e.target.value as TypesTableProps['multiplierType'])}
+          value={optionSelected}
+          minWidth="125px"
+        />
       </Box>
       {defenseMultipliers && attackMultipliers && (
         <TypesTable
-          multipliers={enabled ? defenseMultipliers : attackMultipliers}
-          multiplierType={enabled ? 'defense' : 'attack'}
+          multipliers={optionSelected === 'defense' ? defenseMultipliers : attackMultipliers}
+          multiplierType={optionSelected}
         />
       )}
     </Box>

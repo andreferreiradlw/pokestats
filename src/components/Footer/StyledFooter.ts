@@ -2,14 +2,15 @@ import styled from 'styled-components';
 
 const FooterContainer = styled.footer`
   align-items: center;
-  background-color: black;
-  color: white;
+  background: white;
   display: flex;
   flex-basis: auto;
+  flex-direction: column;
   font-weight: 300;
+  gap: ${({ theme }) => theme.layout.gap};
   justify-content: center;
-  padding: 1em 0;
-  width: 100%; ;
+  padding-bottom: ${({ theme }) => theme.layout.gap};
+  width: 100%;
 `;
 
 const TextContainer = styled.span`

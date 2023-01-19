@@ -8,3 +8,5 @@ export * from './table';
 export * from './headings';
 // buttons
 export * from './button';
+// divider
+export * from './divider';

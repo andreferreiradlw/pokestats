@@ -4,7 +4,7 @@ import Arrow from 'public/static/iconLibrary/arrows.svg';
 
 const EvoArrow = styled(Arrow)`
   transform: rotateZ(90deg);
-  width: 50px;
+  width: 15px;
 
   ${({ theme }) => css`
     @media ${theme.device.lg} {

@@ -15,15 +15,11 @@ interface LayoutProps extends BoxProps {
     pokemonGen?: string;
     autocompleteList: AutocompleteProps['filterList'];
   };
-  withMain?: {
-    mainKey: string;
-  };
 }
 
 const Layout = ({
-  layoutGap = '3em',
+  layoutGap = '1.5em',
   withHeader,
-  withMain,
   children,
   ...rest
 }: LayoutProps): JSX.Element => {
@@ -40,20 +36,14 @@ const Layout = ({
 
   return (
     <GameVersionContext.Provider value={VersionContextValue}>
-      <LayoutContainer flexdirection="column" width="100%" flexgap={layoutGap}>
+      <LayoutContainer flexdirection="column" width="100%" flexgap={layoutGap} {...rest}>
         {withHeader && (
           <Header
             autocompleteList={withHeader.autocompleteList}
             pokemonGen={withHeader?.pokemonGen}
           />
         )}
-        {withMain ? (
-          <MainContainer key={withMain.mainKey} {...rest}>
-            {children}
-          </MainContainer>
-        ) : (
-          children
-        )}
+        {children}
         <Footer />
       </LayoutContainer>
     </GameVersionContext.Provider>

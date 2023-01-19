@@ -1,4 +1,14 @@
-import { breakpoints } from '@/components/Box/config';
+const breakpoints = {
+  xxs: 0.1,
+  xs: 24, // 375px
+  sm: 33, // 528px
+  md: 48, // 768px
+  lg: 64, // 1024px
+  xl: 90, // 1440px
+  xxl: 160, // 2560px
+};
+
+const dimensions = ['xxs', 'xs', 'sm', 'md', 'lg', 'xl', 'xxl'];
 
 const theme = {
   device: {
@@ -14,7 +24,28 @@ const theme = {
     maxWidth: '1200px',
     padding: '0 2rem',
   },
+  layout: {
+    gap: '1.5em',
+    gutterWidth: {
+      xxs: '0 0.5em',
+      md: '0 1.5em',
+      lg: '0 2em',
+    },
+    constrained: {
+      xxs: '1300px',
+      xl: '1450px',
+    },
+  },
   colors: {
+    primary: {
+      main: 'white',
+      light: '#dbd3d35e',
+      contrastText: 'black',
+    },
+    secondary: {
+      main: 'black',
+      contrastText: 'white',
+    },
     white: 'white',
     black: 'black',
     darkShadow: 'rgba(0, 0, 0, 0.3)',
@@ -45,29 +76,30 @@ const theme = {
         'repeating-linear-gradient( 45deg, #606dbc, #606dbc 10px, #465298 10px, #465298 20px)', // light
       water: '#6390F0',
     },
-    $emphasizedBg: {
-      bug: 'rgba(166, 185, 26, 0.1)',
-      dark: 'rgba(112, 87, 70, 0.1)', // light
-      dragon: 'rgba(111, 53, 252, 0.1)', // light
-      electric: 'rgba(247, 208, 44, 0.1)',
-      fairy: 'rgba(214, 133, 173, 0.1)',
-      fighting: 'rgba(194, 46, 40, 0.1)', // light
-      fire: 'rgba(238, 129, 48, 0.1)',
-      flying: 'rgba(169, 143, 243, 0.1)',
-      ghost: 'rgba(115, 87, 151, 0.1)', // light
-      grass: 'rgba(122, 199, 76, 0.1)',
-      ground: 'rgba(226, 191, 101, 0.1)',
-      ice: 'rgba(150, 217, 214, 0.1)',
-      normal: 'rgba(168, 167, 122, 0.1)',
-      poison: 'rgba(163, 62, 161, 0.1)', // light
-      psychic: 'rgba(249, 85, 135, 0.1)',
-      rock: 'rgba(182, 161, 54, 0.1)',
-      shadow: 'rgba(0, 0, 0, 0.1)', // light
-      steel: 'rgba(183, 183, 206, 0.1)',
-      water: 'rgba(99, 144, 240, 0.1)',
+    typesHalf: {
+      bug: 'rgba(166, 185, 26, 0.5)',
+      dark: 'rgba(112, 87, 70, 0.5)', // light
+      dragon: 'rgba(111, 53, 252, 0.5)', // light
+      electric: 'rgba(247, 208, 44, 0.5)',
+      fairy: 'rgba(214, 133, 173, 0.5)',
+      fighting: 'rgba(194, 46, 40, 0.5)', // light
+      fire: 'rgba(238, 129, 48, 0.5)',
+      flying: 'rgba(169, 143, 243, 0.5)',
+      ghost: 'rgba(115, 87, 151, 0.5)', // light
+      grass: 'rgba(122, 199, 76, 0.5)',
+      ground: 'rgba(226, 191, 101, 0.5)',
+      ice: 'rgba(150, 217, 214, 0.5)',
+      normal: 'rgba(168, 167, 122, 0.5)',
+      poison: 'rgba(163, 62, 161, 0.5)', // light
+      psychic: 'rgba(249, 85, 135, 0.5)',
+      rock: 'rgba(182, 161, 54, 0.5)',
+      shadow: 'rgba(0, 0, 0, 0.5)', // light
+      steel: 'rgba(183, 183, 206, 0.5)',
+      water: 'rgba(99, 144, 240, 0.5)',
     },
   },
 };
 
 export default theme;
+export { dimensions, breakpoints };
 export type ThemeType = typeof theme;

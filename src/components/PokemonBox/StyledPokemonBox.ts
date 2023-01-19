@@ -20,7 +20,7 @@ const PokeBox = styled(motion.div)<{
   justify-content: center;
   max-width: 175px;
   overflow: hidden;
-  padding: 1rem;
+  padding: 1em;
   position: relative;
   text-align: center;
   transition: border 0.1s ease-in-out;
@@ -44,11 +44,11 @@ const PokeBox = styled(motion.div)<{
   ${({ $dark, theme }) =>
     $dark
       ? css`
-          background-color: ${theme.colors.black};
-          color: ${theme.colors.white};
+          background-color: ${theme.colors.secondary.main};
+          color: ${theme.colors.secondary.contrastText};
           &::hover,
           &:active {
-            border: 1px solid ${theme.colors.white};
+            border: 1px solid ${theme.colors.primary.main};
           }
           &:hover {
             box-shadow: 1px 1px 3px 0px ${theme.colors.darkerShadow};
@@ -58,17 +58,13 @@ const PokeBox = styled(motion.div)<{
           }
         `
       : css`
-          background-color: ${theme.colors.white};
-          color: ${theme.colors.black};
-          &::hover,
-          &:active {
-            border: 1px solid ${theme.colors.black};
-          }
+          background-color: ${theme.colors.primary.main};
+          color: ${theme.colors.primary.contrastText};
           &:hover {
-            box-shadow: 1px 1px 3px 0px ${theme.colors.lighterShadow};
+            box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
           }
           &:active {
-            box-shadow: 1px 1px 2px 0px ${theme.colors.darkerShadow} inset;
+            box-shadow: 1px 1px 2px 0px rgba(149, 157, 165, 0.2) inset;
           }
         `}
 `;

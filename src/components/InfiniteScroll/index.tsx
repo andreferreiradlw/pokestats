@@ -113,7 +113,7 @@ export default function InfiniteScroll({
         flexalign={flexalign}
         flexwrap={flexwrap}
         flexjustify="center"
-        flexgap="1em"
+        flexgap="1.5em"
         {...rest}
       >
         {showList?.map(currPokemon => (
@@ -129,7 +129,7 @@ export default function InfiniteScroll({
         ))}
       </Box>
       {showList.length > 0 && pokemonList.length !== showList?.length && (
-        <Loading flexheight="100px" $iconWidth="5%" flexpadding="1rem 0" ref={setNode} />
+        <Loading flexheight="100px" $iconWidth="5%" flexpadding="1em 0" ref={setNode} />
       )}
     </>
   );

@@ -4,6 +4,8 @@ import type { PokestatsPokemonPageProps } from '@/pages/pokemon/[pokemonId]';
 // helpers
 import GameVersionContext from '@/components/Layout/gameVersionContext';
 import { mapGenerationToGame, pageContainerVariant } from '@/helpers';
+// styles
+import { Divider } from '@/components/BaseStyles';
 // components
 import { AnimatePresence } from 'framer-motion';
 import { MainContainer } from '@/components/Layout';
@@ -34,8 +36,6 @@ const PokemonPage = ({
   const { names, generation, varieties } = species;
   const { babyTriggerItem } = evolutionChain;
 
-  const mainType = types[0].type.name;
-
   useEffect(() => {
     let pokemonGen: string;
     // set current pokemon gen
@@ -49,7 +49,7 @@ const PokemonPage = ({
   return (
     <AnimatePresence mode="wait">
       <MainContainer
-        $constrained
+        constrained
         $withGutter
         initial="hidden"
         animate="visible"
@@ -57,12 +57,12 @@ const PokemonPage = ({
         variants={pageContainerVariant}
         key={`pokemon-${name}`}
       >
+        <Divider />
         <Box
           flexdirection={{ xxs: 'column-reverse', lg: 'row' }}
           flexalign="center"
           flexjustify="flex-start"
           flexgap="2em"
-          $emphasizedBg={mainType}
         >
           <Details
             screensizes={{ xxs: 12, lg: 5 }}
@@ -70,6 +70,7 @@ const PokemonPage = ({
             pokemon={pokemon}
             abilities={abilities}
             species={species}
+            // $emphasizedBg={mainType}
           />
           <FeaturedImage
             screensizes={{ xxs: 12, lg: 7 }}
@@ -78,6 +79,7 @@ const PokemonPage = ({
             pokemonId={id}
           />
         </Box>
+        <Divider />
         {/** BREEDING, TRAINING, MULTIPLIERS */}
         <Box
           flexdirection={{ xxs: 'column', lg: 'row' }}
@@ -85,19 +87,9 @@ const PokemonPage = ({
           flexjustify="space-between"
           flexgap="2em"
         >
-          <Breeding species={species} babyTriggerItem={babyTriggerItem} $emphasizedBg={mainType} />
-          <Training pokemon={pokemon} species={species} $emphasizedBg={mainType} />
-          <Multipliers pokemonTypes={types} $emphasizedBg={mainType} />
-        </Box>
-        {/** EVOLUTION CHAIN */}
-        <Box flexalign="flex-start" flexjustify="flex-start">
-          <EvolutionChain
-            screensizes={12}
-            key={`pokemon-evolution-${name}`}
-            pokemonName={name}
-            evolutionChain={evolutionChain}
-            $emphasizedBg={mainType}
-          />
+          <Breeding species={species} babyTriggerItem={babyTriggerItem} />
+          <Training pokemon={pokemon} species={species} />
+          <Multipliers pokemonTypes={types} />
         </Box>
         {/** BASESTATS, FORMS */}
         <Box
@@ -106,18 +98,25 @@ const PokemonPage = ({
           flexjustify="space-between"
           flexgap="2em"
         >
-          <BaseStats stats={stats} screensizes={{ xxs: 12, lg: 8 }} $emphasizedBg={mainType} />
-          <PokemonForms
-            pokemonId={id}
-            species={species}
-            screensizes={{ xxs: 12, lg: 4 }}
-            $emphasizedBg={mainType}
+          <BaseStats stats={stats} screensizes={{ xxs: 12, lg: 8 }} />
+          <PokemonForms pokemonId={id} species={species} screensizes={{ xxs: 12, lg: 4 }} />
+        </Box>
+        <Divider />
+        {/** EVOLUTION CHAIN */}
+        <Box flexalign="flex-start" flexjustify="flex-start">
+          <EvolutionChain
+            screensizes={12}
+            key={`pokemon-evolution-${name}`}
+            pokemonName={name}
+            evolutionChain={evolutionChain}
           />
         </Box>
+        <Divider />
         {/** MOVES */}
         <Box flexalign="flex-start" flexjustify="flex-start">
           <Moves pokemon={pokemon} screensizes={12} />
         </Box>
+        <Divider />
         {/** SPRITES */}
         <Box flexalign="flex-start" flexjustify="flex-start">
           <Sprites pokemonSprites={sprites} pokemonId={id} forms={varieties} screensizes={12} />
@@ -126,6 +125,7 @@ const PokemonPage = ({
         <Box flexalign="flex-start" flexjustify="flex-start">
           <Navigation allPokemon={allPokemon} pokemonId={id} screensizes={12} />
         </Box>
+        <Divider />
       </MainContainer>
     </AnimatePresence>
   );

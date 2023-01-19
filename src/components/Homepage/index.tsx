@@ -7,12 +7,13 @@ import { staggerInitialVariant, fadeInUpVariant, getRandomInt } from '@/helpers'
 import type { PokestatsHomepageProps } from '@/pages/index';
 // styles
 import { Container, GithubLink, ScrollDown, ListContainer } from './styledHomepage';
-import { MainHeading, Button } from '@/components/BaseStyles';
+import { MainHeading, Button, Divider } from '@/components/BaseStyles';
 // components
 import Autocomplete from '@/components/Autocomplete';
 import Particles from '@/components/Particles';
 import PokemonList from './PokemonList';
 import TypeList from './TypeList';
+import Box from '@/components/Box';
 // icons
 import Github from 'public/static/iconLibrary/github.svg';
 
@@ -58,7 +59,10 @@ const Homepage = ({ allPokemon, pokemonTypes }: PokestatsHomepageProps): JSX.Ele
       </GithubLink>
       <Container
         flexheight="100vh"
-        $constrained
+        flexalign="center"
+        flexdirection="column"
+        flexgap="1em"
+        constrained
         $withGutter
         initial="hidden"
         animate="show"
@@ -78,9 +82,13 @@ const Homepage = ({ allPokemon, pokemonTypes }: PokestatsHomepageProps): JSX.Ele
         </Button>
         <ScrollDown variants={fadeInUpVariant} key="homepage-scroll-down" />
       </Container>
-      <ListContainer flexgap="2em" flexpadding="3em 0">
-        <TypeList types={pokemonTypes} />
-        <PokemonList pokemon={allPokemon} key="homepage-pokemon-list" />
+      <ListContainer flexpadding="1.5em 0">
+        <Box constrained $withGutter flexgap="1.5em">
+          <TypeList types={pokemonTypes} />
+          <Divider />
+          <PokemonList pokemon={allPokemon} key="homepage-pokemon-list" />
+          <Divider />
+        </Box>
       </ListContainer>
       <Particles key="homepage-particles" />
     </AnimatePresence>

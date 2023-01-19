@@ -58,8 +58,7 @@ const JpnName = styled(motion.span)`
   top: 0;
   right: 0;
   z-index: -1;
-  // text
-  writing-mode: vertical-rl; // show text horizontally
+  writing-mode: vertical-rl; // show text vertically
   line-height: 1;
   text-transform: uppercase;
   text-align: center;
@@ -69,7 +68,7 @@ const JpnName = styled(motion.span)`
   width: 1em;
 
   ${({ theme }) => css`
-    color: ${theme.colors.black};
+    color: ${theme.colors.secondary.main};
 
     @media ${theme.device.xxs} {
       display: none;

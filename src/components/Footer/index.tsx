@@ -21,7 +21,7 @@ const Footer = (): JSX.Element => {
         flexgap="0.5em"
         flexmargin="0"
         screensizes={12}
-        $constrained
+        constrained
         $withGutter
       >
         <TextContainer>

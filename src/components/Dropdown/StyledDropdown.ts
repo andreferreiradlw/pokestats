@@ -42,9 +42,9 @@ const SelectButton = styled.button<{ $isOpen: Boolean; $isSmall?: DropdownProps[
   z-index: 2;
 
   ${({ theme }) => css`
-    background: ${theme.colors.white};
-    border: 2px solid ${theme.colors.black};
-    color: ${theme.colors.black};
+    background: ${theme.colors.primary.main};
+    border: 2px solid ${theme.colors.secondary.main};
+    color: ${theme.colors.primary.contrastText};
   `}
 
   ${({ $isOpen }) =>
@@ -60,7 +60,7 @@ const SelectButton = styled.button<{ $isOpen: Boolean; $isSmall?: DropdownProps[
     `}
 
   &:hover {
-    background: ${({ theme }) => theme.colors.mercury};
+    background: ${({ theme }) => theme.colors.primary.light};
     cursor: pointer;
   }
 `;
@@ -78,9 +78,9 @@ const SelectDropdown = styled(motion.ul)`
   z-index: 1;
 
   ${({ theme }) => css`
-    background: ${theme.colors.white};
-    border: 2px solid ${theme.colors.black};
-    color: ${theme.colors.black};
+    background: ${theme.colors.primary.main};
+    border: 2px solid ${theme.colors.secondary.main};
+    color: ${theme.colors.primary.contrastText};
   `}
 `;
 
@@ -91,12 +91,12 @@ const SelectDropdownItem = styled.li<{
   ${({ $isSelected, theme }) =>
     $isSelected
       ? css`
-          background: ${theme.colors.black};
-          color: ${theme.colors.white};
+          background: ${theme.colors.secondary.contrastText};
+          color: ${theme.colors.secondary.main};
         `
       : css`
           &:hover {
-            background: ${theme.colors.mercury};
+            background: ${theme.colors.primary.light};
           }
         `}
 

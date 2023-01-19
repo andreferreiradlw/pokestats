@@ -41,12 +41,13 @@ const Evolution = ({
         <BoxWrapper
           width="auto"
           $flexgrow
-          flexdirection="column"
+          flexdirection="row"
           flexgap="1em"
           flexwrap="nowrap"
           flexjustify="center"
           flexalign="center"
         >
+          <EvoArrow />
           {evolutionDetails.map((currDetails, i) => (
             <EvolutionDetails key={`evo-details-${i}`} details={currDetails} />
           ))}
@@ -54,7 +55,7 @@ const Evolution = ({
         </BoxWrapper>
       )}
       {/** Pokemon box with image and types */}
-      <PokemonBox $dark pokemonId={id} pokemonName={name} pokemonGen={generation?.name} />
+      <PokemonBox pokemonId={id} pokemonName={name} pokemonGen={generation?.name} />
     </BoxWrapper>
   );
 };

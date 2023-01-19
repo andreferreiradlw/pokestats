@@ -94,7 +94,7 @@ const PokemonDetails = ({
       <BoxWrapper
         flexdirection="column"
         flexalign={{ xxs: 'center', lg: 'flex-start' }}
-        flexgap="0.5em"
+        flexgap="1em"
         width="100%"
         initial="hidden"
         animate="show"

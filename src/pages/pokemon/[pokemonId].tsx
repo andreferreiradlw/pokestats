@@ -187,8 +187,6 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
       chainId: evolutionDataResults.id,
       babyTriggerItem: evolutionDataResults.baby_trigger_item,
       firstEvolution: null,
-      // secondEvolution: [],
-      // thirdEvolution: [],
       secondEvolution: [],
     };
 

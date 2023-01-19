@@ -4,8 +4,8 @@ import { motion } from 'framer-motion';
 const Table = styled(motion.table)`
   border-spacing: 0;
   display: table;
-  font-size: 1rem;
-  line-height: 1.2rem;
+  font-size: 1em;
+  line-height: 1.2em;
   width: 100%;
   word-break: keep-all;
 
@@ -18,20 +18,20 @@ const Table = styled(motion.table)`
   }
 
   tr:not(:last-of-type) {
-    border-bottom: 1px solid #ececec;
+    border-bottom: 1px solid ${({ theme }) => theme.colors.primary.light};
     width: 100%;
   }
 
   th {
-    font-size: 0.875rem;
-    font-weight: normal;
+    font-size: 1em;
+    font-weight: 600;
+    min-height: 45px;
     text-align: left;
     white-space: nowrap;
-    min-height: 45px;
   }
 
   td {
-    font-weight: 500;
+    font-weight: normal;
     min-height: 45px;
     padding: 8px 16px;
     white-space: pre-line;

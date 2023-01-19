@@ -1,6 +1,6 @@
 import { css } from 'styled-components';
 // config
-import { dimensions, breakpoints } from '../components/Box/config';
+import { dimensions, breakpoints } from '@/components/Theme/theme';
 
 /**
  * Creates the media-query syntax with the provided content inside.

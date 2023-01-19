@@ -1,8 +1,6 @@
 import styled from 'styled-components';
 // types
 import type { BoxProps } from '@/components/Box';
-// config
-import { boxConfig } from '@/components/Box/config';
 // helpers
 import { responsiveProps } from '@/helpers/box';
 // components
@@ -17,20 +15,21 @@ const LayoutContainer = styled(BoxWrapper)`
 const MainContainer = styled(motion.main)<{
   flexalign?: BoxProps['flexalign'];
   flexjustify?: BoxProps['flexjustify'];
-  $constrained?: BoxProps['$constrained'];
+  constrained?: BoxProps['constrained'];
   $withGutter?: BoxProps['$withGutter'];
 }>`
   align-items: ${({ flexalign }) => flexalign || 'center'};
   display: flex;
   flex-direction: column;
   flex-grow: 1;
-  gap: 3em;
+  gap: ${({ theme }) => theme.layout.gap};
   justify-content: ${({ flexjustify }) => flexjustify || 'center'};
   margin: 0 auto;
   width: 100%;
 
-  ${({ $constrained }) => $constrained && `max-width: ${boxConfig.$constrained};`}
-  ${({ $withGutter }) => $withGutter && responsiveProps('padding', boxConfig.gutterWidth)}
+  ${({ constrained, theme }) =>
+    constrained && responsiveProps('max-width', theme.layout.constrained)}
+  ${({ $withGutter, theme }) => $withGutter && responsiveProps('padding', theme.layout.gutterWidth)}
 `;
 
 export { LayoutContainer, MainContainer };

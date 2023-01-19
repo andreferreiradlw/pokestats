@@ -1,14 +1,13 @@
 import { CSSProperties, forwardRef } from 'react';
 // types
 import type { HTMLMotionProps } from 'framer-motion';
-import type { Type } from 'pokenode-ts';
 // helpers
 import { useForwardedRef } from '@/helpers';
 // styles
 import BoxWrapper from './StyledBox';
 
 export interface BoxProps extends HTMLMotionProps<'div'> {
-  $constrained?: boolean;
+  constrained?: boolean;
   $flexgrow?: boolean;
   $hide?: boolean;
   $isRelative?: boolean;
@@ -16,7 +15,6 @@ export interface BoxProps extends HTMLMotionProps<'div'> {
   backgroundcolor?: CSSProperties['background'] | Record<string, CSSProperties['background']>;
   borderradius?: CSSProperties['borderRadius'] | Record<string, CSSProperties['borderRadius']>;
   children?: React.ReactNode;
-  $emphasizedBg?: Type['name'];
   flexalign?: CSSProperties['alignItems'] | Record<string, CSSProperties['alignItems']>;
   flexalignself?: CSSProperties['alignSelf'] | Record<string, CSSProperties['alignSelf']>;
   flexdirection?: CSSProperties['flexDirection'] | Record<string, CSSProperties['flexDirection']>;

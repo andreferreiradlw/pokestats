@@ -1,18 +1,9 @@
 import styled, { css } from 'styled-components';
 // types
 import type { BoxProps } from './index';
-import type { Type } from 'pokenode-ts';
 // helpers
 import { responsiveProps, flexStyle } from '@/helpers';
 import { motion } from 'framer-motion';
-// config
-import { boxConfig } from './config';
-
-const gutterStyle = () => css`
-  ${responsiveProps('padding', boxConfig.gutterWidth)}
-`;
-
-const emphasizedBgColor = (typeName: Type['name']) => {};
 
 const BoxWrapper = styled(motion.div)<BoxProps>`
   /** dynamic styles */
@@ -52,29 +43,11 @@ const BoxWrapper = styled(motion.div)<BoxProps>`
     ${borderradius && responsiveProps('border-radius', borderradius)}
   `}
 
-  /** emphasized background */
-  ${({ theme, $emphasizedBg, flexpadding, borderradius, backgroundcolor }) =>
-    $emphasizedBg &&
-    css`
-      ${!backgroundcolor &&
-      css`
-        background: ${theme.colors.$emphasizedBg[$emphasizedBg]};
-      `}
-      ${!borderradius &&
-      css`
-        border-radius: 10px;
-      `}
-    ${!flexpadding &&
-      css`
-        padding: 1em;
-      `}
-    `}
-
   /** column-based flex size */
-  ${({ $constrained, screensizes }) =>
-    $constrained
+  ${({ constrained, screensizes }) =>
+    constrained
       ? css`
-          // flex-basis: 100%;
+          flex-basis: 100%;
         `
       : screensizes
       ? flexStyle(screensizes)
@@ -82,20 +55,20 @@ const BoxWrapper = styled(motion.div)<BoxProps>`
           flex-basis: auto;
         `}
   
-  ${({ $constrained, screensizes, $flexgrow }) =>
-    !$constrained &&
+  ${({ constrained, screensizes, $flexgrow }) =>
+    !constrained &&
     !screensizes &&
     $flexgrow &&
     css`
       flex-grow: 1;
     `}
   
-  /** $constrained max-width */
-  ${({ $constrained, $flexgrow }) =>
-    $constrained &&
+  /** constrained max-width */
+  ${({ constrained, $flexgrow, theme }) =>
+    constrained &&
     css`
       ${$flexgrow && 'flex-grow: 1;'}
-      max-width: ${boxConfig.$constrained};
+      ${responsiveProps('max-width', theme.layout.constrained)}}
     `};
 
   /** Position */
@@ -106,7 +79,12 @@ const BoxWrapper = styled(motion.div)<BoxProps>`
     `}
 
   /** gutter */
-  ${({ flexpadding, $withGutter }) => !flexpadding && $withGutter && gutterStyle()}
+  ${({ flexpadding, $withGutter, theme }) =>
+    !flexpadding &&
+    $withGutter &&
+    css`
+      ${responsiveProps('padding', theme.layout.gutterWidth)}
+    `}
 `;
 
 export default BoxWrapper;

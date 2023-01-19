@@ -9,9 +9,6 @@ import BoxWrapper from '@/components/Box/StyledBox';
 import ArrowDownIcon from 'public/static/iconLibrary/arrow_down.svg';
 
 const Container = styled(BoxWrapper)`
-  align-items: center;
-  flex-direction: column;
-  gap: 1em;
   height: 100vh;
   justify-content: center;
   margin: auto;
@@ -26,8 +23,10 @@ const GithubLink = styled(motion.a)`
   top: 20px;
 
   &:hover svg {
-    background: black;
-    fill: white;
+    ${({ theme }) => css`
+      background: ${theme.colors.secondary.main};
+      fill: ${theme.colors.primary.main};
+    `}
   }
 
   svg {
@@ -48,8 +47,8 @@ const ScrollDown = styled(ArrowDownIcon)`
 
 const ListContainer = styled(Box)`
   ${({ theme }) => css`
-    background-color: ${theme.colors.black};
-    color: ${theme.colors.white};
+    background: ${theme.colors.primary.main};
+    color: ${theme.colors.primary.contrastText};
   `}
 `;
 

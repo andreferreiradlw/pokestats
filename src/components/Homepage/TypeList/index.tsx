@@ -19,8 +19,8 @@ const TypeList = ({ types, ...rest }: TypeListProps): JSX.Element => {
         <SectionTitle>Types</SectionTitle>
         <Box
           flexdirection="row"
-          flexalign="flex-start"
-          flexjustify="flex-start"
+          flexalign="center"
+          flexjustify="center"
           flexgap="1em"
           flexwrap="wrap"
         >

@@ -12,10 +12,10 @@ const isDarkBackground = (type: Type['name']): boolean =>
 const Badge = styled(motion.div)<TypeBadgeProps>`
   align-items: center;
   background: ${({ theme, $typename, $fill }) => !$fill && theme.colors.typesHalf[$typename]};
+  border: 1px solid ${({ theme }) => theme.colors.primary.main};
   border-radius: 4px;
-  /* color: ${({ theme, $typename }) =>
-    isDarkBackground($typename) ? theme.colors.white : theme.colors.black}; */
-  color: ${({ theme }) => theme.colors.secondary.main};
+  color: ${({ theme, $typename }) =>
+    isDarkBackground($typename) ? theme.colors.lightText : theme.colors.darkText};
   display: flex;
   flex-direction: row;
   font-family: 'Quicksand', sans-serif;
@@ -24,7 +24,12 @@ const Badge = styled(motion.div)<TypeBadgeProps>`
   gap: 0.5em;
   justify-content: center;
   text-transform: capitalize;
+  transform: background 0.5 ease-in-out;
   width: auto;
+
+  &:hover {
+    background: ${({ theme, $typename, $fill }) => !$fill && theme.colors.types[$typename]};
+  }
 
   ${({ $iconOnly, flexmargin }) =>
     $iconOnly

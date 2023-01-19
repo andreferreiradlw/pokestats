@@ -46,6 +46,8 @@ const theme = {
       main: 'black',
       contrastText: 'white',
     },
+    lightText: 'white',
+    darkText: 'black',
     white: 'white',
     black: 'black',
     darkShadow: 'rgba(0, 0, 0, 0.3)',
@@ -55,7 +57,7 @@ const theme = {
     mercury: '#fafafa',
     types: {
       bug: '#A6B91A',
-      dark: '#705746', // light
+      dark: '#000000', // light
       dragon: '#6F35FC', // light
       electric: '#F7D02C',
       fairy: '#D685AD',
@@ -78,7 +80,7 @@ const theme = {
     },
     typesHalf: {
       bug: 'rgba(166, 185, 26, 0.75)',
-      dark: 'rgba(112, 87, 70, 0.75)', // light
+      dark: 'rgba(0, 0, 0, 0.75)', // light
       dragon: 'rgba(111, 53, 252, 0.75)', // light
       electric: 'rgba(247, 208, 44, 0.75)',
       fairy: 'rgba(214, 133, 173, 0.75)',

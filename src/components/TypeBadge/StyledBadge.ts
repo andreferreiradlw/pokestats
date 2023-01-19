@@ -12,7 +12,6 @@ const isDarkBackground = (type: Type['name']): boolean =>
 const Badge = styled(motion.div)<TypeBadgeProps>`
   align-items: center;
   background: ${({ theme, $typename, $fill }) => !$fill && theme.colors.typesHalf[$typename]};
-  border: 1px solid ${({ theme }) => theme.colors.secondary.main};
   border-radius: 4px;
   /* color: ${({ theme, $typename }) =>
     isDarkBackground($typename) ? theme.colors.white : theme.colors.black}; */
@@ -65,7 +64,7 @@ const Badge = styled(motion.div)<TypeBadgeProps>`
             width: ${$iconWidth || '15px'};
           `}
 
-    & > path {
+    path {
       ${({ theme, $typename, $fill }) => css`
         fill: ${$fill ? theme.colors.types[$typename] : theme.colors.primary.main};
         stroke: ${theme.colors.primary.contrastText};

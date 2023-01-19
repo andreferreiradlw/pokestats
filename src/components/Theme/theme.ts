@@ -77,25 +77,25 @@ const theme = {
       water: '#6390F0',
     },
     typesHalf: {
-      bug: 'rgba(166, 185, 26, 0.5)',
-      dark: 'rgba(112, 87, 70, 0.5)', // light
-      dragon: 'rgba(111, 53, 252, 0.5)', // light
-      electric: 'rgba(247, 208, 44, 0.5)',
-      fairy: 'rgba(214, 133, 173, 0.5)',
-      fighting: 'rgba(194, 46, 40, 0.5)', // light
-      fire: 'rgba(238, 129, 48, 0.5)',
-      flying: 'rgba(169, 143, 243, 0.5)',
-      ghost: 'rgba(115, 87, 151, 0.5)', // light
-      grass: 'rgba(122, 199, 76, 0.5)',
-      ground: 'rgba(226, 191, 101, 0.5)',
-      ice: 'rgba(150, 217, 214, 0.5)',
-      normal: 'rgba(168, 167, 122, 0.5)',
-      poison: 'rgba(163, 62, 161, 0.5)', // light
-      psychic: 'rgba(249, 85, 135, 0.5)',
-      rock: 'rgba(182, 161, 54, 0.5)',
-      shadow: 'rgba(0, 0, 0, 0.5)', // light
-      steel: 'rgba(183, 183, 206, 0.5)',
-      water: 'rgba(99, 144, 240, 0.5)',
+      bug: 'rgba(166, 185, 26, 0.75)',
+      dark: 'rgba(112, 87, 70, 0.75)', // light
+      dragon: 'rgba(111, 53, 252, 0.75)', // light
+      electric: 'rgba(247, 208, 44, 0.75)',
+      fairy: 'rgba(214, 133, 173, 0.75)',
+      fighting: 'rgba(194, 46, 40, 0.75)', // light
+      fire: 'rgba(238, 129, 48, 0.75)',
+      flying: 'rgba(169, 143, 243, 0.75)',
+      ghost: 'rgba(115, 87, 151, 0.75)', // light
+      grass: 'rgba(122, 199, 76, 0.75)',
+      ground: 'rgba(226, 191, 101, 0.75)',
+      ice: 'rgba(150, 217, 214, 0.75)',
+      normal: 'rgba(168, 167, 122, 0.75)',
+      poison: 'rgba(163, 62, 161, 0.75)', // light
+      psychic: 'rgba(249, 85, 135, 0.75)',
+      rock: 'rgba(182, 161, 54, 0.75)',
+      shadow: 'rgba(0, 0, 0, 0.75)', // light
+      steel: 'rgba(183, 183, 206, 0.75)',
+      water: 'rgba(99, 144, 240, 0.75)',
     },
   },
 };

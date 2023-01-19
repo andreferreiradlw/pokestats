@@ -91,8 +91,8 @@ const SelectDropdownItem = styled.li<{
   ${({ $isSelected, theme }) =>
     $isSelected
       ? css`
-          background: ${theme.colors.secondary.contrastText};
-          color: ${theme.colors.secondary.main};
+          background: ${theme.colors.secondary.main};
+          color: ${theme.colors.secondary.contrastText};
         `
       : css`
           &:hover {

@@ -25,10 +25,16 @@ const Badge = styled(motion.div)<TypeBadgeProps>`
   justify-content: center;
   text-transform: capitalize;
   transform: background 0.5 ease-in-out;
+  transition: box-shadow 0.05s ease-in-out;
   width: auto;
 
   &:hover {
     background: ${({ theme, $typename, $fill }) => !$fill && theme.colors.types[$typename]};
+    box-shadow: ${({ theme }) => theme.colors.defaultBoxShadow};
+  }
+
+  &:active {
+    box-shadow: ${({ theme }) => theme.colors.defaultInsetBoxShadow};
   }
 
   ${({ $iconOnly, flexmargin }) =>

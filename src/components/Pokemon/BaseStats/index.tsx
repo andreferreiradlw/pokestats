@@ -1,13 +1,13 @@
 // types
 import type { PokemonStat, Stat } from 'pokenode-ts';
 // helpers
-import { removeDash, fadeInUpVariant } from '@/helpers';
+import { removeDash } from '@/helpers';
 // components
 import Box, { BoxProps } from '@/components/Box';
 import ProgressBar from './ProgressBar';
 // styles
-import { SectionTitle, Table, UppercasedTd } from '@/components/BaseStyles';
-import { BarCell } from './StyledBaseStats';
+import { SectionTitle, UppercasedTd } from '@/components/BaseStyles';
+import { StatsTable } from './StyledBaseStats';
 
 // total stats
 const totalStats = (values: PokemonStat[]) =>
@@ -51,15 +51,13 @@ const BaseStats = ({ stats, ...rest }: BaseStatsProps): JSX.Element => (
     {...rest}
   >
     <SectionTitle>Base Stats</SectionTitle>
-    <Table initial="hidden" animate="show" variants={fadeInUpVariant} key="pokemon-basestats-table">
+    <StatsTable>
       <tbody>
         {stats.map(({ base_stat, stat }, i) => (
           <tr key={`${stat.name}-${i}`}>
             <UppercasedTd as="th">{removeDash(stat.name)}</UppercasedTd>
             <td>{base_stat}</td>
-            <BarCell>
-              <ProgressBar progress={progressCalc(base_stat)} />
-            </BarCell>
+            <ProgressBar progress={progressCalc(base_stat)} />
             <td>{statsCalc('min', base_stat, stat.name as Stat['name'])}</td>
             <td>{statsCalc('max', base_stat, stat.name as Stat['name'])}</td>
           </tr>
@@ -72,7 +70,7 @@ const BaseStats = ({ stats, ...rest }: BaseStatsProps): JSX.Element => (
           <td>Max</td>
         </tr>
       </tbody>
-    </Table>
+    </StatsTable>
   </Box>
 );
 

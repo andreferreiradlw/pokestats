@@ -14,11 +14,12 @@ import {
   findPokemonName,
 } from '@/helpers';
 // components
+import Box from '@/components/Box';
 import BoxWrapper from '@/components/Box/StyledBox';
 import TypeBadge from '@/components/TypeBadge';
 // styles
 import { PageHeading, Table, Numbered, UppercasedTd } from '@/components/BaseStyles';
-import { TypeContainer, Genera, Flavor } from './StyledDetails';
+import { TypeContainer, AbilityName, Genera, Flavor } from './StyledDetails';
 
 interface PokemonDetailsProps extends BoxProps {
   pokemon: PokestatsPokemonPageProps['pokemon'];
@@ -79,10 +80,10 @@ const PokemonDetails = ({
     () =>
       pokemonAbilities.map(({ ability, is_hidden }, i) => (
         <Numbered key={`${ability}-${i}`}>
-          <UppercasedTd as="p">
+          <AbilityName as="p">
             {`${i + 1}. ${removeDash(ability.name)}`}
             {is_hidden && ' (Hidden Ability)'}
-          </UppercasedTd>
+          </AbilityName>
           <span>{abilities[i].effect_entries[0]?.short_effect}</span>
         </Numbered>
       )),
@@ -102,14 +103,20 @@ const PokemonDetails = ({
         key={`pokemon-details-${name}`}
         {...rest}
       >
-        {types?.length > 0 && (
-          <TypeContainer flexdirection="row" flexjustify="flex-start" flexwrap="wrap">
-            {types.map(({ type }, i) => (
-              <TypeBadge $typename={type.name} key={`${type.name}-${i}-detail-${id}`} />
-            ))}
-          </TypeContainer>
-        )}
-        <PageHeading>{findPokemonName(species)}</PageHeading>
+        <Box
+          flexalign={{ xxs: 'center', lg: 'flex-start' }}
+          flexdirection={{ xxs: 'column-reverse', lg: 'column' }}
+          flexgap={{ xxs: '0.5em', lg: '0.3em' }}
+        >
+          {!!types?.length && (
+            <TypeContainer flexdirection="row" flexwrap="wrap" width="auto">
+              {types.map(({ type }, i) => (
+                <TypeBadge $typename={type.name} key={`${type.name}-${i}-detail-${id}`} />
+              ))}
+            </TypeContainer>
+          )}
+          <PageHeading>{findPokemonName(species)}</PageHeading>
+        </Box>
         {(is_baby || is_legendary || is_mythical) && (
           <Genera>
             {is_baby && `Baby `}

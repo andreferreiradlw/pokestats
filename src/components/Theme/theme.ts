@@ -50,6 +50,8 @@ const theme = {
     darkText: 'black',
     white: 'white',
     black: 'black',
+    defaultBoxShadow: 'rgba(149, 157, 165, 0.2) 0px 8px 24px',
+    defaultInsetBoxShadow: '1px 1px 2px 0px rgba(149, 157, 165, 0.2) inset',
     darkShadow: 'rgba(0, 0, 0, 0.3)',
     darkerShadow: 'rgba(0, 0, 0, 0.75)',
     lightShadow: 'rgba(255, 255, 255, 0.3)',

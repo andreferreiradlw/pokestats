@@ -61,10 +61,10 @@ const PokeBox = styled(motion.div)<{
           background-color: ${theme.colors.primary.main};
           color: ${theme.colors.primary.contrastText};
           &:hover {
-            box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+            box-shadow: ${theme.colors.defaultBoxShadow};
           }
           &:active {
-            box-shadow: 1px 1px 2px 0px rgba(149, 157, 165, 0.2) inset;
+            box-shadow: ${theme.colors.defaultInsetBoxShadow};
           }
         `}
 `;

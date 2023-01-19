@@ -3,7 +3,17 @@ import styled, { css } from 'styled-components';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 
-const BtnContainer = styled(motion.div)``;
+const BtnContainer = styled(motion.div)`
+  transition: box-shadow 0.05s ease-in-out;
+
+  &:hover {
+    box-shadow: ${({ theme }) => theme.colors.defaultBoxShadow};
+  }
+
+  &:active {
+    box-shadow: ${({ theme }) => theme.colors.defaultInsetBoxShadow};
+  }
+`;
 
 const BtnSpan = styled.span`
   align-items: center;

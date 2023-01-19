@@ -1,9 +1,16 @@
 import styled, { css } from 'styled-components';
+// compoennts
 import Box from '@/components/Box';
+// styles
+import { UppercasedTd } from '@/components/BaseStyles';
 
 // type
 const TypeContainer = styled(Box)`
   gap: 1em;
+`;
+
+const AbilityName = styled(UppercasedTd)`
+  font-weight: 500;
 `;
 
 const Genera = styled.p`
@@ -20,4 +27,4 @@ const Flavor = styled.p`
   `}
 `;
 
-export { TypeContainer, Genera, Flavor };
+export { TypeContainer, AbilityName, Genera, Flavor };

@@ -41,7 +41,7 @@ const Evolution = ({
         <BoxWrapper
           width="auto"
           $flexgrow
-          flexdirection="row"
+          flexdirection={{ xxs: 'column', lg: 'row' }}
           flexgap="1em"
           flexwrap="nowrap"
           flexjustify="center"

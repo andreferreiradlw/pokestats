@@ -74,8 +74,8 @@ const Multipliers = ({ pokemonTypes, ...rest }: MultipliersProps): JSX.Element =
       {...rest}
     >
       <Box
-        flexdirection={{ xxs: 'column', lg: 'row' }}
-        flexjustify="space-between"
+        flexdirection="row"
+        flexjustify={{ xxs: 'center', lg: 'space-between' }}
         flexwrap="wrap"
         flexgap="0.5em"
       >

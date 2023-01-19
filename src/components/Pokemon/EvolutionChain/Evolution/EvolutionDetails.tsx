@@ -18,7 +18,7 @@ const mapTriggerName = (triggerName: TriggerNameProps): string => {
     case 'level-up':
       return 'Level up';
     case 'use-item':
-      return 'Use';
+      return 'Using';
     case 'trade':
       return 'Trade';
     case 'shed':

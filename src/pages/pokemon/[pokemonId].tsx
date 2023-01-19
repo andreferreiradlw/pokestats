@@ -16,7 +16,7 @@ import {
   getIdFromEvolutionChain,
   getIdFromSpecies,
   mapGenerationToGame,
-  padPokemonId,
+  prefixId,
   formatFlavorText,
   gameVersions,
   findPokemonName,
@@ -91,7 +91,7 @@ const PokestatsPokemonPage: NextPage<PokestatsPokemonPageProps> = ({
         <meta property="og:description" content={pageDescription} />
         <meta
           property="og:image"
-          content={`https://raw.githubusercontent.com/andreferreiradlw/pokestats_media/main/assets/images/${padPokemonId(
+          content={`https://raw.githubusercontent.com/andreferreiradlw/pokestats_media/main/assets/images/${prefixId(
             props.pokemon.id,
           )}.png`}
         />

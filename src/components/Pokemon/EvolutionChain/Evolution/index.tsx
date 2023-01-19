@@ -5,6 +5,7 @@ import type { PokemonSpecies, EvolutionDetail } from 'pokenode-ts';
 import { fadeInUpVariant } from '@/helpers';
 import { EvoArrow } from './StyledEvolution';
 // components
+import Box from '@/components/Box';
 import BoxWrapper from '@/components/Box/StyledBox';
 import PokemonBox from '@/components/PokemonBox';
 import EvolutionDetails from './EvolutionDetails';
@@ -38,7 +39,7 @@ const Evolution = ({
     >
       {/** Arrow with evolution details */}
       {!noArrow && (
-        <BoxWrapper
+        <Box
           width="auto"
           $flexgrow
           flexdirection={{ xxs: 'column', lg: 'row' }}
@@ -48,11 +49,14 @@ const Evolution = ({
           flexalign="center"
         >
           <EvoArrow />
-          {evolutionDetails.map((currDetails, i) => (
-            <EvolutionDetails key={`evo-details-${i}`} details={currDetails} />
-          ))}
+          <EvolutionDetails details={evolutionDetails} />
+
+          {/* {evolutionDetails?.map((currDetails, i) => (
+              <EvolutionDetails key={`evo-details-${i}`} details={currDetails} />
+            ))} */}
+
           <EvoArrow />
-        </BoxWrapper>
+        </Box>
       )}
       {/** Pokemon box with image and types */}
       <PokemonBox pokemonId={id} pokemonName={name} pokemonGen={generation?.name} />

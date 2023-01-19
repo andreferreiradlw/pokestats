@@ -2,7 +2,7 @@
 import type { PokestatsPokemonPageProps } from '@/pages/pokemon/[pokemonId]';
 import type { Pokemon } from 'pokenode-ts';
 // helpers
-import { removeDash, fadeInUpVariant, padPokemonId } from '@/helpers';
+import { removeDash, fadeInUpVariant, prefixId } from '@/helpers';
 // styles
 import { BtnContainer, BtnAnchor, Title, Arrow, PokemonID, PokemonName } from './StyledNavigation';
 // components
@@ -49,7 +49,7 @@ const Navigation = ({ allPokemon, pokemonId, ...rest }: NavigationProps): JSX.El
           >
             <Arrow $left>
               <ImageNext
-                src={`https://raw.githubusercontent.com/andreferreiradlw/pokestats_media/main/assets/images/${padPokemonId(
+                src={`https://raw.githubusercontent.com/andreferreiradlw/pokestats_media/main/assets/images/${prefixId(
                   pokemonId - 1,
                 )}.png`}
                 alt={allPokemon[pokemonId - 2].name}
@@ -75,7 +75,7 @@ const Navigation = ({ allPokemon, pokemonId, ...rest }: NavigationProps): JSX.El
           <BtnAnchor href={`/pokemon/${allPokemon[pokemonId].name}`} onClick={nextPokemon} $right>
             <Arrow $right>
               <ImageNext
-                src={`https://raw.githubusercontent.com/andreferreiradlw/pokestats_media/main/assets/images/${padPokemonId(
+                src={`https://raw.githubusercontent.com/andreferreiradlw/pokestats_media/main/assets/images/${prefixId(
                   pokemonId + 1,
                 )}.png`}
                 alt={allPokemon[pokemonId].name}

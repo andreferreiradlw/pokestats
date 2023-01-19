@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
 // helpers
-import { removeDash, padPokemonId, fadeInDownVariant } from '@/helpers';
+import { removeDash, prefixId, fadeInDownVariant } from '@/helpers';
 // types
 import type { Pokemon, PokemonType } from '@/types';
 import type { BoxProps } from '@/components/Box';
@@ -158,7 +158,7 @@ const Autocomplete = ({
                   {assetType === 'type' && <TypeIcon type={name} />}
                   {assetType === 'pokemon' && (
                     <OptionImg
-                      src={`https://raw.githubusercontent.com/andreferreiradlw/pokestats_media/main/assets/images/${padPokemonId(
+                      src={`https://raw.githubusercontent.com/andreferreiradlw/pokestats_media/main/assets/images/${prefixId(
                         id,
                       )}.png`}
                     />

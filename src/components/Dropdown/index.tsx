@@ -1,10 +1,6 @@
 import { useState, useRef, useEffect, ChangeEvent } from 'react';
 // types
 import type { BoxProps } from '@/components/Box';
-// helpers
-import { fadeInDownVariant } from '@/helpers';
-// components
-import { AnimatePresence } from 'framer-motion';
 // styles
 import {
   DropDownContainer,
@@ -231,46 +227,33 @@ const Dropdown = ({
           {chosenOption?.label}
           <ChevronIcon />
         </SelectButton>
-        <AnimatePresence>
-          {isDropdownOpen && (
-            <SelectDropdown
-              ref={listRef}
-              role="listbox"
-              id={`${namespace}_dropdown`}
-              tabIndex={-1}
-              initial="hidden"
-              animate="show"
-              whileTap="tap"
-              exit="exit"
-              variants={fadeInDownVariant}
-              key={`dropdown-options-${namespace}-${options.length}`}
-            >
-              {options.map(({ label, value: optionValue }, i) => (
-                <SelectDropdownItem
-                  key={optionValue}
-                  id={`${namespace}_element_${optionValue}`}
-                  aria-selected={i === activeIndex}
-                  role="option"
-                  onMouseOver={() => setActiveIndex(i)}
-                  onFocus={() => setActiveIndex(i)}
-                  $isSelected={chosenOption?.value === optionValue}
-                  $isSmall={sizeSmall}
-                >
-                  <label>
-                    <input
-                      type="radio"
-                      name={`${namespace}_radio`}
-                      value={optionValue}
-                      checked={chosenOption?.value === optionValue}
-                      onChange={e => select(e)}
-                    />
-                    <span>{label}</span>
-                  </label>
-                </SelectDropdownItem>
-              ))}
-            </SelectDropdown>
-          )}
-        </AnimatePresence>
+        {isDropdownOpen && (
+          <SelectDropdown ref={listRef} role="listbox" id={`${namespace}_dropdown`} tabIndex={-1}>
+            {options.map(({ label, value: optionValue }, i) => (
+              <SelectDropdownItem
+                key={optionValue}
+                id={`${namespace}_element_${optionValue}`}
+                aria-selected={i === activeIndex}
+                role="option"
+                onMouseOver={() => setActiveIndex(i)}
+                onFocus={() => setActiveIndex(i)}
+                $isSelected={chosenOption?.value === optionValue}
+                $isSmall={sizeSmall}
+              >
+                <label>
+                  <input
+                    type="radio"
+                    name={`${namespace}_radio`}
+                    value={optionValue}
+                    checked={chosenOption?.value === optionValue}
+                    onChange={e => select(e)}
+                  />
+                  <span>{label}</span>
+                </label>
+              </SelectDropdownItem>
+            ))}
+          </SelectDropdown>
+        )}
       </SelectContainer>
     </DropDownContainer>
   );

@@ -3,7 +3,7 @@ import { useMemo, forwardRef, Ref } from 'react';
 import type { Pokemon, PokemonSpecies } from 'pokenode-ts';
 import type { HTMLMotionProps } from 'framer-motion';
 // helpers
-import { removeDash, mapGeneration, fadeInUpVariant, padPokemonId } from '@/helpers';
+import { removeDash, mapGeneration, fadeInUpVariant, prefixId } from '@/helpers';
 // styles
 import { PokeBox, NumberId, PokeName, PokeGen } from './StyledPokemonBox';
 // components
@@ -38,7 +38,7 @@ const PokemonBox = forwardRef(
           <ImageNext
             alt={pokemonName}
             key={`pokemonbox-img-${pokemonId}`}
-            src={`https://raw.githubusercontent.com/andreferreiradlw/pokestats_media/main/assets/images/${padPokemonId(
+            src={`https://raw.githubusercontent.com/andreferreiradlw/pokestats_media/main/assets/images/${prefixId(
               pokemonId,
             )}.png`}
             width="100"

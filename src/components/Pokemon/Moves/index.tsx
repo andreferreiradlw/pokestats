@@ -196,7 +196,28 @@ const PokemonMoves = ({ pokemon, ...rest }: PokemonMovesProps): JSX.Element => {
                     {/* @ts-ignore **/}
                     {learnMethod === 'level-up' && <td>{move.level_learned_at}</td>}
                     {learnMethod === 'machine' &&
-                      (machineNames?.[i] ? <td>{machineNames[i].toUpperCase()}</td> : <td>...</td>)}
+                      (machineNames?.[i] ? (
+                        <td>
+                          <Box
+                            flexdirection="row"
+                            flexjustify="space-between"
+                            width="75%"
+                            flexmargin="0 auto"
+                            flexgap="0.1em"
+                          >
+                            <span>{machineNames[i].toUpperCase()}</span>
+                            <img
+                              src={`https://raw.githubusercontent.com/msikma/pokesprite/master/items/${
+                                machineNames[i].includes('tm') ? 'tm' : 'hm'
+                              }/${move.type.name}.png`}
+                              alt={move.type.name}
+                              width="30"
+                            />
+                          </Box>
+                        </td>
+                      ) : (
+                        <td>...</td>
+                      ))}
                     {learnMethod === 'egg' && <td>-</td>}
                     {learnMethod === 'tutor' && <td>-</td>}
                     <NameTD>{removeDash(move.name)}</NameTD>

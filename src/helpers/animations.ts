@@ -206,8 +206,8 @@ export const fadeInDownVariant = {
     transition: {
       type: 'spring',
       mass: 1,
-      damping: 15,
-      stiffness: 200,
+      damping: 20,
+      stiffness: 2000,
     },
   },
   exit: {

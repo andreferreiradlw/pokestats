@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 // types
 import type { Pokemon, PokemonSpecies, PokemonSprites } from 'pokenode-ts';
 // helpers
-import { removeUnderscore, padPokemonId } from '@/helpers';
+import { removeUnderscore, prefixId } from '@/helpers';
 // styles
 import { SectionTitle, SectionSubTitle, Divider } from '@/components/BaseStyles';
 import { SpriteContainer, Sprite, SpriteSubtitle, NoSprites } from './StyledSprites';
@@ -159,7 +159,7 @@ const Sprites = ({ pokemonSprites, pokemonId, forms, ...rest }: SpritesProps): J
                     <Sprite
                       alt="Official Artwork Front Default"
                       key="official-artwork"
-                      src={`https://raw.githubusercontent.com/andreferreiradlw/pokestats_media/main/assets/images/${padPokemonId(
+                      src={`https://raw.githubusercontent.com/andreferreiradlw/pokestats_media/main/assets/images/${prefixId(
                         pokemonId,
                       )}-${name}.png`}
                       height="180"

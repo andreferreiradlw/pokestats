@@ -251,11 +251,11 @@ const generations = [
     label: 'Generation VII',
     gameVersion: 'sun',
   },
-  {
-    value: 'generation-viii',
-    label: 'Generation VIII',
-    gameVersion: 'sword',
-  },
+  // {
+  //   value: 'generation-viii',
+  //   label: 'Generation VIII',
+  //   gameVersion: 'sword',
+  // },
 ];
 
 const mapIdToGeneration = (id: number): string => {

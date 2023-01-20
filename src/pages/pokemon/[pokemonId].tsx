@@ -213,11 +213,13 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
         const secondEvoData = await pokemonClient.getPokemonSpeciesByName(
           second_evolution.species.name,
         );
-        evolutionChainPokemon.secondEvolution.push({
-          species: secondEvoData,
-          evolutionDetails: second_evolution.evolution_details,
-          thirdEvolution: [],
-        });
+        if (secondEvoData.id <= 809) {
+          evolutionChainPokemon.secondEvolution.push({
+            species: secondEvoData,
+            evolutionDetails: second_evolution.evolution_details,
+            thirdEvolution: [],
+          });
+        }
       }
       // third evolution
       for (const third_evolution of second_evolution.evolves_to) {
@@ -230,10 +232,12 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
           const thirdEvoData = await pokemonClient.getPokemonSpeciesByName(
             third_evolution.species.name,
           );
-          evolutionChainPokemon.secondEvolution[i].thirdEvolution.push({
-            species: thirdEvoData,
-            evolutionDetails: third_evolution.evolution_details,
-          });
+          if (thirdEvoData.id <= 809) {
+            evolutionChainPokemon.secondEvolution[i].thirdEvolution.push({
+              species: thirdEvoData,
+              evolutionDetails: third_evolution.evolution_details,
+            });
+          }
         }
       }
     }

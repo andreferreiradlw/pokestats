@@ -127,8 +127,17 @@ const tumble = keyframes`
 	98% { transform: rotateZ( 0deg ); }
 `;
 
+const pokeballShake = keyframes`
+  0% { transform: translate(0, 0) rotate(0); }
+  20% { transform: translate(-15px, 0) rotate(-25deg); }
+  30% { transform: translate(10px, 0) rotate(15deg); }
+  50% { transform: translate(-12px, 0) rotate(-17deg); }
+  60% { transform: translate(15px, 0) rotate(25deg); }
+  85% { transform: translate(0, 0) rotate(0); }
+`;
+
 const bounce = keyframes`0%, 20%, 50%, 80%, 100% {transform: translateY(0);} 
 40% {transform: translateY(-20px);} 
 60% {transform: translateY(-15px);} `;
 
-export { float, ellipsis, rotate, riseUp, tumble, bounce };
+export { float, ellipsis, rotate, riseUp, tumble, bounce, pokeballShake };

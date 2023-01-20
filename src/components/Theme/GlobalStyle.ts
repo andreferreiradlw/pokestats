@@ -51,6 +51,10 @@ const GlobalStyle = createGlobalStyle`
   }
   a {
     text-decoration: none;
+    color: inherit;
+    &:hover {
+      cursor: pointer;
+    }
   }
 
   // Layout & box sizing

@@ -12,10 +12,16 @@ import { SectionTitle, Table, Numbered, UppercasedTd } from '@/components/BaseSt
 
 interface PokemonFormsProps extends BoxProps {
   pokemonId: number;
+  pokemonName: string;
   species: PokemonSpecies;
 }
 
-const PokemonForms = ({ pokemonId, species, ...rest }: PokemonFormsProps): JSX.Element => {
+const PokemonForms = ({
+  pokemonId,
+  pokemonName,
+  species,
+  ...rest
+}: PokemonFormsProps): JSX.Element => {
   // data
   const { forms_switchable, varieties, has_gender_differences } = species;
   // memo
@@ -25,9 +31,9 @@ const PokemonForms = ({ pokemonId, species, ...rest }: PokemonFormsProps): JSX.E
         const varietyName = removeDash(form.pokemon.name);
         return (
           <Numbered key={`${form.pokemon.name}-${i}`}>
-            {`${varieties.length > 1 ? `${i + 1}. ` : ``}${varietyName.substring(
-              varietyName.indexOf(' ') + 1,
-            )}`}
+            {`${varieties.length > 1 ? `${i + 1}. ` : ``}${
+              i === 0 ? pokemonName : varietyName.substring(varietyName.indexOf(' ') + 1)
+            }`}
             {form.is_default && <span>{` (Default)`}</span>}
           </Numbered>
         );

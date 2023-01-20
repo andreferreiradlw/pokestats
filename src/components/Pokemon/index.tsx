@@ -57,7 +57,7 @@ const PokemonPage = ({
         animate="visible"
         exit="fade"
         variants={pageContainerVariant}
-        key={`pokemon-${currPokemonName}`}
+        key={`pokemon-${name}`}
       >
         <Divider />
         <Box
@@ -68,7 +68,7 @@ const PokemonPage = ({
         >
           <Details
             screensizes={{ xxs: 12, lg: 5 }}
-            key={`pokemon-details-${currPokemonName}`}
+            key={`pokemon-details-${name}`}
             pokemon={pokemon}
             abilities={abilities}
             species={species}
@@ -101,14 +101,19 @@ const PokemonPage = ({
           flexgap="2em"
         >
           <BaseStats stats={stats} screensizes={{ xxs: 12, lg: 8 }} />
-          <PokemonForms pokemonId={id} species={species} screensizes={{ xxs: 12, lg: 4 }} />
+          <PokemonForms
+            pokemonId={id}
+            pokemonName={currPokemonName}
+            species={species}
+            screensizes={{ xxs: 12, lg: 4 }}
+          />
         </Box>
         <Divider />
         {/** EVOLUTION CHAIN */}
         <Box flexalign="flex-start" flexjustify="flex-start">
           <EvolutionChain
             screensizes={12}
-            key={`pokemon-evolution-${currPokemonName}`}
+            key={`pokemon-evolution-${name}`}
             pokemonName={currPokemonName}
             evolutionChain={evolutionChain}
           />

@@ -2,7 +2,7 @@
 import type { BoxProps } from '@/components/Box';
 import type { PokemonSpecies, EvolutionDetail } from 'pokenode-ts';
 // helpers
-import { fadeInUpVariant } from '@/helpers';
+import { fadeInUpVariant, findPokemonName } from '@/helpers';
 import { EvoArrow } from './StyledEvolution';
 // components
 import Box from '@/components/Box';
@@ -24,6 +24,8 @@ const Evolution = ({
 }: EvolutionProps): JSX.Element => {
   // data
   const { id, name, generation } = species;
+
+  const pokemonName = findPokemonName(species);
 
   return (
     <BoxWrapper
@@ -50,16 +52,16 @@ const Evolution = ({
         >
           <EvoArrow />
           <EvolutionDetails details={evolutionDetails} />
-
-          {/* {evolutionDetails?.map((currDetails, i) => (
-              <EvolutionDetails key={`evo-details-${i}`} details={currDetails} />
-            ))} */}
-
           <EvoArrow />
         </Box>
       )}
       {/** Pokemon box with image and types */}
-      <PokemonBox pokemonId={id} pokemonName={name} pokemonGen={generation?.name} />
+      <PokemonBox
+        pokemonId={id}
+        pokemonName={pokemonName}
+        pokemonGen={generation?.name}
+        nameFormat={false}
+      />
     </BoxWrapper>
   );
 };

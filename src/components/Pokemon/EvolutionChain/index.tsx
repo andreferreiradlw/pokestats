@@ -2,8 +2,7 @@
 import type { PokestatsPokemonPageProps } from '@/pages/pokemon/[pokemonId]';
 import type { BoxProps } from '@/components/Box';
 // helpers
-import { fadeInUpVariant } from '@/helpers/animations';
-import { removeDash } from '@/helpers/typography';
+import { fadeInUpVariant } from '@/helpers';
 // components
 import Box from '@/components/Box';
 import BoxWrapper from '@/components/Box/StyledBox';
@@ -82,7 +81,7 @@ const EvolutionChain = ({
           variants={fadeInUpVariant}
           key={`no-evo-${chainId}`}
         >
-          {`${removeDash(pokemonName)} does not evolve.`}
+          {`${pokemonName} does not evolve.`}
         </SectionMessage>
       )}
     </Box>

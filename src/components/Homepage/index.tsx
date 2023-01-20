@@ -6,7 +6,13 @@ import { staggerInitialVariant, fadeInUpVariant, getRandomInt } from '@/helpers'
 // types
 import type { PokestatsHomepageProps } from '@/pages/index';
 // styles
-import { Container, GithubLink, ScrollDown, ListContainer } from './styledHomepage';
+import {
+  Container,
+  GithubLink,
+  ScrollContainer,
+  ScrollDown,
+  ListContainer,
+} from './styledHomepage';
 import { MainHeading, Button, Divider } from '@/components/BaseStyles';
 // components
 import Autocomplete from '@/components/Autocomplete';
@@ -80,17 +86,19 @@ const Homepage = ({ allPokemon, pokemonTypes }: PokestatsHomepageProps): JSX.Ele
         <Button onClick={routeRandom} $dark variants={fadeInUpVariant} key="homepage-random-btn">
           Random Pokemon!
         </Button>
-        <ScrollDown variants={fadeInUpVariant} key="homepage-scroll-down" />
+        <ScrollContainer variants={fadeInUpVariant} key="homepage-scroll-container">
+          <ScrollDown />
+        </ScrollContainer>
       </Container>
       <ListContainer flexpadding="1.5em 0">
         <Box constrained $withGutter flexgap="1.5em">
           <TypeList types={pokemonTypes} />
           <Divider />
-          <PokemonList pokemon={allPokemon} key="homepage-pokemon-list" />
+          <PokemonList pokemon={allPokemon} />
           <Divider />
         </Box>
       </ListContainer>
-      <Particles key="homepage-particles" />
+      <Particles />
     </AnimatePresence>
   );
 };

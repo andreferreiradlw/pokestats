@@ -31,7 +31,7 @@ const Footer = (): JSX.Element => {
       >
         <Box flexgap="0.5em" flexdirection="row" width="auto">
           <PokestatsIcon />
-          <BoxWrapper as="p" flexdirection="row" flexgap="0.2em" width="auto">
+          <BoxWrapper flexdirection="row" flexgap="0.2em" width="auto">
             {`© ${new Date().getFullYear()} `}
             <Anchor
               as="a"
@@ -44,7 +44,7 @@ const Footer = (): JSX.Element => {
             </Anchor>
           </BoxWrapper>
         </Box>
-        <BoxWrapper as="p" flexdirection="row" flexalign="center" flexgap="0.2em" width="auto">
+        <BoxWrapper flexdirection="row" flexalign="center" flexgap="0.2em" width="auto">
           Powered by
           <motion.span
             whileHover="hover"

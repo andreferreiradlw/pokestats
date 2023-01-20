@@ -2,18 +2,16 @@ import styled, { css } from 'styled-components';
 import { motion } from 'framer-motion';
 
 const SectionTitle = styled(motion.h2)`
-  font-size: 2rem;
+  font-size: 2em;
   font-weight: 600;
-  line-height: 2.5rem;
+  line-height: 1;
 
   ${({ theme }) => css`
     @media ${theme.device.xs} {
-      font-size: 2.5rem;
-      line-height: 3rem;
+      font-size: 2.5em;
     }
     @media ${theme.device.md} {
-      font-size: 3rem;
-      line-height: 3.5rem;
+      font-size: 3em;
     }
   `}
 `;

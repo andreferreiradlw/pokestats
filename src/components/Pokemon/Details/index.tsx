@@ -19,7 +19,14 @@ import BoxWrapper from '@/components/Box/StyledBox';
 import TypeBadge from '@/components/TypeBadge';
 // styles
 import { PageHeading, Table, Numbered, UppercasedTd } from '@/components/BaseStyles';
-import { TypeContainer, AbilityName, Genera, Flavor } from './StyledDetails';
+import {
+  TypeContainer,
+  IconContainer,
+  CriesIcon,
+  AbilityName,
+  Genera,
+  Flavor,
+} from './StyledDetails';
 
 interface PokemonDetailsProps extends BoxProps {
   pokemon: PokestatsPokemonPageProps['pokemon'];
@@ -115,7 +122,17 @@ const PokemonDetails = ({
               ))}
             </TypeContainer>
           )}
-          <PageHeading>{findPokemonName(species)}</PageHeading>
+          <Box flexdirection="row" flexjustify="flex-start" flexalign="flex-start" flexgap="0.5em">
+            <PageHeading>{findPokemonName(species)}</PageHeading>
+            <IconContainer
+              whileHover="hover"
+              whileTap="tap"
+              variants={fadeInUpVariant}
+              key="cries-icon-container-pokemon"
+            >
+              <CriesIcon />
+            </IconContainer>
+          </Box>
         </Box>
         {(is_baby || is_legendary || is_mythical) && (
           <Genera>

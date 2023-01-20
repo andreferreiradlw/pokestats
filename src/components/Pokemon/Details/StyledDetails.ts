@@ -1,12 +1,29 @@
 import styled, { css } from 'styled-components';
-// compoennts
+// components
 import Box from '@/components/Box';
+import { motion } from 'framer-motion';
 // styles
 import { UppercasedTd } from '@/components/BaseStyles';
+// icon
+import SoundIcon from 'public/static/iconLibrary/sound.svg';
 
-// type
 const TypeContainer = styled(Box)`
   gap: 1em;
+`;
+
+const IconContainer = styled(motion.div)``;
+
+const CriesIcon = styled(SoundIcon)`
+  height: auto;
+  width: 3em;
+
+  &:hover {
+    cursor: pointer;
+
+    path:first-of-type {
+      fill: black;
+    }
+  }
 `;
 
 const AbilityName = styled(UppercasedTd)`
@@ -27,4 +44,4 @@ const Flavor = styled.p`
   `}
 `;
 
-export { TypeContainer, AbilityName, Genera, Flavor };
+export { TypeContainer, IconContainer, CriesIcon, AbilityName, Genera, Flavor };

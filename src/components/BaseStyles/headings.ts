@@ -44,7 +44,7 @@ const PageHeading = styled.h1`
     }
     @media ${theme.device.lg} {
       text-align: left;
-      font-size: 5em;
+      font-size: 4.5em;
     }
   `}
 `;

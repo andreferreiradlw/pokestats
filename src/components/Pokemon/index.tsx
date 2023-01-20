@@ -3,7 +3,7 @@ import { useEffect, useContext } from 'react';
 import type { PokestatsPokemonPageProps } from '@/pages/pokemon/[pokemonId]';
 // helpers
 import GameVersionContext from '@/components/Layout/gameVersionContext';
-import { mapGenerationToGame, pageContainerVariant } from '@/helpers';
+import { mapGenerationToGame, pageContainerVariant, findPokemonName } from '@/helpers';
 // styles
 import { Divider } from '@/components/BaseStyles';
 // components
@@ -36,6 +36,8 @@ const PokemonPage = ({
   const { names, generation, varieties } = species;
   const { babyTriggerItem } = evolutionChain;
 
+  const currPokemonName = findPokemonName(species);
+
   useEffect(() => {
     let pokemonGen: string;
     // set current pokemon gen
@@ -55,7 +57,7 @@ const PokemonPage = ({
         animate="visible"
         exit="fade"
         variants={pageContainerVariant}
-        key={`pokemon-${name}`}
+        key={`pokemon-${currPokemonName}`}
       >
         <Divider />
         <Box
@@ -66,7 +68,7 @@ const PokemonPage = ({
         >
           <Details
             screensizes={{ xxs: 12, lg: 5 }}
-            key={`pokemon-details-${name}`}
+            key={`pokemon-details-${currPokemonName}`}
             pokemon={pokemon}
             abilities={abilities}
             species={species}
@@ -75,7 +77,7 @@ const PokemonPage = ({
           <FeaturedImage
             screensizes={{ xxs: 12, lg: 7 }}
             specieNames={names}
-            pokemonName={name}
+            pokemonName={currPokemonName}
             pokemonId={id}
           />
         </Box>
@@ -106,8 +108,8 @@ const PokemonPage = ({
         <Box flexalign="flex-start" flexjustify="flex-start">
           <EvolutionChain
             screensizes={12}
-            key={`pokemon-evolution-${name}`}
-            pokemonName={name}
+            key={`pokemon-evolution-${currPokemonName}`}
+            pokemonName={currPokemonName}
             evolutionChain={evolutionChain}
           />
         </Box>

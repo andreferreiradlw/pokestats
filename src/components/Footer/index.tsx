@@ -1,10 +1,11 @@
+// helpers
+import { fadeInUpVariant } from '@/helpers';
 // styles
 import { FooterContainer, PokestatsIcon, Anchor } from './StyledFooter';
 // components
 import Box from '@/components/Box';
 import BoxWrapper from '../Box/StyledBox';
 import ImageNext from '@/components/ImageNext';
-import { fadeInUpVariant } from '@/helpers';
 import { motion } from 'framer-motion';
 
 const Footer = (): JSX.Element => {

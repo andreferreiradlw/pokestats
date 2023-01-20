@@ -31,8 +31,9 @@ const itemMapUrl = (itemSlug: string): string => {
     }
     if (itemMatch) break;
   }
+
   // return formatted url
-  return `${itemMatch.set}/${itemMatch.filename}`;
+  return itemMatch ? `${itemMatch.set}/${itemMatch.filename}` : 'other-item/poke-doll.png';
 };
 
 export { removeUnderscore, removeDash, formatFlavorText, prefixId, itemMapUrl };

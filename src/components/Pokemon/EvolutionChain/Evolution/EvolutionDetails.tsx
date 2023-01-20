@@ -3,7 +3,7 @@ import styled from 'styled-components';
 // types
 import type { EvolutionDetail, EvolutionTrigger } from 'pokenode-ts';
 // helpers
-import { removeDash, itemMapUrl } from '@/helpers';
+import { removeDash } from '@/helpers';
 // components
 import Box, { BoxProps } from '@/components/Box';
 
@@ -48,7 +48,7 @@ const EvolutionDetails = ({ details, ...rest }: EvolutionDetailsProps): JSX.Elem
     },
     [],
   );
-  const mapTriggerName = useCallback((triggerName: TriggerNameProps): string => {
+  const mapTriggerName = useCallback((triggerName: TriggerNameProps): string | JSX.Element => {
     switch (triggerName) {
       case 'level-up':
         return 'Level up';
@@ -57,7 +57,17 @@ const EvolutionDetails = ({ details, ...rest }: EvolutionDetailsProps): JSX.Elem
       case 'trade':
         return 'Trade';
       case 'shed':
-        return 'Level 20, with empty PokéBall and an open slot in party';
+        return (
+          <>
+            Level 20
+            <ItemImage
+              src="https://raw.githubusercontent.com/msikma/pokesprite/master/items/medicine/rare-candy.png"
+              alt="Rare Candy"
+            />
+            <br />
+            with empty PokéBall and an open slot in party
+          </>
+        );
       case 'three-critical-hits':
         return 'Perform three critical hits';
       case 'other':
@@ -66,8 +76,6 @@ const EvolutionDetails = ({ details, ...rest }: EvolutionDetailsProps): JSX.Elem
         return '';
     }
   }, []);
-
-  const evoItemUrl = useCallback((slug: string) => itemMapUrl(slug), []);
 
   if (!details?.length) return null;
 
@@ -106,6 +114,7 @@ const EvolutionDetails = ({ details, ...rest }: EvolutionDetailsProps): JSX.Elem
                   src="https://raw.githubusercontent.com/msikma/pokesprite/master/items/medicine/rare-candy.png"
                   alt="Rare Candy"
                 />
+                <br />
               </>
             ) : (
               mapTriggerName(trigger?.name as TriggerNameProps)
@@ -115,25 +124,23 @@ const EvolutionDetails = ({ details, ...rest }: EvolutionDetailsProps): JSX.Elem
               <>
                 {` holding ${removeDash(held_item.name)}`}
                 <ItemImage
-                  src={`https://raw.githubusercontent.com/msikma/pokesprite/master/items/${evoItemUrl(
-                    held_item.name,
-                  )}`}
+                  src={`https://raw.githubusercontent.com/msikma/pokesprite/master/items/evo-item/${held_item.name}.png`}
                   alt={held_item.name}
                 />
+                <br />
               </>
             )}
             {item && (
               <>
                 {` ${removeDash(item.name)}`}
                 <ItemImage
-                  src={`https://raw.githubusercontent.com/msikma/pokesprite/master/items/${evoItemUrl(
-                    item.name,
-                  )}`}
+                  src={`https://raw.githubusercontent.com/msikma/pokesprite/master/items/evo-item/${item.name}.png`}
                   alt={item.name}
                 />
+                <br />
               </>
             )}
-            {known_move && ` by learning ${removeDash(known_move.name)}`}
+            {known_move && ` by learning the move ${removeDash(known_move.name)}`}
             {min_happiness && ` with ${min_happiness}+ happiness`}
             {min_affection && ` with ${min_affection}+ affection`}
             {min_beauty && ` with ${min_beauty}+ beauty`}

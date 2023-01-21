@@ -55,7 +55,6 @@ const Navigation = ({ allPokemon, pokemonId, ...rest }: NavigationProps): JSX.El
                 alt={allPokemon[pokemonId - 2].name}
                 key={`navigation-left-${allPokemon[pokemonId - 2].name}`}
                 width="100"
-                $pixelatedImg
               />
             </Arrow>
             <Title>
@@ -81,7 +80,6 @@ const Navigation = ({ allPokemon, pokemonId, ...rest }: NavigationProps): JSX.El
                 alt={allPokemon[pokemonId].name}
                 key={`navigation-right-${allPokemon[pokemonId].name}`}
                 width="100"
-                $pixelatedImg
               />
             </Arrow>
             <Title>

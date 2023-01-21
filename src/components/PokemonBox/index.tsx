@@ -26,7 +26,7 @@ const PokemonBox = forwardRef(
     const generationName = useMemo(() => mapGeneration(pokemonGen), [pokemonGen]);
 
     return (
-      <Link href={`/pokemon/${pokemonName}`}>
+      <Link href={`/pokemon/${pokemonName.toLocaleLowerCase()}`}>
         <PokeBox
           ref={ref}
           $dark={$dark}

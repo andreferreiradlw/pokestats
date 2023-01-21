@@ -1,4 +1,4 @@
-import { useContext, useMemo } from 'react';
+import { useContext, useMemo, useState, useEffect } from 'react';
 // types
 import type { BoxProps } from '@/components/Box';
 import type { PokestatsPokemonPageProps } from '@/pages/pokemon/[pokemonId]';
@@ -12,6 +12,7 @@ import {
   mapGeneration,
   formatFlavorText,
   findPokemonName,
+  prefixId,
 } from '@/helpers';
 // components
 import Box from '@/components/Box';
@@ -54,7 +55,17 @@ const PokemonDetails = ({
     is_mythical,
     generation,
   } = species;
-  // memo
+  // load pokemon cry sound
+  const [cry, setCry] = useState(null);
+  useEffect(() => {
+    setCry(
+      new Audio(
+        `https://raw.githubusercontent.com/andreferreiradlw/pokestats_media/main/assets/cries/${id}.${
+          id >= 722 ? 'wav' : 'mp3'
+        }`,
+      ),
+    );
+  }, []);
   const generationName = useMemo(() => mapGeneration(generation?.name), [generation]);
   const flavorText = useMemo(() => {
     // @ts-ignore
@@ -122,13 +133,20 @@ const PokemonDetails = ({
               ))}
             </TypeContainer>
           )}
-          <Box flexdirection="row" flexjustify="flex-start" flexalign="flex-start" flexgap="0.5em">
+          <Box
+            flexdirection="row"
+            flexjustify="flex-start"
+            flexalign="center"
+            flexgap="0.5em"
+            width="auto"
+          >
             <PageHeading>{findPokemonName(species)}</PageHeading>
             <IconContainer
               whileHover="hover"
               whileTap="tap"
               variants={fadeInUpVariant}
               key="cries-icon-container-pokemon"
+              onClick={() => cry?.play()}
             >
               <CriesIcon />
             </IconContainer>

@@ -95,7 +95,7 @@ const PokemonPage = ({
         </Box>
         {/** BASESTATS, FORMS */}
         <Box
-          flexdirection={{ xxs: 'column', lg: 'row' }}
+          flexdirection={{ xxs: 'column-reverse', lg: 'row' }}
           flexalign="stretch"
           flexjustify="space-between"
           flexgap="2em"

@@ -9,7 +9,6 @@ import BoxWrapper from './StyledBox';
 export interface BoxProps extends HTMLMotionProps<'div'> {
   constrained?: boolean;
   $flexgrow?: boolean;
-  $hide?: boolean;
   $isRelative?: boolean;
   $withGutter?: boolean;
   backgroundcolor?: CSSProperties['background'] | Record<string, CSSProperties['background']>;
@@ -18,6 +17,7 @@ export interface BoxProps extends HTMLMotionProps<'div'> {
   flexalign?: CSSProperties['alignItems'] | Record<string, CSSProperties['alignItems']>;
   flexalignself?: CSSProperties['alignSelf'] | Record<string, CSSProperties['alignSelf']>;
   flexdirection?: CSSProperties['flexDirection'] | Record<string, CSSProperties['flexDirection']>;
+  flexdisplay?: CSSProperties['display'] | Record<string, CSSProperties['display']>;
   flexgap?: CSSProperties['gap'] | Record<string, CSSProperties['gap']>;
   flexheight?: CSSProperties['height'] | Record<string, CSSProperties['height']>;
   flexjustify?: CSSProperties['justifyContent'] | Record<string, CSSProperties['justifyContent']>;

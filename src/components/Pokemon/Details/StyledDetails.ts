@@ -11,11 +11,20 @@ const TypeContainer = styled(Box)`
   gap: 1em;
 `;
 
-const IconContainer = styled(motion.div)``;
+const IconContainer = styled(motion.div)`
+  display: none;
+  margin-top: 10px;
+
+  ${({ theme }) => css`
+    @media ${theme.device.xs} {
+      display: block;
+    }
+  `}
+`;
 
 const CriesIcon = styled(SoundIcon)`
   height: auto;
-  width: 3em;
+  width: 2.5em;
 
   &:hover {
     cursor: pointer;

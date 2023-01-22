@@ -2,10 +2,10 @@ import { useMemo } from 'react';
 // types
 import type { Pokemon, PokemonSpecies, PokemonSprites } from 'pokenode-ts';
 // helpers
-import { removeUnderscore, prefixId } from '@/helpers';
+import { removeUnderscore, prefixId, capitalise, removeDash } from '@/helpers';
 // styles
-import { SectionTitle, SectionSubTitle, Divider } from '@/components/BaseStyles';
-import { SpriteContainer, Sprite, SpriteSubtitle, NoSprites } from './StyledSprites';
+import { SectionTitle, Divider } from '@/components/BaseStyles';
+import { SpriteContainer, Sprite, NoSprites } from './StyledSprites';
 // components
 import Box, { BoxProps } from '@/components/Box';
 
@@ -20,6 +20,11 @@ const Sprites = ({ pokemonSprites, pokemonId, forms, ...rest }: SpritesProps): J
   const animatedSprites = pokemonSprites.versions['generation-v']['black-white'].animated;
   const dreamWorldSprites = pokemonSprites.other.dream_world;
   const officalArtworkSprites = pokemonSprites.other['official-artwork'];
+
+  const defaultVarietyName = useMemo(() => {
+    const defaultForm = removeDash(forms.find(form => form.is_default).pokemon.name);
+    return capitalise(defaultForm.substring(defaultForm.indexOf(' ') + 1));
+  }, [forms]);
 
   const alternativeForms = useMemo(
     () =>
@@ -122,7 +127,7 @@ const Sprites = ({ pokemonSprites, pokemonId, forms, ...rest }: SpritesProps): J
                     height="180"
                   />
                 </SpriteContainer>
-                <p>Official</p>
+                <p>{defaultVarietyName}</p>
               </Box>
             )}
             {(dreamWorldSprites.front_default || dreamWorldSprites.front_female) && (

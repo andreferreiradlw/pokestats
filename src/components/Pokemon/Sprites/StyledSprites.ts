@@ -11,14 +11,10 @@ const SpriteContainer = styled(Box)`
 
 const Sprite = styled(ImageNext)``;
 
-const SpriteSubtitle = styled(SectionSubTitle)`
-  text-align: center;
-`;
-
 const NoSprites = styled(Box)`
   font-size: 2rem;
   line-height: 2.5rem;
   text-align: center;
 `;
 
-export { SpriteContainer, Sprite, SpriteSubtitle, NoSprites };
+export { SpriteContainer, Sprite, NoSprites };

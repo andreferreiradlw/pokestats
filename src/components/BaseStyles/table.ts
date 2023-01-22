@@ -43,7 +43,7 @@ const Table = styled(motion.table)`
 
   ${({ theme }) => css`
     @media ${theme.device.md} {
-      width: 50%;
+      /* width: 50%; */
     }
     @media ${theme.device.lg} {
       width: 100%;

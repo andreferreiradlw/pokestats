@@ -2,33 +2,25 @@ import styled, { css } from 'styled-components';
 import { motion } from 'framer-motion';
 
 const SectionTitle = styled(motion.h2)`
-  font-size: 2em;
+  font-size: 1.5em;
   font-weight: 600;
   line-height: 1;
 
   ${({ theme }) => css`
     @media ${theme.device.xs} {
-      font-size: 2.5em;
-    }
-    @media ${theme.device.md} {
-      font-size: 3em;
+      font-size: 2em;
     }
   `}
 `;
 
 const SectionSubTitle = styled(motion.h3)`
-  font-size: 1.3rem;
+  font-size: 1.2em;
   font-weight: 600;
-  line-height: 1rem;
+  line-height: 1;
 
   ${({ theme }) => css`
     @media ${theme.device.xs} {
-      font-size: 1.6rem;
-      line-height: 2rem;
-    }
-    @media ${theme.device.md} {
-      font-size: 2rem;
-      line-height: 2.5rem;
+      font-size: 1.5em;
     }
   `}
 `;

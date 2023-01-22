@@ -8,7 +8,7 @@ const Divider = styled.hr`
   ${({ theme }) =>
     css`
       background: ${theme.colors.secondary.main};
-      ${responsiveProps('max-width', theme.layout.constrained)}
+      ${responsiveProps('max-width', theme.layout.contained)}
       ${responsiveProps('padding', theme.layout.gutterWidth)}
     `};
 `;

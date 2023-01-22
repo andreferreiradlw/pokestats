@@ -68,15 +68,14 @@
 ✅ Pokemon Page <br />
 ✅ Type Page <br />
 ✅ Static Generated Pages <br />
-🚫 Generation 8 Pokemon Ready (waiting on [PokéApi's issue](https://github.com/PokeAPI/pokeapi/issues/520)) <br />
+✅ Generation 8 Pokemon ([some data is incomplete](https://github.com/PokeAPI/pokeapi/issues/520)) <br />
 ✅ Typescript Refactoring <br />
 🛠️ [Move Page](https://pokeapi.api-docs.io/v2.0/moves/rNQ5oSyuW7AJ3mqEe) <br />
-🗒️ [Headbutt Tree Encounters](https://bulbapedia.bulbagarden.net/wiki/Headbutt_tree) <br />
-🗒️ Unit Tests <br />
-🗒️ Dark Mode <br />
+🗒️ [Encounters](https://pokeapi.api-docs.io/v2.0/encounters) & [Item](https://pokeapi.api-docs.io/v2.0/locations/h6KztxeJv67pvfT5F) Map <br />
+🗒️ [Headbutt Tree Encounters](https://bulbapedia.bulbagarden.net/wiki/Headbutt_tree) Map <br />
 🗒️ [Item Page](https://pokeapi.api-docs.io/v2.0/items/kBoBXQHp45mFi4oNb) <br />
 🗒️ [Berry Page](https://pokeapi.api-docs.io/v2.0/berries/pHc3vWdv6Pkyk377Q) <br />
-💡 [Encounters](https://pokeapi.api-docs.io/v2.0/encounters) & [Item](https://pokeapi.api-docs.io/v2.0/locations/h6KztxeJv67pvfT5F) Locations Map <br />
+🗒️ Dark Mode <br />
 
 ## Contributing
 
@@ -86,7 +85,11 @@ Checkout [CONTRIBUTING.md](https://github.com/andreferreiradlw/pokestats/blob/ma
 
 ## Aknowledgements
 
-Thanks to [PokéApi](https://pokeapi.co) for the data and images (without it, this project would not be possible), [Naramsim](https://github.com/Naramsim) for the images [service worker](https://github.com/PokeAPI/pokeapi-js-wrapper#caching-images) and [duiker101](https://github.com/duiker101/pokemon-type-svg-icons) for the great SVG Type Icons.
+[PokéApi](https://pokeapi.co) for the data and images (without it, this project would not be possible),
+[duiker101](https://github.com/duiker101/pokemon-type-svg-icons) for the great SVG Type Icons,
+[Gabb-c](https://github.com/Gabb-c/pokenode-ts) for the NodeJS wrapper with Typescript support,
+[msikma](https://github.com/msikma/pokesprite) for all the item sprites,
+[HybridShivam](https://github.com/HybridShivam/Pokemon) for the compressed images for each Pokemon and their varieties
 
 ## License
 
@@ -96,11 +99,11 @@ MIT
 
 This is an unofficial, non-commercial, fan-made app and is NOT affiliated, endorsed or supported by Nintendo, Game Freak and The Pokémon Company in any way.
 The images used are © Nintendo/Creatures and Inc./GAME FREAK Inc. Pokémon and Pokémon character names are trademarks of Nintendo.
-Everything else, and the programming code, is governed by the MIT license.
+Everything else, including the code, is governed by the MIT license.
 
 ## Donate
 
-Please consider donating if you think pokestats is helpful to you and want to support the project ❤️
+Please consider donating if you think pokestats is helpful to you and want to see the project evolve ❤️
 
 <a href="https://www.buymeacoffee.com/pokestats">
   <img alt="bmc-button" src="https://img.shields.io/badge/Buy_Me_A_Coffee-FFDD00?style=for-the-badge&logo=buy-me-a-coffee&logoColor=black">

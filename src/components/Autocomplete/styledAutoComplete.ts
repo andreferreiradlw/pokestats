@@ -1,6 +1,7 @@
 import styled, { css } from 'styled-components';
 // types
 import type { AutocompleteProps } from './index';
+import { focusStyles } from '@/BaseStyles';
 // components
 import { motion } from 'framer-motion';
 import Link from 'next/link';
@@ -19,10 +20,13 @@ const Container = styled(motion.div)<{ width?: AutocompleteProps['width'] }>`
 
           @media ${theme.device.sm} {
             max-width: 650px;
-            width: 75%;
+            width: 55%;
+          }
+          @media ${theme.device.md} {
+            width: 40%;
           }
           @media ${theme.device.lg} {
-            width: 55%;
+            width: 30%;
           }
         `}
 
@@ -41,23 +45,23 @@ const Container = styled(motion.div)<{ width?: AutocompleteProps['width'] }>`
 
 const Input = styled.input<{ $isOpen: Boolean }>`
   font-size: 1em;
-  font-weight: 400;
-  line-height: 1;
+  font-weight: 500;
   max-width: 100%;
-  outline: none;
   padding: 0.5rem 0.75rem;
-  position: relative;
   width: 100%;
 
   ${({ theme, $isOpen }) => css`
-    background-color: ${theme.colors.secondary.main};
-    border: ${theme.colors.secondary.main};
+    background-color: ${theme.colors.primary.main};
+    border: 2px solid ${theme.colors.secondary.main};
     border-radius: ${$isOpen ? '0.25rem 0.25rem 0 0' : '0.25rem'};
-    color: ${theme.colors.secondary.contrastText};
+    color: ${theme.colors.primary.contrastText};
 
     &::placeholder {
-      color: ${theme.colors.secondary.contrastText};
+      color: ${theme.colors.secondary.light};
+      font-style: italic;
     }
+
+    ${focusStyles}
 
     @media ${theme.device.md} {
       font-size: 1em;
@@ -121,13 +125,13 @@ const OptionWrapper = styled(Link)`
 
 const Option = styled.span`
   font-size: 1.3em;
-  font-weight: 600;
+  font-weight: 500;
   text-transform: capitalize;
 `;
 
 const PokeID = styled(Option)`
   font-size: 1.5em;
-  font-weight: 600;
+  font-weight: 500;
 `;
 
 export { Container, Input, ListWrapper, OptionWrapper, OptionImg, Option, PokeID };

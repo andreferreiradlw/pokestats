@@ -3,9 +3,8 @@ import type { Type } from 'pokenode-ts';
 // helpers
 import { hoverVariant } from '@/helpers';
 // styles
-import { Badge } from './StyledBadge';
+import { Anchor, Badge } from './StyledBadge';
 // components
-import Link from 'next/link';
 import TypeIcon from '@/components/TypeIcon';
 
 export interface TypeBadgeProps {
@@ -23,7 +22,7 @@ const TypeBadge = ({ $typename, hideIcon, $iconOnly, ...rest }: TypeBadgeProps):
   if (!$typename) return null;
 
   return (
-    <Link href={`/type/${$typename}`}>
+    <Anchor href={`/type/${$typename}`}>
       <Badge
         $typename={$typename}
         $iconOnly={$iconOnly}
@@ -36,7 +35,7 @@ const TypeBadge = ({ $typename, hideIcon, $iconOnly, ...rest }: TypeBadgeProps):
         {!hideIcon && <TypeIcon type={$typename} />}
         {!$iconOnly && <span>{$typename}</span>}
       </Badge>
-    </Link>
+    </Anchor>
   );
 };
 

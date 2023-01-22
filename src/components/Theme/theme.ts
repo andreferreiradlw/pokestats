@@ -44,6 +44,7 @@ const theme = {
     },
     secondary: {
       main: 'black',
+      light: '#757575',
       contrastText: 'white',
     },
     tertiary: {

@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components';
 // types
 import type { PokemonBoxProps } from './index';
 // styles
-import { float } from '@/components/BaseStyles';
+import { float, focusStyles } from '@/components/BaseStyles';
 // components
 import { motion } from 'framer-motion';
 
@@ -10,7 +10,6 @@ const PokeBox = styled(motion.div)<{
   $dark?: PokemonBoxProps['$dark'];
 }>`
   align-items: center;
-  /* border: 1px solid transparent; */
   border: 1px solid ${({ theme }) => theme.colors.primary.light};
   border-radius: 5px;
   display: flex;
@@ -19,14 +18,23 @@ const PokeBox = styled(motion.div)<{
   font-weight: 500;
   gap: 0.5em;
   justify-content: center;
-  max-width: 175px;
+  max-width: 125px;
   overflow: hidden;
   padding: 1em;
   position: relative;
   text-align: center;
   transition: border 0.1s ease-in-out;
   transition: box-shadow 0.05s ease-in-out;
-  width: 175px;
+  width: 125px;
+
+  ${({ theme }) => css`
+    @media ${theme.device.md} {
+      max-width: 175px;
+      width: 175px;
+    }
+  `}
+
+  ${focusStyles}
 
   &:hover {
     cursor: pointer;
@@ -71,17 +79,35 @@ const PokeBox = styled(motion.div)<{
 `;
 
 const NumberId = styled.span`
-  font-size: 2em;
+  font-size: 1.5em;
+
+  ${({ theme }) => css`
+    @media ${theme.device.md} {
+      font-size: 2em;
+    }
+  `}
 `;
 
 const PokeName = styled.span`
-  font-size: 1.5em;
+  font-size: 1em;
   text-transform: capitalize;
+
+  ${({ theme }) => css`
+    @media ${theme.device.md} {
+      font-size: 1.5em;
+    }
+  `}
 `;
 
 const PokeGen = styled.span`
-  font-size: 1em;
+  font-size: 0.85em;
   font-weight: 300;
+
+  ${({ theme }) => css`
+    @media ${theme.device.md} {
+      font-size: 1em;
+    }
+  `}
 `;
 
 export { PokeBox, NumberId, PokeName, PokeGen };

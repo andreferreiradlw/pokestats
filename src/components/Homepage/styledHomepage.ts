@@ -14,6 +14,7 @@ const Container = styled(BoxWrapper)`
   margin: auto;
   min-height: 50vh;
   position: relative;
+  width: 100%;
   z-index: 1;
 `;
 

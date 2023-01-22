@@ -117,7 +117,7 @@ const Autocomplete = ({ filterList, ...rest }: AutocompleteProps): JSX.Element =
       <Input
         type="text"
         autoComplete="off"
-        placeholder="Search PokeStats"
+        placeholder="Search PokeStats..."
         id="autocomplete"
         aria-labelledby="autocomplete_label"
         value={search}

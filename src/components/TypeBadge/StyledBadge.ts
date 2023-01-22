@@ -4,18 +4,20 @@ import { motion } from 'framer-motion';
 import type { Type } from 'pokenode-ts';
 import type { TypeBadgeProps } from './index';
 // styles
-import { float as floatAnim } from '@/components/BaseStyles';
+import { float as floatAnim, focusStyles } from '@/components/BaseStyles';
+// components
+import Link from 'next/link';
 
 const isDarkBackground = (type: Type['name']): boolean =>
   !!type.match(/^(dark|dragon|fighting|ghost|poison|shadow|unknown)$/);
 
+const Anchor = styled(Link)`
+  ${focusStyles}
+`;
+
 const Badge = styled(motion.div)<TypeBadgeProps>`
   align-items: center;
-  background: ${({ theme, $typename, $fill }) => !$fill && theme.colors.typesHalf[$typename]};
-  border: 1px solid ${({ theme }) => theme.colors.primary.main};
   border-radius: 4px;
-  color: ${({ theme, $typename }) =>
-    isDarkBackground($typename) ? theme.colors.lightText : theme.colors.darkText};
   display: flex;
   flex-direction: row;
   font-family: 'Quicksand', sans-serif;
@@ -28,14 +30,20 @@ const Badge = styled(motion.div)<TypeBadgeProps>`
   transition: box-shadow 0.05s ease-in-out;
   width: auto;
 
-  &:hover {
-    background: ${({ theme, $typename, $fill }) => !$fill && theme.colors.types[$typename]};
-    box-shadow: ${({ theme }) => theme.colors.defaultBoxShadow};
-  }
+  ${({ theme, $typename, $fill }) => css`
+    ${!$fill && `background: ${theme.colors.typesHalf[$typename]};`};
+    border: 1px solid ${theme.colors.primary.main};
+    color: ${isDarkBackground($typename) ? theme.colors.lightText : theme.colors.darkText};
 
-  &:active {
-    box-shadow: ${({ theme }) => theme.colors.defaultInsetBoxShadow};
-  }
+    &:hover {
+      ${!$fill && `background: ${theme.colors.types[$typename]};`}
+      box-shadow: ${theme.colors.defaultBoxShadow};
+    }
+
+    &:active {
+      box-shadow: ${theme.colors.defaultInsetBoxShadow};
+    }
+  `}
 
   ${({ $iconOnly, flexmargin }) =>
     $iconOnly
@@ -78,4 +86,4 @@ const Badge = styled(motion.div)<TypeBadgeProps>`
   }
 `;
 
-export { Badge };
+export { Anchor, Badge };

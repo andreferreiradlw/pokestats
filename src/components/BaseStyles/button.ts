@@ -2,6 +2,16 @@ import styled, { css } from 'styled-components';
 import { motion } from 'framer-motion';
 import type { ThemeType } from '../Theme/theme';
 
+const focusStyles = css`
+  ${({ theme }) => css`
+    &:focus,
+    &:focus-visible {
+      outline: ${theme.colors.tertiary.main} auto 1px;
+      outline-offset: 2px;
+    }
+  `}
+`;
+
 const darkValues = (theme: ThemeType) => css`
   background-color: ${theme.colors.secondary.main};
   border: 2px solid ${theme.colors.secondary.main};
@@ -44,11 +54,11 @@ const Button = styled(motion.button)<{ $dark?: boolean; $active?: boolean }>`
   cursor: pointer;
   font-size: 1em;
   font-weight: 500;
-  line-height: 1;
-  outline: none;
   padding: 10px 20px;
   text-align: center;
   transition: box-shadow 0.2s ease-in-out;
+
+  ${focusStyles}
 
   ${({ $active, $dark, theme }) =>
     $dark
@@ -60,4 +70,4 @@ const Button = styled(motion.button)<{ $dark?: boolean; $active?: boolean }>`
       : lightValues(theme)}
 `;
 
-export { Button };
+export { Button, focusStyles };

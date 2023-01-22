@@ -26,7 +26,7 @@ const TypePage = ({ typeInfo, typeMoves }: TypePageProps): JSX.Element => {
       <MainContainer
         flexjustify="flex-start"
         flexalign="flex-start"
-        constrained
+        $contained
         $withGutter
         initial="hidden"
         animate="visible"

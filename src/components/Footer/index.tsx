@@ -26,7 +26,7 @@ const Footer = (): JSX.Element => {
         flexjustify={{ xxs: 'center', sm: 'space-between' }}
         flexgap="1em"
         screensizes={12}
-        constrained
+        $contained
         $withGutter
       >
         <Box flexgap="0.5em" flexdirection="row" width="auto">

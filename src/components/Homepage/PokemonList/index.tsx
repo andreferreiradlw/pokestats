@@ -74,7 +74,6 @@ const PokemonList = ({ pokemon, ...rest }: PokemonListProps): JSX.Element => {
               setGen(e.target.value);
               sessionStorage.setItem('genSelect', e.target.value);
             }}
-            sizeSmall
             minWidth="175px"
           />
           <Dropdown
@@ -88,7 +87,6 @@ const PokemonList = ({ pokemon, ...rest }: PokemonListProps): JSX.Element => {
               setSortBy(e.target.value);
               sessionStorage.setItem('sortSelect', e.target.value);
             }}
-            sizeSmall
             minWidth="125px"
           />
         </SelectContainer>

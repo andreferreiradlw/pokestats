@@ -9,10 +9,10 @@ import BoxWrapper from '@/components/Box/StyledBox';
 import ArrowDownIcon from 'public/static/iconLibrary/arrow_down.svg';
 
 const Container = styled(BoxWrapper)`
-  height: 100vh;
+  height: 50vh;
   justify-content: center;
   margin: auto;
-  min-height: 100vh;
+  min-height: 50vh;
   position: relative;
   z-index: 1;
 `;

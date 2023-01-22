@@ -31,7 +31,7 @@ const HeaderComponent = ({
   return (
     <HeaderContainer {...rest}>
       <Box
-        constrained
+        $contained
         $withGutter
         flexdirection={{ xxs: 'column', md: 'row' }}
         flexjustify="space-between"
@@ -49,7 +49,6 @@ const HeaderComponent = ({
               options={versionOptions}
               value={gameVersion}
               onChange={e => setGameVersion(e.target.value)}
-              sizeSmall
               minWidth="190px"
             />
           )}

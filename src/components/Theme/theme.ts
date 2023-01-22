@@ -27,13 +27,13 @@ const theme = {
   layout: {
     gap: '1.5em',
     gutterWidth: {
-      xxs: '0 0.5em',
-      md: '0 1.5em',
-      lg: '0 2em',
+      xxs: '0 1.5em',
+      xs: '0 2em',
+      md: '0 2.5em',
     },
-    constrained: {
-      xxs: '1300px',
-      xl: '1450px',
+    contained: {
+      xxs: '1350px',
+      xl: '1500px',
     },
   },
   colors: {
@@ -45,6 +45,10 @@ const theme = {
     secondary: {
       main: 'black',
       contrastText: 'white',
+    },
+    tertiary: {
+      main: '#eb4333',
+      contrastText: 'black',
     },
     lightText: 'white',
     darkText: 'black',

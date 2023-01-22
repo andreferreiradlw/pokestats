@@ -68,7 +68,7 @@ const Homepage = ({ allPokemon, pokemonTypes }: PokestatsHomepageProps): JSX.Ele
         flexalign="center"
         flexdirection="column"
         flexgap="1em"
-        constrained
+        $contained
         $withGutter
         initial="hidden"
         animate="show"
@@ -86,19 +86,16 @@ const Homepage = ({ allPokemon, pokemonTypes }: PokestatsHomepageProps): JSX.Ele
         <Button onClick={routeRandom} $dark variants={fadeInUpVariant} key="homepage-random-btn">
           Random Pokemon!
         </Button>
-        <ScrollContainer variants={fadeInUpVariant} key="homepage-scroll-container">
-          <ScrollDown />
-        </ScrollContainer>
       </Container>
-      <ListContainer flexpadding="1.5em 0">
-        <Box constrained $withGutter flexgap="1.5em">
+      <ListContainer flexpadding="1.5em 0" key="homepage-list-container">
+        <Box $contained $withGutter flexgap="1.5em">
           <TypeList types={pokemonTypes} />
           <Divider />
           <PokemonList pokemon={allPokemon} />
           <Divider />
         </Box>
       </ListContainer>
-      <Particles />
+      <Particles key="homepage-particles" />
     </AnimatePresence>
   );
 };

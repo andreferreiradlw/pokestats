@@ -26,7 +26,7 @@ const ChevronIcon = styled(Chevron)`
   width: 1.5em;
 `;
 
-const SelectButton = styled.button<{ $isOpen: Boolean; $isSmall?: DropdownProps['sizeSmall'] }>`
+const SelectButton = styled.button<{ $isOpen: Boolean }>`
   align-items: center;
   border-radius: ${({ $isOpen }) => ($isOpen ? '5px 5px 0 0' : '5px')};
   display: flex;
@@ -34,7 +34,7 @@ const SelectButton = styled.button<{ $isOpen: Boolean; $isSmall?: DropdownProps[
   font-weight: 500;
   gap: 0.5em;
   justify-content: space-between;
-  padding: ${({ $isSmall }) => ($isSmall ? '0.2em 0.5em' : '0.5em')};
+  padding: 0.2em 0.5em;
   position: relative;
   transition: background 0.2s ease-in-out;
   width: 100%;
@@ -85,7 +85,6 @@ const SelectDropdown = styled.ul`
 
 const SelectDropdownItem = styled.li<{
   $isSelected: Boolean;
-  $isSmall?: DropdownProps['sizeSmall'];
 }>`
   ${({ $isSelected, theme }) =>
     $isSelected
@@ -102,7 +101,7 @@ const SelectDropdownItem = styled.li<{
   label {
     cursor: pointer;
     display: flex;
-    padding: ${({ $isSmall }) => ($isSmall ? '0.2em 0.5em' : '0.5em')};
+    padding: 0.2em 0.5em;
     white-space: nowrap;
     width: 100%;
 

@@ -22,7 +22,6 @@ export interface DropdownProps extends BoxProps {
   namespace?: string;
   onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
   minWidth?: string;
-  sizeSmall?: boolean;
 }
 
 const isSafari = () => {
@@ -184,7 +183,6 @@ const Dropdown = ({
   namespace = 'select_namespace',
   onChange,
   minWidth,
-  sizeSmall,
   ...rest
 }: DropdownProps): JSX.Element => {
   const {
@@ -222,7 +220,6 @@ const Dropdown = ({
           aria-expanded={isDropdownOpen}
           aria-activedescendant={`${namespace}_element_${value}`}
           $isOpen={isDropdownOpen}
-          $isSmall={sizeSmall}
         >
           {chosenOption?.label}
           <ChevronIcon />
@@ -238,7 +235,6 @@ const Dropdown = ({
                 onMouseOver={() => setActiveIndex(i)}
                 onFocus={() => setActiveIndex(i)}
                 $isSelected={chosenOption?.value === optionValue}
-                $isSmall={sizeSmall}
               >
                 <label>
                   <input

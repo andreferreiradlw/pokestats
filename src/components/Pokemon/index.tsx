@@ -51,7 +51,7 @@ const PokemonPage = ({
   return (
     <AnimatePresence mode="wait">
       <MainContainer
-        constrained
+        $contained
         $withGutter
         initial="hidden"
         animate="visible"
@@ -72,7 +72,6 @@ const PokemonPage = ({
             pokemon={pokemon}
             abilities={abilities}
             species={species}
-            // $emphasizedBg={mainType}
           />
           <FeaturedImage
             screensizes={{ xxs: 12, lg: 7 }}
@@ -84,35 +83,42 @@ const PokemonPage = ({
         <Divider />
         {/** BREEDING, TRAINING, MULTIPLIERS */}
         <Box
-          flexdirection={{ xxs: 'column', lg: 'row' }}
+          flexdirection={{ xxs: 'column', md: 'row' }}
           flexalign="stretch"
           flexjustify="space-between"
           flexgap="2em"
+          flexwrap="wrap"
         >
-          <Breeding species={species} babyTriggerItem={babyTriggerItem} />
-          <Training pokemon={pokemon} species={species} />
-          <Multipliers pokemonTypes={types} />
-        </Box>
-        {/** BASESTATS, FORMS */}
-        <Box
-          flexdirection={{ xxs: 'column-reverse', lg: 'row' }}
-          flexalign="stretch"
-          flexjustify="space-between"
-          flexgap="2em"
-        >
-          <BaseStats stats={stats} screensizes={{ xxs: 12, lg: 8 }} />
+          <Breeding
+            species={species}
+            babyTriggerItem={babyTriggerItem}
+            screensizes={{ xxs: 12, md: 6, lg: 4 }}
+            $parentGap="2em"
+          />
+          <Training
+            pokemon={pokemon}
+            species={species}
+            screensizes={{ xxs: 12, md: 6, lg: 4 }}
+            $parentGap="2em"
+          />
+          <Multipliers
+            pokemonTypes={types}
+            screensizes={{ xxs: 12, md: 6, lg: 4 }}
+            $parentGap="2em"
+          />
           <PokemonForms
             pokemonId={id}
             pokemonName={currPokemonName}
             species={species}
-            screensizes={{ xxs: 12, lg: 4 }}
+            screensizes={{ xxs: 12, md: 6, lg: 4 }}
+            $parentGap="2em"
           />
+          <BaseStats stats={stats} screensizes={{ xxs: 12, lg: 8 }} />
         </Box>
         <Divider />
         {/** EVOLUTION CHAIN */}
         <Box flexalign="flex-start" flexjustify="flex-start">
           <EvolutionChain
-            screensizes={12}
             key={`pokemon-evolution-${name}`}
             pokemonName={currPokemonName}
             evolutionChain={evolutionChain}
@@ -121,16 +127,16 @@ const PokemonPage = ({
         <Divider />
         {/** MOVES */}
         <Box flexalign="flex-start" flexjustify="flex-start">
-          <Moves pokemon={pokemon} screensizes={12} />
+          <Moves pokemon={pokemon} />
         </Box>
         <Divider />
         {/** SPRITES */}
         <Box flexalign="flex-start" flexjustify="flex-start">
-          <Sprites pokemonSprites={sprites} pokemonId={id} forms={varieties} screensizes={12} />
+          <Sprites pokemonSprites={sprites} pokemonId={id} forms={varieties} />
         </Box>
         {/** NAVIGATION */}
         <Box flexalign="flex-start" flexjustify="flex-start">
-          <Navigation allPokemon={allPokemon} pokemonId={id} screensizes={12} />
+          <Navigation allPokemon={allPokemon} pokemonId={id} />
         </Box>
         <Divider />
       </MainContainer>

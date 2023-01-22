@@ -24,10 +24,10 @@ const EvolutionChain = ({
   const { chainId, firstEvolution, secondEvolution } = evolutionChain;
 
   return (
-    <Box flexalign={{ xxs: 'center', lg: 'flex-start' }} flexgap="1em" {...rest}>
+    <Box flexgap="1em" {...rest}>
       <SectionTitle>Evolution Chain</SectionTitle>
       <BoxWrapper
-        flexdirection={{ xxs: 'column', lg: 'row' }}
+        flexdirection="column"
         flexjustify="center"
         flexalign="center"
         width="100%"
@@ -36,30 +36,21 @@ const EvolutionChain = ({
         <Evolution noArrow species={firstEvolution} width="auto" />
         {secondEvolution.length > 0 && (
           <Box
-            flexdirection={{ xxs: 'row', lg: 'column' }}
-            flexwrap={{ xxs: 'wrap', lg: 'nowrap' }}
-            screensizes={9.6}
+            flexdirection="row"
+            flexalign="stretch"
+            flexjustify="flex-start"
             flexgap="1em"
+            style={{ overflowX: 'scroll' }}
           >
             {secondEvolution.map(({ species, evolutionDetails, thirdEvolution }, i) => (
-              <Box
-                flexdirection={{ xxs: 'column', lg: 'row' }}
-                flexalign="center"
-                key={`second-evo-container-${i}-${chainId}`}
-                width={{ xxs: '200px', lg: '100%' }}
-                flexgap="1em"
-              >
+              <Box key={`second-evo-container-${i}-${chainId}`} flexgap="1em">
                 <Evolution
                   species={species}
                   evolutionDetails={evolutionDetails}
                   key={`second-evo-${i}-${chainId}`}
                 />
                 {thirdEvolution.length > 0 && (
-                  <Box
-                    flexdirection={{ xxs: 'row', lg: 'column' }}
-                    flexalign="center"
-                    flexgap="1em"
-                  >
+                  <Box flexdirection="row" flexjustify="space-evenly" flexgap="1em">
                     {thirdEvolution.map(({ species, evolutionDetails }, x) => (
                       <Evolution
                         key={`third-evo-${x}-${chainId}`}

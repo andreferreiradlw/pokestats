@@ -15,7 +15,7 @@ const PokeBox = styled(motion.div)<{
   display: flex;
   flex-basis: auto;
   flex-direction: column;
-  font-weight: 600;
+  font-weight: 500;
   gap: 0.5em;
   justify-content: center;
   max-width: 175px;

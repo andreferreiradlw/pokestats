@@ -49,12 +49,6 @@ const Badge = styled(motion.div)<TypeBadgeProps>`
           padding: 0.5em;
         `}
 
-  ${({ theme }) => css`
-    @media ${theme.device.lg} {
-      font-size: 1.2em;
-    }
-  `}
-
   ${({ $float }) =>
     $float &&
     css`

@@ -1,11 +1,13 @@
 // data
 import itemMapData from '@/components/Pokemon/Training/item-icons.json';
 
+const capitalise = (str: string): string => str.replace(/(^\w|\s\w)/g, m => m.toUpperCase());
+
 // remove underscores and replace with spaces
 const removeUnderscore = (str: string): string => str.replace(/_/g, ' ');
 
 // remove dashes
-const removeDash = (str: string): string => str.replace(/-/g, ' ');
+const removeDash = (str: string): string => str?.replace(/-/g, ' ');
 
 const formatFlavorText = (text: string): string =>
   text
@@ -36,4 +38,4 @@ const itemMapUrl = (itemSlug: string): string => {
   return itemMatch ? `${itemMatch.set}/${itemMatch.filename}` : 'other-item/poke-doll.png';
 };
 
-export { removeUnderscore, removeDash, formatFlavorText, prefixId, itemMapUrl };
+export { capitalise, removeUnderscore, removeDash, formatFlavorText, prefixId, itemMapUrl };

@@ -91,7 +91,7 @@ const Breeding = ({ species, babyTriggerItem, ...rest }: BreedingProps): JSX.Ele
           </tr>
           <tr>
             <th>Habitat</th>
-            <UppercasedTd>{habitat ? habitat.name : 'None'}</UppercasedTd>
+            <UppercasedTd>{habitat ? removeDash(habitat.name) : 'None'}</UppercasedTd>
           </tr>
         </tbody>
       </Table>

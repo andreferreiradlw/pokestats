@@ -6,7 +6,6 @@ const MainHeading = styled(motion.h1)`
   font-family: 'Josefin Sans', sans-serif;
   font-size: 3.5em;
   font-weight: 700;
-  line-height: 1;
   text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000;
   user-select: none;
 
@@ -23,7 +22,6 @@ const MainHeading = styled(motion.h1)`
 const PageHeading = styled.h1`
   font-size: 2.5em;
   font-weight: 600;
-  line-height: 1em;
   text-align: center;
 
   ${({ theme }) => css`

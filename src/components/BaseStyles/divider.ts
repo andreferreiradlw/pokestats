@@ -1,7 +1,10 @@
 import styled, { css } from 'styled-components';
+// helpers
 import { responsiveProps } from '@/helpers';
+// components
+import { motion } from 'framer-motion';
 
-const Divider = styled.hr`
+const Divider = styled(motion.hr)`
   height: 5px;
   width: 100%;
 

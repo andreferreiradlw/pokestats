@@ -88,10 +88,22 @@ const Homepage = ({ allPokemon, pokemonTypes }: PokestatsHomepageProps): JSX.Ele
         </Button>
       </Container>
       <ListContainer flexpadding="1.5em 0" key="homepage-list-container">
-        <Box $contained $withGutter flexgap="1.5em">
-          <TypeList types={pokemonTypes} />
-          <Divider />
-          <PokemonList pokemon={allPokemon} />
+        <Box
+          $contained
+          $withGutter
+          flexgap="1.5em"
+          initial="hidden"
+          animate="show"
+          variants={staggerInitialVariant}
+          key="homepage-list-container-inner"
+        >
+          <TypeList types={pokemonTypes} variants={fadeInUpVariant} key="homepage-type-list" />
+          <Divider variants={fadeInUpVariant} key="homepage-divider" />
+          <PokemonList
+            pokemon={allPokemon}
+            variants={fadeInUpVariant}
+            key="homepage-pokemon-list"
+          />
           <Divider />
         </Box>
       </ListContainer>

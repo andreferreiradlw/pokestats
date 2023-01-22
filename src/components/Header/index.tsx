@@ -53,13 +53,7 @@ const HeaderComponent = ({
             />
           )}
         </Box>
-        <Autocomplete
-          filterList={autocompleteList}
-          width="350px"
-          flexjustify="flex-end"
-          flexalign="flex-start"
-          flexmargin="none"
-        />
+        <Autocomplete filterList={autocompleteList} width="350px" />
       </Box>
     </HeaderContainer>
   );

@@ -94,7 +94,9 @@ MIT
 
 ## Copyright Notice
 
-This is an unofficial, non-commercial, fan-made app and is NOT affiliated, endorsed or supported by Nintendo, Game Freak and The Pokémon Company in any way. Many images used in this app are copyrighted and are supported under fair use. Pokémon and Pokémon character names are trademarks of Nintendo. No copyright infringement intended.
+This is an unofficial, non-commercial, fan-made app and is NOT affiliated, endorsed or supported by Nintendo, Game Freak and The Pokémon Company in any way.
+The images used are © Nintendo/Creatures and Inc./GAME FREAK Inc. Pokémon and Pokémon character names are trademarks of Nintendo.
+Everything else, and the programming code, is governed by the MIT license.
 
 ## Donate
 

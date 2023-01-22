@@ -1,10 +1,10 @@
 import { useRouter } from 'next/router';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, CSSProperties } from 'react';
 // helpers
 import { removeDash, prefixId, fadeInDownVariant } from '@/helpers';
 // types
 import type { Pokemon, PokemonType } from '@/types';
-import type { BoxProps } from '@/components/Box';
+import type { HTMLMotionProps } from 'framer-motion';
 // styles
 import {
   Container,
@@ -20,17 +20,12 @@ import { AnimatePresence } from 'framer-motion';
 import Box from '@/components/Box';
 import TypeIcon from '@/components/TypeIcon';
 
-export interface AutocompleteProps extends BoxProps {
+export interface AutocompleteProps extends HTMLMotionProps<'div'> {
   filterList: (PokemonType | Pokemon)[];
+  width?: CSSProperties['width'];
 }
 
-const Autocomplete = ({
-  filterList,
-  flexalign = 'stretch',
-  flexdirection = 'row',
-  flexmargin = '0 auto',
-  ...rest
-}: AutocompleteProps): JSX.Element => {
+const Autocomplete = ({ filterList, ...rest }: AutocompleteProps): JSX.Element => {
   // router
   const router = useRouter();
   // search state
@@ -115,12 +110,7 @@ const Autocomplete = ({
   };
 
   return (
-    <Container
-      flexalign={flexalign}
-      flexdirection={flexdirection}
-      flexmargin={flexmargin}
-      {...rest}
-    >
+    <Container {...rest}>
       <label htmlFor="autocomplete" id="autocomplete_label" aria-hidden="true">
         Search Pokestats
       </label>

@@ -1,60 +1,67 @@
 import styled, { css } from 'styled-components';
+// types
+import type { AutocompleteProps } from './index';
 // components
 import { motion } from 'framer-motion';
-import BoxWrapper from '@/components/Box/StyledBox';
 import Link from 'next/link';
 
-const Container = styled(BoxWrapper)`
+const Container = styled(motion.div)<{ width?: AutocompleteProps['width'] }>`
   max-width: 100%;
   position: relative;
 
   ${({ theme, width }) =>
-    !width &&
-    css`
-      width: 90%;
+    width
+      ? css`
+          width: ${width};
+        `
+      : css`
+          width: 90%;
 
-      @media ${theme.device.sm} {
-        max-width: 850px;
-        width: 75%;
-      }
-      @media ${theme.device.lg} {
-        width: 55%;
-      }
-    `}
+          @media ${theme.device.sm} {
+            max-width: 650px;
+            width: 75%;
+          }
+          @media ${theme.device.lg} {
+            width: 55%;
+          }
+        `}
 
   label {
-    height: 0;
+    border: 0;
+    clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
+    clip; rect(1px, 1px, 1px, 1px);
+    height: 1px;
+    margin: -1px;
     overflow: hidden;
-    visibility: hidden;
-    width: 0;
+    padding: 0;
+    position: absolute;
+    width: 1px; 
   }
 `;
 
 const Input = styled.input<{ $isOpen: Boolean }>`
-  font-size: 0.7rem;
+  font-size: 1em;
   font-weight: 400;
-  height: 50px;
-  line-height: 1.5;
+  line-height: 1;
   max-width: 100%;
   outline: none;
-  padding: 0.2rem 0.5rem;
+  padding: 0.5rem 0.75rem;
+  position: relative;
   width: 100%;
 
   ${({ theme, $isOpen }) => css`
-    background-color: ${theme.colors.black};
-    border: ${theme.colors.black};
+    background-color: ${theme.colors.secondary.main};
+    border: ${theme.colors.secondary.main};
     border-radius: ${$isOpen ? '0.25rem 0.25rem 0 0' : '0.25rem'};
-    color: ${theme.colors.white};
+    color: ${theme.colors.secondary.contrastText};
 
     &::placeholder {
-      color: ${theme.colors.white};
-      font-style: italic;
-      font-weight: 500;
+      color: ${theme.colors.secondary.contrastText};
     }
 
     @media ${theme.device.md} {
-      font-size: 1rem;
-      padding: 0.375rem 0.75rem;
+      font-size: 1em;
+      padding: 0.75em 1em;
     }
   `}
 `;
@@ -62,10 +69,8 @@ const Input = styled.input<{ $isOpen: Boolean }>`
 const ListWrapper = styled(motion.div)`
   border-radius: 0 0 0.25rem 0.25rem;
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
-  left: 0;
-  margin-top: 50px;
   position: absolute;
-  right: 0;
+  width: 100%;
   z-index: 2;
 
   ${({ theme }) =>

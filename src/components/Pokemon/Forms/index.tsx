@@ -31,9 +31,9 @@ const PokemonForms = ({
         const varietyName = removeDash(form.pokemon.name);
         return (
           <Numbered key={`${form.pokemon.name}-${i}`}>
-            {`${varieties.length > 1 ? `${i + 1}. ` : ``}${
-              i === 0 ? pokemonName : varietyName.substring(varietyName.indexOf(' ') + 1)
-            }`}
+            {`${varieties.length > 1 ? `${i + 1}. ` : ``}${varietyName.substring(
+              varietyName.indexOf(' ') + 1,
+            )}`}
             {form.is_default && <span>{` (Default)`}</span>}
           </Numbered>
         );

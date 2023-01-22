@@ -82,6 +82,11 @@ const PokemonMoves = ({ pokemon, ...rest }: PokemonMovesProps): JSX.Element => {
   }, []);
 
   useEffect(() => {
+    // console.log(pokemon);
+    // console.log('genMoves', genMoves);
+  }, [genMoves]);
+
+  useEffect(() => {
     if (!movesLoading) setMovesLoading(true);
 
     const moveClient = new MoveClient();
@@ -208,7 +213,7 @@ const PokemonMoves = ({ pokemon, ...rest }: PokemonMovesProps): JSX.Element => {
                             <span>{machineNames[i].toUpperCase()}</span>
                             <img
                               src={`https://raw.githubusercontent.com/msikma/pokesprite/master/items/${
-                                machineNames[i].includes('tm') ? 'tm' : 'hm'
+                                machineNames[i].includes('hm') ? 'hm' : 'tm'
                               }/${move.type.name}.png`}
                               alt={move.type.name}
                               width="30"

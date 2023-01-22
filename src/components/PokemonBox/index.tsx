@@ -16,17 +16,26 @@ export interface PokemonBoxProps extends HTMLMotionProps<'div'> {
   pokemonGen?: PokemonSpecies['generation']['name'];
   nameFormat?: boolean;
   $dark?: boolean;
+  defaultVarietyName?: string;
 }
 
 const PokemonBox = forwardRef(
   (
-    { pokemonId, pokemonName, pokemonGen, nameFormat = true, $dark, ...rest }: PokemonBoxProps,
+    {
+      pokemonId,
+      pokemonName,
+      pokemonGen,
+      nameFormat = true,
+      defaultVarietyName,
+      $dark,
+      ...rest
+    }: PokemonBoxProps,
     ref: Ref<HTMLDivElement>,
   ): JSX.Element => {
     const generationName = useMemo(() => mapGeneration(pokemonGen), [pokemonGen]);
 
     return (
-      <Link href={`/pokemon/${pokemonName.toLocaleLowerCase()}`}>
+      <Link href={`/pokemon/${defaultVarietyName || pokemonName.toLocaleLowerCase()}`}>
         <PokeBox
           ref={ref}
           $dark={$dark}
@@ -43,7 +52,6 @@ const PokemonBox = forwardRef(
               pokemonId,
             )}.png`}
             width="100"
-            height="100"
           />
           <NumberId>{`#${pokemonId}`}</NumberId>
           <PokeName>{nameFormat ? removeDash(pokemonName) : pokemonName}</PokeName>

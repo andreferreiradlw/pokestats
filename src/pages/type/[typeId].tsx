@@ -80,7 +80,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     // fetch data
     const [{ results: allPokemonDataResults }, { results: allTypesDataResults }, typeData] =
       await Promise.all([
-        pokemonClient.listPokemons(0, 809),
+        pokemonClient.listPokemons(0, 905),
         pokemonClient.listTypes(),
         pokemonClient.getTypeByName(typeName),
       ]);
@@ -103,7 +103,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
       .map(({ pokemon }) => {
         const id = getIdFromPokemon(pokemon.url);
         // if pokemon not gen 8
-        if (id <= 809) {
+        if (id <= 905) {
           return {
             ...pokemon,
             id: id,

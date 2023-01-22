@@ -102,19 +102,19 @@ const Training = ({ pokemon, species, ...rest }: TrainingProps): JSX.Element => 
         <tbody>
           <tr>
             <th>EV Yield</th>
-            <td>{EVYield}</td>
+            <td>{stats?.length ? EVYield : 'Not available'}</td>
           </tr>
           <tr>
             <th>Catch Rate</th>
-            <td>{catchRate}</td>
+            <td>{capture_rate ? catchRate : 'Not available'}</td>
           </tr>
           <tr>
             <th>Base Happiness</th>
-            <td>{baseHappiness}</td>
+            <td>{base_happiness ? baseHappiness : 'Not available'}</td>
           </tr>
           <tr>
             <th>Base XP</th>
-            <td>{base_experience}</td>
+            <td>{base_experience || 'Not available'}</td>
           </tr>
           <tr>
             <th>Held Items</th>

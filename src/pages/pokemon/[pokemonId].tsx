@@ -142,7 +142,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
       { results: allTypesDataResults },
       pokemonDataResults,
     ] = await Promise.all([
-      pokemonClient.listPokemons(0, 809),
+      pokemonClient.listPokemons(0, 905),
       pokemonClient.listTypes(),
       pokemonClient.getPokemonByName(pokemonName),
     ]);
@@ -152,7 +152,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
       return { notFound: true };
     }
 
-    if (pokemonDataResults.id > 809) return { notFound: true };
+    if (pokemonDataResults.id > 905) return { notFound: true };
 
     // abilities requests array
     let pokemonAbilities = [];
@@ -213,7 +213,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
         const secondEvoData = await pokemonClient.getPokemonSpeciesByName(
           second_evolution.species.name,
         );
-        if (secondEvoData.id <= 809) {
+        if (secondEvoData.id <= 905) {
           evolutionChainPokemon.secondEvolution.push({
             species: secondEvoData,
             evolutionDetails: second_evolution.evolution_details,
@@ -232,7 +232,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
           const thirdEvoData = await pokemonClient.getPokemonSpeciesByName(
             third_evolution.species.name,
           );
-          if (thirdEvoData.id <= 809) {
+          if (thirdEvoData.id <= 905) {
             evolutionChainPokemon.secondEvolution[i].thirdEvolution.push({
               species: thirdEvoData,
               evolutionDetails: third_evolution.evolution_details,

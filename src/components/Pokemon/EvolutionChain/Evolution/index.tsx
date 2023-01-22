@@ -21,7 +21,7 @@ const Evolution = ({
   ...rest
 }: EvolutionProps): JSX.Element => {
   // data
-  const { id, name, generation } = species;
+  const { id, name, generation, varieties } = species;
 
   const pokemonName = findPokemonName(species);
 
@@ -49,6 +49,7 @@ const Evolution = ({
         pokemonGen={generation?.name}
         nameFormat={false}
         pokemonName={pokemonName}
+        defaultVarietyName={varieties[0].pokemon.name}
       />
     </EvolutionContainer>
   );

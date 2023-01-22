@@ -35,7 +35,7 @@ export const getStaticProps: GetStaticProps = async () => {
 
   try {
     const [pokemonData, typesData] = await Promise.all([
-      api.listPokemons(0, 809),
+      api.listPokemons(0, 905),
       api.listTypes(0, 18),
     ]);
 

@@ -58,14 +58,16 @@ const PokemonDetails = ({
   // load pokemon cry sound
   const [cry, setCry] = useState(null);
   useEffect(() => {
-    setCry(
-      new Audio(
-        `https://raw.githubusercontent.com/andreferreiradlw/pokestats_media/main/assets/cries/${id}.${
-          id >= 722 ? 'wav' : 'mp3'
-        }`,
-      ),
-    );
-  }, []);
+    if (id <= 802) {
+      setCry(
+        new Audio(
+          `https://raw.githubusercontent.com/andreferreiradlw/pokestats_media/main/assets/cries/${id}.${
+            id >= 722 ? 'wav' : 'mp3'
+          }`,
+        ),
+      );
+    }
+  }, [id]);
   const generationName = useMemo(() => mapGeneration(generation?.name), [generation]);
   const flavorText = useMemo(() => {
     // @ts-ignore

@@ -197,7 +197,6 @@ const gameVersions = [
     generation: 'Generation VII',
     genValue: 'generation-vii',
   },
-  /** 
   {
     label: 'Sword',
     value: 'sword',
@@ -212,7 +211,20 @@ const gameVersions = [
     generation: 'Generation VIII',
     genValue: 'generation-viii',
   },
-  */
+  {
+    label: 'Scarlet',
+    value: 'scarlet',
+    group: 'scarlet-violet',
+    generation: 'Generation IX',
+    genValue: 'generation-ix',
+  },
+  {
+    label: 'Violet',
+    value: 'violet',
+    group: 'scarlet-violet',
+    generation: 'Generation IX',
+    genValue: 'generation-ix',
+  },
 ];
 
 const generations = [
@@ -251,10 +263,15 @@ const generations = [
     label: 'Generation VII',
     gameVersion: 'sun',
   },
+  {
+    value: 'generation-viii',
+    label: 'Generation VIII',
+    gameVersion: 'sword',
+  },
   // {
-  //   value: 'generation-viii',
-  //   label: 'Generation VIII',
-  //   gameVersion: 'sword',
+  //   value: 'generation-ix',
+  //   label: 'Generation IX',
+  //   gameVersion: 'scarlet',
   // },
 ];
 
@@ -273,9 +290,11 @@ const mapIdToGeneration = (id: number): string => {
     return 'generation-vi';
   } else if (id > 721 && id <= 809) {
     return 'generation-vii';
-  } /** else if (id > 809 && id <= 898) {
-    return 'generation-viii'
-  } */ else {
+  } else if (id > 809 && id <= 905) {
+    return 'generation-viii';
+  } else if (id > 905 && id <= 1008) {
+    return 'generation-viii';
+  } else {
     return 'all';
   }
 };

@@ -34,7 +34,7 @@ export const getServerSideProps: GetServerSideProps = async context => {
   const routes = [''];
 
   try {
-    const [pokemonData, typesData] = await Promise.all([api.listPokemons(0, 809), api.listTypes()]);
+    const [pokemonData, typesData] = await Promise.all([api.listPokemons(0, 905), api.listTypes()]);
 
     if (!pokemonData || !typesData) {
       return { notFound: true };

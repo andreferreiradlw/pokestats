@@ -42,12 +42,7 @@ const PokemonForms = ({
   );
 
   return (
-    <Box
-      flexalign={{ xxs: 'center', lg: 'flex-start' }}
-      flexjustify="flex-start"
-      flexgap="1em"
-      {...rest}
-    >
+    <Box flexalign="flex-start" flexjustify="flex-start" flexgap="1em" {...rest}>
       <SectionTitle>Forms</SectionTitle>
       <Table>
         <tbody>

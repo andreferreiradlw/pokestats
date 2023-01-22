@@ -141,15 +141,17 @@ const PokemonDetails = ({
             width="auto"
           >
             <PageHeading>{findPokemonName(species)}</PageHeading>
-            <IconContainer
-              whileHover="hover"
-              whileTap="tap"
-              variants={fadeInUpVariant}
-              key="cries-icon-container-pokemon"
-              onClick={() => cry?.play()}
-            >
-              <CriesIcon />
-            </IconContainer>
+            {id <= 802 && (
+              <IconContainer
+                whileHover="hover"
+                whileTap="tap"
+                variants={fadeInUpVariant}
+                key="cries-icon-container-pokemon"
+                onClick={() => cry?.play()}
+              >
+                <CriesIcon />
+              </IconContainer>
+            )}
           </Box>
         </Box>
         {(is_baby || is_legendary || is_mythical) && (

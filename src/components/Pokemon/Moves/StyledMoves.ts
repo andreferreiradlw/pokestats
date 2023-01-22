@@ -7,6 +7,7 @@ const TableBody = styled.tbody``;
 const TableRow = styled.tr``;
 const NameTH = styled.th``;
 const NameTD = styled.td`
+  font-weight: 500;
   text-transform: capitalize;
 `;
 

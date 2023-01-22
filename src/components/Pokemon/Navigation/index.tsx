@@ -40,10 +40,10 @@ const Navigation = ({ allPokemon, pokemonId, ...rest }: NavigationProps): JSX.El
           whileHover="hover"
           whileTap="tap"
           variants={fadeInUpVariant}
-          key={`previous-pokemon-${allPokemon[pokemonId - 2].name}`}
+          key={`previous-pokemon-${allPokemon[pokemonId - 2]?.name}`}
         >
           <BtnAnchor
-            href={`/pokemon/${allPokemon[pokemonId - 2].name}`}
+            href={`/pokemon/${allPokemon[pokemonId - 2]?.name}`}
             onClick={previousPokemon}
             $left
           >
@@ -52,14 +52,14 @@ const Navigation = ({ allPokemon, pokemonId, ...rest }: NavigationProps): JSX.El
                 src={`https://raw.githubusercontent.com/andreferreiradlw/pokestats_media/main/assets/images/${prefixId(
                   pokemonId - 1,
                 )}.png`}
-                alt={allPokemon[pokemonId - 2].name}
-                key={`navigation-left-${allPokemon[pokemonId - 2].name}`}
+                alt={allPokemon[pokemonId - 2]?.name}
+                key={`navigation-left-${allPokemon[pokemonId - 2]?.name}`}
                 width="100"
               />
             </Arrow>
             <Title>
               <PokemonID>{`#${pokemonId - 1}`}</PokemonID>
-              <PokemonName>{removeDash(allPokemon[pokemonId - 2].name)}</PokemonName>
+              <PokemonName>{removeDash(allPokemon[pokemonId - 2]?.name)}</PokemonName>
             </Title>
           </BtnAnchor>
         </BtnContainer>
@@ -69,22 +69,22 @@ const Navigation = ({ allPokemon, pokemonId, ...rest }: NavigationProps): JSX.El
           whileHover="hover"
           whileTap="tap"
           variants={fadeInUpVariant}
-          key={`previous-pokemon-${allPokemon[pokemonId].name}`}
+          key={`previous-pokemon-${allPokemon[pokemonId]?.name}`}
         >
-          <BtnAnchor href={`/pokemon/${allPokemon[pokemonId].name}`} onClick={nextPokemon} $right>
+          <BtnAnchor href={`/pokemon/${allPokemon[pokemonId]?.name}`} onClick={nextPokemon} $right>
             <Arrow $right>
               <ImageNext
                 src={`https://raw.githubusercontent.com/andreferreiradlw/pokestats_media/main/assets/images/${prefixId(
                   pokemonId + 1,
                 )}.png`}
-                alt={allPokemon[pokemonId].name}
-                key={`navigation-right-${allPokemon[pokemonId].name}`}
+                alt={allPokemon[pokemonId]?.name}
+                key={`navigation-right-${allPokemon[pokemonId]?.name}`}
                 width="100"
               />
             </Arrow>
             <Title>
               <PokemonID>{`#${pokemonId + 1}`}</PokemonID>
-              <PokemonName>{removeDash(allPokemon[pokemonId].name)}</PokemonName>
+              <PokemonName>{removeDash(allPokemon[pokemonId]?.name)}</PokemonName>
             </Title>
           </BtnAnchor>
         </BtnContainer>

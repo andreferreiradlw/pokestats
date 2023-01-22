@@ -44,7 +44,7 @@ interface BaseStatsProps extends BoxProps {
 
 const BaseStats = ({ stats, ...rest }: BaseStatsProps): JSX.Element => (
   <Box
-    flexalign={{ xxs: 'center', lg: 'flex-start' }}
+    flexalign="flex-start"
     flexjustify="flex-start"
     flexgap="1em"
     flexalignself="flex-start"

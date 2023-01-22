@@ -48,7 +48,7 @@ export const responsiveProps = (property, values) => {
  * @param {number|string|Object} sizeProp The sizes prop.
  * @returns {string[]} Returns the flex-basis styles for the multiple breakpoints.
  */
-export const flexStyle = sizeProp => {
+export const flexStyle = (sizeProp, $parentGap) => {
   if (typeof sizeProp === 'number') {
     return css`
       flex-basis: ${(sizeProp / 12) * 100}%;
@@ -64,9 +64,13 @@ export const flexStyle = sizeProp => {
         return css`
           ${breakpointStyle(
             breakpoints[d],
-            css`
-              flex-basis: ${(sizeProp[d] / 12) * 100}%;
-            `,
+            $parentGap
+              ? css`
+                  flex-basis: calc(${(sizeProp[d] / 12) * 100}% - ${$parentGap});
+                `
+              : css`
+                  flex-basis: ${(sizeProp[d] / 12) * 100}%;
+                `,
           )}
         `;
       } else if (breakpoints[d] && sizeProp[d] === 'auto') {

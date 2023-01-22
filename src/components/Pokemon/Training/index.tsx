@@ -96,12 +96,7 @@ const Training = ({ pokemon, species, ...rest }: TrainingProps): JSX.Element => 
   }, [gameVersion, held_items]);
 
   return (
-    <Box
-      flexalign={{ xxs: 'center', lg: 'flex-start' }}
-      flexjustify="flex-start"
-      flexgap="1em"
-      {...rest}
-    >
+    <Box flexalign="flex-start" flexjustify="flex-start" flexgap="1em" {...rest}>
       <SectionTitle>Training</SectionTitle>
       <Table>
         <tbody>
@@ -118,7 +113,7 @@ const Training = ({ pokemon, species, ...rest }: TrainingProps): JSX.Element => 
             <td>{baseHappiness}</td>
           </tr>
           <tr>
-            <th>Base Exp.</th>
+            <th>Base XP</th>
             <td>{base_experience}</td>
           </tr>
           <tr>
@@ -130,7 +125,7 @@ const Training = ({ pokemon, species, ...rest }: TrainingProps): JSX.Element => 
                     <Box
                       key={`${item_details.name}-${i}`}
                       flexdirection="row"
-                      flexjustify="space-between"
+                      flexjustify={{ xxs: 'flex-start', md: 'space-between' }}
                       flexgap="0.5em"
                       flexmargin="0 0 5px"
                     >

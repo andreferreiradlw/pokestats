@@ -7,7 +7,7 @@ import { useForwardedRef } from '@/helpers';
 import BoxWrapper from './StyledBox';
 
 export interface BoxProps extends HTMLMotionProps<'div'> {
-  constrained?: boolean;
+  $contained?: boolean;
   $flexgrow?: boolean;
   $isRelative?: boolean;
   $withGutter?: boolean;
@@ -25,6 +25,7 @@ export interface BoxProps extends HTMLMotionProps<'div'> {
   flexpadding?: CSSProperties['padding'] | Record<string, CSSProperties['padding']>;
   flexwrap?: CSSProperties['flexWrap'] | Record<string, CSSProperties['flexWrap']>;
   minheight?: CSSProperties['minHeight'] | Record<string, CSSProperties['minHeight']>;
+  $parentGap?: CSSProperties['gap'];
   screensizes?: number | Record<string, number>;
   width?: CSSProperties['width'] | Record<string, CSSProperties['width']>;
 }

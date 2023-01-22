@@ -44,31 +44,31 @@ const BoxWrapper = styled(motion.div)<BoxProps>`
   `}
 
   /** column-based flex size */
-  ${({ constrained, screensizes }) =>
-    constrained
+  ${({ $contained, screensizes, $parentGap }) =>
+    $contained
       ? css`
           flex-basis: 100%;
         `
       : screensizes
-      ? flexStyle(screensizes)
+      ? flexStyle(screensizes, $parentGap)
       : css`
           flex-basis: auto;
         `}
   
-  ${({ constrained, screensizes, $flexgrow }) =>
-    !constrained &&
+  ${({ $contained, screensizes, $flexgrow }) =>
+    !$contained &&
     !screensizes &&
     $flexgrow &&
     css`
       flex-grow: 1;
     `}
   
-  /** constrained max-width */
-  ${({ constrained, $flexgrow, theme }) =>
-    constrained &&
+  /** $contained max-width */
+  ${({ $contained, $flexgrow, theme }) =>
+    $contained &&
     css`
       ${$flexgrow && 'flex-grow: 1;'}
-      ${responsiveProps('max-width', theme.layout.constrained)}}
+      ${responsiveProps('max-width', theme.layout.contained)}}
     `};
 
   /** Position */

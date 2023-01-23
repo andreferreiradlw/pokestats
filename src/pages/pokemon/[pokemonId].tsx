@@ -35,7 +35,6 @@ export interface PokestatsPokemonPageProps {
   abilities: Ability[];
   species: PokemonSpecies;
   pokemonMoves: PokemonMove[];
-  pokemonGen: VersionGroup['name'];
   evolutionChain: {
     chainId: number;
     babyTriggerItem: EvolutionChain['baby_trigger_item'];
@@ -54,7 +53,6 @@ export interface PokestatsPokemonPageProps {
 const PokestatsPokemonPage: NextPage<PokestatsPokemonPageProps> = ({
   allPokemonTypes,
   allPokemon,
-  pokemonGen,
   ...props
 }) => {
   const router = useRouter();
@@ -71,7 +69,7 @@ const PokestatsPokemonPage: NextPage<PokestatsPokemonPageProps> = ({
   }
 
   const pokemonName = findPokemonName(props.species);
-  const pageTitle = `${pokemonName} (Pokémon) - ${PokestatsPageTitle}`;
+  const pageTitle = `${pokemonName} (Pokémon #${props.pokemon.id}) - ${PokestatsPageTitle}`;
   const pageDescription = formatFlavorText(props.species.flavor_text_entries[0]?.flavor_text);
   const generationDescriptions = gameVersions
     .filter(version => version.genValue === props.species.generation.name)
@@ -100,7 +98,7 @@ const PokestatsPokemonPage: NextPage<PokestatsPokemonPageProps> = ({
       <Layout
         withHeader={{
           autocompleteList: [].concat(allPokemon, allPokemonTypes),
-          pokemonGen: pokemonGen,
+          currPokemon: props.species,
         }}
       >
         <PokemonPage allPokemon={allPokemon} {...props} />
@@ -251,12 +249,6 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
       entry => entry.language.name === 'en',
     );
 
-    const { game_indices } = pokemonDataResults;
-    const { generation } = pokemonSpeciesResults;
-    const pokemonGen = game_indices?.[0]
-      ? game_indices[0].version.name
-      : mapGenerationToGame(generation.name, pokemonDataResults.id);
-
     return {
       props: {
         allPokemon: allPokemonDataResults.map((currPokemon, i) => ({
@@ -276,7 +268,6 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
         })),
         species: pokemonSpeciesResults,
         evolutionChain: evolutionChainPokemon,
-        pokemonGen,
         revalidate: 120,
       },
     };

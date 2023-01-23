@@ -1,9 +1,7 @@
-import { useEffect, useContext } from 'react';
 // types
 import type { PokestatsPokemonPageProps } from '@/pages/pokemon/[pokemonId]';
 // helpers
-import GameVersionContext from '@/components/Layout/gameVersionContext';
-import { mapGenerationToGame, pageContainerVariant, findPokemonName } from '@/helpers';
+import { pageContainerVariant, findPokemonName } from '@/helpers';
 // styles
 import { Divider } from '@/components/BaseStyles';
 // components
@@ -29,29 +27,12 @@ const PokemonPage = ({
   species,
   evolutionChain,
 }: Omit<PokestatsPokemonPageProps, 'allPokemonTypes' | 'pokemonGen'>): JSX.Element => {
-  // game version
-  const { setGameVersion } = useContext(GameVersionContext);
   // data
-  const { id, name, stats, types, sprites, game_indices } = pokemon;
-  const { names, generation, varieties } = species;
+  const { id, name, stats, types, sprites } = pokemon;
+  const { names, varieties } = species;
   const { babyTriggerItem } = evolutionChain;
 
   const currPokemonName = findPokemonName(species);
-
-  console.log(pokemon);
-  console.log(species);
-
-  useEffect(() => {
-    let pokemonGen: string;
-    // set current pokemon gen
-    game_indices?.[0]
-      ? (pokemonGen = game_indices[0].version.name)
-      : (pokemonGen = mapGenerationToGame(generation.name, id));
-
-    console.log('pokemonGen', pokemonGen);
-
-    setGameVersion(pokemonGen);
-  }, [generation, game_indices, setGameVersion, id]);
 
   return (
     <AnimatePresence mode="wait">

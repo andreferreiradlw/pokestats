@@ -1,7 +1,9 @@
-import { useContext, useMemo } from 'react';
+import { useContext, useEffect, useState } from 'react';
+// types
+import type { PokemonSpecies } from 'pokenode-ts';
 // helpers
 import GameVersionContext from '@/components/Layout/gameVersionContext';
-import { gameVersions, checkIfEarlierGen } from '@/helpers';
+import { gameVersions, checkIfEarlierGen, mapGenerationToGame } from '@/helpers';
 // components
 import Link from 'next/link';
 import Box, { BoxProps } from '@/components/Box';
@@ -12,21 +14,33 @@ import { HeaderContainer, PokestatsLogo } from './styledHeader';
 
 interface HeaderComponentProps extends BoxProps {
   autocompleteList: AutocompleteProps['filterList'];
-  pokemonGen?: string;
+  currPokemon?: PokemonSpecies;
 }
+type GameVersions = typeof gameVersions;
 
 const HeaderComponent = ({
   autocompleteList,
-  pokemonGen,
+  currPokemon,
   ...rest
 }: HeaderComponentProps): JSX.Element => {
+  const pokemonGen = currPokemon.generation.name;
   // game version
   const { gameVersion, setGameVersion } = useContext(GameVersionContext);
+  // state
+  const [dropdownOptions, setDropdownOptions] = useState<GameVersions>();
 
-  const versionOptions = useMemo(
-    () => gameVersions.filter(version => !checkIfEarlierGen(pokemonGen, version.value)),
-    [pokemonGen],
-  );
+  useEffect(() => {
+    const currGame = mapGenerationToGame(pokemonGen, currPokemon.id);
+
+    const currPokemonVersions = gameVersions.filter(
+      version => !checkIfEarlierGen(currGame, version.value),
+    );
+    setDropdownOptions(currPokemonVersions);
+
+    if (currPokemonVersions.findIndex(game => game.value === gameVersion) < 0) {
+      setGameVersion(currPokemonVersions[0].value);
+    }
+  }, [currPokemon]);
 
   return (
     <HeaderContainer {...rest}>
@@ -43,10 +57,10 @@ const HeaderComponent = ({
           <Link href="/">
             <PokestatsLogo>PokeStats</PokestatsLogo>
           </Link>
-          {pokemonGen && !!versionOptions?.length && (
+          {pokemonGen && !!dropdownOptions?.length && (
             <Dropdown
               label="Game Version"
-              options={versionOptions}
+              options={dropdownOptions}
               value={gameVersion}
               onChange={e => setGameVersion(e.target.value)}
               minWidth="190px"

@@ -133,7 +133,6 @@ const PokemonMoves = ({ pokemon, ...rest }: PokemonMovesProps): JSX.Element => {
       };
       // current group to filter
       const gameGroup = mapVersionToGroup(gameVersion);
-      console.log('filterMoves machine', filterMoves(allMoves, 'machine', gameGroup));
       // filter moves
       const levelMoves = filterMoves(allMoves, 'level-up', gameGroup);
       const tmMoves = filterMoves(allMoves, 'machine', gameGroup);

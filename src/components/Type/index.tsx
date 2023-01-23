@@ -1,7 +1,7 @@
 // types
 import type { PokestatsTypePageProps } from '@/pages/type/[typeId]';
 // helpers
-import { pageContainerVariant } from '@/helpers';
+import { findEnglishName, pageContainerVariant } from '@/helpers';
 // components
 import { AnimatePresence } from 'framer-motion';
 import { MainContainer } from '@/components/Layout';
@@ -19,7 +19,7 @@ const TypePage = ({ typeInfo, typeMoves }: TypePageProps): JSX.Element => {
   // data
   const { name, names, damage_relations } = typeInfo;
 
-  const typeName = names.find(name => name.language.name === 'en').name;
+  const typeName = findEnglishName(names);
 
   return (
     <AnimatePresence mode="wait">

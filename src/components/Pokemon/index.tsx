@@ -32,7 +32,7 @@ const PokemonPage = ({
   const { names, varieties } = species;
   const { babyTriggerItem } = evolutionChain;
 
-  const currPokemonName = findEnglishName(species);
+  const currPokemonName = findEnglishName(names);
 
   return (
     <AnimatePresence mode="wait">

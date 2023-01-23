@@ -11,12 +11,12 @@ import {
   ContestClient,
   SuperContestEffect,
 } from 'pokenode-ts';
-import { findEnglishName, getIdFromURL } from '@/helpers';
+import { capitalise, findEnglishName, getIdFromURL, removeDash } from '@/helpers';
 import { PokestatsPageTitle } from '@/components/Head';
 // components
 import Head from 'next/head';
 import Layout from '@/components/Layout';
-// import MovePage from '@/components/MovePage';
+import MovePage from '@/components/MovePage';
 import Loading from '@/components/Loading';
 
 export interface PokestatsMovePageProps {
@@ -27,12 +27,7 @@ export interface PokestatsMovePageProps {
 }
 
 const PokestatsMovePage: NextPage<PokestatsMovePageProps> = ({ autocompleteList, ...props }) => {
-  console.log(props.move, props.target, props.superContestEffect);
-
   const router = useRouter();
-
-  const moveName = findEnglishName(props.move.names);
-  const pageTitle = `${moveName} (Move) - ${PokestatsPageTitle}`;
 
   if (router.isFallback) {
     return (
@@ -44,12 +39,19 @@ const PokestatsMovePage: NextPage<PokestatsMovePageProps> = ({ autocompleteList,
     );
   }
 
+  const moveName = props.move?.names
+    ? findEnglishName(props.move.names)
+    : capitalise(removeDash(props.move.name));
+  const pageTitle = `${moveName} (Move) - ${PokestatsPageTitle}`;
+
   return (
     <>
       <Head>
         <title>{pageTitle}</title>
       </Head>
-      <Layout withHeader={{ autocompleteList: autocompleteList }}>move page</Layout>
+      <Layout withHeader={{ autocompleteList: autocompleteList }}>
+        <MovePage {...props} />
+      </Layout>
     </>
   );
 };
@@ -96,6 +98,8 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
       console.log('Failed to fetch moveData');
       return { notFound: true };
     }
+
+    console.log(moveData);
 
     // fetch target and contest move data
     const [targetData, superContestEffectData] = await Promise.all([

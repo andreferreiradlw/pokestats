@@ -1,10 +1,10 @@
 import { useRouter } from 'next/router';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, CSSProperties } from 'react';
 // helpers
-import { removeDash, padPokemonId } from '@/helpers';
+import { removeDash, prefixId, fadeInDownVariant } from '@/helpers';
 // types
 import type { Pokemon, PokemonType } from '@/types';
-import type { BoxProps } from '@/components/Box';
+import type { HTMLMotionProps } from 'framer-motion';
 // styles
 import {
   Container,
@@ -16,20 +16,16 @@ import {
   PokeID,
 } from './styledAutoComplete';
 // components
+import { AnimatePresence } from 'framer-motion';
 import Box from '@/components/Box';
 import TypeIcon from '@/components/TypeIcon';
 
-export interface AutocompleteProps extends BoxProps {
+export interface AutocompleteProps extends HTMLMotionProps<'div'> {
   filterList: (PokemonType | Pokemon)[];
+  width?: CSSProperties['width'];
 }
 
-const Autocomplete = ({
-  filterList,
-  flexalign = 'stretch',
-  flexdirection = 'row',
-  flexmargin = '0 auto',
-  ...rest
-}: AutocompleteProps): JSX.Element => {
+const Autocomplete = ({ filterList, ...rest }: AutocompleteProps): JSX.Element => {
   // router
   const router = useRouter();
   // search state
@@ -114,52 +110,57 @@ const Autocomplete = ({
   };
 
   return (
-    <Container
-      flexalign={flexalign}
-      flexdirection={flexdirection}
-      flexmargin={flexmargin}
-      {...rest}
-    >
+    <Container {...rest}>
       <label htmlFor="autocomplete" id="autocomplete_label" aria-hidden="true">
         Search Pokestats
       </label>
       <Input
         type="text"
         autoComplete="off"
-        placeholder="Search PokeStats"
+        placeholder="Search PokeStats..."
         id="autocomplete"
         aria-labelledby="autocomplete_label"
         value={search}
         onChange={e => handleInputChange(e)}
         onKeyDown={e => handleKeyDown(e)}
+        $isOpen={!!filtered?.length}
       />
-      {!!filtered?.length && (
-        <ListWrapper>
-          {filtered.map(({ assetType, name, id }, i) => (
-            <OptionWrapper
-              href={`/${assetType}/${name}`}
-              key={`${assetType}-${id}-${name}-${i}`}
-              onClick={() => resetStates()}
-              onFocus={() => setActiveOption(i)}
-              onKeyDown={e => handleKeyDown(e)}
-              ref={currOption => currOption && i === activeOption && currOption.focus()}
-            >
-              <Box flexdirection="row" flexjustify="flex-start" flexgap="1em">
-                {assetType === 'type' && <TypeIcon type={name} />}
-                {assetType === 'pokemon' && (
-                  <OptionImg
-                    src={`https://raw.githubusercontent.com/andreferreiradlw/pokestats_media/main/assets/images/${padPokemonId(
-                      id,
-                    )}.png`}
-                  />
-                )}
-                <Option>{removeDash(name)}</Option>
-              </Box>
-              {assetType === 'pokemon' && <PokeID>{`#${id}`}</PokeID>}
-            </OptionWrapper>
-          ))}
-        </ListWrapper>
-      )}
+      <AnimatePresence>
+        {!!filtered?.length && (
+          <ListWrapper
+            initial="hidden"
+            animate="show"
+            whileTap="tap"
+            exit="exit"
+            variants={fadeInDownVariant}
+            key="autocomplete-list-wrapper"
+          >
+            {filtered.map(({ assetType, name, id }, i) => (
+              <OptionWrapper
+                href={`/${assetType}/${name}`}
+                key={`${assetType}-${id}-${name}-${i}`}
+                onClick={() => resetStates()}
+                onFocus={() => setActiveOption(i)}
+                onKeyDown={e => handleKeyDown(e)}
+                ref={currOption => currOption && i === activeOption && currOption.focus()}
+              >
+                <Box flexdirection="row" flexjustify="flex-start" flexgap="1em">
+                  {assetType === 'type' && <TypeIcon type={name} />}
+                  {assetType === 'pokemon' && (
+                    <OptionImg
+                      src={`https://raw.githubusercontent.com/andreferreiradlw/pokestats_media/main/assets/images/${prefixId(
+                        id,
+                      )}.png`}
+                    />
+                  )}
+                  <Option>{removeDash(name)}</Option>
+                </Box>
+                {assetType === 'pokemon' && <PokeID>{`#${id}`}</PokeID>}
+              </OptionWrapper>
+            ))}
+          </ListWrapper>
+        )}
+      </AnimatePresence>
     </Container>
   );
 };

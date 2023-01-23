@@ -1,8 +1,13 @@
+// data
+import itemMapData from '@/components/Pokemon/Training/item-icons.json';
+
+const capitalise = (str: string): string => str.replace(/(^\w|\s\w)/g, m => m.toUpperCase());
+
 // remove underscores and replace with spaces
 const removeUnderscore = (str: string): string => str.replace(/_/g, ' ');
 
 // remove dashes
-const removeDash = (str: string): string => str.replace(/-/g, ' ');
+const removeDash = (str: string): string => str?.replace(/-/g, ' ');
 
 const formatFlavorText = (text: string): string =>
   text
@@ -12,6 +17,25 @@ const formatFlavorText = (text: string): string =>
     .replace(/u'-\n'/, '-')
     .replace(/(\r\n|\n|\r)/gm, ' ');
 
-const padPokemonId = (id: number): string => id.toString().padStart(3, '0');
+const prefixId = (id: number, length = 3): string => id.toString().padStart(length, '0');
 
-export { removeUnderscore, removeDash, formatFlavorText, padPokemonId };
+// map item pokeapi slug to correct sprites url
+const itemMapUrl = (itemSlug: string): string => {
+  let itemMatch;
+
+  for (const category of Object.keys(itemMapData)) {
+    for (const categoryItem of Object.keys(itemMapData[category])) {
+      const currItem = itemMapData[category][categoryItem];
+      if (currItem.icon.slug === itemSlug) {
+        itemMatch = currItem.icon;
+        break;
+      }
+    }
+    if (itemMatch) break;
+  }
+
+  // return formatted url
+  return itemMatch ? `${itemMatch.set}/${itemMatch.filename}` : 'other-item/poke-doll.png';
+};
+
+export { capitalise, removeUnderscore, removeDash, formatFlavorText, prefixId, itemMapUrl };

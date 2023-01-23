@@ -2,30 +2,42 @@ import styled, { css } from 'styled-components';
 // types
 import type { PokemonBoxProps } from './index';
 // styles
-import { float } from '@/components/BaseStyles';
+import { float, focusStyles } from '@/components/BaseStyles';
 // components
 import { motion } from 'framer-motion';
+import Link from 'next/link';
+
+const Anchor = styled(Link)`
+  ${focusStyles}
+`;
 
 const PokeBox = styled(motion.div)<{
   $dark?: PokemonBoxProps['$dark'];
 }>`
   align-items: center;
-  border: 1px solid transparent;
+  border: 1px solid ${({ theme }) => theme.colors.primary.light};
   border-radius: 5px;
   display: flex;
   flex-basis: auto;
   flex-direction: column;
-  font-weight: 600;
+  font-weight: 500;
   gap: 0.5em;
   justify-content: center;
-  max-width: 175px;
+  max-width: 125px;
   overflow: hidden;
-  padding: 1rem;
+  padding: 1em;
   position: relative;
   text-align: center;
   transition: border 0.1s ease-in-out;
   transition: box-shadow 0.05s ease-in-out;
-  width: 175px;
+  width: 125px;
+
+  ${({ theme }) => css`
+    @media ${theme.device.md} {
+      max-width: 175px;
+      width: 175px;
+    }
+  `}
 
   &:hover {
     cursor: pointer;
@@ -44,11 +56,11 @@ const PokeBox = styled(motion.div)<{
   ${({ $dark, theme }) =>
     $dark
       ? css`
-          background-color: ${theme.colors.black};
-          color: ${theme.colors.white};
+          background-color: ${theme.colors.secondary.main};
+          color: ${theme.colors.secondary.contrastText};
           &::hover,
           &:active {
-            border: 1px solid ${theme.colors.white};
+            border: 1px solid ${theme.colors.primary.main};
           }
           &:hover {
             box-shadow: 1px 1px 3px 0px ${theme.colors.darkerShadow};
@@ -58,33 +70,47 @@ const PokeBox = styled(motion.div)<{
           }
         `
       : css`
-          background-color: ${theme.colors.white};
-          color: ${theme.colors.black};
-          &::hover,
-          &:active {
-            border: 1px solid ${theme.colors.black};
-          }
+          background-color: ${theme.colors.primary.main};
+          color: ${theme.colors.primary.contrastText};
           &:hover {
-            box-shadow: 1px 1px 3px 0px ${theme.colors.lighterShadow};
+            box-shadow: ${theme.colors.defaultBoxShadow};
           }
           &:active {
-            box-shadow: 1px 1px 2px 0px ${theme.colors.darkerShadow} inset;
+            box-shadow: ${theme.colors.defaultInsetBoxShadow};
           }
         `}
 `;
 
 const NumberId = styled.span`
-  font-size: 2em;
+  font-size: 1.5em;
+
+  ${({ theme }) => css`
+    @media ${theme.device.md} {
+      font-size: 2em;
+    }
+  `}
 `;
 
 const PokeName = styled.span`
-  font-size: 1.5em;
+  font-size: 1em;
   text-transform: capitalize;
+
+  ${({ theme }) => css`
+    @media ${theme.device.md} {
+      font-size: 1.5em;
+    }
+  `}
 `;
 
 const PokeGen = styled.span`
-  font-size: 1em;
+  font-size: 0.85em;
   font-weight: 300;
+
+  ${({ theme }) => css`
+    @media ${theme.device.md} {
+      font-size: 1em;
+    }
+  `}
 `;
 
-export { PokeBox, NumberId, PokeName, PokeGen };
+export { Anchor, PokeBox, NumberId, PokeName, PokeGen };

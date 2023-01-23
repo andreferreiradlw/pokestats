@@ -2,7 +2,7 @@
 import type { PokestatsPokemonPageProps } from '@/pages/pokemon/[pokemonId]';
 import type { Pokemon } from 'pokenode-ts';
 // helpers
-import { removeDash, fadeInUpVariant, padPokemonId } from '@/helpers';
+import { removeDash, fadeInUpVariant, prefixId } from '@/helpers';
 // styles
 import { BtnContainer, BtnAnchor, Title, Arrow, PokemonID, PokemonName } from './StyledNavigation';
 // components
@@ -32,6 +32,7 @@ const Navigation = ({ allPokemon, pokemonId, ...rest }: NavigationProps): JSX.El
       flexdirection={{ xxs: 'column', sm: 'row' }}
       flexjustify={{ xxs: 'flex-start', sm: 'center' }}
       flexgap="1em"
+      flexmargin="1em 0 0"
       {...rest}
     >
       {pokemonId !== 1 && (
@@ -39,27 +40,26 @@ const Navigation = ({ allPokemon, pokemonId, ...rest }: NavigationProps): JSX.El
           whileHover="hover"
           whileTap="tap"
           variants={fadeInUpVariant}
-          key={`previous-pokemon-${allPokemon[pokemonId - 2].name}`}
+          key={`previous-pokemon-${allPokemon[pokemonId - 2]?.name}`}
         >
           <BtnAnchor
-            href={`/pokemon/${allPokemon[pokemonId - 2].name}`}
+            href={`/pokemon/${allPokemon[pokemonId - 2]?.name}`}
             onClick={previousPokemon}
             $left
           >
             <Arrow $left>
               <ImageNext
-                src={`https://raw.githubusercontent.com/andreferreiradlw/pokestats_media/main/assets/images/${padPokemonId(
+                src={`https://raw.githubusercontent.com/andreferreiradlw/pokestats_media/main/assets/images/${prefixId(
                   pokemonId - 1,
                 )}.png`}
-                alt={allPokemon[pokemonId - 2].name}
-                key={`navigation-left-${allPokemon[pokemonId - 2].name}`}
+                alt={allPokemon[pokemonId - 2]?.name}
+                key={`navigation-left-${allPokemon[pokemonId - 2]?.name}`}
                 width="100"
-                $pixelatedImg
               />
             </Arrow>
             <Title>
               <PokemonID>{`#${pokemonId - 1}`}</PokemonID>
-              <PokemonName>{removeDash(allPokemon[pokemonId - 2].name)}</PokemonName>
+              <PokemonName>{removeDash(allPokemon[pokemonId - 2]?.name)}</PokemonName>
             </Title>
           </BtnAnchor>
         </BtnContainer>
@@ -69,23 +69,22 @@ const Navigation = ({ allPokemon, pokemonId, ...rest }: NavigationProps): JSX.El
           whileHover="hover"
           whileTap="tap"
           variants={fadeInUpVariant}
-          key={`previous-pokemon-${allPokemon[pokemonId].name}`}
+          key={`previous-pokemon-${allPokemon[pokemonId]?.name}`}
         >
-          <BtnAnchor href={`/pokemon/${allPokemon[pokemonId].name}`} onClick={nextPokemon} $right>
+          <BtnAnchor href={`/pokemon/${allPokemon[pokemonId]?.name}`} onClick={nextPokemon} $right>
             <Arrow $right>
               <ImageNext
-                src={`https://raw.githubusercontent.com/andreferreiradlw/pokestats_media/main/assets/images/${padPokemonId(
+                src={`https://raw.githubusercontent.com/andreferreiradlw/pokestats_media/main/assets/images/${prefixId(
                   pokemonId + 1,
                 )}.png`}
-                alt={allPokemon[pokemonId].name}
-                key={`navigation-right-${allPokemon[pokemonId].name}`}
+                alt={allPokemon[pokemonId]?.name}
+                key={`navigation-right-${allPokemon[pokemonId]?.name}`}
                 width="100"
-                $pixelatedImg
               />
             </Arrow>
             <Title>
               <PokemonID>{`#${pokemonId + 1}`}</PokemonID>
-              <PokemonName>{removeDash(allPokemon[pokemonId].name)}</PokemonName>
+              <PokemonName>{removeDash(allPokemon[pokemonId]?.name)}</PokemonName>
             </Title>
           </BtnAnchor>
         </BtnContainer>

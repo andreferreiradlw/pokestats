@@ -44,11 +44,17 @@ const Bar = styled.div<ProgressBarProps>`
   }
 `;
 
+const BarCell = styled.td`
+  width: 100%;
+`;
+
 const ProgressBar = ({ progress = 60, color }: ProgressBarProps): JSX.Element => {
   return (
-    <Bar progress={progress} color={color}>
-      <span />
-    </Bar>
+    <BarCell>
+      <Bar progress={progress} color={color}>
+        <span />
+      </Bar>
+    </BarCell>
   );
 };
 

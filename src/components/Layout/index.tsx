@@ -2,33 +2,32 @@ import { useState, useMemo, CSSProperties } from 'react';
 // types
 import type { AutocompleteProps } from '@/components/Autocomplete';
 import type { BoxProps } from '@/components/Box';
+import type { PokemonSpecies } from 'pokenode-ts';
 // helpers
 import GameVersionContext from './gameVersionContext';
 import { LayoutContainer, MainContainer } from './StyledLayout';
 // components
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import { mapGeneration } from '@/helpers';
 
 interface LayoutProps extends BoxProps {
   layoutGap?: CSSProperties['gap'];
   withHeader?: {
-    pokemonGen?: string;
+    currPokemon?: PokemonSpecies;
     autocompleteList: AutocompleteProps['filterList'];
-  };
-  withMain?: {
-    mainKey: string;
   };
 }
 
 const Layout = ({
-  layoutGap = '3em',
+  layoutGap = '1.5em',
   withHeader,
-  withMain,
   children,
   ...rest
 }: LayoutProps): JSX.Element => {
+  const pokemonGen = mapGeneration(withHeader?.currPokemon?.generation?.name);
   // game version
-  const [gameVersion, setGameVersion] = useState(withHeader?.pokemonGen);
+  const [gameVersion, setGameVersion] = useState(pokemonGen);
 
   const VersionContextValue = useMemo(
     () => ({
@@ -40,20 +39,14 @@ const Layout = ({
 
   return (
     <GameVersionContext.Provider value={VersionContextValue}>
-      <LayoutContainer flexdirection="column" width="100%" flexgap={layoutGap}>
+      <LayoutContainer flexdirection="column" width="100%" flexgap={layoutGap} {...rest}>
         {withHeader && (
           <Header
             autocompleteList={withHeader.autocompleteList}
-            pokemonGen={withHeader?.pokemonGen}
+            currPokemon={withHeader?.currPokemon}
           />
         )}
-        {withMain ? (
-          <MainContainer key={withMain.mainKey} {...rest}>
-            {children}
-          </MainContainer>
-        ) : (
-          children
-        )}
+        {children}
         <Footer />
       </LayoutContainer>
     </GameVersionContext.Provider>

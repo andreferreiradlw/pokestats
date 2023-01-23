@@ -2,14 +2,13 @@
 import type { BoxProps } from '@/components/Box';
 import type { PokemonSpecies, EvolutionDetail } from 'pokenode-ts';
 // helpers
-import { fadeInUpVariant } from '@/helpers';
-import { EvoArrow } from './StyledEvolution';
+import { fadeInUpVariant, findPokemonName } from '@/helpers';
+import { EvolutionContainer, EvoDetailsContainer, EvoArrow } from './StyledEvolution';
 // components
-import BoxWrapper from '@/components/Box/StyledBox';
 import PokemonBox from '@/components/PokemonBox';
 import EvolutionDetails from './EvolutionDetails';
 
-interface EvolutionProps extends BoxProps {
+export interface EvolutionProps extends BoxProps {
   noArrow?: boolean;
   species: PokemonSpecies;
   evolutionDetails?: EvolutionDetail[];
@@ -22,40 +21,37 @@ const Evolution = ({
   ...rest
 }: EvolutionProps): JSX.Element => {
   // data
-  const { id, name, generation } = species;
+  const { id, name, generation, varieties } = species;
+
+  const pokemonName = findPokemonName(species);
 
   return (
-    <BoxWrapper
-      flexdirection={{ xxs: 'column', lg: 'row' }}
+    <EvolutionContainer
+      flexdirection="column"
       flexalign="center"
+      flexjustify="space-between"
       flexgap="1em"
-      width={{ xxs: 'auto', lg: '100%' }}
       initial="hidden"
       animate="show"
       variants={fadeInUpVariant}
       key={`evo-details-container-${name}`}
       {...rest}
     >
-      {/** Arrow with evolution details */}
       {!noArrow && (
-        <BoxWrapper
-          width="auto"
-          $flexgrow
-          flexdirection="column"
-          flexgap="1em"
-          flexwrap="nowrap"
-          flexjustify="center"
-          flexalign="center"
-        >
-          {evolutionDetails.map((currDetails, i) => (
-            <EvolutionDetails key={`evo-details-${i}`} details={currDetails} />
-          ))}
+        <EvoDetailsContainer width="auto" flexgap="1em" flexjustify="space-between">
+          {/* <EvoArrow /> */}
+          <EvolutionDetails details={evolutionDetails} />
           <EvoArrow />
-        </BoxWrapper>
+        </EvoDetailsContainer>
       )}
-      {/** Pokemon box with image and types */}
-      <PokemonBox $dark pokemonId={id} pokemonName={name} pokemonGen={generation?.name} />
-    </BoxWrapper>
+      <PokemonBox
+        pokemonId={id}
+        pokemonGen={generation?.name}
+        nameFormat={false}
+        pokemonName={pokemonName}
+        defaultVarietyName={varieties[0].pokemon.name}
+      />
+    </EvolutionContainer>
   );
 };
 

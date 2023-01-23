@@ -1,6 +1,6 @@
 import { css } from 'styled-components';
 // config
-import { dimensions, breakpoints } from '../components/Box/config';
+import { dimensions, breakpoints } from '@/components/Theme/theme';
 
 /**
  * Creates the media-query syntax with the provided content inside.
@@ -28,12 +28,16 @@ export const responsiveProps = (property, values) => {
   } else if (typeof values === 'object') {
     return dimensions.map(d => {
       if (breakpoints[d] && values[d] !== undefined) {
-        return css`
-          ${breakpointStyle(
-            breakpoints[d],
-            property ? `${property}: ${values[d]};` : `${values[d]}`,
-          )}
-        `;
+        return d === 'xxs'
+          ? css`
+              ${property ? `${property}: ${values[d]};` : `${values[d]}`}
+            `
+          : css`
+              ${breakpointStyle(
+                breakpoints[d],
+                property ? `${property}: ${values[d]};` : `${values[d]}`,
+              )}
+            `;
       }
       return null;
     });
@@ -48,7 +52,7 @@ export const responsiveProps = (property, values) => {
  * @param {number|string|Object} sizeProp The sizes prop.
  * @returns {string[]} Returns the flex-basis styles for the multiple breakpoints.
  */
-export const flexStyle = sizeProp => {
+export const flexStyle = (sizeProp, $parentGap) => {
   if (typeof sizeProp === 'number') {
     return css`
       flex-basis: ${(sizeProp / 12) * 100}%;
@@ -64,9 +68,13 @@ export const flexStyle = sizeProp => {
         return css`
           ${breakpointStyle(
             breakpoints[d],
-            css`
-              flex-basis: ${(sizeProp[d] / 12) * 100}%;
-            `,
+            $parentGap
+              ? css`
+                  flex-basis: calc(${(sizeProp[d] / 12) * 100}% - ${$parentGap});
+                `
+              : css`
+                  flex-basis: ${(sizeProp[d] / 12) * 100}%;
+                `,
           )}
         `;
       } else if (breakpoints[d] && sizeProp[d] === 'auto') {

@@ -16,7 +16,7 @@ import {
   getIdFromEvolutionChain,
   getIdFromSpecies,
   mapGenerationToGame,
-  padPokemonId,
+  prefixId,
   formatFlavorText,
   gameVersions,
   findPokemonName,
@@ -35,7 +35,6 @@ export interface PokestatsPokemonPageProps {
   abilities: Ability[];
   species: PokemonSpecies;
   pokemonMoves: PokemonMove[];
-  pokemonGen: VersionGroup['name'];
   evolutionChain: {
     chainId: number;
     babyTriggerItem: EvolutionChain['baby_trigger_item'];
@@ -43,10 +42,10 @@ export interface PokestatsPokemonPageProps {
     secondEvolution: {
       species: PokemonSpecies;
       evolutionDetails: EvolutionDetail[];
-    }[];
-    thirdEvolution: {
-      species: PokemonSpecies;
-      evolutionDetails: EvolutionDetail[];
+      thirdEvolution: {
+        species: PokemonSpecies;
+        evolutionDetails: EvolutionDetail[];
+      }[];
     }[];
   };
 }
@@ -54,7 +53,6 @@ export interface PokestatsPokemonPageProps {
 const PokestatsPokemonPage: NextPage<PokestatsPokemonPageProps> = ({
   allPokemonTypes,
   allPokemon,
-  pokemonGen,
   ...props
 }) => {
   const router = useRouter();
@@ -63,18 +61,19 @@ const PokestatsPokemonPage: NextPage<PokestatsPokemonPageProps> = ({
     return (
       <Loading
         flexheight="100vh"
-        text="Loading Pokemon"
+        pokeball
+        text="Catching Pokémon"
         $iconWidth={{ xxs: '20%', xs: '15%', md: '10%', lg: '5%' }}
       />
     );
   }
 
   const pokemonName = findPokemonName(props.species);
-  const pageTitle = `${pokemonName} (Pokémon) - ${PokestatsPageTitle}`;
+  const pageTitle = `${pokemonName} (Pokémon #${props.pokemon.id}) - ${PokestatsPageTitle}`;
   const pageDescription = formatFlavorText(props.species.flavor_text_entries[0]?.flavor_text);
   const generationDescriptions = gameVersions
     .filter(version => version.genValue === props.species.generation.name)
-    .map(game => game.name)
+    .map(game => game.label)
     .join(', ');
 
   return (
@@ -91,7 +90,7 @@ const PokestatsPokemonPage: NextPage<PokestatsPokemonPageProps> = ({
         <meta property="og:description" content={pageDescription} />
         <meta
           property="og:image"
-          content={`https://raw.githubusercontent.com/andreferreiradlw/pokestats_media/main/assets/images/${padPokemonId(
+          content={`https://raw.githubusercontent.com/andreferreiradlw/pokestats_media/main/assets/images/${prefixId(
             props.pokemon.id,
           )}.png`}
         />
@@ -99,7 +98,7 @@ const PokestatsPokemonPage: NextPage<PokestatsPokemonPageProps> = ({
       <Layout
         withHeader={{
           autocompleteList: [].concat(allPokemon, allPokemonTypes),
-          pokemonGen: pokemonGen,
+          currPokemon: props.species,
         }}
       >
         <PokemonPage allPokemon={allPokemon} {...props} />
@@ -141,7 +140,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
       { results: allTypesDataResults },
       pokemonDataResults,
     ] = await Promise.all([
-      pokemonClient.listPokemons(0, 809),
+      pokemonClient.listPokemons(0, 905),
       pokemonClient.listTypes(),
       pokemonClient.getPokemonByName(pokemonName),
     ]);
@@ -151,7 +150,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
       return { notFound: true };
     }
 
-    if (pokemonDataResults.id > 809) return { notFound: true };
+    if (pokemonDataResults.id > 905) return { notFound: true };
 
     // abilities requests array
     let pokemonAbilities = [];
@@ -188,7 +187,6 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
       babyTriggerItem: evolutionDataResults.baby_trigger_item,
       firstEvolution: null,
       secondEvolution: [],
-      thirdEvolution: [],
     };
 
     // first evolution
@@ -201,26 +199,30 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
       evolutionChainPokemon.firstEvolution = firstEvoData;
     }
 
-    for (const second_evolution of evolutionDataResults.chain.evolves_to) {
+    for (const [i, second_evolution] of evolutionDataResults.chain.evolves_to.entries()) {
       // second evolution
       if (second_evolution.species.name === pokemonName) {
         evolutionChainPokemon.secondEvolution.push({
           species: pokemonSpeciesResults,
           evolutionDetails: second_evolution.evolution_details,
+          thirdEvolution: [],
         });
       } else {
         const secondEvoData = await pokemonClient.getPokemonSpeciesByName(
           second_evolution.species.name,
         );
-        evolutionChainPokemon.secondEvolution.push({
-          species: secondEvoData,
-          evolutionDetails: second_evolution.evolution_details,
-        });
+        if (secondEvoData.id <= 905) {
+          evolutionChainPokemon.secondEvolution.push({
+            species: secondEvoData,
+            evolutionDetails: second_evolution.evolution_details,
+            thirdEvolution: [],
+          });
+        }
       }
       // third evolution
       for (const third_evolution of second_evolution.evolves_to) {
         if (third_evolution.species.name === pokemonName) {
-          evolutionChainPokemon.thirdEvolution.push({
+          evolutionChainPokemon.secondEvolution[i].thirdEvolution.push({
             species: pokemonSpeciesResults,
             evolutionDetails: third_evolution.evolution_details,
           });
@@ -228,10 +230,12 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
           const thirdEvoData = await pokemonClient.getPokemonSpeciesByName(
             third_evolution.species.name,
           );
-          evolutionChainPokemon.thirdEvolution.push({
-            species: thirdEvoData,
-            evolutionDetails: third_evolution.evolution_details,
-          });
+          if (thirdEvoData.id <= 905) {
+            evolutionChainPokemon.secondEvolution[i].thirdEvolution.push({
+              species: thirdEvoData,
+              evolutionDetails: third_evolution.evolution_details,
+            });
+          }
         }
       }
     }
@@ -244,12 +248,6 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     pokemonSpeciesResults.genera = pokemonSpeciesResults.genera.filter(
       entry => entry.language.name === 'en',
     );
-
-    const { game_indices } = pokemonDataResults;
-    const { generation } = pokemonSpeciesResults;
-    const pokemonGen = game_indices?.[0]
-      ? game_indices[0].version.name
-      : mapGenerationToGame(generation.name);
 
     return {
       props: {
@@ -270,7 +268,6 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
         })),
         species: pokemonSpeciesResults,
         evolutionChain: evolutionChainPokemon,
-        pokemonGen,
         revalidate: 120,
       },
     };

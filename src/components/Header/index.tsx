@@ -1,32 +1,54 @@
-import { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
+// types
+import type { PokemonSpecies } from 'pokenode-ts';
 // helpers
 import GameVersionContext from '@/components/Layout/gameVersionContext';
-import { gameVersions, checkIfEarlierGen } from '@/helpers';
+import { gameVersions, checkIfEarlierGen, mapGenerationToGame } from '@/helpers';
 // components
 import Link from 'next/link';
 import Box, { BoxProps } from '@/components/Box';
 import Autocomplete, { AutocompleteProps } from '@/components/Autocomplete';
+import Dropdown from '@/components/Dropdown';
 // styles
-import { Select } from '@/components/BaseStyles';
-import { HeaderContainer, Heading, SelectContainer } from './styledHeader';
+import { HeaderContainer, PokestatsLogo } from './styledHeader';
 
 interface HeaderComponentProps extends BoxProps {
   autocompleteList: AutocompleteProps['filterList'];
-  pokemonGen?: string;
+  currPokemon?: PokemonSpecies;
 }
+type GameVersions = typeof gameVersions;
 
 const HeaderComponent = ({
   autocompleteList,
-  pokemonGen,
+  currPokemon,
   ...rest
 }: HeaderComponentProps): JSX.Element => {
+  const pokemonGen = currPokemon?.generation.name;
   // game version
   const { gameVersion, setGameVersion } = useContext(GameVersionContext);
+  // state
+  const [dropdownOptions, setDropdownOptions] = useState<GameVersions>();
+
+  useEffect(() => {
+    if (currPokemon) {
+      const currGame = mapGenerationToGame(pokemonGen, currPokemon.id);
+
+      const currPokemonVersions = gameVersions.filter(
+        version => !checkIfEarlierGen(currGame, version.value),
+      );
+
+      setDropdownOptions(currPokemonVersions);
+
+      if (currPokemonVersions.findIndex(game => game.value === gameVersion) < 0) {
+        setGameVersion(currPokemonVersions[0].value);
+      }
+    }
+  }, [currPokemon]);
 
   return (
     <HeaderContainer {...rest}>
       <Box
-        $constrained
+        $contained
         $withGutter
         flexdirection={{ xxs: 'column', md: 'row' }}
         flexjustify="space-between"
@@ -36,39 +58,19 @@ const HeaderComponent = ({
       >
         <Box width="auto" flexjustify="flex-start" flexalign="flex-start">
           <Link href="/">
-            <Heading>PokeStats</Heading>
+            <PokestatsLogo>PokeStats</PokestatsLogo>
           </Link>
-          {/** Select */}
-          {pokemonGen && (
-            <SelectContainer flexdirection="row" flexjustify="flex-start" flexgap="0.5em">
-              <label id="header_generation" htmlFor="header_gen_select">
-                Game Version:
-              </label>
-              <Select
-                aria-labelledby="header_generation"
-                id="header_gen_select"
-                value={gameVersion}
-                onChange={e => setGameVersion(e.target.value)}
-              >
-                {gameVersions.map(
-                  ({ name, value }, index) =>
-                    !checkIfEarlierGen(pokemonGen, value) && (
-                      <option key={index} value={value}>
-                        {name}
-                      </option>
-                    ),
-                )}
-              </Select>
-            </SelectContainer>
+          {pokemonGen && !!dropdownOptions?.length && (
+            <Dropdown
+              label="Game Version"
+              options={dropdownOptions}
+              value={gameVersion}
+              onChange={e => setGameVersion(e.target.value)}
+              minWidth="190px"
+            />
           )}
         </Box>
-        <Autocomplete
-          filterList={autocompleteList}
-          width="350px"
-          flexjustify="flex-end"
-          flexalign="flex-start"
-          flexmargin="none"
-        />
+        <Autocomplete filterList={autocompleteList} width="350px" />
       </Box>
     </HeaderContainer>
   );

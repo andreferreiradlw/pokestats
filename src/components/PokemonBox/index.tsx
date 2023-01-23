@@ -3,29 +3,38 @@ import { useMemo, forwardRef, Ref } from 'react';
 import type { Pokemon, PokemonSpecies } from 'pokenode-ts';
 import type { HTMLMotionProps } from 'framer-motion';
 // helpers
-import { removeDash, mapGeneration, fadeInUpVariant, padPokemonId } from '@/helpers';
+import { removeDash, mapGeneration, fadeInUpVariant, prefixId } from '@/helpers';
 // styles
-import { PokeBox, NumberId, PokeName, PokeGen } from './StyledPokemonBox';
+import { Anchor, PokeBox, NumberId, PokeName, PokeGen } from './StyledPokemonBox';
 // components
-import Link from 'next/link';
 import ImageNext from '@/components/ImageNext';
 
 export interface PokemonBoxProps extends HTMLMotionProps<'div'> {
   pokemonId: Pokemon['id'];
   pokemonName: Pokemon['name'];
   pokemonGen?: PokemonSpecies['generation']['name'];
+  nameFormat?: boolean;
   $dark?: boolean;
+  defaultVarietyName?: string;
 }
 
 const PokemonBox = forwardRef(
   (
-    { pokemonId, pokemonName, pokemonGen, $dark, ...rest }: PokemonBoxProps,
+    {
+      pokemonId,
+      pokemonName,
+      pokemonGen,
+      nameFormat = true,
+      defaultVarietyName,
+      $dark,
+      ...rest
+    }: PokemonBoxProps,
     ref: Ref<HTMLDivElement>,
   ): JSX.Element => {
     const generationName = useMemo(() => mapGeneration(pokemonGen), [pokemonGen]);
 
     return (
-      <Link href={`/pokemon/${pokemonName}`}>
+      <Anchor href={`/pokemon/${defaultVarietyName || pokemonName.toLocaleLowerCase()}`}>
         <PokeBox
           ref={ref}
           $dark={$dark}
@@ -38,17 +47,17 @@ const PokemonBox = forwardRef(
           <ImageNext
             alt={pokemonName}
             key={`pokemonbox-img-${pokemonId}`}
-            src={`https://raw.githubusercontent.com/andreferreiradlw/pokestats_media/main/assets/images/${padPokemonId(
+            src={`https://raw.githubusercontent.com/andreferreiradlw/pokestats_media/main/assets/images/${prefixId(
               pokemonId,
             )}.png`}
             width="100"
             height="100"
           />
           <NumberId>{`#${pokemonId}`}</NumberId>
-          <PokeName>{removeDash(pokemonName)}</PokeName>
+          <PokeName>{nameFormat ? removeDash(pokemonName) : pokemonName}</PokeName>
           {generationName && <PokeGen>{generationName}</PokeGen>}
         </PokeBox>
-      </Link>
+      </Anchor>
     );
   },
 );

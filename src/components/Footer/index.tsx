@@ -1,55 +1,79 @@
+// helpers
+import { fadeInUpVariant } from '@/helpers';
 // styles
-import { FooterContainer, FooterA, TextContainer } from './StyledFooter';
+import { FooterContainer, PokestatsIcon, Anchor } from './StyledFooter';
 // components
 import Box from '@/components/Box';
-import Image from 'next/image';
-// icons
-import GitHub from 'public/static/iconLibrary/github.svg';
+import BoxWrapper from '../Box/StyledBox';
+import ImageNext from '@/components/ImageNext';
+import { motion } from 'framer-motion';
 
 const Footer = (): JSX.Element => {
   const githubClick = () => {
     if (process.env.NODE_ENV === 'production' && window?.plausible)
       window.plausible('Github Footer');
   };
+  const pokeapiClick = () => {
+    if (process.env.NODE_ENV === 'production' && window?.plausible)
+      window.plausible('Pokeapi Footer');
+  };
 
   return (
     <FooterContainer>
       <Box
         flexdirection={{ xxs: 'column', sm: 'row' }}
-        flexalign={{ xxs: 'flex-start', sm: 'center' }}
+        flexalign="flex-start"
         flexjustify={{ xxs: 'center', sm: 'space-between' }}
-        flexgap="0.5em"
-        flexmargin="0"
+        flexgap="1em"
         screensizes={12}
-        $constrained
+        flextextalign={{ xxs: 'center', sm: 'left' }}
+        $contained
         $withGutter
       >
-        <TextContainer>
-          <FooterA href="https://pokeapi.co/" target="_blank" rel="noopener" aria-label="PokeApi">
-            {`Powered by`}{' '}
-            <Image
-              src="/static/pokeapi_logo.png"
-              alt="PokeApi Logo"
-              loading="lazy"
-              width={60}
-              height={25}
-            />
-          </FooterA>
-          <FooterA href="https://andreferreira.tech" target="_blank" rel="noopener">
-            and created by Andre.
-          </FooterA>
-        </TextContainer>
-        <span>
-          <FooterA
-            href="https://github.com/andreferreiradlw/pokestats"
-            target="_blank"
-            rel="noopener"
-            onClick={githubClick}
+        <Box flexalign={{ xxs: 'center', sm: 'flex-start' }} flexgap="1em" width="auto">
+          <Box flexgap="0.5em" flexdirection="row" width="auto">
+            <PokestatsIcon />
+            <BoxWrapper flexdirection="row" flexgap="0.2em" width="auto">
+              {`© ${new Date().getFullYear()} `}
+              <Anchor
+                as="a"
+                href="https://github.com/andreferreiradlw/pokestats"
+                target="_blank"
+                rel="noopener"
+                onClick={githubClick}
+              >
+                Pokestats
+              </Anchor>
+            </BoxWrapper>
+          </Box>
+          Pokémon are registered trademarks of Nintendo and Game Freak.
+        </Box>
+        <BoxWrapper
+          flexdirection="row"
+          flexalign="center"
+          flexjustify={{ xxs: 'center', sm: 'flex-start' }}
+          flexgap="0.2em"
+          width={{ xxs: '100%', sm: 'auto' }}
+          flexshrink="0"
+        >
+          Powered by
+          <motion.span
+            whileHover="hover"
+            whileTap="tap"
+            variants={fadeInUpVariant}
+            key="pokeapi-anchor-footer"
           >
-            GitHub
-            <GitHub />
-          </FooterA>
-        </span>
+            <Anchor
+              as="a"
+              href="https://pokeapi.co/"
+              target="_blank"
+              rel="noopener"
+              onClick={pokeapiClick}
+            >
+              <ImageNext src="/static/pokeapi_logo.png" alt="PokeApi Logo" height={25} />
+            </Anchor>
+          </motion.span>
+        </BoxWrapper>
       </Box>
     </FooterContainer>
   );

@@ -14,13 +14,13 @@ const TypeList = ({ types, ...rest }: TypeListProps): JSX.Element => {
   if (!types) return null;
 
   return (
-    <Box $constrained $withGutter flexalign="flex-start" flexjustify="flex-start" {...rest}>
-      <Box flexalign="flex-start" flexjustify="flex-start" flexgap="1em">
+    <Box flexalign="flex-start" flexjustify="flex-start" {...rest}>
+      <Box flexalign="flex-start" flexjustify="flex-start" flexgap="1.5em">
         <SectionTitle>Types</SectionTitle>
         <Box
           flexdirection="row"
-          flexalign="flex-start"
-          flexjustify="flex-start"
+          flexalign="center"
+          flexjustify="center"
           flexgap="1em"
           flexwrap="wrap"
         >

@@ -17,12 +17,17 @@ module.exports = {
       {
         protocol: 'https',
         hostname: 'raw.githubusercontent.com',
-        pathname: '/PokeAPI/sprites/**',
+        pathname: '/PokeAPI/sprites/master/**',
       },
       {
         protocol: 'https',
         hostname: 'raw.githubusercontent.com',
-        pathname: '/andreferreiradlw/pokestats_media/**',
+        pathname: '/andreferreiradlw/pokestats_media/main/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'raw.githubusercontent.com',
+        pathname: '/msikma/pokesprite/master/**',
       },
     ],
   },

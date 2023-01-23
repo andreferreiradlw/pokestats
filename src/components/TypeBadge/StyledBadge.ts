@@ -4,18 +4,20 @@ import { motion } from 'framer-motion';
 import type { Type } from 'pokenode-ts';
 import type { TypeBadgeProps } from './index';
 // styles
-import { float as floatAnim } from '@/components/BaseStyles';
+import { float as floatAnim, focusStyles } from '@/components/BaseStyles';
+// components
+import Link from 'next/link';
 
 const isDarkBackground = (type: Type['name']): boolean =>
   !!type.match(/^(dark|dragon|fighting|ghost|poison|shadow|unknown)$/);
 
+const Anchor = styled(Link)`
+  ${focusStyles}
+`;
+
 const Badge = styled(motion.div)<TypeBadgeProps>`
   align-items: center;
-  background: ${({ theme, $typename, $fill }) => !$fill && theme.colors.types[$typename]};
-  border: 1px solid ${({ theme }) => theme.colors.white};
   border-radius: 4px;
-  color: ${({ theme, $typename }) =>
-    isDarkBackground($typename) ? theme.colors.white : theme.colors.black};
   display: flex;
   flex-direction: row;
   font-family: 'Quicksand', sans-serif;
@@ -24,7 +26,24 @@ const Badge = styled(motion.div)<TypeBadgeProps>`
   gap: 0.5em;
   justify-content: center;
   text-transform: capitalize;
+  transform: background 0.5 ease-in-out;
+  transition: box-shadow 0.05s ease-in-out;
   width: auto;
+
+  ${({ theme, $typename, $fill }) => css`
+    ${!$fill && `background: ${theme.colors.typesHalf[$typename]};`};
+    border: 1px solid ${theme.colors.primary.main};
+    color: ${isDarkBackground($typename) ? theme.colors.lightText : theme.colors.darkText};
+
+    &:hover {
+      ${!$fill && `background: ${theme.colors.types[$typename]};`}
+      box-shadow: ${theme.colors.defaultBoxShadow};
+    }
+
+    &:active {
+      box-shadow: ${theme.colors.defaultInsetBoxShadow};
+    }
+  `}
 
   ${({ $iconOnly, flexmargin }) =>
     $iconOnly
@@ -37,12 +56,6 @@ const Badge = styled(motion.div)<TypeBadgeProps>`
           ${flexmargin && `margin: ${flexmargin};`}
           padding: 0.5em;
         `}
-
-  ${({ theme }) => css`
-    @media ${theme.device.lg} {
-      font-size: 1.2em;
-    }
-  `}
 
   ${({ $float }) =>
     $float &&
@@ -64,13 +77,13 @@ const Badge = styled(motion.div)<TypeBadgeProps>`
             width: ${$iconWidth || '15px'};
           `}
 
-    & > path {
+    path {
       ${({ theme, $typename, $fill }) => css`
-        fill: ${$fill ? theme.colors.types[$typename] : theme.colors.white};
-        stroke: ${theme.colors.black};
+        fill: ${$fill ? theme.colors.types[$typename] : theme.colors.primary.main};
+        stroke: ${theme.colors.primary.contrastText};
       `};
     }
   }
 `;
 
-export { Badge };
+export { Anchor, Badge };

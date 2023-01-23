@@ -1,7 +1,9 @@
 import styled from 'styled-components';
+// styles
+import { Table } from '@/components/BaseStyles';
 
-const BarCell = styled.td`
+const StatsTable = styled(Table)`
   width: 100%;
 `;
 
-export { BarCell };
+export { StatsTable };

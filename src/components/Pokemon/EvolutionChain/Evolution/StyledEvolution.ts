@@ -1,16 +1,29 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
+// components
+import Box from '@/components/Box';
+import BoxWrapper from '@/components/Box/StyledBox';
 // svg
-import Arrow from 'public/static/iconLibrary/arrows.svg';
+import Arrow from 'public/static/iconLibrary/arrow_right.svg';
 
-const EvoArrow = styled(Arrow)`
-  transform: rotateZ(90deg);
-  width: 50px;
-
-  ${({ theme }) => css`
-    @media ${theme.device.lg} {
-      transform: none;
-    }
-  `}
+const EvolutionContainer = styled(BoxWrapper)`
+  flex-basis: 0;
+  flex-grow: 1;
+  min-width: 0;
 `;
 
-export { EvoArrow };
+const EvoArrow = styled(Arrow)`
+  flex-shrink: 0;
+  transform: rotateZ(90deg);
+  transition: transform 0.2s ease-in-out;
+  width: 35px;
+`;
+
+const EvoDetailsContainer = styled(Box)`
+  flex-grow: 1;
+
+  &:hover ${EvoArrow} {
+    transform: translateY(0.75em) rotateZ(90deg);
+  }
+`;
+
+export { EvolutionContainer, EvoDetailsContainer, EvoArrow };

@@ -11,7 +11,7 @@ import TypeRelations from './Relations';
 import TypeIcon from './TypeIcon';
 import Tabs from './Tabs';
 // styles
-import { PageHeading } from '@/components/BaseStyles';
+import { PageHeading, Divider } from '@/components/BaseStyles';
 
 export type TypePageProps = Omit<PokestatsTypePageProps, 'autocompleteList'>;
 
@@ -26,7 +26,7 @@ const TypePage = ({ typeInfo, typeMoves }: TypePageProps): JSX.Element => {
       <MainContainer
         flexjustify="flex-start"
         flexalign="flex-start"
-        $constrained
+        $contained
         $withGutter
         initial="hidden"
         animate="visible"
@@ -59,9 +59,11 @@ const TypePage = ({ typeInfo, typeMoves }: TypePageProps): JSX.Element => {
           </Box>
           <TypeIcon screensizes={{ xxs: 12, lg: 4 }} typeName={name} otherNames={names} />
         </Box>
+        <Divider />
         <Box flexalign="flex-start" flexjustify="flex-start">
           <Tabs typeInfo={typeInfo} typeMoves={typeMoves} typeName={typeName} screensizes={12} />
         </Box>
+        <Divider />
       </MainContainer>
     </AnimatePresence>
   );

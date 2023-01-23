@@ -2,10 +2,10 @@ import { useMemo } from 'react';
 // types
 import type { Pokemon, PokemonSpecies, PokemonSprites } from 'pokenode-ts';
 // helpers
-import { removeUnderscore, padPokemonId } from '@/helpers';
+import { removeUnderscore, prefixId, capitalise, removeDash } from '@/helpers';
 // styles
-import { SectionTitle, SectionSubTitle } from '@/components/BaseStyles';
-import { SpriteContainer, Sprite, SpriteSubtitle, NoSprites } from './StyledSprites';
+import { SectionTitle, Divider } from '@/components/BaseStyles';
+import { SpriteContainer, Sprite, NoSprites } from './StyledSprites';
 // components
 import Box, { BoxProps } from '@/components/Box';
 
@@ -20,6 +20,11 @@ const Sprites = ({ pokemonSprites, pokemonId, forms, ...rest }: SpritesProps): J
   const animatedSprites = pokemonSprites.versions['generation-v']['black-white'].animated;
   const dreamWorldSprites = pokemonSprites.other.dream_world;
   const officalArtworkSprites = pokemonSprites.other['official-artwork'];
+
+  const defaultVarietyName = useMemo(() => {
+    const defaultForm = removeDash(forms.find(form => form.is_default).pokemon.name);
+    return capitalise(defaultForm.substring(defaultForm.indexOf(' ') + 1));
+  }, [forms]);
 
   const alternativeForms = useMemo(
     () =>
@@ -38,16 +43,15 @@ const Sprites = ({ pokemonSprites, pokemonId, forms, ...rest }: SpritesProps): J
   );
 
   return (
-    <Box flexalign={{ xxs: 'center', lg: 'flex-start' }} flexgap="2em" {...rest}>
+    <Box flexalign={{ xxs: 'center', lg: 'flex-start' }} flexgap="1.5em" {...rest}>
       <SectionTitle>Sprites</SectionTitle>
       {pokemonSprites ? (
         <>
           <Box flexalign={{ xxs: 'center', lg: 'flex-start' }} flexgap="1em">
-            <SectionSubTitle>Static Sprites</SectionSubTitle>
             <Box
               flexdirection="row-reverse"
               flexalign="flex-start"
-              flexjustify={{ xxs: 'center', lg: 'flex-end' }}
+              flexjustify={{ xxs: 'center', lg: 'space-evenly' }}
               flexgap="2em"
               flexwrap="wrap"
             >
@@ -63,7 +67,10 @@ const Sprites = ({ pokemonSprites, pokemonId, forms, ...rest }: SpritesProps): J
                         width="140"
                         $pixelatedImg
                       />
-                      <p>{removeUnderscore(key)}</p>
+                      <Box>
+                        <p>Static</p>
+                        <p>{removeUnderscore(key)}</p>
+                      </Box>
                     </SpriteContainer>
                   ),
               )}
@@ -71,11 +78,10 @@ const Sprites = ({ pokemonSprites, pokemonId, forms, ...rest }: SpritesProps): J
           </Box>
           {pokemonId < 650 && (
             <Box flexalign={{ xxs: 'center', lg: 'flex-start' }} flexgap="1em">
-              <SectionSubTitle>Animated Sprites</SectionSubTitle>
               <Box
                 flexdirection="row-reverse"
                 flexalign="flex-start"
-                flexjustify={{ xxs: 'center', lg: 'flex-end' }}
+                flexjustify={{ xxs: 'center', lg: 'space-evenly' }}
                 flexgap="2em"
                 flexwrap="wrap"
               >
@@ -91,13 +97,18 @@ const Sprites = ({ pokemonSprites, pokemonId, forms, ...rest }: SpritesProps): J
                           height="100"
                           $pixelatedImg
                         />
-                        <p>{removeUnderscore(key)}</p>
+
+                        <Box>
+                          <p>Animated</p>
+                          <p>{removeUnderscore(key)}</p>
+                        </Box>
                       </SpriteContainer>
                     ),
                 )}
               </Box>
             </Box>
           )}
+          <Divider />
           <SectionTitle>Varieties</SectionTitle>
           <Box
             flexdirection={{ xxs: 'column', sm: 'row' }}
@@ -108,7 +119,6 @@ const Sprites = ({ pokemonSprites, pokemonId, forms, ...rest }: SpritesProps): J
           >
             {officalArtworkSprites.front_default && (
               <Box flexalign="center" flexjustify="space-between" screensizes={3} flexgap="1em">
-                <SpriteSubtitle>Official</SpriteSubtitle>
                 <SpriteContainer width={{ xxs: '100%', md: 'auto' }}>
                   <Sprite
                     alt="Official Artwork Front Default"
@@ -117,11 +127,11 @@ const Sprites = ({ pokemonSprites, pokemonId, forms, ...rest }: SpritesProps): J
                     height="180"
                   />
                 </SpriteContainer>
+                <p>{defaultVarietyName}</p>
               </Box>
             )}
             {(dreamWorldSprites.front_default || dreamWorldSprites.front_female) && (
               <Box flexalign="center" flexjustify="space-between" screensizes={3} flexgap="1em">
-                <SpriteSubtitle>Dream World</SpriteSubtitle>
                 <Box flexdirection="row" flexjustify="center" flexwrap="wrap">
                   {Object.keys(dreamWorldSprites).map(
                     (key, i) =>
@@ -137,6 +147,7 @@ const Sprites = ({ pokemonSprites, pokemonId, forms, ...rest }: SpritesProps): J
                       ),
                   )}
                 </Box>
+                <p>Dream World</p>
               </Box>
             )}
             {!!alternativeForms?.length &&
@@ -149,17 +160,17 @@ const Sprites = ({ pokemonSprites, pokemonId, forms, ...rest }: SpritesProps): J
                   key={`pokemon-variety-${name}`}
                   width="auto"
                 >
-                  <SpriteSubtitle>{name.replace(/-/g, ' ')}</SpriteSubtitle>
                   <SpriteContainer width={{ xxs: '100%', md: 'auto' }}>
                     <Sprite
                       alt="Official Artwork Front Default"
                       key="official-artwork"
-                      src={`https://raw.githubusercontent.com/andreferreiradlw/pokestats_media/main/assets/images/${padPokemonId(
+                      src={`https://raw.githubusercontent.com/andreferreiradlw/pokestats_media/main/assets/images/${prefixId(
                         pokemonId,
                       )}-${name}.png`}
                       height="180"
                     />
                   </SpriteContainer>
+                  <p>{name.replace(/-/g, ' ')}</p>
                 </Box>
               ))}
           </Box>

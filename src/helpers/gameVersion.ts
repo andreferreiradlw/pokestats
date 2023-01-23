@@ -1,260 +1,325 @@
 const gameVersions = [
   {
-    name: 'Red',
+    label: 'Red',
     value: 'red',
     group: 'red-blue',
     generation: 'Generation I',
     genValue: 'generation-i',
   },
   {
-    name: 'Blue',
+    label: 'Blue',
     value: 'blue',
     group: 'red-blue',
     generation: 'Generation I',
     genValue: 'generation-i',
   },
   {
-    name: 'Yellow',
+    label: 'Yellow',
     value: 'yellow',
     group: 'yellow',
     generation: 'Generation I',
     genValue: 'generation-i',
   },
   {
-    name: 'Gold',
+    label: 'Gold',
     value: 'gold',
     group: 'gold-silver',
     generation: 'Generation II',
     genValue: 'generation-ii',
   },
   {
-    name: 'Silver',
+    label: 'Silver',
     value: 'silver',
     group: 'gold-silver',
     generation: 'Generation II',
     genValue: 'generation-ii',
   },
   {
-    name: 'Crystal',
+    label: 'Crystal',
     value: 'crystal',
     group: 'crystal',
     generation: 'Generation II',
     genValue: 'generation-ii',
   },
   {
-    name: 'Ruby',
+    label: 'Ruby',
     value: 'ruby',
     group: 'ruby-sapphire',
     generation: 'Generation III',
     genValue: 'generation-iii',
   },
   {
-    name: 'Sapphire',
+    label: 'Sapphire',
     value: 'sapphire',
     group: 'ruby-sapphire',
     generation: 'Generation III',
     genValue: 'generation-iii',
   },
   {
-    name: 'Emerald',
+    label: 'Emerald',
     value: 'emerald',
     group: 'emerald',
     generation: 'Generation III',
     genValue: 'generation-iii',
   },
   {
-    name: 'Fire Red',
+    label: 'Fire Red',
     value: 'firered',
     group: 'firered-leafgreen',
     generation: 'Generation III',
     genValue: 'generation-iii',
   },
   {
-    name: 'Leaf Green',
+    label: 'Leaf Green',
     value: 'leafgreen',
     group: 'firered-leafgreen',
     generation: 'Generation III',
     genValue: 'generation-iii',
   },
   {
-    name: 'Diamond',
+    label: 'Diamond',
     value: 'diamond',
     group: 'diamond-pearl',
     generation: 'Generation IV',
     genValue: 'generation-iv',
   },
   {
-    name: 'Pearl',
+    label: 'Pearl',
     value: 'pearl',
     group: 'diamond-pearl',
     generation: 'Generation IV',
     genValue: 'generation-iv',
   },
   {
-    name: 'Platinum',
+    label: 'Platinum',
     value: 'platinum',
     group: 'platinum',
     generation: 'Generation IV',
     genValue: 'generation-iv',
   },
   {
-    name: 'Heart Gold',
+    label: 'Heart Gold',
     value: 'heartgold',
     group: 'heartgold-soulsilver',
     generation: 'Generation IV',
     genValue: 'generation-iv',
   },
   {
-    name: 'Soul Silver',
+    label: 'Soul Silver',
     value: 'soulsilver',
     group: 'heartgold-soulsilver',
     generation: 'Generation IV',
     genValue: 'generation-iv',
   },
   {
-    name: 'Black',
+    label: 'Black',
     value: 'black',
     group: 'black-white',
     generation: 'Generation V',
     genValue: 'generation-v',
   },
   {
-    name: 'White',
+    label: 'White',
     value: 'white',
     group: 'black-white',
     generation: 'Generation V',
     genValue: 'generation-v',
   },
   {
-    name: 'Black 2',
+    label: 'Black 2',
     value: 'black-2',
     group: 'black-2-white-2',
     generation: 'Generation V',
     genValue: 'generation-v',
   },
   {
-    name: 'White 2',
+    label: 'White 2',
     value: 'white-2',
     group: 'black-2-white-2',
     generation: 'Generation V',
     genValue: 'generation-v',
   },
-  { name: 'X', value: 'x', group: 'x-y', generation: 'Generation VI', genValue: 'generation-vi' },
-  { name: 'Y', value: 'y', group: 'x-y', generation: 'Generation VI', genValue: 'generation-vi' },
+  { label: 'X', value: 'x', group: 'x-y', generation: 'Generation VI', genValue: 'generation-vi' },
+  { label: 'Y', value: 'y', group: 'x-y', generation: 'Generation VI', genValue: 'generation-vi' },
   {
-    name: 'Omega Ruby',
+    label: 'Omega Ruby',
     value: 'omega-ruby',
     group: 'omega-ruby-alpha-sapphire',
     generation: 'Generation VI',
     genValue: 'generation-vi',
   },
   {
-    name: 'Alpha Sapphire',
+    label: 'Alpha Sapphire',
     value: 'alpha-sapphire',
     group: 'omega-ruby-alpha-sapphire',
     generation: 'Generation VI',
     genValue: 'generation-vi',
   },
   {
-    name: 'Sun',
+    label: 'Sun',
     value: 'sun',
     group: 'sun-moon',
     generation: 'Generation VII',
     genValue: 'generation-vii',
   },
   {
-    name: 'Moon',
+    label: 'Moon',
     value: 'moon',
     group: 'sun-moon',
     generation: 'Generation VII',
     genValue: 'generation-vii',
   },
   {
-    name: 'Ultra Sun',
+    label: 'Ultra Sun',
     value: 'ultra-sun',
     group: 'ultra-sun-ultra-moon',
     generation: 'Generation VII',
     genValue: 'generation-vii',
   },
   {
-    name: 'Ultra Moon',
+    label: 'Ultra Moon',
     value: 'ultra-moon',
     group: 'ultra-sun-ultra-moon',
     generation: 'Generation VII',
     genValue: 'generation-vii',
   },
   {
-    name: "Let's Go Pikachu",
+    label: "Let's Go Pikachu",
     value: 'lets-go-pikachu',
     group: 'lets-go-pikachu-lets-go-eevee',
     generation: 'Generation VII',
     genValue: 'generation-vii',
   },
   {
-    name: "Let's Go Eevee",
+    label: "Let's Go Eevee",
     value: 'lets-go-eevee',
     group: 'lets-go-pikachu-lets-go-eevee',
     generation: 'Generation VII',
     genValue: 'generation-vii',
   },
-  /** 
   {
-    name: 'Sword',
+    label: 'Sword',
     value: 'sword',
     group: 'sword-shield',
     generation: 'Generation VIII',
     genValue: 'generation-viii',
   },
   {
-    name: 'Shield',
+    label: 'Shield',
     value: 'shield',
     group: 'sword-shield',
     generation: 'Generation VIII',
     genValue: 'generation-viii',
   },
-  */
+  {
+    label: 'Legends: Arceus',
+    value: 'legends-arceus',
+    group: 'scarlet-violet',
+    generation: 'Generation VIII',
+    genValue: 'generation-viii',
+  },
+  // {
+  //   label: 'Scarlet',
+  //   value: 'scarlet',
+  //   group: 'scarlet-violet',
+  //   generation: 'Generation IX',
+  //   genValue: 'generation-ix',
+  // },
+  // {
+  //   label: 'Violet',
+  //   value: 'violet',
+  //   group: 'scarlet-violet',
+  //   generation: 'Generation IX',
+  //   genValue: 'generation-ix',
+  // },
+];
+
+const generationOptions = [
+  { value: 'all', label: 'All' },
+  {
+    value: 'generation-i',
+    label: 'Generation I',
+  },
+  {
+    value: 'generation-ii',
+    label: 'Generation II',
+  },
+  {
+    value: 'generation-iii',
+    label: 'Generation III',
+  },
+  {
+    value: 'generation-iv',
+    label: 'Generation IV',
+  },
+  {
+    value: 'generation-v',
+    label: 'Generation V',
+  },
+  {
+    value: 'generation-vi',
+    label: 'Generation VI',
+  },
+  {
+    value: 'generation-vii',
+    label: 'Generation VII',
+  },
+  {
+    value: 'generation-viii',
+    label: 'Generation VIII',
+  },
 ];
 
 const generations = [
   {
-    genValue: 'generation-i',
-    genDescription: 'Generation I',
+    value: 'generation-i',
+    label: 'Generation I',
     gameVersion: 'yellow',
   },
   {
-    genValue: 'generation-ii',
-    genDescription: 'Generation II',
+    value: 'generation-ii',
+    label: 'Generation II',
     gameVersion: 'crystal',
   },
   {
-    genValue: 'generation-iii',
-    genDescription: 'Generation III',
+    value: 'generation-iii',
+    label: 'Generation III',
     gameVersion: 'leafgreen',
   },
   {
-    genValue: 'generation-iv',
-    genDescription: 'Generation IV',
+    value: 'generation-iv',
+    label: 'Generation IV',
     gameVersion: 'soulsilver',
   },
   {
-    genValue: 'generation-v',
-    genDescription: 'Generation V',
+    value: 'generation-v',
+    label: 'Generation V',
     gameVersion: 'black',
   },
   {
-    genValue: 'generation-vi',
-    genDescription: 'Generation VI',
+    value: 'generation-vi',
+    label: 'Generation VI',
     gameVersion: 'alpha-sapphire',
   },
   {
-    genValue: 'generation-vii',
-    genDescription: 'Generation VII',
+    value: 'generation-vii',
+    label: 'Generation VII',
     gameVersion: 'sun',
   },
   {
-    genValue: 'generation-viii',
-    genDescription: 'Generation VIII',
+    value: 'generation-viii',
+    label: 'Generation VIII',
     gameVersion: 'sword',
+  },
+  {
+    value: 'generation-viii',
+    label: 'Generation VIII',
+    gameVersion: 'legends-arceus',
+  },
+  {
+    value: 'generation-ix',
+    label: 'Generation IX',
+    gameVersion: 'scarlet',
   },
 ];
 
@@ -273,27 +338,32 @@ const mapIdToGeneration = (id: number): string => {
     return 'generation-vi';
   } else if (id > 721 && id <= 809) {
     return 'generation-vii';
-  } /** else if (id > 809 && id <= 898) {
-    return 'generation-viii'
-  } */ else {
+  } else if (id > 809 && id <= 905) {
+    return 'generation-viii';
+  } else if (id > 905 && id <= 1008) {
+    return 'generation-ix';
+  } else {
     return 'all';
   }
 };
+
+const checkIfArceus = (pokemonId: number): boolean => pokemonId > 898 && pokemonId <= 905;
 
 const mapVersionToGroup = (currentVersion: string): string =>
   gameVersions.filter(version => version.value === currentVersion).map(version => version.group)[0];
 
 const mapGeneration = (generationValue: string): string =>
-  generations
-    .filter(gen => gen.genValue === generationValue)
-    .map(generation => generation.genDescription)
-    .toString();
+  generationValue ? generations.find(gen => gen.value === generationValue)?.label : '';
 
-const mapGenerationToGame = (value: string): string =>
-  generations
-    .filter(gen => gen.genValue === value)
-    .map(generation => generation.gameVersion)
-    .toString();
+const mapGenerationToGame = (value: string, pokemonId: number): string => {
+  const genGames = gameVersions.filter(gen => gen.genValue === value);
+
+  if (checkIfArceus(pokemonId)) {
+    return genGames[2].value;
+  } else {
+    return genGames[0].value;
+  }
+};
 
 const checkIfEarlierGen = (newGen: string, currGen: string): boolean => {
   const versionValues = gameVersions.map(version => version.value);
@@ -303,10 +373,12 @@ const checkIfEarlierGen = (newGen: string, currGen: string): boolean => {
 
 export {
   gameVersions,
+  generationOptions,
   generations,
   mapIdToGeneration,
   mapVersionToGroup,
   mapGeneration,
   mapGenerationToGame,
   checkIfEarlierGen,
+  checkIfArceus,
 };

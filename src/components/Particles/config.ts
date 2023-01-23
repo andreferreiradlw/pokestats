@@ -26,7 +26,7 @@ const particleConfig = {
       },
     },
     size: {
-      value: 70,
+      value: 40,
       random: true,
       anim: {
         enable: false,

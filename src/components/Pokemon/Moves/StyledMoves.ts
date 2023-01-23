@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
-import { motion } from 'framer-motion';
 // components
+import { motion } from 'framer-motion';
 import Box from '@/components/Box';
 import Link from 'next/link';
 
@@ -11,11 +11,13 @@ const TableRow = styled(Link)`
 `;
 const NameTH = styled(motion.th)``;
 const NameTD = styled.td`
+  font-weight: 500;
   text-transform: capitalize;
 `;
 
 const TableContainer = styled(motion.div)`
-  overflow: auto;
+  border-radius: 5px;
+  overflow: hidden;
   width: 100%;
 
   ${({ theme }) => css`
@@ -26,14 +28,15 @@ const TableContainer = styled(motion.div)`
 `;
 
 const MovesTable = styled.table`
+  border: 2px solid ${({ theme }) => theme.colors.primary.light};
   font-size: 0.7em;
   line-height: 0.7em;
   text-align: center;
   width: 100%;
 
   & thead {
-    background-color: black;
-    color: white;
+    background: ${({ theme }) => theme.colors.primary.light};
+    color: ${({ theme }) => theme.colors.primary.contrastText};
   }
 
   & th,
@@ -51,13 +54,14 @@ const MovesTable = styled.table`
   }
 
   ${({ theme }) => css`
-    & ${TableRow}:not(:last-of-type) {
-      border-bottom: 1px solid ${theme.colors.mercury};
+    & tr:not(:last-of-type) {
+      border-bottom: 1px solid ${({ theme }) => theme.colors.primary.light};
     }
 
     & ${TableRow} {
       &:hover {
-        background-color: ${theme.colors.mercury};
+        background: ${({ theme }) => theme.colors.primary.light};
+        color: ${({ theme }) => theme.colors.primary.contrastText};
       }
     }
 
@@ -73,6 +77,6 @@ const MovesTable = styled.table`
   `}
 `;
 
-const TabContainer = styled(Box)``;
+const TitleContainer = styled(Box)``;
 
-export { TableContainer, MovesTable, TableBody, NameTH, NameTD, TableRow, TabContainer };
+export { TableContainer, MovesTable, TableBody, NameTH, NameTD, TableRow, TitleContainer };

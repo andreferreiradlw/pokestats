@@ -62,16 +62,16 @@ const filterMoves = (
 };
 
 const getMachineNames = async (machineMoves: FilteredMove[]): Promise<string[]> => {
-  const machineClient = new MachineClient({
-    cacheOptions: { maxAge: 0, limit: false },
-  });
+  const machineClient = new MachineClient();
   // requests array
   const machineRequests = [];
   // create a request for each move
   machineMoves.forEach(move => {
-    machineRequests.push(
-      machineClient.getMachineById(getIdFromMachine(move.current_version_machine)),
-    );
+    if (move?.current_version_machine) {
+      machineRequests.push(
+        machineClient.getMachineById(getIdFromMachine(move.current_version_machine)),
+      );
+    }
   });
 
   const machines: Machine[] = await Promise.all(machineRequests);

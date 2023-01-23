@@ -9,14 +9,12 @@ import BoxWrapper from '@/components/Box/StyledBox';
 import ArrowDownIcon from 'public/static/iconLibrary/arrow_down.svg';
 
 const Container = styled(BoxWrapper)`
-  align-items: center;
-  flex-direction: column;
-  gap: 1em;
-  height: 100vh;
+  height: 50vh;
   justify-content: center;
   margin: auto;
-  min-height: 100vh;
+  min-height: 50vh;
   position: relative;
+  width: 100%;
   z-index: 1;
 `;
 
@@ -26,8 +24,10 @@ const GithubLink = styled(motion.a)`
   top: 20px;
 
   &:hover svg {
-    background: black;
-    fill: white;
+    ${({ theme }) => css`
+      background: ${theme.colors.secondary.main};
+      fill: ${theme.colors.primary.main};
+    `}
   }
 
   svg {
@@ -37,20 +37,24 @@ const GithubLink = styled(motion.a)`
   }
 `;
 
-const ScrollDown = styled(ArrowDownIcon)`
-  animation: ${bounce} 1.5s ease-in-out 0s infinite;
+const ScrollContainer = styled(motion.div)`
   bottom: 10px;
   left: 50%;
   position: absolute;
   transform: translate(-50%, -50%);
+`;
+
+const ScrollDown = styled(ArrowDownIcon)`
+  animation: ${bounce} 1.5s ease-in-out 0s infinite;
+
   width: 40px;
 `;
 
 const ListContainer = styled(Box)`
   ${({ theme }) => css`
-    background-color: ${theme.colors.black};
-    color: ${theme.colors.white};
+    background: ${theme.colors.primary.main};
+    color: ${theme.colors.primary.contrastText};
   `}
 `;
 
-export { Container, GithubLink, ScrollDown, ListContainer };
+export { Container, GithubLink, ScrollContainer, ScrollDown, ListContainer };

@@ -23,6 +23,10 @@ const getIdFromPokemon = (url: string): number => {
   const matchId = url.match(/\/pokemon\/(\d+)\//);
   return Number(matchId[1]);
 };
+const getIdFromItem = (url: string): number => {
+  const matchId = url.match(/\/item\/(\d+)\//);
+  return Number(matchId[1]);
+};
 
 const getIdFromURL = (url: string, matcher: string): number => {
   const regex = new RegExp(`\\/${matcher}\\/(\\d+)\\/`);
@@ -37,4 +41,5 @@ export {
   getIdFromMove,
   getIdFromPokemon,
   getIdFromURL,
+  getIdFromItem,
 };

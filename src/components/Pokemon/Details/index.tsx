@@ -1,4 +1,4 @@
-import { useContext, useMemo } from 'react';
+import { useContext, useMemo, useState, useEffect } from 'react';
 // types
 import type { BoxProps } from '@/components/Box';
 import type { PokestatsPokemonPageProps } from '@/pages/pokemon/[pokemonId]';
@@ -12,13 +12,22 @@ import {
   mapGeneration,
   formatFlavorText,
   findPokemonName,
+  prefixId,
 } from '@/helpers';
 // components
+import Box from '@/components/Box';
 import BoxWrapper from '@/components/Box/StyledBox';
 import TypeBadge from '@/components/TypeBadge';
 // styles
 import { PageHeading, Table, Numbered, UppercasedTd } from '@/components/BaseStyles';
-import { TypeContainer, Genera, Flavor } from './StyledDetails';
+import {
+  TypeContainer,
+  IconContainer,
+  CriesIcon,
+  AbilityName,
+  Genera,
+  Flavor,
+} from './StyledDetails';
 
 interface PokemonDetailsProps extends BoxProps {
   pokemon: PokestatsPokemonPageProps['pokemon'];
@@ -46,7 +55,19 @@ const PokemonDetails = ({
     is_mythical,
     generation,
   } = species;
-  // memo
+  // load pokemon cry sound
+  const [cry, setCry] = useState(null);
+  useEffect(() => {
+    if (id <= 802) {
+      setCry(
+        new Audio(
+          `https://raw.githubusercontent.com/andreferreiradlw/pokestats_media/main/assets/cries/${id}.${
+            id >= 722 ? 'wav' : 'mp3'
+          }`,
+        ),
+      );
+    }
+  }, [id]);
   const generationName = useMemo(() => mapGeneration(generation?.name), [generation]);
   const flavorText = useMemo(() => {
     // @ts-ignore
@@ -79,10 +100,10 @@ const PokemonDetails = ({
     () =>
       pokemonAbilities.map(({ ability, is_hidden }, i) => (
         <Numbered key={`${ability}-${i}`}>
-          <UppercasedTd as="p">
+          <AbilityName as="p">
             {`${i + 1}. ${removeDash(ability.name)}`}
             {is_hidden && ' (Hidden Ability)'}
-          </UppercasedTd>
+          </AbilityName>
           <span>{abilities[i].effect_entries[0]?.short_effect}</span>
         </Numbered>
       )),
@@ -94,7 +115,7 @@ const PokemonDetails = ({
       <BoxWrapper
         flexdirection="column"
         flexalign={{ xxs: 'center', lg: 'flex-start' }}
-        flexgap="0.5em"
+        flexgap="1em"
         width="100%"
         initial="hidden"
         animate="show"
@@ -102,14 +123,39 @@ const PokemonDetails = ({
         key={`pokemon-details-${name}`}
         {...rest}
       >
-        {types?.length > 0 && (
-          <TypeContainer flexdirection="row" flexjustify="flex-start" flexwrap="wrap">
-            {types.map(({ type }, i) => (
-              <TypeBadge $typename={type.name} key={`${type.name}-${i}-detail-${id}`} />
-            ))}
-          </TypeContainer>
-        )}
-        <PageHeading>{findPokemonName(species)}</PageHeading>
+        <Box
+          flexalign={{ xxs: 'center', lg: 'flex-start' }}
+          flexdirection={{ xxs: 'column-reverse', lg: 'column' }}
+          flexgap={{ xxs: '0.5em', lg: '0.3em' }}
+        >
+          {!!types?.length && (
+            <TypeContainer flexdirection="row" flexwrap="wrap" width="auto">
+              {types.map(({ type }, i) => (
+                <TypeBadge $typename={type.name} key={`${type.name}-${i}-detail-${id}`} />
+              ))}
+            </TypeContainer>
+          )}
+          <Box
+            flexdirection="row"
+            flexjustify="flex-start"
+            flexalign="center"
+            flexgap="0.5em"
+            width="auto"
+          >
+            <PageHeading>{findPokemonName(species)}</PageHeading>
+            {id <= 802 && (
+              <IconContainer
+                whileHover="hover"
+                whileTap="tap"
+                variants={fadeInUpVariant}
+                key="cries-icon-container-pokemon"
+                onClick={() => cry?.play()}
+              >
+                <CriesIcon />
+              </IconContainer>
+            )}
+          </Box>
+        </Box>
         {(is_baby || is_legendary || is_mythical) && (
           <Genera>
             {is_baby && `Baby `}

@@ -4,11 +4,12 @@ import type { LoadingProps } from './index';
 // components
 import BoxWrapper from '@/components/Box/StyledBox';
 // styles
-import { SectionSubTitle, ellipsis, rotate, riseUp } from '@/components/BaseStyles';
+import { SectionSubTitle, ellipsis, rotate, riseUp, pokeballShake } from '@/components/BaseStyles';
 // helpers
-import { responsiveProps } from '@/helpers/box';
+import { responsiveProps } from '@/helpers';
 // svg
 import Potion from 'public/static/iconLibrary/potion.svg';
+import Pokeball from 'public/static/iconLibrary/pokeball.svg';
 
 const LoadingContainer = styled(BoxWrapper)`
   align-items: center;
@@ -55,9 +56,13 @@ const PotionIcon = styled(Potion)<{ $iconwidth?: LoadingProps['$iconWidth'] }>`
   }
 `;
 
-const Text = styled(SectionSubTitle)`
-  margin-top: 2rem;
+const PokeballIcon = styled(Pokeball)<{ $iconwidth?: LoadingProps['$iconWidth'] }>`
+  animation: 2.5s ${pokeballShake} 0ms infinite ease-in-out;
+  height: auto;
+  ${({ $iconWidth }) => $iconWidth && responsiveProps('width', $iconWidth)}
+`;
 
+const Text = styled(SectionSubTitle)`
   &:after {
     animation: ${ellipsis} 1.25s infinite;
     content: '.';
@@ -67,4 +72,4 @@ const Text = styled(SectionSubTitle)`
   }
 `;
 
-export { LoadingContainer, PotionIcon, Text };
+export { LoadingContainer, PotionIcon, Text, PokeballIcon };

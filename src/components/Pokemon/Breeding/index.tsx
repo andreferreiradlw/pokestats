@@ -13,6 +13,8 @@ import MaleIcon from 'public/static/iconLibrary/male.svg';
 import FemaleIcon from 'public/static/iconLibrary/female.svg';
 
 const Ratio = styled.p`
+  white-space: nowrap;
+
   svg {
     margin-left: 0.2em;
     width: 1em;
@@ -42,7 +44,7 @@ const Breeding = ({ species, babyTriggerItem, ...rest }: BreedingProps): JSX.Ele
   const eggGroups = useMemo(
     () =>
       egg_groups?.map((group, i) => (
-        <Numbered key={`${group.name}-${i}`}>
+        <Numbered key={`${group.name}-${i}`} style={{ paddingBottom: 0 }}>
           <UppercasedTd as="p">{`${egg_groups.length > 1 ? `${i + 1}. ` : ``}${removeDash(
             group.name,
           )}`}</UppercasedTd>
@@ -61,7 +63,7 @@ const Breeding = ({ species, babyTriggerItem, ...rest }: BreedingProps): JSX.Ele
   );
 
   return (
-    <Box flexalign={{ xxs: 'center', lg: 'flex-start' }} flexgap="1em" {...rest}>
+    <Box flexalign="flex-start" flexjustify="flex-start" flexgap="1em" {...rest}>
       <SectionTitle>Breeding</SectionTitle>
       <Table>
         <tbody>
@@ -89,7 +91,7 @@ const Breeding = ({ species, babyTriggerItem, ...rest }: BreedingProps): JSX.Ele
           </tr>
           <tr>
             <th>Habitat</th>
-            <UppercasedTd>{habitat ? habitat.name : 'None'}</UppercasedTd>
+            <UppercasedTd>{habitat ? removeDash(habitat.name) : 'None'}</UppercasedTd>
           </tr>
         </tbody>
       </Table>

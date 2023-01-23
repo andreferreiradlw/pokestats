@@ -2,7 +2,7 @@ import { forwardRef } from 'react';
 // types
 import type { BoxProps } from '@/components/Box';
 // styles
-import { LoadingContainer, PotionIcon, Text } from './StyledLoading';
+import { LoadingContainer, PotionIcon, PokeballIcon, Text } from './StyledLoading';
 // components
 import BoxWrapper from '@/components/Box/StyledBox';
 // helpers
@@ -13,6 +13,7 @@ export interface LoadingProps extends BoxProps {
   noIcon?: boolean;
   passKey?: string;
   text?: string;
+  pokeball?: boolean;
 }
 
 const Loading = forwardRef(
@@ -21,6 +22,7 @@ const Loading = forwardRef(
       flexheight,
       $iconWidth,
       noIcon,
+      pokeball,
       text,
       flexjustify = 'center',
       flexalign = 'center',
@@ -34,6 +36,7 @@ const Loading = forwardRef(
       flexjustify={flexjustify}
       flexalign={flexalign}
       flexheight={flexheight}
+      flexgap="1em"
       initial="initial"
       animate="animate"
       exit="exit"
@@ -48,7 +51,11 @@ const Loading = forwardRef(
           variants={loadingChild}
           key={`icon-${passKey}`}
         >
-          <PotionIcon $iconWidth={$iconWidth} />
+          {pokeball ? (
+            <PokeballIcon $iconWidth={$iconWidth} />
+          ) : (
+            <PotionIcon $iconWidth={$iconWidth} />
+          )}
         </BoxWrapper>
       )}
       {text && (

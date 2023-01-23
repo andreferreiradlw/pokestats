@@ -12,10 +12,16 @@ import { SectionTitle, Table, Numbered, UppercasedTd } from '@/components/BaseSt
 
 interface PokemonFormsProps extends BoxProps {
   pokemonId: number;
+  pokemonName: string;
   species: PokemonSpecies;
 }
 
-const PokemonForms = ({ pokemonId, species, ...rest }: PokemonFormsProps): JSX.Element => {
+const PokemonForms = ({
+  pokemonId,
+  pokemonName,
+  species,
+  ...rest
+}: PokemonFormsProps): JSX.Element => {
   // data
   const { forms_switchable, varieties, has_gender_differences } = species;
   // memo
@@ -36,7 +42,7 @@ const PokemonForms = ({ pokemonId, species, ...rest }: PokemonFormsProps): JSX.E
   );
 
   return (
-    <Box flexalign={{ xxs: 'center', lg: 'flex-start' }} flexgap="1em" {...rest}>
+    <Box flexalign="flex-start" flexjustify="flex-start" flexgap="1em" {...rest}>
       <SectionTitle>Forms</SectionTitle>
       <Table>
         <tbody>

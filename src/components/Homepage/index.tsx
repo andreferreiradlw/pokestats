@@ -6,13 +6,7 @@ import { staggerInitialVariant, fadeInUpVariant, getRandomInt } from '@/helpers'
 // types
 import type { PokestatsHomepageProps } from '@/pages/index';
 // styles
-import {
-  Container,
-  GithubLink,
-  ScrollContainer,
-  ScrollDown,
-  ListContainer,
-} from './styledHomepage';
+import { Container, GithubLink, ListContainer } from './styledHomepage';
 import { MainHeading, Button, Divider } from '@/components/BaseStyles';
 // components
 import Autocomplete from '@/components/Autocomplete';

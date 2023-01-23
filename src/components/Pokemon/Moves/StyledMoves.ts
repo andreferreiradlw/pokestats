@@ -2,14 +2,12 @@ import styled, { css } from 'styled-components';
 // components
 import { motion } from 'framer-motion';
 import Box from '@/components/Box';
-import Link from 'next/link';
 
-const TableBody = styled(motion.tbody)``;
-const TableRow = styled(Link)`
-  color: black;
-  display: table-row;
+const TableBody = styled.tbody``;
+const TableRow = styled.tr`
+  cursor: pointer;
 `;
-const NameTH = styled(motion.th)``;
+const NameTH = styled.th``;
 const NameTD = styled.td`
   font-weight: 500;
   text-transform: capitalize;

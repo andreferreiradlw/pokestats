@@ -9,6 +9,7 @@ import Link from 'next/link';
 // icons
 import Moon from 'public/static/iconLibrary/moon.svg';
 import Sun from 'public/static/iconLibrary/sun.svg';
+import Sunset from 'public/static/iconLibrary/sunset.svg';
 import Swap from 'public/static/iconLibrary/swap.svg';
 
 const Container = styled(Box)`
@@ -56,6 +57,17 @@ const checkNullTriggers = (evolution: EvolutionDetail): boolean => {
   if (currEvo['trigger']?.name === 'level-up') delete currEvo['trigger'];
   // check if all other triggers are falsy
   return Object.values(currEvo).every(x => x === null || x === false || x === '');
+};
+
+const mapTimeOfDayIcon = (timeOfDay: string): JSX.Element => {
+  switch (timeOfDay) {
+    case 'day':
+      return <Sun width="35px" />;
+    case 'night':
+      return <Moon width="30px" />;
+    case 'dusk':
+      return <Sunset width="40px" />;
+  }
 };
 
 const mapPhysicalStats = (physical: EvolutionDetail['relative_physical_stats']): string => {
@@ -160,9 +172,7 @@ const ConstructPhrase = ({ triggers }: { triggers: EvolutionDetail }): JSX.Eleme
               alt={item.name}
             />
           )}
-          {!!time_of_day &&
-            // @ts-ignore
-            (time_of_day === 'day' ? <Sun width="35px" /> : <Moon width="35px" />)}
+          {!!time_of_day && mapTimeOfDayIcon(time_of_day)}
         </Box>
       )}
       <Details>

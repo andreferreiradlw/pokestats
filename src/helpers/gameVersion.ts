@@ -1,3 +1,5 @@
+import { version } from 'os';
+
 const gameVersions = [
   {
     label: 'Red',
@@ -371,6 +373,9 @@ const checkIfEarlierGen = (newGen: string, currGen: string): boolean => {
   return versionValues.indexOf(newGen) > versionValues.indexOf(currGen);
 };
 
+const mapGroupToGeneration = (groupName: string): string =>
+  gameVersions.find(version => version.group === groupName).generation;
+
 export {
   gameVersions,
   generationOptions,
@@ -381,4 +386,5 @@ export {
   mapGenerationToGame,
   checkIfEarlierGen,
   checkIfArceus,
+  mapGroupToGeneration,
 };

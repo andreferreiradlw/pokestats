@@ -10,6 +10,7 @@ import {
   MoveTarget,
   ContestClient,
   SuperContestEffect,
+  ContestEffect,
 } from 'pokenode-ts';
 import { capitalise, findEnglishName, getIdFromURL, removeDash } from '@/helpers';
 import { PokestatsPageTitle } from '@/components/Head';
@@ -24,6 +25,7 @@ export interface PokestatsMovePageProps {
   move: Move;
   target: MoveTarget;
   superContestEffect: SuperContestEffect;
+  contestEffect: ContestEffect;
 }
 
 const PokestatsMovePage: NextPage<PokestatsMovePageProps> = ({ autocompleteList, ...props }) => {
@@ -42,7 +44,7 @@ const PokestatsMovePage: NextPage<PokestatsMovePageProps> = ({ autocompleteList,
   const moveName = props.move?.names
     ? findEnglishName(props.move.names)
     : capitalise(removeDash(props.move.name));
-  const pageTitle = `${moveName} (Move) - ${PokestatsPageTitle}`;
+  const pageTitle = `${moveName} (Pokémon Move) - ${PokestatsPageTitle}`;
 
   return (
     <>
@@ -102,14 +104,17 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     console.log(moveData);
 
     // fetch target and contest move data
-    const [targetData, superContestEffectData] = await Promise.all([
+    const [targetData, superContestEffectData, contestEffectData] = await Promise.all([
       moveClient.getMoveTargetById(getIdFromURL(moveData.target.url, 'move-target')),
       contestClient.getSuperContestEffectById(
         getIdFromURL(moveData.super_contest_effect.url, 'super-contest-effect'),
       ),
+      contestClient.getContestEffectById(
+        getIdFromURL(moveData.contest_effect.url, 'contest-effect'),
+      ),
     ]);
 
-    if (!targetData || !superContestEffectData) {
+    if (!targetData || !superContestEffectData || !contestEffectData) {
       console.log('Failed to fetch targetData');
       return { notFound: true };
     }
@@ -122,6 +127,11 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     delete superContestEffectData.moves;
     superContestEffectData.flavor_text_entries = superContestEffectData.flavor_text_entries.filter(
       ({ language }) => language.name === 'en',
+    );
+
+    // move english flavor text
+    moveData.flavor_text_entries = moveData.flavor_text_entries.filter(
+      entry => entry.language.name === 'en',
     );
 
     return {
@@ -141,6 +151,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
         move: moveData,
         target: targetData,
         superContestEffect: superContestEffectData,
+        contestEffect: contestEffectData,
       },
     };
   } catch (error) {

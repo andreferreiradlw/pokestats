@@ -38,15 +38,20 @@ const PokemonPage = ({
 
   const currPokemonName = findPokemonName(species);
 
+  console.log(pokemon);
+  console.log(species);
+
   useEffect(() => {
     let pokemonGen: string;
     // set current pokemon gen
     game_indices?.[0]
       ? (pokemonGen = game_indices[0].version.name)
-      : (pokemonGen = mapGenerationToGame(generation.name));
+      : (pokemonGen = mapGenerationToGame(generation.name, id));
+
+    console.log('pokemonGen', pokemonGen);
 
     setGameVersion(pokemonGen);
-  }, [generation, game_indices, setGameVersion]);
+  }, [generation, game_indices, setGameVersion, id]);
 
   return (
     <AnimatePresence mode="wait">

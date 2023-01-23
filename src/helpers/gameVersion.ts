@@ -212,18 +212,61 @@ const gameVersions = [
     genValue: 'generation-viii',
   },
   {
-    label: 'Scarlet',
-    value: 'scarlet',
+    label: 'Legends: Arceus',
+    value: 'legends-arceus',
     group: 'scarlet-violet',
-    generation: 'Generation IX',
-    genValue: 'generation-ix',
+    generation: 'Generation VIII',
+    genValue: 'generation-viii',
+  },
+  // {
+  //   label: 'Scarlet',
+  //   value: 'scarlet',
+  //   group: 'scarlet-violet',
+  //   generation: 'Generation IX',
+  //   genValue: 'generation-ix',
+  // },
+  // {
+  //   label: 'Violet',
+  //   value: 'violet',
+  //   group: 'scarlet-violet',
+  //   generation: 'Generation IX',
+  //   genValue: 'generation-ix',
+  // },
+];
+
+const generationOptions = [
+  { value: 'all', label: 'All' },
+  {
+    value: 'generation-i',
+    label: 'Generation I',
   },
   {
-    label: 'Violet',
-    value: 'violet',
-    group: 'scarlet-violet',
-    generation: 'Generation IX',
-    genValue: 'generation-ix',
+    value: 'generation-ii',
+    label: 'Generation II',
+  },
+  {
+    value: 'generation-iii',
+    label: 'Generation III',
+  },
+  {
+    value: 'generation-iv',
+    label: 'Generation IV',
+  },
+  {
+    value: 'generation-v',
+    label: 'Generation V',
+  },
+  {
+    value: 'generation-vi',
+    label: 'Generation VI',
+  },
+  {
+    value: 'generation-vii',
+    label: 'Generation VII',
+  },
+  {
+    value: 'generation-viii',
+    label: 'Generation VIII',
   },
 ];
 
@@ -268,11 +311,16 @@ const generations = [
     label: 'Generation VIII',
     gameVersion: 'sword',
   },
-  // {
-  //   value: 'generation-ix',
-  //   label: 'Generation IX',
-  //   gameVersion: 'scarlet',
-  // },
+  {
+    value: 'generation-viii',
+    label: 'Generation VIII',
+    gameVersion: 'legends-arceus',
+  },
+  {
+    value: 'generation-ix',
+    label: 'Generation IX',
+    gameVersion: 'scarlet',
+  },
 ];
 
 const mapIdToGeneration = (id: number): string => {
@@ -293,26 +341,31 @@ const mapIdToGeneration = (id: number): string => {
   } else if (id > 809 && id <= 905) {
     return 'generation-viii';
   } else if (id > 905 && id <= 1008) {
-    return 'generation-viii';
+    return 'generation-ix';
   } else {
     return 'all';
   }
 };
 
+const checkIfArceus = (pokemonId: number): boolean => pokemonId > 898 && pokemonId <= 905;
+
 const mapVersionToGroup = (currentVersion: string): string =>
   gameVersions.filter(version => version.value === currentVersion).map(version => version.group)[0];
 
 const mapGeneration = (generationValue: string): string =>
-  generations
-    .filter(gen => gen.value === generationValue)
-    .map(generation => generation.label)
-    .toString();
+  generations.find(gen => gen.value === generationValue)?.label;
 
-const mapGenerationToGame = (value: string): string =>
-  generations
+const mapGenerationToGame = (value: string, pokemonId: number): string => {
+  const currGame = generations
     .filter(gen => gen.value === value)
-    .map(generation => generation.gameVersion)
-    .toString();
+    .map(generation => generation.gameVersion);
+
+  if (checkIfArceus(pokemonId)) {
+    return currGame[1];
+  } else {
+    return currGame[0];
+  }
+};
 
 const checkIfEarlierGen = (newGen: string, currGen: string): boolean => {
   const versionValues = gameVersions.map(version => version.value);
@@ -322,6 +375,7 @@ const checkIfEarlierGen = (newGen: string, currGen: string): boolean => {
 
 export {
   gameVersions,
+  generationOptions,
   generations,
   mapIdToGeneration,
   mapVersionToGroup,

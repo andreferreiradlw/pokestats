@@ -184,7 +184,7 @@ const ConstructPhrase = ({ triggers }: { triggers: EvolutionDetail }): JSX.Eleme
         )}
         {held_item && ` while holding ${capitalise(removeDash(held_item.name))}`}
         {item && ` ${capitalise(removeDash(item.name))}`}
-        {known_move && ` learn ${capitalise(removeDash(known_move.name))} move`}
+        {known_move && ` learn move ${capitalise(removeDash(known_move.name))}`}
         {min_happiness && ` has over ${min_happiness} Happiness`}
         {min_affection && ` has over ${min_affection} Affection`}
         {min_beauty && ` has over ${min_beauty} beauty`}

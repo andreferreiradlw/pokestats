@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback } from 'react';
 // types
 import type { Pokemon } from '@/types';
 // helpers
-import { generations, mapIdToGeneration } from '@/helpers';
+import { generationOptions, mapIdToGeneration } from '@/helpers';
 // components
 import Box, { BoxProps } from '@/components/Box';
 import InfiniteScroll from '@/components/InfiniteScroll';
@@ -68,7 +68,7 @@ const PokemonList = ({ pokemon, ...rest }: PokemonListProps): JSX.Element => {
         >
           <Dropdown
             label="Game Generation"
-            options={[{ value: 'all', label: 'All' }, ...generations]}
+            options={generationOptions}
             value={gen}
             onChange={e => {
               setGen(e.target.value);

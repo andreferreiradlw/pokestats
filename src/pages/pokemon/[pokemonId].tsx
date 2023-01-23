@@ -255,7 +255,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     const { generation } = pokemonSpeciesResults;
     const pokemonGen = game_indices?.[0]
       ? game_indices[0].version.name
-      : mapGenerationToGame(generation.name);
+      : mapGenerationToGame(generation.name, pokemonDataResults.id);
 
     return {
       props: {

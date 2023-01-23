@@ -5,6 +5,11 @@ import type { PokemonBoxProps } from './index';
 import { float, focusStyles } from '@/components/BaseStyles';
 // components
 import { motion } from 'framer-motion';
+import Link from 'next/link';
+
+const Anchor = styled(Link)`
+  ${focusStyles}
+`;
 
 const PokeBox = styled(motion.div)<{
   $dark?: PokemonBoxProps['$dark'];
@@ -33,8 +38,6 @@ const PokeBox = styled(motion.div)<{
       width: 175px;
     }
   `}
-
-  ${focusStyles}
 
   &:hover {
     cursor: pointer;
@@ -110,4 +113,4 @@ const PokeGen = styled.span`
   `}
 `;
 
-export { PokeBox, NumberId, PokeName, PokeGen };
+export { Anchor, PokeBox, NumberId, PokeName, PokeGen };

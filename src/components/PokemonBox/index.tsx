@@ -5,9 +5,8 @@ import type { HTMLMotionProps } from 'framer-motion';
 // helpers
 import { removeDash, mapGeneration, fadeInUpVariant, prefixId } from '@/helpers';
 // styles
-import { PokeBox, NumberId, PokeName, PokeGen } from './StyledPokemonBox';
+import { Anchor, PokeBox, NumberId, PokeName, PokeGen } from './StyledPokemonBox';
 // components
-import Link from 'next/link';
 import ImageNext from '@/components/ImageNext';
 
 export interface PokemonBoxProps extends HTMLMotionProps<'div'> {
@@ -35,7 +34,7 @@ const PokemonBox = forwardRef(
     const generationName = useMemo(() => mapGeneration(pokemonGen), [pokemonGen]);
 
     return (
-      <Link href={`/pokemon/${defaultVarietyName || pokemonName.toLocaleLowerCase()}`}>
+      <Anchor href={`/pokemon/${defaultVarietyName || pokemonName.toLocaleLowerCase()}`}>
         <PokeBox
           ref={ref}
           $dark={$dark}
@@ -52,12 +51,13 @@ const PokemonBox = forwardRef(
               pokemonId,
             )}.png`}
             width="100"
+            height="100"
           />
           <NumberId>{`#${pokemonId}`}</NumberId>
           <PokeName>{nameFormat ? removeDash(pokemonName) : pokemonName}</PokeName>
           {generationName && <PokeGen>{generationName}</PokeGen>}
         </PokeBox>
-      </Link>
+      </Anchor>
     );
   },
 );

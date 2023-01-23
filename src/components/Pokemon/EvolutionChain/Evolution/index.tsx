@@ -2,7 +2,7 @@
 import type { BoxProps } from '@/components/Box';
 import type { PokemonSpecies, EvolutionDetail } from 'pokenode-ts';
 // helpers
-import { fadeInUpVariant, findPokemonName } from '@/helpers';
+import { fadeInUpVariant, findEnglishName } from '@/helpers';
 import { EvolutionContainer, EvoDetailsContainer, EvoArrow } from './StyledEvolution';
 // components
 import PokemonBox from '@/components/PokemonBox';
@@ -21,9 +21,9 @@ const Evolution = ({
   ...rest
 }: EvolutionProps): JSX.Element => {
   // data
-  const { id, name, generation, varieties } = species;
+  const { id, name, generation, varieties, names } = species;
 
-  const pokemonName = findPokemonName(species);
+  const pokemonName = findEnglishName(names);
 
   return (
     <EvolutionContainer

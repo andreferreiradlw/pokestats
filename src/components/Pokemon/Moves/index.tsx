@@ -85,11 +85,6 @@ const PokemonMoves = ({ pokemon, ...rest }: PokemonMovesProps): JSX.Element => {
   }, []);
 
   useEffect(() => {
-    // console.log(pokemon);
-    // console.log('genMoves', genMoves);
-  }, [genMoves]);
-
-  useEffect(() => {
     if (!movesLoading) setMovesLoading(true);
 
     const moveClient = new MoveClient();

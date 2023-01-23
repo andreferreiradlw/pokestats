@@ -1,42 +1,57 @@
-import type { GetStaticPaths, GetStaticProps, NextPage } from 'next';
-// helpers
 import { useRouter } from 'next/router';
-import { MoveClient, Move, MoveTarget, ContestClient, SuperContestEffect } from 'pokenode-ts';
-import { getIdFromURL } from '@/helpers';
+// types
+import type { GetStaticPaths, GetStaticProps, NextPage } from 'next';
+import type { Pokemon, PokemonType } from '@/types';
+// helpers
+import {
+  PokemonClient,
+  MoveClient,
+  Move,
+  MoveTarget,
+  ContestClient,
+  SuperContestEffect,
+} from 'pokenode-ts';
+import { findEnglishName, getIdFromURL } from '@/helpers';
 import { PokestatsPageTitle } from '@/components/Head';
 // components
 import Head from 'next/head';
 import Layout from '@/components/Layout';
-// import MovePage from '@/components/Move';
+// import MovePage from '@/components/MovePage';
 import Loading from '@/components/Loading';
 
 export interface PokestatsMovePageProps {
+  autocompleteList: (Pokemon | PokemonType)[];
   move: Move;
   target: MoveTarget;
   superContestEffect: SuperContestEffect;
 }
 
-const PokestatsMovePage: NextPage<PokestatsMovePageProps> = ({
-  move,
-  target,
-  superContestEffect,
-  ...props
-}) => {
-  console.log(move, target, superContestEffect, props);
+const PokestatsMovePage: NextPage<PokestatsMovePageProps> = ({ autocompleteList, ...props }) => {
+  console.log(props.move, props.target, props.superContestEffect);
 
   const router = useRouter();
+
+  const moveName = findEnglishName(props.move.names);
+  const pageTitle = `${moveName} (Move) - ${PokestatsPageTitle}`;
 
   if (router.isFallback) {
     return (
       <Loading
-        height="100vh"
-        text="Loading Move"
+        flexheight="100vh"
+        text="Learning Move"
         $iconWidth={{ xxs: '20%', xs: '15%', md: '10%', lg: '5%' }}
       />
     );
   }
 
-  return <div>Move Page</div>;
+  return (
+    <>
+      <Head>
+        <title>{pageTitle}</title>
+      </Head>
+      <Layout withHeader={{ autocompleteList: autocompleteList }}>move page</Layout>
+    </>
+  );
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
@@ -62,21 +77,27 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   // clients
+  const pokemonClient = new PokemonClient();
   const moveClient = new MoveClient();
   const contestClient = new ContestClient();
 
   const moveName = params.moveId as string;
 
   try {
-    // get move data from param
-    const moveData = await moveClient.getMoveByName(moveName);
+    // fetch data
+    const [{ results: allPokemonDataResults }, { results: allTypesDataResults }, moveData] =
+      await Promise.all([
+        pokemonClient.listPokemons(0, 905),
+        pokemonClient.listTypes(),
+        moveClient.getMoveByName(moveName),
+      ]);
 
-    if (!moveData) {
-      console.error('Failed to fetch moveData');
+    if (!allPokemonDataResults || !allTypesDataResults || !moveData) {
+      console.log('Failed to fetch moveData');
       return { notFound: true };
     }
 
-    // fetch data
+    // fetch target and contest move data
     const [targetData, superContestEffectData] = await Promise.all([
       moveClient.getMoveTargetById(getIdFromURL(moveData.target.url, 'move-target')),
       contestClient.getSuperContestEffectById(
@@ -85,7 +106,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     ]);
 
     if (!targetData || !superContestEffectData) {
-      console.error('Failed to fetch targetData');
+      console.log('Failed to fetch targetData');
       return { notFound: true };
     }
 
@@ -101,6 +122,18 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
     return {
       props: {
+        autocompleteList: [
+          ...allPokemonDataResults.map((currPokemon, i) => ({
+            ...currPokemon,
+            id: i + 1,
+            assetType: 'pokemon',
+          })),
+          ...allTypesDataResults.map((currType, i) => ({
+            ...currType,
+            id: i + 1,
+            assetType: 'type',
+          })),
+        ],
         move: moveData,
         target: targetData,
         superContestEffect: superContestEffectData,

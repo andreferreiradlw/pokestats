@@ -1,7 +1,7 @@
 // types
 import type { PokestatsPokemonPageProps } from '@/pages/pokemon/[pokemonId]';
 // helpers
-import { pageContainerVariant, findPokemonName } from '@/helpers';
+import { pageContainerVariant, findEnglishName } from '@/helpers';
 // styles
 import { Divider } from '@/components/BaseStyles';
 // components
@@ -32,7 +32,7 @@ const PokemonPage = ({
   const { names, varieties } = species;
   const { babyTriggerItem } = evolutionChain;
 
-  const currPokemonName = findPokemonName(species);
+  const currPokemonName = findEnglishName(species);
 
   return (
     <AnimatePresence mode="wait">

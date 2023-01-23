@@ -6,7 +6,6 @@ import type {
   Pokemon as PokenodePokemon,
   EvolutionChain,
   PokemonSpecies,
-  VersionGroup,
   Ability,
   EvolutionDetail,
 } from 'pokenode-ts';
@@ -15,11 +14,10 @@ import { PokemonClient, EvolutionClient } from 'pokenode-ts';
 import {
   getIdFromEvolutionChain,
   getIdFromSpecies,
-  mapGenerationToGame,
   prefixId,
   formatFlavorText,
   gameVersions,
-  findPokemonName,
+  findEnglishName,
 } from '@/helpers';
 import { PokestatsPageTitle } from '@/components/Head';
 // components
@@ -68,7 +66,7 @@ const PokestatsPokemonPage: NextPage<PokestatsPokemonPageProps> = ({
     );
   }
 
-  const pokemonName = findPokemonName(props.species);
+  const pokemonName = findEnglishName(props.species.names);
   const pageTitle = `${pokemonName} (Pokémon #${props.pokemon.id}) - ${PokestatsPageTitle}`;
   const pageDescription = formatFlavorText(props.species.flavor_text_entries[0]?.flavor_text);
   const generationDescriptions = gameVersions
@@ -146,7 +144,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     ]);
 
     if (!allPokemonDataResults || !allTypesDataResults || !pokemonDataResults) {
-      console.error('Failed to fetch allPokemonData, typesData, pokemonData');
+      console.log('Failed to fetch allPokemonData, typesData, pokemonData');
       return { notFound: true };
     }
 
@@ -167,7 +165,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     );
 
     if (!pokemonSpeciesResults || !pokemonAbilitiesResults) {
-      console.error('Failed to fetch pokemonSpeciesResults or pokemonAbilitiesResults');
+      console.log('Failed to fetch pokemonSpeciesResults or pokemonAbilitiesResults');
       return { notFound: true };
     }
 
@@ -177,7 +175,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     );
 
     if (!evolutionDataResults) {
-      console.error('Failed to fetch evolutionData');
+      console.log('Failed to fetch evolutionData');
       return { notFound: true };
     }
 
@@ -272,7 +270,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
       },
     };
   } catch (error) {
-    console.error(error);
+    console.log(error);
     // redirects to 404 page
     return { notFound: true };
   }

@@ -11,7 +11,7 @@ import {
   fadeInUpVariant,
   mapGeneration,
   formatFlavorText,
-  findPokemonName,
+  findEnglishName,
   prefixId,
 } from '@/helpers';
 // components
@@ -54,6 +54,7 @@ const PokemonDetails = ({
     is_legendary,
     is_mythical,
     generation,
+    names,
   } = species;
   // load pokemon cry sound
   const [cry, setCry] = useState(null);
@@ -142,7 +143,7 @@ const PokemonDetails = ({
             flexgap="0.5em"
             width="auto"
           >
-            <PageHeading>{findPokemonName(species)}</PageHeading>
+            <PageHeading>{findEnglishName(names)}</PageHeading>
             {id <= 802 && (
               <IconContainer
                 whileHover="hover"

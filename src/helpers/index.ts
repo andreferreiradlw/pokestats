@@ -3,7 +3,7 @@ export * from './animations';
 // box
 export * from './box';
 // names
-export * from './findPokemonName';
+export * from './findName';
 // game version
 export * from './gameVersion';
 // moves

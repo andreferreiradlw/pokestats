@@ -353,7 +353,7 @@ const mapVersionToGroup = (currentVersion: string): string =>
   gameVersions.filter(version => version.value === currentVersion).map(version => version.group)[0];
 
 const mapGeneration = (generationValue: string): string =>
-  generations.find(gen => gen.value === generationValue)?.label;
+  generationValue ? generations.find(gen => gen.value === generationValue)?.label : '';
 
 const mapGenerationToGame = (value: string, pokemonId: number): string => {
   const currGames = gameVersions.filter(gen => gen.genValue === value);

@@ -23,22 +23,24 @@ const HeaderComponent = ({
   currPokemon,
   ...rest
 }: HeaderComponentProps): JSX.Element => {
-  const pokemonGen = currPokemon.generation.name;
+  const pokemonGen = currPokemon?.generation.name;
   // game version
   const { gameVersion, setGameVersion } = useContext(GameVersionContext);
   // state
   const [dropdownOptions, setDropdownOptions] = useState<GameVersions>();
 
   useEffect(() => {
-    const currGame = mapGenerationToGame(pokemonGen, currPokemon.id);
+    if (currPokemon) {
+      const currGame = mapGenerationToGame(pokemonGen, currPokemon.id);
 
-    const currPokemonVersions = gameVersions.filter(
-      version => !checkIfEarlierGen(currGame, version.value),
-    );
-    setDropdownOptions(currPokemonVersions);
+      const currPokemonVersions = gameVersions.filter(
+        version => !checkIfEarlierGen(currGame, version.value),
+      );
+      setDropdownOptions(currPokemonVersions);
 
-    if (currPokemonVersions.findIndex(game => game.value === gameVersion) < 0) {
-      setGameVersion(currPokemonVersions[0].value);
+      if (currPokemonVersions.findIndex(game => game.value === gameVersion) < 0) {
+        setGameVersion(currPokemonVersions[0].value);
+      }
     }
   }, [currPokemon]);
 

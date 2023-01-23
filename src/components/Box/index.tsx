@@ -24,9 +24,11 @@ export interface BoxProps extends HTMLMotionProps<'div'> {
   flexmargin?: CSSProperties['margin'] | Record<string, CSSProperties['margin']>;
   flexpadding?: CSSProperties['padding'] | Record<string, CSSProperties['padding']>;
   flexwrap?: CSSProperties['flexWrap'] | Record<string, CSSProperties['flexWrap']>;
+  flexshrink?: CSSProperties['flexShrink'] | Record<string, CSSProperties['flexShrink']>;
   minheight?: CSSProperties['minHeight'] | Record<string, CSSProperties['minHeight']>;
   $parentGap?: CSSProperties['gap'];
   screensizes?: number | Record<string, number>;
+  textAlign?: CSSProperties['textAlign'] | Record<string, CSSProperties['textAlign']>;
   width?: CSSProperties['width'] | Record<string, CSSProperties['width']>;
 }
 

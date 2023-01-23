@@ -68,8 +68,8 @@
 ✅ Pokemon Page <br />
 ✅ Type Page <br />
 ✅ Static Generated Pages <br />
-✅ Generation 8 Pokemon ([some data is incomplete](https://github.com/PokeAPI/pokeapi/issues/520)) <br />
 ✅ Typescript Refactoring <br />
+✅ Generation 8 Pokemon + Legends: Arceus ([some data is incomplete](https://github.com/PokeAPI/pokeapi/issues/520)) <br />
 🛠️ [Move Page](https://pokeapi.api-docs.io/v2.0/moves/rNQ5oSyuW7AJ3mqEe) <br />
 🗒️ [Encounters](https://pokeapi.api-docs.io/v2.0/encounters) & [Item](https://pokeapi.api-docs.io/v2.0/locations/h6KztxeJv67pvfT5F) Map <br />
 🗒️ [Headbutt Tree Encounters](https://bulbapedia.bulbagarden.net/wiki/Headbutt_tree) Map <br />

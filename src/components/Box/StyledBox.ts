@@ -20,7 +20,9 @@ const BoxWrapper = styled(motion.div)<BoxProps>`
     flexmargin,
     flexpadding,
     flexwrap,
+    flexshrink,
     minheight,
+    textAlign,
     width,
   }) => css`
     // flexbox styles
@@ -31,6 +33,7 @@ const BoxWrapper = styled(motion.div)<BoxProps>`
     ${flexwrap && responsiveProps('flex-wrap', flexwrap)}
     ${flexgap && responsiveProps('gap', flexgap)}
     ${flexjustify && responsiveProps('justify-content', flexjustify)}
+    ${flexshrink && responsiveProps('flex-shrink', flexshrink)}
     // spacing
     ${flexmargin && responsiveProps('margin', flexmargin)}
     ${flexpadding && responsiveProps('padding', flexpadding)}
@@ -38,6 +41,8 @@ const BoxWrapper = styled(motion.div)<BoxProps>`
     ${flexheight && responsiveProps('height', flexheight)}
     ${minheight && responsiveProps('min-height', minheight)}
     ${width && responsiveProps('width', width)}
+    // typography
+    ${textAlign && responsiveProps('text-align', textAlign)}
     // others
     ${backgroundcolor && responsiveProps('background', backgroundcolor)}
     ${borderradius && responsiveProps('border-radius', borderradius)}

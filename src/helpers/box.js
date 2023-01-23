@@ -28,12 +28,16 @@ export const responsiveProps = (property, values) => {
   } else if (typeof values === 'object') {
     return dimensions.map(d => {
       if (breakpoints[d] && values[d] !== undefined) {
-        return css`
-          ${breakpointStyle(
-            breakpoints[d],
-            property ? `${property}: ${values[d]};` : `${values[d]}`,
-          )}
-        `;
+        return d === 'xxs'
+          ? css`
+              ${property ? `${property}: ${values[d]};` : `${values[d]}`}
+            `
+          : css`
+              ${breakpointStyle(
+                breakpoints[d],
+                property ? `${property}: ${values[d]};` : `${values[d]}`,
+              )}
+            `;
       }
       return null;
     });

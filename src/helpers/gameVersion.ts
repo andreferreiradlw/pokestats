@@ -356,12 +356,12 @@ const mapGeneration = (generationValue: string): string =>
   generationValue ? generations.find(gen => gen.value === generationValue)?.label : '';
 
 const mapGenerationToGame = (value: string, pokemonId: number): string => {
-  const currGames = gameVersions.filter(gen => gen.genValue === value);
+  const genGames = gameVersions.filter(gen => gen.genValue === value);
 
   if (checkIfArceus(pokemonId)) {
-    return currGames[1].value;
+    return genGames[2].value;
   } else {
-    return currGames[0].value;
+    return genGames[0].value;
   }
 };
 
@@ -380,4 +380,5 @@ export {
   mapGeneration,
   mapGenerationToGame,
   checkIfEarlierGen,
+  checkIfArceus,
 };

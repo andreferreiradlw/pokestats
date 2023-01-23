@@ -26,7 +26,7 @@ const Footer = (): JSX.Element => {
         flexjustify={{ xxs: 'center', sm: 'space-between' }}
         flexgap="1em"
         screensizes={12}
-        textAlign={{ xxs: 'center', sm: 'left' }}
+        flextextalign={{ xxs: 'center', sm: 'left' }}
         $contained
         $withGutter
       >

@@ -22,7 +22,7 @@ const BoxWrapper = styled(motion.div)<BoxProps>`
     flexwrap,
     flexshrink,
     minheight,
-    textAlign,
+    flextextalign,
     width,
   }) => css`
     // flexbox styles
@@ -42,7 +42,7 @@ const BoxWrapper = styled(motion.div)<BoxProps>`
     ${minheight && responsiveProps('min-height', minheight)}
     ${width && responsiveProps('width', width)}
     // typography
-    ${textAlign && responsiveProps('text-align', textAlign)}
+    ${flextextalign && responsiveProps('text-align', flextextalign)}
     // others
     ${backgroundcolor && responsiveProps('background', backgroundcolor)}
     ${borderradius && responsiveProps('border-radius', borderradius)}

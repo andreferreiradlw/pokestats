@@ -36,6 +36,7 @@ const HeaderComponent = ({
       const currPokemonVersions = gameVersions.filter(
         version => !checkIfEarlierGen(currGame, version.value),
       );
+
       setDropdownOptions(currPokemonVersions);
 
       if (currPokemonVersions.findIndex(game => game.value === gameVersion) < 0) {

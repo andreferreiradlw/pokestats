@@ -13,6 +13,7 @@ import MoveInfo from './MoveInfo';
 import MoveEntries from './MoveEntries';
 import MoveContest from './MoveContest';
 import MoveFlavorText from './MoveFlavorText';
+import MoveMachines from './MoveMachines';
 
 export type TypePageProps = Omit<PokestatsMovePageProps, 'autocompleteList'>;
 
@@ -22,7 +23,7 @@ const MovePage = ({
   superContestEffect,
   contestEffect,
 }: TypePageProps): JSX.Element => {
-  // console.log('move', move);
+  console.log('move', move);
   // console.log('target', target);
   // console.log('superContestEffect', superContestEffect);
   // console.log('contestEffect', contestEffect);
@@ -70,7 +71,10 @@ const MovePage = ({
               flexjustify="flex-start"
               flexgap="1.5em"
             >
-              <MoveInfo move={move} screensizes={4} />
+              <Box screensizes={4} flexgap="1.5em">
+                <MoveInfo move={move} />
+                <MoveMachines />
+              </Box>
               <MoveFlavorText flavorTexts={flavor_text_entries} screensizes={8} />
             </Box>
           </Box>
@@ -82,7 +86,9 @@ const MovePage = ({
           flexdirection="row"
           flexgap="1.5em"
         >
-          <MoveEntries move={move} moveName={moveName} screensizes={5} />
+          <Box screensizes={5} flexgap="1.5em">
+            <MoveEntries move={move} moveName={moveName} />
+          </Box>
           <MoveContest
             move={move}
             moveName={moveName}

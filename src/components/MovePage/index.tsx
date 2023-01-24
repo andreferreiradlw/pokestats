@@ -1,7 +1,9 @@
+import { useMemo } from 'react';
 // types
 import type { PokestatsMovePageProps } from '@/pages/move/[moveId]';
+import type { Pokemon } from '@/types';
 // helpers
-import { findEnglishName, pageContainerVariant } from '@/helpers';
+import { findEnglishName, pageContainerVariant, getIdFromURL } from '@/helpers';
 // styles
 import { Divider, PageHeading } from '@/BaseStyles';
 // components
@@ -14,6 +16,8 @@ import MoveEntries from './MoveEntries';
 import MoveContest from './MoveContest';
 import MoveFlavorText from './MoveFlavorText';
 import MoveMachines from './MoveMachines';
+import MoveTarget from './MoveTarget';
+import MovePokemon from './MovePokemon';
 
 export type TypePageProps = Omit<PokestatsMovePageProps, 'autocompleteList'>;
 
@@ -23,12 +27,21 @@ const MovePage = ({
   superContestEffect,
   contestEffect,
 }: TypePageProps): JSX.Element => {
-  console.log('move', move);
-  // console.log('target', target);
+  // console.log('move', move);
+  console.log('target', target);
   // console.log('superContestEffect', superContestEffect);
   // console.log('contestEffect', contestEffect);
   // data
-  const { name, names: moveNames, type, flavor_text_entries } = move;
+  const { name, names: moveNames, type, flavor_text_entries, learned_by_pokemon } = move;
+  // memo
+  const pokemonList = useMemo(
+    () =>
+      learned_by_pokemon.map(pokemon => ({
+        name: pokemon.name,
+        id: getIdFromURL(pokemon.url, 'pokemon'),
+      })),
+    [learned_by_pokemon],
+  );
 
   const moveName = findEnglishName(moveNames);
 
@@ -88,6 +101,7 @@ const MovePage = ({
         >
           <Box screensizes={5} flexgap="1.5em">
             <MoveEntries move={move} moveName={moveName} />
+            <MoveTarget target={target} />
           </Box>
           <MoveContest
             move={move}
@@ -98,6 +112,7 @@ const MovePage = ({
           />
         </Box>
         <Divider />
+        <MovePokemon pokemonList={pokemonList as Pokemon[]} />
         <Divider />
       </MainContainer>
     </AnimatePresence>

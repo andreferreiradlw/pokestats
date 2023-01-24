@@ -55,7 +55,7 @@ const Contest = ({
   return (
     <Box flexalign="flex-start" flexjustify="flex-start" flexgap="0.5em" {...rest}>
       {title && <SectionSubTitle>{title}</SectionSubTitle>}
-      <Table style={{ maxWidth: '350px' }}>
+      <Table style={{ maxWidth: '300px' }}>
         <tbody>
           <tr>
             <th>Appeal</th>

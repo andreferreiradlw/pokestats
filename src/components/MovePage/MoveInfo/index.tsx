@@ -43,7 +43,7 @@ const MoveInfo = ({ move, ...rest }: MoveInfoProps): JSX.Element => {
             <td>{priority}</td>
           </tr>
           <tr>
-            <th>Generation</th>
+            <th>Introduced</th>
             <td>{generationName}</td>
           </tr>
         </tbody>

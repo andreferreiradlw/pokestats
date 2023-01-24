@@ -28,12 +28,13 @@ const Table = styled(motion.table)`
     min-height: 45px;
     text-align: left;
     white-space: nowrap;
+    padding: 0.5em 1em 0.5em 0;
   }
 
   td {
     font-weight: normal;
     min-height: 45px;
-    padding: 8px 16px;
+    padding: 0.5em 1em;
     white-space: pre-line;
 
     p {

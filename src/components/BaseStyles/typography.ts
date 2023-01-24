@@ -58,7 +58,7 @@ const JpnName = styled(motion.span)`
 `;
 
 const BoldSpan = styled.span`
-  font-weight: 600;
+  font-weight: 600 !important;
 `;
 
 const Anchor = styled(Link)`

@@ -4,7 +4,7 @@ import type { LoadingProps } from './index';
 // components
 import BoxWrapper from '@/components/Box/StyledBox';
 // styles
-import { SectionSubTitle, ellipsis, rotate, riseUp, pokeballShake } from '@/components/BaseStyles';
+import { SectionSubTitle, ellipsis, shake, riseUp, pokeballShake } from '@/components/BaseStyles';
 // helpers
 import { responsiveProps } from '@/helpers';
 // svg
@@ -33,8 +33,8 @@ const LoadingContainer = styled(BoxWrapper)`
 const PotionIcon = styled(Potion)<{ $iconwidth?: LoadingProps['$iconWidth'] }>`
   height: auto;
   ${({ $iconWidth }) => $iconWidth && responsiveProps('width', $iconWidth)}
-  // rotation
-  animation: 20s ${rotate} 0ms infinite ease-in-out;
+  // shake
+  animation: 20s ${shake} 0ms infinite ease-in-out;
   // rise up
   circle {
     animation: ${riseUp} 2s infinite linear;

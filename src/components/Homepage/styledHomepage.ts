@@ -1,12 +1,12 @@
 import styled, { css } from 'styled-components';
 // helpers
-import { bounce } from '@/components/BaseStyles';
+import { bounce, rotate } from '@/BaseStyles';
 // components
 import { motion } from 'framer-motion';
-import Box from '@/components/Box';
 import BoxWrapper from '@/components/Box/StyledBox';
 // icons
 import ArrowDownIcon from 'public/static/iconLibrary/arrow_down.svg';
+import PokeballIcon from 'public/static/iconLibrary/pokeball.svg';
 
 const Container = styled(BoxWrapper)`
   height: 50vh;
@@ -31,9 +31,16 @@ const GithubLink = styled(motion.a)`
   }
 
   svg {
-    border-radius: 30%;
+    border-radius: 25%;
     height: auto;
-    width: 50px;
+    width: 30px;
+
+    ${({ theme }) =>
+      css`
+        @media ${theme.device.sm} {
+          width: 50px;
+        }
+      `}
   }
 `;
 
@@ -50,11 +57,17 @@ const ScrollDown = styled(ArrowDownIcon)`
   width: 40px;
 `;
 
-const ListContainer = styled(Box)`
+const ListContainer = styled(BoxWrapper)`
   ${({ theme }) => css`
     background: ${theme.colors.primary.main};
     color: ${theme.colors.primary.contrastText};
   `}
 `;
 
-export { Container, GithubLink, ScrollContainer, ScrollDown, ListContainer };
+const Pokeball = styled(PokeballIcon)`
+  width: 1em;
+  // rotation
+  animation: 3s ${rotate} 0ms infinite linear;
+`;
+
+export { Container, GithubLink, ScrollContainer, ScrollDown, ListContainer, Pokeball };

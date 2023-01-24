@@ -1,5 +1,4 @@
 import { useMemo } from 'react';
-import styled from 'styled-components';
 // types
 import type { PokestatsTypePageProps } from '@/pages/type/[typeId]';
 // helpers
@@ -7,11 +6,7 @@ import { mapGeneration, removeDash } from '@/helpers';
 // components
 import Box, { BoxProps } from '@/components/Box';
 // styles
-import { Table, UppercasedTd } from '@/components/BaseStyles';
-
-const InfoTable = styled(Table)`
-  width: 100%;
-`;
+import { Table, UppercasedTd } from '@/BaseStyles';
 
 interface TypeInfoProps extends BoxProps {
   type: PokestatsTypePageProps['typeInfo'];
@@ -24,7 +19,7 @@ const TypeInfo = ({ type, ...rest }: TypeInfoProps): JSX.Element => {
 
   return (
     <Box {...rest}>
-      <InfoTable>
+      <Table>
         <tbody>
           <tr>
             <th>Type Id</th>
@@ -43,7 +38,7 @@ const TypeInfo = ({ type, ...rest }: TypeInfoProps): JSX.Element => {
             </tr>
           )}
         </tbody>
-      </InfoTable>
+      </Table>
     </Box>
   );
 };

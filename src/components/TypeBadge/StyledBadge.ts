@@ -45,7 +45,7 @@ const Badge = styled(motion.div)<TypeBadgeProps>`
     }
   `}
 
-  ${({ $iconOnly, flexmargin }) =>
+  ${({ theme, $iconOnly, flexmargin }) =>
     $iconOnly
       ? css`
           display: inline-flex;
@@ -54,7 +54,11 @@ const Badge = styled(motion.div)<TypeBadgeProps>`
         `
       : css`
           ${flexmargin && `margin: ${flexmargin};`}
-          padding: 0.5em;
+          padding: 0.25em;
+
+          @media ${theme.device.md} {
+            padding: 0.5em;
+          }
         `}
 
   ${({ $float }) =>

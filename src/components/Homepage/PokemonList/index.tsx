@@ -62,9 +62,9 @@ const PokemonList = ({ pokemon, ...rest }: PokemonListProps): JSX.Element => {
         <SectionTitle>{`Select your Pokemon (${showPokemon.length})`}</SectionTitle>
         <SelectContainer
           flexdirection="row"
-          flexjustify={{ xxs: 'center', sm: 'flex-start' }}
+          flexjustify="flex-start"
           flexwrap="wrap"
-          flexgap="2em"
+          flexgap={{ xxs: '1em', md: '2em' }}
         >
           <Dropdown
             label="Game Generation"

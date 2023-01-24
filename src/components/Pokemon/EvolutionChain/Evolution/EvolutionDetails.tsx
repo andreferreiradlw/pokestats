@@ -3,9 +3,10 @@ import styled from 'styled-components';
 import type { EvolutionDetail, EvolutionTrigger } from 'pokenode-ts';
 // helpers
 import { capitalise, removeDash, getIdFromSpecies } from '@/helpers';
+// styles
+import { Anchor } from '@/BaseStyles';
 // components
 import Box, { BoxProps } from '@/components/Box';
-import Link from 'next/link';
 // icons
 import Moon from 'public/static/iconLibrary/moon.svg';
 import Sun from 'public/static/iconLibrary/sun.svg';
@@ -32,17 +33,6 @@ const Details = styled.p`
 
 const ItemImage = styled.img`
   width: 50px;
-`;
-
-const Anchor = styled(Link)`
-  color: ${({ theme }) => theme.colors.tertiary.main};
-  font-weight: 700;
-  white-space: nowrap;
-
-  &:hover {
-    color: ${({ theme }) => theme.colors.secondary.main};
-    text-decoration: underline;
-  }
 `;
 
 type TriggerNameProps = EvolutionTrigger['name'] | 'three-critical-hits';

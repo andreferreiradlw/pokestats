@@ -81,7 +81,7 @@ const PokestatsPokemonPage: NextPage<PokestatsPokemonPageProps> = ({
         <meta name="description" content={pageDescription} />
         <meta
           name="keywords"
-          content={`${pokemonName}, Pokemon, Pokémon, Pokédex, Pokestats, ${generationDescriptions}`}
+          content={`${pokemonName}, ${pokemonName} gg, Pokemon, Pokémon, Pokédex, Pokestats, Pokestats gg, Shiny, ${generationDescriptions}`}
         />
         {/** Open Graph */}
         <meta property="og:title" content={pageTitle} />

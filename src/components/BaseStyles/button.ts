@@ -50,10 +50,14 @@ const lightValues = (theme: ThemeType) => css`
 `;
 
 const Button = styled(motion.button)<{ $dark?: boolean; $active?: boolean }>`
+  align-items: center;
   border-radius: 4px;
   cursor: pointer;
+  display: flex;
   font-size: 1em;
   font-weight: 500;
+  gap: 0.5em;
+  justify-content: center;
   padding: 10px 20px;
   text-align: center;
   transition: box-shadow 0.2s ease-in-out;

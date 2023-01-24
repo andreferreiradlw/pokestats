@@ -1,12 +1,14 @@
 import styled, { css } from 'styled-components';
 import { motion } from 'framer-motion';
+import Link from 'next/link';
+import { focusStyles } from './button';
 
 const SectionTitle = styled(motion.h2)`
   font-size: 1.5em;
   font-weight: 600;
 
   ${({ theme }) => css`
-    @media ${theme.device.xs} {
+    @media ${theme.device.sm} {
       font-size: 2em;
     }
   `}
@@ -55,4 +57,20 @@ const JpnName = styled(motion.span)`
   `}
 `;
 
-export { SectionTitle, SectionSubTitle, SectionMessage, JpnName };
+const BoldSpan = styled.span`
+  font-weight: 600;
+`;
+
+const Anchor = styled(Link)`
+  color: ${({ theme }) => theme.colors.tertiary.main};
+  font-weight: 700;
+  text-decoration: underline;
+
+  ${focusStyles}
+
+  &:hover {
+    color: ${({ theme }) => theme.colors.secondary.main};
+  }
+`;
+
+export { SectionTitle, SectionSubTitle, SectionMessage, JpnName, BoldSpan, Anchor };

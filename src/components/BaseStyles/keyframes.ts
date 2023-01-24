@@ -25,7 +25,7 @@ const ellipsis = keyframes`
   }
 `;
 
-const rotate = keyframes`
+const shake = keyframes`
   0% { -webkit-transform: translate(0px, 0px) rotate(0deg); }
   2% { -webkit-transform: translate(0px, 0px) rotate(-0.5deg); }
   4% { -webkit-transform: translate(0px, 0px) rotate(-4.5deg); }
@@ -136,8 +136,15 @@ const pokeballShake = keyframes`
   85% { transform: translate(0, 0) rotate(0); }
 `;
 
-const bounce = keyframes`0%, 20%, 50%, 80%, 100% {transform: translateY(0);} 
-40% {transform: translateY(-20px);} 
-60% {transform: translateY(-15px);} `;
+const bounce = keyframes`
+  0%, 20%, 50%, 80%, 100% {transform: translateY(0);} 
+  40% {transform: translateY(-20px);} 
+  60% {transform: translateY(-15px);} 
+`;
 
-export { float, ellipsis, rotate, riseUp, tumble, bounce, pokeballShake };
+const rotate = keyframes`
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+`;
+
+export { float, ellipsis, shake, riseUp, tumble, bounce, pokeballShake, rotate };

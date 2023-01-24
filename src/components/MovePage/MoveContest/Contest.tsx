@@ -44,7 +44,7 @@ const Contest = ({
   title,
   ...rest
 }: ContestProps): JSX.Element => {
-  // data
+  // @ts-ignore
   const { appeal, jam } = effect || {};
   // memo
   const contestFlavorText = useMemo(

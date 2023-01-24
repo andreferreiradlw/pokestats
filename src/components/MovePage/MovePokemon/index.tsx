@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 // types
 import type { Pokemon } from '@/types';
 // styles
@@ -11,10 +12,16 @@ interface MovePokemonProps extends BoxProps {
 }
 
 const MovePokemon = ({ pokemonList, ...rest }: MovePokemonProps): JSX.Element => {
+  // memo
+  const displayPokemon = useMemo(
+    () => pokemonList.filter(pokemon => pokemon.id <= 905),
+    [pokemonList],
+  );
+
   return (
     <Box flexalign="flex-start" flexjustify="flex-start" flexgap="1em" {...rest}>
       <SectionTitle>{`Learnset (${pokemonList.length})`}</SectionTitle>
-      <InfiniteScroll screensizes={12} pokemonList={pokemonList} />
+      <InfiniteScroll screensizes={12} pokemonList={displayPokemon} />
     </Box>
   );
 };

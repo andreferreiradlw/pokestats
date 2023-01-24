@@ -2,24 +2,25 @@ import { useMemo } from 'react';
 // types
 import type { Move } from 'pokenode-ts';
 // helpers
-import { mapGeneration, removeDash } from '@/helpers';
+import { capitalise, mapGeneration, removeDash } from '@/helpers';
 // styles
-import { Table, UppercasedTd } from '@/BaseStyles';
+import { BoldSpan, SectionSubTitle, Table, UppercasedTd } from '@/BaseStyles';
 // components
 import Box, { BoxProps } from '@/components/Box';
 
 interface MoveInfoProps extends BoxProps {
   move: Move;
+  moveName: string;
 }
 
-const MoveInfo = ({ move, ...rest }: MoveInfoProps): JSX.Element => {
+const MoveInfo = ({ move, moveName, ...rest }: MoveInfoProps): JSX.Element => {
   // data
-  const { damage_class, accuracy, power, pp, priority, generation } = move;
+  const { damage_class, accuracy, power, pp, priority, generation, stat_changes, name } = move;
   // memo
   const generationName = useMemo(() => mapGeneration(generation.name), [generation.name]);
 
   return (
-    <Box {...rest}>
+    <Box flexalign="flex-start" flexjustify="flex-start" flexgap="1em" {...rest}>
       <Table>
         <tbody>
           <tr>
@@ -48,6 +49,26 @@ const MoveInfo = ({ move, ...rest }: MoveInfoProps): JSX.Element => {
           </tr>
         </tbody>
       </Table>
+      <Box flexalign="flex-start" flexjustify="flex-start" flexgap="0.5em">
+        <SectionSubTitle>Stat Changes</SectionSubTitle>
+        {stat_changes ? (
+          <Table>
+            <tbody>
+              {stat_changes.map(({ change, stat }, i) => (
+                <tr key={`stat-change-${name}-${stat.name}`}>
+                  <th>{capitalise(removeDash(stat.name))}</th>
+                  <td>{change}</td>
+                </tr>
+              ))}
+            </tbody>
+          </Table>
+        ) : (
+          <p>
+            <BoldSpan>{moveName}</BoldSpan>
+            {` doesn't affect any stats.`}
+          </p>
+        )}
+      </Box>
     </Box>
   );
 };

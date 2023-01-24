@@ -27,7 +27,7 @@ const MovePage = ({
   superContestEffect,
   contestEffect,
 }: TypePageProps): JSX.Element => {
-  // console.log('move', move);
+  console.log('move', move);
   console.log('target', target);
   // console.log('superContestEffect', superContestEffect);
   // console.log('contestEffect', contestEffect);
@@ -85,7 +85,7 @@ const MovePage = ({
               flexgap="1.5em"
             >
               <Box screensizes={4} flexgap="1.5em">
-                <MoveInfo move={move} />
+                <MoveInfo move={move} moveName={moveName} />
                 <MoveMachines />
               </Box>
               <MoveFlavorText flavorTexts={flavor_text_entries} screensizes={8} />

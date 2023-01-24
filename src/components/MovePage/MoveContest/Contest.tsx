@@ -48,7 +48,10 @@ const Contest = ({
   const { appeal, jam } = effect || {};
   // memo
   const contestFlavorText = useMemo(
-    () => effect.flavor_text_entries.find(flavor => flavor.language.name === 'en').flavor_text,
+    () =>
+      effect
+        ? effect.flavor_text_entries.find(flavor => flavor.language.name === 'en').flavor_text
+        : 'No flavor text available for this move.',
     [effect],
   );
 

@@ -28,24 +28,35 @@ const MoveContest = ({
   return (
     <Box flexalign="flex-start" flexjustify="flex-start" flexgap="1em" {...rest}>
       <SectionTitle>Contests</SectionTitle>
-      <p>
-        {`${moveName} has the `}
-        <BoldSpan>{capitalise(removeDash(contest_type.name))}</BoldSpan>
-        {` contest type.`}
-      </p>
-      <Contest
-        combos={normalCombos}
-        contestType={contest_type}
-        effect={contestEffect}
-        moveName={moveName}
-      />
-      <Contest
-        title="Super Contests"
-        combos={superCombos}
-        contestType={contest_type}
-        effect={superContestEffect}
-        moveName={moveName}
-      />
+      {contest_type ? (
+        <>
+          <p>
+            <BoldSpan>{moveName}</BoldSpan>
+            {` has the `}
+            <BoldSpan>{capitalise(removeDash(contest_type.name))}</BoldSpan>
+            {` contest type.`}
+          </p>
+          {contestEffect && (
+            <Contest
+              combos={normalCombos}
+              contestType={contest_type}
+              effect={contestEffect}
+              moveName={moveName}
+            />
+          )}
+          {superContestEffect && (
+            <Contest
+              title="Super Contests"
+              combos={superCombos}
+              contestType={contest_type}
+              effect={superContestEffect}
+              moveName={moveName}
+            />
+          )}
+        </>
+      ) : (
+        <p>{`${moveName} has no contest types.`}</p>
+      )}
     </Box>
   );
 };

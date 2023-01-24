@@ -17,7 +17,7 @@ import Box from '@/components/Box';
 // icons
 import Github from 'public/static/iconLibrary/github.svg';
 
-const Homepage = ({ allPokemon, pokemonTypes }: PokestatsHomepageProps): JSX.Element => {
+const Homepage = ({ allPokemon, pokemonTypes, allMoves }: PokestatsHomepageProps): JSX.Element => {
   // router
   const router = useRouter();
   // memo
@@ -73,7 +73,7 @@ const Homepage = ({ allPokemon, pokemonTypes }: PokestatsHomepageProps): JSX.Ele
           PokeStats
         </MainHeading>
         <Autocomplete
-          filterList={[...allPokemon, ...pokemonTypes]}
+          filterList={[...allPokemon, ...pokemonTypes, ...allMoves]}
           variants={fadeInUpVariant}
           key="homepage-autocomplete"
         />

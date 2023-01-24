@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 // types
 import type { GetStaticPaths, GetStaticProps, NextPage } from 'next';
-import type { Pokemon, PokemonType } from '@/types';
+import type { MoveType, Pokemon, PokemonType } from '@/types';
 // helpers
 import {
   PokemonClient,
@@ -12,7 +12,13 @@ import {
   SuperContestEffect,
   ContestEffect,
 } from 'pokenode-ts';
-import { capitalise, findEnglishName, getIdFromURL, removeDash } from '@/helpers';
+import {
+  capitalise,
+  findEnglishName,
+  getIdFromURL,
+  removeDash,
+  removeDuplicateMoves,
+} from '@/helpers';
 import { PokestatsPageTitle } from '@/components/Head';
 // components
 import Head from 'next/head';
@@ -21,7 +27,7 @@ import MovePage from '@/components/MovePage';
 import Loading from '@/components/Loading';
 
 export interface PokestatsMovePageProps {
-  autocompleteList: (Pokemon | PokemonType)[];
+  autocompleteList: (Pokemon | PokemonType | MoveType)[];
   move: Move;
   target: MoveTarget;
   superContestEffect: SuperContestEffect;
@@ -89,43 +95,59 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
   try {
     // fetch data
-    const [{ results: allPokemonDataResults }, { results: allTypesDataResults }, moveData] =
-      await Promise.all([
-        pokemonClient.listPokemons(0, 905),
-        pokemonClient.listTypes(),
-        moveClient.getMoveByName(moveName),
-      ]);
+    let moveData: Move;
 
-    if (!allPokemonDataResults || !allTypesDataResults || !moveData) {
+    if (moveName === 'pound') {
+      moveData = await moveClient.getMoveById(1);
+    } else {
+      moveData = await moveClient.getMoveByName(moveName);
+    }
+    const [
+      { results: allPokemonDataResults },
+      { results: allTypesDataResults },
+      { results: allMovesDataResults },
+    ] = await Promise.all([
+      pokemonClient.listPokemons(0, 905),
+      pokemonClient.listTypes(),
+      moveClient.listMoves(0, 850),
+    ]);
+
+    if (!allPokemonDataResults || !allTypesDataResults || !allMovesDataResults || !moveData) {
       console.log('Failed to fetch moveData');
       return { notFound: true };
     }
 
-    console.log(moveData);
+    const targetData = await moveClient.getMoveTargetById(
+      getIdFromURL(moveData.target.url, 'move-target'),
+    );
 
-    // fetch target and contest move data
-    const [targetData, superContestEffectData, contestEffectData] = await Promise.all([
-      moveClient.getMoveTargetById(getIdFromURL(moveData.target.url, 'move-target')),
-      contestClient.getSuperContestEffectById(
-        getIdFromURL(moveData.super_contest_effect.url, 'super-contest-effect'),
-      ),
-      contestClient.getContestEffectById(
-        getIdFromURL(moveData.contest_effect.url, 'contest-effect'),
-      ),
-    ]);
-
-    if (!targetData || !superContestEffectData || !contestEffectData) {
+    if (!targetData) {
       console.log('Failed to fetch targetData');
       return { notFound: true };
+    }
+
+    let superContestEffectData: SuperContestEffect;
+    let contestEffectData: ContestEffect;
+
+    if (moveData?.super_contest_effect) {
+      superContestEffectData = await contestClient.getSuperContestEffectById(
+        getIdFromURL(moveData.super_contest_effect.url, 'super-contest-effect'),
+      );
+
+      delete superContestEffectData.moves;
+      superContestEffectData.flavor_text_entries =
+        superContestEffectData.flavor_text_entries.filter(({ language }) => language.name === 'en');
+    }
+
+    if (moveData?.contest_effect) {
+      contestEffectData = await contestClient.getContestEffectById(
+        getIdFromURL(moveData.contest_effect.url, 'contest-effect'),
+      );
     }
 
     // delete unnecessary data
     delete targetData.moves;
     targetData.descriptions = targetData.descriptions.filter(
-      ({ language }) => language.name === 'en',
-    );
-    delete superContestEffectData.moves;
-    superContestEffectData.flavor_text_entries = superContestEffectData.flavor_text_entries.filter(
       ({ language }) => language.name === 'en',
     );
 
@@ -147,11 +169,16 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
             id: i + 1,
             assetType: 'type',
           })),
+          ...removeDuplicateMoves(allMovesDataResults).map((currMove, i) => ({
+            ...currMove,
+            id: getIdFromURL(currMove.url, 'move'),
+            assetType: 'move',
+          })),
         ],
         move: moveData,
         target: targetData,
-        superContestEffect: superContestEffectData,
-        contestEffect: contestEffectData,
+        superContestEffect: superContestEffectData || null,
+        contestEffect: contestEffectData || null,
       },
     };
   } catch (error) {

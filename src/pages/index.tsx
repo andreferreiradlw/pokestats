@@ -1,9 +1,10 @@
 // types
 import type { GetStaticProps, NextPage } from 'next';
-import type { Pokemon, PokemonType } from '@/types';
+import type { Pokemon, PokemonType, MoveType } from '@/types';
 // helpers
-import { PokemonClient } from 'pokenode-ts';
+import { PokemonClient, MoveClient } from 'pokenode-ts';
 import { PokestatsPageTitle } from '@/components/Head';
+import { getIdFromURL, removeDuplicateMoves } from '@/helpers';
 // components
 import Head from 'next/head';
 import Layout from '@/components/Layout';
@@ -12,6 +13,7 @@ import Homepage from '@/components/Homepage';
 export interface PokestatsHomepageProps {
   allPokemon: Pokemon[];
   pokemonTypes: PokemonType[];
+  allMoves: MoveType[];
 }
 
 const PokestatsHomepage: NextPage<PokestatsHomepageProps> = props => (
@@ -31,13 +33,16 @@ const PokestatsHomepage: NextPage<PokestatsHomepageProps> = props => (
 );
 
 export const getStaticProps: GetStaticProps = async () => {
-  const api = new PokemonClient();
+  const pokemonClient = new PokemonClient();
+  const moveClient = new MoveClient();
 
   try {
-    const [pokemonData, typesData] = await Promise.all([
-      api.listPokemons(0, 905),
-      api.listTypes(0, 18),
-    ]);
+    const [{ results: pokemonData }, { results: typesData }, { results: movesData }] =
+      await Promise.all([
+        pokemonClient.listPokemons(0, 905),
+        pokemonClient.listTypes(0, 18),
+        moveClient.listMoves(0, 850),
+      ]);
 
     if (!pokemonData || !typesData) {
       return { notFound: true };
@@ -45,12 +50,17 @@ export const getStaticProps: GetStaticProps = async () => {
 
     return {
       props: {
-        allPokemon: pokemonData.results.map((pokemon, index) => {
+        allPokemon: pokemonData.map((pokemon, index) => {
           return { ...pokemon, id: index + 1, assetType: 'pokemon' };
         }),
-        pokemonTypes: typesData.results.map((type, index) => {
+        pokemonTypes: typesData.map((type, index) => {
           return { ...type, id: index + 1, assetType: 'type' };
         }),
+        allMoves: removeDuplicateMoves(movesData).map((currMove, i) => ({
+          ...currMove,
+          id: getIdFromURL(currMove.url, 'move'),
+          assetType: 'move',
+        })),
       },
     };
   } catch (error) {

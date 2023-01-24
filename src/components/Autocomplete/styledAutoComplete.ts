@@ -85,7 +85,11 @@ const ListWrapper = styled(motion.div)`
     `}
 `;
 
-const OptionImg = styled.img`
+const PokemonImg = styled.img`
+  width: 40px;
+`;
+
+const MachineImg = styled.img`
   width: 40px;
 `;
 
@@ -134,4 +138,4 @@ const PokeID = styled(Option)`
   font-weight: 500;
 `;
 
-export { Container, Input, ListWrapper, OptionWrapper, OptionImg, Option, PokeID };
+export { Container, Input, ListWrapper, OptionWrapper, PokemonImg, MachineImg, Option, PokeID };

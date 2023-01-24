@@ -26,7 +26,7 @@ const PokemonPage = ({
   abilities,
   species,
   evolutionChain,
-}: Omit<PokestatsPokemonPageProps, 'allPokemonTypes' | 'pokemonGen'>): JSX.Element => {
+}: Omit<PokestatsPokemonPageProps, 'autocompleteList' | 'pokemonGen'>): JSX.Element => {
   // data
   const { id, name, stats, types, sprites } = pokemon;
   const { names, varieties } = species;

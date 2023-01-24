@@ -1,4 +1,4 @@
-import type { Move } from 'pokenode-ts';
+import type { Move, NamedAPIResource } from 'pokenode-ts';
 
 export interface PokemonMove extends Move {
   version_group_details: {
@@ -6,4 +6,9 @@ export interface PokemonMove extends Move {
     move_learn_method: { name: string; url: string };
     version_group: { name: string; url: string };
   }[];
+}
+
+export interface MoveType extends NamedAPIResource {
+  assetType: 'move';
+  id: number;
 }

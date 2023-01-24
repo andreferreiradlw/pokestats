@@ -1,3 +1,3 @@
-export type { Pokemon } from './pokemon';
-export type { PokemonType } from './type';
-export type { PokemonMove } from './move';
+export * from './pokemon';
+export * from './type';
+export * from './move';

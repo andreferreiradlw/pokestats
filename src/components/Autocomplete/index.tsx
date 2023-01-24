@@ -3,7 +3,7 @@ import { useState, useEffect, CSSProperties } from 'react';
 // helpers
 import { removeDash, prefixId, fadeInDownVariant } from '@/helpers';
 // types
-import type { Pokemon, PokemonType } from '@/types';
+import type { Pokemon, PokemonType, MoveType } from '@/types';
 import type { HTMLMotionProps } from 'framer-motion';
 // styles
 import {
@@ -11,7 +11,8 @@ import {
   Input,
   ListWrapper,
   OptionWrapper,
-  OptionImg,
+  PokemonImg,
+  MachineImg,
   Option,
   PokeID,
 } from './styledAutoComplete';
@@ -21,7 +22,7 @@ import Box from '@/components/Box';
 import TypeIcon from '@/components/TypeIcon';
 
 export interface AutocompleteProps extends HTMLMotionProps<'div'> {
-  filterList: (PokemonType | Pokemon)[];
+  filterList: (PokemonType | Pokemon | MoveType)[];
   width?: CSSProperties['width'];
 }
 
@@ -147,10 +148,17 @@ const Autocomplete = ({ filterList, ...rest }: AutocompleteProps): JSX.Element =
                 <Box flexdirection="row" flexjustify="flex-start" flexgap="1em">
                   {assetType === 'type' && <TypeIcon type={name} />}
                   {assetType === 'pokemon' && (
-                    <OptionImg
+                    <PokemonImg
+                      alt={`${name} pokemon`}
                       src={`https://raw.githubusercontent.com/andreferreiradlw/pokestats_media/main/assets/images/${prefixId(
                         id,
                       )}.png`}
+                    />
+                  )}
+                  {assetType === 'move' && (
+                    <MachineImg
+                      alt={`${name} pokemon move`}
+                      src="https://raw.githubusercontent.com/msikma/pokesprite/master/items-outline/tm/ghost.png"
                     />
                   )}
                   <Option>{removeDash(name)}</Option>

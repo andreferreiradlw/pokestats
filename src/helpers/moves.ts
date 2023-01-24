@@ -1,5 +1,5 @@
 // types
-import type { MoveLearnMethod, Machine } from 'pokenode-ts';
+import type { MoveLearnMethod, Machine, NamedAPIResource } from 'pokenode-ts';
 import type { PokemonMove } from '@/types';
 // helpers
 import { MachineClient } from 'pokenode-ts';
@@ -79,4 +79,12 @@ const getMachineNames = async (machineMoves: FilteredMove[]): Promise<string[]> 
   return machines.map(machine => machine.item.name);
 };
 
-export { filterMoves, getMachineNames };
+const removeDuplicateMoves = (moves: NamedAPIResource[]): NamedAPIResource[] =>
+  moves.reduce((accumulator, current) => {
+    if (!accumulator.find(item => item.name === current.name)) {
+      accumulator.push(current);
+    }
+    return accumulator;
+  }, []);
+
+export { filterMoves, getMachineNames, removeDuplicateMoves };

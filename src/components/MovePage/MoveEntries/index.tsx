@@ -35,9 +35,15 @@ const buildValuesPhrase = (
     const pastChanges = effectChanges.find(
       change => change.version_group.name === values.version_group.name,
     );
-    pastChanges.effect_entries.forEach(entry =>
-      phraseElements.push(entry.effect.toLowerCase().replace('.', '')),
-    );
+
+    if (pastChanges?.effect_entries) {
+      pastChanges.effect_entries.forEach(entry =>
+        phraseElements.push(entry.effect.toLowerCase().replace('.', '')),
+      );
+    } else {
+      return null;
+    }
+
     phrasePrefix = '';
   }
 
@@ -60,7 +66,7 @@ const MoveEntries = ({ move, moveName, ...rest }: MoveEntriesProps): JSX.Element
           <SectionTitle>Effect Entries</SectionTitle>
           {effectEntries.map(({ effect }, i) => (
             <p key={`effect-entry-${i}`}>
-              {effect.replace('$effect_chance', effect_chance.toString())}
+              {effect.replace('$effect_chance', effect_chance?.toString())}
             </p>
           ))}
         </Box>
@@ -68,13 +74,25 @@ const MoveEntries = ({ move, moveName, ...rest }: MoveEntriesProps): JSX.Element
       <Box flexalign="flex-start" flexjustify="flex-start" flexgap="0.5em">
         <SectionTitle>Version Changes</SectionTitle>
         {past_values?.length > 0
-          ? past_values.map(({ version_group }, i) => (
-              <p key={`move-past-value-${i}`}>
-                {`Prior to ${mapGroupToGeneration(version_group.name)}, `}
-                <BoldSpan>{moveName}</BoldSpan>
-                {` ${buildValuesPhrase(past_values[i], effect_changes)}.`}
-              </p>
-            ))
+          ? past_values.map(({ version_group }, i) => {
+              const phrase = buildValuesPhrase(past_values[i], effect_changes);
+              if (phrase) {
+                return (
+                  <p key={`move-past-value-${i}`}>
+                    {`Prior to ${mapGroupToGeneration(version_group.name)}, `}
+                    <BoldSpan>{moveName}</BoldSpan>
+                    {` ${phrase}.`}
+                  </p>
+                );
+              } else {
+                return (
+                  <p key={`move-past-value-${i}`}>
+                    <BoldSpan>{moveName}</BoldSpan>
+                    {' has no previous version changes.'}
+                  </p>
+                );
+              }
+            })
           : 'No changes in previous Generations.'}
       </Box>
     </Box>

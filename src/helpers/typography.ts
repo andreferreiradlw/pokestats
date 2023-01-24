@@ -38,4 +38,17 @@ const itemMapUrl = (itemSlug: string): string => {
   return itemMatch ? `${itemMatch.set}/${itemMatch.filename}` : 'other-item/poke-doll.png';
 };
 
-export { capitalise, removeUnderscore, removeDash, formatFlavorText, prefixId, itemMapUrl };
+const createSentence = (elements: string[], lastDivider = 'and'): string =>
+  elements.slice(0, -2).join(', ') +
+  (elements.slice(0, -2).length ? ', ' : '') +
+  elements.slice(-2).join(` ${lastDivider} `);
+
+export {
+  capitalise,
+  removeUnderscore,
+  removeDash,
+  formatFlavorText,
+  prefixId,
+  itemMapUrl,
+  createSentence,
+};

@@ -3,20 +3,31 @@ import type { PokestatsMovePageProps } from '@/pages/move/[moveId]';
 // helpers
 import { findEnglishName, pageContainerVariant } from '@/helpers';
 // styles
-import { PageHeading } from '@/BaseStyles';
+import { Divider, PageHeading } from '@/BaseStyles';
 // components
 import { AnimatePresence } from 'framer-motion';
 import { MainContainer } from '@/components/Layout';
 import Box from '@/components/Box';
 import TypeBadge from '@/components/TypeBadge';
+import MoveInfo from './MoveInfo';
+import MoveEntries from './MoveEntries';
+import MoveContest from './MoveContest';
+import MoveFlavorText from './MoveFlavorText';
 
 export type TypePageProps = Omit<PokestatsMovePageProps, 'autocompleteList'>;
 
-const MovePage = ({ move, superContestEffect, target }: TypePageProps): JSX.Element => {
-  // console.log(move, target, superContestEffect);
-
+const MovePage = ({
+  move,
+  target,
+  superContestEffect,
+  contestEffect,
+}: TypePageProps): JSX.Element => {
+  console.log('move', move);
+  // console.log('target', target);
+  // console.log('superContestEffect', superContestEffect);
+  // console.log('contestEffect', contestEffect);
   // data
-  const { name, names: moveNames, type } = move;
+  const { name, names: moveNames, type, flavor_text_entries } = move;
 
   const moveName = findEnglishName(moveNames);
 
@@ -33,6 +44,7 @@ const MovePage = ({ move, superContestEffect, target }: TypePageProps): JSX.Elem
         variants={pageContainerVariant}
         key={`move-page-${name}`}
       >
+        <Divider />
         <Box
           flexdirection={{ xxs: 'column-reverse', lg: 'row' }}
           flexalign="flex-start"
@@ -42,7 +54,7 @@ const MovePage = ({ move, superContestEffect, target }: TypePageProps): JSX.Elem
           <Box
             flexjustify={{ xxs: 'center', lg: 'flex-start' }}
             flexalign={{ xxs: 'center', lg: 'flex-start' }}
-            flexgap="2em"
+            flexgap="1.5em"
           >
             <Box
               flexalign={{ xxs: 'center', lg: 'flex-start' }}
@@ -52,8 +64,35 @@ const MovePage = ({ move, superContestEffect, target }: TypePageProps): JSX.Elem
               <TypeBadge $typename={type.name} />
               <PageHeading>{moveName}</PageHeading>
             </Box>
+            <Box
+              flexdirection="row"
+              flexalign="flex-start"
+              flexjustify="flex-start"
+              flexgap="1.5em"
+            >
+              <MoveInfo move={move} screensizes={4} />
+              <MoveContest
+                move={move}
+                moveName={moveName}
+                contestEffect={contestEffect}
+                superContestEffect={superContestEffect}
+                screensizes={8}
+              />
+            </Box>
           </Box>
         </Box>
+        <Divider />
+        <Box
+          flexjustify={{ xxs: 'center', lg: 'flex-start' }}
+          flexalign={{ xxs: 'center', lg: 'flex-start' }}
+          flexdirection="row"
+          flexgap="1.5em"
+        >
+          <MoveEntries move={move} moveName={moveName} screensizes={5} />
+          <MoveFlavorText flavorTexts={flavor_text_entries} screensizes={7} />
+        </Box>
+        <Divider />
+        <Divider />
       </MainContainer>
     </AnimatePresence>
   );

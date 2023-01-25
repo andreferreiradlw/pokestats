@@ -1,9 +1,10 @@
+import { Fragment } from 'react';
 // types
 import type { Move } from 'pokenode-ts';
 // helpers
 import { capitalise, removeDash } from '@/helpers';
 // styles
-import { BoldSpan, SectionSubTitle, Table } from '@/BaseStyles';
+import { BoldSpan, SectionTitle, Table } from '@/BaseStyles';
 // components
 import Box, { BoxProps } from '@/components/Box';
 
@@ -18,16 +19,18 @@ const MoveStats = ({ move, moveName, ...rest }: MoveStatsProps): JSX.Element => 
 
   return (
     <Box flexalign="flex-start" flexjustify="flex-start" flexgap="0.5em" {...rest}>
-      <SectionSubTitle>Stat Changes</SectionSubTitle>
+      <SectionTitle>Stat Changes</SectionTitle>
       {stat_changes?.length > 0 ? (
         <Table>
           <tbody>
-            {stat_changes.map(({ change, stat }, i) => (
-              <tr key={`stat-change-${name}-${stat.name}-${i}`}>
-                <th>{capitalise(removeDash(stat.name))}</th>
-                <td>{change}</td>
-              </tr>
-            ))}
+            <tr>
+              {stat_changes.map(({ change, stat }, i) => (
+                <Fragment key={`stat-change-${name}-${stat.name}-${i}`}>
+                  <th>{capitalise(removeDash(stat.name))}</th>
+                  <td>{change}</td>
+                </Fragment>
+              ))}
+            </tr>
           </tbody>
         </Table>
       ) : (

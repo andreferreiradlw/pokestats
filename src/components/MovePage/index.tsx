@@ -29,11 +29,8 @@ const MovePage = ({
   superContestEffect,
   contestEffect,
 }: MovePageProps): JSX.Element => {
-  console.log('move', move);
-  console.log('moveMachines', moveMachines);
-  // console.log('target', target);
-  // console.log('superContestEffect', superContestEffect);
-  // console.log('contestEffect', contestEffect);
+  // console.log('move', move);
+  console.log('target', target);
   // data
   const { name, names: moveNames, type, flavor_text_entries, learned_by_pokemon } = move;
   // memo
@@ -102,11 +99,11 @@ const MovePage = ({
           flexdirection="row"
           flexgap="1.5em"
         >
-          <Box screensizes={5} flexgap="1.5em" $parentGap="1.5em">
+          <Box screensizes={6} flexgap="1.5em" $parentGap="1.5em">
             <MoveEntries move={move} moveName={moveName} />
             <MoveTarget target={target} />
           </Box>
-          <Box screensizes={7} flexgap="1.5em" $parentGap="1.5em">
+          <Box screensizes={6} flexgap="1.5em" $parentGap="1.5em">
             <MoveStats move={move} moveName={moveName} />
             <MoveContest
               move={move}

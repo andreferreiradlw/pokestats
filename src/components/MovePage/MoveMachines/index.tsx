@@ -42,8 +42,8 @@ const MoveMachines = ({
                 <td>
                   <Box
                     flexdirection="row"
-                    flexjustify="space-between"
-                    width="75%"
+                    flexjustify="flex-end"
+                    width="100%"
                     flexmargin="0 auto"
                     flexgap="0.1em"
                   >

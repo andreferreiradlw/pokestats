@@ -3,7 +3,7 @@ import { useMemo, forwardRef, Ref } from 'react';
 import type { Pokemon, PokemonSpecies } from 'pokenode-ts';
 import type { HTMLMotionProps } from 'framer-motion';
 // helpers
-import { removeDash, mapGeneration, fadeInUpVariant, prefixId } from '@/helpers';
+import { removeDash, mapGeneration, fadeInUpVariant, prefixId, mapIdToGeneration } from '@/helpers';
 // styles
 import { Anchor, PokeBox, NumberId, PokeName, PokeGen } from './StyledPokemonBox';
 // components
@@ -55,7 +55,7 @@ const PokemonBox = forwardRef(
           />
           <NumberId>{`#${pokemonId}`}</NumberId>
           <PokeName>{nameFormat ? removeDash(pokemonName) : pokemonName}</PokeName>
-          {generationName && <PokeGen>{generationName}</PokeGen>}
+          <PokeGen>{generationName || mapGeneration(mapIdToGeneration(pokemonId))}</PokeGen>
         </PokeBox>
       </Anchor>
     );

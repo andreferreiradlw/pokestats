@@ -32,7 +32,7 @@ const MoveFlavorText = ({ flavorTexts, ...rest }: MoveFlavorTextProps): JSX.Elem
   }, [flavorTexts]);
 
   return (
-    <Box flexalign="flex-start" flexjustify="flex-start" flexgap="1em" {...rest}>
+    <Box flexalign="flex-start" flexjustify="flex-start" flexgap="0.5em" {...rest}>
       <SectionTitle>Descriptions</SectionTitle>
       <Table>
         <tbody>

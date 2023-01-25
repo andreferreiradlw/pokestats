@@ -39,7 +39,7 @@ const theme = {
   colors: {
     primary: {
       main: 'white',
-      light: '#dbd3d35e',
+      light: '#f8f5f5',
       contrastText: 'black',
     },
     secondary: {

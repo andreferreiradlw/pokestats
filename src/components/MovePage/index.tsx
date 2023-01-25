@@ -29,7 +29,7 @@ const MovePage = ({
   superContestEffect,
   contestEffect,
 }: MovePageProps): JSX.Element => {
-  // console.log('move', move);
+  console.log('move', move);
   console.log('target', target);
   // data
   const { name, names: moveNames, type, flavor_text_entries, learned_by_pokemon } = move;
@@ -79,12 +79,16 @@ const MovePage = ({
               <PageHeading>{moveName}</PageHeading>
             </Box>
             <Box
-              flexdirection="row"
-              flexalign="flex-start"
+              flexdirection={{ xxs: 'column', lg: 'row' }}
+              flexalign={{ xxs: 'center', lg: 'flex-start' }}
               flexjustify="flex-start"
               flexgap="1.5em"
             >
-              <Box screensizes={4} flexgap="1.5em">
+              <Box
+                screensizes={4}
+                flexdirection={{ xxs: 'column', sm: 'row', lg: 'column' }}
+                flexgap="1.5em"
+              >
                 <MoveInfo move={move} />
                 <MoveMachines moveName={moveName} moveType={type.name} machines={moveMachines} />
               </Box>
@@ -96,15 +100,20 @@ const MovePage = ({
         <Box
           flexjustify={{ xxs: 'center', lg: 'flex-start' }}
           flexalign={{ xxs: 'center', lg: 'flex-start' }}
-          flexdirection="row"
+          flexdirection={{ xxs: 'column', lg: 'row' }}
           flexgap="1.5em"
         >
-          <Box screensizes={6} flexgap="1.5em" $parentGap="1.5em">
-            <MoveEntries move={move} moveName={moveName} />
-            <MoveTarget target={target} />
-          </Box>
-          <Box screensizes={6} flexgap="1.5em" $parentGap="1.5em">
+          <Box
+            screensizes={5}
+            flexdirection={{ xxs: 'column-reverse', lg: 'column' }}
+            flexgap="1.5em"
+            $parentGap="1.5em"
+          >
             <MoveStats move={move} moveName={moveName} />
+            <MoveTarget target={target} moveType={type} />
+          </Box>
+          <Box screensizes={7} flexgap="1.5em" $parentGap="1.5em">
+            <MoveEntries move={move} moveName={moveName} />
             <MoveContest
               move={move}
               moveName={moveName}

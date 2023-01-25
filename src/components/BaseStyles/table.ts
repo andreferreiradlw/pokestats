@@ -27,7 +27,6 @@ const Table = styled(motion.table)`
     font-weight: 600;
     min-height: 45px;
     text-align: left;
-    white-space: nowrap;
     padding: 0.5em 1em 0.5em 0;
   }
 
@@ -44,7 +43,7 @@ const Table = styled(motion.table)`
 
   ${({ theme }) => css`
     @media ${theme.device.md} {
-      /* width: 50%; */
+      white-space: nowrap;
     }
     @media ${theme.device.lg} {
       width: 100%;

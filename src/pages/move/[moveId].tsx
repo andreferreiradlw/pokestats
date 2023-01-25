@@ -6,6 +6,7 @@ import type { MoveType, Pokemon, PokemonType } from '@/types';
 import {
   PokemonClient,
   MoveClient,
+  MachineClient,
   Move,
   MoveTarget,
   ContestClient,
@@ -16,6 +17,9 @@ import {
   capitalise,
   findEnglishName,
   getIdFromURL,
+  listGamesByGroup,
+  listGenGroupsByGroup,
+  listMoveGroupsByGroup,
   removeDash,
   removeDuplicateMoves,
 } from '@/helpers';
@@ -29,6 +33,7 @@ import Loading from '@/components/Loading';
 export interface PokestatsMovePageProps {
   autocompleteList: (Pokemon | PokemonType | MoveType)[];
   move: Move;
+  moveMachines: { [key: string]: { machine: string; groups: string[][] } } | null;
   target: MoveTarget;
   superContestEffect: SuperContestEffect;
   contestEffect: ContestEffect;
@@ -68,7 +73,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   // clients
   const moveClient = new MoveClient();
 
-  const moveList = await moveClient.listMoves(0, 150);
+  const moveList = await moveClient.listMoves(0, 50);
 
   const paths = moveList.results.map(move => {
     return {
@@ -89,6 +94,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   // clients
   const pokemonClient = new PokemonClient();
   const moveClient = new MoveClient();
+  const machineClient = new MachineClient();
   const contestClient = new ContestClient();
 
   const moveName = params.moveId as string;
@@ -117,6 +123,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
       return { notFound: true };
     }
 
+    // move target data
     const targetData = await moveClient.getMoveTargetById(
       getIdFromURL(moveData.target.url, 'move-target'),
     );
@@ -126,6 +133,35 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
       return { notFound: true };
     }
 
+    // moves machine data
+    let moveMachinesData = {};
+
+    if (moveData.machines?.length > 0) {
+      for await (const { version_group, machine } of moveData.machines) {
+        const currGenGroups = listMoveGroupsByGroup(version_group.name);
+        // check if gen group already has a key
+        if (
+          currGenGroups &&
+          !moveMachinesData[version_group.name] &&
+          !moveMachinesData[currGenGroups[0]] &&
+          version_group.name === currGenGroups[0]
+        ) {
+          // fetch machine data
+          const currMachineData = await machineClient.getMachineById(
+            getIdFromURL(machine.url, 'machine'),
+          );
+          // update results object
+          moveMachinesData[version_group.name] = {
+            machine: currMachineData.item.name.toUpperCase(),
+            groups: currGenGroups.map(group => listGamesByGroup(group)),
+          };
+        }
+      }
+    } else {
+      moveMachinesData = null;
+    }
+
+    // move contest data
     let superContestEffectData: SuperContestEffect;
     let contestEffectData: ContestEffect;
 
@@ -176,6 +212,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
           })),
         ],
         move: moveData,
+        moveMachines: moveMachinesData,
         target: targetData,
         superContestEffect: superContestEffectData || null,
         contestEffect: contestEffectData || null,

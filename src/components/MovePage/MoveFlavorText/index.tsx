@@ -13,14 +13,19 @@ const MoveFlavorText = ({ flavorTexts, ...rest }: MoveFlavorTextProps): JSX.Elem
   const groupFlavorByVersionGroup = useMemo(() => {
     let result = {};
 
-    flavorTexts.forEach(({ version_group, flavor_text }, i) => {
+    flavorTexts.forEach(({ version_group, flavor_text }) => {
       const currGenGroups = listGenGroupsByGroup(version_group.name);
       // check if gen group already has a key
-      if (!result[version_group.name] && !result[currGenGroups[0]])
+      if (
+        !result[version_group.name] &&
+        !result[currGenGroups[0]] &&
+        version_group.name === currGenGroups[0]
+      ) {
         result[version_group.name] = {
           flavor: formatFlavorText(flavor_text),
           groups: currGenGroups.map(group => listGamesByGroup(group)),
         };
+      }
     });
 
     return result;

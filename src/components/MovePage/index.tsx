@@ -18,17 +18,20 @@ import MoveFlavorText from './MoveFlavorText';
 import MoveMachines from './MoveMachines';
 import MoveTarget from './MoveTarget';
 import MovePokemon from './MovePokemon';
+import MoveStats from './MoveStats';
 
-export type TypePageProps = Omit<PokestatsMovePageProps, 'autocompleteList'>;
+export type MovePageProps = Omit<PokestatsMovePageProps, 'autocompleteList'>;
 
 const MovePage = ({
   move,
+  moveMachines,
   target,
   superContestEffect,
   contestEffect,
-}: TypePageProps): JSX.Element => {
-  // console.log('move', move);
-  console.log('target', target);
+}: MovePageProps): JSX.Element => {
+  console.log('move', move);
+  console.log('moveMachines', moveMachines);
+  // console.log('target', target);
   // console.log('superContestEffect', superContestEffect);
   // console.log('contestEffect', contestEffect);
   // data
@@ -85,8 +88,8 @@ const MovePage = ({
               flexgap="1.5em"
             >
               <Box screensizes={4} flexgap="1.5em">
-                <MoveInfo move={move} moveName={moveName} />
-                <MoveMachines />
+                <MoveInfo move={move} />
+                <MoveMachines moveName={moveName} moveType={type.name} machines={moveMachines} />
               </Box>
               <MoveFlavorText flavorTexts={flavor_text_entries} screensizes={8} />
             </Box>
@@ -99,17 +102,19 @@ const MovePage = ({
           flexdirection="row"
           flexgap="1.5em"
         >
-          <Box screensizes={5} flexgap="1.5em">
+          <Box screensizes={5} flexgap="1.5em" $parentGap="1.5em">
             <MoveEntries move={move} moveName={moveName} />
             <MoveTarget target={target} />
           </Box>
-          <MoveContest
-            move={move}
-            moveName={moveName}
-            contestEffect={contestEffect}
-            superContestEffect={superContestEffect}
-            screensizes={7}
-          />
+          <Box screensizes={7} flexgap="1.5em" $parentGap="1.5em">
+            <MoveStats move={move} moveName={moveName} />
+            <MoveContest
+              move={move}
+              moveName={moveName}
+              contestEffect={contestEffect}
+              superContestEffect={superContestEffect}
+            />
+          </Box>
         </Box>
         <Divider />
         <MovePokemon pokemonList={pokemonList as Pokemon[]} />

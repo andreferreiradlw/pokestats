@@ -5,6 +5,7 @@ interface Game {
   generation: string;
   genValue: string;
   genGroups: string[];
+  moveGroups: string[];
 }
 
 type GameVersions = Game[];
@@ -17,6 +18,7 @@ const gameVersions: GameVersions = [
     generation: 'Generation I',
     genValue: 'generation-i',
     genGroups: ['red-blue', 'yellow'],
+    moveGroups: ['red-blue', 'yellow'],
   },
   {
     label: 'Blue',
@@ -25,6 +27,7 @@ const gameVersions: GameVersions = [
     generation: 'Generation I',
     genValue: 'generation-i',
     genGroups: ['red-blue', 'yellow'],
+    moveGroups: ['red-blue', 'yellow'],
   },
   {
     label: 'Yellow',
@@ -33,6 +36,7 @@ const gameVersions: GameVersions = [
     generation: 'Generation I',
     genValue: 'generation-i',
     genGroups: ['red-blue', 'yellow'],
+    moveGroups: ['red-blue', 'yellow'],
   },
   {
     label: 'Gold',
@@ -41,6 +45,7 @@ const gameVersions: GameVersions = [
     generation: 'Generation II',
     genValue: 'generation-ii',
     genGroups: ['gold-silver', 'crystal'],
+    moveGroups: ['gold-silver', 'crystal'],
   },
   {
     label: 'Silver',
@@ -49,6 +54,7 @@ const gameVersions: GameVersions = [
     generation: 'Generation II',
     genValue: 'generation-ii',
     genGroups: ['gold-silver', 'crystal'],
+    moveGroups: ['gold-silver', 'crystal'],
   },
   {
     label: 'Crystal',
@@ -57,6 +63,7 @@ const gameVersions: GameVersions = [
     generation: 'Generation II',
     genValue: 'generation-ii',
     genGroups: ['gold-silver', 'crystal'],
+    moveGroups: ['gold-silver', 'crystal'],
   },
   {
     label: 'Ruby',
@@ -65,6 +72,7 @@ const gameVersions: GameVersions = [
     generation: 'Generation III',
     genValue: 'generation-iii',
     genGroups: ['ruby-sapphire', 'emerald'],
+    moveGroups: ['ruby-sapphire', 'emerald', 'firered-leafgreen'],
   },
   {
     label: 'Sapphire',
@@ -73,6 +81,7 @@ const gameVersions: GameVersions = [
     generation: 'Generation III',
     genValue: 'generation-iii',
     genGroups: ['ruby-sapphire', 'emerald'],
+    moveGroups: ['ruby-sapphire', 'emerald', 'firered-leafgreen'],
   },
   {
     label: 'Emerald',
@@ -81,6 +90,7 @@ const gameVersions: GameVersions = [
     generation: 'Generation III',
     genValue: 'generation-iii',
     genGroups: ['ruby-sapphire', 'emerald'],
+    moveGroups: ['ruby-sapphire', 'emerald', 'firered-leafgreen'],
   },
   {
     label: 'Fire Red',
@@ -89,6 +99,7 @@ const gameVersions: GameVersions = [
     generation: 'Generation III',
     genValue: 'generation-iii',
     genGroups: ['firered-leafgreen'],
+    moveGroups: ['ruby-sapphire', 'emerald', 'firered-leafgreen'],
   },
   {
     label: 'Leaf Green',
@@ -97,6 +108,7 @@ const gameVersions: GameVersions = [
     generation: 'Generation III',
     genValue: 'generation-iii',
     genGroups: ['firered-leafgreen'],
+    moveGroups: ['ruby-sapphire', 'emerald', 'firered-leafgreen'],
   },
   {
     label: 'Diamond',
@@ -105,6 +117,7 @@ const gameVersions: GameVersions = [
     generation: 'Generation IV',
     genValue: 'generation-iv',
     genGroups: ['diamond-pearl', 'platinum', 'heartgold-soulsilver'],
+    moveGroups: ['diamond-pearl', 'platinum', 'heartgold-soulsilver'],
   },
   {
     label: 'Pearl',
@@ -113,6 +126,7 @@ const gameVersions: GameVersions = [
     generation: 'Generation IV',
     genValue: 'generation-iv',
     genGroups: ['diamond-pearl', 'platinum', 'heartgold-soulsilver'],
+    moveGroups: ['diamond-pearl', 'platinum', 'heartgold-soulsilver'],
   },
   {
     label: 'Platinum',
@@ -121,6 +135,7 @@ const gameVersions: GameVersions = [
     generation: 'Generation IV',
     genValue: 'generation-iv',
     genGroups: ['diamond-pearl', 'platinum', 'heartgold-soulsilver'],
+    moveGroups: ['diamond-pearl', 'platinum', 'heartgold-soulsilver'],
   },
   {
     label: 'Heart Gold',
@@ -129,6 +144,7 @@ const gameVersions: GameVersions = [
     generation: 'Generation IV',
     genValue: 'generation-iv',
     genGroups: ['diamond-pearl', 'platinum', 'heartgold-soulsilver'],
+    moveGroups: ['diamond-pearl', 'platinum', 'heartgold-soulsilver'],
   },
   {
     label: 'Soul Silver',
@@ -137,6 +153,7 @@ const gameVersions: GameVersions = [
     generation: 'Generation IV',
     genValue: 'generation-iv',
     genGroups: ['diamond-pearl', 'platinum', 'heartgold-soulsilver'],
+    moveGroups: ['diamond-pearl', 'platinum', 'heartgold-soulsilver'],
   },
   {
     label: 'Black',
@@ -145,6 +162,7 @@ const gameVersions: GameVersions = [
     generation: 'Generation V',
     genValue: 'generation-v',
     genGroups: ['black-white', 'black-2-white-2'],
+    moveGroups: ['black-white', 'black-2-white-2'],
   },
   {
     label: 'White',
@@ -153,6 +171,7 @@ const gameVersions: GameVersions = [
     generation: 'Generation V',
     genValue: 'generation-v',
     genGroups: ['black-white', 'black-2-white-2'],
+    moveGroups: ['black-white', 'black-2-white-2'],
   },
   {
     label: 'Black 2',
@@ -161,6 +180,7 @@ const gameVersions: GameVersions = [
     generation: 'Generation V',
     genValue: 'generation-v',
     genGroups: ['black-white', 'black-2-white-2'],
+    moveGroups: ['black-white', 'black-2-white-2'],
   },
   {
     label: 'White 2',
@@ -169,6 +189,7 @@ const gameVersions: GameVersions = [
     generation: 'Generation V',
     genValue: 'generation-v',
     genGroups: ['black-white', 'black-2-white-2'],
+    moveGroups: ['black-white', 'black-2-white-2'],
   },
   {
     label: 'X',
@@ -177,6 +198,7 @@ const gameVersions: GameVersions = [
     generation: 'Generation VI',
     genValue: 'generation-vi',
     genGroups: ['x-y', 'omega-ruby-alpha-sapphire'],
+    moveGroups: ['x-y', 'omega-ruby-alpha-sapphire'],
   },
   {
     label: 'Y',
@@ -185,6 +207,7 @@ const gameVersions: GameVersions = [
     generation: 'Generation VI',
     genValue: 'generation-vi',
     genGroups: ['x-y', 'omega-ruby-alpha-sapphire'],
+    moveGroups: ['x-y', 'omega-ruby-alpha-sapphire'],
   },
   {
     label: 'Omega Ruby',
@@ -193,6 +216,7 @@ const gameVersions: GameVersions = [
     generation: 'Generation VI',
     genValue: 'generation-vi',
     genGroups: ['x-y', 'omega-ruby-alpha-sapphire'],
+    moveGroups: ['x-y', 'omega-ruby-alpha-sapphire'],
   },
   {
     label: 'Alpha Sapphire',
@@ -201,6 +225,7 @@ const gameVersions: GameVersions = [
     generation: 'Generation VI',
     genValue: 'generation-vi',
     genGroups: ['x-y', 'omega-ruby-alpha-sapphire'],
+    moveGroups: ['x-y', 'omega-ruby-alpha-sapphire'],
   },
   {
     label: 'Sun',
@@ -209,6 +234,7 @@ const gameVersions: GameVersions = [
     generation: 'Generation VII',
     genValue: 'generation-vii',
     genGroups: ['sun-moon', 'ultra-sun-ultra-moon', 'lets-go-pikachu-lets-go-eevee'],
+    moveGroups: ['sun-moon', 'ultra-sun-ultra-moon'],
   },
   {
     label: 'Moon',
@@ -217,6 +243,7 @@ const gameVersions: GameVersions = [
     generation: 'Generation VII',
     genValue: 'generation-vii',
     genGroups: ['sun-moon', 'ultra-sun-ultra-moon', 'lets-go-pikachu-lets-go-eevee'],
+    moveGroups: ['sun-moon', 'ultra-sun-ultra-moon'],
   },
   {
     label: 'Ultra Sun',
@@ -225,6 +252,7 @@ const gameVersions: GameVersions = [
     generation: 'Generation VII',
     genValue: 'generation-vii',
     genGroups: ['sun-moon', 'ultra-sun-ultra-moon', 'lets-go-pikachu-lets-go-eevee'],
+    moveGroups: ['sun-moon', 'ultra-sun-ultra-moon'],
   },
   {
     label: 'Ultra Moon',
@@ -233,6 +261,7 @@ const gameVersions: GameVersions = [
     generation: 'Generation VII',
     genValue: 'generation-vii',
     genGroups: ['sun-moon', 'ultra-sun-ultra-moon', 'lets-go-pikachu-lets-go-eevee'],
+    moveGroups: ['sun-moon', 'ultra-sun-ultra-moon'],
   },
   {
     label: "Let's Go Pikachu",
@@ -241,6 +270,7 @@ const gameVersions: GameVersions = [
     generation: 'Generation VII',
     genValue: 'generation-vii',
     genGroups: ['sun-moon', 'ultra-sun-ultra-moon', 'lets-go-pikachu-lets-go-eevee'],
+    moveGroups: ['lets-go-pikachu-lets-go-eevee'],
   },
   {
     label: "Let's Go Eevee",
@@ -249,6 +279,7 @@ const gameVersions: GameVersions = [
     generation: 'Generation VII',
     genValue: 'generation-vii',
     genGroups: ['sun-moon', 'ultra-sun-ultra-moon', 'lets-go-pikachu-lets-go-eevee'],
+    moveGroups: ['lets-go-pikachu-lets-go-eevee'],
   },
   {
     label: 'Sword',
@@ -257,6 +288,7 @@ const gameVersions: GameVersions = [
     generation: 'Generation VIII',
     genValue: 'generation-viii',
     genGroups: ['sword-shield'],
+    moveGroups: ['sword-shield'],
   },
   {
     label: 'Shield',
@@ -265,6 +297,7 @@ const gameVersions: GameVersions = [
     generation: 'Generation VIII',
     genValue: 'generation-viii',
     genGroups: ['sword-shield'],
+    moveGroups: ['sword-shield'],
   },
   {
     label: 'Legends: Arceus',
@@ -273,6 +306,7 @@ const gameVersions: GameVersions = [
     generation: 'Generation VIII',
     genValue: 'generation-viii',
     genGroups: ['scarlet-violet'],
+    moveGroups: ['scarlet-violet'],
   },
   // {
   //   label: 'Scarlet',
@@ -442,7 +476,10 @@ const listGamesByGroup = (group: string): Game['label'][] =>
   gameVersions.filter(game => game.group === group).map(currGame => currGame.label);
 
 const listGenGroupsByGroup = (genGroup: string): Game['genGroups'] =>
-  gameVersions.find(version => version.group === genGroup).genGroups;
+  gameVersions.find(version => version.group === genGroup)?.genGroups;
+
+const listMoveGroupsByGroup = (moveGroup: string): Game['genGroups'] =>
+  gameVersions.find(version => version.group === moveGroup)?.moveGroups;
 
 export {
   gameVersions,
@@ -459,4 +496,5 @@ export {
   listGamesByGen,
   listGamesByGroup,
   listGenGroupsByGroup,
+  listMoveGroupsByGroup,
 };

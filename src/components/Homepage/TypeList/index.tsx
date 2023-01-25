@@ -1,5 +1,5 @@
 // types
-import type { Type } from 'pokenode-ts';
+import type { PokemonType } from '@/types';
 // styles
 import { SectionTitle } from '@/components/BaseStyles';
 // components
@@ -7,7 +7,7 @@ import Box, { BoxProps } from '@/components/Box';
 import TypeBadge from '@/components/TypeBadge';
 
 interface TypeListProps extends BoxProps {
-  types: Type[];
+  types: PokemonType[];
 }
 
 const TypeList = ({ types, ...rest }: TypeListProps): JSX.Element => {

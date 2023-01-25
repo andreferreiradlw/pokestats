@@ -27,7 +27,7 @@ const MovePage = ({
   superContestEffect,
   contestEffect,
 }: TypePageProps): JSX.Element => {
-  console.log('move', move);
+  // console.log('move', move);
   console.log('target', target);
   // console.log('superContestEffect', superContestEffect);
   // console.log('contestEffect', contestEffect);

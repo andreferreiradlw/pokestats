@@ -84,6 +84,8 @@ const Homepage = ({ allPokemon, pokemonTypes, allMoves }: PokestatsHomepageProps
       </Container>
       <ListContainer
         flexpadding="1.5em 0"
+        flexalign="center"
+        flexjustify="center"
         key="homepage-list-container"
         initial="hidden"
         animate="show"

@@ -61,42 +61,84 @@ const mapTypeToPokemonId = (typeName: string): number => {
   }
 };
 
+const foes = [
+  {
+    name: 'Gardevoir',
+    id: 282,
+  },
+  {
+    name: 'Gengar',
+    id: 94,
+  },
+  {
+    name: 'Moltres',
+    id: 146,
+  },
+];
+
+const allies = [
+  {
+    name: 'Charizard',
+    id: 6,
+  },
+  {
+    name: 'Snorlax',
+    id: 143,
+  },
+];
+
 const MoveTarget = ({ target, moveType, ...rest }: MoveTargetProps): JSX.Element => {
   // data
-  const { descriptions } = target;
+  const { descriptions, name } = target;
   // memo
   const targetDescription = useMemo(
     () => descriptions.find(flavor => flavor.language.name === 'en').description,
     [descriptions],
   );
+  // foes
+  const isFoeAffected =
+    name === 'all-other-pokemon' ||
+    name === 'all-opponents' ||
+    name === 'entire-field' ||
+    name === 'opponents-field';
+  const isFoeSelected = name === 'selected-pokemon' || name === 'selected-pokemon-me-first';
+  // allies
+  const isAllyAffected =
+    name === 'all-other-pokemon' || name === 'entire-field' || name === 'user-and-allies';
+  const isAllySelected = name === 'selected-pokemon' || name === 'ally';
+  // self
+  const isSelfAffected = name === 'entire-field' || name === 'user-and-allies';
+  const isSelfSelected = name === 'user';
 
   return (
-    <Box flexalign="flex-start" flexjustify="flex-start" flexgap="1.5em" {...rest}>
+    <Box flexalign="flex-start" flexjustify="flex-start" flexgap="1em" {...rest}>
       <SectionTitle>Target</SectionTitle>
-      <BattleContainer flexgap="4em">
+      <Description as="p">{`This move targets ${
+        targetDescription.charAt(0).toLowerCase() + targetDescription.slice(1)
+      }`}</Description>
+      <BattleContainer flexgap="3.5em">
         <Box
-          width="70%"
+          width={{ xxs: '100%', sm: '65%' }}
           flexdirection="row"
           flexalign="stretch"
           flexjustify="space-around"
           flexgap="0.5em"
           flexalignself="flex-end"
         >
-          <PokemonContainer>
-            <Badge>Foe</Badge>
-            <FoeImg src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/250.png" />
-          </PokemonContainer>
-          <PokemonContainer>
-            <Badge>Foe</Badge>
-            <FoeImg src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/282.png" />
-          </PokemonContainer>
-          <PokemonContainer>
-            <Badge>Foe</Badge>
-            <FoeImg src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/6.png" />
-          </PokemonContainer>
+          {foes.map(({ name, id }, i) => (
+            <PokemonContainer key={`target-foe-${i}`}>
+              <Badge $isAffected={isFoeAffected} $isSelected={isFoeSelected}>
+                Foe
+              </Badge>
+              <FoeImg
+                alt={`front view of ${name}`}
+                src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`}
+              />
+            </PokemonContainer>
+          ))}
         </Box>
         <Box
-          width="85%"
+          width={{ xxs: '100%', sm: '85%' }}
           flexdirection="row"
           flexjustify="space-around"
           flexgap="0.5em"
@@ -109,26 +151,24 @@ const MoveTarget = ({ target, moveType, ...rest }: MoveTargetProps): JSX.Element
                 moveType.name,
               )}.png`}
             />
-            <Badge>Self</Badge>
+            <Badge $isAffected={isSelfAffected} $isSelected={isSelfSelected}>
+              Self
+            </Badge>
           </PokemonContainer>
-          <PokemonContainer>
-            <AllyImg
-              alt="Back view of Gardevoir"
-              src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/384.png"
-            />
-            <Badge $isAffected>Ally</Badge>
-          </PokemonContainer>
-          <PokemonContainer>
-            <AllyImg
-              alt="Back view of Garchomp"
-              src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/245.png"
-            />
-            <Badge>Ally</Badge>
-          </PokemonContainer>
+          {allies.map(({ name, id }, i) => (
+            <PokemonContainer key={`target-ally-${i}`}>
+              <AllyImg
+                alt={`front view of ${name}`}
+                src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/${id}.png`}
+              />
+              <Badge $isAffected={isAllyAffected} $isSelected={isAllySelected}>
+                Ally
+              </Badge>
+            </PokemonContainer>
+          ))}
         </Box>
         <BattleGround />
       </BattleContainer>
-      <Description as="p">{targetDescription}</Description>
     </Box>
   );
 };

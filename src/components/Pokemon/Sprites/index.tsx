@@ -16,7 +16,6 @@ interface SpritesProps extends BoxProps {
 }
 
 const Sprites = ({ pokemonSprites, pokemonId, forms, ...rest }: SpritesProps): JSX.Element => {
-  console.log(pokemonSprites);
   // sprites
   const animatedSprites = pokemonSprites.versions['generation-v']['black-white'].animated;
   const dreamWorldSprites = pokemonSprites.other.dream_world;

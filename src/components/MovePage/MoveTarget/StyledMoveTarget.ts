@@ -1,5 +1,8 @@
-import Box from '@/components/Box';
 import styled, { css } from 'styled-components';
+// styles
+import { blink } from '@/BaseStyles';
+// components
+import Box from '@/components/Box';
 
 const BattleContainer = styled(Box)`
   position: relative;
@@ -7,7 +10,6 @@ const BattleContainer = styled(Box)`
 
 const PokemonContainer = styled.div`
   align-items: center;
-  /* border: 1px solid ${({ theme }) => theme.colors.primary.light}; */
   display: flex;
   flex-basis: 33%;
   flex-direction: column;
@@ -17,9 +19,9 @@ const PokemonContainer = styled.div`
   overflow: hidden;
 `;
 
-const Badge = styled.div<{ $isAffected?: boolean }>`
-  /* border: 2px solid black; */
+const Badge = styled.div<{ $isAffected?: boolean; $isSelected?: boolean }>`
   background: ${({ theme }) => theme.colors.primary.light};
+  border: 2px solid transparent;
   border-radius: 5px;
   font-weight: 600;
   padding: 0.5em 1em;
@@ -27,19 +29,24 @@ const Badge = styled.div<{ $isAffected?: boolean }>`
   width: 100%;
 
   ${({ theme, $isAffected }) =>
-    $isAffected
-      ? css`
-          /* background: ${theme.colors.secondary.main}; */
-          /* color: ${theme.colors.secondary.contrastText}; */
-        `
-      : css`
-          /* background: ${theme.colors.primary.main}; */
-          /* color: ${theme.colors.primary.contrastText}; */
-        `}
+    $isAffected &&
+    css`
+      animation: ${blink(theme.colors.primary.main)} 4s infinite linear;
+      background: ${theme.colors.secondary.main};
+      border: 2px solid ${theme.colors.secondary.main};
+      color: ${theme.colors.secondary.contrastText};
+    `}
+
+  ${({ theme, $isSelected }) =>
+    $isSelected &&
+    css`
+      animation: ${blink(theme.colors.primary.main)} 2s infinite ease-in-out;
+      border: 2px solid ${theme.colors.secondary.main};
+    `}
 `;
 
 const AllyImg = styled.img`
-  transform: translateY(2.5em);
+  transform: translateY(3.5em);
   width: 100%;
   z-index: -1;
 `;
@@ -49,15 +56,21 @@ const FoeImg = styled.img`
 `;
 
 const Description = styled.p`
+  font-size: 1em;
   font-weight: 500;
-  text-align: center;
   width: 100%;
+
+  ${({ theme }) => css`
+    @media ${theme.device.sm} {
+      font-size: 1.2em;
+    }
+  `}
 `;
 
 const BattleGround = styled.div`
   background: radial-gradient(ellipse at center, #ffffff 19%, #cecece 57%, #ffffff 67%);
+  display: none;
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#ffffff',GradientType=1 );
-
   height: 30%;
   left: 5%;
   position: absolute;
@@ -92,13 +105,14 @@ const BattleGround = styled.div`
     @media ${theme.device.sm} {
       top: 49%;
       left: 25%;
+      display: block;
     }
     @media ${theme.device.md} {
       left: 35%;
       top: 53%;
     }
     @media ${theme.device.lg} {
-      left: 20%;
+      left: 23%;
       top: 50%;
     }
   `}

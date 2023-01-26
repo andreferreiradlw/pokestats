@@ -21,7 +21,7 @@ const MoveStats = ({ move, moveName, ...rest }: MoveStatsProps): JSX.Element => 
     <Box flexalign="flex-start" flexjustify="flex-start" flexgap="0.5em" {...rest}>
       <SectionTitle>Stat Changes</SectionTitle>
       {stat_changes?.length > 0 ? (
-        <Table>
+        <Table style={{ maxWidth: '300px' }}>
           <tbody>
             <tr>
               {stat_changes.map(({ change, stat }, i) => (

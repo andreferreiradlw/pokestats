@@ -147,4 +147,8 @@ const rotate = keyframes`
   to { transform: rotate(360deg); }
 `;
 
-export { float, ellipsis, shake, riseUp, tumble, bounce, pokeballShake, rotate };
+const blink = (color: string, property = 'border-color') => keyframes`
+  50% { ${property}: ${color}; }
+`;
+
+export { float, ellipsis, shake, riseUp, tumble, bounce, pokeballShake, rotate, blink };

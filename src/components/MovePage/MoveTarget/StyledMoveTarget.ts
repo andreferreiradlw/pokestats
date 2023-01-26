@@ -40,7 +40,7 @@ const Badge = styled.div<{ $isAffected?: boolean; $isSelected?: boolean }>`
   ${({ theme, $isSelected }) =>
     $isSelected &&
     css`
-      animation: ${blink(theme.colors.primary.main)} 2s infinite ease-in-out;
+      animation: ${blink(theme.colors.primary.light)} 2s infinite ease-in-out;
       border: 2px solid ${theme.colors.secondary.main};
     `}
 `;

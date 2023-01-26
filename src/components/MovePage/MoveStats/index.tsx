@@ -1,4 +1,3 @@
-import { Fragment } from 'react';
 // types
 import type { Move } from 'pokenode-ts';
 // helpers
@@ -23,14 +22,12 @@ const MoveStats = ({ move, moveName, ...rest }: MoveStatsProps): JSX.Element => 
       {stat_changes?.length > 0 ? (
         <Table style={{ maxWidth: '300px' }}>
           <tbody>
-            <tr>
-              {stat_changes.map(({ change, stat }, i) => (
-                <Fragment key={`stat-change-${name}-${stat.name}-${i}`}>
-                  <th>{capitalise(removeDash(stat.name))}</th>
-                  <td>{change}</td>
-                </Fragment>
-              ))}
-            </tr>
+            {stat_changes.map(({ change, stat }, i) => (
+              <tr key={`stat-change-${name}-${stat.name}-${i}`}>
+                <th>{capitalise(removeDash(stat.name))}</th>
+                <td>{change}</td>
+              </tr>
+            ))}
           </tbody>
         </Table>
       ) : (

@@ -29,8 +29,6 @@ const MovePage = ({
   superContestEffect,
   contestEffect,
 }: MovePageProps): JSX.Element => {
-  console.log('move', move);
-  console.log('target', target);
   // data
   const { name, names: moveNames, type, flavor_text_entries, learned_by_pokemon } = move;
   // memo

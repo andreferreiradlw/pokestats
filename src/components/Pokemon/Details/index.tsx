@@ -173,7 +173,7 @@ const PokemonDetails = ({
               <td>{`#${id}`}</td>
             </tr>
             <tr>
-              <th>Generation</th>
+              <th>Introduced</th>
               <td>{generationName}</td>
             </tr>
             <tr>

@@ -84,7 +84,7 @@ const MoveEntries = ({ move, moveName, ...rest }: MoveEntriesProps): JSX.Element
                     {` ${phrase}.`}
                   </p>
                 );
-              } else {
+              } else if (past_values.length === 1) {
                 return (
                   <p key={`move-past-value-${i}`}>
                     <BoldSpan>{moveName}</BoldSpan>

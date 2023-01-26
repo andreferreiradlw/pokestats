@@ -11,7 +11,8 @@ import { Button, SectionTitle } from '@/components/BaseStyles';
 import Box, { BoxProps } from '@/components/Box';
 import BoxWrapper from '@/components/Box/StyledBox';
 import InfiniteScroll from '@/components/InfiniteScroll';
-import TypeMoves from './Moves';
+// import TypeMoves from './Moves';
+import MovesTable from '@/components/MovesTable';
 
 const TabContainer = styled(BoxWrapper)`
   display: flex;
@@ -76,7 +77,8 @@ const TypeTabs = ({ typeInfo, typeMoves, typeName, ...rest }: TypeTabsProps) => 
             key={`${name}-type-moves`}
           >
             <SectionTitle>{`${typeName} Type Moves (${typeMoves.length})`}</SectionTitle>{' '}
-            <TypeMoves moves={typeMoves} />
+            {/* <TypeMoves moves={typeMoves} /> */}
+            <MovesTable moves={typeMoves} />
           </TabContainer>
         )}
       </AnimatePresence>

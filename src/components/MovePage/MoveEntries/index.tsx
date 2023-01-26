@@ -91,6 +91,8 @@ const MoveEntries = ({ move, moveName, ...rest }: MoveEntriesProps): JSX.Element
                     {' has no previous version changes.'}
                   </p>
                 );
+              } else {
+                return null;
               }
             })
           : 'No changes in previous Generations.'}

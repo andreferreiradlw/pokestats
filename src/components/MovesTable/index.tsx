@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 // types
 import type { Move, MoveLearnMethod } from 'pokenode-ts';
 // helpers
-import { removeDash, mapGeneration, fadeInUpVariant } from '@/helpers';
+import { removeDash, mapGeneration, fadeInUpVariant, FilteredMove } from '@/helpers';
 // styles
 import { SectionMessage, UppercasedTd } from '@/components/BaseStyles';
 import {
@@ -21,7 +21,7 @@ import TypeBadge from '@/components/TypeBadge';
 import Box from '@/components/Box';
 
 interface TypeMovesProps extends HTMLMotionProps<'div'> {
-  moves: Move[];
+  moves: (FilteredMove | Move)[];
   learnMethod?: MoveLearnMethod['name'];
   machineNames?: string[];
 }
@@ -72,7 +72,8 @@ const MovesTable = ({ moves, learnMethod, machineNames, ...rest }: TypeMovesProp
                   <TableRow key={`type-${move.name}-${i}`}>
                     {learnMethod && (
                       <>
-                        {learnMethod === 'level-up' && <td>{move.level_learned_at}</td>}
+                        {/** @ts-ignore */}
+                        {learnMethod === 'level-up' && <td>{move?.level_learned_at}</td>}
                         {learnMethod === 'machine' &&
                           !!machineNames?.length &&
                           (machineNames?.[i] ? (

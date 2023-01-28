@@ -1,7 +1,7 @@
 // types
 import type { GetServerSideProps } from 'next';
 // helpers
-import { PokemonClient, Pokemon, Type } from 'pokenode-ts';
+import { PokemonClient, MoveClient, NamedAPIResource } from 'pokenode-ts';
 
 const toUrl = (host: string, route: string, priority = '1.0') => `
   <url>
@@ -15,28 +15,39 @@ const toUrl = (host: string, route: string, priority = '1.0') => `
 const createSitemap = (
   host: string,
   routes: string[],
-  pokemonList: Pokemon[],
-  pokemonTypes: Type[],
+  pokemonList: NamedAPIResource[],
+  pokemonTypes: NamedAPIResource[],
+  movesList: NamedAPIResource[],
 ) => `<?xml version="1.0" encoding="UTF-8"?>
   <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     ${routes.map(route => toUrl(host, route))}
     ${pokemonList.map(pokemon => toUrl(host, `/pokemon/${pokemon.name}`))}
     ${pokemonTypes.map(type => toUrl(host, `/type/${type.name}`))}
+    ${movesList.map(type => toUrl(host, `/move/${type.name}`))}
   </urlset>`;
 
 const Sitemap = () => {};
 
 export const getServerSideProps: GetServerSideProps = async context => {
   const { req, res } = context;
-
-  const api = new PokemonClient();
+  // clients
+  const pokemonClient = new PokemonClient();
+  const moveClient = new MoveClient();
   // fixed routes
   const routes = [''];
 
   try {
-    const [pokemonData, typesData] = await Promise.all([api.listPokemons(0, 905), api.listTypes()]);
+    const [
+      { results: allPokemonDataResults },
+      { results: allTypesDataResults },
+      { results: allMovesDataResults },
+    ] = await Promise.all([
+      pokemonClient.listPokemons(0, 905),
+      pokemonClient.listTypes(),
+      moveClient.listMoves(0, 850),
+    ]);
 
-    if (!pokemonData || !typesData) {
+    if (!allPokemonDataResults || !allTypesDataResults || !allMovesDataResults) {
       return { notFound: true };
     }
 
@@ -44,8 +55,9 @@ export const getServerSideProps: GetServerSideProps = async context => {
     const sitemap = createSitemap(
       req.headers.host,
       routes,
-      pokemonData.results as unknown as Pokemon[],
-      typesData.results as unknown as Type[],
+      allPokemonDataResults,
+      allTypesDataResults,
+      allMovesDataResults,
     );
 
     // response

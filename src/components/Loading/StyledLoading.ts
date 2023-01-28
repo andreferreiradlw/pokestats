@@ -17,7 +17,7 @@ import { responsiveProps } from '@/helpers';
 // svg
 import Potion from 'public/static/iconLibrary/potion.svg';
 import Pokeball from 'public/static/iconLibrary/pokeball.svg';
-import Record from 'public/static/iconLibrary/move_record.svg';
+import Record from 'public/static/iconLibrary/record.svg';
 
 const LoadingContainer = styled(BoxWrapper)`
   align-items: center;
@@ -71,9 +71,14 @@ const PokeballIcon = styled(Pokeball)<{ $iconwidth?: LoadingProps['$iconWidth'] 
 `;
 
 const RecordIcon = styled(Record)<{ $iconwidth?: LoadingProps['$iconWidth'] }>`
-  animation: 0.5s ease-in-out 0ms infinite ${rotate};
   height: auto;
   ${({ $iconWidth }) => $iconWidth && responsiveProps('width', $iconWidth)}
+
+  .record_svg__roll {
+    animation: 2s linear 0ms infinite ${rotate};
+    transform-box: fill-box;
+    transform-origin: center center;
+  }
 `;
 
 const Text = styled(SectionSubTitle)`

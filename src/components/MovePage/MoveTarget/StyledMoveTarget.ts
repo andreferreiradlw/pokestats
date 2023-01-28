@@ -14,41 +14,58 @@ const PokemonContainer = styled.div`
   flex-basis: 33%;
   flex-direction: column;
   flex-shrink: 0;
-  gap: 0.5em;
   justify-content: center;
   overflow: hidden;
 `;
 
 const Badge = styled.div<{ $isAffected?: boolean; $isSelected?: boolean }>`
-  background: ${({ theme }) => theme.colors.primary.light};
+  align-items: center;
   border: 2px solid transparent;
   border-radius: 5px;
+  display: flex;
   font-weight: 600;
-  padding: 0.5em 1em;
+  gap: 0.25em;
+  min-width: 50%;
+  padding: 0.2em 0.5em;
   text-align: center;
-  width: 100%;
 
   ${({ theme, $isAffected }) =>
     $isAffected &&
     css`
-      animation: ${blink(theme.colors.primary.main)} 4s infinite linear;
-      background: ${theme.colors.secondary.main};
-      border: 2px solid ${theme.colors.secondary.main};
-      color: ${theme.colors.secondary.contrastText};
+      border: 2px dotted ${theme.colors.secondary.main};
     `}
 
-  ${({ theme, $isSelected }) =>
-    $isSelected &&
+  ${({ theme, $isSelected, $isAffected }) =>
+    ($isSelected || $isAffected) &&
     css`
-      animation: ${blink(theme.colors.primary.light)} 2s infinite ease-in-out;
-      border: 2px solid ${theme.colors.secondary.main};
+      &:before {
+        background-image: url('/static/iconLibrary/arrow_right.svg');
+      }
+
+      &:after {
+        background-image: url('/static/iconLibrary/arrow_left.svg');
+      }
+
+      &:before,
+      &:after {
+        animation: ${blink(theme.colors.primary.main, 'background')} 2s infinite ease-in-out 1s;
+        background-size: 20px 20px;
+        content: '';
+        display: inline-flex;
+        height: 20px;
+        width: 20px;
+      }
     `}
 `;
 
+const ImageContainer = styled.div`
+  width: 80%;
+`;
+
 const AllyImg = styled.img`
-  transform: translateY(3.5em);
+  transform: translateY(1em);
   width: 100%;
-  z-index: -1;
+  /* z-index: -1; */
 `;
 
 const FoeImg = styled.img`
@@ -72,50 +89,27 @@ const BattleGround = styled.div`
   display: none;
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#ffffff',GradientType=1 );
   height: 30%;
-  left: 5%;
+  left: 50%;
   position: absolute;
-  top: 45%;
-  transform: translate(-50%, -50%)
-    matrix3d(
-      2.105369,
-      0.253319,
-      0,
-      -0.000773,
-      -1.510317,
-      2.129105,
-      0,
-      -0.000654,
-      0,
-      0,
-      1,
-      0,
-      197.530897,
-      39.40095,
-      0,
-      1
-    );
-
-  /* Need to make sure you define the width and height */
-  /* transform: translate(-50%, -50%); */
-  /* transform-origin: 0px 0px 0px; */
+  top: 50%;
+  transform: translate(-50%, -50%) matrix(2.9, 0.1, -1.5, 2.1, 50, 35);
   width: 30%;
   z-index: -2;
 
   ${({ theme }) => css`
     @media ${theme.device.sm} {
-      top: 49%;
-      left: 25%;
       display: block;
-    }
-    @media ${theme.device.md} {
-      left: 35%;
-      top: 53%;
-    }
-    @media ${theme.device.lg} {
-      left: 23%;
-      top: 50%;
     }
   `}
 `;
 
-export { BattleContainer, PokemonContainer, Badge, FoeImg, AllyImg, Description, BattleGround };
+export {
+  BattleContainer,
+  PokemonContainer,
+  Badge,
+  ImageContainer,
+  FoeImg,
+  AllyImg,
+  Description,
+  BattleGround,
+};

@@ -7,6 +7,7 @@ import {
   BattleContainer,
   PokemonContainer,
   Badge,
+  ImageContainer,
   FoeImg,
   AllyImg,
   Description,
@@ -82,8 +83,8 @@ const allies = [
     id: 6,
   },
   {
-    name: 'Snorlax',
-    id: 143,
+    name: 'Electrivire',
+    id: 466,
   },
 ];
 
@@ -104,10 +105,14 @@ const MoveTarget = ({ target, moveType, ...rest }: MoveTargetProps): JSX.Element
   const isFoeSelected = name === 'selected-pokemon' || name === 'selected-pokemon-me-first';
   // allies
   const isAllyAffected =
-    name === 'all-other-pokemon' || name === 'entire-field' || name === 'user-and-allies';
+    name === 'all-other-pokemon' ||
+    name === 'entire-field' ||
+    name === 'users-field' ||
+    name === 'user-and-allies';
   const isAllySelected = name === 'selected-pokemon' || name === 'ally';
   // self
-  const isSelfAffected = name === 'entire-field' || name === 'user-and-allies';
+  const isSelfAffected =
+    name === 'entire-field' || name === 'user-and-allies' || name === 'users-field';
   const isSelfSelected = name === 'user';
 
   return (
@@ -145,22 +150,28 @@ const MoveTarget = ({ target, moveType, ...rest }: MoveTargetProps): JSX.Element
           flexalignself="flex-start"
         >
           <PokemonContainer>
-            <AllyImg
-              alt="Back view of Current Pokemon"
-              src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/${mapTypeToPokemonId(
-                moveType.name,
-              )}.png`}
-            />
+            <ImageContainer>
+              <AllyImg
+                alt="Back view of Current Pokemon"
+                src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/${mapTypeToPokemonId(
+                  moveType.name,
+                )}.png`}
+              />
+            </ImageContainer>
+
             <Badge $isAffected={isSelfAffected} $isSelected={isSelfSelected}>
-              Self
+              User
             </Badge>
           </PokemonContainer>
           {allies.map(({ name, id }, i) => (
             <PokemonContainer key={`target-ally-${i}`}>
-              <AllyImg
-                alt={`front view of ${name}`}
-                src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/${id}.png`}
-              />
+              <ImageContainer>
+                <AllyImg
+                  alt={`front view of ${name}`}
+                  src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/${id}.png`}
+                />
+              </ImageContainer>
+
               <Badge $isAffected={isAllyAffected} $isSelected={isAllySelected}>
                 Ally
               </Badge>

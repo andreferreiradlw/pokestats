@@ -99,18 +99,17 @@ const MovePage = ({
           flexjustify={{ xxs: 'center', lg: 'flex-start' }}
           flexalign={{ xxs: 'center', lg: 'flex-start' }}
           flexdirection={{ xxs: 'column', lg: 'row' }}
-          flexgap="1.5em"
+          flexgap="3em"
         >
           <Box
-            screensizes={5}
+            screensizes={6}
             flexdirection={{ xxs: 'column-reverse', lg: 'column' }}
             flexgap="1.5em"
-            $parentGap="1.5em"
           >
-            <MoveStats move={move} moveName={moveName} />
             <MoveTarget target={target} moveType={type} />
+            <MoveStats move={move} moveName={moveName} />
           </Box>
-          <Box screensizes={7} flexgap="1.5em" $parentGap="1.5em">
+          <Box screensizes={6} flexgap="1.5em">
             <MoveEntries move={move} moveName={moveName} />
             <MoveContest
               move={move}

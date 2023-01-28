@@ -46,6 +46,7 @@ const PokestatsMovePage: NextPage<PokestatsMovePageProps> = ({ autocompleteList,
     return (
       <Loading
         flexheight="100vh"
+        icon="record"
         text="Learning Move"
         $iconWidth={{ xxs: '20%', xs: '15%', md: '10%', lg: '5%' }}
       />

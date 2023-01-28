@@ -2,7 +2,7 @@ import { forwardRef } from 'react';
 // types
 import type { BoxProps } from '@/components/Box';
 // styles
-import { LoadingContainer, PotionIcon, PokeballIcon, Text } from './StyledLoading';
+import { LoadingContainer, PotionIcon, PokeballIcon, RecordIcon, Text } from './StyledLoading';
 // components
 import BoxWrapper from '@/components/Box/StyledBox';
 // helpers
@@ -13,8 +13,24 @@ export interface LoadingProps extends BoxProps {
   noIcon?: boolean;
   passKey?: string;
   text?: string;
-  pokeball?: boolean;
+  icon?: 'potion' | 'pokeball' | 'record';
 }
+
+interface LoadingIconProps {
+  width: LoadingProps['$iconWidth'];
+  icon: LoadingProps['icon'];
+}
+
+const LoadingIcon = ({ width, icon }: LoadingIconProps): JSX.Element => {
+  switch (icon) {
+    case 'pokeball':
+      return <PokeballIcon $iconWidth={width} />;
+    case 'record':
+      return <RecordIcon $iconWidth={width} />;
+    default:
+      return <PotionIcon $iconWidth={width} />;
+  }
+};
 
 const Loading = forwardRef(
   (
@@ -22,7 +38,7 @@ const Loading = forwardRef(
       flexheight,
       $iconWidth,
       noIcon,
-      pokeball,
+      icon,
       text,
       flexjustify = 'center',
       flexalign = 'center',
@@ -51,11 +67,7 @@ const Loading = forwardRef(
           variants={loadingChild}
           key={`icon-${passKey}`}
         >
-          {pokeball ? (
-            <PokeballIcon $iconWidth={$iconWidth} />
-          ) : (
-            <PotionIcon $iconWidth={$iconWidth} />
-          )}
+          <LoadingIcon width={$iconWidth} icon={icon} />
         </BoxWrapper>
       )}
       {text && (

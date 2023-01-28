@@ -61,7 +61,7 @@ const PokestatsPokemonPage: NextPage<PokestatsPokemonPageProps> = ({
     return (
       <Loading
         flexheight="100vh"
-        pokeball
+        icon="pokeball"
         text="Catching Pokémon"
         $iconWidth={{ xxs: '20%', xs: '15%', md: '10%', lg: '5%' }}
       />

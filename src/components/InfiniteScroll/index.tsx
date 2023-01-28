@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 // helpers
 import { fadeInUpVariant } from '@/helpers';
 // types
@@ -29,34 +29,38 @@ export default function InfiniteScroll({
   const [prevY, setPrevY] = useState(1);
   // show list state
   const [showList, setShowList] = useState<Pokemon[]>([]);
-
-  // pokemon observer ref
-  let observer = useRef(null);
   // node state for observer
   const [node, setNode] = useState<IntersectionObserver | null>(null);
+  // pokemon observer ref
+  let observer = useRef(null);
+  // memo
+  const handleObserver = useCallback(
+    entitites => {
+      // entity data
+      const { isIntersecting, boundingClientRect, intersectionRatio } = entitites[0];
 
-  const handleObserver = entitites => {
-    // entity data
-    const { isIntersecting, boundingClientRect, intersectionRatio } = entitites[0];
-
-    if (isIntersecting && intersectionRatio === 1 && boundingClientRect.y > prevY) {
-      // set new y state
-      // remove 50 pixels as redundancy
-      setPrevY(boundingClientRect.y - 100);
-      // change page
-      setCurrPage(currPage + 1);
-    }
-  };
-
-  const sliceNewPage = (page: number, listUpdated: boolean): void => {
-    // slice new page from pokemon array
-    const newPage = pokemonList.slice(
-      page === 1 ? 0 : (page - 1) * itemsPerPage,
-      page * itemsPerPage,
-    );
-    // update show list with sliced array
-    listUpdated ? setShowList([...newPage]) : setShowList([...showList, ...newPage]);
-  };
+      if (isIntersecting && intersectionRatio === 1 && boundingClientRect.y > prevY) {
+        // set new y state
+        // remove 50 pixels as redundancy
+        setPrevY(boundingClientRect.y - 100);
+        // change page
+        setCurrPage(currPage + 1);
+      }
+    },
+    [currPage, prevY],
+  );
+  const sliceNewPage = useCallback(
+    (page: number, listUpdated: boolean): void => {
+      // slice new page from pokemon array
+      const newPage = pokemonList.slice(
+        page === 1 ? 0 : (page - 1) * itemsPerPage,
+        page * itemsPerPage,
+      );
+      // update show list with sliced array
+      listUpdated ? setShowList([...newPage]) : setShowList([...showList, ...newPage]);
+    },
+    [itemsPerPage, pokemonList, showList],
+  );
 
   // pokemon list effect
   useEffect(() => {

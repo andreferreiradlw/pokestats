@@ -78,29 +78,28 @@ const MovesTable = ({ moves, learnMethod, machineNames, ...rest }: TypeMovesProp
                         {/** @ts-ignore */}
                         {learnMethod === 'level-up' && <td>{move?.level_learned_at}</td>}
                         {learnMethod === 'machine' &&
-                        !!machineNames?.length &&
-                        machineNames?.[i] ? (
-                          <DataCell onClick={() => onCellClick(move.name, move.id)}>
-                            <Box
-                              flexdirection="row"
-                              flexjustify="space-between"
-                              width="75%"
-                              flexmargin="0 auto"
-                              flexgap="0.1em"
-                            >
-                              <span>{machineNames[i].toUpperCase()}</span>
-                              <img
-                                src={`https://raw.githubusercontent.com/msikma/pokesprite/master/items/${
-                                  machineNames[i].includes('hm') ? 'hm' : 'tm'
-                                }/${move.type.name}.png`}
-                                alt={move.type.name}
-                                width="30"
-                              />
-                            </Box>
-                          </DataCell>
-                        ) : (
-                          <DataCell onClick={() => onCellClick(move.name, move.id)}>...</DataCell>
-                        )}
+                          (!!machineNames?.length && machineNames?.[i] ? (
+                            <DataCell onClick={() => onCellClick(move.name, move.id)}>
+                              <Box
+                                flexdirection="row"
+                                flexjustify="space-between"
+                                width="75%"
+                                flexmargin="0 auto"
+                                flexgap="0.1em"
+                              >
+                                <span>{machineNames[i].toUpperCase()}</span>
+                                <img
+                                  src={`https://raw.githubusercontent.com/msikma/pokesprite/master/items/${
+                                    machineNames[i].includes('hm') ? 'hm' : 'tm'
+                                  }/${move.type.name}.png`}
+                                  alt={move.type.name}
+                                  width="30"
+                                />
+                              </Box>
+                            </DataCell>
+                          ) : (
+                            <DataCell onClick={() => onCellClick(move.name, move.id)}>...</DataCell>
+                          ))}
                         {learnMethod === 'egg' && <td>-</td>}
                         {learnMethod === 'tutor' && <td>-</td>}
                       </>

@@ -45,6 +45,9 @@ const MovesTable = ({ moves, learnMethod, machineNames, ...rest }: TypeMovesProp
     }
   }, [learnMethod]);
 
+  const onCellClick = (moveName: Move['name'], id: Move['id']) =>
+    id <= 850 && router.push(`/move/${moveName}`);
+
   return (
     <AnimatePresence mode="wait">
       {moves?.length !== 0 && (
@@ -77,7 +80,7 @@ const MovesTable = ({ moves, learnMethod, machineNames, ...rest }: TypeMovesProp
                         {learnMethod === 'machine' &&
                           !!machineNames?.length &&
                           (machineNames?.[i] ? (
-                            <DataCell onClick={() => router.push(`/move/${move.name}`)}>
+                            <DataCell onClick={() => onCellClick(move.name, move.id)}>
                               <Box
                                 flexdirection="row"
                                 flexjustify="space-between"
@@ -96,36 +99,34 @@ const MovesTable = ({ moves, learnMethod, machineNames, ...rest }: TypeMovesProp
                               </Box>
                             </DataCell>
                           ) : (
-                            <DataCell onClick={() => router.push(`/move/${move.name}`)}>
-                              ...
-                            </DataCell>
+                            <DataCell onClick={() => onCellClick(move.name, move.id)}>...</DataCell>
                           ))}
                         {learnMethod === 'egg' && <td>-</td>}
                         {learnMethod === 'tutor' && <td>-</td>}
                       </>
                     )}
-                    <NameTD onClick={() => router.push(`/move/${move.name}`)}>
+                    <NameTD onClick={() => onCellClick(move.name, move.id)}>
                       {removeDash(move.name)}
                     </NameTD>
                     <DataCell>
                       <TypeBadge flexmargin="0" $iconOnly $typename={move.type.name} />
                     </DataCell>
-                    <UppercasedTd onClick={() => router.push(`/move/${move.name}`)}>
+                    <UppercasedTd onClick={() => onCellClick(move.name, move.id)}>
                       {move.damage_class.name}
                     </UppercasedTd>
-                    <DataCell onClick={() => router.push(`/move/${move.name}`)}>
+                    <DataCell onClick={() => onCellClick(move.name, move.id)}>
                       {move.power || '-'}
                     </DataCell>
-                    <DataCell onClick={() => router.push(`/move/${move.name}`)}>
+                    <DataCell onClick={() => onCellClick(move.name, move.id)}>
                       {move.pp || '-'}
                     </DataCell>
-                    <DataCell onClick={() => router.push(`/move/${move.name}`)}>
+                    <DataCell onClick={() => onCellClick(move.name, move.id)}>
                       {move.accuracy || '-'}
                     </DataCell>
-                    <DataCell onClick={() => router.push(`/move/${move.name}`)}>
+                    <DataCell onClick={() => onCellClick(move.name, move.id)}>
                       {move.priority}
                     </DataCell>
-                    <DataCell onClick={() => router.push(`/move/${move.name}`)}>
+                    <DataCell onClick={() => onCellClick(move.name, move.id)}>
                       {mapGeneration(move.generation.name)}
                     </DataCell>
                   </TableRow>

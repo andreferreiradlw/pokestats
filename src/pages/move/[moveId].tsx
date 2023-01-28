@@ -16,6 +16,7 @@ import {
 import {
   capitalise,
   findEnglishName,
+  formatFlavorText,
   getIdFromURL,
   listGamesByGroup,
   listGenGroupsByGroup,
@@ -53,15 +54,30 @@ const PokestatsMovePage: NextPage<PokestatsMovePageProps> = ({ autocompleteList,
     );
   }
 
+  console.log(props.move);
+
   const moveName = props.move?.names
     ? findEnglishName(props.move.names)
     : capitalise(removeDash(props.move.name));
-  const pageTitle = `${moveName} (Pokémon Move) - ${PokestatsPageTitle}`;
+  const pageTitle = `${moveName} (${capitalise(
+    props.move.type.name,
+  )} Type Pokémon Move) - ${PokestatsPageTitle}`;
+  const pageDescription = formatFlavorText(props.move.flavor_text_entries.at(-1)?.flavor_text);
 
   return (
     <>
       <Head>
         <title>{pageTitle}</title>
+        <meta name="description" content={pageDescription} />
+        <meta
+          name="keywords"
+          content={`${moveName}, Move, Pokémon, Pokémon Move, ${capitalise(
+            props.move.type.name,
+          )} Type, Move, TM, HM, TR, Machines, Target, Effect, PP, Accuracy, Power`}
+        />
+        {/** Open Graph */}
+        <meta property="og:title" content={pageTitle} />
+        <meta property="og:description" content={pageDescription} />
       </Head>
       <Layout withHeader={{ autocompleteList: autocompleteList }}>
         <MovePage {...props} />

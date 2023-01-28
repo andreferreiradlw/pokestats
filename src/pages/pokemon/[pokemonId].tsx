@@ -70,7 +70,7 @@ const PokestatsPokemonPage: NextPage<PokestatsPokemonPageProps> = ({
 
   const pokemonName = findEnglishName(props.species.names);
   const pageTitle = `${pokemonName} (Pokémon #${props.pokemon.id}) - ${PokestatsPageTitle}`;
-  const pageDescription = formatFlavorText(props.species.flavor_text_entries[0]?.flavor_text);
+  const pageDescription = formatFlavorText(props.species.flavor_text_entries.at(-1)?.flavor_text);
   const generationDescriptions = gameVersions
     .filter(version => version.genValue === props.species.generation.name)
     .map(game => game.label)
@@ -83,7 +83,7 @@ const PokestatsPokemonPage: NextPage<PokestatsPokemonPageProps> = ({
         <meta name="description" content={pageDescription} />
         <meta
           name="keywords"
-          content={`${pokemonName}, ${pokemonName} gg, Pokemon, Pokémon, Pokédex, Pokestats, Pokestats gg, Shiny, ${generationDescriptions}`}
+          content={`${pokemonName}, ${pokemonName} gg, Pokemon, Pokémon, Pokédex, Pokestats, Pokestats gg, ${pokemonName} Shiny, ${generationDescriptions}`}
         />
         {/** Open Graph */}
         <meta property="og:title" content={pageTitle} />

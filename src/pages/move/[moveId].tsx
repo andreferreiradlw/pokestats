@@ -54,8 +54,6 @@ const PokestatsMovePage: NextPage<PokestatsMovePageProps> = ({ autocompleteList,
     );
   }
 
-  console.log(props.move);
-
   const moveName = props.move?.names
     ? findEnglishName(props.move.names)
     : capitalise(removeDash(props.move.name));

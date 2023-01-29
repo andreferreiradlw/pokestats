@@ -21,12 +21,6 @@ const Navigation = ({ allPokemon, pokemonId, ...rest }: NavigationProps): JSX.El
   // pokemon array length
   const pokemonLength = allPokemon.length;
 
-  const nextPokemon = () => {
-    if (process.env.NODE_ENV === 'production') plausible('Next Pokemon');
-  };
-
-  const previousPokemon = () => plausible('Previous Pokemon');
-
   return (
     <Box
       flexdirection={{ xxs: 'column', sm: 'row' }}
@@ -44,7 +38,7 @@ const Navigation = ({ allPokemon, pokemonId, ...rest }: NavigationProps): JSX.El
         >
           <BtnAnchor
             href={`/pokemon/${allPokemon[pokemonId - 2]?.name}`}
-            onClick={previousPokemon}
+            onClick={() => plausible('Previous Pokemon')}
             $left
           >
             <Arrow $left>
@@ -71,7 +65,11 @@ const Navigation = ({ allPokemon, pokemonId, ...rest }: NavigationProps): JSX.El
           variants={fadeInUpVariant}
           key={`previous-pokemon-${allPokemon[pokemonId]?.name}`}
         >
-          <BtnAnchor href={`/pokemon/${allPokemon[pokemonId]?.name}`} onClick={nextPokemon} $right>
+          <BtnAnchor
+            href={`/pokemon/${allPokemon[pokemonId]?.name}`}
+            onClick={() => plausible('Next Pokemon')}
+            $right
+          >
             <Arrow $right>
               <ImageNext
                 src={`https://raw.githubusercontent.com/andreferreiradlw/pokestats_media/main/assets/images/${prefixId(

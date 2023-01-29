@@ -13,14 +13,6 @@ const Footer = (): JSX.Element => {
   // analytics
   const plausible = usePlausible();
 
-  const githubClick = () => {
-    if (process.env.NODE_ENV === 'production') plausible('Github Footer');
-  };
-
-  const pokeapiClick = () => {
-    if (process.env.NODE_ENV === 'production') plausible('Pokeapi Footer');
-  };
-
   return (
     <FooterContainer>
       <Box
@@ -43,7 +35,7 @@ const Footer = (): JSX.Element => {
                 href="https://github.com/andreferreiradlw/pokestats"
                 target="_blank"
                 rel="noopener"
-                onClick={githubClick}
+                onClick={() => plausible('Github Footer')}
               >
                 Pokestats
               </Anchor>
@@ -71,7 +63,7 @@ const Footer = (): JSX.Element => {
               href="https://pokeapi.co/"
               target="_blank"
               rel="noopener"
-              onClick={pokeapiClick}
+              onClick={() => plausible('Pokeapi Footer')}
             >
               <ImageNext src="/static/pokeapi_logo.png" alt="PokeApi Logo" height={25} />
             </Anchor>

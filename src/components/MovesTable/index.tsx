@@ -46,10 +46,6 @@ const MovesTable = ({ moves, learnMethod, machineNames, ...rest }: TypeMovesProp
     }
   }, [learnMethod]);
 
-  const onRowClick = () => {
-    if (process.env.NODE_ENV === 'production') plausible('Move Table Click');
-  };
-
   return (
     <AnimatePresence mode="wait">
       {moves?.length !== 0 && (
@@ -75,7 +71,7 @@ const MovesTable = ({ moves, learnMethod, machineNames, ...rest }: TypeMovesProp
                   whileTap="tap"
                   variants={rowVariant}
                   key={`type-${move.name}-${i}`}
-                  onClick={onRowClick}
+                  onClick={() => plausible('Move Table Click')}
                 >
                   {learnMethod && (
                     <>

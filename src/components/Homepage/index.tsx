@@ -33,15 +33,6 @@ const Homepage = ({ allPokemon, pokemonTypes, allMoves }: PokestatsHomepageProps
     if (router && randomPokemonUrl) router.prefetch(randomPokemonUrl);
   }, [randomPokemonUrl, router]);
 
-  const routeRandom = () => {
-    if (process.env.NODE_ENV === 'production') plausible('Random Pokemon');
-    router.push(randomPokemonUrl);
-  };
-
-  const githubClick = () => {
-    if (process.env.NODE_ENV === 'production') plausible('Github Homepage');
-  };
-
   return (
     <AnimatePresence mode="wait">
       <GithubLink
@@ -54,7 +45,7 @@ const Homepage = ({ allPokemon, pokemonTypes, allMoves }: PokestatsHomepageProps
         whileTap="tap"
         variants={fadeInUpVariant}
         key="homepage-github"
-        onClick={githubClick}
+        onClick={() => plausible('Github Homepage')}
       >
         <Github />
       </GithubLink>
@@ -78,7 +69,15 @@ const Homepage = ({ allPokemon, pokemonTypes, allMoves }: PokestatsHomepageProps
           variants={fadeInUpVariant}
           key="homepage-autocomplete"
         />
-        <Button onClick={routeRandom} $dark variants={fadeInUpVariant} key="homepage-random-btn">
+        <Button
+          onClick={() => {
+            plausible('Random Pokemon');
+            router.push(randomPokemonUrl);
+          }}
+          $dark
+          variants={fadeInUpVariant}
+          key="homepage-random-btn"
+        >
           Random Pokemon
           <Pokeball />
         </Button>

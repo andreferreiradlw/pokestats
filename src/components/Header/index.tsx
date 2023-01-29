@@ -71,7 +71,7 @@ const HeaderComponent = ({
               value={gameVersion}
               onChange={e => {
                 setGameVersion(e.target.value);
-                if (process.env.NODE_ENV === 'production') plausible('Game Version Select');
+                plausible('Game Version Select');
               }}
               minWidth="190px"
             />

@@ -76,7 +76,7 @@ const PokemonList = ({ pokemon, ...rest }: PokemonListProps): JSX.Element => {
             onChange={e => {
               setGen(e.target.value);
               sessionStorage.setItem('genSelect', e.target.value);
-              if (process.env.NODE_ENV === 'production') plausible('Homepage Generation Select');
+              plausible('Homepage Generation Select');
             }}
             minWidth="175px"
           />
@@ -90,7 +90,7 @@ const PokemonList = ({ pokemon, ...rest }: PokemonListProps): JSX.Element => {
             onChange={e => {
               setSortBy(e.target.value);
               sessionStorage.setItem('sortSelect', e.target.value);
-              if (process.env.NODE_ENV === 'production') plausible('Homepage Sort Select');
+              plausible('Homepage Sort Select');
             }}
             minWidth="125px"
           />

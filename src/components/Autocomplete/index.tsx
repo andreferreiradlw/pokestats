@@ -118,7 +118,7 @@ const Autocomplete = ({ filterList, ...rest }: AutocompleteProps): JSX.Element =
         // clean filtered state
         resetStates();
         // goals
-        if (process.env.NODE_ENV === 'production') plausible('Autocomplete Selection');
+        plausible('Autocomplete Selection');
       } // up arrow
       else if (e.key === 'ArrowUp') {
         // stop window from scrolling
@@ -179,7 +179,7 @@ const Autocomplete = ({ filterList, ...rest }: AutocompleteProps): JSX.Element =
                 key={`${assetType}-${id}-${name}-${i}`}
                 onClick={() => {
                   resetStates();
-                  if (process.env.NODE_ENV === 'production') plausible('Autocomplete Selection');
+                  plausible('Autocomplete Selection');
                 }}
                 onFocus={() => setActiveOption(i)}
                 onKeyDown={e => handleKeyDown(e)}

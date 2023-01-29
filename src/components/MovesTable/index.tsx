@@ -1,4 +1,5 @@
-import { useMemo } from 'react';
+import React, { useMemo } from 'react';
+import { useRouter } from 'next/router';
 // types
 import type { Move, MoveLearnMethod } from 'pokenode-ts';
 // helpers
@@ -28,6 +29,8 @@ interface TypeMovesProps extends HTMLMotionProps<'div'> {
 }
 
 const MovesTable = ({ moves, learnMethod, machineNames, ...rest }: TypeMovesProps): JSX.Element => {
+  // router
+  const router = useRouter();
   // analytics
   const plausible = usePlausible();
   // memo
@@ -45,6 +48,13 @@ const MovesTable = ({ moves, learnMethod, machineNames, ...rest }: TypeMovesProp
       return null;
     }
   }, [learnMethod]);
+
+  const onCellClick = (moveName: Move['name'], id: Move['id']) => {
+    if (id <= 850) {
+      plausible('Move Table Click');
+      router.push(`/move/${moveName}`);
+    }
+  };
 
   return (
     <AnimatePresence mode="wait">
@@ -65,28 +75,28 @@ const MovesTable = ({ moves, learnMethod, machineNames, ...rest }: TypeMovesProp
               </tr>
             </thead>
             <TableBody>
-              {moves.map((move, i) => (
-                <TableRow
-                  whileHover="hover"
-                  whileTap="tap"
-                  variants={rowVariant}
-                  key={`type-${move.name}-${i}`}
-                  onClick={() => plausible('Move Table Click')}
-                >
-                  {learnMethod && (
-                    <>
-                      {learnMethod === 'level-up' && (
-                        <td>
-                          <Link href={`/move/${move.name}`} prefetch={false}>
+              {moves.map((move, i) => {
+                // prefetch move page
+                router.prefetch(`/move/${move.name}`);
+
+                return (
+                  <TableRow
+                    whileHover="hover"
+                    whileTap="tap"
+                    variants={rowVariant}
+                    key={`type-${move.name}-${i}`}
+                  >
+                    {learnMethod && (
+                      <>
+                        {learnMethod === 'level-up' && (
+                          <DataCell onClick={() => onCellClick(move.name, move.id)}>
                             {/** @ts-ignore */}
                             {move?.level_learned_at}
-                          </Link>
-                        </td>
-                      )}
-                      {learnMethod === 'machine' &&
-                        (!!machineNames?.length && machineNames?.[i] ? (
-                          <DataCell>
-                            <Link href={`/move/${move.name}`} prefetch={false}>
+                          </DataCell>
+                        )}
+                        {learnMethod === 'machine' &&
+                          (!!machineNames?.length && machineNames?.[i] ? (
+                            <DataCell onClick={() => onCellClick(move.name, move.id)}>
                               <Box
                                 flexdirection="row"
                                 flexjustify="space-between"
@@ -103,69 +113,48 @@ const MovesTable = ({ moves, learnMethod, machineNames, ...rest }: TypeMovesProp
                                   width="30"
                                 />
                               </Box>
-                            </Link>
-                          </DataCell>
-                        ) : (
-                          <DataCell>
-                            <Link href={`/move/${move.name}`} prefetch={false}>
-                              ...
-                            </Link>
-                          </DataCell>
-                        ))}
-                      {learnMethod === 'egg' && (
-                        <td>
-                          <Link href={`/move/${move.name}`} prefetch={false}>
-                            -
-                          </Link>
-                        </td>
-                      )}
-                      {learnMethod === 'tutor' && (
-                        <td>
-                          <Link href={`/move/${move.name}`} prefetch={false}>
-                            -
-                          </Link>
-                        </td>
-                      )}
-                    </>
-                  )}
-                  <NameTD>
-                    <Link href={`/move/${move.name}`}>{removeDash(move.name)}</Link>
-                  </NameTD>
-                  <DataCell>
-                    <TypeBadge flexmargin="0" $iconOnly $typename={move.type.name} />
-                  </DataCell>
-                  <UppercasedTd>
-                    <Link href={`/move/${move.name}`} prefetch={false}>
+                            </DataCell>
+                          ) : (
+                            <DataCell onClick={() => onCellClick(move.name, move.id)}>...</DataCell>
+                          ))}
+                        {learnMethod === 'egg' && (
+                          <DataCell onClick={() => onCellClick(move.name, move.id)}>-</DataCell>
+                        )}
+                        {learnMethod === 'tutor' && (
+                          <DataCell onClick={() => onCellClick(move.name, move.id)}>-</DataCell>
+                        )}
+                      </>
+                    )}
+                    <NameTD onClick={() => onCellClick(move.name, move.id)}>
+                      {removeDash(move.name)}
+                    </NameTD>
+                    <DataCell>
+                      <TypeBadge flexmargin="0" $iconOnly $typename={move.type.name} />
+                    </DataCell>
+                    <UppercasedTd onClick={() => onCellClick(move.name, move.id)}>
                       {move.damage_class.name}
-                    </Link>
-                  </UppercasedTd>
-                  <DataCell>
-                    <Link href={`/move/${move.name}`} prefetch={false}>
+                    </UppercasedTd>
+                    <DataCell onClick={() => onCellClick(move.name, move.id)}>
                       {move.power || '-'}
-                    </Link>
-                  </DataCell>
-                  <DataCell>
-                    <Link href={`/move/${move.name}`} prefetch={false}>
+                    </DataCell>
+                    <DataCell onClick={() => onCellClick(move.name, move.id)}>
                       {move.pp || '-'}
-                    </Link>
-                  </DataCell>
-                  <DataCell>
-                    <Link href={`/move/${move.name}`} prefetch={false}>
+                    </DataCell>
+                    <DataCell onClick={() => onCellClick(move.name, move.id)}>
                       {move.accuracy || '-'}
-                    </Link>
-                  </DataCell>
-                  <DataCell>
-                    <Link href={`/move/${move.name}`} prefetch={false}>
+                    </DataCell>
+                    <DataCell onClick={() => onCellClick(move.name, move.id)}>
                       {move.priority}
-                    </Link>
-                  </DataCell>
-                  <DataCell>
-                    <Link href={`/move/${move.name}`} prefetch={false}>
-                      {mapGeneration(move.generation.name)}
-                    </Link>
-                  </DataCell>
-                </TableRow>
-              ))}
+                    </DataCell>
+                    <DataCell onClick={() => onCellClick(move.name, move.id)}>
+                      {/** leaving this anchor for SEO purposes */}
+                      <Link href={`/move/${move.name}`} prefetch={false}>
+                        {mapGeneration(move.generation.name)}
+                      </Link>
+                    </DataCell>
+                  </TableRow>
+                );
+              })}
             </TableBody>
           </MovesTableEl>
         </TableContainer>

@@ -172,7 +172,11 @@ const Autocomplete = ({ filterList, ...rest }: AutocompleteProps): JSX.Element =
               <OptionWrapper
                 href={`/${assetType}/${name}`}
                 key={`${assetType}-${id}-${name}-${i}`}
-                onClick={() => resetStates()}
+                onClick={() => {
+                  resetStates();
+                  if (process.env.NODE_ENV === 'production' && window?.plausible)
+                    window.plausible('Autocomplete Click');
+                }}
                 onFocus={() => setActiveOption(i)}
                 onKeyDown={e => handleKeyDown(e)}
                 ref={currOption => currOption && i === activeOption && currOption.focus()}

@@ -65,7 +65,11 @@ const HeaderComponent = ({
               label="Game Version"
               options={dropdownOptions}
               value={gameVersion}
-              onChange={e => setGameVersion(e.target.value)}
+              onChange={e => {
+                setGameVersion(e.target.value);
+                if (process.env.NODE_ENV === 'production' && window?.plausible)
+                  window.plausible('Game Version Select');
+              }}
               minWidth="190px"
             />
           )}

@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components';
 import { motion } from 'framer-motion';
 
 const TableBody = styled.tbody``;
-const TableRow = styled.tr`
+const TableRow = styled(motion.tr)`
   cursor: pointer;
 `;
 const DataCell = styled.td``;

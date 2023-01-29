@@ -65,7 +65,7 @@ const TypeTabs = ({ typeInfo, typeMoves, typeName, ...rest }: TypeTabsProps) => 
             key={`${name}-type-pokemon`}
           >
             <SectionTitle>{`${typeName} Type Pokemon (${pokemon.length})`}</SectionTitle>
-            <InfiniteScroll pokemonList={pokemon} dark />
+            <InfiniteScroll pokemonList={pokemon} />
           </TabContainer>
         )}
         {currTab === 'moves' && (

@@ -1,3 +1,4 @@
+import PlausibleProvider from 'next-plausible';
 // types
 import type { AppProps } from 'next/app';
 // helpers
@@ -20,7 +21,9 @@ const App = ({ Component, pageProps, router }: AppProps): JSX.Element => {
           exit="pageExit"
           variants={pageVariant}
         >
-          <Component {...pageProps} />
+          <PlausibleProvider domain="pokestats.gg" enabled={process.env.NODE_ENV === 'production'}>
+            <Component {...pageProps} />
+          </PlausibleProvider>
         </motion.div>
       </AnimatePresence>
     </ThemeProvider>

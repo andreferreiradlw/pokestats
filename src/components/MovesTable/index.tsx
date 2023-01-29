@@ -1,9 +1,9 @@
 import { useMemo } from 'react';
-import { useRouter } from 'next/router';
 // types
 import type { Move, MoveLearnMethod } from 'pokenode-ts';
 // helpers
-import { removeDash, mapGeneration, rowVariant, FilteredMove } from '@/helpers';
+import { usePlausible } from 'next-plausible';
+import { removeDash, mapGeneration, fadeInUpVariant, rowVariant, FilteredMove } from '@/helpers';
 // styles
 import { SectionMessage, UppercasedTd } from '@/components/BaseStyles';
 import {
@@ -28,8 +28,8 @@ interface TypeMovesProps extends HTMLMotionProps<'div'> {
 }
 
 const MovesTable = ({ moves, learnMethod, machineNames, ...rest }: TypeMovesProps): JSX.Element => {
-  // router
-  const router = useRouter();
+  // analytics
+  const plausible = usePlausible();
   // memo
   const mapMethodName = useMemo(() => {
     if (learnMethod) {
@@ -47,8 +47,7 @@ const MovesTable = ({ moves, learnMethod, machineNames, ...rest }: TypeMovesProp
   }, [learnMethod]);
 
   const onRowClick = () => {
-    if (process.env.NODE_ENV === 'production' && window?.plausible)
-      window.plausible('Move Table Click');
+    if (process.env.NODE_ENV === 'production') plausible('Move Table Click');
   };
 
   return (

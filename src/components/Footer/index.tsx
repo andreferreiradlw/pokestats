@@ -1,4 +1,5 @@
 // helpers
+import { usePlausible } from 'next-plausible';
 import { fadeInUpVariant } from '@/helpers';
 // styles
 import { FooterContainer, PokestatsIcon, Anchor } from './StyledFooter';
@@ -9,13 +10,15 @@ import ImageNext from '@/components/ImageNext';
 import { motion } from 'framer-motion';
 
 const Footer = (): JSX.Element => {
+  // analytics
+  const plausible = usePlausible();
+
   const githubClick = () => {
-    if (process.env.NODE_ENV === 'production' && window?.plausible)
-      window.plausible('Github Footer');
+    if (process.env.NODE_ENV === 'production') plausible('Github Footer');
   };
+
   const pokeapiClick = () => {
-    if (process.env.NODE_ENV === 'production' && window?.plausible)
-      window.plausible('Pokeapi Footer');
+    if (process.env.NODE_ENV === 'production') plausible('Pokeapi Footer');
   };
 
   return (

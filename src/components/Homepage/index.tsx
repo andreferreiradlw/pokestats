@@ -2,6 +2,7 @@ import { useMemo, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { AnimatePresence } from 'framer-motion';
 // heplpers
+import { usePlausible } from 'next-plausible';
 import { staggerInitialVariant, fadeInUpVariant, getRandomInt } from '@/helpers';
 // types
 import type { PokestatsHomepageProps } from '@/pages/index';
@@ -20,6 +21,8 @@ import Github from 'public/static/iconLibrary/github.svg';
 const Homepage = ({ allPokemon, pokemonTypes, allMoves }: PokestatsHomepageProps): JSX.Element => {
   // router
   const router = useRouter();
+  // analytics
+  const plausible = usePlausible();
   // memo
   const randomPokemonUrl = useMemo(
     () => `/pokemon/${allPokemon[getRandomInt(1, allPokemon.length)].name}`,
@@ -31,14 +34,12 @@ const Homepage = ({ allPokemon, pokemonTypes, allMoves }: PokestatsHomepageProps
   }, [randomPokemonUrl, router]);
 
   const routeRandom = () => {
-    if (process.env.NODE_ENV === 'production' && window?.plausible)
-      window.plausible('Random Pokemon');
+    if (process.env.NODE_ENV === 'production') plausible('Random Pokemon');
     router.push(randomPokemonUrl);
   };
 
   const githubClick = () => {
-    if (process.env.NODE_ENV === 'production' && window?.plausible)
-      window.plausible('Github Homepage');
+    if (process.env.NODE_ENV === 'production') plausible('Github Homepage');
   };
 
   return (

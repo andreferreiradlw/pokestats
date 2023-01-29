@@ -2,6 +2,7 @@
 import type { PokestatsPokemonPageProps } from '@/pages/pokemon/[pokemonId]';
 import type { Pokemon } from 'pokenode-ts';
 // helpers
+import { usePlausible } from 'next-plausible';
 import { removeDash, fadeInUpVariant, prefixId } from '@/helpers';
 // styles
 import { BtnContainer, BtnAnchor, Title, Arrow, PokemonID, PokemonName } from './StyledNavigation';
@@ -9,23 +10,22 @@ import { BtnContainer, BtnAnchor, Title, Arrow, PokemonID, PokemonName } from '.
 import Box, { BoxProps } from '@/components/Box';
 import ImageNext from '@/components/ImageNext';
 
-const nextPokemon = () => {
-  if (process.env.NODE_ENV === 'production' && window?.plausible) window.plausible('Next Pokemon');
-};
-
-const previousPokemon = () => {
-  if (process.env.NODE_ENV === 'production' && window?.plausible)
-    window.plausible('Previous Pokemon');
-};
-
 interface NavigationProps extends BoxProps {
   allPokemon: PokestatsPokemonPageProps['allPokemon'];
   pokemonId: Pokemon['id'];
 }
 
 const Navigation = ({ allPokemon, pokemonId, ...rest }: NavigationProps): JSX.Element => {
+  // analytics
+  const plausible = usePlausible();
   // pokemon array length
   const pokemonLength = allPokemon.length;
+
+  const nextPokemon = () => {
+    if (process.env.NODE_ENV === 'production') plausible('Next Pokemon');
+  };
+
+  const previousPokemon = () => plausible('Previous Pokemon');
 
   return (
     <Box

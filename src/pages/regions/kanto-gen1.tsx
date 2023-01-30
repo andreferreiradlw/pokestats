@@ -11,9 +11,12 @@ import KantoGen1 from '@/components/RegionsPage/KantoGen1';
 import { findEnglishName, getIdFromURL } from '@/helpers';
 
 export interface PokestatsKantoGen1PageProps {
-  region: Region;
-  locations: Location[];
-  locationAreas: any;
+  locations: {
+    key: string;
+    label: string;
+    locationId: number;
+    locationAreas: LocationArea[];
+  }[];
 }
 
 const PokestatsRegionsPage: NextPage<PokestatsKantoGen1PageProps> = props => (
@@ -67,6 +70,33 @@ export const getStaticProps: GetStaticProps<PokestatsKantoGen1PageProps> = async
             locationClient.getLocationAreaById(getIdFromURL(url, 'location-area')),
           ),
         );
+
+        if (locationAreaData.length) {
+          // filter out pokemon encounters from other generations
+          locationAreaData.forEach(currArea => {
+            // filter pokemon encounters by game version
+            let filteredEncounters = currArea.pokemon_encounters.filter(({ version_details }) =>
+              version_details.some(
+                ({ version }) =>
+                  version.name === 'red' || version.name === 'blue' || version.name === 'yellow',
+              ),
+            );
+            // if any gen1 encounters
+            // also filter encounters version details array
+            if (filteredEncounters.length > 0) {
+              filteredEncounters.forEach(encounter => {
+                const filteredVersion = encounter.version_details.filter(
+                  ({ version }) =>
+                    version.name === 'red' || version.name === 'blue' || version.name === 'yellow',
+                );
+                encounter.version_details = filteredVersion;
+              });
+            }
+            // assign gen1 encounters
+            currArea.pokemon_encounters = filteredEncounters;
+          });
+        }
+
         // add location area data
         regionLocationAreas.push({
           key: locationName,
@@ -77,29 +107,9 @@ export const getStaticProps: GetStaticProps<PokestatsKantoGen1PageProps> = async
       }),
     );
 
-    // filter out pokemon encounters from other generations
-    // const genLocationAreas = regionLocationAreas.map(({ locationAreas }) => {
-    //   locationAreas.forEach(({ pokemon_encounters }) => pokemon_encounters.filter());
-    // });
-    const res = regionLocationAreas.filter(
-      ({ locationAreas }) =>
-        !!locationAreas?.length &&
-        locationAreas.some(
-          ({ pokemon_encounters }) =>
-            !!pokemon_encounters?.length &&
-            pokemon_encounters.some(({ version_details }) =>
-              version_details?.find(
-                ({ version }) => version === 'red' || version === 'blue' || version === 'yellow',
-              ),
-            ),
-        ),
-    );
-
     return {
       props: {
-        region: kantoData,
-        locations: kantoLocationsData,
-        locationAreas: res,
+        locations: regionLocationAreas,
       },
     };
   } catch (error) {

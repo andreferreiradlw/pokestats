@@ -61,6 +61,7 @@ const Sprites = ({ pokemonSprites, pokemonId, forms, ...rest }: SpritesProps): J
                   typeof pokemonSprites[key] !== 'object' && (
                     <SpriteContainer screensizes={1.5} key={`${key}-${i}`}>
                       <Sprite
+                        unoptimized
                         alt={key}
                         key={`sprite-${key}`}
                         src={pokemonSprites[key]}
@@ -91,6 +92,7 @@ const Sprites = ({ pokemonSprites, pokemonId, forms, ...rest }: SpritesProps): J
                     typeof animatedSprites[key] !== 'object' && (
                       <SpriteContainer screensizes={1.5} key={`${key}-${i}`} flexgap="1em">
                         <Sprite
+                          unoptimized
                           alt={key}
                           key={`animated-sprite-${key}`}
                           src={animatedSprites[key]}

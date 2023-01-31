@@ -1,14 +1,14 @@
 // types
 import type { GetStaticProps, NextPage } from 'next';
-// import type { Pokemon, PokemonType, MoveType } from '@/types';
+import type { Pokemon, PokemonType, MoveType } from '@/types';
 // helpers
-import { Location, LocationArea, LocationClient, NamedAPIResource, Region } from 'pokenode-ts';
+import { Location, LocationArea, LocationClient, Region } from 'pokenode-ts';
 // import { PokestatsPageTitle } from '@/components/Head';
 // components
 import Head from 'next/head';
 import Layout from '@/components/Layout';
 import KantoGen1 from '@/components/RegionsPage/KantoGen1';
-import { findEnglishName, getIdFromURL } from '@/helpers';
+import { fetchAutocompleteData, findEnglishName, getIdFromURL } from '@/helpers';
 
 export interface PokestatsKantoGen1PageProps {
   locations: {
@@ -17,26 +17,33 @@ export interface PokestatsKantoGen1PageProps {
     locationId: number;
     locationAreas: LocationArea[];
   }[];
+  autocompleteList: (Pokemon | PokemonType | MoveType)[];
 }
 
-const PokestatsRegionsPage: NextPage<PokestatsKantoGen1PageProps> = props => (
-  <>
-    <Head>
-      <meta property="og:title" content="Regions" />
-    </Head>
-    <Layout $withGutter={false} layoutGap="0">
-      <KantoGen1 {...props} />
-    </Layout>
-  </>
-);
+const PokestatsRegionsPage: NextPage<PokestatsKantoGen1PageProps> = ({
+  autocompleteList,
+  ...rest
+}) => {
+  return (
+    <>
+      <Head>
+        <meta property="og:title" content="Regions" />
+      </Head>
+      <Layout withHeader={{ autocompleteList: autocompleteList }} $withGutter={false} layoutGap="0">
+        <KantoGen1 {...rest} />
+      </Layout>
+    </>
+  );
+};
 
 export const getStaticProps: GetStaticProps<PokestatsKantoGen1PageProps> = async () => {
   const locationClient = new LocationClient();
 
   try {
-    const kantoData = await locationClient.getRegionById(1);
+    const kantoData: Region = await locationClient.getRegionById(1);
+    const { allMovesData, allPokemonData, allTypesData } = await fetchAutocompleteData();
 
-    if (!kantoData) {
+    if (!kantoData || !allMovesData || !allPokemonData || !allTypesData) {
       return { notFound: true };
     }
 
@@ -110,6 +117,7 @@ export const getStaticProps: GetStaticProps<PokestatsKantoGen1PageProps> = async
     return {
       props: {
         locations: regionLocationAreas,
+        autocompleteList: [...allPokemonData, ...allTypesData, ...allMovesData],
       },
     };
   } catch (error) {

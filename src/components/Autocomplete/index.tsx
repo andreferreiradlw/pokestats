@@ -4,7 +4,7 @@ import { useState, useEffect, CSSProperties, useCallback } from 'react';
 import { usePlausible } from 'next-plausible';
 import { removeDash, prefixId, fadeInDownVariant } from '@/helpers';
 // types
-import type { Pokemon, PokemonType, MoveType } from '@/types';
+import type { MoveType, Pokemon, PokemonType } from '@/types';
 import type { HTMLMotionProps } from 'framer-motion';
 // styles
 import {
@@ -23,14 +23,14 @@ import Box from '@/components/Box';
 import TypeIcon from '@/components/TypeIcon';
 
 export interface AutocompleteProps extends HTMLMotionProps<'div'> {
-  filterList: (PokemonType | Pokemon | MoveType)[];
+  filterList: (Pokemon | PokemonType | MoveType)[];
   width?: CSSProperties['width'];
 }
 
 interface AutocompleteIconProps {
   assetType: PokemonType['assetType'] | Pokemon['assetType'] | MoveType['assetType'];
-  name: PokemonType['name'];
-  id?: Pokemon['id'];
+  name: string;
+  id?: number;
 }
 
 const AutocompleteIcon = ({ assetType, name, id }: AutocompleteIconProps): JSX.Element => {

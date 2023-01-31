@@ -1,5 +1,7 @@
 // animations
 export * from './animations';
+// autocomplete
+export * from './autocomplete';
 // box
 export * from './box';
 // names

@@ -1,21 +1,22 @@
 import { useState, useMemo, CSSProperties } from 'react';
 // types
-import type { AutocompleteProps } from '@/components/Autocomplete';
+import type { MoveType, Pokemon, PokemonType } from '@/types';
 import type { BoxProps } from '@/components/Box';
 import type { PokemonSpecies } from 'pokenode-ts';
 // helpers
 import GameVersionContext from './gameVersionContext';
+import { mapGeneration } from '@/helpers';
+// styles
 import { LayoutContainer, MainContainer } from './StyledLayout';
 // components
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import { mapGeneration } from '@/helpers';
 
 interface LayoutProps extends BoxProps {
   layoutGap?: CSSProperties['gap'];
   withHeader?: {
     currPokemon?: PokemonSpecies;
-    autocompleteList: AutocompleteProps['filterList'];
+    autocompleteList: (Pokemon | PokemonType | MoveType)[];
   };
 }
 

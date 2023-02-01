@@ -2,7 +2,7 @@
 import type { GetStaticProps, NextPage } from 'next';
 import type { Pokemon, PokemonType, MoveType } from '@/types';
 // helpers
-import { Location, LocationArea, LocationClient, Region } from 'pokenode-ts';
+import { Location as PokenodeLocation, LocationArea, LocationClient, Region } from 'pokenode-ts';
 // import { PokestatsPageTitle } from '@/components/Head';
 // components
 import Head from 'next/head';
@@ -10,13 +10,14 @@ import Layout from '@/components/Layout';
 import KantoGen1 from '@/components/RegionsPage/KantoGen1';
 import { fetchAutocompleteData, findEnglishName, getIdFromURL } from '@/helpers';
 
+export interface Location {
+  key: string;
+  label: string;
+  locationId: number;
+  locationAreas?: LocationArea[];
+}
 export interface PokestatsKantoGen1PageProps {
-  locations: {
-    key: string;
-    label: string;
-    locationId: number;
-    locationAreas?: LocationArea[];
-  }[];
+  locations: Location[];
   autocompleteList: (Pokemon | PokemonType | MoveType)[];
 }
 
@@ -53,7 +54,7 @@ export const getStaticProps: GetStaticProps<PokestatsKantoGen1PageProps> = async
       locations.push(locationClient.getLocationById(getIdFromURL(url, 'location'))),
     );
 
-    const kantoLocationsData: Location[] = await Promise.all(locations);
+    const kantoLocationsData: PokenodeLocation[] = await Promise.all(locations);
 
     if (!kantoLocationsData) {
       return { notFound: true };

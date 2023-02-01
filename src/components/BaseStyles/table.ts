@@ -1,6 +1,7 @@
 import styled, { css } from 'styled-components';
 import { motion } from 'framer-motion';
 
+// simple table styles
 const Table = styled(motion.table)`
   border-spacing: 0;
   display: table;

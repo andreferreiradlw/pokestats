@@ -13,6 +13,7 @@ import Box from '@/components/Box';
 import ImageMapper from 'react-img-mapper';
 // data
 import kantoZones from './kanto-zones.json';
+import LocationTable from '@/components/LocationTable';
 
 const KantoGen1 = ({
   locations,
@@ -30,9 +31,9 @@ const KantoGen1 = ({
     mapRef.current.clearHighlightedArea();
   };
 
-  const handleAreaClick = (areaId: string): void => {
+  const handleAreaClick = (areaId: number): void => {
     const matchedArea = locations.find(location => location.locationId === areaId);
-    console.log(matchedArea);
+    // console.log(matchedArea);
     setCurrArea(matchedArea);
   };
 
@@ -90,12 +91,12 @@ const KantoGen1 = ({
               toggleHighlighted={true}
               fillColor="#eab54d4d"
               strokeColor="black"
-              onClick={area => handleAreaClick(area.id)}
+              onClick={area => handleAreaClick(Number(area.id))}
               onMouseEnter={(area: any) => setMapHover(area.title)}
               onMouseLeave={() => setMapHover(null)}
             />
           </ImageContainer>
-          <Box>Table</Box>
+          {currArea && <LocationTable location={currArea} />}
         </Box>
         <Divider />
       </MainContainer>

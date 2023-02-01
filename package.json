@@ -37,6 +37,7 @@
     "pokenode-ts": "^1.17.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-img-mapper": "^1.4.0",
     "react-is": "^18.2.0",
     "react-particles": "^2.6.0",
     "sharp": "^0.31.3",

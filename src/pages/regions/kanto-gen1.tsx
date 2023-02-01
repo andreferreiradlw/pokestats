@@ -15,7 +15,7 @@ export interface PokestatsKantoGen1PageProps {
     key: string;
     label: string;
     locationId: number;
-    locationAreas: LocationArea[];
+    locationAreas?: LocationArea[];
   }[];
   autocompleteList: (Pokemon | PokemonType | MoveType)[];
 }
@@ -116,7 +116,7 @@ export const getStaticProps: GetStaticProps<PokestatsKantoGen1PageProps> = async
 
     return {
       props: {
-        locations: regionLocationAreas,
+        locations: regionLocationAreas.sort((a, b) => (a.locationId > b.locationId ? 1 : -1)),
         autocompleteList: [...allPokemonData, ...allTypesData, ...allMovesData],
       },
     };

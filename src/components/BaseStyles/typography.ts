@@ -63,6 +63,7 @@ const BoldSpan = styled.span`
 
 const Anchor = styled(Link)`
   color: ${({ theme }) => theme.colors.tertiary.main};
+  cursor: pointer;
   font-weight: 700;
   text-decoration: underline;
 

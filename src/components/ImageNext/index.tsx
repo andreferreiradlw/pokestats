@@ -17,14 +17,14 @@ import {
 import { AnimatePresence } from 'framer-motion';
 
 export interface ImageNextProps extends ImageProps {
-  $pixelatedImg?: boolean;
+  pixelatedimg?: boolean;
   placeholderwidth?: string;
 }
 
 const ImageNext = ({
   width,
   height,
-  $pixelatedImg,
+  pixelatedimg,
   placeholderwidth = '60%',
   priority,
   fill = true,
@@ -35,12 +35,7 @@ const ImageNext = ({
   const [hasError, setHasError] = useState(false);
 
   return (
-    <ImageContainer
-      width={width}
-      height={height}
-      $pixelatedImg={$pixelatedImg}
-      key={`image-container-${src}`}
-    >
+    <ImageContainer width={width} height={height} key={`image-container-${src}`}>
       <AnimatePresence>
         {showPlaceholder && !hasError && (
           <LoadingContainer
@@ -68,6 +63,7 @@ const ImageNext = ({
               sizes={fill && '(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'}
               src={src}
               draggable={false}
+              pixelatedimg={pixelatedimg}
               onLoadingComplete={() => setShowPlaceholder(false)}
               onError={() => setHasError(true)}
               {...rest}

@@ -4,328 +4,375 @@
     "key": "pewter-city",
     "title": "Pewter City",
     "shape": "rect",
-    "coords": [283, 171, 228, 223]
+    "coords": [283, 171, 228, 223],
+    "description": "Pewter City is north of Viridian City and is the second city that the player will encounter. Here, you will face your first gym leader, Brock. Also, you can revive fossils that you obtain in the Pokémon Museum of Science. In this game, you can revive Kabuto or Omanyte. To the west of this map, you’ll enter a route toward Mt. Moon. From there, you’ll enter the next city, Cerulean City."
   },
   {
     "id": "232",
     "key": "lavender-town",
     "title": "Lavender Town",
     "shape": "rect",
-    "coords": [960, 285, 905, 337]
+    "coords": [960, 285, 905, 337],
+    "description": "Lavender Town is the fifth town that the player is introduced to. This town is the spookiest town in Kanto. This town is home to Pokémon Tower, a tower where Pokémon are buried and many of their trainers come to pay their respects. The player must come to this tower to save Mr. Fuji from the evil team, Team Rocket. From there, the player meets a ghost (which is Cubone’s mother) and must travel to Saffron City to get the Silph Scope to see ghosts."
   },
   {
     "id": "233",
     "key": "indigo-plateau",
     "title": "Indigo Plateau",
     "shape": "rect",
-    "coords": [169, 115, 114, 167]
+    "coords": [169, 115, 114, 167],
+    "description": "The Pokémon League's headquarters are located here, a plain on the highest mountain in Kanto. You can only enter it once you have defeated all the arena leaders in the Kanto region and can show their medals to the guards. The top four is a coach's last hurdle to becoming a champion."
   },
   {
     "id": "234",
     "key": "saffron-city",
     "title": "Saffron City",
     "shape": "rect",
-    "coords": [734, 285, 679, 337]
+    "coords": [734, 285, 679, 337],
+    "description": "Saffron City is the seventh that is introduced to the player. This city is in between Lavender town and Celadon City. This city has the gym leader, Sabrina, where the player can earn their sixth gym badge. In the center of the map, Silph Co. is invaded by Team Rocket. The player must go through the building to save the president of the company. Once the player defeats Team Rocket, they receive the Silph Scope and the Master Ball. A Master Ball is an ultimate Poké Ball that allows any Pokémon to be caught."
   },
   {
     "id": "67",
     "key": "celadon-city",
     "title": "Celadon City",
     "shape": "rect",
-    "coords": [565, 284, 510, 336]
+    "coords": [565, 284, 510, 336],
+    "description": "Celadon City is the sixth city that the player is introduced to. This city is home to the gym leader, Erika. This city contains several stores and fun activities. First, it as the Celadon Mall. This mall contains several items that will help the player such as stones, restores, etc. Next, we have the game corner. The game corner allows players to “gamble” coins to earn more coins. Using these coins, you can buy items and Pokémon."
   },
   {
     "id": "158",
     "key": "power-plant",
     "title": "Power Plant",
     "shape": "rect",
-    "coords": [1019, 223, 960, 280]
+    "coords": [1019, 223, 960, 280],
+    "description": "The Power Plant was abandoned years before the events of the Generation I games, though some of the machinery still works. It was refurbished at some time between generations I and II to provide power for the Magnet Train. It became a home for Electric-type Pokémon when it was abandoned. Surfing from Route 10 is required to reach it."
   },
   {
     "id": "159",
     "key": "kanto-victory-road-2",
     "title": "Victory Road",
     "shape": "rect",
-    "coords": [170, 228, 113, 283]
+    "coords": [170, 228, 113, 283],
+    "description": ""
   },
   {
     "id": "154",
     "key": "viridian-city",
     "title": "Viridian City",
     "shape": "rect",
-    "coords": [283, 453, 226, 508]
+    "coords": [283, 453, 226, 508],
+    "description": "Viridian City is north of Pallet Town and is the first city the player will encounter. Here, you are introduced to the Pokémon Center (Beginning of the game) by your rival character. Here, you can also see the eighth gym leader, Giovanni. To the right of the image of the map, there is a route that leads into the Pokémon League. When you move forward to route 2, you’ll enter Viridian Forest."
   },
   {
     "id": "162",
     "key": "kanto-safari-zone",
     "title": "Safari Zone",
     "shape": "rect",
-    "coords": [651, 656, 539, 735]
+    "coords": [651, 656, 539, 735],
+    "description": "A special Pokémon preserve in Kanto that Trainers can enter to capture Pokémon. For $500, the player can play the Safari Game and receive 30 Safari Balls. Trainers are limited to 500 steps in the Safari Zone before the Game is over."
   },
   {
     "id": "151",
     "key": "vermilion-city",
     "title": "Vermilion City",
     "shape": "rect",
-    "coords": [737, 507, 678, 565]
+    "coords": [737, 507, 678, 565],
+    "description": "Vermillion City is the fourth city that the player is introduced to. This city is south of Cerulean City. Here, the player must enter the St. Anne and receive HM01 (Cut). From there, the player can cut the tree to enter the gym to battle the gym leader, Lt. Surge. In this city, the player can receive the Pokémon Squirtle (in Pokémon Yellow)."
   },
   {
     "id": "155",
     "key": "viridian-forest",
     "title": "Viridian Forest",
     "shape": "rect",
-    "coords": [253, 277, 196, 390]
+    "coords": [253, 277, 196, 390],
+    "description": ""
   },
   {
     "id": "73",
     "key": "digletts-cave",
     "title": "Digletts Cave",
     "shape": "rect",
-    "coords": [283, 224, 226, 278]
+    "coords": [283, 224, 226, 278],
+    "description": ""
   },
   {
     "id": "68",
     "key": "cerulean-city",
     "title": "Cerulean City",
     "shape": "rect",
-    "coords": [735, 115, 678, 171]
+    "coords": [735, 115, 678, 171],
+    "description": "Cerulean City is east of Pewter City. This city is the third city that the player is introduced to. Here, the player will face the second gym leader, Misty. Also, the player is able to get Bulbasaur (in Pokémon Yellow). North from this city is a bridge that leads you to Bill’s House. Bill created the PC system, so, you’ll meet him and he’ll talk about his studies and give you tickets to the St. Anne in Vermillion City."
   },
   {
     "id": "71",
     "key": "cinnabar-island",
     "title": "Cinnabar Island",
     "shape": "rect",
-    "coords": [283, 848, 226, 904]
+    "coords": [283, 848, 226, 904],
+    "description": "Cinnabar Island is the ninth and final city that the player is introduced to. This city is on an island, south of Pallet Town. This city is home to the gym leader, Blaine. On this island, you’ll find the Pokémon Mansion where you can read about the creation of the legendary Pokémon, Mewtwo. In that same building, you can find strong Pokémon like Magmar."
   },
   {
     "id": "76",
     "key": "fuchsia-city",
     "title": "Fuchsia City",
     "shape": "rect",
-    "coords": [621, 734, 565, 791]
+    "coords": [621, 734, 565, 791],
+    "description": "Fuschia City is the eighth city that the player is introduced to. This city is south of Saffron City. This city is home to the gym leader, Koga. Here, the player can go to the Safari Zone and face Pokémon that cannot be encountered in the wild in other areas of the game."
   },
   {
     "id": "80",
     "key": "mt-moon",
     "title": "Mt. Moon",
     "shape": "rect",
-    "coords": [509, 113, 453, 170]
+    "coords": [509, 113, 453, 170],
+    "description": ""
   },
   {
     "id": "86",
     "key": "pallet-town",
     "title": "Pallet Town",
     "shape": "rect",
-    "coords": [283, 621, 227, 678]
+    "coords": [283, 621, 227, 678],
+    "description": "Pallet Town is where the main character (you) lives and starts out before going on their adventure. The protagonist gets their starter Pokémon from here from Professor Oak. You can find wild Pokémon here, but, only in the small pond using the fishing rod or the move surf."
   },
   {
     "id": "87",
     "key": "rock-tunnel",
     "title": "Rock Tunnel",
     "shape": "rect",
-    "coords": [960, 170, 904, 227]
+    "coords": [960, 170, 904, 227],
+    "description": ""
   },
   {
     "id": "136",
     "key": "seafoam-islands",
     "title": "Seafoam Islands",
     "shape": "rect",
-    "coords": [453, 847, 394, 904]
+    "coords": [453, 847, 394, 904],
+    "description": ""
   },
   {
     "id": "147",
     "key": "cerulean-cave",
     "title": "Cerulean Cave",
     "shape": "rect",
-    "coords": [677, 54, 618, 111]
+    "coords": [677, 54, 618, 111],
+    "description": ""
   },
   {
     "id": "160",
     "key": "pokemon-tower",
     "title": "Pokemon Tower",
     "shape": "rect",
-    "coords": [902, 224, 843, 281]
+    "coords": [902, 224, 843, 281],
+    "description": ""
   },
   {
     "id": "161",
     "key": "pokemon-mansion",
     "title": "Pokemon Mansion",
     "shape": "rect",
-    "coords": [227, 846, 168, 903]
+    "coords": [227, 846, 168, 903],
+    "description": ""
   },
   {
     "id": "88",
     "key": "kanto-route-1",
     "title": "Route 1",
     "shape": "rect",
-    "coords": [284, 510, 226, 622]
+    "coords": [284, 510, 226, 622],
+    "description": ""
   },
   {
     "id": "99",
     "key": "kanto-route-2",
     "title": "Route 2",
     "shape": "rect",
-    "coords": [284, 282, 226, 452]
+    "coords": [284, 282, 226, 452],
+    "description": ""
   },
   {
     "id": "109",
     "key": "kanto-route-3",
     "title": "Route 3",
     "shape": "poly",
-    "coords": [282, 225, 452, 225, 452, 113, 395, 113, 395, 170, 282, 170]
+    "coords": [282, 225, 452, 225, 452, 113, 395, 113, 395, 170, 282, 170],
+    "description": ""
   },
   {
     "id": "120",
     "key": "kanto-route-4",
     "title": "Route 4",
     "shape": "rect",
-    "coords": [506, 169, 677, 114]
+    "coords": [506, 169, 677, 114],
+    "description": ""
   },
   {
     "id": "130",
     "key": "kanto-route-5",
     "title": "Route 5",
     "shape": "rect",
-    "coords": [735, 170, 678, 283]
+    "coords": [735, 170, 678, 283],
+    "description": ""
   },
   {
     "id": "131",
     "key": "kanto-route-6",
     "title": "Route 6",
     "shape": "rect",
-    "coords": [677, 509, 735, 338]
+    "coords": [677, 509, 735, 338],
+    "description": ""
   },
   {
     "id": "132",
     "key": "kanto-route-7",
     "title": "Route 7",
     "shape": "rect",
-    "coords": [563, 339, 678, 282]
+    "coords": [563, 339, 678, 282],
+    "description": ""
   },
   {
     "id": "133",
     "key": "kanto-route-8",
     "title": "Route 8",
     "shape": "rect",
-    "coords": [903, 283, 735, 338]
+    "coords": [903, 283, 735, 338],
+    "description": ""
   },
   {
     "id": "134",
     "key": "kanto-route-9",
     "title": "Route 9",
     "shape": "rect",
-    "coords": [735, 170, 961, 112]
+    "coords": [735, 170, 961, 112],
+    "description": ""
   },
   {
     "id": "89",
     "key": "kanto-route-10",
     "title": "Route 10",
     "shape": "rect",
-    "coords": [904, 283, 961, 220]
+    "coords": [904, 283, 961, 220],
+    "description": ""
   },
   {
     "id": "90",
     "key": "kanto-route-11",
     "title": "Route 11",
     "shape": "rect",
-    "coords": [735, 565, 904, 509]
+    "coords": [735, 565, 904, 509],
+    "description": ""
   },
   {
     "id": "91",
     "key": "kanto-route-12",
     "title": "Route 12",
     "shape": "rect",
-    "coords": [904, 623, 961, 340]
+    "coords": [904, 623, 961, 340],
+    "description": ""
   },
   {
     "id": "92",
     "key": "kanto-route-13",
     "title": "Route 13",
     "shape": "rect",
-    "coords": [733, 677, 960, 621]
+    "coords": [733, 677, 960, 621],
+    "description": ""
   },
   {
     "id": "93",
     "key": "kanto-route-14",
     "title": "Route 14",
     "shape": "rect",
-    "coords": [734, 678, 790, 790]
+    "coords": [734, 678, 790, 790],
+    "description": ""
   },
   {
     "id": "94",
     "key": "kanto-route-15",
     "title": "Route 15",
     "shape": "rect",
-    "coords": [621, 734, 734, 790]
+    "coords": [621, 734, 734, 790],
+    "description": ""
   },
   {
     "id": "95",
     "key": "kanto-route-16",
     "title": "Route 16",
     "shape": "rect",
-    "coords": [339, 282, 510, 339]
+    "coords": [339, 282, 510, 339],
+    "description": ""
   },
   {
     "id": "96",
     "key": "kanto-route-17",
     "title": "Route 17",
     "shape": "rect",
-    "coords": [339, 282, 395, 736]
+    "coords": [339, 282, 395, 736],
+    "description": ""
   },
   {
     "id": "97",
     "key": "kanto-route-18",
     "title": "Route 18",
     "shape": "rect",
-    "coords": [338, 735, 565, 791]
+    "coords": [338, 735, 565, 791],
+    "description": ""
   },
   {
     "id": "98",
     "key": "kanto-sea-route-19",
     "title": "Sea Route 19",
     "shape": "rect",
-    "coords": [565, 790, 621, 908]
+    "coords": [565, 790, 621, 908],
+    "description": ""
   },
   {
     "id": "100",
     "key": "kanto-sea-route-20",
     "title": "Sea Route 20",
     "shape": "rect",
-    "coords": [564, 848, 283, 905]
+    "coords": [564, 848, 283, 905],
+    "description": ""
   },
   {
     "id": "101",
     "key": "kanto-sea-route-21",
     "title": "Sea Route 21",
     "shape": "rect",
-    "coords": [283, 678, 225, 846]
+    "coords": [283, 678, 225, 846],
+    "description": ""
   },
   {
     "id": "102",
     "key": "kanto-route-22",
     "title": "Route 22",
     "shape": "rect",
-    "coords": [226, 451, 113, 509]
+    "coords": [226, 451, 113, 509],
+    "description": ""
   },
   {
     "id": "157",
     "key": "kanto-route-23",
     "title": "Route 23",
     "shape": "rect",
-    "coords": [170, 169, 113, 449]
+    "coords": [170, 169, 113, 449],
+    "description": ""
   },
   {
     "id": "103",
     "key": "kanto-route-24",
     "title": "Route 24",
     "shape": "rect",
-    "coords": [736, 1, 678, 112]
+    "coords": [736, 1, 678, 112],
+    "description": ""
   },
   {
     "id": "104",
     "key": "kanto-route-25",
     "title": "Route 25",
     "shape": "rect",
-    "coords": [848, 0, 735, 57]
+    "coords": [848, 0, 735, 57],
+    "description": ""
   }
 ]

@@ -29,6 +29,10 @@ const PokestatsRegionsPage: NextPage<PokestatsKantoGen1PageProps> = ({
     <>
       <Head>
         <meta property="og:title" content="Regions" />
+        <meta
+          name="description"
+          content="The Kanto region (Japanese: カントー地方 Kanto region) is a region of the Pokémon world. Kanto is located east of Johto, which together form a joint landmass that is south of Sinnoh."
+        />
       </Head>
       <Layout withHeader={{ autocompleteList: autocompleteList }} $withGutter={false} layoutGap="0">
         <KantoGen1 {...rest} />

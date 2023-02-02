@@ -42,6 +42,8 @@ const Sprites = ({ pokemonSprites, pokemonId, forms, ...rest }: SpritesProps): J
     [forms],
   );
 
+  console.log(pokemonSprites);
+
   return (
     <Box flexalign={{ xxs: 'center', lg: 'flex-start' }} flexgap="1.5em" {...rest}>
       <SectionTitle>Sprites</SectionTitle>
@@ -65,7 +67,7 @@ const Sprites = ({ pokemonSprites, pokemonId, forms, ...rest }: SpritesProps): J
                         key={`sprite-${key}`}
                         src={pokemonSprites[key]}
                         width="140"
-                        $pixelatedImg
+                        pixelatedimg
                       />
                       <Box>
                         <p>Static</p>
@@ -95,7 +97,7 @@ const Sprites = ({ pokemonSprites, pokemonId, forms, ...rest }: SpritesProps): J
                           key={`animated-sprite-${key}`}
                           src={animatedSprites[key]}
                           height="100"
-                          $pixelatedImg
+                          pixelatedimg
                         />
 
                         <Box>

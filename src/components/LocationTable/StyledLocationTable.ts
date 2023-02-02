@@ -2,7 +2,7 @@ import styled from 'styled-components';
 // styles
 import { UppercasedTd } from '@/BaseStyles';
 
-const LocationCell = styled.td`
+const LocationCell = styled.a`
   align-items: center;
   display: flex;
   gap: 2em;

@@ -1,8 +1,8 @@
-import { useCallback } from 'react';
+import { Fragment, useCallback } from 'react';
 import { useRouter } from 'next/router';
 // types
 import type { Location } from '@/pages/regions/kanto-gen1';
-import type { VersionEncounterDetail } from 'pokenode-ts';
+import type { PokemonEncounter, VersionEncounterDetail } from 'pokenode-ts';
 // helpers
 import { betweentParenthesis, capitalise, getIdFromURL } from '@/helpers';
 // styles
@@ -13,6 +13,7 @@ import {
   MovesTableEl,
   TableBody,
   TableRow,
+  DataCell,
 } from '@/components/MovesTable/StyledMovesTable';
 // components
 import { AnimatePresence } from 'framer-motion';
@@ -31,12 +32,15 @@ interface AreaEncounters {
 }
 
 const omit = (key: string, obj: Record<string, any>): Record<string, any> => {
-  const { [key]: omitted, ...rest } = obj;
-  return rest;
+  if (obj) {
+    const { [key]: omitted, ...rest } = obj;
+    return rest;
+  }
+  return null;
 };
 
 const LocationTable = ({ location, ...rest }: LocationTableProps): JSX.Element => {
-  // console.log('table area', location);
+  console.log('table area', location);
   // router
   const router = useRouter();
   // memo
@@ -85,43 +89,134 @@ const LocationTable = ({ location, ...rest }: LocationTableProps): JSX.Element =
       for (const game of gameVersions) {
         // data
         const { encounter_details, max_chance, games } = game;
-        // variables
-        let maxLevel: number;
-        let minLevel: number;
-        let method: string;
 
-        for (const {
-          max_level,
-          min_level,
-          method: currMethod,
-          condition_values, // TODO
-        } of encounter_details) {
-          if (!maxLevel) {
-            maxLevel = max_level;
-          } else if (max_level > maxLevel) {
-            maxLevel = max_level;
+        if (encounter_details) {
+          // variables
+          let maxLevel: number;
+          let minLevel: number;
+          let method: string;
+          let maxChance = max_chance > 100 ? null : max_chance;
+
+          for (const {
+            max_level,
+            min_level,
+            method: currMethod,
+            chance,
+            condition_values, // TODO
+          } of encounter_details) {
+            if (!maxLevel) {
+              maxLevel = max_level;
+            } else if (max_level > maxLevel) {
+              maxLevel = max_level;
+            }
+            if (!minLevel) {
+              minLevel = min_level;
+            } else if (min_level < minLevel) {
+              minLevel = min_level;
+            }
+            if (!maxChance) {
+              maxChance = chance;
+            } else if (chance > maxChance) {
+              maxChance = chance;
+            }
+            if (!method) method = currMethod.name;
           }
-          if (!minLevel) {
-            minLevel = min_level;
-          } else if (min_level < minLevel) {
-            minLevel = min_level;
-          }
-          if (!method) method = currMethod.name;
+
+          areaEncounters.push({
+            maxLevel: maxLevel,
+            minLevel: minLevel,
+            method: method,
+            maxChance: maxChance,
+            gameVersions: games,
+          });
         }
-
-        areaEncounters.push({
-          maxLevel: maxLevel,
-          minLevel: minLevel,
-          method: method,
-          maxChance: max_chance,
-          gameVersions: games,
-        });
       }
 
       return areaEncounters;
     },
     [],
   );
+
+  const formatEncounters = (pokemonEncounters: PokemonEncounter[]) => {
+    let areaMethods = {};
+
+    pokemonEncounters.forEach(({ pokemon, version_details: encounterVersions }, i) => {
+      const { name: pokemonName, url } = pokemon;
+
+      encounterVersions.forEach(({ encounter_details, max_chance, version }, i) => {
+        let maxChance = max_chance > 100 ? null : max_chance;
+
+        if (encounter_details) {
+          // organise encounters per method
+          for (const {
+            max_level,
+            min_level,
+            method: currMethod,
+            chance,
+            condition_values, // TODO
+          } of encounter_details) {
+            // check if method key already exists
+            if (areaMethods[currMethod.name]) {
+              // check if method.pokemon key already exists
+              if (areaMethods[currMethod.name]?.[pokemonName]) {
+                if (areaMethods[currMethod.name][pokemonName][version.name]) {
+                  // update pokemon key for version
+                  const { maxLevel, minLevel, maxChance } =
+                    areaMethods[currMethod.name][pokemonName][version.name];
+                  // compare values and adjust
+                  if (maxLevel < max_level) {
+                    areaMethods[currMethod.name][pokemonName][version.name].maxLevel = max_level;
+                  }
+                  if (minLevel > min_level) {
+                    areaMethods[currMethod.name][pokemonName][version.name].minLevel = min_level;
+                  }
+                  if (chance > maxChance) {
+                    areaMethods[currMethod.name][pokemonName][version.name].maxChance = chance;
+                  }
+                } else {
+                  // update pokemon key for version
+                  areaMethods[currMethod.name][pokemonName] = {
+                    ...areaMethods[currMethod.name][pokemonName],
+                    [version.name]: {
+                      maxLevel: max_level,
+                      minLevel: min_level,
+                      maxChance: chance > maxChance ? chance : maxChance,
+                    },
+                  };
+                }
+              } else {
+                // create new pokemon key for method
+                areaMethods[currMethod.name] = {
+                  ...areaMethods[currMethod.name],
+                  [pokemonName]: {
+                    [version.name]: {
+                      maxLevel: max_level,
+                      minLevel: min_level,
+                      maxChance: chance > maxChance ? chance : maxChance,
+                    },
+                  },
+                };
+              }
+            } else {
+              // create new method and pokemon key
+              areaMethods[currMethod.name] = {
+                [pokemonName]: {
+                  [version.name]: {
+                    maxLevel: max_level,
+                    minLevel: min_level,
+                    maxChance: chance > maxChance ? chance : maxChance,
+                  },
+                },
+              };
+            }
+          }
+        }
+      });
+    });
+    // TODO merge equal versions in areaMethods
+    // return area methods
+    return areaMethods;
+  };
 
   const { key, locationAreas } = location;
 
@@ -131,21 +226,22 @@ const LocationTable = ({ location, ...rest }: LocationTableProps): JSX.Element =
         {locationAreas?.length > 0
           ? locationAreas.map(
               ({ pokemon_encounters, names: areaNames, name: areaName, id: areaId }) => {
+                const areaSubName = betweentParenthesis(areaNames[0].name);
+                //
+                const formattedEncounters = formatEncounters(pokemon_encounters);
+                console.log('formattedEncounters', formattedEncounters);
+                //
                 return (
                   <Box key={`${key}-${areaName}-${areaId}`} flexalign="flex-start" flexgap="1em">
-                    <SectionSubTitle>
-                      {capitalise(betweentParenthesis(areaNames[0].name))}
-                    </SectionSubTitle>
+                    {areaSubName && <SectionSubTitle>{capitalise(areaSubName)}</SectionSubTitle>}
                     {pokemon_encounters.length > 0 ? (
                       <TableContainer>
                         <MovesTableEl>
                           <thead>
                             <tr>
-                              <th colSpan={2} rowSpan={2}>
-                                Pokemon
-                              </th>
-                              <th rowSpan={2}>Versions</th>
+                              <th rowSpan={2}>Pokemon</th>
                               <th rowSpan={2}>Method</th>
+                              <th rowSpan={2}>Versions</th>
                               <th rowSpan={2}>Levels</th>
                               <th colSpan={3}>Likelihood</th>
                             </tr>
@@ -162,22 +258,56 @@ const LocationTable = ({ location, ...rest }: LocationTableProps): JSX.Element =
                               router.prefetch(`/pokemon/${pokemonName}`);
 
                               const currVersionDetails = processVersion(version_details);
-                              console.log('currVersionDetails', pokemonName, currVersionDetails);
+                              // console.log('currVersionDetails', pokemonName, currVersionDetails);
+
+                              const firstVersion = currVersionDetails.shift();
 
                               return (
-                                <TableRow key={`${areaName}-${areaId}-${pokemonName}`}>
-                                  <LocationCell
-                                    onClick={() => router.push(`/pokemon/${pokemonName}`)}
-                                  >
-                                    <PokeImg
-                                      src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${getIdFromURL(
-                                        url,
-                                        'pokemon',
-                                      )}.png`}
-                                    />
-                                    {pokemonName}
-                                  </LocationCell>
-                                </TableRow>
+                                <Fragment key={`${areaName}-${areaId}-${pokemonName}`}>
+                                  <TableRow>
+                                    <DataCell
+                                      rowSpan={currVersionDetails.length + 1}
+                                      onClick={() => router.push(`/pokemon/${pokemonName}`)}
+                                    >
+                                      <LocationCell>
+                                        <PokeImg
+                                          src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${getIdFromURL(
+                                            url,
+                                            'pokemon',
+                                          )}.png`}
+                                        />
+                                        {pokemonName}
+                                      </LocationCell>
+                                    </DataCell>
+
+                                    <DataCell rowSpan={currVersionDetails.length + 1}>
+                                      {firstVersion.method}
+                                    </DataCell>
+                                    <DataCell>{firstVersion.gameVersions.join(', ')}</DataCell>
+                                    <DataCell>
+                                      {firstVersion.minLevel === firstVersion.maxLevel
+                                        ? firstVersion.maxLevel
+                                        : `${firstVersion.minLevel} to ${firstVersion.maxLevel}`}
+                                    </DataCell>
+                                    <DataCell colSpan={3}>{`${firstVersion.maxChance}%`}</DataCell>
+                                  </TableRow>
+                                  {!!currVersionDetails?.length &&
+                                    currVersionDetails.map(
+                                      ({ gameVersions, maxChance, maxLevel, minLevel }, i) => (
+                                        <TableRow
+                                          key={`${areaName}-${areaId}-${pokemonName}-version-${i}`}
+                                        >
+                                          <DataCell>{gameVersions.join(', ')}</DataCell>
+                                          <DataCell>
+                                            {minLevel === maxLevel
+                                              ? maxLevel
+                                              : `${minLevel} to ${maxLevel}`}
+                                          </DataCell>
+                                          <DataCell colSpan={3}>{`${maxChance}%`}</DataCell>
+                                        </TableRow>
+                                      ),
+                                    )}
+                                </Fragment>
                               );
                             })}
                           </TableBody>

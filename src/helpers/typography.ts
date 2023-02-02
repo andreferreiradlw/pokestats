@@ -14,7 +14,7 @@ const removeDash = (str: string): string => str?.replace(/-/g, ' ');
 const betweentParenthesis = (str: string): string => {
   const match = str.match(/\((.*)\)/)?.pop();
   // if no parenthesis, return original str
-  return match || str;
+  return match || null;
 };
 
 // formats game ROMs flavor text

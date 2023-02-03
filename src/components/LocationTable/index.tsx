@@ -213,9 +213,54 @@ const LocationTable = ({ location, ...rest }: LocationTableProps): JSX.Element =
         }
       });
     });
-    // TODO merge equal versions in areaMethods
-    // return area methods
-    return areaMethods;
+    // merge equal versions in areaMethods
+    let aggregatedAreaVersions = [];
+
+    Object.keys(areaMethods).forEach(methodKey => {
+      let currMethod = { name: methodKey, pokemon: [] };
+
+      Object.keys(areaMethods[methodKey]).forEach(pokemonKey => {
+        const currRed = JSON.stringify(areaMethods[methodKey][pokemonKey]?.red);
+        const currBlue = JSON.stringify(areaMethods[methodKey][pokemonKey]?.blue);
+        const currYellow = JSON.stringify(areaMethods[methodKey][pokemonKey]?.yellow);
+
+        if (currRed === currBlue) {
+          if (currYellow && currRed === currYellow) {
+            // all versions are equal
+            currMethod.pokemon.push({
+              name: pokemonKey,
+              versions: [
+                { ...areaMethods[methodKey][pokemonKey]?.red, games: ['red', 'blue', 'yellow'] },
+              ],
+            });
+          } else {
+            // red blue equal, but yellow different
+            currMethod.pokemon.push({
+              name: pokemonKey,
+              versions: [
+                { ...areaMethods[methodKey][pokemonKey]?.red, games: ['red', 'blue'] },
+                { ...areaMethods[methodKey][pokemonKey]?.yellow, games: ['yellow'] },
+              ],
+            });
+          }
+        } else {
+          // all versions are different
+          currMethod.pokemon.push({
+            name: pokemonKey,
+            versions: [
+              { ...areaMethods[methodKey][pokemonKey]?.red, games: ['red'] },
+              { ...areaMethods[methodKey][pokemonKey]?.blue, games: ['blue'] },
+              { ...areaMethods[methodKey][pokemonKey]?.yellow, games: ['yellow'] },
+            ],
+          });
+        }
+      });
+
+      aggregatedAreaVersions.push(currMethod);
+    });
+    // console.log('aggregatedAreaVersions', aggregatedAreaVersions);
+    // return aggregatedAreaVersions
+    return aggregatedAreaVersions;
   };
 
   const { key, locationAreas } = location;

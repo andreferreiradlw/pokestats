@@ -5,7 +5,7 @@
     "eqeqeq": "error",
     "prefer-object-has-own": "off",
     "max-params": 0,
-    "max-nested-callbacks": ["error", 4],
+    "max-nested-callbacks": ["error", 5],
     "max-depth": ["error", 6],
     "complexity": ["error", 28],
     "prettier/prettier": "error",

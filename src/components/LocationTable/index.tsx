@@ -11,6 +11,8 @@ import {
   PokemonCell,
   LocationAnchor,
   PokeImg,
+  GamesContainer,
+  GamePill,
 } from './StyledLocationTable';
 import { SectionSubTitle, UppercasedTd } from '@/components/BaseStyles';
 import {
@@ -333,7 +335,18 @@ const LocationTable = ({ location, ...rest }: LocationTableProps): JSX.Element =
                                         {firstPokemonName}
                                       </LocationAnchor>
                                     </PokemonCell>
-                                    <DataCell>{firstVersion.games.join(', ')}</DataCell>
+                                    <DataCell>
+                                      <GamesContainer>
+                                        {firstVersion.games.map((game, i) => (
+                                          <GamePill
+                                            key={`${firstPokemonName}-${game}-${i}`}
+                                            game={game}
+                                          >
+                                            {game}
+                                          </GamePill>
+                                        ))}
+                                      </GamesContainer>
+                                    </DataCell>
                                     <DataCell>
                                       {firstVersion.minLevel === firstVersion.maxLevel
                                         ? firstVersion.maxLevel
@@ -345,7 +358,18 @@ const LocationTable = ({ location, ...rest }: LocationTableProps): JSX.Element =
                                     firstPokemonVersions.map(
                                       ({ minLevel, maxChance, maxLevel, games }, i) => (
                                         <tr key={`${methodName}-${firstPokemonName}-version-${i}`}>
-                                          <DataCell>{games.join(', ')}</DataCell>
+                                          <DataCell>
+                                            <GamesContainer>
+                                              {games.map((game, i) => (
+                                                <GamePill
+                                                  key={`${firstPokemonName}-${game}-others-${i}`}
+                                                  game={game}
+                                                >
+                                                  {game}
+                                                </GamePill>
+                                              ))}
+                                            </GamesContainer>
+                                          </DataCell>
                                           <DataCell>
                                             {minLevel === maxLevel
                                               ? maxLevel
@@ -376,7 +400,16 @@ const LocationTable = ({ location, ...rest }: LocationTableProps): JSX.Element =
                                             </LocationAnchor>
                                           </PokemonCell>
                                           <DataCell>
-                                            {pokemonFirstVersion.games.join(', ')}
+                                            <GamesContainer>
+                                              {pokemonFirstVersion.games.map((game, i) => (
+                                                <GamePill
+                                                  key={`${pokemonName}-${game}-${i}`}
+                                                  game={game}
+                                                >
+                                                  {game}
+                                                </GamePill>
+                                              ))}
+                                            </GamesContainer>
                                           </DataCell>
                                           <DataCell>
                                             {pokemonFirstVersion.minLevel ===
@@ -392,7 +425,18 @@ const LocationTable = ({ location, ...rest }: LocationTableProps): JSX.Element =
                                           versions.map(
                                             ({ minLevel, maxChance, maxLevel, games }, i) => (
                                               <tr key={`${methodName}-${pokemonName}-version-${i}`}>
-                                                <DataCell>{games.join(', ')}</DataCell>
+                                                <DataCell>
+                                                  <GamesContainer>
+                                                    {games.map((game, i) => (
+                                                      <GamePill
+                                                        key={`${pokemonName}-${game}-others-${i}`}
+                                                        game={game}
+                                                      >
+                                                        {game}
+                                                      </GamePill>
+                                                    ))}
+                                                  </GamesContainer>
+                                                </DataCell>
                                                 <DataCell>
                                                   {minLevel === maxLevel
                                                     ? maxLevel

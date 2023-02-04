@@ -38,7 +38,7 @@ const LocationAnchor = styled.a`
 
 const PokeImg = styled.img`
   image-rendering: pixelated;
-  margin: -20px;
+  margin: -10px;
   width: 60px;
 `;
 

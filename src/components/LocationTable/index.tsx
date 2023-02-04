@@ -111,7 +111,6 @@ const mapMethodIcon = (methodName: string, pokemonName: string, areaKey: string)
 };
 
 const LocationTable = ({ location, ...rest }: LocationTableProps): JSX.Element => {
-  console.log('table area', location);
   // memo
   const formatEncounters = useCallback(
     (pokemonEncounters: PokemonEncounter[]): AreaEncounters[] => {

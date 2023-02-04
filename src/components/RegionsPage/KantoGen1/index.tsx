@@ -18,7 +18,7 @@ import LocationTable from '@/components/LocationTable';
 const KantoGen1 = ({
   locations,
 }: Omit<PokestatsKantoGen1PageProps, 'autocompleteList'>): JSX.Element => {
-  // console.log('locations', locations);
+  console.log('locations', locations);
 
   // ref
   const dimensionsRef = useRef(null);

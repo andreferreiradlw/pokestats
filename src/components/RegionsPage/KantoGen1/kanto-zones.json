@@ -53,7 +53,7 @@
     "title": "Victory Road",
     "shape": "rect",
     "coords": [170, 228, 113, 283],
-    "description": ""
+    "description": "Victory Road is a tunnel situated on Route 23. It earned its name because it must be traveled by all Trainers aiming for the top. Its other end opens up in Indigo Plateau and the Pokémon League. Only Trainers with the eight Kanto Badges are allowed to enter it."
   },
   {
     "id": "154",
@@ -85,15 +85,15 @@
     "title": "Viridian Forest",
     "shape": "rect",
     "coords": [253, 277, 196, 390],
-    "description": ""
+    "description": "Viridian Forest is a forest which lies between Viridian City and Pewter City in the middle of Route 2 with both the north and south entrances of Viridian Forest open to the route. The deep and sprawling forest is said to be a natural maze as many people get lost inside. The trees in the forest are so thick that little light gets in, and because of this the forest is full of Bug and Flying type Pokémon that attract Bug Catchers and other Trainers."
   },
   {
     "id": "73",
     "key": "digletts-cave",
-    "title": "Digletts Cave",
+    "title": "Diglett's Cave",
     "shape": "rect",
     "coords": [283, 224, 226, 278],
-    "description": ""
+    "description": "Diglett's Cave is a long tunnel dug by wild Diglett and Dugtrio in Kanto. The northern entrance is on Route 2, south of Pewter City, and the southern entrance is on Route 11, near the eastern edge of Vermilion City."
   },
   {
     "id": "68",
@@ -125,7 +125,7 @@
     "title": "Mt. Moon",
     "shape": "rect",
     "coords": [509, 113, 453, 170],
-    "description": ""
+    "description": "Mt. Moon is a mountain located in northern Kanto. Known for being one of the few places where wild Clefairy can be found and for its frequent meteor falls. The shards of meteorites that fall here become Moon Stones, which explains the mountain's name. The mountain is also known for being home to Pokémon Fossils. Brock digs for Fossils here in his spare time."
   },
   {
     "id": "86",
@@ -141,7 +141,7 @@
     "title": "Rock Tunnel",
     "shape": "rect",
     "coords": [960, 170, 904, 227],
-    "description": ""
+    "description": "The Rock Tunnel is a naturally formed underground tunnel. Since it has not been developed, it is pitch black inside. A light of some sort is needed for travelers to find their way, so it is recommended that Pokémon Trainers bring along a Pokémon that can use Flash outside of battle."
   },
   {
     "id": "136",
@@ -149,7 +149,7 @@
     "title": "Seafoam Islands",
     "shape": "rect",
     "coords": [453, 847, 394, 904],
-    "description": ""
+    "description": "The Seafoam Islands are a pair of islands that are situated on Route 20. The two islands are shaped the same, as if they were twins."
   },
   {
     "id": "147",
@@ -157,7 +157,7 @@
     "title": "Cerulean Cave",
     "shape": "rect",
     "coords": [677, 54, 618, 111],
-    "description": ""
+    "description": "Cerulean Cave is a cave in Cerulean City that is only accessible if you have all 8 badges. It has a crystalline look about it and has numerous floors and can act as a maze. There are no trainers within the cave but the legendary Pokémon, Mewtwo, dwells within."
   },
   {
     "id": "160",
@@ -165,7 +165,7 @@
     "title": "Pokemon Tower",
     "shape": "rect",
     "coords": [902, 224, 843, 281],
-    "description": ""
+    "description": "The Pokémon Tower is a seven-story tower located in Lavender Town in the Kanto region. The Pokémon Tower is a burial site and serves as a memorial for Pokémon that have died."
   },
   {
     "id": "161",
@@ -173,7 +173,7 @@
     "title": "Pokemon Mansion",
     "shape": "rect",
     "coords": [227, 846, 168, 903],
-    "description": ""
+    "description": "The Pokémon Mansion is a decrepit, burned-down mansion on Cinnabar Island. It got its name because a famous Pokémon researcher once lived there."
   },
   {
     "id": "88",
@@ -181,7 +181,7 @@
     "title": "Route 1",
     "shape": "rect",
     "coords": [284, 510, 226, 622],
-    "description": ""
+    "description": "Route 1 is a route located in western Kanto. It connects Pallet Town in the south to Viridian City in the north."
   },
   {
     "id": "99",
@@ -189,7 +189,7 @@
     "title": "Route 2",
     "shape": "rect",
     "coords": [284, 282, 226, 452],
-    "description": ""
+    "description": "Route 2 is a route located in western Kanto. It connects Viridian City in the south to Pewter City in the north. Viridian Forest and the northwestern terminus of Diglett's Cave are located on this route."
   },
   {
     "id": "109",
@@ -197,7 +197,7 @@
     "title": "Route 3",
     "shape": "poly",
     "coords": [282, 225, 452, 225, 452, 113, 395, 113, 395, 170, 282, 170],
-    "description": ""
+    "description": "Route 3 is a route located in northwestern Kanto. It connects Pewter City in the west to Route 4 and Mt. Moon in the east."
   },
   {
     "id": "120",
@@ -205,7 +205,7 @@
     "title": "Route 4",
     "shape": "rect",
     "coords": [506, 169, 677, 114],
-    "description": ""
+    "description": "Route 4 is a route located in northern Kanto. It connects Route 3 and Mt. Moon in the west to Cerulean City in the east."
   },
   {
     "id": "130",
@@ -213,7 +213,7 @@
     "title": "Route 5",
     "shape": "rect",
     "coords": [735, 170, 678, 283],
-    "description": ""
+    "description": "Route 5 is a route located in northern Kanto. It connects Cerulean City in the north to Saffron City in the south. The northern terminus of the Underground Path is located on this route."
   },
   {
     "id": "131",
@@ -221,7 +221,7 @@
     "title": "Route 6",
     "shape": "rect",
     "coords": [677, 509, 735, 338],
-    "description": ""
+    "description": "Route 6 is a route located in central Kanto. It connects Saffron City in the north to Vermilion City in the south. The southern terminus of the Underground Path is located on this route."
   },
   {
     "id": "132",
@@ -229,7 +229,7 @@
     "title": "Route 7",
     "shape": "rect",
     "coords": [563, 339, 678, 282],
-    "description": ""
+    "description": "Route 7 is a route located in central Kanto. It connects Celadon City in the west to Saffron City in the east. The western terminus of the Underground Path is located on this route."
   },
   {
     "id": "133",
@@ -237,7 +237,7 @@
     "title": "Route 8",
     "shape": "rect",
     "coords": [903, 283, 735, 338],
-    "description": ""
+    "description": "Route 8 is a route located in eastern Kanto. It connects Saffron City in the west to Lavender Town in the east. The eastern terminus of the Underground Path is located on this route."
   },
   {
     "id": "134",
@@ -245,7 +245,7 @@
     "title": "Route 9",
     "shape": "rect",
     "coords": [735, 170, 961, 112],
-    "description": ""
+    "description": "Route 9 is a route located in northeastern Kanto. It connects Cerulean City in the west to Route 10 in the east."
   },
   {
     "id": "89",
@@ -253,7 +253,7 @@
     "title": "Route 10",
     "shape": "rect",
     "coords": [904, 283, 961, 220],
-    "description": ""
+    "description": "Route 10 is a route located in northeastern Kanto. It connects Route 9 in the north to Lavender Town in the south. The Rock Tunnel and Kanto Power Plant are located on this route."
   },
   {
     "id": "90",
@@ -261,7 +261,7 @@
     "title": "Route 11",
     "shape": "rect",
     "coords": [735, 565, 904, 509],
-    "description": ""
+    "description": "Route 11 is a route located in eastern Kanto. It connects Vermilion City in the west to Route 12 in the east. The southeastern terminus of Diglett's Cave is located on this route."
   },
   {
     "id": "91",
@@ -269,7 +269,7 @@
     "title": "Route 12",
     "shape": "rect",
     "coords": [904, 623, 961, 340],
-    "description": ""
+    "description": "Route 12 is a route located in eastern Kanto. It connects Route 11 in the west to Lavender Town in the north and Route 13 in the south. The portion of this route south of the gate near Lavender Town is also known as Silence Bridge."
   },
   {
     "id": "92",
@@ -277,7 +277,7 @@
     "title": "Route 13",
     "shape": "rect",
     "coords": [733, 677, 960, 621],
-    "description": ""
+    "description": "Route 13 is a route located in southeastern Kanto. It connects Route 12 in the east to Route 14 in the west."
   },
   {
     "id": "93",
@@ -285,7 +285,7 @@
     "title": "Route 14",
     "shape": "rect",
     "coords": [734, 678, 790, 790],
-    "description": ""
+    "description": "Route 14 is a route located in southeastern Kanto. It connects Route 13 in the north to Route 15 in the south."
   },
   {
     "id": "94",
@@ -293,7 +293,7 @@
     "title": "Route 15",
     "shape": "rect",
     "coords": [621, 734, 734, 790],
-    "description": ""
+    "description": "Route 15 is a route located in southern Kanto. It connects Route 14 in the east to Fuchsia City in the west."
   },
   {
     "id": "95",
@@ -301,7 +301,7 @@
     "title": "Route 16",
     "shape": "rect",
     "coords": [339, 282, 510, 339],
-    "description": ""
+    "description": "Route 16 is a route located in central Kanto. It connects Celadon City in the east to Route 17 to the south."
   },
   {
     "id": "96",
@@ -309,7 +309,7 @@
     "title": "Route 17",
     "shape": "rect",
     "coords": [339, 282, 395, 736],
-    "description": ""
+    "description": "Route 17 is a route located in western Kanto. It connects Route 16 in the north to Route 18 in the south. In Generations I through IV, the route is also known as Cycling Road, where only people with Bicycles or Motorcycles are permitted to travel on the road, making the route a favorite hangout for motorcyclists and bicyclists alike."
   },
   {
     "id": "97",
@@ -317,7 +317,7 @@
     "title": "Route 18",
     "shape": "rect",
     "coords": [338, 735, 565, 791],
-    "description": ""
+    "description": "Route 18 is a route located in southern Kanto. It connects Route 17 in the west to Fuchsia City in the east."
   },
   {
     "id": "98",
@@ -325,7 +325,7 @@
     "title": "Sea Route 19",
     "shape": "rect",
     "coords": [565, 790, 621, 908],
-    "description": ""
+    "description": "Sea Route 19 is a water route located in southern Kanto. It connects Fuchsia City in the north to Route 20 in the south."
   },
   {
     "id": "100",
@@ -333,7 +333,7 @@
     "title": "Sea Route 20",
     "shape": "rect",
     "coords": [564, 848, 283, 905],
-    "description": ""
+    "description": "Sea Route 20 is a water route located in southern Kanto. It connects Route 19 in the east to Cinnabar Island in the west. The Seafoam Islands are located on this route."
   },
   {
     "id": "101",
@@ -341,7 +341,7 @@
     "title": "Sea Route 21",
     "shape": "rect",
     "coords": [283, 678, 225, 846],
-    "description": ""
+    "description": "Sea Route 21 is a water route located in southwestern Kanto. It connects Cinnabar Island in the south to Pallet Town in the north."
   },
   {
     "id": "102",
@@ -349,7 +349,7 @@
     "title": "Route 22",
     "shape": "rect",
     "coords": [226, 451, 113, 509],
-    "description": ""
+    "description": "Route 22 is a route located in western Kanto. It connects Viridian City in the east to the Pokémon League Reception Gate in the west."
   },
   {
     "id": "157",
@@ -357,7 +357,7 @@
     "title": "Route 23",
     "shape": "rect",
     "coords": [170, 169, 113, 449],
-    "description": ""
+    "description": "Route 23 is a route located in western Kanto. It connects the Pokémon League Reception Gate in the south to Indigo Plateau in the north. Victory Road is located on this route."
   },
   {
     "id": "103",
@@ -365,7 +365,7 @@
     "title": "Route 24",
     "shape": "rect",
     "coords": [736, 1, 678, 112],
-    "description": ""
+    "description": "Route 24 is a route located in northern Kanto. It connects Cerulean City in the south to Route 25 in the north. Most of the route encompasses the Nugget Bridge, a location where five Trainers will challenge the player one by one. Upon defeating every Trainer on the bridge, a disguised Team Rocket Grunt will reward the player with a Nugget."
   },
   {
     "id": "104",
@@ -373,6 +373,6 @@
     "title": "Route 25",
     "shape": "rect",
     "coords": [848, 0, 735, 57],
-    "description": ""
+    "description": "Route 25 is a route located in northeastern Kanto. It connects to Route 24 in the west. The Sea Cottage is located on this route, at the eastern end."
   }
 ]

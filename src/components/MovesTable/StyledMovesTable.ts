@@ -3,14 +3,25 @@ import styled, { css } from 'styled-components';
 import { motion } from 'framer-motion';
 
 const TableBody = styled.tbody``;
-const TableRow = styled(motion.tr)`
-  cursor: pointer;
-`;
+
 const DataCell = styled.td``;
+
 const NameTH = styled.th``;
+
 const NameTD = styled(DataCell)`
   font-weight: 500;
   text-transform: capitalize;
+`;
+
+const TableRow = styled(motion.tr)`
+  cursor: pointer;
+
+  ${({ theme }) => css`
+    &:hover {
+      background: ${theme.colors.primary.light};
+      color: ${theme.colors.primary.contrastText};
+    }
+  `}
 `;
 
 const TableContainer = styled(motion.div)`
@@ -53,14 +64,7 @@ const MovesTableEl = styled.table`
 
   ${({ theme }) => css`
     & tr:not(:last-of-type) {
-      border-bottom: 1px solid ${({ theme }) => theme.colors.primary.light};
-    }
-
-    & ${TableRow} {
-      &:hover {
-        background: ${({ theme }) => theme.colors.primary.light};
-        color: ${({ theme }) => theme.colors.primary.contrastText};
-      }
+      border-bottom: 2px solid ${theme.colors.primary.light};
     }
 
     @media ${theme.device.md} {

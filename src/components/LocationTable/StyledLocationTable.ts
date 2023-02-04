@@ -1,8 +1,23 @@
 import styled from 'styled-components';
 // styles
 import { UppercasedTd } from '@/BaseStyles';
+import { motion } from 'framer-motion';
 
-const LocationCell = styled.a`
+const PokemonCell = styled(motion.td)`
+  cursor: pointer;
+  height: 40px;
+  overflow: hidden;
+  padding: 0.5em;
+  text-align: center;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  &:hover {
+    text-decoration: underline;
+  }
+`;
+
+const LocationAnchor = styled.a`
   align-items: center;
   display: flex;
   gap: 2em;
@@ -11,9 +26,11 @@ const LocationCell = styled.a`
 `;
 
 const PokeImg = styled.img`
-  float: left;
   image-rendering: pixelated;
-  margin: -25px;
+  margin: -20px;
+  width: 60px;
 `;
 
-export { LocationCell, PokeImg };
+const MethodName = styled.p``;
+
+export { MethodName, PokemonCell, LocationAnchor, PokeImg };

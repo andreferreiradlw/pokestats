@@ -1,7 +1,18 @@
 import styled from 'styled-components';
-// styles
-import { UppercasedTd } from '@/BaseStyles';
+// components
 import { motion } from 'framer-motion';
+
+const MethodContainer = styled.div`
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+  justify-content: center;
+
+  img {
+    width: 40px;
+  }
+`;
 
 const PokemonCell = styled(motion.td)`
   cursor: pointer;
@@ -33,4 +44,6 @@ const PokeImg = styled.img`
 
 const MethodName = styled.p``;
 
-export { MethodName, PokemonCell, LocationAnchor, PokeImg };
+const TypePill = styled.span``;
+
+export { MethodContainer, MethodName, PokemonCell, LocationAnchor, PokeImg };

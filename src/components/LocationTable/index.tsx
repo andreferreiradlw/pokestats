@@ -1,12 +1,17 @@
 import { Fragment, useCallback } from 'react';
-import { useRouter } from 'next/router';
 // types
 import type { Location } from '@/pages/regions/kanto-gen1';
-import type { PokemonEncounter, VersionEncounterDetail } from 'pokenode-ts';
+import type { PokemonEncounter } from 'pokenode-ts';
 // helpers
-import { betweentParenthesis, capitalise, getIdFromURL, removeDash, rowVariant } from '@/helpers';
+import { capitalise, getIdFromURL, removeDash, rowVariant } from '@/helpers';
 // styles
-import { MethodName, PokemonCell, LocationAnchor, PokeImg } from './StyledLocationTable';
+import {
+  MethodContainer,
+  MethodName,
+  PokemonCell,
+  LocationAnchor,
+  PokeImg,
+} from './StyledLocationTable';
 import { SectionSubTitle, UppercasedTd } from '@/components/BaseStyles';
 import {
   TableContainer,
@@ -36,10 +41,75 @@ interface AreaEncounters {
   }[];
 }
 
+const mapMethodIcon = (methodName: string, pokemonName: string, areaKey: string): string => {
+  switch (methodName) {
+    case 'walk':
+      return '/static/regions/kantoGen1/walk.png';
+    case 'surf':
+      return '/static/regions/kantoGen1/surf.png';
+    case 'good-rod':
+    case 'super-rod':
+    case 'old-rod':
+      return '/static/regions/kantoGen1/rod.png';
+    case 'pokeflute':
+      return 'https://raw.githubusercontent.com/msikma/pokesprite/master/items/key-item/poke-flute.png';
+    case 'only-one':
+      switch (pokemonName) {
+        case 'articuno':
+        case 'moltres':
+        case 'zapdos':
+          return '/static/regions/kantoGen1/legendary.png';
+        default:
+          return '/static/regions/kantoGen1/only_one.png';
+      }
+    case 'gift':
+      switch (pokemonName) {
+        case 'bulbasaur':
+          switch (areaKey) {
+            case 'cerulean-city':
+              return '/static/regions/kantoGen1/female_trainer.png';
+            default:
+              return '/static/regions/kantoGen1/professor_oak.png';
+          }
+        case 'charmander':
+          switch (areaKey) {
+            case 'kanto-route-24':
+              return '/static/regions/kantoGen1/male_trainer.png';
+            default:
+              return '/static/regions/kantoGen1/professor_oak.png';
+          }
+        case 'squirtle':
+          switch (areaKey) {
+            case 'vermilion-city':
+              return '/static/regions/kantoGen1/officer_jenny.png';
+            default:
+              return '/static/regions/kantoGen1/professor_oak.png';
+          }
+        case 'pikachu':
+          return '/static/regions/kantoGen1/professor_oak.png';
+        case 'magikarp':
+          return '/static/regions/kantoGen1/magikarp_salesman.png';
+        case 'omanyte':
+        case 'kabuto':
+          return '/static/regions/kantoGen1/super_nerd.png';
+        case 'aerodactyl':
+          return '/static/regions/kantoGen1/museum_scientist.png';
+        case 'hitmonlee':
+        case 'hitmonchan':
+        case 'eevee':
+          return '/static/regions/kantoGen1/karate_trainer.png';
+        case 'lapras':
+          return '/static/regions/kantoGen1/silphco_employee.png';
+        default:
+          return '/static/regions/kantoGen1/male_trainer.png';
+      }
+    default:
+      break;
+  }
+};
+
 const LocationTable = ({ location, ...rest }: LocationTableProps): JSX.Element => {
   console.log('table area', location);
-  // router
-  const router = useRouter();
   // memo
   const formatEncounters = useCallback(
     (pokemonEncounters: PokemonEncounter[]): AreaEncounters[] => {
@@ -241,7 +311,13 @@ const LocationTable = ({ location, ...rest }: LocationTableProps): JSX.Element =
                                 <Fragment key={`${areaName}-${areaId}-${methodName}`}>
                                   <tr>
                                     <UppercasedTd rowSpan={methodRowSpan}>
-                                      <MethodName>{removeDash(methodName)}</MethodName>
+                                      <MethodContainer>
+                                        <img
+                                          alt="pokeflute"
+                                          src={mapMethodIcon(methodName, firstPokemonName, key)}
+                                        />
+                                        <MethodName>{removeDash(methodName)}</MethodName>
+                                      </MethodContainer>
                                     </UppercasedTd>
                                     <PokemonCell
                                       rowSpan={firstPokemonVersions.length + 1}

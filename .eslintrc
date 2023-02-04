@@ -7,6 +7,7 @@
     "max-params": 0,
     "max-nested-callbacks": ["error", 4],
     "max-depth": ["error", 6],
+    "complexity": ["error", 28],
     "prettier/prettier": "error",
     "react/display-name": "off",
     "react/no-children-prop": "off",

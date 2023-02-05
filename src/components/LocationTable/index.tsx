@@ -61,6 +61,8 @@ const mapMethodIcon = (methodName: string, pokemonName: string, areaKey: string)
         case 'moltres':
         case 'zapdos':
           return '/static/regions/kantoGen1/legendary.png';
+        case 'mewtwo':
+          return '/static/regions/kantoGen1/monster.png';
         default:
           return '/static/regions/kantoGen1/only_one.png';
       }
@@ -268,9 +270,9 @@ const LocationTable = ({ location, ...rest }: LocationTableProps): JSX.Element =
     [],
   );
 
-  const { key, locationAreas, label } = location;
+  const { key, locationAreas } = location;
 
-  console.log('currArea', location);
+  // console.log('currArea', location);
 
   return (
     <AnimatePresence mode="wait">

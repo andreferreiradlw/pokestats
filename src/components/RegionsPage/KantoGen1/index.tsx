@@ -2,10 +2,17 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 // types
 import type { PokestatsKantoGen1PageProps, Location } from '@/pages/regions/kanto-gen1';
 // helpers
-import { capitalise, pageContainerVariant, removeDash } from '@/helpers';
+import { capitalise, fadeInUpVariant, pageContainerVariant, removeDash } from '@/helpers';
 // styles
-import { Anchor, Divider, PageHeading, SectionSubTitle, SectionTitle } from '@/BaseStyles';
-import { ImageContainer, CurrentLocation, MapImage } from './StyledKantoGen1';
+import { Divider, PageHeading, SectionSubTitle, SectionTitle } from '@/BaseStyles';
+import {
+  ImageContainer,
+  CurrentLocation,
+  MapImage,
+  PlayIconContainer,
+  PlayIcon,
+  PauseIcon,
+} from './StyledKantoGen1';
 // components
 import { AnimatePresence } from 'framer-motion';
 import { MainContainer } from '@/components/Layout';
@@ -14,6 +21,76 @@ import ImageMapper from 'react-img-mapper';
 // data
 import kantoZones from './kanto-zones.json';
 import LocationTable from '@/components/LocationTable';
+
+const mapLocationToMusic = (locationKey: string): string => {
+  switch (locationKey) {
+    case 'pallet-town':
+      return 'pallet-town';
+    case 'kanto-route-1':
+    case 'kanto-route-2':
+      return 'route-1';
+    case 'pewter-city':
+    case 'viridian-city':
+    case 'saffron-city':
+      return 'viridian-city';
+    case 'seafoam-islands':
+    case 'viridian-forest':
+    case 'digletts-cave':
+      return 'viridian-forest';
+    case 'mt-moon':
+    case 'rock-tunnel':
+    case 'kanto-victory-road-2':
+      return 'mt-moon';
+    case 'kanto-route-3':
+    case 'kanto-route-4':
+    case 'kanto-route-5':
+    case 'kanto-route-6':
+    case 'kanto-route-7':
+    case 'kanto-route-8':
+    case 'kanto-route-9':
+    case 'kanto-route-10':
+    case 'kanto-route-16':
+    case 'kanto-route-17':
+    case 'kanto-route-18':
+    case 'kanto-sea-route-19':
+    case 'kanto-sea-route-20':
+    case 'kanto-sea-route-21':
+    case 'kanto-route-22':
+      return 'route-3';
+    case 'kanto-route-24':
+    case 'kanto-route-25':
+      return 'route-24';
+    case 'kanto-route-11':
+    case 'kanto-route-12':
+    case 'kanto-route-13':
+    case 'kanto-route-14':
+    case 'kanto-route-15':
+      return 'route-11';
+    case 'cerulean-city':
+    case 'fuchsia-city':
+      return 'cerulean-city';
+    case 'vermilion-city':
+      return 'vermilion-city';
+    case 'lavender-town':
+      return 'lavender-town';
+    case 'pokemon-tower':
+      return 'pokemon-tower';
+    case 'pokemon-mansion':
+      return 'pokemon-mansion';
+    case 'celadon-city':
+      return 'celadon-city';
+    case 'kanto-safari-zone':
+      return 'safari-zone';
+    case 'cinnabar-island':
+      return 'cinnabar-island';
+    case 'kanto-route-23':
+    case 'indigo-plateau':
+      return 'victory-road';
+    case 'power-plant':
+    case 'cerulean-cave':
+      return 'rocket-hideout';
+  }
+};
 
 const KantoGen1 = ({
   locations,
@@ -28,6 +105,9 @@ const KantoGen1 = ({
   const [mapHover, setMapHover] = useState('');
   const [currArea, setCurrArea] = useState<Location>();
   const [currAreaDescription, setCurrAreaDescription] = useState<string>('');
+  const [locationMusic, setLocationMusic] = useState<HTMLAudioElement>();
+  const [isPlaying, setIsPlaying] = useState(false);
+
   // memo
   const handleAreaClick = useCallback(
     (areaId: number): void => {
@@ -39,6 +119,14 @@ const KantoGen1 = ({
       }
       const matchedArea = locations.find(location => location.locationId === areaId);
       setCurrArea(matchedArea);
+      // update soundtrack
+      setLocationMusic(
+        new Audio(
+          `https://raw.githubusercontent.com/andreferreiradlw/pokestats_media/main/assets/music/gen1/${mapLocationToMusic(
+            matchedArea.key,
+          )}.mp3`,
+        ),
+      );
     },
     [locations],
   );
@@ -46,6 +134,23 @@ const KantoGen1 = ({
   const handleMapClear = () => {
     mapRef.current.clearHighlightedArea();
   };
+
+  const playAreaMusic = () => {
+    setIsPlaying(true);
+    locationMusic.play();
+  };
+
+  const pauseAreaMusic = () => {
+    setIsPlaying(false);
+    locationMusic.pause();
+  };
+  // set playing to false when music track ends
+  useEffect(() => {
+    locationMusic?.addEventListener('ended', () => setIsPlaying(false));
+    return () => {
+      locationMusic?.removeEventListener('ended', () => setIsPlaying(false));
+    };
+  }, [locationMusic]);
 
   useEffect(() => {
     const handleResize = () => {
@@ -77,7 +182,6 @@ const KantoGen1 = ({
         key="kanto-gen1-page-container"
       >
         <Divider />
-
         <Box flexalign="flex-start" flexjustify="flex-start" flexgap="2em" $flexgrow>
           <Box
             flexdirection={{ xxs: 'column', lg: 'row' }}
@@ -130,7 +234,24 @@ const KantoGen1 = ({
                   flexalign="flex-start"
                   flexgap="1em"
                 >
-                  <SectionTitle>{currArea.label}</SectionTitle>
+                  <Box
+                    flexdirection="row"
+                    flexjustify="flex-start"
+                    flexalign="center"
+                    flexgap="0.5em"
+                    width="auto"
+                  >
+                    <SectionTitle>{currArea.label}</SectionTitle>
+                    <PlayIconContainer
+                      whileHover="hover"
+                      whileTap="tap"
+                      variants={fadeInUpVariant}
+                      key={`${currArea.key}-music-icon`}
+                      onClick={() => (isPlaying ? pauseAreaMusic() : playAreaMusic())}
+                    >
+                      {isPlaying ? <PauseIcon /> : <PlayIcon />}
+                    </PlayIconContainer>
+                  </Box>
                   <p>{currAreaDescription}</p>
                   {!!currArea.locationAreas &&
                     currArea.locationAreas.map(({ name, location, names }, i) => {

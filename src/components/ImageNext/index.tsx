@@ -1,6 +1,7 @@
 import { useState } from 'react';
 // types
 import type { ImageProps } from 'next/image';
+import type { BoxProps } from '../Box';
 // helpers
 import { placeholderVariant, fadeInUpVariant } from '@/helpers';
 // styles
@@ -19,6 +20,7 @@ import { AnimatePresence } from 'framer-motion';
 export interface ImageNextProps extends ImageProps {
   pixelatedimg?: boolean;
   placeholderwidth?: string;
+  containerProps?: BoxProps;
 }
 
 const ImageNext = ({
@@ -29,13 +31,19 @@ const ImageNext = ({
   priority,
   fill = true,
   src,
+  containerProps,
   ...rest
 }: ImageNextProps): JSX.Element => {
   const [showPlaceholder, setShowPlaceholder] = useState(true);
   const [hasError, setHasError] = useState(false);
 
   return (
-    <ImageContainer width={width} height={height} key={`image-container-${src}`}>
+    <ImageContainer
+      width={width as any}
+      height={height}
+      key={`image-container-${src}`}
+      {...containerProps}
+    >
       <AnimatePresence>
         {showPlaceholder && !hasError && (
           <LoadingContainer

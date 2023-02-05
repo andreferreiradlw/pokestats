@@ -98,15 +98,21 @@ const mapMethodIcon = (methodName: string, pokemonName: string, areaKey: string)
           return '/static/regions/kantoGen1/museum_scientist.png';
         case 'hitmonlee':
         case 'hitmonchan':
-        case 'eevee':
           return '/static/regions/kantoGen1/karate_trainer.png';
+        case 'eevee':
+          switch (areaKey) {
+            case 'saffron-city':
+              return '/static/regions/kantoGen1/karate_trainer.png';
+            default:
+              return '/static/regions/kantoGen1/only_one.png';
+          }
         case 'lapras':
           return '/static/regions/kantoGen1/silphco_employee.png';
         default:
-          return '/static/regions/kantoGen1/male_trainer.png';
+          return '/static/regions/kantoGen1/only_one.png';
       }
     default:
-      break;
+      return '/static/regions/kantoGen1/only_one.png';
   }
 };
 
@@ -264,19 +270,29 @@ const LocationTable = ({ location, ...rest }: LocationTableProps): JSX.Element =
 
   const { key, locationAreas, label } = location;
 
+  console.log('currArea', location);
+
   return (
     <AnimatePresence mode="wait">
       <Box flexgap="1.5em" {...rest}>
         {locationAreas?.length > 0
           ? locationAreas.map(
-              ({ pokemon_encounters, names: areaNames, name: areaName, id: areaId }) => {
-                const areaSubName = areaNames[0].name.replace(label, '').replace(/[()]/g, '');
+              ({ pokemon_encounters, name: areaName, id: areaId, location: areaLocation }, i) => {
+                const areaSubName = capitalise(
+                  removeDash(areaName.replace(areaLocation.name, '')),
+                ).trim();
                 //
                 const formattedEncounters = formatEncounters(pokemon_encounters);
                 //
                 return (
-                  <Box key={`${key}-${areaName}-${areaId}`} flexalign="flex-start" flexgap="1em">
-                    {areaSubName && <SectionSubTitle>{capitalise(areaSubName)}</SectionSubTitle>}
+                  <Box
+                    key={`${key}-${areaName}-${areaId}-${i}`}
+                    flexalign="flex-start"
+                    flexgap="1em"
+                  >
+                    {areaSubName && areaSubName !== 'Area' && (
+                      <SectionSubTitle>{capitalise(areaSubName)}</SectionSubTitle>
+                    )}
                     {formattedEncounters.length > 0 ? (
                       <TableContainer>
                         <MovesTableEl>

@@ -2,10 +2,10 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 // types
 import type { PokestatsKantoGen1PageProps, Location } from '@/pages/regions/kanto-gen1';
 // helpers
-import { pageContainerVariant } from '@/helpers';
+import { capitalise, pageContainerVariant, removeDash } from '@/helpers';
 // styles
 import { Anchor, Divider, PageHeading, SectionSubTitle, SectionTitle } from '@/BaseStyles';
-import { ImageContainer, CurrentLocation } from './StyledKantoGen1';
+import { ImageContainer, CurrentLocation, MapImage } from './StyledKantoGen1';
 // components
 import { AnimatePresence } from 'framer-motion';
 import { MainContainer } from '@/components/Layout';
@@ -18,7 +18,7 @@ import LocationTable from '@/components/LocationTable';
 const KantoGen1 = ({
   locations,
 }: Omit<PokestatsKantoGen1PageProps, 'autocompleteList'>): JSX.Element => {
-  console.log('locations', locations);
+  // console.log('locations', locations);
 
   // ref
   const dimensionsRef = useRef(null);
@@ -125,11 +125,47 @@ const KantoGen1 = ({
           >
             {currArea && (
               <>
-                <Box screensizes={4} flexalign="flex-start" flexgap="0.5em">
+                <Box
+                  screensizes={currArea.locationAreas?.length > 0 ? 4 : 6}
+                  flexalign="flex-start"
+                  flexgap="1em"
+                >
                   <SectionTitle>{currArea.label}</SectionTitle>
                   <p>{currAreaDescription}</p>
+                  {!!currArea.locationAreas &&
+                    currArea.locationAreas.map(({ name, location, names }, i) => {
+                      const areaSubName = capitalise(
+                        removeDash(name.replace(location.name, '')),
+                      ).trim();
+
+                      return (
+                        <Box
+                          key={`location-area-map-${name}-${i}`}
+                          flexalign="flex-start"
+                          flexjustify="flex-start"
+                          flexgap="0.5em"
+                        >
+                          {areaSubName && areaSubName !== 'Area' && (
+                            <SectionSubTitle>{areaSubName}</SectionSubTitle>
+                          )}
+                          <MapImage
+                            alt={`Map view of ${names[0].name}`}
+                            src={`https://raw.githubusercontent.com/andreferreiradlw/pokestats_media/main/assets/regions/kanto/gen1/${name}.png`}
+                            placeholderwidth="10%"
+                          />
+                        </Box>
+                      );
+                    })}
                 </Box>
-                <LocationTable location={currArea} screensizes={8} />
+                {currArea.locationAreas ? (
+                  <LocationTable location={currArea} screensizes={8} />
+                ) : (
+                  <MapImage
+                    containerProps={{ screensizes: 6 }}
+                    alt={`Map view of ${currArea.label}`}
+                    src={`https://raw.githubusercontent.com/andreferreiradlw/pokestats_media/main/assets/regions/kanto/gen1/${currArea.key}.png`}
+                  />
+                )}
               </>
             )}
           </Box>

@@ -1,4 +1,5 @@
 import Box from '@/components/Box';
+import ImageNext from '@/components/ImageNext';
 import styled from 'styled-components';
 
 const ImageContainer = styled(Box)`
@@ -18,4 +19,6 @@ const CurrentLocation = styled.span`
   z-index: 2;
 `;
 
-export { ImageContainer, CurrentLocation };
+const MapImage = styled(ImageNext)``;
+
+export { ImageContainer, CurrentLocation, MapImage };

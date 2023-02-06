@@ -1,46 +1,37 @@
-import React from 'react';
-import { ImageMapperProps } from '@/types/imageMapper';
+import styled, { css } from 'styled-components';
 
-const absPos: React.CSSProperties = {
-  position: 'absolute',
-  top: 0,
-  left: 0,
-};
+const absolutePosition = css`
+  left: 0;
+  position: absolute;
+  top: 0;
+`;
 
-const imgNonResponsive: React.CSSProperties = {
-  ...absPos,
-  zIndex: 1,
-  userSelect: 'none',
-};
+const ContainerEl = styled.div`
+  position: relative;
+`;
 
-const imgResponsive: React.CSSProperties = {
-  ...imgNonResponsive,
-  width: '100%',
-  height: 'auto',
-};
+const ImageEl = styled.img<{ hide?: boolean }>`
+  ${absolutePosition}
 
-interface StylesProps {
-  container: React.CSSProperties;
-  canvas: React.CSSProperties;
-  img: React.CSSProperties;
-  map: React.CSSProperties | undefined;
-}
+  user-select: none;
+  z-index: 1;
 
-const styles = (props?: Partial<ImageMapperProps>): StylesProps => ({
-  container: {
-    position: 'relative',
-  },
-  canvas: {
-    ...absPos,
-    pointerEvents: 'none',
-    zIndex: 2,
-  },
-  img: props?.responsive ? imgResponsive : imgNonResponsive,
-  map:
-    (props?.onClick && {
-      cursor: 'pointer',
-    }) ||
-    undefined,
-});
+  ${({ hide }) =>
+    hide &&
+    css`
+      display: none;
+    `}
+`;
 
-export default styles;
+const CanvasEl = styled.canvas`
+  ${absolutePosition}
+
+  pointer-events: none;
+  z-index: 2;
+`;
+
+const MapEl = styled.map`
+  cursor: pointer;
+`;
+
+export { ContainerEl, ImageEl, CanvasEl, MapEl };

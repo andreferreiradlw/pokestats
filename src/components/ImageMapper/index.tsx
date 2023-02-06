@@ -9,7 +9,6 @@ import type {
   ImageMapperProps,
 } from '@/types/imageMapper';
 // helpers
-// import isEqual from 'react-fast-compare';
 import equal from 'fast-deep-equal';
 import { callingFn } from '@/helpers';
 // constants
@@ -25,7 +24,7 @@ import {
   touchEnd,
 } from './events';
 // styles
-import styles from './StyledImageMapper';
+import { ContainerEl, ImageEl, CanvasEl, MapEl } from './StyledImageMapper';
 
 const ImageMapper = (props: ImageMapperProps): JSX.Element => {
   // data
@@ -297,23 +296,23 @@ const ImageMapper = (props: ImageMapperProps): JSX.Element => {
     });
 
   return (
-    <div id="img-mapper" style={styles(props).container} ref={container}>
-      <img
+    <ContainerEl id="img-mapper" ref={container}>
+      <ImageEl
         role="presentation"
         className="img-mapper-img"
-        style={{ ...styles(props).img, ...(!imgRef ? { display: 'none' } : {}) }}
         src={srcProp}
         useMap={`#${map.name}`}
+        hide={!imgRef}
         alt="map"
         ref={img}
         onClick={event => imageClick(event, props)}
         onMouseMove={event => imageMouseMove(event, props)}
       />
-      <canvas className="img-mapper-canvas" ref={canvas} style={styles().canvas} />
-      <map className="img-mapper-map" name={map.name} style={styles().map}>
+      <CanvasEl className="img-mapper-canvas" ref={canvas} />
+      <MapEl className="img-mapper-map" name={map.name}>
         {isRendered && !disabled && imgRef && renderAreas()}
-      </map>
-    </div>
+      </MapEl>
+    </ContainerEl>
   );
 };
 

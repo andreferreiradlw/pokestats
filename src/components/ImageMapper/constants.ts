@@ -41,7 +41,6 @@ export const ImageMapperDefaultProps: Partial<ImageMapperProps> = {
   rerenderProps: [],
   responsive: false,
   parentWidth: 0,
-
   onImageClick: null,
   onImageMouseMove: null,
   onClick: null,

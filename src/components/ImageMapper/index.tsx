@@ -9,7 +9,8 @@ import type {
   ImageMapperProps,
 } from '@/types/imageMapper';
 // helpers
-import isEqual from 'react-fast-compare';
+// import isEqual from 'react-fast-compare';
+import equal from 'fast-deep-equal';
 import { callingFn } from '@/helpers';
 // constants
 import { rerenderPropsList, ImageMapperDefaultProps } from './constants';
@@ -323,5 +324,5 @@ export default React.memo<ImageMapperProps>(ImageMapper, (prevProps, nextProps) 
 
   const propChanged = watchedProps.some(prop => prevProps[prop] !== nextProps[prop]);
 
-  return isEqual(prevProps.map, nextProps.map) && !propChanged;
+  return equal(prevProps.map, nextProps.map) && !propChanged;
 });

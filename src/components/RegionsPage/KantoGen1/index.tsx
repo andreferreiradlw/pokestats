@@ -17,7 +17,6 @@ import {
 import { AnimatePresence } from 'framer-motion';
 import { MainContainer } from '@/components/Layout';
 import Box from '@/components/Box';
-// import ImageMapper from 'react-img-mapper';
 import ImageMapper from '@/components/ImageMapper';
 // data
 import kantoZones from './kanto-zones.json';

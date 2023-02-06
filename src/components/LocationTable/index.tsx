@@ -4,6 +4,7 @@ import type { Location } from '@/pages/regions/kanto-gen1';
 import type { PokemonEncounter } from 'pokenode-ts';
 // helpers
 import { capitalise, getIdFromURL, removeDash, rowVariant } from '@/helpers';
+import equal from 'fast-deep-equal';
 // styles
 import {
   MethodContainer,
@@ -209,23 +210,23 @@ const LocationTable = ({ location, ...rest }: LocationTableProps): JSX.Element =
         let currMethod = { name: methodKey, pokemon: [] };
 
         Object.keys(areaMethods[methodKey]).forEach(pokemonKey => {
-          const currRed = JSON.stringify(areaMethods[methodKey][pokemonKey]?.red);
-          const currBlue = JSON.stringify(areaMethods[methodKey][pokemonKey]?.blue);
-          const currYellow = JSON.stringify(areaMethods[methodKey][pokemonKey]?.yellow);
+          const currRed = areaMethods[methodKey][pokemonKey]?.red;
+          const currBlue = areaMethods[methodKey][pokemonKey]?.blue;
+          const currYellow = areaMethods[methodKey][pokemonKey]?.yellow;
 
-          if (currRed && currBlue && currRed === currBlue) {
-            if (currYellow && currRed === currYellow) {
+          if (currRed && currBlue && equal(currRed, currBlue)) {
+            if (currYellow && equal(currRed, currYellow)) {
               // all versions are equal
               currMethod.pokemon.push({
                 name: pokemonKey,
                 versions: [
                   currRed
                     ? {
-                        ...areaMethods[methodKey][pokemonKey]?.red,
+                        ...currRed,
                         games: ['red', 'blue', 'yellow'],
                       }
                     : {
-                        ...areaMethods[methodKey][pokemonKey]?.blue,
+                        ...currBlue,
                         games: ['red', 'blue', 'yellow'],
                       },
                 ],
@@ -236,23 +237,21 @@ const LocationTable = ({ location, ...rest }: LocationTableProps): JSX.Element =
                 ? currMethod.pokemon.push({
                     name: pokemonKey,
                     versions: [
-                      { ...areaMethods[methodKey][pokemonKey]?.red, games: ['red', 'blue'] },
-                      { ...areaMethods[methodKey][pokemonKey]?.yellow, games: ['yellow'] },
+                      { ...currRed, games: ['red', 'blue'] },
+                      { ...currYellow, games: ['yellow'] },
                     ],
                   })
                 : currMethod.pokemon.push({
                     name: pokemonKey,
-                    versions: [
-                      { ...areaMethods[methodKey][pokemonKey]?.red, games: ['red', 'blue'] },
-                    ],
+                    versions: [{ ...currRed, games: ['red', 'blue'] }],
                   });
             }
           } else {
             // all versions are different
             let pokemonVersions = [
-              currRed && { ...areaMethods[methodKey][pokemonKey]?.red, games: ['red'] },
-              currBlue && { ...areaMethods[methodKey][pokemonKey]?.blue, games: ['blue'] },
-              currYellow && { ...areaMethods[methodKey][pokemonKey]?.yellow, games: ['yellow'] },
+              currRed && { ...currRed, games: ['red'] },
+              currBlue && { ...currBlue, games: ['blue'] },
+              currYellow && { ...currYellow, games: ['yellow'] },
             ];
 
             currMethod.pokemon.push({

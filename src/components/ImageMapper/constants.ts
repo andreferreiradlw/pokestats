@@ -4,19 +4,15 @@ export const rerenderPropsList = [
   'src',
   'active',
   'disabled',
-  'width',
-  'height',
   'imgWidth',
   'fillColor',
   'strokeColor',
   'lineWidth',
-  'natural',
   'areaKeyName',
   'stayHighlighted',
   'stayMultiHighlighted',
   'toggleHighlighted',
   'parentWidth',
-  'responsive',
 ] as const;
 
 export const ImageMapperDefaultProps: Partial<ImageMapperProps> = {
@@ -29,9 +25,6 @@ export const ImageMapperDefaultProps: Partial<ImageMapperProps> = {
   fillColor: 'rgba(255, 255, 255, 0.5)',
   strokeColor: 'rgba(0, 0, 0, 0.5)',
   lineWidth: 1,
-  imgWidth: 0,
-  width: 0,
-  height: 0,
   rerenderProps: [],
   parentWidth: 0,
 };

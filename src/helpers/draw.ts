@@ -54,14 +54,14 @@ const drawPoly = (
 };
 
 const callingFn = (
-  shape: string,
+  shape: 'rect' | 'circle' | 'poly',
   coords: number[],
   fillColor: string,
   lineWidth: number,
   strokeColor: string,
   isAreaActive: boolean,
   ctx: CTX,
-): boolean | void => {
+): void => {
   if (shape === 'rect' && isAreaActive) {
     return drawRect(coords, fillColor, lineWidth, strokeColor, ctx);
   }
@@ -71,7 +71,6 @@ const callingFn = (
   if (shape === 'poly' && isAreaActive) {
     return drawPoly(coords, fillColor, lineWidth, strokeColor, ctx);
   }
-  return false;
 };
 
 export { callingFn };

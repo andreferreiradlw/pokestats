@@ -4,7 +4,7 @@ import type { PokestatsKantoGen1PageProps, Location } from '@/pages/regions/kant
 // helpers
 import { capitalise, fadeInUpVariant, pageContainerVariant, removeDash } from '@/helpers';
 // styles
-import { Divider, PageHeading, SectionSubTitle, SectionTitle } from '@/BaseStyles';
+import { Button, Divider, PageHeading, SectionSubTitle, SectionTitle } from '@/BaseStyles';
 import {
   ImageContainer,
   CurrentLocation,
@@ -107,6 +107,7 @@ const KantoGen1 = ({
   const [currAreaDescription, setCurrAreaDescription] = useState<string>('');
   const [locationMusic, setLocationMusic] = useState<HTMLAudioElement>();
   const [isPlaying, setIsPlaying] = useState(false);
+  const [showAllAreas, setShowAllAreas] = useState(true);
 
   // memo
   const handleAreaClick = useCallback(
@@ -199,6 +200,7 @@ const KantoGen1 = ({
                 setting of the first generation of games and can also be explored in Generations II,
                 III, IV, and VII.
               </p>
+              <Button onClick={() => setShowAllAreas(prev => !prev)}>Toggle Highlights</Button>
             </Box>
             <ImageContainer width="auto">
               <CurrentLocation>{mapHover || currArea?.label || 'Hover me!'}</CurrentLocation>
@@ -211,6 +213,7 @@ const KantoGen1 = ({
                 }}
                 parentWidth={imgWidth}
                 stayHighlighted={true}
+                highlightAllAreas={showAllAreas}
                 toggleHighlighted={true}
                 fillColor="#eab54d4d"
                 strokeColor="black"

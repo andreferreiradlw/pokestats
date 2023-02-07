@@ -37,8 +37,6 @@ const ImageMapper = (props: ImageMapperProps): JSX.Element => {
     map: mapProp,
     src: srcProp,
     strokeColor: strokeColorProp,
-    height: heightProp,
-    width: widthProp,
     areaKeyName,
     stayHighlighted,
     stayMultiHighlighted,
@@ -54,7 +52,6 @@ const ImageMapper = (props: ImageMapperProps): JSX.Element => {
   const [map, setMap] = useState<Map>(mapProp);
   const [storedMap, setStoredMap] = useState<Map>(map);
   const [isRendered, setRendered] = useState<boolean>(false);
-  const [imgRef, setImgRef] = useState<HTMLImageElement>(null);
   const container = useRef<Container>(null);
   const img = useRef<HTMLImageElement>(null);
   const canvas = useRef<HTMLCanvasElement>(null);
@@ -68,14 +65,15 @@ const ImageMapper = (props: ImageMapperProps): JSX.Element => {
 
   const scaleCoords = useCallback(
     (coords: number[]): number[] =>
-      coords.map(coord => coord / (imgRef.naturalWidth / parentWidth)),
-    [parentWidth, imgRef],
+      coords.map(coord => coord / (img.current.naturalWidth / parentWidth)),
+    [parentWidth, img],
   );
 
   const renderPrefilledAreas = useCallback(
     (mapObj = map) => {
       mapObj.areas.map(area => {
         if (!area.preFillColor) return false;
+
         callingFn(
           area.shape,
           scaleCoords(area.coords),
@@ -85,38 +83,19 @@ const ImageMapper = (props: ImageMapperProps): JSX.Element => {
           true,
           ctx,
         );
+
         return true;
       });
     },
     [map, lineWidthProp, strokeColorProp, scaleCoords],
   );
 
-  const getValues = useCallback(
-    (type: string, measure: number, name = 'area'): number => {
-      // image data
-      const { clientHeight } = img.current;
-
-      if (type === 'width') return parentWidth;
-      if (type === 'height') return clientHeight;
-      return 0;
-    },
-    [parentWidth],
-  );
-
   const initCanvas = useCallback(
     (firstLoad = false) => {
-      if (!firstLoad && !imgRef) return;
+      if (!firstLoad && !img.current) return;
 
-      const imageWidth = getValues('width', widthProp);
-      const imageHeight = getValues('height', heightProp);
-
-      if (widthProp) {
-        img.current.width = getValues('width', widthProp, 'image');
-      }
-
-      if (heightProp) {
-        img.current.height = getValues('height', heightProp, 'image');
-      }
+      const imageWidth = parentWidth;
+      const imageHeight = img.current.clientHeight;
 
       canvas.current.width = imageWidth;
       canvas.current.height = imageHeight;
@@ -126,18 +105,42 @@ const ImageMapper = (props: ImageMapperProps): JSX.Element => {
       ctx.current = canvas.current.getContext('2d');
       ctx.current.fillStyle = fillColorProp;
 
-      // trigger onLoad fn prop
-      if (onLoad && imgRef) {
-        onLoad(img.current, {
-          width: imageWidth,
-          height: imageHeight,
-        });
+      if (img.current) {
+        renderPrefilledAreas();
+        // trigger onLoad fn prop
+        if (onLoad) {
+          onLoad(img.current, {
+            width: imageWidth,
+            height: imageHeight,
+          });
+        }
       }
-
-      setImgRef(img.current);
-      if (imgRef) renderPrefilledAreas();
     },
-    [fillColorProp, getValues, heightProp, imgRef, onLoad, renderPrefilledAreas, widthProp],
+    [fillColorProp, img, onLoad, renderPrefilledAreas, parentWidth],
+  );
+
+  const computeCenter = useCallback(
+    (area: MapAreas): [number, number] => {
+      if (!area) return [0, 0];
+
+      const scaledCoords = scaleCoords(area.coords);
+
+      switch (area.shape) {
+        case 'circle':
+          return [scaledCoords[0], scaledCoords[1]];
+        case 'poly':
+        case 'rect':
+        default: {
+          const n = scaledCoords.length / 2;
+          const { y: scaleY, x: scaleX } = scaledCoords.reduce(
+            ({ y, x }, val, idx) => (!(idx % 2) ? { y, x: x + val / n } : { y: y + val / n, x }),
+            { y: 0, x: 0 },
+          );
+          return [scaleX, scaleY];
+        }
+      }
+    },
+    [scaleCoords],
   );
 
   const onAreaEnter = (area: CustomArea, index?: number, event?: AreaEvent) => {
@@ -192,30 +195,6 @@ const ImageMapper = (props: ImageMapperProps): JSX.Element => {
     }
   };
 
-  const computeCenter = useCallback(
-    (area: MapAreas): [number, number] => {
-      if (!area) return [0, 0];
-
-      const scaledCoords = scaleCoords(area.coords);
-
-      switch (area.shape) {
-        case 'circle':
-          return [scaledCoords[0], scaledCoords[1]];
-        case 'poly':
-        case 'rect':
-        default: {
-          const n = scaledCoords.length / 2;
-          const { y: scaleY, x: scaleX } = scaledCoords.reduce(
-            ({ y, x }, val, idx) => (!(idx % 2) ? { y, x: x + val / n } : { y: y + val / n, x }),
-            { y: 0, x: 0 },
-          );
-          return [scaleX, scaleY];
-        }
-      }
-    },
-    [scaleCoords],
-  );
-
   const updateCanvas = () => {
     ctx.current.clearRect(0, 0, canvas.current.width, canvas.current.height);
     renderPrefilledAreas(mapProp);
@@ -234,9 +213,9 @@ const ImageMapper = (props: ImageMapperProps): JSX.Element => {
     } else {
       updateCacheMap();
       initCanvas();
-      if (imgRef) updateCanvas();
+      if (img.current) updateCanvas();
     }
-  }, [props, isInitialMount, imgRef]);
+  }, [props, isInitialMount, img]);
 
   useEffect(() => {
     container.current.clearHighlightedArea = () => {
@@ -247,7 +226,7 @@ const ImageMapper = (props: ImageMapperProps): JSX.Element => {
     if (containerRef) {
       containerRef.current = container.current;
     }
-  }, [imgRef]);
+  }, [img]);
 
   useEffect(() => {
     // restart canvas when parent resizes
@@ -262,7 +241,7 @@ const ImageMapper = (props: ImageMapperProps): JSX.Element => {
         alt="map"
         src={srcProp}
         useMap={`#${map.name}`}
-        hide={!imgRef}
+        hide={!img.current}
         ref={img}
         onClick={event => imageClick(event, props)}
         onMouseMove={event => imageMouseMove(event, props)}
@@ -271,7 +250,7 @@ const ImageMapper = (props: ImageMapperProps): JSX.Element => {
       <MapEl className="img-mapper-map" name={map.name}>
         {isRendered &&
           !disabled &&
-          imgRef &&
+          img.current &&
           map.areas.map((area, index) => {
             if (area.disabled) return null;
 

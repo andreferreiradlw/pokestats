@@ -6,7 +6,7 @@ export interface Container extends HTMLDivElement {
 
 export interface MapAreas {
   id?: string;
-  shape: string;
+  shape: 'rect' | 'circle' | 'poly';
   coords: number[];
   active?: boolean;
   disabled?: boolean;
@@ -42,8 +42,6 @@ export interface ImageMapperProps {
   fillColor?: string;
   strokeColor?: string;
   lineWidth?: number;
-  width?: number;
-  height?: number;
   stayHighlighted?: boolean;
   stayMultiHighlighted?: boolean;
   highlightAllAreas?: boolean;

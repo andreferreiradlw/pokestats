@@ -209,7 +209,6 @@ const KantoGen1 = ({
                   name: 'kanto-gen1',
                   areas: kantoZones,
                 }}
-                responsive={true}
                 parentWidth={imgWidth}
                 stayHighlighted={true}
                 toggleHighlighted={true}

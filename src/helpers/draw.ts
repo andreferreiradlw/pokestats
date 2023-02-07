@@ -61,7 +61,7 @@ const callingFn = (
   strokeColor: string,
   isAreaActive: boolean,
   ctx: CTX,
-): void | boolean => {
+): boolean | void => {
   if (shape === 'rect' && isAreaActive) {
     return drawRect(coords, fillColor, lineWidth, strokeColor, ctx);
   }

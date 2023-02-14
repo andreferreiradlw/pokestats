@@ -6,6 +6,8 @@ export * from './box';
 export * from './findName';
 // game version
 export * from './gameVersion';
+// layout
+export * from './layout';
 // moves
 export * from './moves';
 // random

@@ -1,1 +1,1 @@
-export * from './useIntersectionObserver';
+export * from './useScrollPosition';

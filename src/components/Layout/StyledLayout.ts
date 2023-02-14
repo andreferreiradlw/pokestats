@@ -31,4 +31,13 @@ const MainContainer = styled(motion.main)<{
   ${({ $withGutter, theme }) => $withGutter && responsiveProps('padding', theme.layout.gutterWidth)}
 `;
 
-export { LayoutContainer, MainContainer };
+const ScrollButton = styled(motion.div)`
+  bottom: 20px;
+  cursor: pointer;
+  position: fixed;
+  right: 20px;
+  width: fit-content;
+  z-index: 100;
+`;
+
+export { LayoutContainer, MainContainer, ScrollButton };

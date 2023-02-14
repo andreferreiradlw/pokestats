@@ -6,7 +6,7 @@ const focusStyles = css`
   ${({ theme }) => css`
     &:focus,
     &:focus-visible {
-      outline: ${theme.colors.tertiary.main} auto 1px;
+      outline: ${theme.colors.primary.light} auto 1px;
       outline-offset: 2px;
     }
   `}

@@ -10,7 +10,6 @@ import {
   getIdFromURL,
   removeDuplicateMoves,
 } from '@/helpers';
-import { PokestatsPageTitle } from '@/components/Head';
 // components
 import Head from 'next/head';
 import Layout from '@/components/Layout';
@@ -28,7 +27,7 @@ export interface PokestatsTypePageProps {
 
 const PokestatsTypePage: NextPage<PokestatsTypePageProps> = ({ autocompleteList, ...props }) => {
   const typeName = findEnglishName(props.typeInfo.names);
-  const pageTitle = `${typeName} (Type) - ${PokestatsPageTitle}`;
+  const pageTitle = `${typeName} (Type) - Pokestats.gg`;
   const pageDescription = `The ${typeName} type ( Japanese: ${
     props.typeInfo.names.find(name => name.language.name === 'ja-Hrkt').name
   }タイプ ) is one of the eighteen elemental types in the Pokémon world.`;

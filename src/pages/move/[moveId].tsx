@@ -19,12 +19,10 @@ import {
   formatFlavorText,
   getIdFromURL,
   listGamesByGroup,
-  listGenGroupsByGroup,
   listMoveGroupsByGroup,
   removeDash,
   removeDuplicateMoves,
 } from '@/helpers';
-import { PokestatsPageTitle } from '@/components/Head';
 // components
 import Head from 'next/head';
 import Layout from '@/components/Layout';
@@ -59,7 +57,7 @@ const PokestatsMovePage: NextPage<PokestatsMovePageProps> = ({ autocompleteList,
     : capitalise(removeDash(props.move.name));
   const pageTitle = `${moveName} (${capitalise(
     props.move.type.name,
-  )} Type Pokémon Move) - ${PokestatsPageTitle}`;
+  )} Type Pokémon Move) - Pokestats.gg`;
   const pageDescription = formatFlavorText(props.move.flavor_text_entries.at(-1)?.flavor_text);
 
   return (

@@ -20,7 +20,6 @@ import {
   findEnglishName,
   fetchAutocompleteData,
 } from '@/helpers';
-import { PokestatsPageTitle } from '@/components/Head';
 // components
 import Head from 'next/head';
 import Layout from '@/components/Layout';
@@ -68,7 +67,7 @@ const PokestatsPokemonPage: NextPage<PokestatsPokemonPageProps> = ({
   }
 
   const pokemonName = findEnglishName(props.species.names);
-  const pageTitle = `${pokemonName} (Pokémon #${props.pokemon.id}) - ${PokestatsPageTitle}`;
+  const pageTitle = `${pokemonName} (Pokémon #${props.pokemon.id}) - Pokestats.gg`;
   const pageDescription = formatFlavorText(props.species.flavor_text_entries.at(-1)?.flavor_text);
   const generationDescriptions = gameVersions
     .filter(version => version.genValue === props.species.generation.name)

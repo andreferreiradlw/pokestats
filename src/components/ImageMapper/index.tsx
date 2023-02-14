@@ -186,6 +186,7 @@ const ImageMapper = (props: ImageMapperProps): JSX.Element => {
       const updatedAreas = chosenArea.areas.map(cur =>
         cur[areaKeyName] === area[areaKeyName] ? newArea : cur,
       );
+
       setMap(prev => ({ ...prev, areas: updatedAreas }));
     }
 
@@ -200,15 +201,17 @@ const ImageMapper = (props: ImageMapperProps): JSX.Element => {
     renderPrefilledAreas(mapProp);
   };
 
-  useEffect(() => {
-    initCanvas(true);
-    ctx.current = canvas.current.getContext('2d');
-    updateCacheMap();
-    setRendered(true);
-  }, []);
+  // useEffect(() => {
+  //   initCanvas(true);
+  //   updateCacheMap();
+  //   setRendered(true);
+  // }, []);
 
   useEffect(() => {
     if (isInitialMount.current) {
+      initCanvas(true);
+      updateCacheMap();
+      setRendered(true);
       isInitialMount.current = false;
     } else {
       updateCacheMap();

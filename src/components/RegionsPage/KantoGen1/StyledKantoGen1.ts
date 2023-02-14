@@ -4,7 +4,7 @@ import Box from '@/components/Box';
 import ImageNext from '@/components/ImageNext';
 import { motion } from 'framer-motion';
 // icon
-import SoundIcon from 'public/static/iconLibrary/sound.svg';
+import StartIcon from 'public/static/iconLibrary/play.svg';
 import PausedIcon from 'public/static/iconLibrary/pause.svg';
 
 const ImageContainer = styled(Box)`
@@ -26,7 +26,7 @@ const CurrentLocation = styled.span`
 
 const MapImage = styled(ImageNext)``;
 
-const PlayIcon = styled(SoundIcon)``;
+const PlayIcon = styled(StartIcon)``;
 
 const PauseIcon = styled(PausedIcon)``;
 
@@ -39,8 +39,10 @@ const PlayIconContainer = styled(motion.div)`
     &:hover {
       cursor: pointer;
 
-      path:first-of-type {
-        fill: black;
+      &:hover {
+        path:first-of-type {
+          stroke: white;
+        }
       }
     }
   }

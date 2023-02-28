@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 // types
 import type { PokestatsKantoGen1PageProps, Location } from '@/pages/regions/kanto-gen1';
+import type { MapAreas } from '@/types/imageMapper';
 // helpers
 import { capitalise, fadeInUpVariant, pageContainerVariant, removeDash } from '@/helpers';
 // styles
@@ -21,6 +22,7 @@ import ImageMapper from '@/components/ImageMapper';
 // data
 import kantoZones from './kanto-zones.json';
 import LocationTable from '@/components/LocationTable';
+import NewMapper from '@/components/ImageMapper/newMapper';
 
 const mapLocationToMusic = (locationKey: string): string => {
   switch (locationKey) {
@@ -107,7 +109,12 @@ const KantoGen1 = ({
   const [currAreaDescription, setCurrAreaDescription] = useState<string>('');
   const [locationMusic, setLocationMusic] = useState<HTMLAudioElement>();
   const [isPlaying, setIsPlaying] = useState(false);
-  const [showAllAreas, setShowAllAreas] = useState(true);
+  const [showAllAreas, setShowAllAreas] = useState(false);
+
+  const handleHighlightsClick = () => {
+    setShowAllAreas(prev => !prev);
+    console.log('showAllAreas', !showAllAreas);
+  };
 
   // memo
   const handleAreaClick = useCallback(
@@ -200,7 +207,8 @@ const KantoGen1 = ({
                 setting of the first generation of games and can also be explored in Generations II,
                 III, IV, and VII.
               </p>
-              <Button onClick={() => setShowAllAreas(prev => !prev)}>Toggle Highlights</Button>
+              <Button onClick={handleHighlightsClick}>Toggle Highlights</Button>
+              {showAllAreas ? 'true' : 'false'}
             </Box>
             <ImageContainer width="auto">
               <CurrentLocation>{mapHover || currArea?.label || 'Hover me!'}</CurrentLocation>
@@ -209,7 +217,7 @@ const KantoGen1 = ({
                 src="/static/regions/kantoGen1/kanto-map.png"
                 map={{
                   name: 'kanto-gen1',
-                  areas: kantoZones,
+                  areas: kantoZones as MapAreas[],
                 }}
                 parentWidth={imgWidth}
                 stayHighlighted={true}
@@ -222,6 +230,25 @@ const KantoGen1 = ({
                 onMouseLeave={() => setMapHover(null)}
               />
             </ImageContainer>
+          </Box>
+          <Box screensizes={6} width="50%">
+            <NewMapper
+              containerRef={mapRef}
+              src="/static/regions/kantoGen1/kanto-map.png"
+              map={{
+                name: 'kanto-gen1',
+                areas: kantoZones as MapAreas[],
+              }}
+              parentWidth={imgWidth}
+              stayHighlighted={true}
+              highlightAllAreas={showAllAreas}
+              toggleHighlighted={true}
+              fillColor="#eab54d4d"
+              strokeColor="black"
+              onClick={area => handleAreaClick(Number(area.id))}
+              onMouseEnter={(area: any) => setMapHover(area.title)}
+              onMouseLeave={() => setMapHover(null)}
+            />
           </Box>
           <Box
             flexdirection={{ xxs: 'column', lg: 'row' }}

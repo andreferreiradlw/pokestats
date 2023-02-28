@@ -40,20 +40,19 @@ const drawPoly = (
   ctx: CTX,
 ) => {
   const newCoords = coords.reduce((a, v, i, s) => (i % 2 ? a : [...a, s.slice(i, i + 2)]), []);
-  // const first = newCoords.unshift();
+
   ctx.current.fillStyle = fillColor;
   ctx.current.beginPath();
   ctx.current.lineWidth = lineWidth;
   ctx.current.strokeStyle = strokeColor;
 
-  // ctx.current.moveTo(first[0], first[1]);
   newCoords.forEach(c => ctx.current.lineTo(c[0], c[1]));
   ctx.current.closePath();
   ctx.current.stroke();
   ctx.current.fill();
 };
 
-const callingFn = (
+const drawAreas = (
   shape: 'rect' | 'circle' | 'poly',
   coords: number[],
   fillColor: string,
@@ -62,15 +61,16 @@ const callingFn = (
   isAreaActive: boolean,
   ctx: CTX,
 ): void => {
-  if (shape === 'rect' && isAreaActive) {
+  if (!isAreaActive) return;
+  if (shape === 'rect') {
     return drawRect(coords, fillColor, lineWidth, strokeColor, ctx);
   }
-  if (shape === 'circle' && isAreaActive) {
+  if (shape === 'circle') {
     return drawCircle(coords, fillColor, lineWidth, strokeColor, ctx);
   }
-  if (shape === 'poly' && isAreaActive) {
+  if (shape === 'poly') {
     return drawPoly(coords, fillColor, lineWidth, strokeColor, ctx);
   }
 };
 
-export { callingFn };
+export { drawAreas };

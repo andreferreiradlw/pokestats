@@ -8,6 +8,7 @@ export interface MapAreas {
   id?: string;
   shape: 'rect' | 'circle' | 'poly';
   coords: number[];
+  title: string;
   active?: boolean;
   disabled?: boolean;
   href?: string;
@@ -19,7 +20,7 @@ export interface MapAreas {
 
 export interface Map {
   name: string;
-  areas: Array<MapAreas>;
+  areas: MapAreas[];
 }
 
 export interface CustomArea extends MapAreas {
@@ -37,8 +38,6 @@ export interface ImageMapperProps {
   map?: Map;
   areaKeyName?: 'id';
   containerRef?: { current: HTMLDivElement } | null;
-  active?: boolean;
-  disabled?: boolean;
   fillColor?: string;
   strokeColor?: string;
   lineWidth?: number;

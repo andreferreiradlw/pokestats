@@ -10,7 +10,9 @@ import type {
 } from '@/types/imageMapper';
 // helpers
 import equal from 'fast-deep-equal';
-import { callingFn } from '@/helpers';
+import { drawAreas } from '@/helpers';
+// hooks
+import { useIsFirstRender } from 'usehooks-ts';
 // constants
 import { rerenderPropsList, ImageMapperDefaultProps } from './constants';
 // events
@@ -30,8 +32,6 @@ const ImageMapper = (props: ImageMapperProps): JSX.Element => {
   // data
   const {
     containerRef,
-    active,
-    disabled,
     fillColor: fillColorProp,
     lineWidth: lineWidthProp,
     map: mapProp,
@@ -53,38 +53,34 @@ const ImageMapper = (props: ImageMapperProps): JSX.Element => {
   const [storedMap, setStoredMap] = useState<Map>(map);
   const [isRendered, setRendered] = useState<boolean>(false);
   const container = useRef<Container>(null);
-  const img = useRef<HTMLImageElement>(null);
-  const canvas = useRef<HTMLCanvasElement>(null);
-  const ctx = useRef<CanvasRenderingContext2D>(null);
-  const isInitialMount = useRef<boolean>(true);
+  const imageRef = useRef<HTMLImageElement>(null);
+  const hoverCanvasRef = useRef<HTMLCanvasElement>(null);
+  const highlightCanvasRef = useRef<HTMLCanvasElement>(null);
+  const renderingCtx = useRef<CanvasRenderingContext2D>(null);
+  const highlightCtx = useRef<CanvasRenderingContext2D>(null);
+  // hooks
+  const isFirstRender = useIsFirstRender();
   // memo
-  const updateCacheMap = useCallback(() => {
-    setMap(mapProp);
-    setStoredMap(mapProp);
-  }, [mapProp]);
-
   const scaleCoords = useCallback(
     (coords: number[]): number[] =>
-      coords.map(coord => coord / (img.current.naturalWidth / parentWidth)),
-    [parentWidth, img],
+      coords.map(coord => coord / (imageRef.current.naturalWidth / parentWidth)),
+    [parentWidth, imageRef],
   );
 
   const renderPrefilledAreas = useCallback(
     (mapObj = map) => {
-      mapObj.areas.map(area => {
-        if (!area.preFillColor) return false;
+      mapObj.areas.forEach(area => {
+        if (!area.preFillColor) return;
 
-        callingFn(
+        drawAreas(
           area.shape,
           scaleCoords(area.coords),
           area.preFillColor,
           area.lineWidth || lineWidthProp,
           area.strokeColor || strokeColorProp,
           true,
-          ctx,
+          renderingCtx,
         );
-
-        return true;
       });
     },
     [map, lineWidthProp, strokeColorProp, scaleCoords],
@@ -92,32 +88,71 @@ const ImageMapper = (props: ImageMapperProps): JSX.Element => {
 
   const initCanvas = useCallback(
     (firstLoad = false) => {
-      if (!firstLoad && !img.current) return;
+      if (!firstLoad && !imageRef.current) return;
 
       const imageWidth = parentWidth;
-      const imageHeight = img.current.clientHeight;
+      const imageHeight = imageRef.current.clientHeight;
 
-      canvas.current.width = imageWidth;
-      canvas.current.height = imageHeight;
+      hoverCanvasRef.current.width = imageWidth;
+      hoverCanvasRef.current.height = imageHeight;
       container.current.style.width = `${imageWidth}px`;
       container.current.style.height = `${imageHeight}px`;
 
-      ctx.current = canvas.current.getContext('2d');
-      ctx.current.fillStyle = fillColorProp;
+      renderingCtx.current = hoverCanvasRef.current.getContext('2d');
+      renderingCtx.current.fillStyle = fillColorProp;
+      // highlight canvas
+      highlightCanvasRef.current.width = imageWidth;
+      highlightCanvasRef.current.height = imageHeight;
+      highlightCtx.current = hoverCanvasRef.current.getContext('2d');
 
-      if (img.current) {
+      if (imageRef.current) {
         renderPrefilledAreas();
+
         // trigger onLoad fn prop
         if (onLoad) {
-          onLoad(img.current, {
+          onLoad(imageRef.current, {
             width: imageWidth,
             height: imageHeight,
           });
         }
       }
     },
-    [fillColorProp, img, onLoad, renderPrefilledAreas, parentWidth],
+    [fillColorProp, imageRef, onLoad, renderPrefilledAreas, parentWidth],
   );
+
+  // useEffect(() => {
+  //   if (highlightCtx) {
+  //     if (imageRef.current && highlightAllAreas) {
+  //       map.areas.forEach(area => {
+  //         drawAreas(
+  //           area.shape,
+  //           scaleCoords(area.coords),
+  //           'rgba(222, 98, 98, 0.5)',
+  //           2,
+  //           'black',
+  //           true,
+  //           highlightCtx,
+  //         );
+
+  //         return true;
+  //       });
+  //     } else {
+  //       map.areas.forEach(area => {
+  //         drawAreas(
+  //           area.shape,
+  //           scaleCoords(area.coords),
+  //           'rgba(222, 98, 98, 0.5)',
+  //           2,
+  //           'black',
+  //           false,
+  //           highlightCtx,
+  //         );
+
+  //         return true;
+  //       });
+  //     }
+  //   }
+  // }, [highlightAllAreas, imageRef]);
 
   const computeCenter = useCallback(
     (area: MapAreas): [number, number] => {
@@ -146,26 +181,27 @@ const ImageMapper = (props: ImageMapperProps): JSX.Element => {
   const onAreaEnter = (area: CustomArea, index?: number, event?: AreaEvent) => {
     const { shape, scaledCoords, fillColor, lineWidth, strokeColor, active: isAreaActive } = area;
 
-    if (active) {
-      callingFn(
-        shape,
-        scaledCoords,
-        fillColor || fillColorProp,
-        lineWidth || lineWidthProp,
-        strokeColor || strokeColorProp,
-        isAreaActive ?? true,
-        ctx,
-      );
-    }
+    drawAreas(
+      shape,
+      scaledCoords,
+      fillColor || fillColorProp,
+      lineWidth || lineWidthProp,
+      strokeColor || strokeColorProp,
+      isAreaActive ?? true,
+      renderingCtx,
+    );
 
     if (onMouseEnter) onMouseEnter(area, index, event);
   };
 
   const onAreaLeave = (area: CustomArea, index: number, event: AreaEvent) => {
-    if (active) {
-      ctx.current.clearRect(0, 0, canvas.current.width, canvas.current.height);
-      renderPrefilledAreas();
-    }
+    renderingCtx.current.clearRect(
+      0,
+      0,
+      hoverCanvasRef.current.width,
+      hoverCanvasRef.current.height,
+    );
+    renderPrefilledAreas();
 
     if (onMouseLeave) onMouseLeave(area, index, event);
   };
@@ -196,64 +232,63 @@ const ImageMapper = (props: ImageMapperProps): JSX.Element => {
     }
   };
 
-  const updateCanvas = () => {
-    ctx.current.clearRect(0, 0, canvas.current.width, canvas.current.height);
-    renderPrefilledAreas(mapProp);
-  };
+  useEffect(() => {
+    if (isFirstRender) {
+      initCanvas(true);
+      setRendered(true);
+      renderPrefilledAreas(mapProp);
+    } else {
+      initCanvas();
+      if (imageRef.current) {
+        renderingCtx.current.clearRect(
+          0,
+          0,
+          hoverCanvasRef.current.width,
+          hoverCanvasRef.current.height,
+        );
+        renderPrefilledAreas(mapProp);
+      }
+    }
+    // update cached map
+    setMap(mapProp);
+    setStoredMap(mapProp);
+  }, [props]);
 
   // useEffect(() => {
-  //   initCanvas(true);
-  //   updateCacheMap();
-  //   setRendered(true);
-  // }, []);
+  //   container.current.clearHighlightedArea = () => {
+  //     setMap(storedMap);
+  //     initCanvas();
+  //   };
 
-  useEffect(() => {
-    if (isInitialMount.current) {
-      initCanvas(true);
-      updateCacheMap();
-      setRendered(true);
-      isInitialMount.current = false;
-    } else {
-      updateCacheMap();
-      initCanvas();
-      if (img.current) updateCanvas();
-    }
-  }, [props, isInitialMount, img]);
-
-  useEffect(() => {
-    container.current.clearHighlightedArea = () => {
-      setMap(storedMap);
-      initCanvas();
-    };
-
-    if (containerRef) {
-      containerRef.current = container.current;
-    }
-  }, [img]);
+  //   if (containerRef) {
+  //     containerRef.current = container.current;
+  //   }
+  // }, [imageRef]);
 
   useEffect(() => {
     // restart canvas when parent resizes
     initCanvas();
   }, [parentWidth, initCanvas]);
 
+  console.log('highlightAllAreas', highlightAllAreas);
+
   return (
     <ContainerEl id="img-mapper" ref={container}>
       <ImageEl
         role="presentation"
-        className="img-mapper-img"
         alt="map"
         src={srcProp}
         useMap={`#${map.name}`}
-        hide={!img.current}
-        ref={img}
+        hide={!imageRef.current}
+        ref={imageRef}
         onClick={event => imageClick(event, props)}
         onMouseMove={event => imageMouseMove(event, props)}
       />
-      <CanvasEl className="img-mapper-canvas" ref={canvas} />
-      <MapEl className="img-mapper-map" name={map.name}>
+      <CanvasEl ref={hoverCanvasRef} />
+      <CanvasEl ref={highlightCanvasRef} />
+      <MapEl name={map.name}>
         {isRendered &&
-          !disabled &&
-          img.current &&
+          imageRef.current &&
           map.areas.map((area, index) => {
             if (area.disabled) return null;
 

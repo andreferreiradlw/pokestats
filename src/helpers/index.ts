@@ -2,6 +2,8 @@
 export * from './animations';
 // box
 export * from './box';
+// card
+export * from './card';
 // names
 export * from './findName';
 // game version

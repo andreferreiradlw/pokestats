@@ -1,17 +1,22 @@
 // types
 import type { GetStaticPaths, GetStaticProps, NextPage } from 'next';
+import type { MoveType, Pokemon, PokemonType } from '@/types';
 // helpers
 import { PokemonTCG } from 'pokemon-tcg-sdk-typescript';
 import { useRouter } from 'next/router';
 import { formatCardName } from '@/helpers';
 // components
 import Loading from '@/components/Loading';
+import Head from 'next/head';
+import CardPage from '@/components/CardPage';
+import Layout from '@/components/Layout';
 
-interface SingleCardPageProps {
+export interface SingleCardPageProps {
+  autocompleteList: (Pokemon | PokemonType | MoveType)[];
   card: PokemonTCG.Card;
 }
 
-const SingleCardPage: NextPage<SingleCardPageProps> = ({ card }) => {
+const SingleCardPage: NextPage<SingleCardPageProps> = ({ autocompleteList, ...rest }) => {
   // router
   const router = useRouter();
 
@@ -28,7 +33,25 @@ const SingleCardPage: NextPage<SingleCardPageProps> = ({ card }) => {
 
   // console.log('card', card);
 
-  return <div>{card.name}</div>;
+  return (
+    <>
+      <Head>
+        {/* <title>{pageTitle}</title>
+        <meta name="description" content={pageDescription} />
+        <meta
+          name="keywords"
+          content={`${moveName}, Move, Pokémon, Pokémon Move, ${capitalise(
+            props.move.type.name,
+          )} Type, Move, TM, HM, TR, Machines, Target, Effect, PP, Accuracy, Power`}
+        />
+        <meta property="og:title" content={pageTitle} />
+        <meta property="og:description" content={pageDescription} /> */}
+      </Head>
+      <Layout withHeader={{ autocompleteList: autocompleteList }}>
+        <CardPage {...rest} />
+      </Layout>
+    </>
+  );
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {

@@ -1,7 +1,8 @@
 // types
 import type { GetServerSideProps } from 'next';
+import type { Pokemon, PokemonType, MoveType } from '@/types';
 // helpers
-import { PokemonClient, MoveClient, NamedAPIResource } from 'pokenode-ts';
+import { fetchAutocompleteData } from '@/helpers';
 
 const toUrl = (host: string, route: string, priority = '1.0') => `
   <url>
@@ -15,9 +16,9 @@ const toUrl = (host: string, route: string, priority = '1.0') => `
 const createSitemap = (
   host: string,
   routes: string[],
-  pokemonList: NamedAPIResource[],
-  pokemonTypes: NamedAPIResource[],
-  movesList: NamedAPIResource[],
+  pokemonList: Pokemon[],
+  pokemonTypes: PokemonType[],
+  movesList: MoveType[],
 ) => `<?xml version="1.0" encoding="UTF-8"?>
   <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     ${routes.map(route => toUrl(host, route))}
@@ -30,24 +31,13 @@ const Sitemap = () => {};
 
 export const getServerSideProps: GetServerSideProps = async context => {
   const { req, res } = context;
-  // clients
-  const pokemonClient = new PokemonClient();
-  const moveClient = new MoveClient();
   // fixed routes
   const routes = [''];
 
-  try {
-    const [
-      { results: allPokemonDataResults },
-      { results: allTypesDataResults },
-      { results: allMovesDataResults },
-    ] = await Promise.all([
-      pokemonClient.listPokemons(0, 905),
-      pokemonClient.listTypes(),
-      moveClient.listMoves(0, 850),
-    ]);
+  const { allMovesData, allPokemonData, allTypesData } = await fetchAutocompleteData();
 
-    if (!allPokemonDataResults || !allTypesDataResults || !allMovesDataResults) {
+  try {
+    if (!allPokemonData || !allTypesData || !allMovesData) {
       return { notFound: true };
     }
 
@@ -55,9 +45,9 @@ export const getServerSideProps: GetServerSideProps = async context => {
     const sitemap = createSitemap(
       req.headers.host,
       routes,
-      allPokemonDataResults,
-      allTypesDataResults,
-      allMovesDataResults,
+      allPokemonData,
+      allTypesData,
+      allMovesData,
     );
 
     // response

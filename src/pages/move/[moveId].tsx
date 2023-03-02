@@ -21,6 +21,7 @@ import {
   listGamesByGroup,
   listMoveGroupsByGroup,
   removeDash,
+  mapGeneration,
 } from '@/helpers';
 // components
 import Head from 'next/head';
@@ -57,7 +58,13 @@ const PokestatsMovePage: NextPage<PokestatsMovePageProps> = ({ autocompleteList,
   const pageTitle = `${moveName} (${capitalise(
     props.move.type.name,
   )} Type Pokémon Move) - Pokestats.gg`;
-  const pageDescription = formatFlavorText(props.move.flavor_text_entries.at(-1)?.flavor_text);
+  const moveFlavorText = props.move.flavor_text_entries.at(-1)?.flavor_text;
+  const pageDescription = moveFlavorText
+    ? formatFlavorText(moveFlavorText)
+    : `${moveName} is a ${capitalise(props.move.type.name)}-type ${capitalise(
+        props.move.damage_class.name,
+      )} move introduced in ${mapGeneration(props.move.generation.name)}`;
+  console.log(props.move);
 
   return (
     <>

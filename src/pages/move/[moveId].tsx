@@ -64,7 +64,6 @@ const PokestatsMovePage: NextPage<PokestatsMovePageProps> = ({ autocompleteList,
     : `${moveName} is a ${capitalise(props.move.type.name)}-type ${capitalise(
         props.move.damage_class.name,
       )} move introduced in ${mapGeneration(props.move.generation.name)}`;
-  console.log(props.move);
 
   return (
     <>

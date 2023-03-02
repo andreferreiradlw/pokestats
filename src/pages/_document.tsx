@@ -37,7 +37,7 @@ export default class MyDocument extends Document {
             href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,700;1,700&family=Montserrat:wght@400;500;600;700&family=Quicksand:wght@600;700&display=swap"
             rel="stylesheet"
             id="generate-googlefonts-css"
-            crossOrigin="true"
+            crossOrigin=""
           />
         </Head>
         <body>

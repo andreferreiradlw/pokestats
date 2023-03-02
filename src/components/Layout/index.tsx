@@ -1,11 +1,11 @@
 import { useState, useMemo, CSSProperties } from 'react';
 // types
-import type { AutocompleteProps } from '@/components/Autocomplete';
+import type { MoveType, Pokemon, PokemonType } from '@/types';
 import type { BoxProps } from '@/components/Box';
 import type { PokemonSpecies } from 'pokenode-ts';
 // helpers
 import GameVersionContext from './gameVersionContext';
-import { fadeInOutUpVariant, fadeInUpVariant, mapGeneration, scrollToTop } from '@/helpers';
+import { fadeInOutUpVariant, mapGeneration, scrollToTop } from '@/helpers';
 // styles
 import { LayoutContainer, MainContainer, ScrollButton } from './StyledLayout';
 // hooks
@@ -22,7 +22,7 @@ interface LayoutProps extends BoxProps {
   layoutGap?: CSSProperties['gap'];
   withHeader?: {
     currPokemon?: PokemonSpecies;
-    autocompleteList: AutocompleteProps['filterList'];
+    autocompleteList: (Pokemon | PokemonType | MoveType)[];
   };
 }
 

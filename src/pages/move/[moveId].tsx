@@ -4,7 +4,6 @@ import type { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 import type { MoveType, Pokemon, PokemonType } from '@/types';
 // helpers
 import {
-  PokemonClient,
   MoveClient,
   MachineClient,
   Move,
@@ -15,13 +14,14 @@ import {
 } from 'pokenode-ts';
 import {
   capitalise,
+  fetchAutocompleteData,
   findEnglishName,
   formatFlavorText,
   getIdFromURL,
   listGamesByGroup,
   listMoveGroupsByGroup,
   removeDash,
-  removeDuplicateMoves,
+  mapGeneration,
 } from '@/helpers';
 // components
 import Head from 'next/head';
@@ -58,7 +58,12 @@ const PokestatsMovePage: NextPage<PokestatsMovePageProps> = ({ autocompleteList,
   const pageTitle = `${moveName} (${capitalise(
     props.move.type.name,
   )} Type Pokémon Move) - Pokestats.gg`;
-  const pageDescription = formatFlavorText(props.move.flavor_text_entries.at(-1)?.flavor_text);
+  const moveFlavorText = props.move.flavor_text_entries.at(-1)?.flavor_text;
+  const pageDescription = moveFlavorText
+    ? formatFlavorText(moveFlavorText)
+    : `${moveName} is a ${capitalise(props.move.type.name)}-type ${capitalise(
+        props.move.damage_class.name,
+      )} move introduced in ${mapGeneration(props.move.generation.name)}`;
 
   return (
     <>
@@ -105,7 +110,6 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   // clients
-  const pokemonClient = new PokemonClient();
   const moveClient = new MoveClient();
   const machineClient = new MachineClient();
   const contestClient = new ContestClient();
@@ -117,21 +121,14 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     let moveData: Move;
 
     if (moveName === 'pound') {
+      // multiple pound named moves in last gen
       moveData = await moveClient.getMoveById(1);
     } else {
       moveData = await moveClient.getMoveByName(moveName);
     }
-    const [
-      { results: allPokemonDataResults },
-      { results: allTypesDataResults },
-      { results: allMovesDataResults },
-    ] = await Promise.all([
-      pokemonClient.listPokemons(0, 905),
-      pokemonClient.listTypes(),
-      moveClient.listMoves(0, 850),
-    ]);
+    const { allMovesData, allPokemonData, allTypesData } = await fetchAutocompleteData();
 
-    if (!allPokemonDataResults || !allTypesDataResults || !allMovesDataResults || !moveData) {
+    if (!allPokemonData || !allTypesData || !allMovesData || !moveData) {
       console.log('Failed to fetch moveData');
       return { notFound: true };
     }
@@ -207,23 +204,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
     return {
       props: {
-        autocompleteList: [
-          ...allPokemonDataResults.map((currPokemon, i) => ({
-            ...currPokemon,
-            id: i + 1,
-            assetType: 'pokemon',
-          })),
-          ...allTypesDataResults.map((currType, i) => ({
-            ...currType,
-            id: i + 1,
-            assetType: 'type',
-          })),
-          ...removeDuplicateMoves(allMovesDataResults).map((currMove, i) => ({
-            ...currMove,
-            id: getIdFromURL(currMove.url, 'move'),
-            assetType: 'move',
-          })),
-        ],
+        autocompleteList: [...allPokemonData, ...allTypesData, ...allMovesData],
         move: moveData,
         moveMachines: moveMachinesData,
         target: targetData,

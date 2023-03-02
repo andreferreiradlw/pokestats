@@ -106,6 +106,11 @@ const theme = {
       steel: 'rgba(183, 183, 206, 0.75)',
       water: 'rgba(99, 144, 240, 0.75)',
     },
+    games: {
+      red: '#EB0000',
+      blue: '#1111FF',
+      yellow: '#FFD733',
+    },
   },
 };
 

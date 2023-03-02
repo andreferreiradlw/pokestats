@@ -10,6 +10,13 @@ const removeUnderscore = (str: string): string => str.replace(/_/g, ' ');
 // remove dashes
 const removeDash = (str: string): string => str?.replace(/-/g, ' ');
 
+// return text between parenthesis
+const betweentParenthesis = (str: string): string => {
+  const match = str.match(/\((.*)\)/)?.pop();
+  // if no parenthesis, return original str
+  return match || null;
+};
+
 // formats game ROMs flavor text
 const formatFlavorText = (text: string): string =>
   text
@@ -51,6 +58,7 @@ export {
   capitalise,
   removeUnderscore,
   removeDash,
+  betweentParenthesis,
   formatFlavorText,
   prefixId,
   itemMapUrl,

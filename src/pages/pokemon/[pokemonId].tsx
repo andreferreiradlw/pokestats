@@ -10,7 +10,7 @@ import type {
   EvolutionDetail,
 } from 'pokenode-ts';
 // helpers
-import { PokemonClient, EvolutionClient, MoveClient } from 'pokenode-ts';
+import { PokemonClient, EvolutionClient } from 'pokenode-ts';
 import {
   getIdFromEvolutionChain,
   getIdFromSpecies,
@@ -18,8 +18,7 @@ import {
   formatFlavorText,
   gameVersions,
   findEnglishName,
-  removeDuplicateMoves,
-  getIdFromURL,
+  fetchAutocompleteData,
 } from '@/helpers';
 // components
 import Head from 'next/head';
@@ -129,30 +128,15 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   // clients
   const pokemonClient = new PokemonClient();
   const evolutionClient = new EvolutionClient();
-  const moveClient = new MoveClient();
 
   const pokemonName = params.pokemonId as string;
 
   try {
     // fetch data
-    const [
-      { results: allPokemonDataResults },
-      { results: allTypesDataResults },
-      pokemonDataResults,
-      { results: allMovesDataResults },
-    ] = await Promise.all([
-      pokemonClient.listPokemons(0, 905),
-      pokemonClient.listTypes(),
-      pokemonClient.getPokemonByName(pokemonName),
-      moveClient.listMoves(0, 850),
-    ]);
+    const pokemonDataResults = await pokemonClient.getPokemonByName(pokemonName);
+    const { allMovesData, allPokemonData, allTypesData } = await fetchAutocompleteData();
 
-    if (
-      !allPokemonDataResults ||
-      !allTypesDataResults ||
-      !allMovesDataResults ||
-      !pokemonDataResults
-    ) {
+    if (!allPokemonData || !allTypesData || !allMovesData || !pokemonDataResults) {
       console.log('Failed to fetch allPokemonData, typesData, pokemonData');
       return { notFound: true };
     }
@@ -258,23 +242,8 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
     return {
       props: {
-        allPokemon: allPokemonDataResults.map((currPokemon, i) => ({
-          ...currPokemon,
-          id: i + 1,
-          assetType: 'pokemon',
-        })),
-        autocompleteList: [
-          ...allTypesDataResults.map((currType, i) => ({
-            ...currType,
-            id: i + 1,
-            assetType: 'type',
-          })),
-          ...removeDuplicateMoves(allMovesDataResults).map((currMove, i) => ({
-            ...currMove,
-            id: getIdFromURL(currMove.url, 'move'),
-            assetType: 'move',
-          })),
-        ],
+        allPokemon: allPokemonData,
+        autocompleteList: [...allTypesData, ...allMovesData],
         pokemon: pokemonDataResults,
         abilities: pokemonAbilitiesResults.map(ability => ({
           name: ability.name,

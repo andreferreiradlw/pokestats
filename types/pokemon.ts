@@ -1,6 +1,6 @@
-import type { Pokemon as PokenodePokemon } from 'pokenode-ts';
+import type { NamedAPIResource } from 'pokenode-ts';
 
-export interface Pokemon extends PokenodePokemon {
+export interface Pokemon extends NamedAPIResource {
   assetType: 'pokemon';
   id: number;
 }

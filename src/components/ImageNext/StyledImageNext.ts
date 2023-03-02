@@ -11,26 +11,23 @@ import Box from '@/components/Box/';
 import EggIcon from 'public/static/iconLibrary/egg.svg';
 import Error404Icon from 'public/static/iconLibrary/404_error.svg';
 
-const ImageElement = styled(Image)`
+const ImageElement = styled(Image)<{ pixelatedimg?: ImageNextProps['pixelatedimg'] }>`
   object-fit: contain;
   position: relative !important;
   will-change: opacity;
+
+  ${({ pixelatedimg }) =>
+    pixelatedimg &&
+    css`
+      image-rendering: pixelated;
+    `}
 `;
 
 const ImageContainer = styled(Box)<{
   width?: ImageNextProps['width'];
   height?: ImageNextProps['height'];
-  $pixelatedImg?: ImageNextProps['$pixelatedImg'];
 }>`
   position: relative;
-
-  ${({ $pixelatedImg }) =>
-    $pixelatedImg &&
-    css`
-      ${ImageElement} {
-        image-rendering: pixelated;
-      }
-    `}
 
   ${({ width }) =>
     width &&

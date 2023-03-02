@@ -20,7 +20,7 @@ const MovePokemon = ({ pokemonList, ...rest }: MovePokemonProps): JSX.Element =>
 
   return (
     <Box flexalign="flex-start" flexjustify="flex-start" flexgap="1em" {...rest}>
-      <SectionTitle>{`Learnset (${pokemonList.length})`}</SectionTitle>
+      <SectionTitle>{`Learnset (${displayPokemon?.length})`}</SectionTitle>
       <InfiniteScroll screensizes={12} pokemonList={displayPokemon} />
     </Box>
   );

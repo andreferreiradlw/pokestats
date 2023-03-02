@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from 'react';
 // types
 import type { PokemonSpecies } from 'pokenode-ts';
+import type { MoveType, Pokemon, PokemonType } from '@/types';
 // helpers
 import { usePlausible } from 'next-plausible';
 import GameVersionContext from '@/components/Layout/gameVersionContext';
@@ -8,13 +9,13 @@ import { gameVersions, checkIfEarlierGen, mapGenerationToGame } from '@/helpers'
 // components
 import Link from 'next/link';
 import Box, { BoxProps } from '@/components/Box';
-import Autocomplete, { AutocompleteProps } from '@/components/Autocomplete';
+import Autocomplete from '@/components/Autocomplete';
 import Dropdown from '@/components/Dropdown';
 // styles
 import { HeaderContainer, PokestatsLogo } from './styledHeader';
 
 interface HeaderComponentProps extends BoxProps {
-  autocompleteList: AutocompleteProps['filterList'];
+  autocompleteList: (Pokemon | PokemonType | MoveType)[];
   currPokemon?: PokemonSpecies;
 }
 type GameVersions = typeof gameVersions;

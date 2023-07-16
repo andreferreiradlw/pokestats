@@ -4,7 +4,7 @@ import type { MoveType, Pokemon, PokemonType } from '@/types';
 // helpers
 import { PokemonTCG } from 'pokemon-tcg-sdk-typescript';
 import { useRouter } from 'next/router';
-import { formatCardName } from '@/helpers';
+import { fetchAutocompleteData, formatCardName } from '@/helpers';
 // components
 import Loading from '@/components/Loading';
 import Head from 'next/head';
@@ -16,7 +16,7 @@ export interface SingleCardPageProps {
   card: PokemonTCG.Card;
 }
 
-const SingleCardPage: NextPage<SingleCardPageProps> = ({ autocompleteList, ...rest }) => {
+const SingleCardPage: NextPage<SingleCardPageProps> = ({ autocompleteList, card }) => {
   // router
   const router = useRouter();
 
@@ -31,24 +31,26 @@ const SingleCardPage: NextPage<SingleCardPageProps> = ({ autocompleteList, ...re
     );
   }
 
-  // console.log('card', card);
+  const { supertype, set, name } = card;
+
+  // SEO
+  const pageTitle = `${name} - ${set.series} ${set.name} - Pokestats.gg`;
+  const pageDescription = `${name} from ${set.series} - ${set.name}, released on ${set.releaseDate}.`;
 
   return (
     <>
       <Head>
-        {/* <title>{pageTitle}</title>
+        <title>{pageTitle}</title>
         <meta name="description" content={pageDescription} />
+        <meta property="og:title" content={pageTitle} />
+        <meta property="og:description" content={pageDescription} />
         <meta
           name="keywords"
-          content={`${moveName}, Move, Pokémon, Pokémon Move, ${capitalise(
-            props.move.type.name,
-          )} Type, Move, TM, HM, TR, Machines, Target, Effect, PP, Accuracy, Power`}
+          content={`${supertype}, ${name}, ${set.name}, ${set.series}, pokemon, trading, card, cards, evolution, api, developers, trading card game, trading cards, collectible card game, tcg, game, multiplayer, hobby`}
         />
-        <meta property="og:title" content={pageTitle} />
-        <meta property="og:description" content={pageDescription} /> */}
       </Head>
       <Layout withHeader={{ autocompleteList: autocompleteList }}>
-        <CardPage {...rest} />
+        <CardPage card={card} />
       </Layout>
     </>
   );
@@ -84,7 +86,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     const [pageCard] = await Promise.all([PokemonTCG.findCardByID(cardSetId)]);
 
     if (!pageCard) {
-      console.log('Failed to fetch card data', cardName, cardSetId, name);
+      console.log('Failed to fetch card data');
       return { notFound: true };
     }
 
@@ -93,8 +95,18 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
       return { notFound: true };
     }
 
+    const { allMovesData, allPokemonData, allTypesData } = await fetchAutocompleteData();
+
+    if (!allPokemonData || !allTypesData || !allMovesData) {
+      console.log('Failed to fetch autocomplete data');
+      return { notFound: true };
+    }
+
     return {
-      props: { card: pageCard },
+      props: {
+        card: pageCard,
+        autocompleteList: [...allPokemonData, ...allTypesData, ...allMovesData],
+      },
     };
   } catch (error) {
     console.error(error);

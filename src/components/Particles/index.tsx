@@ -43,7 +43,7 @@ const Particles = ({ ...props }): JSX.Element => {
         height="100%"
         id="tsparticles"
         init={particlesInit}
-        // @ts-ignore
+        // @ts-expect-error: not able to type json file object
         options={particleConfig}
       />
     </ParticlesContainer>

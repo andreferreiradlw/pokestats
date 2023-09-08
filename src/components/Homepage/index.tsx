@@ -33,6 +33,11 @@ const Homepage = ({ allPokemon, pokemonTypes, allMoves }: PokestatsHomepageProps
     if (router && randomPokemonUrl) router.prefetch(randomPokemonUrl);
   }, [randomPokemonUrl, router]);
 
+  const onRandomClick = () => {
+    plausible('Random Pokemon');
+    router.push(randomPokemonUrl);
+  };
+
   return (
     <>
       <motion.div
@@ -63,13 +68,7 @@ const Homepage = ({ allPokemon, pokemonTypes, allMoves }: PokestatsHomepageProps
         >
           <MainHeading>PokeStats</MainHeading>
           <Autocomplete filterList={[...allPokemon, ...pokemonTypes, ...allMoves]} />
-          <Button
-            onClick={() => {
-              plausible('Random Pokemon');
-              router.push(randomPokemonUrl);
-            }}
-            $dark
-          >
+          <Button onClick={onRandomClick} $dark>
             Random Pokemon
             <Pokeball />
           </Button>

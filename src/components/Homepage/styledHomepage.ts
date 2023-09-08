@@ -1,11 +1,10 @@
 import styled, { css } from 'styled-components';
 // helpers
-import { bounce, rotate } from '@/BaseStyles';
+import { rotate } from '@/BaseStyles';
 // components
 import { motion } from 'framer-motion';
 import BoxWrapper from '@/components/Box/StyledBox';
 // icons
-import ArrowDownIcon from 'public/static/iconLibrary/arrow_down.svg';
 import PokeballIcon from 'public/static/iconLibrary/pokeball.svg';
 
 const Container = styled(BoxWrapper)`
@@ -44,19 +43,6 @@ const GithubLink = styled(motion.a)`
   }
 `;
 
-const ScrollContainer = styled(motion.div)`
-  bottom: 10px;
-  left: 50%;
-  position: absolute;
-  transform: translate(-50%, -50%);
-`;
-
-const ScrollDown = styled(ArrowDownIcon)`
-  animation: ${bounce} 1.5s ease-in-out 0s infinite;
-
-  width: 40px;
-`;
-
 const ListContainer = styled(BoxWrapper)`
   ${({ theme }) => css`
     background: ${theme.colors.primary.main};
@@ -70,4 +56,4 @@ const Pokeball = styled(PokeballIcon)`
   animation: 3s ${rotate} 0ms infinite linear;
 `;
 
-export { Container, GithubLink, ScrollContainer, ScrollDown, ListContainer, Pokeball };
+export { Container, GithubLink, ListContainer, Pokeball };

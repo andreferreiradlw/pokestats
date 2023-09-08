@@ -34,12 +34,11 @@ const GithubLink = styled(motion.a)`
     height: auto;
     width: 30px;
 
-    ${({ theme }) =>
-      css`
-        @media ${theme.device.sm} {
-          width: 50px;
-        }
-      `}
+    ${({ theme }) => css`
+      @media ${theme.device.sm} {
+        width: 50px;
+      }
+    `}
   }
 `;
 

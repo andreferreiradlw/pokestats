@@ -50,17 +50,16 @@ const SelectButton = styled.button<{ $isOpen: Boolean }>`
 
   ${focusStyles}
 
-  ${({ $isOpen }) =>
-    css`
-      border-radius: ${$isOpen ? '5px 5px 0 0' : '5px'};
+  ${({ $isOpen }) => css`
+    border-radius: ${$isOpen ? '5px 5px 0 0' : '5px'};
 
-      ${$isOpen &&
-      css`
-        ${ChevronIcon} {
-          transform: rotate(180deg);
-        }
-      `}
+    ${$isOpen &&
+    css`
+      ${ChevronIcon} {
+        transform: rotate(180deg);
+      }
     `}
+  `}
 
   &:hover {
     background: ${({ theme }) => theme.colors.primary.light};

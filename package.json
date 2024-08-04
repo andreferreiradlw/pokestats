@@ -27,7 +27,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint src -c .eslintrc --ext js",
-    "prettier": "prettier \"**/*.{js,ts,md,json,yml}\" --ignore-path .gitignore"
+    "prettier": "prettier \"**/*.{js,ts,md,json,yml}\" --ignore-path .gitignore",
+    "fix:eslint": "eslint --fix \"**/*.*\"",
+    "fix:prettier": "prettier --write \"**/*.*\""
   },
   "dependencies": {
     "@mui/material": "^5.14.8",

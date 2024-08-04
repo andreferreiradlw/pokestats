@@ -38,5 +38,5 @@
     "es6": true,
     "jest": true
   },
-  "ignorePatterns": ["node_modules", "build", "dist", "public", "src/**/*.js", "src/**/*.jsx"]
+  "ignorePatterns": ["node_modules", "build", "dist", "public"]
 }

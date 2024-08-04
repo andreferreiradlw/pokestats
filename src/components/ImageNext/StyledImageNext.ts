@@ -41,7 +41,7 @@ const ImageContainer = styled(Box)<{
     ${ImageElement} {
       height: ${height ? `${height}px` : 'auto'} !important;
       min-height: ${height ? `${height}px` : 'auto'};
-      ${height && `width: auto !important;`}
+      ${height && 'width: auto !important;'}
     }
   `}
 `;

@@ -25,7 +25,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "NODE_ENV=production node server.js",
+    "start": "next start",
     "lint": "eslint src -c .eslintrc --ext js",
     "prettier": "prettier \"**/*.{js,ts,md,json,yml}\" --ignore-path .gitignore",
     "lint:css": "stylelint './src/**/*.js'"

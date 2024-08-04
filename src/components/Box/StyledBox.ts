@@ -55,10 +55,10 @@ const BoxWrapper = styled(motion.div)<BoxProps>`
           flex-basis: 100%;
         `
       : screensizes
-      ? flexStyle(screensizes, $parentGap)
-      : css`
-          flex-basis: auto;
-        `}
+        ? flexStyle(screensizes, $parentGap)
+        : css`
+            flex-basis: auto;
+          `}
   
   ${({ $contained, screensizes, $flexgrow }) =>
     !$contained &&

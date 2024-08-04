@@ -6,7 +6,11 @@ const MainHeading = styled(motion.h1)`
   font-family: 'Josefin Sans', sans-serif;
   font-size: 3em;
   font-weight: 700;
-  text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000;
+  text-shadow:
+    -2px -2px 0 #000,
+    2px -2px 0 #000,
+    -2px 2px 0 #000,
+    2px 2px 0 #000;
   user-select: none;
 
   ${({ theme }) => css`

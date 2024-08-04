@@ -72,17 +72,18 @@ const Input = styled.input<{ $isOpen: Boolean }>`
 
 const ListWrapper = styled(motion.div)`
   border-radius: 0 0 0.25rem 0.25rem;
-  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+  box-shadow:
+    0 2px 5px 0 rgba(0, 0, 0, 0.16),
+    0 2px 10px 0 rgba(0, 0, 0, 0.12);
   position: absolute;
   width: 100%;
   z-index: 2;
 
-  ${({ theme }) =>
-    css`
-      background: ${theme.colors.white};
-      border: 1px solid ${theme.colors.white};
-      border-top: none;
-    `}
+  ${({ theme }) => css`
+    background: ${theme.colors.white};
+    border: 1px solid ${theme.colors.white};
+    border-top: none;
+  `}
 `;
 
 const PokemonImg = styled.img`

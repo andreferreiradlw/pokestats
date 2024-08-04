@@ -40,7 +40,10 @@ const EvolutionChain = ({
             flexalign="stretch"
             flexjustify="flex-start"
             flexgap="1em"
-            style={{ overflowX: 'scroll' }}
+            style={{
+              overflow: 'hidden',
+              overflowX: firstEvolution.name === 'eevee' ? 'scroll' : 'hidden',
+            }}
           >
             {secondEvolution.map(({ species, evolutionDetails, thirdEvolution }, i) => (
               <Box key={`second-evo-container-${i}-${chainId}`} flexgap="1em">

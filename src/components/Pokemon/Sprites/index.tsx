@@ -32,7 +32,7 @@ const Sprites = ({ pokemonSprites, pokemonId, forms, ...rest }: SpritesProps): J
         .filter(form => !form.is_default)
         ?.map(form => {
           const uppercased = form.pokemon.name.replace(/\-[a-z]/g, match => match.toUpperCase());
-          let arr = uppercased.split('-');
+          const arr = uppercased.split('-');
           arr.shift();
 
           return {

@@ -72,7 +72,7 @@ const ImageNext = ({
               src={src}
               draggable={false}
               pixelatedimg={pixelatedimg}
-              onLoadingComplete={() => setShowPlaceholder(false)}
+              onLoad={() => setShowPlaceholder(false)}
               onError={() => setHasError(true)}
               {...rest}
             />

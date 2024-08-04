@@ -70,8 +70,8 @@ const Button = styled(motion.button)<{ $dark?: boolean; $active?: boolean }>`
         ? lightValues(theme)
         : darkValues(theme)
       : $active
-      ? darkValues(theme)
-      : lightValues(theme)}
+        ? darkValues(theme)
+        : lightValues(theme)}
 `;
 
 export { Button, focusStyles };

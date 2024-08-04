@@ -11,7 +11,11 @@ const PokestatsLogo = styled.h2`
   font-size: 4.2rem;
   font-weight: 700;
   line-height: 4.2rem;
-  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+  text-shadow:
+    -1px -1px 0 #000,
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+    1px 1px 0 #000;
   user-select: none;
 
   &:hover {

@@ -26,30 +26,33 @@ const BtnSpan = styled.span`
 `;
 
 const Arrow = styled(BtnSpan)<{ $left?: boolean; $right?: boolean }>`
-  ${({ $right, $left }) =>
-    css`
-      &:after {
-        border-bottom: 45px solid transparent;
-        border-top: 45px solid transparent;
-        content: '';
-        position: absolute;
-        transition: all 0.15s ease-in-out;
+  ${({ $right, $left }) => css`
+    &:after {
+      border-bottom: 45px solid transparent;
+      border-top: 45px solid transparent;
+      content: '';
+      position: absolute;
+      transition: all 0.15s ease-in-out;
 
-        ${$left &&
-        css`
-          border-right: 10px solid black;
-          box-shadow: 10px 0 0 0 black, 10px 3px 0 0 black;
-          right: 0;
-        `}
+      ${$left &&
+      css`
+        border-right: 10px solid black;
+        box-shadow:
+          10px 0 0 0 black,
+          10px 3px 0 0 black;
+        right: 0;
+      `}
 
-        ${$right &&
-        css`
-          border-left: 10px solid black;
-          box-shadow: -10px 0 0 0 black, -10px 3px 0 0 black;
-          left: 0;
-        `}
-      }
-    `}
+      ${$right &&
+      css`
+        border-left: 10px solid black;
+        box-shadow:
+          -10px 0 0 0 black,
+          -10px 3px 0 0 black;
+        left: 0;
+      `}
+    }
+  `}
 `;
 
 const Title = styled(BtnSpan)`

@@ -4,6 +4,8 @@ export * from './animations';
 export * from './autocomplete';
 // box
 export * from './box';
+// card
+export * from './card';
 // draw
 export * from './draw';
 // names

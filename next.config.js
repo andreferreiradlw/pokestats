@@ -29,6 +29,10 @@ module.exports = {
         hostname: 'raw.githubusercontent.com',
         pathname: '/msikma/pokesprite/master/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'images.pokemontcg.io',
+      },
     ],
   },
   async rewrites() {

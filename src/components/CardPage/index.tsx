@@ -1,5 +1,5 @@
 // types
-import type { SingleCardPageProps } from '@/pages/card/[cardName]/[cardSetId]';
+import type { SingleCardPageProps } from '@/pages/card/[cardSetId]';
 // helpers
 import { pageContainerVariant } from '@/helpers';
 // components
@@ -15,7 +15,7 @@ interface CardPageProps extends Omit<SingleCardPageProps, 'autocompleteList'>, B
 const CardPage = ({ card, ...rest }: CardPageProps): JSX.Element => {
   console.log('card', card);
   // data
-  const { name, id, images } = card;
+  const { id, images } = card;
 
   return (
     <AnimatePresence mode="wait">

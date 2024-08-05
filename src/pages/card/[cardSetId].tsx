@@ -1,10 +1,10 @@
 // types
-import type { GetStaticPaths, GetStaticProps, NextPage } from 'next';
+import type { GetServerSideProps, NextPage } from 'next';
 import type { MoveType, Pokemon, PokemonType } from '@/types';
 // helpers
 import { PokemonTCG } from 'pokemon-tcg-sdk-typescript';
 import { useRouter } from 'next/router';
-import { fetchAutocompleteData, formatCardName } from '@/helpers';
+import { fetchAutocompleteData } from '@/helpers';
 // components
 import Loading from '@/components/Loading';
 import Head from 'next/head';
@@ -56,28 +56,8 @@ const SingleCardPage: NextPage<SingleCardPageProps> = ({ autocompleteList, card 
   );
 };
 
-export const getStaticPaths: GetStaticPaths = async () => {
-  // clients
-  const [baseSetCards] = await Promise.all([PokemonTCG.findCardsByQueries({ q: `id:base1` })]);
-
-  const paths = baseSetCards.map(({ name, id }) => {
-    return {
-      params: {
-        cardName: formatCardName(name),
-        cardSetId: id,
-      },
-    };
-  });
-
-  // return static paths
-  return {
-    paths,
-    fallback: true,
-  };
-};
-
-export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const { cardName, cardSetId } = params as { cardName: string; cardSetId: string };
+export const getServerSideProps: GetServerSideProps<SingleCardPageProps> = async ({ params }) => {
+  const { cardSetId } = params as { cardName: string; cardSetId: string };
 
   if (!cardSetId) {
     return { notFound: true };
@@ -85,17 +65,10 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
   try {
     // get card
-    const name = cardName.split('-').at(-1);
-
     const [pageCard] = await Promise.all([PokemonTCG.findCardByID(cardSetId)]);
 
     if (!pageCard) {
       console.log('Failed to fetch card data');
-      return { notFound: true };
-    }
-
-    if (formatCardName(cardName) !== formatCardName(pageCard.name)) {
-      console.log('Card name does not match fetched card: ', name, pageCard.name);
       return { notFound: true };
     }
 

@@ -79,6 +79,10 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const { cardName, cardSetId } = params as { cardName: string; cardSetId: string };
 
+  if (!cardSetId) {
+    return { notFound: true };
+  }
+
   try {
     // get card
     const name = cardName.split('-').at(-1);

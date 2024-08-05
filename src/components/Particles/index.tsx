@@ -5,7 +5,6 @@ import { motion } from 'framer-motion';
 import type { Engine } from 'tsparticles-engine';
 // helpers
 import { loadFull } from 'tsparticles';
-import { scaleInVariant } from '@/helpers/animations';
 // particles
 import { default as ParticlesJS } from 'react-particles';
 // config
@@ -38,19 +37,13 @@ const Particles = ({ ...props }): JSX.Element => {
   }, []);
 
   return (
-    <ParticlesContainer
-      initial="hidden"
-      animate="show"
-      variants={scaleInVariant}
-      key="particles"
-      {...props}
-    >
+    <ParticlesContainer {...props}>
       <ParticlesElement
         width="100%"
         height="100%"
         id="tsparticles"
         init={particlesInit}
-        // @ts-ignore
+        // @ts-expect-error: not able to type json file object
         options={particleConfig}
       />
     </ParticlesContainer>

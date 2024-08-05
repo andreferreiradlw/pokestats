@@ -35,16 +35,15 @@ const ImageContainer = styled(Box)<{
       width: ${width}px;
     `}
 
-  ${({ height }) =>
-    css`
-      height: ${height ? `${height}px` : 'auto'};
+  ${({ height }) => css`
+    height: ${height ? `${height}px` : 'auto'};
 
-      ${ImageElement} {
-        height: ${height ? `${height}px` : 'auto'} !important;
-        min-height: ${height ? `${height}px` : 'auto'};
-        ${height && `width: auto !important;`}
-      }
-    `}
+    ${ImageElement} {
+      height: ${height ? `${height}px` : 'auto'} !important;
+      min-height: ${height ? `${height}px` : 'auto'};
+      ${height && 'width: auto !important;'}
+    }
+  `}
 `;
 
 const LoadingIcon = styled(EggIcon)`
@@ -65,17 +64,15 @@ const PlaceholderContainer = styled(motion.div)<{
   position: relative;
 
   ${LoadingIcon}, ${ErrorIcon} {
-    ${({ height }) =>
-      css`
-        height: ${height ? `${height}px` : '100%'};
-        width: ${height ? 'auto' : '100%'};
-      `}
+    ${({ height }) => css`
+      height: ${height ? `${height}px` : '100%'};
+      width: ${height ? 'auto' : '100%'};
+    `}
   }
   // width relative to container
-  ${({ placeholderwidth }) =>
-    css`
-      width: ${placeholderwidth ? `${placeholderwidth}` : '100%'};
-    `}
+  ${({ placeholderwidth }) => css`
+    width: ${placeholderwidth ? `${placeholderwidth}` : '100%'};
+  `}
 `;
 
 const LoadingContainer = styled(PlaceholderContainer)`

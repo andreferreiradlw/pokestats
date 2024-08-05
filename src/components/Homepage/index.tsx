@@ -1,9 +1,8 @@
 import { useMemo, useEffect } from 'react';
 import { useRouter } from 'next/router';
-import { AnimatePresence } from 'framer-motion';
 // heplpers
 import { usePlausible } from 'next-plausible';
-import { staggerInitialVariant, fadeInUpVariant, getRandomInt } from '@/helpers';
+import { fadeInUpVariant, getRandomInt } from '@/helpers';
 // types
 import type { PokestatsHomepageProps } from '@/pages/index';
 // styles
@@ -15,6 +14,7 @@ import Particles from '@/components/Particles';
 import PokemonList from './PokemonList';
 import TypeList from './TypeList';
 import Box from '@/components/Box';
+import { motion } from 'framer-motion';
 // icons
 import Github from 'public/static/iconLibrary/github.svg';
 
@@ -33,73 +33,57 @@ const Homepage = ({ allPokemon, pokemonTypes, allMoves }: PokestatsHomepageProps
     if (router && randomPokemonUrl) router.prefetch(randomPokemonUrl);
   }, [randomPokemonUrl, router]);
 
+  const onRandomClick = () => {
+    plausible('Random Pokemon');
+    router.push(randomPokemonUrl);
+  };
+
   return (
-    <AnimatePresence mode="wait">
-      <GithubLink
-        href="https://github.com/andreferreiradlw/pokestats"
-        target="_blank"
-        rel="noopener"
+    <>
+      <motion.div
         initial="hidden"
         animate="show"
-        whileHover="hover"
-        whileTap="tap"
         variants={fadeInUpVariant}
-        key="homepage-github"
-        onClick={() => plausible('Github Homepage')}
-      >
-        <Github />
-      </GithubLink>
-      <Container
-        flexheight="100vh"
-        flexalign="center"
-        flexdirection="column"
-        flexgap="1em"
-        $contained
-        $withGutter
-        initial="hidden"
-        animate="show"
-        variants={staggerInitialVariant}
         key="homepage-container"
       >
-        <MainHeading variants={fadeInUpVariant} key="homepage-heading">
-          PokeStats
-        </MainHeading>
-        <Autocomplete
-          filterList={[...allPokemon, ...pokemonTypes, ...allMoves]}
+        <GithubLink
+          href="https://github.com/andreferreiradlw/pokestats"
+          target="_blank"
+          rel="noopener"
+          whileHover="hover"
+          whileTap="tap"
           variants={fadeInUpVariant}
-          key="homepage-autocomplete"
-        />
-        <Button
-          onClick={() => {
-            plausible('Random Pokemon');
-            router.push(randomPokemonUrl);
-          }}
-          $dark
-          variants={fadeInUpVariant}
-          key="homepage-random-btn"
+          key="homepage-github"
+          onClick={() => plausible('Github Homepage')}
         >
-          Random Pokemon
-          <Pokeball />
-        </Button>
-      </Container>
-      <ListContainer
-        flexpadding="1.5em 0"
-        flexalign="center"
-        flexjustify="center"
-        key="homepage-list-container"
-        initial="hidden"
-        animate="show"
-        variants={fadeInUpVariant}
-      >
-        <Box $contained $withGutter flexgap="1.5em">
-          <TypeList types={pokemonTypes} />
-          <Divider />
-          <PokemonList pokemon={allPokemon} />
-          <Divider />
-        </Box>
-      </ListContainer>
-      <Particles key="homepage-particles" />
-    </AnimatePresence>
+          <Github />
+        </GithubLink>
+        <Container
+          flexheight="100vh"
+          flexalign="center"
+          flexdirection="column"
+          flexgap="1em"
+          $contained
+          $withGutter
+        >
+          <MainHeading>PokeStats</MainHeading>
+          <Autocomplete filterList={[...allPokemon, ...pokemonTypes, ...allMoves]} />
+          <Button onClick={onRandomClick} $dark>
+            Random Pokemon
+            <Pokeball />
+          </Button>
+        </Container>
+        <ListContainer flexpadding="1.5em 0" flexalign="center" flexjustify="center">
+          <Box $contained $withGutter flexgap="1.5em">
+            <TypeList types={pokemonTypes} />
+            <Divider />
+            <PokemonList pokemon={allPokemon} />
+            <Divider />
+          </Box>
+        </ListContainer>
+      </motion.div>
+      <Particles />
+    </>
   );
 };
 

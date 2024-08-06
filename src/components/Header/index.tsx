@@ -13,6 +13,7 @@ import Autocomplete from '@/components/Autocomplete';
 import Dropdown from '@/components/Dropdown';
 // styles
 import { HeaderContainer, PokestatsLogo } from './styledHeader';
+import GameGenSelect from '../GameGenSelect';
 
 interface HeaderComponentProps extends BoxProps {
   autocompleteList: (Pokemon | PokemonType | MoveType)[];
@@ -65,7 +66,7 @@ const HeaderComponent = ({
           <Link href="/">
             <PokestatsLogo>PokeStats</PokestatsLogo>
           </Link>
-          {pokemonGen && !!dropdownOptions?.length && (
+          {/* {pokemonGen && !!dropdownOptions?.length && (
             <Dropdown
               label="Game Version"
               options={dropdownOptions}
@@ -76,7 +77,8 @@ const HeaderComponent = ({
               }}
               minWidth="190px"
             />
-          )}
+          )} */}
+          {pokemonGen && !!dropdownOptions?.length && <GameGenSelect currPokemon={currPokemon} />}
         </Box>
         <Autocomplete filterList={autocompleteList} width="350px" />
       </Box>

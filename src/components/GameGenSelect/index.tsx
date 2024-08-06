@@ -7,24 +7,24 @@ import { useContext, useEffect, useState } from 'react';
 import { FormControl, InputLabel, MenuItem, Select, SelectProps } from '@mui/material';
 
 interface GameGenSelectProps extends SelectProps {
-  currPokemon?: PokemonSpecies;
+  pokemon?: PokemonSpecies;
 }
 
 type GameVersions = typeof gameVersions;
 
-const GameGenSelect = ({ currPokemon, ...rest }: GameGenSelectProps): JSX.Element => {
+const GameGenSelect = ({ pokemon, ...rest }: GameGenSelectProps): JSX.Element => {
   // analytics
   const plausible = usePlausible();
   // gen
-  const pokemonGen = currPokemon?.generation.name;
+  const pokemonGen = pokemon?.generation.name;
   // game version
   const { gameVersion, setGameVersion } = useContext(GameVersionContext);
   // state
   const [dropdownOptions, setDropdownOptions] = useState<GameVersions>([]);
 
   useEffect(() => {
-    if (currPokemon) {
-      const currGame = mapGenerationToGame(pokemonGen, currPokemon.id);
+    if (pokemon) {
+      const currGame = mapGenerationToGame(pokemonGen, pokemon.id);
 
       const currPokemonVersions = gameVersions.filter(
         version => !checkIfEarlierGen(currGame, version.value),
@@ -36,16 +36,15 @@ const GameGenSelect = ({ currPokemon, ...rest }: GameGenSelectProps): JSX.Elemen
         setGameVersion(currPokemonVersions[0].value);
       }
     }
-  }, [currPokemon]);
+  }, [pokemon]);
 
   return (
     <FormControl fullWidth>
-      <InputLabel id="demo-simple-select-label">Game Version Select</InputLabel>
+      <InputLabel id="demo-simple-select-label">Game Version:</InputLabel>
       <Select
         labelId="demo-simple-select-label"
         id="demo-simple-select"
         value={gameVersion}
-        label="Age"
         onChange={e => {
           setGameVersion(e.target.value);
           plausible('Game Version Select');

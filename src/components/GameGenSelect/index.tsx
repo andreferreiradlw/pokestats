@@ -1,19 +1,14 @@
 // helpers
 import { usePlausible } from 'next-plausible';
 import GameVersionContext from '@/components/Layout/gameVersionContext';
-import {
-  gameVersions,
-  checkIfEarlierGen,
-  mapGenerationToGame,
-  GameVersions,
-  Game,
-} from '@/helpers';
+import { gameVersions, checkIfEarlierGen, mapGenerationToGame, GameVersions } from '@/helpers';
 import { PokemonSpecies } from 'pokenode-ts';
 import { useContext, useEffect, useState } from 'react';
-import { FormControl, InputLabel, MenuItem, Select, SelectProps } from '@mui/material';
+import { SelectProps } from '@mui/material';
+import DropdownV2 from '../DropdownV2';
 
 interface GameGenSelectProps extends SelectProps {
-  pokemon?: PokemonSpecies;
+  pokemon: PokemonSpecies;
 }
 
 const GameGenSelect = ({ pokemon, ...rest }: GameGenSelectProps): JSX.Element => {
@@ -43,25 +38,16 @@ const GameGenSelect = ({ pokemon, ...rest }: GameGenSelectProps): JSX.Element =>
   }, [pokemon]);
 
   return (
-    <FormControl fullWidth>
-      <InputLabel id="demo-simple-select-label">Game Version:</InputLabel>
-      <Select
-        labelId="demo-simple-select-label"
-        id="demo-simple-select"
-        value={gameVersion}
-        onChange={e => {
-          setGameVersion(e.target.value as string);
-          plausible('Game Version Select');
-        }}
-        {...rest}
-      >
-        {dropdownOptions.map(({ label, value }) => (
-          <MenuItem key={value} value={value}>
-            {label}
-          </MenuItem>
-        ))}
-      </Select>
-    </FormControl>
+    <DropdownV2
+      label="Game Version"
+      value={gameVersion}
+      options={dropdownOptions}
+      minWidth="170px"
+      onChange={e => {
+        setGameVersion(e.target.value as string);
+        plausible('Game Version Select');
+      }}
+    />
   );
 };
 

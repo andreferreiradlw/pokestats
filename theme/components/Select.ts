@@ -14,6 +14,9 @@ const Select: {
       root: {
         minWidth: '170px',
       },
+      select: {
+        padding: '5px 10px',
+      },
       icon: {
         transition: 'transform 0.2s ease-in-out',
         width: '1.5em',

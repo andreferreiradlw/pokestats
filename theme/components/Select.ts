@@ -12,7 +12,7 @@ const Select: {
     },
     styleOverrides: {
       root: {
-        minWidth: '170px',
+        // minWidth: '170px',
       },
       select: {
         padding: '5px 10px',

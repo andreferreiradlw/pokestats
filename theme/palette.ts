@@ -1,8 +1,8 @@
+import { ThemeOptions } from '@mui/material';
 import { red } from '@mui/material/colors';
 
-const styledMuiPalette = {
+const styledMuiPalette: ThemeOptions = {
   palette: {
-    type: 'light',
     primary: {
       main: '#b18d1e',
     },

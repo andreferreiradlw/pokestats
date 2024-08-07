@@ -1,7 +1,13 @@
 // helpers
 import { usePlausible } from 'next-plausible';
 import GameVersionContext from '@/components/Layout/gameVersionContext';
-import { gameVersions, checkIfEarlierGen, mapGenerationToGame } from '@/helpers';
+import {
+  gameVersions,
+  checkIfEarlierGen,
+  mapGenerationToGame,
+  GameVersions,
+  Game,
+} from '@/helpers';
 import { PokemonSpecies } from 'pokenode-ts';
 import { useContext, useEffect, useState } from 'react';
 import { FormControl, InputLabel, MenuItem, Select, SelectProps } from '@mui/material';
@@ -9,8 +15,6 @@ import { FormControl, InputLabel, MenuItem, Select, SelectProps } from '@mui/mat
 interface GameGenSelectProps extends SelectProps {
   pokemon?: PokemonSpecies;
 }
-
-type GameVersions = typeof gameVersions;
 
 const GameGenSelect = ({ pokemon, ...rest }: GameGenSelectProps): JSX.Element => {
   // analytics
@@ -46,7 +50,7 @@ const GameGenSelect = ({ pokemon, ...rest }: GameGenSelectProps): JSX.Element =>
         id="demo-simple-select"
         value={gameVersion}
         onChange={e => {
-          setGameVersion(e.target.value);
+          setGameVersion(e.target.value as string);
           plausible('Game Version Select');
         }}
         {...rest}

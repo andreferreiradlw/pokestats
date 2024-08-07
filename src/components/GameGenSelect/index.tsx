@@ -49,6 +49,7 @@ const GameGenSelect = ({ pokemon, ...rest }: GameGenSelectProps): JSX.Element =>
           setGameVersion(e.target.value);
           plausible('Game Version Select');
         }}
+        {...rest}
       >
         {dropdownOptions.map(({ label, value }) => (
           <MenuItem key={value} value={value}>

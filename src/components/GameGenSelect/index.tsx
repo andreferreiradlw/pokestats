@@ -1,17 +1,17 @@
+import { useContext, useEffect, useState } from 'react';
 // helpers
 import { usePlausible } from 'next-plausible';
 import GameVersionContext from '@/components/Layout/gameVersionContext';
 import { gameVersions, checkIfEarlierGen, mapGenerationToGame, GameVersions } from '@/helpers';
 import { PokemonSpecies } from 'pokenode-ts';
-import { useContext, useEffect, useState } from 'react';
-import { SelectProps } from '@mui/material';
+// components
 import DropdownV2 from '../DropdownV2';
 
-interface GameGenSelectProps extends SelectProps {
+interface GameGenSelectProps {
   pokemon: PokemonSpecies;
 }
 
-const GameGenSelect = ({ pokemon, ...rest }: GameGenSelectProps): JSX.Element => {
+const GameGenSelect = ({ pokemon }: GameGenSelectProps): JSX.Element => {
   // analytics
   const plausible = usePlausible();
   // gen

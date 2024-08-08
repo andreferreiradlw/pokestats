@@ -25,7 +25,7 @@ const PokemonList = ({ pokemon, ...rest }: PokemonListProps): JSX.Element => {
     // Retrieve session storage state when component mounts
     const storedGen = sessionStorage.getItem('genSelect');
     const storedSortBy = sessionStorage.getItem('sortSelect');
-
+    // update state with defaults if they exist from session state
     if (storedGen) setGen(storedGen);
     if (storedSortBy) setSortBy(storedSortBy);
   }, []);
@@ -72,7 +72,7 @@ const PokemonList = ({ pokemon, ...rest }: PokemonListProps): JSX.Element => {
         />
       </Grid>
       {sortedAndFilteredPokemon.length > 0 && (
-        <InfiniteScroll screensizes={12} pokemonList={sortedAndFilteredPokemon} />
+        <InfiniteScroll item pokemonList={sortedAndFilteredPokemon} />
       )}
     </Grid>
   );

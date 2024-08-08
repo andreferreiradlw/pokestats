@@ -4,23 +4,18 @@ import { fadeInUpVariant } from '@/helpers';
 // types
 import type { Pokemon } from '@/types';
 // components
-import Box, { BoxProps } from '@/components/Box';
 import Loading from '@/components/Loading';
 import PokemonBox from '@/components/PokemonBox';
+import { Grid, GridProps } from '@mui/material';
 
-export interface InfiniteScrollProps extends BoxProps {
+export interface InfiniteScrollProps extends GridProps {
   pokemonList: Pokemon[];
   itemsPerPage?: number;
-  dark?: boolean;
 }
 
 const InfiniteScroll = ({
   pokemonList,
-  dark,
   itemsPerPage = 35,
-  flexdirection = 'row',
-  flexalign = 'flex-start',
-  flexwrap = 'wrap',
   ...rest
 }: InfiniteScrollProps): JSX.Element => {
   // Combined state for managing current page, previous Y position, and the list to show
@@ -95,17 +90,16 @@ const InfiniteScroll = ({
 
   return (
     <>
-      <Box
-        flexdirection={flexdirection}
-        flexalign={flexalign}
-        flexwrap={flexwrap}
-        flexjustify="center"
-        flexgap="1.5em"
+      <Grid
+        flexDirection="row"
+        alignItems="flex-start"
+        flexWrap="wrap"
+        justifyContent="center"
+        gap="1.5em"
         {...rest}
       >
         {state.showList.map(currPokemon => (
           <PokemonBox
-            $dark={dark}
             key={`infinite-scroll-${currPokemon.id}`}
             pokemonName={currPokemon.name}
             pokemonId={currPokemon.id}
@@ -114,7 +108,7 @@ const InfiniteScroll = ({
             variants={fadeInUpVariant}
           />
         ))}
-      </Box>
+      </Grid>
       {/* Render the Loading component only if there are more items to load */}
       {state.showList.length > 0 && state.showList.length < pokemonList.length && (
         <Loading flexheight="100px" $iconWidth="5%" flexpadding="1em 0" ref={nodeRef} />

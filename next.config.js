@@ -13,6 +13,7 @@ module.exports = {
     largePageDataBytes: 300 * 100000,
   },
   images: {
+    unoptimized: true,
     remotePatterns: [
       {
         protocol: 'https',

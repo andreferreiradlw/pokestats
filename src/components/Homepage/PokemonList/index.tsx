@@ -1,10 +1,9 @@
-import { useMemo } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 // types
 import type { Pokemon } from '@/types';
 // helpers
 import { usePlausible } from 'next-plausible';
 import { generationOptions, mapIdToGeneration } from '@/helpers';
-import { useSessionState } from '@/hooks';
 // components
 import { Grid, GridProps, Typography } from '@mui/material';
 import InfiniteScroll from '@/components/InfiniteScroll';
@@ -17,9 +16,19 @@ interface PokemonListProps extends GridProps {
 const PokemonList = ({ pokemon, ...rest }: PokemonListProps): JSX.Element => {
   // analytics
   const plausible = usePlausible();
-  // display pokemon list
-  const [gen, setGen] = useSessionState('genSelect', 'all');
-  const [sortBy, setSortBy] = useSessionState('sortSelect', 'id');
+
+  // Initialize state
+  const [gen, setGen] = useState<string>('all');
+  const [sortBy, setSortBy] = useState<string>('id');
+
+  useEffect(() => {
+    // Retrieve session storage state when component mounts
+    const storedGen = sessionStorage.getItem('genSelect');
+    const storedSortBy = sessionStorage.getItem('sortSelect');
+
+    if (storedGen) setGen(storedGen);
+    if (storedSortBy) setSortBy(storedSortBy);
+  }, []);
 
   const filteredPokemon = useMemo(() => {
     if (gen === 'all') return pokemon;
@@ -44,6 +53,7 @@ const PokemonList = ({ pokemon, ...rest }: PokemonListProps): JSX.Element => {
           value={gen}
           onChange={e => {
             setGen(e.target.value);
+            sessionStorage.setItem('genSelect', e.target.value);
             plausible('Homepage Generation Select');
           }}
         />
@@ -56,6 +66,7 @@ const PokemonList = ({ pokemon, ...rest }: PokemonListProps): JSX.Element => {
           value={sortBy}
           onChange={e => {
             setSortBy(e.target.value);
+            sessionStorage.setItem('sortSelect', e.target.value);
             plausible('Homepage Sort Select');
           }}
         />

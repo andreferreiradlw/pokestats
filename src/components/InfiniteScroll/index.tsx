@@ -14,7 +14,7 @@ export interface InfiniteScrollProps extends BoxProps {
   dark?: boolean;
 }
 
-export default function InfiniteScroll({
+const InfiniteScroll = ({
   pokemonList,
   dark,
   itemsPerPage = 35,
@@ -22,7 +22,7 @@ export default function InfiniteScroll({
   flexalign = 'flex-start',
   flexwrap = 'wrap',
   ...rest
-}: InfiniteScrollProps): JSX.Element {
+}: InfiniteScrollProps): JSX.Element => {
   // Combined state for managing current page, previous Y position, and the list to show
   const [state, setState] = useState({
     currPage: 1,
@@ -121,4 +121,6 @@ export default function InfiniteScroll({
       )}
     </>
   );
-}
+};
+
+export default InfiniteScroll;

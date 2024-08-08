@@ -1,14 +1,13 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useMemo } from 'react';
 // types
 import type { Pokemon } from '@/types';
 // helpers
 import { usePlausible } from 'next-plausible';
 import { generationOptions, mapIdToGeneration } from '@/helpers';
+import { useSessionState } from '@/hooks';
 // components
 import { Grid, GridProps, Typography } from '@mui/material';
-// import Box, { BoxProps } from '@/components/Box';
 import InfiniteScroll from '@/components/InfiniteScroll';
-// styles
 import DropdownV2 from '@/components/DropdownV2';
 
 interface PokemonListProps extends GridProps {
@@ -19,56 +18,32 @@ const PokemonList = ({ pokemon, ...rest }: PokemonListProps): JSX.Element => {
   // analytics
   const plausible = usePlausible();
   // display pokemon list
-  const [showPokemon, setShowPokemon] = useState<Pokemon[]>(pokemon);
-  // gen select state
-  const [gen, setGen] = useState('all');
-  // sort select state
-  const [sortBy, setSortBy] = useState('id');
-  // memo
-  const sortItems = useCallback(
-    (list: Pokemon[], sortProperty: string): Pokemon[] =>
-      [...list].sort((a, b) => {
-        if (a[sortProperty] > b[sortProperty]) return 1;
-        if (a[sortProperty] < b[sortProperty]) return -1;
-        return 0;
-      }),
-    [],
-  );
-  const filterByGen = useCallback(
-    (pokemonToFilter: Pokemon[]): Pokemon[] =>
-      pokemonToFilter.filter(pokemon => gen === mapIdToGeneration(pokemon.id)),
-    [gen],
-  );
+  const [gen, setGen] = useSessionState('genSelect', 'all');
+  const [sortBy, setSortBy] = useSessionState('sortSelect', 'id');
 
-  useEffect(() => {
-    // Access initial value from session storage
-    const genSelect = sessionStorage.getItem('genSelect');
-    const sortSelect = sessionStorage.getItem('sortSelect');
-    // update states
-    if (genSelect) setGen(genSelect);
-    if (sortSelect) setSortBy(sortSelect);
-  }, []);
+  const filteredPokemon = useMemo(() => {
+    if (gen === 'all') return pokemon;
+    return pokemon.filter(p => gen === mapIdToGeneration(p.id));
+  }, [gen, pokemon]);
 
-  useEffect(() => {
-    if (gen !== 'all') {
-      const filteredPokemon = filterByGen(pokemon);
-      setShowPokemon(sortItems(filteredPokemon, sortBy));
-    } else {
-      setShowPokemon(sortItems(pokemon, sortBy));
-    }
-  }, [gen, pokemon, sortBy]);
+  const sortedAndFilteredPokemon = useMemo(() => {
+    return [...filteredPokemon].sort((a, b) => {
+      if (a[sortBy as keyof Pokemon] > b[sortBy as keyof Pokemon]) return 1;
+      if (a[sortBy as keyof Pokemon] < b[sortBy as keyof Pokemon]) return -1;
+      return 0;
+    });
+  }, [filteredPokemon, sortBy]);
 
   return (
     <Grid container {...rest}>
-      <Typography variant="sectionTitle">{`Select your Pokemon (${showPokemon.length})`}</Typography>
-      <Grid item flexDirection="row" flexWrap="wrap" gap={{ xs: '1em', md: '2em' }}>
+      <Typography variant="sectionTitle">{`Select your Pokemon (${sortedAndFilteredPokemon.length})`}</Typography>
+      <Grid item container flexDirection="row" flexWrap="wrap" gap={{ xs: '1em', md: '2em' }}>
         <DropdownV2
           label="Game Generation"
           options={generationOptions}
           value={gen}
           onChange={e => {
             setGen(e.target.value);
-            sessionStorage.setItem('genSelect', e.target.value);
             plausible('Homepage Generation Select');
           }}
         />
@@ -81,12 +56,13 @@ const PokemonList = ({ pokemon, ...rest }: PokemonListProps): JSX.Element => {
           value={sortBy}
           onChange={e => {
             setSortBy(e.target.value);
-            sessionStorage.setItem('sortSelect', e.target.value);
             plausible('Homepage Sort Select');
           }}
         />
       </Grid>
-      {showPokemon.length > 0 && <InfiniteScroll screensizes={12} pokemonList={showPokemon} />}
+      {sortedAndFilteredPokemon.length > 0 && (
+        <InfiniteScroll screensizes={12} pokemonList={sortedAndFilteredPokemon} />
+      )}
     </Grid>
   );
 };

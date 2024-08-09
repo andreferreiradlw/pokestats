@@ -69,6 +69,11 @@ const customTypography: ThemeOptions = {
         fontSize: '1.5em',
       },
     },
+    sectionMessage: {
+      fontSize: '1em',
+      textAlign: 'center',
+      width: '100%',
+    },
   },
 };
 

@@ -16,6 +16,7 @@ declare module '@mui/material/styles' {
     pageHeading: React.CSSProperties;
     sectionTitle: React.CSSProperties;
     sectionSubTitle: React.CSSProperties;
+    sectionMessage: React.CSSProperties;
   }
 
   // allow configuration using `createTheme`
@@ -24,6 +25,7 @@ declare module '@mui/material/styles' {
     pageHeading?: React.CSSProperties;
     sectionTitle?: React.CSSProperties;
     sectionSubTitle?: React.CSSProperties;
+    sectionMessage?: React.CSSProperties;
   }
 }
 
@@ -34,5 +36,6 @@ declare module '@mui/material/Typography' {
     pageHeading: true;
     sectionTitle: true;
     sectionSubTitle: true;
+    sectionMessage: true;
   }
 }

@@ -3,7 +3,7 @@ import { useMemo } from 'react';
 import type { Pokemon, PokemonSpecies } from 'pokenode-ts';
 import type { HTMLMotionProps } from 'framer-motion';
 // helpers
-import { removeDash, mapGeneration, fadeInUpVariant, prefixId, mapIdToGeneration } from '@/helpers';
+import { removeDash, mapGeneration, fadeInUpVariant, mapIdToGeneration } from '@/helpers';
 // styles
 import { PokeBox, NumberId, PokeName, PokeGen } from './StyledPokemonBox';
 // components
@@ -33,6 +33,7 @@ const PokemonBox = ({
       href={`/pokemon/${defaultVarietyName || pokemonName.toLocaleLowerCase()}`}
       legacyBehavior
       passHref
+      prefetch={false}
     >
       <PokeBox
         whileHover="hover"
@@ -44,9 +45,7 @@ const PokemonBox = ({
         <ImageNext
           alt={pokemonName}
           key={`pokemonbox-img-${pokemonId}`}
-          src={`https://raw.githubusercontent.com/andreferreiradlw/pokestats_media/main/assets/images/${prefixId(
-            pokemonId,
-          )}.png`}
+          src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemonId}.png`}
           width="100"
           height="100"
         />

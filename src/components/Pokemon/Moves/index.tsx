@@ -1,18 +1,14 @@
-import { useState, useEffect, useRef, useContext } from 'react';
-// types
-import type { PokemonMove } from '@/types';
-// helpers
-import { MoveClient, MoveLearnMethod, Pokemon, Move, PokemonSpecies } from 'pokenode-ts';
+import { useState, useContext } from 'react';
+import { useQuery } from '@tanstack/react-query';
+import { MoveClient, MoveLearnMethod, Pokemon, PokemonSpecies } from 'pokenode-ts';
 import GameVersionContext from '@/components/Layout/gameVersionContext';
 import {
   mapVersionToGroup,
   filterMoves,
-  FilteredMove,
   getMachineNames,
   fadeInUpVariant,
   getIdFromMove,
 } from '@/helpers';
-// components
 import { AnimatePresence, motion } from 'framer-motion';
 import Loading from '@/components/Loading';
 import MovesTable from '@/components/MovesTable';
@@ -33,98 +29,52 @@ interface PokemonMovesProps extends GridProps {
 }
 
 const PokemonMoves = ({ pokemon, species, ...rest }: PokemonMovesProps): JSX.Element => {
-  // game version
   const { gameVersion } = useContext(GameVersionContext);
-  // moves
-  const [allMoves, setAllMoves] = useState<PokemonMove[]>();
-  const [genMoves, setGenMoves] = useState<{
-    'level-up': FilteredMove[];
-    machine: FilteredMove[];
-    egg: FilteredMove[];
-    tutor: FilteredMove[];
-  }>();
-  // learn method state
   const [learnMethod, setLearnMethod] = useState<MoveLearnMethod['name']>('level-up');
-  // machine names
-  const [machineNames, setMachineNames] = useState<string[]>();
-  // loading
-  const [movesLoading, setMovesLoading] = useState(true);
-  // ref
-  const _isMounted = useRef(null);
-  // manage mounted state to avoid memory leaks
-  useEffect(() => {
-    _isMounted.current = true;
-    return () => {
-      _isMounted.current = false;
-    };
-  }, []);
 
-  useEffect(() => {
-    if (!movesLoading) setMovesLoading(true);
-
-    const moveClient = new MoveClient();
-
-    const fetchMovesData = async (): Promise<Move[]> => {
-      let moveRequests = [];
-      // create an axios request for each move
-      pokemon.moves.forEach(({ move }) =>
-        moveRequests.push(moveClient.getMoveById(getIdFromMove(move.url))),
+  // Fetch all moves
+  const { data: allMoves, isLoading: movesLoading } = useQuery({
+    queryKey: ['pokemonMoves', pokemon.name],
+    queryFn: async () => {
+      const moveClient = new MoveClient();
+      const moveRequests = pokemon.moves.map(({ move }) =>
+        moveClient.getMoveById(getIdFromMove(move.url)),
       );
-      const allPokemonMovesData = await Promise.all(moveRequests);
-      if (!_isMounted.current) return;
-      return allPokemonMovesData;
-    };
+      const movesData = await Promise.all(moveRequests);
 
-    fetchMovesData()
-      .then(movesData => {
-        const formatMoves = movesData
-          .map((currMove, i) => {
-            // version details from pokemon moves info
-            return {
-              ...currMove,
-              version_group_details: pokemon.moves[i].version_group_details,
-            };
-          })
-          .filter(data => data);
-        if (!_isMounted.current) return;
-        setAllMoves(formatMoves);
-      })
-      .catch(console.error);
-  }, []);
+      return movesData.map((currMove, i) => ({
+        ...currMove,
+        version_group_details: pokemon.moves[i].version_group_details,
+      }));
+    },
+  });
 
-  useEffect(() => {
-    if (!movesLoading) setMovesLoading(true);
+  // Process moves based on the selected game version
+  const { data: genMoves, isLoading: genMovesLoading } = useQuery({
+    queryKey: ['genMoves', gameVersion, allMoves],
+    queryFn: async () => {
+      if (!allMoves) return null;
 
-    if (allMoves) {
-      setMachineNames([]);
-
-      const fetchMachineNames = async (moves: FilteredMove[]): Promise<void> => {
-        await getMachineNames(moves).then(names => {
-          if (!_isMounted.current) return;
-          setMachineNames(names);
-        });
-      };
-      // current group to filter
       const gameGroup = mapVersionToGroup(gameVersion);
-      // filter moves
       const levelMoves = filterMoves(allMoves, 'level-up', gameGroup);
       const tmMoves = filterMoves(allMoves, 'machine', gameGroup);
-      fetchMachineNames(tmMoves);
       const breedingMoves = filterMoves(allMoves, 'egg', gameGroup);
       const professorMoves = filterMoves(allMoves, 'tutor', gameGroup);
 
-      if (!_isMounted.current) return;
-      // update state
-      setGenMoves({
-        'level-up': levelMoves,
-        machine: tmMoves,
-        egg: breedingMoves,
-        tutor: professorMoves,
-      });
-    }
-    // stop loading
-    setMovesLoading(false);
-  }, [allMoves, gameVersion]);
+      const machineNames = await getMachineNames(tmMoves);
+
+      return {
+        genMoves: {
+          'level-up': levelMoves,
+          machine: tmMoves,
+          egg: breedingMoves,
+          tutor: professorMoves,
+        },
+        machineNames,
+      };
+    },
+    enabled: !!allMoves, // Only run this query if allMoves has data
+  });
 
   return (
     <Grid container alignItems={{ xxs: 'center', lg: 'flex-start' }} {...rest}>
@@ -138,35 +88,36 @@ const PokemonMoves = ({ pokemon, species, ...rest }: PokemonMovesProps): JSX.Ele
         />
         <GameGenSelect pokemon={species} />
       </Grid>
-      {movesLoading && (
+      {movesLoading || genMovesLoading ? (
         <Loading flexheight="100%" $iconWidth={{ xxs: '20%', xs: '15%', md: '10%', lg: '5%' }} />
+      ) : (
+        <AnimatePresence mode="wait">
+          {genMoves?.genMoves?.[learnMethod]?.length ? (
+            <MovesTable
+              moves={genMoves.genMoves[learnMethod]}
+              machineNames={genMoves.machineNames}
+              learnMethod={learnMethod}
+              initial="hidden"
+              animate="show"
+              exit="exit"
+              variants={fadeInUpVariant}
+              key={`moves-${learnMethod}-table-container`}
+            />
+          ) : (
+            <Typography
+              variant="sectionMessage"
+              component={motion.p}
+              initial="hidden"
+              animate="show"
+              exit="exit"
+              variants={fadeInUpVariant}
+              key={`moves-${learnMethod}-nomoves-message`}
+            >
+              {`No ${learnMethod} moves for currently selected game version.`}
+            </Typography>
+          )}
+        </AnimatePresence>
       )}
-      <AnimatePresence mode="wait">
-        {genMoves?.[learnMethod]?.length ? (
-          <MovesTable
-            moves={genMoves[learnMethod]}
-            machineNames={machineNames}
-            learnMethod={learnMethod}
-            initial="hidden"
-            animate="show"
-            exit="exit"
-            variants={fadeInUpVariant}
-            key={`moves-${learnMethod}-table-container`}
-          />
-        ) : (
-          <Typography
-            variant="sectionMessage"
-            component={motion.p}
-            initial="hidden"
-            animate="show"
-            exit="exit"
-            variants={fadeInUpVariant}
-            key={`moves-${learnMethod}-nomoves-message`}
-          >
-            {`No ${learnMethod} moves for currently selected game version.`}
-          </Typography>
-        )}
-      </AnimatePresence>
     </Grid>
   );
 };

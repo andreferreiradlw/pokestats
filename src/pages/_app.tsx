@@ -19,7 +19,13 @@ import theme from '@/MuiTheme';
 
 const App = ({ Component, pageProps, router }: AppProps): JSX.Element => {
   // Create a client
-  const queryClient = new QueryClient();
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: {
+        refetchOnWindowFocus: false,
+      },
+    },
+  });
 
   useEffect(() => {
     // Remove the server-side injected CSS.

@@ -41,7 +41,6 @@ const EvolutionChain = ({
             flexjustify="flex-start"
             flexgap="1em"
             style={{
-              overflow: 'hidden',
               overflowX: firstEvolution.name === 'eevee' ? 'scroll' : 'hidden',
             }}
           >

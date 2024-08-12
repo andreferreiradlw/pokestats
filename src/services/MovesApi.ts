@@ -7,4 +7,6 @@ export const MovesApi = {
     await Promise.all(names.map(name => MainClient.move.getMoveByName(name))),
 
   getByName: async (name: string) => await MainClient.move.getMoveByName(name),
+
+  getById: async (id: number) => await MainClient.move.getMoveById(id),
 };

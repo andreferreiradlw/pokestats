@@ -1,17 +1,22 @@
 import { ThemeOptions } from '@mui/material';
-import { red } from '@mui/material/colors';
 
 const styledMuiPalette: ThemeOptions = {
   palette: {
     primary: {
-      main: '#b18d1e',
+      main: '#F4C095', // peach
+      light: '#ffe7e6',
+      dark: '#513b3b',
     },
     secondary: {
-      main: '#000',
+      main: '#071E22', // rich black
+      light: '#0f0a11',
+      dark: '#ada9af',
     },
     error: {
-      main: red.A400,
+      main: '#EE2E31', // red
     },
+    divider: '#679289', // viridian
+    contrastThreshold: 4.5,
   },
 };
 

@@ -108,7 +108,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   };
 };
 
-export const getStaticProps: GetStaticProps = async ({ params }) => {
+export const getStaticProps: GetStaticProps<PokestatsMovePageProps> = async ({ params }) => {
   // clients
   const moveClient = new MoveClient();
   const machineClient = new MachineClient();

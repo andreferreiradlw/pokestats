@@ -1,82 +1,81 @@
-import styled, { css } from 'styled-components';
+import { default as styledSC } from 'styled-components';
 // components
+import { css, styled } from '@mui/material';
 import { motion } from 'framer-motion';
 
-const TableBody = styled.tbody``;
+const TableBody = styledSC.tbody``;
 
-const DataCell = styled.td``;
+const DataCell = styledSC.td``;
 
-const NameTH = styled.th``;
+const NameTH = styledSC.th``;
 
 const NameTD = styled(DataCell)`
   font-weight: 500;
   text-transform: capitalize;
 `;
 
-const TableRow = styled(motion.tr)`
-  cursor: pointer;
+const TableRow = styled(motion.tr)(
+  ({ theme }) => css`
+    cursor: pointer;
 
-  ${({ theme }) => css`
     &:hover {
-      background: ${theme.colors.primary.light};
-      color: ${theme.colors.primary.contrastText};
+      background: ${theme.palette.primary.light};
     }
-  `}
-`;
+  `,
+);
 
-const TableContainer = styled(motion.div)`
-  border-radius: 5px;
-  overflow: hidden;
-  width: 100%;
+const TableContainer = styled(motion.div)(
+  ({ theme }) => css`
+    border-radius: 5px;
+    overflow: hidden;
+    width: 100%;
 
-  ${({ theme }) => css`
-    @media ${theme.device.lg} {
+    ${theme.breakpoints.up('lg')} {
       overflow-x: hidden;
     }
-  `}
-`;
+  `,
+);
 
-const MovesTableEl = styled.table`
-  border: 2px solid ${({ theme }) => theme.colors.primary.light};
-  font-size: 0.7em;
-  line-height: 0.7em;
-  text-align: center;
-  width: 100%;
-
-  & thead {
-    background: ${({ theme }) => theme.colors.primary.light};
-    color: ${({ theme }) => theme.colors.primary.contrastText};
-  }
-
-  & th,
-  & td {
-    height: 40px;
-    overflow: hidden;
-    padding: 0.5em;
+const MovesTableEl = styled('table')(
+  ({ theme }) => css`
+    border: 2px solid ${theme.palette.primary.light};
+    font-size: 0.7em;
+    line-height: 0.7em;
     text-align: center;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
+    width: 100%;
 
-  & ${NameTH}, & ${NameTD} {
-    width: 25%;
-  }
-
-  ${({ theme }) => css`
-    & tr:not(:last-of-type) {
-      border-bottom: 2px solid ${theme.colors.primary.light};
+    & thead {
+      background: ${theme.palette.primary.light};
     }
 
-    @media ${theme.device.md} {
+    & th,
+    & td {
+      height: 40px;
+      overflow: hidden;
+      padding: 0.5em;
+      text-align: center;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    & ${NameTH}, & ${NameTD} {
+      width: 25%;
+    }
+
+    & tr:not(:last-of-type) {
+      border-bottom: 2px solid ${theme.palette.primary.light};
+    }
+
+    ${theme.breakpoints.up('md')} {
       font-size: 0.8em;
       line-height: 0.8em;
     }
 
-    @media ${theme.device.lg} {
+    ${theme.breakpoints.up('lg')} {
       font-size: 1em;
       line-height: 1em;
     }
-  `}
-`;
+  `,
+);
 
 export { TableContainer, MovesTableEl, TableBody, NameTH, DataCell, NameTD, TableRow };

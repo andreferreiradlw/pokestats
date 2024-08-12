@@ -60,16 +60,7 @@ const PokemonMoves = ({ pokemon, species, ...rest }: PokemonMovesProps): JSX.Ele
       ) : (
         <AnimatePresence mode="wait">
           {filteredMoves.length ? (
-            <MovesTable
-              moves={filteredMoves}
-              machineNames={machines}
-              learnMethod={learnMethod}
-              initial="hidden"
-              animate="show"
-              exit="exit"
-              variants={fadeInUpVariant}
-              key={`moves-${learnMethod}-table-container`}
-            />
+            <MovesTable moves={filteredMoves} machineNames={machines} learnMethod={learnMethod} />
           ) : (
             <Typography
               variant="sectionMessage"

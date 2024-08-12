@@ -20,7 +20,7 @@ import { Typography } from '@mui/material';
 
 interface TypeMovesProps extends HTMLMotionProps<'div'> {
   moves: (FilteredMove | Move)[];
-  learnMethod: MoveLearnMethod['name'];
+  learnMethod?: MoveLearnMethod['name'];
   machineNames?: string[];
 }
 
@@ -95,7 +95,14 @@ const MovesTable = ({ moves, learnMethod, machineNames, ...rest }: TypeMovesProp
   return (
     <AnimatePresence mode="wait">
       {moves.length > 0 ? (
-        <TableContainer {...rest}>
+        <TableContainer
+          initial="hidden"
+          animate="show"
+          exit="exit"
+          variants={fadeInUpVariant}
+          key="moves-table-container"
+          {...rest}
+        >
           <MovesTableEl>
             <thead>
               <tr>
@@ -119,9 +126,9 @@ const MovesTable = ({ moves, learnMethod, machineNames, ...rest }: TypeMovesProp
                     whileHover="hover"
                     whileTap="tap"
                     variants={rowVariant}
-                    key={`type-${move.name}-${index}`}
+                    key={`type-${move.name}`}
                   >
-                    {renderMoveCell(move, index)}
+                    {learnMethod && renderMoveCell(move, index)}
                     <NameTD onClick={() => onCellClick(move.name, move.id)}>
                       {removeDash(move.name)}
                     </NameTD>

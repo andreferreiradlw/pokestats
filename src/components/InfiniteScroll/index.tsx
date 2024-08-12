@@ -4,125 +4,102 @@ import { fadeInUpVariant } from '@/helpers';
 // types
 import type { Pokemon } from '@/types';
 // components
-import Box, { BoxProps } from '@/components/Box';
 import Loading from '@/components/Loading';
 import PokemonBox from '@/components/PokemonBox';
+import { Grid, GridProps } from '@mui/material';
 
-export interface InfiniteScrollProps extends BoxProps {
+export interface InfiniteScrollProps extends GridProps {
   pokemonList: Pokemon[];
   itemsPerPage?: number;
-  dark?: boolean;
 }
 
-export default function InfiniteScroll({
+const InfiniteScroll = ({
   pokemonList,
-  dark,
   itemsPerPage = 35,
-  flexdirection = 'row',
-  flexalign = 'flex-start',
-  flexwrap = 'wrap',
   ...rest
-}: InfiniteScrollProps): JSX.Element {
-  // current page state
-  const [currPage, setCurrPage] = useState(1);
-  // y state
-  const [prevY, setPrevY] = useState(1);
-  // show list state
-  const [showList, setShowList] = useState<Pokemon[]>([]);
-  // node state for observer
-  const [node, setNode] = useState<IntersectionObserver | null>(null);
-  // pokemon observer ref
-  let observer = useRef(null);
-  // memo
-  const handleObserver = useCallback(
-    entitites => {
-      // entity data
-      const { isIntersecting, boundingClientRect, intersectionRatio } = entitites[0];
+}: InfiniteScrollProps): JSX.Element => {
+  // Combined state for managing current page, previous Y position, and the list to show
+  const [state, setState] = useState({
+    currPage: 1,
+    prevY: 1,
+    showList: [] as Pokemon[],
+  });
 
-      if (isIntersecting && intersectionRatio === 1 && boundingClientRect.y > prevY) {
-        // set new y state
-        // remove 50 pixels as redundancy
-        setPrevY(boundingClientRect.y - 100);
-        // change page
-        setCurrPage(currPage + 1);
+  // Ref to store the IntersectionObserver instance
+  const observer = useRef<IntersectionObserver | null>(null);
+
+  // Ref for the loading component (target node for the IntersectionObserver)
+  const nodeRef = useRef<HTMLDivElement | null>(null);
+
+  // Function to slice the pokemon list based on the current page
+  const sliceNewPage = useCallback(
+    (page: number): Pokemon[] =>
+      pokemonList.slice(page === 1 ? 0 : (page - 1) * itemsPerPage, page * itemsPerPage),
+    [itemsPerPage, pokemonList],
+  );
+
+  // Callback for IntersectionObserver when the target element is in view
+  const handleObserver = useCallback(
+    (entries: IntersectionObserverEntry[]) => {
+      const { isIntersecting, boundingClientRect, intersectionRatio } = entries[0];
+
+      if (isIntersecting && intersectionRatio === 1 && boundingClientRect.y > state.prevY) {
+        setState(prevState => ({
+          ...prevState,
+          prevY: boundingClientRect.y - 100, // Update previous Y position to prevent repeated triggers
+          currPage: prevState.currPage + 1, // Increment page to load more items
+        }));
       }
     },
-    [currPage, prevY],
-  );
-  const sliceNewPage = useCallback(
-    (page: number, listUpdated: boolean): void => {
-      // slice new page from pokemon array
-      const newPage = pokemonList.slice(
-        page === 1 ? 0 : (page - 1) * itemsPerPage,
-        page * itemsPerPage,
-      );
-      // update show list with sliced array
-      listUpdated ? setShowList([...newPage]) : setShowList([...showList, ...newPage]);
-    },
-    [itemsPerPage, pokemonList, showList],
+    [state.prevY],
   );
 
-  // pokemon list effect
+  // Effect to reset the list and page when the pokemonList changes
   useEffect(() => {
-    // reset showList
-    setShowList([]);
-    // reset prevY
-    setPrevY(0);
-    // page management
-    if (currPage !== 1) {
-      // if page is not 1, change it and will trigger new slice
-      setCurrPage(1);
-    } else {
-      // page is already 1, with showList reset we can slice a new first page
-      sliceNewPage(currPage, true);
-    }
-  }, [pokemonList]);
+    setState({
+      currPage: 1,
+      prevY: 0,
+      showList: sliceNewPage(1), // Load the first page
+    });
+  }, [pokemonList, sliceNewPage]);
 
-  // observer effect
+  // Effect to set up the IntersectionObserver when the list has items
   useEffect(() => {
-    // only start the observer if showList has length
-    // otherwise it will start an infinite loop
-    // since the node will always be visible
-    if (showList.length > 0) {
-      // https://medium.com/the-non-traditional-developer/how-to-use-an-intersectionobserver-in-a-react-hook-9fb061ac6cb5
-      // observer options
+    if (state.showList.length > 0 && state.showList.length < pokemonList.length) {
       const options = {
         root: null,
         rootMargin: '0px',
         threshold: 1,
       };
-      // make sure previous observer is disconnected
-      if (observer.current) observer.current.disconnect();
-      // create new observer
-      observer.current = new window.IntersectionObserver(handleObserver, options);
-      // observer.current can be mutated so create a variable
-      const { current: currentObserver } = observer;
-      // if node exists, observe
-      if (node) currentObserver.observe(node);
-      // disconnect when component unmounts
-      return () => currentObserver.disconnect();
+      if (observer.current) observer.current.disconnect(); // Disconnect any previous observer
+      observer.current = new IntersectionObserver(handleObserver, options); // Create a new observer
+      if (nodeRef.current) observer.current.observe(nodeRef.current); // Observe the target node
+      return () => observer.current?.disconnect(); // Cleanup on component unmount
     }
-  }, [node, currPage]);
+  }, [state.showList.length, handleObserver, pokemonList.length]);
 
-  // page effect
+  // Effect to load more items when the current page changes
   useEffect(() => {
-    // page has been changed so slice it into showList
-    sliceNewPage(currPage, false);
-  }, [currPage]);
+    if (state.currPage > 1) {
+      setState(prevState => ({
+        ...prevState,
+        showList: [...prevState.showList, ...sliceNewPage(state.currPage)], // Append new items to the list
+      }));
+    }
+  }, [state.currPage, sliceNewPage]);
 
   return (
     <>
-      <Box
-        flexdirection={flexdirection}
-        flexalign={flexalign}
-        flexwrap={flexwrap}
-        flexjustify="center"
-        flexgap="1.5em"
+      <Grid
+        flexDirection="row"
+        alignItems="flex-start"
+        flexWrap="wrap"
+        justifyContent="center"
+        gap="1.5em"
         {...rest}
       >
-        {showList?.map(currPokemon => (
+        {state.showList.map(currPokemon => (
           <PokemonBox
-            $dark={dark}
             key={`infinite-scroll-${currPokemon.id}`}
             pokemonName={currPokemon.name}
             pokemonId={currPokemon.id}
@@ -131,10 +108,13 @@ export default function InfiniteScroll({
             variants={fadeInUpVariant}
           />
         ))}
-      </Box>
-      {showList.length > 0 && pokemonList.length !== showList?.length && (
-        <Loading flexheight="100px" $iconWidth="5%" flexpadding="1em 0" ref={setNode} />
+      </Grid>
+      {/* Render the Loading component only if there are more items to load */}
+      {state.showList.length > 0 && state.showList.length < pokemonList.length && (
+        <Loading flexheight="100px" $iconWidth="5%" flexpadding="1em 0" ref={nodeRef} />
       )}
     </>
   );
-}
+};
+
+export default InfiniteScroll;

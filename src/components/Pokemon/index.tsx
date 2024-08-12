@@ -113,7 +113,7 @@ const PokemonPage = ({
         <Divider />
         {/** MOVES */}
         <Box flexalign="flex-start" flexjustify="flex-start">
-          <Moves pokemon={pokemon} />
+          <Moves pokemon={pokemon} species={species} />
         </Box>
         <Divider />
         {/** SPRITES */}

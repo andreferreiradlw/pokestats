@@ -1,9 +1,5 @@
-// types
-import type { MoveLearnMethod, Machine, NamedAPIResource } from 'pokenode-ts';
+import type { MoveLearnMethod, NamedAPIResource } from 'pokenode-ts';
 import type { PokemonMove } from '@/types';
-// helpers
-import { MachineClient } from 'pokenode-ts';
-import { getIdFromMachine } from '@/helpers';
 
 export interface FilteredMove extends PokemonMove {
   level_learned_at: number;
@@ -14,77 +10,36 @@ const filterMoves = (
   moves: PokemonMove[],
   learnMethod: MoveLearnMethod['name'],
   versionGroup: string,
-): FilteredMove[] => {
-  // filter pokemon moves by learn method and game version
-  const groupMoves = moves.filter(move => {
-    const groupDetails = move.version_group_details;
-    let match = false;
-
-    for (let moveGroup of groupDetails) {
-      // check if version and learn method match
-      if (
-        moveGroup.version_group.name === versionGroup &&
-        moveGroup.move_learn_method.name === learnMethod
-      ) {
-        if (learnMethod === 'level-up') {
-          // add level key to move
-          move['level_learned_at'] = moveGroup.level_learned_at;
-        }
-        // matched!
-        match = true;
-        break;
-      }
-    }
-
-    // check if learn method is machine
-    if (match && learnMethod === 'machine') {
-      const machineDetails = move.machines;
-
-      for (let machineMove of machineDetails) {
-        if (machineMove.version_group.name === versionGroup) {
-          // if machine matches version
-          // add url key to pokemon move
-          move['current_version_machine'] = machineMove.machine.url;
-          break;
-        }
-      }
-    }
-
-    return match;
-  });
-
-  if (groupMoves.length && learnMethod === 'level-up') {
-    // sort moves by level
-    groupMoves.sort((a: FilteredMove, b: FilteredMove) => a.level_learned_at - b.level_learned_at);
-  }
-
-  return groupMoves as FilteredMove[];
-};
-
-const getMachineNames = async (machineMoves: FilteredMove[]): Promise<string[]> => {
-  const machineClient = new MachineClient();
-  // requests array
-  const machineRequests = [];
-  // create a request for each move
-  machineMoves.forEach(move => {
-    if (move?.current_version_machine) {
-      machineRequests.push(
-        machineClient.getMachineById(getIdFromMachine(move.current_version_machine)),
+): FilteredMove[] =>
+  moves
+    .map((move): FilteredMove | null => {
+      const group = move.version_group_details.find(
+        group =>
+          group.version_group.name === versionGroup && group.move_learn_method.name === learnMethod,
       );
-    }
-  });
 
-  const machines: Machine[] = await Promise.all(machineRequests);
+      if (!group) return null;
 
-  return machines.map(machine => machine.item.name);
-};
+      // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      const filteredMove: FilteredMove = { ...move } as FilteredMove;
+
+      if (learnMethod === 'level-up') {
+        filteredMove.level_learned_at = group.level_learned_at || 0;
+      }
+
+      if (learnMethod === 'machine') {
+        const machine = move.machines?.find(machine => machine.version_group.name === versionGroup);
+        filteredMove.current_version_machine = machine?.machine.url;
+      }
+
+      return filteredMove;
+    })
+    .filter((move): move is FilteredMove => move !== null)
+    .sort((a, b) => (learnMethod === 'level-up' ? a.level_learned_at - b.level_learned_at : 0));
 
 const removeDuplicateMoves = (moves: NamedAPIResource[]): NamedAPIResource[] =>
-  moves.reduce((accumulator, current) => {
-    if (!accumulator.find(item => item.name === current.name)) {
-      accumulator.push(current);
-    }
-    return accumulator;
-  }, []);
+  Array.from(new Set(moves.map(move => move.name))).map(name =>
+    moves.find(move => move.name === name),
+  );
 
-export { filterMoves, getMachineNames, removeDuplicateMoves };
+export { filterMoves, removeDuplicateMoves };

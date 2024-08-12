@@ -45,18 +45,18 @@ const EvolutionChain = ({
               overflowX: firstEvolution.name === 'eevee' ? 'scroll' : 'hidden',
             }}
           >
-            {secondEvolution.map(({ species, evolutionDetails, thirdEvolution }, i) => (
-              <Box key={`second-evo-container-${i}-${chainId}`} flexgap="1em">
+            {secondEvolution.map(({ species, evolutionDetails, thirdEvolution }) => (
+              <Box key={`second-evo-container-${chainId}`} flexgap="1em">
                 <Evolution
                   species={species}
                   evolutionDetails={evolutionDetails}
-                  key={`second-evo-${i}-${chainId}`}
+                  key={`second-evo-${chainId}`}
                 />
                 {thirdEvolution.length > 0 && (
                   <Box flexdirection="row" flexjustify="space-evenly" flexgap="1em">
-                    {thirdEvolution.map(({ species, evolutionDetails }, x) => (
+                    {thirdEvolution.map(({ species, evolutionDetails }) => (
                       <Evolution
-                        key={`third-evo-${x}-${chainId}`}
+                        key={`third-evo-${chainId}`}
                         species={species}
                         evolutionDetails={evolutionDetails}
                       />

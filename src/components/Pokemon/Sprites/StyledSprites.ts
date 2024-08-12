@@ -2,7 +2,6 @@ import styled from 'styled-components';
 // components
 import Box from '@/components/Box';
 import ImageNext from '@/components/ImageNext';
-import { SectionSubTitle } from '@/components/BaseStyles';
 
 const SpriteContainer = styled(Box)`
   text-align: center;

@@ -1,19 +1,16 @@
-import { createTheme } from '@mui/material/styles';
-import { red } from '@mui/material/colors';
+import { createTheme, responsiveFontSizes } from '@mui/material/styles';
+import styledMuiPalette from './palette';
+import styledMuiComponents from './components';
+import customTypography from './typography';
+import customBreakpoints from './breakpoints';
 
 // Create a theme instance.
 const theme = createTheme({
-  palette: {
-    primary: {
-      main: '#556cd6',
-    },
-    secondary: {
-      main: '#19857b',
-    },
-    error: {
-      main: red.A400,
-    },
-  },
+  ...styledMuiPalette,
+  ...customTypography,
+  ...styledMuiComponents,
+  ...customBreakpoints,
+  shape: { borderRadius: 2 },
 });
 
-export default theme;
+export default responsiveFontSizes(theme);

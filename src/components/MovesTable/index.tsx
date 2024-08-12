@@ -1,12 +1,9 @@
-import { useMemo } from 'react';
+import { useMemo, useCallback } from 'react';
 import { useRouter } from 'next/router';
-// types
 import type { Move, MoveLearnMethod } from 'pokenode-ts';
-// helpers
 import { usePlausible } from 'next-plausible';
 import { removeDash, mapGeneration, fadeInUpVariant, rowVariant, FilteredMove } from '@/helpers';
-// styles
-import { SectionMessage, UppercasedTd } from '@/components/BaseStyles';
+import { UppercasedTd } from '@/components/BaseStyles';
 import {
   TableContainer,
   MovesTableEl,
@@ -16,11 +13,10 @@ import {
   NameTD,
   TableRow,
 } from './StyledMovesTable';
-// components
-import { AnimatePresence, HTMLMotionProps } from 'framer-motion';
+import { AnimatePresence, HTMLMotionProps, motion } from 'framer-motion';
 import TypeBadge from '@/components/TypeBadge';
 import Box from '@/components/Box';
-import Link from 'next/link';
+import { Typography } from '@mui/material';
 
 interface TypeMovesProps extends HTMLMotionProps<'div'> {
   moves: (FilteredMove | Move)[];
@@ -29,37 +25,84 @@ interface TypeMovesProps extends HTMLMotionProps<'div'> {
 }
 
 const MovesTable = ({ moves, learnMethod, machineNames, ...rest }: TypeMovesProps): JSX.Element => {
-  // router
   const router = useRouter();
-  // analytics
   const plausible = usePlausible();
-  // memo
+
+  // map learn method to a display name
   const mapMethodName = useMemo(() => {
-    if (learnMethod) {
-      switch (learnMethod) {
-        case 'level-up':
-          return 'Level';
-        case 'machine':
-          return 'Machine';
-        default:
-          return '-';
-      }
-    } else {
-      return null;
+    switch (learnMethod) {
+      case 'level-up':
+        return 'Level';
+      case 'machine':
+        return 'Machine';
+      default:
+        return '-';
     }
   }, [learnMethod]);
 
-  const onCellClick = (moveName: Move['name'], id: Move['id']) => {
-    if (id <= 850) {
-      plausible('Move Table Click');
-      router.push(`/move/${moveName}`);
-    }
-  };
+  const onCellClick = useCallback(
+    (moveName: Move['name'], id: Move['id']) => {
+      if (id <= 850) {
+        plausible('Move Table Click');
+        router.push(`/move/${moveName}`);
+      }
+    },
+    [plausible, router],
+  );
+
+  const renderMoveCell = useCallback(
+    (move: FilteredMove | Move, index: number) => {
+      switch (learnMethod) {
+        case 'level-up':
+          return (
+            <DataCell onClick={() => onCellClick(move.name, move.id)}>
+              {/** @ts-ignore */}
+              {move?.level_learned_at}
+            </DataCell>
+          );
+        case 'machine':
+          return (
+            <DataCell onClick={() => onCellClick(move.name, move.id)}>
+              {!!machineNames?.length && machineNames[index] ? (
+                <Box
+                  flexdirection="row"
+                  flexjustify="space-between"
+                  width="75%"
+                  flexmargin="0 auto"
+                  flexgap="0.1em"
+                >
+                  <span>{machineNames[index].toUpperCase()}</span>
+                  <img
+                    src={`https://raw.githubusercontent.com/msikma/pokesprite/master/items/${machineNames[index].includes('hm') ? 'hm' : 'tm'}/${move.type.name}.png`}
+                    alt={move.type.name}
+                    width="30"
+                  />
+                </Box>
+              ) : (
+                '...'
+              )}
+            </DataCell>
+          );
+        case 'egg':
+        case 'tutor':
+        default:
+          return <DataCell onClick={() => onCellClick(move.name, move.id)}>-</DataCell>;
+      }
+    },
+    [learnMethod, machineNames, onCellClick],
+  );
 
   return (
     <AnimatePresence mode="wait">
-      {moves?.length !== 0 && (
-        <TableContainer {...rest}>
+      {moves.length > 0 ? (
+        <TableContainer
+          initial="hidden"
+          animate="show"
+          exit="exit"
+          variants={fadeInUpVariant}
+          key="moves-table-container"
+          {...rest}
+        >
           <MovesTableEl>
             <thead>
               <tr>
@@ -75,8 +118,7 @@ const MovesTable = ({ moves, learnMethod, machineNames, ...rest }: TypeMovesProp
               </tr>
             </thead>
             <TableBody>
-              {moves.map((move, i) => {
-                // prefetch move page
+              {moves.map((move, index) => {
                 router.prefetch(`/move/${move.name}`);
 
                 return (
@@ -84,47 +126,9 @@ const MovesTable = ({ moves, learnMethod, machineNames, ...rest }: TypeMovesProp
                     whileHover="hover"
                     whileTap="tap"
                     variants={rowVariant}
-                    key={`type-${move.name}-${i}`}
+                    key={`type-${move.name}`}
                   >
-                    {learnMethod && (
-                      <>
-                        {learnMethod === 'level-up' && (
-                          <DataCell onClick={() => onCellClick(move.name, move.id)}>
-                            {/** @ts-ignore */}
-                            {move?.level_learned_at}
-                          </DataCell>
-                        )}
-                        {learnMethod === 'machine' &&
-                          (!!machineNames?.length && machineNames?.[i] ? (
-                            <DataCell onClick={() => onCellClick(move.name, move.id)}>
-                              <Box
-                                flexdirection="row"
-                                flexjustify="space-between"
-                                width="75%"
-                                flexmargin="0 auto"
-                                flexgap="0.1em"
-                              >
-                                <span>{machineNames[i].toUpperCase()}</span>
-                                <img
-                                  src={`https://raw.githubusercontent.com/msikma/pokesprite/master/items/${
-                                    machineNames[i].includes('hm') ? 'hm' : 'tm'
-                                  }/${move.type.name}.png`}
-                                  alt={move.type.name}
-                                  width="30"
-                                />
-                              </Box>
-                            </DataCell>
-                          ) : (
-                            <DataCell onClick={() => onCellClick(move.name, move.id)}>...</DataCell>
-                          ))}
-                        {learnMethod === 'egg' && (
-                          <DataCell onClick={() => onCellClick(move.name, move.id)}>-</DataCell>
-                        )}
-                        {learnMethod === 'tutor' && (
-                          <DataCell onClick={() => onCellClick(move.name, move.id)}>-</DataCell>
-                        )}
-                      </>
-                    )}
+                    {learnMethod && renderMoveCell(move, index)}
                     <NameTD onClick={() => onCellClick(move.name, move.id)}>
                       {removeDash(move.name)}
                     </NameTD>
@@ -147,10 +151,7 @@ const MovesTable = ({ moves, learnMethod, machineNames, ...rest }: TypeMovesProp
                       {move.priority}
                     </DataCell>
                     <DataCell onClick={() => onCellClick(move.name, move.id)}>
-                      {/** leaving this anchor for SEO purposes */}
-                      <Link href={`/move/${move.name}`} prefetch={false}>
-                        {mapGeneration(move.generation.name)}
-                      </Link>
+                      {mapGeneration(move.generation.name)}
                     </DataCell>
                   </TableRow>
                 );
@@ -158,10 +159,10 @@ const MovesTable = ({ moves, learnMethod, machineNames, ...rest }: TypeMovesProp
             </TableBody>
           </MovesTableEl>
         </TableContainer>
-      )}
-      {/** NO MOVES */}
-      {moves.length === 0 && (
-        <SectionMessage
+      ) : (
+        <Typography
+          variant="sectionMessage"
+          component={motion.p}
           initial="hidden"
           animate="show"
           exit="exit"
@@ -169,7 +170,7 @@ const MovesTable = ({ moves, learnMethod, machineNames, ...rest }: TypeMovesProp
           key="type-nomoves-message"
         >
           No moves for current type.
-        </SectionMessage>
+        </Typography>
       )}
     </AnimatePresence>
   );

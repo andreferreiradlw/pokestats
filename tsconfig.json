@@ -17,6 +17,8 @@
       "@/pages/*": ["src/pages/*"],
       "@/hooks": ["src/hooks"],
       "@/hooks/*": ["src/hooks/*"],
+      "@/services": ["src/services"],
+      "@/services/*": ["src/services/*"],
       "@mui/styled-engine": ["./node_modules/@mui/styled-engine-sc"] // this mapping is relative to "baseUrl"
     },
     "target": "es2015",
@@ -36,13 +38,6 @@
     "jsx": "preserve",
     "incremental": true
   },
-  "include": [
-    "types/next-env.d.ts",
-    "types/environment.d.ts",
-    "types/index.d.ts",
-    "types/styled.d.ts",
-    "src/**/*.ts",
-    "src/**/*.tsx"
-  ],
+  "include": ["types/*.d.ts", "src/**/*.ts", "src/**/*.tsx"],
   "exclude": ["node_modules", "dist", "src/**/*.js", "src/**/*.jsx"]
 }

@@ -1,0 +1,14 @@
+export { AbilityApi } from './AbilityApi';
+export { BerryApi } from './BerryApi';
+export { EggGroupApi } from './EggGroupApi';
+export { EncountersApi } from './EncountersApi';
+export { EvolutionApi } from './EvolutionApi';
+export { GrowthRateApi } from './GrowthRateApi';
+export { ItemApi } from './ItemApi';
+export * from './LocationApi';
+export { MachineApi } from './MachineApi';
+export { MovesApi } from './MovesApi';
+export { NatureApi } from './NatureApi';
+export { PokemonApi } from './PokemonApi';
+export { SpeciesApi } from './SpeciesApi';
+export { TypesApi } from './TypesApi';

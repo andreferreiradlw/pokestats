@@ -1,4 +1,4 @@
-interface Game {
+export interface Game {
   label: string;
   value: string;
   group: string;
@@ -8,7 +8,7 @@ interface Game {
   moveGroups: string[];
 }
 
-type GameVersions = Game[];
+export type GameVersions = Game[];
 
 const gameVersions: GameVersions = [
   {

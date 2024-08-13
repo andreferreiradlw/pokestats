@@ -1,44 +1,19 @@
-import { PokemonSprites } from 'pokenode-ts';
+import { PokemonSpecies, PokemonSprites } from 'pokenode-ts';
 
-const spriteExtractor = (data: PokemonSprites) => {
-  const { other, versions } = data;
+const spriteExtractor = (
+  pokemonSprites: PokemonSprites,
+  pokemonVarieties: PokemonSpecies['varieties'],
+) => {
+  const { other, versions } = pokemonSprites;
+
+  /**
+   * OTHER SPRITES
+   */
+  // @ts-expect-error
+  const { dream_world, home, showdown } = other;
 
   // Extracting and formatting the 'other' sprites
   const otherSprites = [
-    {
-      label: 'Dream World',
-      sprites: [
-        {
-          label: 'Front Default',
-          imageUrl: other.dream_world.front_default,
-        },
-        {
-          label: 'Front Female',
-          imageUrl: other.dream_world.front_female,
-        },
-      ],
-    },
-    {
-      label: 'Home',
-      sprites: [
-        {
-          label: 'Front Default',
-          imageUrl: other.home.front_default,
-        },
-        {
-          label: 'Front Female',
-          imageUrl: other.home.front_female,
-        },
-        {
-          label: 'Front Shiny',
-          imageUrl: other.home.front_shiny,
-        },
-        {
-          label: 'Front Shiny Female',
-          imageUrl: other.home.front_shiny_female,
-        },
-      ],
-    },
     {
       label: 'Official Artwork',
       sprites: [
@@ -48,7 +23,42 @@ const spriteExtractor = (data: PokemonSprites) => {
         },
         {
           label: 'Front Shiny',
+          // @ts-expect-error
           imageUrl: other['official-artwork'].front_shiny,
+        },
+      ],
+    },
+    {
+      label: 'Dream World',
+      sprites: [
+        {
+          label: 'Front Default',
+          imageUrl: dream_world.front_default,
+        },
+        {
+          label: 'Front Female',
+          imageUrl: dream_world.front_female,
+        },
+      ],
+    },
+    {
+      label: 'Home',
+      sprites: [
+        {
+          label: 'Front Default',
+          imageUrl: home.front_default,
+        },
+        {
+          label: 'Front Female',
+          imageUrl: home.front_female,
+        },
+        {
+          label: 'Front Shiny',
+          imageUrl: home.front_shiny,
+        },
+        {
+          label: 'Front Shiny Female',
+          imageUrl: home.front_shiny_female,
         },
       ],
     },
@@ -57,35 +67,35 @@ const spriteExtractor = (data: PokemonSprites) => {
       sprites: [
         {
           label: 'Front Default',
-          imageUrl: other.showdown.front_default,
+          imageUrl: showdown.front_default,
         },
         {
           label: 'Front Female',
-          imageUrl: other.showdown.front_female,
+          imageUrl: showdown.front_female,
         },
         {
           label: 'Front Shiny',
-          imageUrl: other.showdown.front_shiny,
+          imageUrl: showdown.front_shiny,
         },
         {
           label: 'Front Shiny Female',
-          imageUrl: other.showdown.front_shiny_female,
+          imageUrl: showdown.front_shiny_female,
         },
         {
           label: 'Back Default',
-          imageUrl: other.showdown.back_default,
+          imageUrl: showdown.back_default,
         },
         {
           label: 'Back Female',
-          imageUrl: other.showdown.back_female,
+          imageUrl: showdown.back_female,
         },
         {
           label: 'Back Shiny',
-          imageUrl: other.showdown.back_shiny,
+          imageUrl: showdown.back_shiny,
         },
         {
           label: 'Back Shiny Female',
-          imageUrl: other.showdown.back_shiny_female,
+          imageUrl: showdown.back_shiny_female,
         },
       ],
     },
@@ -102,6 +112,9 @@ const spriteExtractor = (data: PokemonSprites) => {
     })
     .filter(category => category.sprites.length > 0);
 
+  /**
+   * GENERATION SPRITES
+   */
   const generations = [
     {
       label: 'Generation I',
@@ -572,7 +585,27 @@ const spriteExtractor = (data: PokemonSprites) => {
     })
     .filter(generation => generation.gameVersions.length > 0);
 
-  return [...filteredGenerationSprites, ...filteredOtherSprites];
+  /**
+   * VARIETY SPRITES
+   */
+  const forms = pokemonVarieties
+    .filter(({ is_default }) => !is_default) // Filter out default forms
+    ?.map(({ pokemon: { name } }) => {
+      // Split the name into parts, transform the case, and rejoin
+      const formName = name
+        .split('-')
+        .slice(1) // Remove the first part (base name)
+        .map(part => part.charAt(0).toUpperCase() + part.slice(1)) // Capitalize each part
+        .join('-');
+
+      return { name: formName };
+    });
+
+  return {
+    generationSprites: filteredGenerationSprites,
+    otherSprites: filteredOtherSprites,
+    varietySprites: forms,
+  };
 };
 
 export { spriteExtractor };

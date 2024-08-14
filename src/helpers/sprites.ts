@@ -586,7 +586,7 @@ const spriteExtractor = (
     .filter(generation => generation.gameVersions.length > 0);
 
   /**
-   * VARIETY SPRITES
+   * FORMS
    */
   const forms = pokemonVarieties
     .filter(({ is_default }) => !is_default) // Filter out default forms
@@ -604,7 +604,7 @@ const spriteExtractor = (
   return {
     generationSprites: filteredGenerationSprites,
     otherSprites: filteredOtherSprites,
-    varietySprites: forms,
+    forms: forms,
   };
 };
 

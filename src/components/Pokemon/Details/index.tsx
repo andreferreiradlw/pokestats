@@ -130,7 +130,7 @@ const PokemonDetails = ({
         >
           {!!types?.length && (
             <TypeContainer flexdirection="row" flexwrap="wrap" width="auto">
-              {types.map(({ type }, i) => (
+              {types.map(({ type }) => (
                 <TypeBadge $typename={type.name} key={`${type.name}-detail-${id}`} />
               ))}
             </TypeContainer>

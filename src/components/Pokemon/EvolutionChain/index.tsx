@@ -1,84 +1,96 @@
 // types
-import type { PokestatsPokemonPageProps } from '@/pages/pokemon/[pokemonId]';
-import type { BoxProps } from '@/components/Box';
+import type { EvolutionChain as EvoChainType, PokemonSpecies } from 'pokenode-ts';
 // helpers
 import { fadeInUpVariant } from '@/helpers';
 // components
-import Box from '@/components/Box';
-import BoxWrapper from '@/components/Box/StyledBox';
 import Evolution from './Evolution';
+import { motion } from 'framer-motion';
 // styles
-import { SectionTitle, SectionMessage } from '@/components/BaseStyles';
+import { useEvolutionChain } from '@/hooks';
+import { capitalize, Grid, GridProps, Typography } from '@mui/material';
+import Loading from '@/components/Loading';
 
-interface EvolutionChainProps extends BoxProps {
-  pokemonName: string;
-  evolutionChain: PokestatsPokemonPageProps['evolutionChain'];
+interface EvolutionChainProps extends GridProps {
+  pokemonSpecies: PokemonSpecies;
+  evolutionChain: EvoChainType;
 }
 
 const EvolutionChain = ({
-  pokemonName,
+  pokemonSpecies,
   evolutionChain,
   ...rest
 }: EvolutionChainProps): JSX.Element => {
   // data
-  const { chainId, firstEvolution, secondEvolution } = evolutionChain;
+  const { data, isLoading } = useEvolutionChain(evolutionChain, pokemonSpecies);
 
   return (
-    <Box flexgap="1em" {...rest}>
-      <SectionTitle>Evolution Chain</SectionTitle>
-      <BoxWrapper
-        flexdirection="column"
-        flexjustify="center"
-        flexalign="center"
-        width="100%"
-        flexgap="1em"
-      >
-        <Evolution noArrow species={firstEvolution} width="auto" />
-        {secondEvolution.length > 0 && (
-          <Box
-            flexdirection="row"
-            flexalign="stretch"
-            flexjustify="flex-start"
-            flexgap="1em"
-            style={{
-              overflow: 'hidden',
-              overflowX: firstEvolution.name === 'eevee' ? 'scroll' : 'hidden',
-            }}
+    <Grid container gap="1em" {...rest}>
+      <Typography variant="sectionTitle">Evolution Chain</Typography>
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <>
+          <Grid
+            item
+            container
+            flexDirection="column"
+            justifyContent="center"
+            alignItems="center"
+            width="100%"
+            gap="1em"
           >
-            {secondEvolution.map(({ species, evolutionDetails, thirdEvolution }) => (
-              <Box key={`second-evo-container-${chainId}`} flexgap="1em">
-                <Evolution
-                  species={species}
-                  evolutionDetails={evolutionDetails}
-                  key={`second-evo-${chainId}`}
-                />
-                {thirdEvolution.length > 0 && (
-                  <Box flexdirection="row" flexjustify="space-evenly" flexgap="1em">
-                    {thirdEvolution.map(({ species, evolutionDetails }) => (
-                      <Evolution
-                        key={`third-evo-${chainId}`}
-                        species={species}
-                        evolutionDetails={evolutionDetails}
-                      />
-                    ))}
-                  </Box>
-                )}
-              </Box>
-            ))}
-          </Box>
-        )}
-      </BoxWrapper>
-      {!secondEvolution.length && (
-        <SectionMessage
-          initial="hidden"
-          animate="show"
-          variants={fadeInUpVariant}
-          key={`no-evo-${chainId}`}
-        >
-          {`${pokemonName} does not evolve.`}
-        </SectionMessage>
+            <Evolution noArrow species={data.firstEvolution} width="auto" />
+            {data.secondEvolution.length > 0 && (
+              <Grid
+                item
+                flexDirection="row"
+                alignItems="stretch"
+                justifyContent="flex-start"
+                gap="1em"
+                // overflow="visible"
+                maxWidth="100%"
+                sx={{
+                  overflow: data.firstEvolution.name === 'eevee' ? 'scroll hidden' : 'visible',
+                }}
+              >
+                {data.secondEvolution.map(({ species, evolutionDetails, thirdEvolution }) => (
+                  <Grid item key="second-evo-container" gap="1em">
+                    <Evolution
+                      species={species}
+                      evolutionDetails={evolutionDetails}
+                      key="second-evo"
+                    />
+                    {thirdEvolution.length > 0 && (
+                      <Grid flexDirection="row" justifyContent="space-evenly" gap="1em">
+                        {thirdEvolution.map(({ species, evolutionDetails }) => (
+                          <Evolution
+                            key="third-evo"
+                            species={species}
+                            evolutionDetails={evolutionDetails}
+                          />
+                        ))}
+                      </Grid>
+                    )}
+                  </Grid>
+                ))}
+              </Grid>
+            )}
+          </Grid>
+          {!data.secondEvolution.length && (
+            <Typography
+              variant="sectionMessage"
+              component={motion.p}
+              initial="hidden"
+              animate="show"
+              variants={fadeInUpVariant}
+              key="no-evolutions"
+            >
+              {`${capitalize(pokemonSpecies.name)} does not evolve.`}
+            </Typography>
+          )}
+        </>
       )}
-    </Box>
+    </Grid>
   );
 };
 

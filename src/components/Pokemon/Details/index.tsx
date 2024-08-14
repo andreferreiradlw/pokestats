@@ -12,7 +12,6 @@ import {
   mapGeneration,
   formatFlavorText,
   findEnglishName,
-  prefixId,
 } from '@/helpers';
 // components
 import Box from '@/components/Box';

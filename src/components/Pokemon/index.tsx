@@ -25,12 +25,11 @@ const PokemonPage = ({
   pokemon,
   abilities,
   species,
-  evolutionChain,
+  evolutionData,
 }: Omit<PokestatsPokemonPageProps, 'autocompleteList' | 'pokemonGen'>): JSX.Element => {
   // data
   const { id, name, stats, types, sprites } = pokemon;
   const { names, varieties } = species;
-  const { babyTriggerItem } = evolutionChain;
 
   const currPokemonName = findEnglishName(names);
 
@@ -77,7 +76,7 @@ const PokemonPage = ({
         >
           <Breeding
             species={species}
-            babyTriggerItem={babyTriggerItem}
+            babyTriggerItem={evolutionData.baby_trigger_item}
             screensizes={{ xxs: 12, md: 6, lg: 4 }}
             $parentGap="2em"
           />
@@ -104,11 +103,7 @@ const PokemonPage = ({
         <Divider />
         {/** EVOLUTION CHAIN */}
         <Box flexalign="flex-start" flexjustify="flex-start">
-          <EvolutionChain
-            key={`pokemon-evolution-${name}`}
-            pokemonName={currPokemonName}
-            evolutionChain={evolutionChain}
-          />
+          <EvolutionChain item evolutionChain={evolutionData} pokemonSpecies={species} />
         </Box>
         <Divider />
         {/** MOVES */}

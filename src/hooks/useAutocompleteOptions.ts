@@ -3,12 +3,12 @@ import { MovesApi, PokemonApi, TypesApi } from '@/services';
 import { MoveType, Pokemon, PokemonType } from '@/types';
 import { useQuery, UseQueryOptions, UseQueryResult } from '@tanstack/react-query';
 
-type AutocompleteList = (Pokemon | PokemonType | MoveType)[];
+export type AutocompleteListOption = Pokemon | PokemonType | MoveType;
 
 export const useAutocompleteOptions = (
-  options?: Partial<UseQueryOptions<AutocompleteList>>,
-): UseQueryResult<AutocompleteList> =>
-  useQuery<AutocompleteList>({
+  options?: Partial<UseQueryOptions<AutocompleteListOption[]>>,
+): UseQueryResult<AutocompleteListOption[]> =>
+  useQuery<AutocompleteListOption[]>({
     queryKey: ['autocomplete'],
     queryFn: async () => {
       // fetch data
@@ -18,7 +18,7 @@ export const useAutocompleteOptions = (
         MovesApi.listMoves(0, 850),
       ]);
 
-      const allOptions: AutocompleteList = [];
+      const allOptions: AutocompleteListOption[] = [];
 
       // pokemon
       pokemonResponse.results.forEach((currPokemon, i) => {

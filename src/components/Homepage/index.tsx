@@ -17,6 +17,7 @@ import Box from '@/components/Box';
 import { motion } from 'framer-motion';
 // icons
 import Github from 'public/static/iconLibrary/github.svg';
+import AutocompleteV2 from '../AutocompleteV2';
 
 const Homepage = ({ allPokemon, pokemonTypes, allMoves }: PokestatsHomepageProps): JSX.Element => {
   // router
@@ -67,7 +68,8 @@ const Homepage = ({ allPokemon, pokemonTypes, allMoves }: PokestatsHomepageProps
           $withGutter
         >
           <MainHeading>PokeStats</MainHeading>
-          <Autocomplete filterList={[...allPokemon, ...pokemonTypes, ...allMoves]} />
+          {/* <Autocomplete filterList={[...allPokemon, ...pokemonTypes, ...allMoves]} /> */}
+          <AutocompleteV2 />
           <Button onClick={onRandomClick} $dark>
             Random Pokemon
             <Pokeball />

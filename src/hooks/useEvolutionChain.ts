@@ -84,11 +84,12 @@ export const useEvolutionChain = (
   evolutionChain: EvolutionChain,
   species: PokemonSpecies,
   options?: Partial<UseQueryOptions<EvolutionChainPokestats>>,
-): UseQueryResult<EvolutionChainPokestats> => {
-  return useQuery<EvolutionChainPokestats>({
+): UseQueryResult<EvolutionChainPokestats> =>
+  useQuery<EvolutionChainPokestats>({
     queryKey: ['evolutionChain', evolutionChain.id],
     queryFn: async () => {
       const firstEvolutionSpecies = evolutionChain.chain.species.name;
+
       const firstEvolution = await fetchEvolutionDetails(firstEvolutionSpecies, species);
 
       const secondEvolution = await processSecondEvolution(
@@ -105,4 +106,3 @@ export const useEvolutionChain = (
     },
     ...options,
   });
-};

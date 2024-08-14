@@ -7,24 +7,22 @@ import type {
   EvolutionChain,
   PokemonSpecies,
   Ability,
-  EvolutionDetail,
 } from 'pokenode-ts';
 // helpers
-import { PokemonClient, EvolutionClient } from 'pokenode-ts';
 import {
-  getIdFromEvolutionChain,
-  getIdFromSpecies,
   prefixId,
   formatFlavorText,
   gameVersions,
   findEnglishName,
   fetchAutocompleteData,
+  getResourceId,
 } from '@/helpers';
 // components
 import Head from 'next/head';
 import Layout from '@/components/Layout';
 import PokemonPage from '@/components/Pokemon';
 import Loading from '@/components/Loading';
+import { AbilityApi, EvolutionApi, PokemonApi, SpeciesApi } from '@/services';
 
 export interface PokestatsPokemonPageProps {
   allPokemon: Pokemon[];
@@ -33,19 +31,7 @@ export interface PokestatsPokemonPageProps {
   abilities: Ability[];
   species: PokemonSpecies;
   pokemonMoves: PokemonMove[];
-  evolutionChain: {
-    chainId: number;
-    babyTriggerItem: EvolutionChain['baby_trigger_item'];
-    firstEvolution: PokemonSpecies;
-    secondEvolution: {
-      species: PokemonSpecies;
-      evolutionDetails: EvolutionDetail[];
-      thirdEvolution: {
-        species: PokemonSpecies;
-        evolutionDetails: EvolutionDetail[];
-      }[];
-    }[];
-  };
+  evolutionData: EvolutionChain;
 }
 
 const PokestatsPokemonPage: NextPage<PokestatsPokemonPageProps> = ({
@@ -106,9 +92,7 @@ const PokestatsPokemonPage: NextPage<PokestatsPokemonPageProps> = ({
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const api = new PokemonClient();
-
-  const pokemonList = await api.listPokemons(0, 250);
+  const pokemonList = await PokemonApi.listPokemons(0, 250);
   // paths
   const paths = pokemonList.results.map(pokemon => {
     return {
@@ -125,15 +109,12 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  // clients
-  const pokemonClient = new PokemonClient();
-  const evolutionClient = new EvolutionClient();
-
+  // get current pokemon name from url params
   const pokemonName = params.pokemonId as string;
 
   try {
     // fetch data
-    const pokemonDataResults = await pokemonClient.getPokemonByName(pokemonName);
+    const pokemonDataResults = await PokemonApi.getByName(pokemonName);
     const { allMovesData, allPokemonData, allTypesData } = await fetchAutocompleteData();
 
     if (!allPokemonData || !allTypesData || !allMovesData || !pokemonDataResults) {
@@ -143,18 +124,11 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
     if (pokemonDataResults.id > 905) return { notFound: true };
 
-    // abilities requests array
-    let pokemonAbilities = [];
-    // create an axios request for each ability
-    pokemonDataResults.abilities.forEach(({ ability }) =>
-      pokemonAbilities.push(pokemonClient.getAbilityByName(ability.name)),
-    );
-
-    const pokemonAbilitiesResults = await Promise.all(pokemonAbilities);
+    const pokemonAbilitiesResults = await AbilityApi.getPokemonAbilities(pokemonDataResults);
 
     // get evolution chain id from url
-    const pokemonSpeciesResults = await pokemonClient.getPokemonSpeciesById(
-      getIdFromSpecies(pokemonDataResults.species.url),
+    const pokemonSpeciesResults = await SpeciesApi.getById(
+      getResourceId(pokemonDataResults.species.url),
     );
 
     if (!pokemonSpeciesResults || !pokemonAbilitiesResults) {
@@ -163,72 +137,13 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     }
 
     // get evolution chain id from url
-    const evolutionDataResults = await evolutionClient.getEvolutionChainById(
-      getIdFromEvolutionChain(pokemonSpeciesResults.evolution_chain.url),
+    const evolutionDataResults = await EvolutionApi.getById(
+      getResourceId(pokemonSpeciesResults.evolution_chain.url),
     );
 
     if (!evolutionDataResults) {
       console.log('Failed to fetch evolutionData');
       return { notFound: true };
-    }
-
-    // get evolution data based on chain
-    let evolutionChainPokemon = {
-      chainId: evolutionDataResults.id,
-      babyTriggerItem: evolutionDataResults.baby_trigger_item,
-      firstEvolution: null,
-      secondEvolution: [],
-    };
-
-    // first evolution
-    if (evolutionDataResults.chain.species.name === pokemonName) {
-      evolutionChainPokemon.firstEvolution = pokemonSpeciesResults;
-    } else {
-      const firstEvoData = await pokemonClient.getPokemonSpeciesByName(
-        evolutionDataResults.chain.species.name,
-      );
-      evolutionChainPokemon.firstEvolution = firstEvoData;
-    }
-
-    for (const [i, second_evolution] of evolutionDataResults.chain.evolves_to.entries()) {
-      // second evolution
-      if (second_evolution.species.name === pokemonName) {
-        evolutionChainPokemon.secondEvolution.push({
-          species: pokemonSpeciesResults,
-          evolutionDetails: second_evolution.evolution_details,
-          thirdEvolution: [],
-        });
-      } else {
-        const secondEvoData = await pokemonClient.getPokemonSpeciesByName(
-          second_evolution.species.name,
-        );
-        if (secondEvoData.id <= 905) {
-          evolutionChainPokemon.secondEvolution.push({
-            species: secondEvoData,
-            evolutionDetails: second_evolution.evolution_details,
-            thirdEvolution: [],
-          });
-        }
-      }
-      // third evolution
-      for (const third_evolution of second_evolution.evolves_to) {
-        if (third_evolution.species.name === pokemonName) {
-          evolutionChainPokemon.secondEvolution[i].thirdEvolution.push({
-            species: pokemonSpeciesResults,
-            evolutionDetails: third_evolution.evolution_details,
-          });
-        } else {
-          const thirdEvoData = await pokemonClient.getPokemonSpeciesByName(
-            third_evolution.species.name,
-          );
-          if (thirdEvoData.id <= 905) {
-            evolutionChainPokemon.secondEvolution[i].thirdEvolution.push({
-              species: thirdEvoData,
-              evolutionDetails: third_evolution.evolution_details,
-            });
-          }
-        }
-      }
     }
 
     // species english flavor text
@@ -250,7 +165,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
           effect_entries: ability.effect_entries.filter(entry => entry.language.name === 'en'),
         })),
         species: pokemonSpeciesResults,
-        evolutionChain: evolutionChainPokemon,
+        evolutionData: evolutionDataResults,
         revalidate: 120,
       },
     };

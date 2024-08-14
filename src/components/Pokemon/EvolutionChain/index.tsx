@@ -39,7 +39,7 @@ const EvolutionChain = ({
             width="100%"
             gap="1em"
           >
-            <Evolution noArrow species={data.firstEvolution} width="auto" />
+            <Evolution noArrow species={data.firstEvolution} style={{ width: 'auto' }} />
             {data.secondEvolution.length > 0 && (
               <Grid
                 item
@@ -47,7 +47,6 @@ const EvolutionChain = ({
                 alignItems="stretch"
                 justifyContent="flex-start"
                 gap="1em"
-                // overflow="visible"
                 maxWidth="100%"
                 sx={{
                   overflow: data.firstEvolution.name === 'eevee' ? 'scroll hidden' : 'visible',

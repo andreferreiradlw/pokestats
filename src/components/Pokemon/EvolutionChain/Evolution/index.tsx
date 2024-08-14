@@ -1,5 +1,4 @@
 // types
-import type { BoxProps } from '@/components/Box';
 import type { PokemonSpecies, EvolutionDetail } from 'pokenode-ts';
 // helpers
 import { fadeInUpVariant, findEnglishName } from '@/helpers';
@@ -7,8 +6,9 @@ import { EvolutionContainer, EvoDetailsContainer, EvoArrow } from './StyledEvolu
 // components
 import PokemonBox from '@/components/PokemonBox';
 import EvolutionDetails from './EvolutionDetails';
+import { HTMLMotionProps } from 'framer-motion';
 
-export interface EvolutionProps extends BoxProps {
+export interface EvolutionProps extends HTMLMotionProps<'div'> {
   noArrow?: boolean;
   species: PokemonSpecies;
   evolutionDetails?: EvolutionDetail[];
@@ -27,10 +27,6 @@ const Evolution = ({
 
   return (
     <EvolutionContainer
-      flexdirection="column"
-      flexalign="center"
-      flexjustify="space-between"
-      flexgap="1em"
       initial="hidden"
       animate="show"
       variants={fadeInUpVariant}
@@ -38,8 +34,7 @@ const Evolution = ({
       {...rest}
     >
       {!noArrow && (
-        <EvoDetailsContainer width="auto" flexgap="1em" flexjustify="space-between">
-          {/* <EvoArrow /> */}
+        <EvoDetailsContainer>
           <EvolutionDetails details={evolutionDetails} />
           <EvoArrow />
         </EvoDetailsContainer>

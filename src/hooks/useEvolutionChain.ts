@@ -33,7 +33,7 @@ const processThirdEvolution = async (
 ) => {
   if (thirdEvolutions.length === 0) return [];
 
-  return Promise.all(
+  return await Promise.all(
     thirdEvolutions.map(async thirdEvolution => {
       const thirdEvolutionData = await fetchEvolutionDetails(
         thirdEvolution.species.name,
@@ -57,7 +57,7 @@ const processSecondEvolution = async (
 ) => {
   if (secondEvolutions.length === 0) return [];
 
-  return Promise.all(
+  return await Promise.all(
     secondEvolutions.map(async secondEvolution => {
       const secondEvolutionData = await fetchEvolutionDetails(
         secondEvolution.species.name,

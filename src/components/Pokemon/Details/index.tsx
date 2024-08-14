@@ -70,7 +70,7 @@ const PokemonDetails = ({
   }, [id]);
   const generationName = useMemo(() => mapGeneration(generation?.name), [generation]);
   const flavorText = useMemo(() => {
-    // @ts-ignore
+    // @ts-expect-error: valid text entries
     const versionEntry = flavor_text_entries.filter(entry => entry.version.name === gameVersion);
     // return formatted text
     // page breaks are treated just like newlines
@@ -99,7 +99,7 @@ const PokemonDetails = ({
   const renderAbilities = useMemo(
     () =>
       pokemonAbilities.map(({ ability, is_hidden }, i) => (
-        <Numbered key={`${ability}-${i}`}>
+        <Numbered key={ability.name}>
           <AbilityName as="p">
             {`${i + 1}. ${removeDash(ability.name)}`}
             {is_hidden && ' (Hidden Ability)'}
@@ -131,7 +131,7 @@ const PokemonDetails = ({
           {!!types?.length && (
             <TypeContainer flexdirection="row" flexwrap="wrap" width="auto">
               {types.map(({ type }, i) => (
-                <TypeBadge $typename={type.name} key={`${type.name}-${i}-detail-${id}`} />
+                <TypeBadge $typename={type.name} key={`${type.name}-detail-${id}`} />
               ))}
             </TypeContainer>
           )}
@@ -158,9 +158,9 @@ const PokemonDetails = ({
         </Box>
         {(is_baby || is_legendary || is_mythical) && (
           <Genera>
-            {is_baby && `Baby `}
-            {is_legendary && `Legendary `}
-            {is_mythical && `Mythical `}
+            {is_baby && 'Baby '}
+            {is_legendary && 'Legendary '}
+            {is_mythical && 'Mythical '}
             Pokemon
           </Genera>
         )}

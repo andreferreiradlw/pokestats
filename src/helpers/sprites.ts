@@ -604,7 +604,7 @@ const spriteExtractor = (
   return {
     generationSprites: filteredGenerationSprites,
     otherSprites: filteredOtherSprites,
-    forms: forms,
+    forms,
   };
 };
 

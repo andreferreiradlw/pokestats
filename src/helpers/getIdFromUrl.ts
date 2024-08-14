@@ -41,7 +41,8 @@ const getIdFromURL = (url: string, matcher: string): number => {
  * @return The extracted resource ID.
  */
 const getResourceId = (url: string) => {
-  const matchResult = url.match(/\/(\d+)\/$/);
+  const regex = /\/(\d+)\/$/;
+  const matchResult = regex.exec(url);
   return Number(matchResult?.[1]);
 };
 

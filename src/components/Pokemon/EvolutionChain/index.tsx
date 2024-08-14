@@ -27,7 +27,7 @@ const EvolutionChain = ({
     <Grid container gap="1em" {...rest}>
       <Typography variant="sectionTitle">Evolution Chain</Typography>
       {isLoading ? (
-        <Loading />
+        <Loading flexheight="100%" $iconWidth={{ xxs: '20%', xs: '15%', md: '10%', lg: '5%' }} />
       ) : (
         <>
           <Grid
@@ -45,9 +45,11 @@ const EvolutionChain = ({
                 item
                 flexDirection="row"
                 alignItems="stretch"
-                justifyContent="flex-start"
+                justifyContent="space-evenly"
                 gap="1em"
                 maxWidth="100%"
+                width="100%"
+                pb={1}
                 sx={{
                   overflow: data.firstEvolution.name === 'eevee' ? 'scroll hidden' : 'visible',
                 }}

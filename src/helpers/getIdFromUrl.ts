@@ -42,7 +42,7 @@ const getIdFromURL = (url: string, matcher: string): number => {
  */
 const getResourceId = (url: string) => {
   const matchResult = url.match(/\/(\d+)\/$/);
-  return Number(matchResult![1]);
+  return Number(matchResult?.[1]);
 };
 
 export {

@@ -5,7 +5,7 @@ import { fadeInUpVariant, findEnglishName } from '@/helpers';
 import { EvolutionContainer, EvoDetailsContainer, EvoArrow } from './StyledEvolution';
 // components
 import PokemonBox from '@/components/PokemonBox';
-import EvolutionDetails from './EvolutionDetails';
+import EvolutionDetails from '../EvolutionDetails';
 import { HTMLMotionProps } from 'framer-motion';
 
 export interface EvolutionProps extends HTMLMotionProps<'div'> {

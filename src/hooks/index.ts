@@ -1,3 +1,4 @@
+export * from './useAutocompleteOptions';
 export * from './useEvolutionChain';
 export * from './useMachines';
 export * from './usePokemonMoves';

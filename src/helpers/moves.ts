@@ -37,9 +37,16 @@ const filterMoves = (
     .filter((move): move is FilteredMove => move !== null)
     .sort((a, b) => (learnMethod === 'level-up' ? a.level_learned_at - b.level_learned_at : 0));
 
-const removeDuplicateMoves = (moves: NamedAPIResource[]): NamedAPIResource[] =>
-  Array.from(new Set(moves.map(move => move.name))).map(name =>
-    moves.find(move => move.name === name),
-  );
+const removeDuplicateMoves = (moves: NamedAPIResource[]): NamedAPIResource[] => {
+  const uniqueMovesMap = new Map<string, NamedAPIResource>();
+
+  moves.forEach(move => {
+    if (!uniqueMovesMap.has(move.name)) {
+      uniqueMovesMap.set(move.name, move);
+    }
+  });
+
+  return Array.from(uniqueMovesMap.values());
+};
 
 export { filterMoves, removeDuplicateMoves };

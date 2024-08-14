@@ -9,4 +9,6 @@ export const MovesApi = {
   getByName: async (name: string) => await MainClient.move.getMoveByName(name),
 
   getById: async (id: number) => await MainClient.move.getMoveById(id),
+
+  listMoves: async (from: number, to: number) => await MainClient.move.listMoves(from, to),
 };

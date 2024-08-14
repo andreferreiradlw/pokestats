@@ -34,6 +34,17 @@ const getIdFromURL = (url: string, matcher: string): number => {
   return Number(matchId?.[1]);
 };
 
+/**
+ * Retrieves the resource ID from a given URL.
+ *
+ * @param url - The URL from which to extract the resource ID.
+ * @return The extracted resource ID.
+ */
+const getResourceId = (url: string) => {
+  const matchResult = url.match(/\/(\d+)\/$/);
+  return Number(matchResult![1]);
+};
+
 export {
   getIdFromEvolutionChain,
   getIdFromMachine,
@@ -42,4 +53,5 @@ export {
   getIdFromPokemon,
   getIdFromURL,
   getIdFromItem,
+  getResourceId,
 };

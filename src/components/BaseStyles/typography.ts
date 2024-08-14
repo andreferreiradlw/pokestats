@@ -1,7 +1,6 @@
 import { default as styledSC } from 'styled-components';
 import { motion } from 'framer-motion';
 
-import { focusStyles } from './button';
 import { Link, styled, css } from '@mui/material';
 
 const SectionTitle = styledSC(motion.h2)`

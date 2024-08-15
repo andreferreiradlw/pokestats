@@ -1,4 +1,4 @@
-import { css, styled } from '@mui/material';
+import { css, styled, Typography } from '@mui/material';
 import { motion } from 'framer-motion';
 import { AutocompleteV2Props } from '.';
 
@@ -46,4 +46,56 @@ const ListWrapper = styled(motion.ul)(
   `,
 );
 
-export { Container, ListWrapper };
+const OptionWrapper = styled('li')(
+  ({ theme }) => css`
+    align-items: center;
+    cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    font-size: 0.875rem;
+    gap: 1em;
+    justify-content: space-between;
+    min-height: 55px;
+    padding: 0.5em 1em;
+
+    svg {
+      padding: 5px;
+      width: 40px;
+    }
+
+    /* ${({ theme }) => css`
+      background-color: ${theme.colors.white};
+      color: ${theme.colors.black};
+
+      &:hover,
+      &:active,
+      &:focus {
+        background-color: ${theme.colors.black};
+        color: ${theme.colors.white};
+
+        svg path {
+          fill: ${theme.colors.white};
+          stroke: ${theme.colors.black};
+        }
+      }
+    `} */
+  `,
+);
+
+const ItemIcon = styled('img')({ width: '40px' });
+
+const Option = styled(Typography)(
+  ({ theme }) => css`
+    font-weight: ${theme.typography.fontWeightMedium};
+    text-transform: capitalize;
+  `,
+);
+
+const PokeID = styled(Typography)(
+  ({ theme }) => css`
+    font-weight: ${theme.typography.fontWeightMedium};
+    margin-left: auto;
+  `,
+);
+
+export { Container, ListWrapper, OptionWrapper, ItemIcon, Option, PokeID };

@@ -1,17 +1,53 @@
 import { HTMLMotionProps } from 'framer-motion';
-import { Container, ListWrapper } from './styledAutocompleteV2';
+import {
+  Container,
+  ItemIcon,
+  ListWrapper,
+  Option,
+  OptionWrapper,
+  PokeID,
+} from './styledAutocompleteV2';
 import { CSSProperties } from '@mui/styled-engine-sc';
 import { AutocompleteListOption, useAutocompleteOptions } from '@/hooks';
 import { useEffect } from 'react';
-import { Autocomplete, Box, capitalize, createFilterOptions, TextField } from '@mui/material';
+import { Autocomplete, capitalize, createFilterOptions, Stack, TextField } from '@mui/material';
 import { useRouter } from 'next/router';
 import { usePlausible } from 'next-plausible';
-import { fadeInDownVariant } from '@/helpers';
+import { fadeInDownVariant, removeDash } from '@/helpers';
+import { MoveType, Pokemon, PokemonType } from '@/types';
+import TypeIcon from '@/components/TypeIcon';
 
 export interface AutocompleteV2Props extends HTMLMotionProps<'div'> {
   width?: CSSProperties['width'];
   placeholder?: string;
 }
+
+interface AutocompleteIconProps {
+  assetType: PokemonType['assetType'] | Pokemon['assetType'] | MoveType['assetType'];
+  name: string;
+  id?: number;
+}
+
+const AutocompleteIcon = ({ assetType, name, id }: AutocompleteIconProps): JSX.Element => {
+  switch (assetType) {
+    case 'pokemon':
+      return (
+        <ItemIcon
+          alt={`${name} pokemon`}
+          src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`}
+        />
+      );
+    case 'type':
+      return <TypeIcon type={name} />;
+    case 'move':
+      return (
+        <ItemIcon
+          alt={`${name} pokemon move`}
+          src="https://raw.githubusercontent.com/msikma/pokesprite/master/items/hm/normal.png"
+        />
+      );
+  }
+};
 
 const AutocompleteV2 = ({ placeholder, ...rest }: AutocompleteV2Props): JSX.Element => {
   // router
@@ -22,7 +58,7 @@ const AutocompleteV2 = ({ placeholder, ...rest }: AutocompleteV2Props): JSX.Elem
   const { data, isLoading } = useAutocompleteOptions();
 
   const filterOptions = createFilterOptions<AutocompleteListOption>({
-    matchFrom: 'start',
+    matchFrom: 'any',
     limit: 6,
   });
 
@@ -57,10 +93,14 @@ const AutocompleteV2 = ({ placeholder, ...rest }: AutocompleteV2Props): JSX.Elem
             />
           );
         }}
-        renderOption={({ key, ...optionProps }, option) => (
-          <Box component="li" role="option" key={key} {...optionProps}>
-            {option.name}
-          </Box>
+        renderOption={({ key, ...optionProps }, { assetType, id, name }) => (
+          <OptionWrapper role="option" key={key} {...optionProps}>
+            <Stack flexDirection="row" justifyContent="flex-start" alignItems="center" gap="1em">
+              <AutocompleteIcon assetType={assetType} name={name} id={id} />
+              <Option variant="subtitle1">{removeDash(name)}</Option>
+            </Stack>
+            {assetType === 'pokemon' && <PokeID variant="h5">{`#${id}`}</PokeID>}
+          </OptionWrapper>
         )}
         ListboxComponent={ListWrapper}
         ListboxProps={{

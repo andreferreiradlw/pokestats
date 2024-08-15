@@ -104,6 +104,7 @@ const OptionWrapper = styled(Link)`
   justify-content: space-between;
   min-height: 55px;
   padding: 0.5em 1em;
+  width: 100%;
 
   svg {
     padding: 5px;

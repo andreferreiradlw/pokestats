@@ -9,7 +9,6 @@ import type { PokestatsHomepageProps } from '@/pages/index';
 import { Container, GithubLink, ListContainer, Pokeball } from './styledHomepage';
 import { MainHeading, Button, Divider } from '@/BaseStyles';
 // components
-import Autocomplete from '@/components/Autocomplete';
 import Particles from '@/components/Particles';
 import PokemonList from './PokemonList';
 import TypeList from './TypeList';
@@ -19,16 +18,18 @@ import { motion } from 'framer-motion';
 import Github from 'public/static/iconLibrary/github.svg';
 import AutocompleteV2 from '../AutocompleteV2';
 
-const Homepage = ({ allPokemon, pokemonTypes, allMoves }: PokestatsHomepageProps): JSX.Element => {
+const Homepage = ({ allPokemon, pokemonTypes }: PokestatsHomepageProps): JSX.Element => {
   // router
   const router = useRouter();
   // analytics
   const plausible = usePlausible();
+
   // memo
   const randomPokemonUrl = useMemo(
     () => `/pokemon/${allPokemon[getRandomInt(1, allPokemon.length)].name}`,
     [allPokemon],
   );
+
   // prefetch random pokemon page
   useEffect(() => {
     if (router && randomPokemonUrl) router.prefetch(randomPokemonUrl);
@@ -68,7 +69,6 @@ const Homepage = ({ allPokemon, pokemonTypes, allMoves }: PokestatsHomepageProps
           $withGutter
         >
           <MainHeading>PokeStats</MainHeading>
-          {/* <Autocomplete filterList={[...allPokemon, ...pokemonTypes, ...allMoves]} /> */}
           <AutocompleteV2 />
           <Button onClick={onRandomClick} $dark>
             Random Pokemon

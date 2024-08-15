@@ -1,18 +1,17 @@
 // types
 import type { GetStaticProps, NextPage } from 'next';
-import type { Pokemon, PokemonType, MoveType } from '@/types';
 // helpers
 import { PokestatsPageTitle } from '@/components/Head';
-import { fetchAutocompleteData } from '@/helpers';
 // components
 import Head from 'next/head';
 import Layout from '@/components/Layout';
 import Homepage from '@/components/Homepage';
+import { PokemonApi, TypesApi } from '@/services';
+import { NamedAPIResource } from 'pokenode-ts';
 
 export interface PokestatsHomepageProps {
-  allPokemon: Pokemon[];
-  pokemonTypes: PokemonType[];
-  allMoves: MoveType[];
+  allPokemon: NamedAPIResource[];
+  pokemonTypes: NamedAPIResource[];
 }
 
 const PokestatsHomepage: NextPage<PokestatsHomepageProps> = props => (
@@ -33,17 +32,19 @@ const PokestatsHomepage: NextPage<PokestatsHomepageProps> = props => (
 
 export const getStaticProps: GetStaticProps = async () => {
   try {
-    const { allMovesData, allPokemonData, allTypesData } = await fetchAutocompleteData();
+    const [pokemonResponse, typesResponse] = await Promise.all([
+      PokemonApi.listPokemons(0, 905),
+      TypesApi.listTypes(0, 18),
+    ]);
 
-    if (!allMovesData || !allPokemonData || !allTypesData) {
+    if (!pokemonResponse || !typesResponse) {
       return { notFound: true };
     }
 
     return {
       props: {
-        allPokemon: allPokemonData,
-        pokemonTypes: allTypesData,
-        allMoves: allMovesData,
+        allPokemon: pokemonResponse.results,
+        pokemonTypes: typesResponse.results,
       },
     };
   } catch (error) {

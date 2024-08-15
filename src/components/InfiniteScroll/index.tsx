@@ -1,15 +1,15 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 // helpers
-import { fadeInUpVariant } from '@/helpers';
+import { fadeInUpVariant, getResourceId } from '@/helpers';
 // types
-import type { Pokemon } from '@/types';
+import { NamedAPIResource } from 'pokenode-ts';
 // components
 import Loading from '@/components/Loading';
 import PokemonBox from '@/components/PokemonBox';
 import { Grid, GridProps } from '@mui/material';
 
 export interface InfiniteScrollProps extends GridProps {
-  pokemonList: Pokemon[];
+  pokemonList: NamedAPIResource[];
   itemsPerPage?: number;
 }
 
@@ -22,7 +22,7 @@ const InfiniteScroll = ({
   const [state, setState] = useState({
     currPage: 1,
     prevY: 1,
-    showList: [] as Pokemon[],
+    showList: [] as NamedAPIResource[],
   });
 
   // Ref to store the IntersectionObserver instance
@@ -33,7 +33,7 @@ const InfiniteScroll = ({
 
   // Function to slice the pokemon list based on the current page
   const sliceNewPage = useCallback(
-    (page: number): Pokemon[] =>
+    (page: number): NamedAPIResource[] =>
       pokemonList.slice(page === 1 ? 0 : (page - 1) * itemsPerPage, page * itemsPerPage),
     [itemsPerPage, pokemonList],
   );
@@ -98,11 +98,11 @@ const InfiniteScroll = ({
         gap="1.5em"
         {...rest}
       >
-        {state.showList.map(currPokemon => (
+        {state.showList.map(({ name, url }) => (
           <PokemonBox
-            key={`infinite-scroll-${currPokemon.id}`}
-            pokemonName={currPokemon.name}
-            pokemonId={currPokemon.id}
+            key={`infinite-scroll-${name}`}
+            pokemonName={name}
+            pokemonId={getResourceId(url)}
             whileHover="hover"
             whileTap="tap"
             variants={fadeInUpVariant}

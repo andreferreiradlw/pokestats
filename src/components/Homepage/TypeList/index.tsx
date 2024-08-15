@@ -1,5 +1,5 @@
 // types
-import type { PokemonType } from '@/types';
+import { NamedAPIResource } from 'pokenode-ts';
 // styles
 import { SectionTitle } from '@/components/BaseStyles';
 // components
@@ -7,7 +7,7 @@ import Box, { BoxProps } from '@/components/Box';
 import TypeBadge from '@/components/TypeBadge';
 
 interface TypeListProps extends BoxProps {
-  types: PokemonType[];
+  types: NamedAPIResource[];
 }
 
 const TypeList = ({ types, ...rest }: TypeListProps): JSX.Element => {
@@ -24,8 +24,8 @@ const TypeList = ({ types, ...rest }: TypeListProps): JSX.Element => {
           flexgap="1em"
           flexwrap="wrap"
         >
-          {types?.map(({ name }, i) => (
-            <TypeBadge $typename={name} key={`homepage-typebadge-${name}-${i}`} />
+          {types?.map(({ name }) => (
+            <TypeBadge $typename={name} key={`homepage-typebadge-${name}`} />
           ))}
         </Box>
       </Box>

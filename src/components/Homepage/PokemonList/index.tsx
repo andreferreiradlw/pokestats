@@ -1,61 +1,81 @@
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect, useMemo, useCallback } from 'react';
 // types
-import type { Pokemon } from '@/types';
+import { NamedAPIResource } from 'pokenode-ts';
 // helpers
 import { usePlausible } from 'next-plausible';
-import { generationOptions, mapIdToGeneration } from '@/helpers';
+import { generationOptions, getResourceId, mapIdToGeneration } from '@/helpers';
 // components
 import { Grid, GridProps, Typography } from '@mui/material';
 import InfiniteScroll from '@/components/InfiniteScroll';
 import DropdownV2 from '@/components/DropdownV2';
 
 interface PokemonListProps extends GridProps {
-  pokemon: Pokemon[];
+  pokemon: NamedAPIResource[];
 }
 
 const PokemonList = ({ pokemon, ...rest }: PokemonListProps): JSX.Element => {
-  // analytics
   const plausible = usePlausible();
 
-  // Initialize state
+  console.log('pokemon', pokemon);
+
   const [gen, setGen] = useState<string>('all');
   const [sortBy, setSortBy] = useState<string>('id');
 
   useEffect(() => {
-    // Retrieve session storage state when component mounts
+    // This will only run on the client side
     const storedGen = sessionStorage.getItem('genSelect');
     const storedSortBy = sessionStorage.getItem('sortSelect');
-    // update state with defaults if they exist from session state
     if (storedGen) setGen(storedGen);
     if (storedSortBy) setSortBy(storedSortBy);
   }, []);
 
+  const handleGenChange = useCallback(
+    (e: React.ChangeEvent<HTMLSelectElement>) => {
+      const value = e.target.value;
+      setGen(value);
+      sessionStorage.setItem('genSelect', value);
+      plausible('Homepage Generation Select');
+    },
+    [plausible],
+  );
+
+  const handleSortChange = useCallback(
+    (e: React.ChangeEvent<HTMLSelectElement>) => {
+      const value = e.target.value;
+      setSortBy(value);
+      sessionStorage.setItem('sortSelect', value);
+      plausible('Homepage Sort Select');
+    },
+    [plausible],
+  );
+
   const filteredPokemon = useMemo(() => {
-    if (gen === 'all') return pokemon;
-    return pokemon.filter(p => gen === mapIdToGeneration(p.id));
+    return gen === 'all'
+      ? pokemon
+      : pokemon.filter(p => gen === mapIdToGeneration(getResourceId(p.url)));
   }, [gen, pokemon]);
 
   const sortedAndFilteredPokemon = useMemo(() => {
-    return [...filteredPokemon].sort((a, b) => {
-      if (a[sortBy as keyof Pokemon] > b[sortBy as keyof Pokemon]) return 1;
-      if (a[sortBy as keyof Pokemon] < b[sortBy as keyof Pokemon]) return -1;
-      return 0;
+    const sortedPokemon = filteredPokemon.slice().sort((a, b) => {
+      const aValue = sortBy === 'id' ? getResourceId(a.url) : a.name.toLowerCase();
+      const bValue = sortBy === 'id' ? getResourceId(b.url) : b.name.toLowerCase();
+      return aValue > bValue ? 1 : aValue < bValue ? -1 : 0;
     });
+
+    return sortedPokemon;
   }, [filteredPokemon, sortBy]);
 
   return (
     <Grid container {...rest}>
-      <Typography variant="sectionTitle">{`Select your Pokemon (${sortedAndFilteredPokemon.length})`}</Typography>
+      <Typography variant="sectionTitle">
+        {`Select your Pokemon (${sortedAndFilteredPokemon.length})`}
+      </Typography>
       <Grid item container flexDirection="row" flexWrap="wrap" gap={{ xs: '1em', md: '2em' }}>
         <DropdownV2
           label="Game Generation"
           options={generationOptions}
           value={gen}
-          onChange={e => {
-            setGen(e.target.value);
-            sessionStorage.setItem('genSelect', e.target.value);
-            plausible('Homepage Generation Select');
-          }}
+          onChange={handleGenChange}
         />
         <DropdownV2
           label="Sort Pokemon"
@@ -64,11 +84,7 @@ const PokemonList = ({ pokemon, ...rest }: PokemonListProps): JSX.Element => {
             { value: 'name', label: 'Name' },
           ]}
           value={sortBy}
-          onChange={e => {
-            setSortBy(e.target.value);
-            sessionStorage.setItem('sortSelect', e.target.value);
-            plausible('Homepage Sort Select');
-          }}
+          onChange={handleSortChange}
         />
       </Grid>
       {sortedAndFilteredPokemon.length > 0 && (

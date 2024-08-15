@@ -49,6 +49,10 @@ module.exports = {
       test: /\.svg$/,
       use: ['@svgr/webpack'],
     });
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      '@mui/styled-engine': '@mui/styled-engine-sc',
+    };
     return config;
   },
 };

@@ -30,4 +30,20 @@ const Container = styled(motion.div, {
   `,
 );
 
-export { Container };
+const ListWrapper = styled(motion.ul)(
+  ({ theme }) => css`
+    background: ${theme.palette.background.paper};
+    border: 1px solid ${theme.palette.background.paper};
+    border-radius: 0 0 0.25rem 0.25rem;
+    border-top: none;
+    box-shadow:
+      0 2px 5px 0 rgba(0, 0, 0, 0.16),
+      0 2px 10px 0 rgba(0, 0, 0, 0.12);
+    overflow: hidden;
+    position: absolute;
+    width: 100%;
+    z-index: 2;
+  `,
+);
+
+export { Container, ListWrapper };

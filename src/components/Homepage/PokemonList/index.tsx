@@ -5,7 +5,7 @@ import { NamedAPIResource } from 'pokenode-ts';
 import { usePlausible } from 'next-plausible';
 import { generationOptions, getResourceId, mapIdToGeneration } from '@/helpers';
 // components
-import { Grid, GridProps, Typography } from '@mui/material';
+import { Grid, GridProps, SelectChangeEvent, Typography } from '@mui/material';
 import InfiniteScroll from '@/components/InfiniteScroll';
 import DropdownV2 from '@/components/DropdownV2';
 
@@ -15,8 +15,6 @@ interface PokemonListProps extends GridProps {
 
 const PokemonList = ({ pokemon, ...rest }: PokemonListProps): JSX.Element => {
   const plausible = usePlausible();
-
-  console.log('pokemon', pokemon);
 
   const [gen, setGen] = useState<string>('all');
   const [sortBy, setSortBy] = useState<string>('id');
@@ -30,7 +28,7 @@ const PokemonList = ({ pokemon, ...rest }: PokemonListProps): JSX.Element => {
   }, []);
 
   const handleGenChange = useCallback(
-    (e: React.ChangeEvent<HTMLSelectElement>) => {
+    (e: SelectChangeEvent<string>) => {
       const value = e.target.value;
       setGen(value);
       sessionStorage.setItem('genSelect', value);
@@ -40,7 +38,7 @@ const PokemonList = ({ pokemon, ...rest }: PokemonListProps): JSX.Element => {
   );
 
   const handleSortChange = useCallback(
-    (e: React.ChangeEvent<HTMLSelectElement>) => {
+    (e: SelectChangeEvent<string>) => {
       const value = e.target.value;
       setSortBy(value);
       sessionStorage.setItem('sortSelect', value);

@@ -7,7 +7,7 @@ import {
   SelectProps,
 } from '@mui/material';
 
-export interface DropdownProps extends SelectProps<string> {
+export interface DropdownProps extends Omit<SelectProps<string>, 'children'> {
   label: string;
   options: {
     value: string;
@@ -30,6 +30,7 @@ const DropdownV2 = ({
       <Select
         labelId={`dropdown-label-${label}`}
         id={`dropdown-select-${label}`}
+        variant="outlined"
         sx={{ minWidth }}
         {...rest}
       >

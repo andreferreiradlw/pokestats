@@ -11,9 +11,6 @@ const Select: {
       IconComponent: Chevron,
     },
     styleOverrides: {
-      root: {
-        // minWidth: '170px',
-      },
       select: {
         padding: '5px 10px',
       },

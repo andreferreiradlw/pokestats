@@ -7,7 +7,6 @@ import { fadeInUpVariant, getRandomInt } from '@/helpers';
 import type { PokestatsHomepageProps } from '@/pages/index';
 // styles
 import { Container, GithubLink, ListContainer, Pokeball } from './styledHomepage';
-import { MainHeading, Divider } from '@/BaseStyles';
 // components
 import Particles from '@/components/Particles';
 import PokemonList from './PokemonList';
@@ -17,7 +16,7 @@ import { motion } from 'framer-motion';
 // icons
 import Github from 'public/static/iconLibrary/github.svg';
 import AutocompleteV2 from '../AutocompleteV2';
-import { Button } from '@mui/material';
+import { Button, Divider, Typography } from '@mui/material';
 
 const Homepage = ({ allPokemon, pokemonTypes }: PokestatsHomepageProps): JSX.Element => {
   // router
@@ -64,7 +63,7 @@ const Homepage = ({ allPokemon, pokemonTypes }: PokestatsHomepageProps): JSX.Ele
           $contained
           $withGutter
         >
-          <MainHeading>PokeStats</MainHeading>
+          <Typography variant="mainHeading">PokeStats</Typography>
           <AutocompleteV2 />
           <Button
             onClick={async () => {

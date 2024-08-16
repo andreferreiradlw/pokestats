@@ -33,6 +33,18 @@ const customTypography: ThemeOptions = {
       color: common.white,
       textShadow: '-2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000',
       userSelect: 'none',
+      [theme.breakpoints.up('xs')]: {
+        fontSize: '4.2rem',
+      },
+      [theme.breakpoints.up('sm')]: {
+        fontSize: '6em',
+      },
+      [theme.breakpoints.up('md')]: {
+        fontSize: '7.5em',
+      },
+      [theme.breakpoints.up('lg')]: {
+        fontSize: '10em',
+      },
     },
     pageHeading: {
       fontFamily: 'Quicksand, sans-serif',

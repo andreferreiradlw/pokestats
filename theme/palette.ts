@@ -8,9 +8,9 @@ const styledMuiPalette: ThemeOptions = {
       dark: '#513b3b',
     },
     secondary: {
-      main: '#071E22', // rich black
-      light: '#0f0a11',
-      dark: '#ada9af',
+      main: '#474044', // jet
+      light: '#ada9af',
+      dark: '#0f0a11',
     },
     error: {
       main: '#EE2E31', // red

@@ -7,7 +7,7 @@ import { fadeInUpVariant, getRandomInt } from '@/helpers';
 import type { PokestatsHomepageProps } from '@/pages/index';
 // styles
 import { Container, GithubLink, ListContainer, Pokeball } from './styledHomepage';
-import { MainHeading, Button, Divider } from '@/BaseStyles';
+import { MainHeading, Divider } from '@/BaseStyles';
 // components
 import Particles from '@/components/Particles';
 import PokemonList from './PokemonList';
@@ -17,6 +17,7 @@ import { motion } from 'framer-motion';
 // icons
 import Github from 'public/static/iconLibrary/github.svg';
 import AutocompleteV2 from '../AutocompleteV2';
+import { Button } from '@mui/material';
 
 const Homepage = ({ allPokemon, pokemonTypes }: PokestatsHomepageProps): JSX.Element => {
   // router
@@ -34,11 +35,6 @@ const Homepage = ({ allPokemon, pokemonTypes }: PokestatsHomepageProps): JSX.Ele
   useEffect(() => {
     if (router && randomPokemonUrl) router.prefetch(randomPokemonUrl);
   }, [randomPokemonUrl, router]);
-
-  const onRandomClick = () => {
-    plausible('Random Pokemon');
-    router.push(randomPokemonUrl);
-  };
 
   return (
     <>
@@ -70,7 +66,14 @@ const Homepage = ({ allPokemon, pokemonTypes }: PokestatsHomepageProps): JSX.Ele
         >
           <MainHeading>PokeStats</MainHeading>
           <AutocompleteV2 />
-          <Button onClick={onRandomClick} $dark>
+          <Button
+            onClick={async () => {
+              plausible('Random Pokemon');
+              await router.push(randomPokemonUrl);
+            }}
+            variant="contained"
+            color="secondary"
+          >
             Random Pokemon
             <Pokeball />
           </Button>

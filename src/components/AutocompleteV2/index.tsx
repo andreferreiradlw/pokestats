@@ -1,4 +1,17 @@
-import { HTMLMotionProps } from 'framer-motion';
+// types
+import type { HTMLMotionProps } from 'framer-motion';
+import type { CSSProperties } from '@mui/styled-engine-sc';
+import type { MoveType, Pokemon, PokemonType } from '@/types';
+// hooks
+import { useRouter } from 'next/router';
+import { usePlausible } from 'next-plausible';
+import { AutocompleteListOption, useAutocompleteOptions } from '@/hooks';
+// helpers
+import { fadeInDownVariant, removeDash } from '@/helpers';
+// components
+import { Autocomplete, capitalize, createFilterOptions, Stack, TextField } from '@mui/material';
+
+// styles
 import {
   Container,
   ItemIcon,
@@ -7,15 +20,7 @@ import {
   OptionWrapper,
   PokeID,
 } from './styledAutocompleteV2';
-import { CSSProperties } from '@mui/styled-engine-sc';
-import { AutocompleteListOption, useAutocompleteOptions } from '@/hooks';
-import { useEffect } from 'react';
-import { Autocomplete, capitalize, createFilterOptions, Stack, TextField } from '@mui/material';
-import { useRouter } from 'next/router';
-import { usePlausible } from 'next-plausible';
-import { fadeInDownVariant, removeDash } from '@/helpers';
-import { MoveType, Pokemon, PokemonType } from '@/types';
-import TypeIcon from '@/components/TypeIcon';
+import TypeIcon from '../TypeIcon';
 import Loading from '../Loading';
 
 export interface AutocompleteV2Props extends HTMLMotionProps<'div'> {
@@ -64,10 +69,6 @@ const AutocompleteV2 = ({ placeholder, ...rest }: AutocompleteV2Props): JSX.Elem
     stringify: ({ name, id, assetType }) => (assetType === 'pokemon' ? name + id : name),
     limit: 8,
   });
-
-  useEffect(() => {
-    console.log('options', data);
-  }, [data]);
 
   return (
     <Container {...rest}>

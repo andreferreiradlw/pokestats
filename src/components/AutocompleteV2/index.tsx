@@ -16,6 +16,7 @@ import { usePlausible } from 'next-plausible';
 import { fadeInDownVariant, removeDash } from '@/helpers';
 import { MoveType, Pokemon, PokemonType } from '@/types';
 import TypeIcon from '@/components/TypeIcon';
+import Loading from '../Loading';
 
 export interface AutocompleteV2Props extends HTMLMotionProps<'div'> {
   width?: CSSProperties['width'];
@@ -59,7 +60,9 @@ const AutocompleteV2 = ({ placeholder, ...rest }: AutocompleteV2Props): JSX.Elem
 
   const filterOptions = createFilterOptions<AutocompleteListOption>({
     matchFrom: 'any',
-    limit: 6,
+    // match by both name and id if option is a pokemon
+    stringify: ({ name, id, assetType }) => (assetType === 'pokemon' ? name + id : name),
+    limit: 8,
   });
 
   useEffect(() => {
@@ -82,13 +85,21 @@ const AutocompleteV2 = ({ placeholder, ...rest }: AutocompleteV2Props): JSX.Elem
           option.id === value.id && option.assetType === value.assetType
         }
         renderInput={params => {
-          const { inputProps, ...fieldProps } = params;
+          const { InputProps, ...fieldProps } = params;
 
           return (
             <TextField
               placeholder={placeholder || 'Search Pokestats'}
               autoComplete="off"
-              inputProps={inputProps}
+              InputProps={{
+                ...InputProps,
+                endAdornment: (
+                  <>
+                    {isLoading && <Loading $iconWidth="30px" $flexgrow={false} width="auto" />}
+                    {InputProps.endAdornment}
+                  </>
+                ),
+              }}
               {...fieldProps}
             />
           );
@@ -119,6 +130,8 @@ const AutocompleteV2 = ({ placeholder, ...rest }: AutocompleteV2Props): JSX.Elem
           plausible('Autocomplete Selection');
           await router.push(`/${optionSelected.assetType}/${optionSelected.name}`);
         }}
+        noOptionsText="Nothing was found!"
+        loadingText="Rummaging..."
       />
     </Container>
   );

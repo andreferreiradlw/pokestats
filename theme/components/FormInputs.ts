@@ -4,6 +4,7 @@ const FormInputs: {
   MuiFormControl: Components<Theme>['MuiFormControl'];
   MuiInputLabel: Components<Theme>['MuiInputLabel'];
   MuiOutlinedInput: Components<Theme>['MuiOutlinedInput'];
+  MuiAutocomplete: Components<Theme>['MuiAutocomplete'];
 } = {
   MuiFormControl: {
     defaultProps: {
@@ -38,6 +39,24 @@ const FormInputs: {
       notchedOutline: ({ theme }) => ({
         borderColor: theme.palette.secondary.main,
         borderWidth: '2px',
+      }),
+    },
+  },
+  MuiAutocomplete: {
+    styleOverrides: {
+      groupLabel: ({ theme }) => ({
+        backgroundColor: theme.palette.secondary.main,
+        color: theme.palette.secondary.contrastText,
+        textTransform: 'capitalize',
+      }),
+      paper: {
+        overflow: 'hidden',
+      },
+      listbox: {
+        padding: 0,
+      },
+      inputRoot: ({ theme }) => ({
+        backgroundColor: theme.palette.background.paper,
       }),
     },
   },

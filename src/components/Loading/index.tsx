@@ -58,6 +58,8 @@ const Loading = forwardRef(
       exit="exit"
       variants={staggerExitLoadingVariant}
       key={passKey}
+      $flexgrow={true}
+      width="100%"
       {...rest}
     >
       {!noIcon && (

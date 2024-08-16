@@ -22,9 +22,7 @@ import Record from 'public/static/iconLibrary/record.svg';
 const LoadingContainer = styled(BoxWrapper)`
   align-items: center;
   flex-direction: column;
-  flex-grow: 1;
   justify-content: center;
-  width: 100%;
   z-index: 2;
 
   ${({ flexheight }) =>

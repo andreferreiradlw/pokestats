@@ -28,7 +28,6 @@ const MovesTable = ({ moves, learnMethod, machineNames, ...rest }: TypeMovesProp
   const router = useRouter();
   const plausible = usePlausible();
 
-  // map learn method to a display name
   const mapMethodName = useMemo(() => {
     switch (learnMethod) {
       case 'level-up':
@@ -52,12 +51,16 @@ const MovesTable = ({ moves, learnMethod, machineNames, ...rest }: TypeMovesProp
 
   const renderMoveCell = useCallback(
     (move: FilteredMove | Move, index: number) => {
+      if (!learnMethod) {
+        return null;
+      }
+
       switch (learnMethod) {
         case 'level-up':
           return (
             <DataCell onClick={() => onCellClick(move.name, move.id)}>
               {/** @ts-ignore */}
-              {move?.level_learned_at}
+              {move?.level_learned_at || '-'}
             </DataCell>
           );
         case 'machine':
@@ -79,14 +82,14 @@ const MovesTable = ({ moves, learnMethod, machineNames, ...rest }: TypeMovesProp
                   />
                 </Box>
               ) : (
-                '...'
+                '-'
               )}
             </DataCell>
           );
         case 'egg':
         case 'tutor':
         default:
-          return <DataCell onClick={() => onCellClick(move.name, move.id)}>-</DataCell>;
+          return <DataCell>-</DataCell>;
       }
     },
     [learnMethod, machineNames, onCellClick],
@@ -106,7 +109,7 @@ const MovesTable = ({ moves, learnMethod, machineNames, ...rest }: TypeMovesProp
           <MovesTableEl>
             <thead>
               <tr>
-                {mapMethodName && <th>{mapMethodName}</th>}
+                {learnMethod && <th>{mapMethodName}</th>}
                 <NameTH>Name</NameTH>
                 <th>Type</th>
                 <th>Category</th>

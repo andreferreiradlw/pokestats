@@ -1,20 +1,22 @@
 import { useMemo } from 'react';
 // types
-import type { Pokemon } from '@/types';
+import type { NamedAPIResource } from 'pokenode-ts';
 // styles
 import { SectionTitle } from '@/BaseStyles';
 // components
 import Box, { BoxProps } from '@/components/Box';
 import InfiniteScroll from '@/components/InfiniteScroll';
+// helpers
+import { getResourceId } from '@/helpers';
 
 interface MovePokemonProps extends BoxProps {
-  pokemonList: Pokemon[];
+  pokemonList: NamedAPIResource[];
 }
 
 const MovePokemon = ({ pokemonList, ...rest }: MovePokemonProps): JSX.Element => {
   // memo
   const displayPokemon = useMemo(
-    () => pokemonList.filter(pokemon => pokemon.id <= 905),
+    () => pokemonList.filter(({ url }) => getResourceId(url) <= 905),
     [pokemonList],
   );
 

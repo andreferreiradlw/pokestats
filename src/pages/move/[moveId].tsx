@@ -37,8 +37,6 @@ const PokestatsMovePage: NextPage<PokestatsMovePageProps> = props => {
     );
   }
 
-  console.log(props);
-
   const moveName = findEnglishName(props.move.names) ?? capitalise(removeDash(props.move.name));
   const pageTitle = `${moveName} (${capitalise(props.move.type.name)} Type Pokémon Move) - Pokestats.gg`;
   const moveFlavorText = props.move.flavor_text_entries.at(-1)?.flavor_text;

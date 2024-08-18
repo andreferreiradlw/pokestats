@@ -1,14 +1,12 @@
 // types
 import type { GetStaticProps, NextPage } from 'next';
-import type { Pokemon, PokemonType, MoveType } from '@/types';
 // helpers
 import { Location as PokenodeLocation, LocationArea, LocationClient, Region } from 'pokenode-ts';
-// import { PokestatsPageTitle } from '@/components/Head';
 // components
 import Head from 'next/head';
 import Layout from '@/components/Layout';
 import KantoGen1 from '@/components/RegionsPage/KantoGen1';
-import { fetchAutocompleteData, findEnglishName, getIdFromURL } from '@/helpers';
+import { findEnglishName, getIdFromURL } from '@/helpers';
 
 export interface Location {
   key: string;
@@ -18,13 +16,9 @@ export interface Location {
 }
 export interface PokestatsKantoGen1PageProps {
   locations: Location[];
-  autocompleteList: (Pokemon | PokemonType | MoveType)[];
 }
 
-const PokestatsRegionsPage: NextPage<PokestatsKantoGen1PageProps> = ({
-  autocompleteList,
-  ...rest
-}) => {
+const PokestatsRegionsPage: NextPage<PokestatsKantoGen1PageProps> = props => {
   return (
     <>
       <Head>
@@ -34,8 +28,8 @@ const PokestatsRegionsPage: NextPage<PokestatsKantoGen1PageProps> = ({
           content="The Kanto region (Japanese: カントー地方 Kanto region) is a region of the Pokémon world. Kanto is located east of Johto, which together form a joint landmass that is south of Sinnoh."
         />
       </Head>
-      <Layout withHeader={{ autocompleteList: autocompleteList }} $withGutter={false} layoutGap="0">
-        <KantoGen1 {...rest} />
+      <Layout withHeader $withGutter={false} layoutGap="0">
+        <KantoGen1 {...props} />
       </Layout>
     </>
   );
@@ -46,9 +40,8 @@ export const getStaticProps: GetStaticProps<PokestatsKantoGen1PageProps> = async
 
   try {
     const kantoData: Region = await locationClient.getRegionById(1);
-    const { allMovesData, allPokemonData, allTypesData } = await fetchAutocompleteData();
 
-    if (!kantoData || !allMovesData || !allPokemonData || !allTypesData) {
+    if (!kantoData) {
       return { notFound: true };
     }
 
@@ -122,7 +115,6 @@ export const getStaticProps: GetStaticProps<PokestatsKantoGen1PageProps> = async
     return {
       props: {
         locations: regionLocationAreas.sort((a, b) => (a.locationId > b.locationId ? 1 : -1)),
-        autocompleteList: [...allPokemonData, ...allTypesData, ...allMovesData],
       },
     };
   } catch (error) {

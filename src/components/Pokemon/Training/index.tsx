@@ -9,7 +9,7 @@ import type {
 // components
 import Box, { BoxProps } from '@/components/Box';
 // helpers
-import GameVersionContext from '@/components/Layout/gameVersionContext';
+import { GameVersionContext } from '@/context';
 import { removeDash, itemMapUrl } from '@/helpers';
 // styles
 import { SectionTitle, Table, Numbered, UppercasedTd } from '@/components/BaseStyles';

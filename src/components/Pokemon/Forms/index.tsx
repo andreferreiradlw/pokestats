@@ -12,16 +12,10 @@ import { SectionTitle, Table, Numbered, UppercasedTd } from '@/components/BaseSt
 
 interface PokemonFormsProps extends BoxProps {
   pokemonId: number;
-  pokemonName: string;
   species: PokemonSpecies;
 }
 
-const PokemonForms = ({
-  pokemonId,
-  pokemonName,
-  species,
-  ...rest
-}: PokemonFormsProps): JSX.Element => {
+const PokemonForms = ({ pokemonId, species, ...rest }: PokemonFormsProps): JSX.Element => {
   // data
   const { forms_switchable, varieties, has_gender_differences } = species;
   // memo

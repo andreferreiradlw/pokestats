@@ -4,7 +4,7 @@ import type { BoxProps } from '@/components/Box';
 import type { PokestatsPokemonPageProps } from '@/pages/pokemon/[pokemonId]';
 import type { Ability } from 'pokenode-ts';
 // helpers
-import GameVersionContext from '@/components/Layout/gameVersionContext';
+import { GameVersionContext } from '@/context';
 import { AnimatePresence } from 'framer-motion';
 import {
   removeDash,

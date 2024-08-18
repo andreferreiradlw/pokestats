@@ -12,16 +12,10 @@ import ImageNext from '@/components/ImageNext';
 
 interface FeaturedImageProps extends BoxProps {
   specieNames: PokemonSpecies['names'];
-  pokemonName: Pokemon['name'];
   pokemonId: Pokemon['id'];
 }
 
-const FeaturedImage = ({
-  specieNames,
-  pokemonName,
-  pokemonId,
-  ...rest
-}: FeaturedImageProps): JSX.Element => {
+const FeaturedImage = ({ specieNames, pokemonId, ...rest }: FeaturedImageProps): JSX.Element => {
   // memo
   const englishName = useMemo(
     () => specieNames?.find(name => name.language.name === 'en').name,

@@ -7,3 +7,6 @@ dist
 .umi
 mock
 next.config.js
+./src/components/ImageMapper/*
+./src/components/LocationTable/*
+./src/components/RegionsPage/*

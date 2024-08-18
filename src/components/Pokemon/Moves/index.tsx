@@ -1,6 +1,6 @@
 import { useState, useContext, useMemo } from 'react';
-import { MoveLearnMethod, Pokemon, PokemonSpecies } from 'pokenode-ts';
-import GameVersionContext from '@/components/Layout/gameVersionContext';
+import { MoveLearnMethod, Pokemon } from 'pokenode-ts';
+import { GameVersionContext } from '@/context';
 import { mapVersionToGroup, filterMoves, fadeInUpVariant } from '@/helpers';
 import { AnimatePresence, motion } from 'framer-motion';
 import Loading from '@/components/Loading';
@@ -19,10 +19,9 @@ const LearnMethodOptions = [
 
 interface PokemonMovesProps extends GridProps {
   pokemon: Pokemon;
-  species: PokemonSpecies;
 }
 
-const PokemonMoves = ({ pokemon, species, ...rest }: PokemonMovesProps): JSX.Element => {
+const PokemonMoves = ({ pokemon, ...rest }: PokemonMovesProps): JSX.Element => {
   // states
   const { gameVersion } = useContext(GameVersionContext);
   const [learnMethod, setLearnMethod] = useState<MoveLearnMethod['name']>('level-up');
@@ -32,6 +31,7 @@ const PokemonMoves = ({ pokemon, species, ...rest }: PokemonMovesProps): JSX.Ele
 
   const filteredMoves = useMemo(() => {
     if (!allMoves) return [];
+    console.log(gameVersion);
     // currently selected game group
     const gameGroup = mapVersionToGroup(gameVersion);
     // filter moves
@@ -53,7 +53,7 @@ const PokemonMoves = ({ pokemon, species, ...rest }: PokemonMovesProps): JSX.Ele
           onChange={e => setLearnMethod(e.target.value)}
           value={learnMethod}
         />
-        <GameGenSelect pokemon={species} />
+        <GameGenSelect />
       </Grid>
       {movesLoading || machinesLoading ? (
         <Loading flexheight="100%" $iconWidth={{ xxs: '20%', xs: '15%', md: '10%', lg: '5%' }} />

@@ -19,6 +19,8 @@
       "@/hooks/*": ["src/hooks/*"],
       "@/services": ["src/services"],
       "@/services/*": ["src/services/*"],
+      "@/context": ["src/context"],
+      "@/context/*": ["src/context/*"],
       "@mui/styled-engine": ["./node_modules/@mui/styled-engine-sc"] // this mapping is relative to "baseUrl"
     },
     "target": "es2015",

@@ -7,7 +7,7 @@ import type {
   SuperContestEffect,
 } from 'pokenode-ts';
 // helpers
-import { capitalise, createSentence, removeDash } from '@/helpers';
+import { capitalise, removeDash } from '@/helpers';
 // styles
 import { Anchor, BoldSpan, SectionSubTitle, Table } from '@/BaseStyles';
 // components
@@ -36,14 +36,7 @@ const renderLinks = (combos: NamedAPIResource[], lastDivider = 'or'): JSX.Elemen
   );
 };
 
-const Contest = ({
-  combos,
-  moveName,
-  contestType,
-  effect,
-  title,
-  ...rest
-}: ContestProps): JSX.Element => {
+const Contest = ({ combos, moveName, effect, title, ...rest }: ContestProps): JSX.Element => {
   // @ts-ignore
   const { appeal, jam } = effect || {};
   // memo

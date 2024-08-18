@@ -9,10 +9,6 @@ import Layout from '@/components/Layout';
 import TypePage from '@/components/Type';
 import { TypesApi } from '@/services';
 
-// interface PokestatsType extends Omit<Type, 'pokemon'> {
-//   pokemon: Pokemon[];
-// }
-
 export interface PokestatsTypePageProps {
   typeData: Type;
 }
@@ -67,45 +63,17 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  // clients
-  // const moveClient = new MoveClient();
-
   // params
   const typeName = params.typeId as string;
 
   try {
     // fetch data
     const typeData = await TypesApi.getByName(typeName);
-    // const { allMovesData, allPokemonData, allTypesData } = await fetchAutocompleteData();
 
     if (!typeData) {
       console.log('Failed to fetch typeData');
       return { notFound: true };
     }
-
-    // // move requests array
-    // let moveRequests = [];
-    // // create an axios request for each move
-    // typeData.moves.forEach(({ url }) =>
-    //   moveRequests.push(moveClient.getMoveById(getIdFromMove(url))),
-    // );
-
-    // const allPokemonMovesData: Move[] = await Promise.all(moveRequests);
-
-    // const pokemonListWithId = typeData.pokemon
-    //   .map(({ pokemon }) => {
-    //     const id = getIdFromPokemon(pokemon.url);
-    //     // if pokemon not gen 8
-    //     if (id <= 905) {
-    //       return {
-    //         ...pokemon,
-    //         id: id,
-    //         assetType: 'pokemon',
-    //       };
-    //     }
-    //     return null;
-    //   })
-    //   .filter(Boolean);
 
     return {
       props: {

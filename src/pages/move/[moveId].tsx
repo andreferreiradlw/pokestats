@@ -97,10 +97,12 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
       return { notFound: true };
     }
 
-    const targetData = await MovesApi.getMoveTarget(getResourceId(moveData.target.url));
-    const moveMachinesData = await MachineApi.getMoveMachinesData(moveData.machines);
-    const { superContestEffectData, contestEffectData } =
-      await ContestApi.getMoveContestEffects(moveData);
+    const [targetData, moveMachinesData, { superContestEffectData, contestEffectData }] =
+      await Promise.all([
+        MovesApi.getMoveTarget(getResourceId(moveData.target.url)),
+        MachineApi.getMoveMachinesData(moveData.machines),
+        ContestApi.getMoveContestEffects(moveData),
+      ]);
 
     return {
       props: {

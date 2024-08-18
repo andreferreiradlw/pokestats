@@ -4,53 +4,59 @@ import { formatFlavorText, listGamesByGroup, listGenGroupsByGroup } from '@/help
 import { MoveFlavorText as PokenodeMoveFlavorText } from 'pokenode-ts';
 import { useMemo, Fragment } from 'react';
 
+interface GroupedFlavorText {
+  flavor: string;
+  games: string[][];
+}
 interface MoveFlavorTextProps extends BoxProps {
   flavorTexts: PokenodeMoveFlavorText[];
 }
 
 const MoveFlavorText = ({ flavorTexts, ...rest }: MoveFlavorTextProps): JSX.Element => {
   // memo
-  const groupFlavorByVersionGroup = useMemo(() => {
-    let result = {};
+  const groupFlavorByVersionGroup = useMemo(
+    () =>
+      flavorTexts.reduce(
+        (acc: Record<string, GroupedFlavorText>, { version_group, flavor_text, language }) => {
+          if (language.name !== 'en') return acc;
 
-    flavorTexts.forEach(({ version_group, flavor_text }) => {
-      const currGenGroups = listGenGroupsByGroup(version_group.name);
-      // check if gen group already has a key
-      if (
-        !result[version_group.name] &&
-        !result[currGenGroups[0]] &&
-        version_group.name === currGenGroups[0]
-      ) {
-        result[version_group.name] = {
-          flavor: formatFlavorText(flavor_text),
-          groups: currGenGroups.map(group => listGamesByGroup(group)),
-        };
-      }
-    });
+          const genGroups = listGenGroupsByGroup(version_group.name);
+          const primaryGroup = genGroups[0];
 
-    return result;
-  }, [flavorTexts]);
+          if (!acc[primaryGroup]) {
+            acc[primaryGroup] = {
+              flavor: formatFlavorText(flavor_text),
+              games: genGroups.map(group => listGamesByGroup(group)),
+            };
+          }
+
+          return acc;
+        },
+        {},
+      ),
+    [flavorTexts],
+  );
 
   return (
     <Box flexalign="flex-start" flexjustify="flex-start" flexgap="0.5em" {...rest}>
       <SectionTitle>Descriptions</SectionTitle>
       <Table>
         <tbody>
-          {Object.keys(groupFlavorByVersionGroup).map((currKey, i) => (
+          {Object.entries(groupFlavorByVersionGroup).map(([groupKey, { flavor, games }], i) => (
             <tr key={`attack-flavor-${i}`}>
               <th>
-                {groupFlavorByVersionGroup[currKey].groups.map((currGroup, i) => (
-                  <Fragment key={`move-${currKey}-${i}`}>
+                {games.map((gameGroup, j) => (
+                  <Fragment key={`move-${groupKey}-${j}`}>
                     <BoldSpan>
-                      {currGroup.map(
-                        (game, i) => `${game}${currGroup.length > i + 1 ? ' / ' : ''}`,
+                      {gameGroup.map(
+                        (game, k) => `${game}${k < gameGroup.length - 1 ? ' / ' : ''}`,
                       )}
                     </BoldSpan>
-                    {groupFlavorByVersionGroup[currKey].groups.length > 1 && <br />}
+                    {j < games.length - 1 && <br />}
                   </Fragment>
                 ))}
               </th>
-              <td>{groupFlavorByVersionGroup[currKey].flavor}</td>
+              <td>{flavor}</td>
             </tr>
           ))}
         </tbody>

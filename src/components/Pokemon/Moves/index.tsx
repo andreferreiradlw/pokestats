@@ -31,7 +31,6 @@ const PokemonMoves = ({ pokemon, ...rest }: PokemonMovesProps): JSX.Element => {
 
   const filteredMoves = useMemo(() => {
     if (!allMoves) return [];
-    console.log(gameVersion);
     // currently selected game group
     const gameGroup = mapVersionToGroup(gameVersion);
     // filter moves

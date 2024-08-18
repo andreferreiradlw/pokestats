@@ -22,7 +22,7 @@ const TypeBadge = ({ $typename, hideIcon, $iconOnly, ...rest }: TypeBadgeProps):
   if (!$typename) return null;
 
   return (
-    <Anchor href={`/type/${$typename}`}>
+    <Anchor href={`/type/${$typename}`} prefetch={false}>
       <Badge
         $typename={$typename}
         $iconOnly={$iconOnly}

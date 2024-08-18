@@ -2,8 +2,6 @@
 import type { PokestatsPokemonPageProps } from '@/pages/pokemon/[pokemonId]';
 // helpers
 import { pageContainerVariant, findEnglishName } from '@/helpers';
-// styles
-import { Divider } from '@/components/BaseStyles';
 // components
 import { AnimatePresence } from 'framer-motion';
 import { MainContainer } from '@/components/Layout';
@@ -19,6 +17,7 @@ import PokemonForms from './Forms';
 import Moves from './Moves';
 import Sprites from './Sprites';
 import Navigation from './Navigation';
+import { Divider } from '@mui/material';
 
 const PokemonPage = ({
   allPokemon,

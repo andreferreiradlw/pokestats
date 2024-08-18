@@ -9,7 +9,14 @@ import { AutocompleteListOption, useAutocompleteOptions } from '@/hooks';
 // helpers
 import { fadeInDownVariant, removeDash } from '@/helpers';
 // components
-import { Autocomplete, capitalize, createFilterOptions, Stack, TextField } from '@mui/material';
+import {
+  Autocomplete,
+  AutocompleteProps,
+  capitalize,
+  createFilterOptions,
+  Stack,
+  TextField,
+} from '@mui/material';
 
 // styles
 import {
@@ -26,6 +33,9 @@ import Loading from '../Loading';
 export interface AutocompleteV2Props extends HTMLMotionProps<'div'> {
   width?: CSSProperties['width'];
   placeholder?: string;
+  autocompleteOptions?: Partial<
+    AutocompleteProps<AutocompleteListOption, false, true, false, 'div'>
+  >;
 }
 
 interface AutocompleteIconProps {
@@ -55,7 +65,11 @@ const AutocompleteIcon = ({ assetType, name, id }: AutocompleteIconProps): JSX.E
   }
 };
 
-const AutocompleteV2 = ({ placeholder, ...rest }: AutocompleteV2Props): JSX.Element => {
+const AutocompleteV2 = ({
+  placeholder,
+  autocompleteOptions,
+  ...rest
+}: AutocompleteV2Props): JSX.Element => {
   // router
   const router = useRouter();
   // analytics
@@ -133,6 +147,7 @@ const AutocompleteV2 = ({ placeholder, ...rest }: AutocompleteV2Props): JSX.Elem
         }}
         noOptionsText="Nothing was found!"
         loadingText="Rummaging..."
+        {...autocompleteOptions}
       />
     </Container>
   );

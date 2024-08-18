@@ -17,22 +17,24 @@ import { motion } from 'framer-motion';
 import Github from 'public/static/iconLibrary/github.svg';
 import AutocompleteV2 from '../AutocompleteV2';
 import { Button, Divider, Typography } from '@mui/material';
+import { usePokemonList } from '@/hooks/usePokemonList';
+import Loading from '../Loading';
 
-const Homepage = ({ allPokemon, pokemonTypes }: PokestatsHomepageProps): JSX.Element => {
-  // router
+const Homepage = ({ pokemonTypes }: PokestatsHomepageProps): JSX.Element => {
+  // hooks
   const router = useRouter();
-  // analytics
   const plausible = usePlausible();
+  const { data: allPokemon, isLoading } = usePokemonList();
 
   // memo
   const randomPokemonUrl = useMemo(
-    () => `/pokemon/${allPokemon[getRandomInt(1, allPokemon.length)].name}`,
+    () => (allPokemon ? `/pokemon/${allPokemon[getRandomInt(1, allPokemon.length)].name}` : ''),
     [allPokemon],
   );
 
   // prefetch random pokemon page
   useEffect(() => {
-    if (router && randomPokemonUrl) router.prefetch(randomPokemonUrl);
+    if (router && randomPokemonUrl !== '') router.prefetch(randomPokemonUrl);
   }, [randomPokemonUrl, router]);
 
   return (
@@ -81,7 +83,11 @@ const Homepage = ({ allPokemon, pokemonTypes }: PokestatsHomepageProps): JSX.Ele
           <Box $contained $withGutter flexgap="1.5em">
             <TypeList types={pokemonTypes} />
             <Divider />
-            <PokemonList pokemon={allPokemon} />
+            {isLoading ? (
+              <Loading $withGutter $iconWidth="50px" />
+            ) : (
+              <PokemonList pokemon={allPokemon} />
+            )}
             <Divider />
           </Box>
         </ListContainer>

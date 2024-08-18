@@ -1,6 +1,5 @@
 import { useState, useMemo, CSSProperties } from 'react';
 // types
-import type { MoveType, Pokemon, PokemonType } from '@/types';
 import type { BoxProps } from '@/components/Box';
 import type { PokemonSpecies } from 'pokenode-ts';
 // helpers
@@ -20,19 +19,18 @@ import { AnimatePresence } from 'framer-motion';
 
 interface LayoutProps extends BoxProps {
   layoutGap?: CSSProperties['gap'];
-  withHeader?: {
-    currPokemon?: PokemonSpecies;
-    autocompleteList: (Pokemon | PokemonType | MoveType)[];
-  };
+  currPokemon?: PokemonSpecies;
+  withHeader?: Boolean;
 }
 
 const Layout = ({
   layoutGap = '1.5em',
   withHeader,
+  currPokemon,
   children,
   ...rest
 }: LayoutProps): JSX.Element => {
-  const pokemonGen = mapGeneration(withHeader?.currPokemon?.generation?.name);
+  const pokemonGen = mapGeneration(currPokemon?.generation?.name);
   // game version
   const [gameVersion, setGameVersion] = useState(pokemonGen);
   // hooks
@@ -57,12 +55,7 @@ const Layout = ({
         $isRelative
         {...rest}
       >
-        {withHeader && (
-          <Header
-            autocompleteList={withHeader.autocompleteList}
-            currPokemon={withHeader?.currPokemon}
-          />
-        )}
+        {withHeader && <Header currPokemon={currPokemon} />}
         {children}
         <Footer />
         <AnimatePresence>

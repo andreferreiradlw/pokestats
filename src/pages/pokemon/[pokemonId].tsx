@@ -78,11 +78,7 @@ const PokestatsPokemonPage: NextPage<PokestatsPokemonPageProps> = ({
           )}.png`}
         />
       </Head>
-      <Layout
-        withHeader={{
-          currPokemon: props.species,
-        }}
-      >
+      <Layout withHeader currPokemon={props.species}>
         <PokemonPage allPokemon={allPokemon} {...props} />
       </Layout>
     </>

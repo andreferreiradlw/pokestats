@@ -36,7 +36,7 @@ const PokestatsTypePage: NextPage<PokestatsTypePageProps> = props => {
           content={`public/static/typeIcons/${name.toLocaleLowerCase()}.svg`}
         />
       </Head>
-      <Layout withHeader={{}}>
+      <Layout withHeader>
         <TypePage {...props} />
       </Layout>
     </>

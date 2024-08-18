@@ -20,7 +20,7 @@ import { AnimatePresence } from 'framer-motion';
 interface LayoutProps extends BoxProps {
   layoutGap?: CSSProperties['gap'];
   currPokemon?: PokemonSpecies;
-  withHeader?: Boolean;
+  withHeader?: boolean;
 }
 
 const Layout = ({

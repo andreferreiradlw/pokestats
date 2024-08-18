@@ -58,7 +58,7 @@ const Loading = forwardRef(
       exit="exit"
       variants={staggerExitLoadingVariant}
       key={passKey}
-      $flexgrow={true}
+      $flexgrow
       width="100%"
       {...rest}
     >

@@ -17,9 +17,9 @@ export const MovesApi = {
 
   getMoveData: async (moveName: string) => {
     if (moveName === 'pound') {
-      return MovesApi.getById(1);
+      return await MovesApi.getById(1);
     }
-    return MovesApi.getByName(moveName);
+    return await MovesApi.getByName(moveName);
   },
 
   getMoveTarget: async (targetId: number) => {

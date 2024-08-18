@@ -47,7 +47,7 @@ const ListWrapper = styled(motion.ul)(
 );
 
 const OptionWrapper = styled('li')(
-  ({ theme }) => css`
+  () => css`
     align-items: center;
     cursor: pointer;
     display: flex;
@@ -62,23 +62,6 @@ const OptionWrapper = styled('li')(
       padding: 5px;
       width: 40px;
     }
-
-    /* ${({ theme }) => css`
-      background-color: ${theme.colors.white};
-      color: ${theme.colors.black};
-
-      &:hover,
-      &:active,
-      &:focus {
-        background-color: ${theme.colors.black};
-        color: ${theme.colors.white};
-
-        svg path {
-          fill: ${theme.colors.white};
-          stroke: ${theme.colors.black};
-        }
-      }
-    `} */
   `,
 );
 

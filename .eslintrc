@@ -15,6 +15,7 @@
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "off",
     "better-styled-components/sort-declarations-alphabetically": 2,
+    "@typescript-eslint/no-unused-vars": "error",
   },
   "parserOptions": {
     "ecmaVersion": 6,

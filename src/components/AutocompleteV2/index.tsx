@@ -62,6 +62,8 @@ const AutocompleteIcon = ({ assetType, name, id }: AutocompleteIconProps): JSX.E
           src="https://raw.githubusercontent.com/msikma/pokesprite/master/items/hm/normal.png"
         />
       );
+    default:
+      return null;
   }
 };
 

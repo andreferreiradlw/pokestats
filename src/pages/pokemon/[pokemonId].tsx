@@ -33,11 +33,7 @@ export interface PokestatsPokemonPageProps {
   evolutionData: EvolutionChain;
 }
 
-const PokestatsPokemonPage: NextPage<PokestatsPokemonPageProps> = ({
-  autocompleteList,
-  allPokemon,
-  ...props
-}) => {
+const PokestatsPokemonPage: NextPage<PokestatsPokemonPageProps> = ({ allPokemon, ...props }) => {
   const router = useRouter();
 
   if (router.isFallback) {

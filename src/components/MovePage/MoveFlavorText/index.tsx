@@ -46,7 +46,7 @@ const MoveFlavorText = ({ flavorTexts, ...rest }: MoveFlavorTextProps): JSX.Elem
             <tr key={`attack-flavor-${i}`}>
               <th>
                 {games.map((gameGroup, j) => (
-                  <Fragment key={`move-${groupKey}-${j}`}>
+                  <Fragment key={`move-${groupKey}`}>
                     <BoldSpan>
                       {gameGroup.map(
                         (game, k) => `${game}${k < gameGroup.length - 1 ? ' / ' : ''}`,

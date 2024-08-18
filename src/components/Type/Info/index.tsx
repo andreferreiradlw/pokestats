@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 // types
-import type { PokestatsTypePageProps } from '@/pages/type/[typeId]';
+import type { Type } from 'pokenode-ts';
 // helpers
 import { mapGeneration, removeDash } from '@/helpers';
 // components
@@ -9,7 +9,7 @@ import Box, { BoxProps } from '@/components/Box';
 import { Table, UppercasedTd } from '@/BaseStyles';
 
 interface TypeInfoProps extends BoxProps {
-  type: PokestatsTypePageProps['typeInfo'];
+  type: Type;
 }
 
 const TypeInfo = ({ type, ...rest }: TypeInfoProps): JSX.Element => {

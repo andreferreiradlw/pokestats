@@ -6,7 +6,7 @@ import type { Pokemon } from 'pokenode-ts';
 
 export const usePokemonMoves = (
   pokemon: Pokemon,
-  options?: UseQueryOptions<PokemonMove[]>,
+  options?: Partial<UseQueryOptions<PokemonMove[]>>,
 ): UseQueryResult<PokemonMove[]> =>
   useQuery<PokemonMove[]>({
     queryKey: ['pokemonMoves', pokemon.name],

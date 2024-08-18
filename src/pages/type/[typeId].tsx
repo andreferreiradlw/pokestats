@@ -1,29 +1,29 @@
 // types
 import type { GetStaticPaths, GetStaticProps, NextPage } from 'next';
-import type { MoveType, Pokemon, PokemonType } from '@/types';
 // helpers
-import { PokemonClient, MoveClient, Type, Move } from 'pokenode-ts';
-import { fetchAutocompleteData, findEnglishName, getIdFromMove, getIdFromPokemon } from '@/helpers';
+import { Type } from 'pokenode-ts';
+import { findEnglishName } from '@/helpers';
 // components
 import Head from 'next/head';
 import Layout from '@/components/Layout';
 import TypePage from '@/components/Type';
+import { TypesApi } from '@/services';
 
-interface PokestatsType extends Omit<Type, 'pokemon'> {
-  pokemon: Pokemon[];
-}
+// interface PokestatsType extends Omit<Type, 'pokemon'> {
+//   pokemon: Pokemon[];
+// }
 
 export interface PokestatsTypePageProps {
-  autocompleteList: (Pokemon | PokemonType | MoveType)[];
-  typeInfo: PokestatsType;
-  typeMoves: Move[];
+  typeData: Type;
 }
 
-const PokestatsTypePage: NextPage<PokestatsTypePageProps> = ({ autocompleteList, ...props }) => {
-  const typeName = findEnglishName(props.typeInfo.names);
+const PokestatsTypePage: NextPage<PokestatsTypePageProps> = props => {
+  const { names, name } = props.typeData;
+
+  const typeName = findEnglishName(names);
   const pageTitle = `${typeName} (Type) - Pokestats.gg`;
   const pageDescription = `The ${typeName} type ( Japanese: ${
-    props.typeInfo.names.find(name => name.language.name === 'ja-Hrkt').name
+    names.find(({ language }) => language.name === 'ja-Hrkt').name
   }タイプ ) is one of the eighteen elemental types in the Pokémon world.`;
 
   return (
@@ -37,10 +37,10 @@ const PokestatsTypePage: NextPage<PokestatsTypePageProps> = ({ autocompleteList,
         <meta property="og:description" content={pageDescription} />
         <meta
           property="og:image"
-          content={`public/static/typeIcons/${props.typeInfo.name.toLocaleLowerCase()}.svg`}
+          content={`public/static/typeIcons/${name.toLocaleLowerCase()}.svg`}
         />
       </Head>
-      <Layout withHeader={{ autocompleteList: autocompleteList }}>
+      <Layout withHeader={{}}>
         <TypePage {...props} />
       </Layout>
     </>
@@ -48,15 +48,13 @@ const PokestatsTypePage: NextPage<PokestatsTypePageProps> = ({ autocompleteList,
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  // clients
-  const pokemonClient = new PokemonClient();
+  // data
+  const typeList = await TypesApi.getAll();
 
-  const typeList = await pokemonClient.listTypes();
-
-  const paths = typeList.results.map(type => {
+  const paths = typeList.map(({ name }) => {
     return {
       params: {
-        typeId: type.name,
+        typeId: name,
       },
     };
   });
@@ -70,50 +68,48 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   // clients
-  const pokemonClient = new PokemonClient();
-  const moveClient = new MoveClient();
+  // const moveClient = new MoveClient();
 
+  // params
   const typeName = params.typeId as string;
 
   try {
     // fetch data
-    const typeData = await pokemonClient.getTypeByName(typeName);
-    const { allMovesData, allPokemonData, allTypesData } = await fetchAutocompleteData();
+    const typeData = await TypesApi.getByName(typeName);
+    // const { allMovesData, allPokemonData, allTypesData } = await fetchAutocompleteData();
 
-    if (!typeData || !allTypesData || !allMovesData || !allPokemonData) {
+    if (!typeData) {
       console.log('Failed to fetch typeData');
       return { notFound: true };
     }
 
-    // move requests array
-    let moveRequests = [];
-    // create an axios request for each move
-    typeData.moves.forEach(({ url }) =>
-      moveRequests.push(moveClient.getMoveById(getIdFromMove(url))),
-    );
+    // // move requests array
+    // let moveRequests = [];
+    // // create an axios request for each move
+    // typeData.moves.forEach(({ url }) =>
+    //   moveRequests.push(moveClient.getMoveById(getIdFromMove(url))),
+    // );
 
-    const allPokemonMovesData: Move[] = await Promise.all(moveRequests);
+    // const allPokemonMovesData: Move[] = await Promise.all(moveRequests);
 
-    const pokemonListWithId = typeData.pokemon
-      .map(({ pokemon }) => {
-        const id = getIdFromPokemon(pokemon.url);
-        // if pokemon not gen 8
-        if (id <= 905) {
-          return {
-            ...pokemon,
-            id: id,
-            assetType: 'pokemon',
-          };
-        }
-        return null;
-      })
-      .filter(Boolean);
+    // const pokemonListWithId = typeData.pokemon
+    //   .map(({ pokemon }) => {
+    //     const id = getIdFromPokemon(pokemon.url);
+    //     // if pokemon not gen 8
+    //     if (id <= 905) {
+    //       return {
+    //         ...pokemon,
+    //         id: id,
+    //         assetType: 'pokemon',
+    //       };
+    //     }
+    //     return null;
+    //   })
+    //   .filter(Boolean);
 
     return {
       props: {
-        autocompleteList: [...allPokemonData, ...allTypesData, ...allMovesData],
-        typeInfo: { ...typeData, pokemon: pokemonListWithId },
-        typeMoves: allPokemonMovesData,
+        typeData,
         revalidate: 90, // In seconds
       },
     };

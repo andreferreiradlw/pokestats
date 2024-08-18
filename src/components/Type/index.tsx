@@ -15,9 +15,9 @@ import { PageHeading, Divider } from '@/components/BaseStyles';
 
 export type TypePageProps = Omit<PokestatsTypePageProps, 'autocompleteList'>;
 
-const TypePage = ({ typeInfo, typeMoves }: TypePageProps): JSX.Element => {
+const TypePage = ({ typeData }: TypePageProps): JSX.Element => {
   // data
-  const { name, names, damage_relations } = typeInfo;
+  const { name, names, damage_relations } = typeData;
 
   const typeName = findEnglishName(names);
 
@@ -53,7 +53,7 @@ const TypePage = ({ typeInfo, typeMoves }: TypePageProps): JSX.Element => {
               screensizes={{ xxs: 12, lg: 8 }}
               flexgap="2em"
             >
-              <TypeInfo type={typeInfo} />
+              <TypeInfo type={typeData} />
               <TypeRelations relations={damage_relations} />
             </Box>
           </Box>
@@ -61,7 +61,7 @@ const TypePage = ({ typeInfo, typeMoves }: TypePageProps): JSX.Element => {
         </Box>
         <Divider />
         <Box flexalign="flex-start" flexjustify="flex-start">
-          <Tabs typeInfo={typeInfo} typeMoves={typeMoves} typeName={typeName} screensizes={12} />
+          <Tabs typeData={typeData} typeName={typeName} screensizes={12} />
         </Box>
         <Divider />
       </MainContainer>

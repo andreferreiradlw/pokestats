@@ -1,18 +1,19 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import styled from 'styled-components';
 // types
 import type { TypePageProps } from '../index';
 // helpers
 import { AnimatePresence } from 'framer-motion';
-import { hoverVariant, fadeInUpVariant } from '@/helpers';
+import { hoverVariant, fadeInUpVariant, getResourceId } from '@/helpers';
 // styles
 import { Button, SectionTitle } from '@/components/BaseStyles';
 // components
 import Box, { BoxProps } from '@/components/Box';
 import BoxWrapper from '@/components/Box/StyledBox';
 import InfiniteScroll from '@/components/InfiniteScroll';
-// import TypeMoves from './Moves';
 import MovesTable from '@/components/MovesTable';
+import { useTypeMoves } from '@/hooks/useTypeMoves';
+import Loading from '@/components/Loading';
 
 const TabContainer = styled(BoxWrapper)`
   display: flex;
@@ -25,11 +26,29 @@ interface TypeTabsProps extends BoxProps, TypePageProps {
   typeName: string;
 }
 
-const TypeTabs = ({ typeInfo, typeMoves, typeName, ...rest }: TypeTabsProps) => {
+const TypeTabs = ({ typeData, typeName, ...rest }: TypeTabsProps) => {
   // tab state
-  const [currTab, setCurrTab] = useState('pokemon');
+  const [currTab, setCurrTab] = useState<'pokemon' | 'moves'>('pokemon');
+
   // data
-  const { name, pokemon } = typeInfo;
+  const { name, pokemon, moves } = typeData;
+
+  const { data: movesData, isLoading } = useTypeMoves(typeData, { enabled: currTab === 'moves' });
+
+  const pokemonList = useMemo(
+    () =>
+      typeData.pokemon
+        .map(({ pokemon }) => {
+          const id = getResourceId(pokemon.url);
+          // if pokemon not gen 8
+          if (id <= 905) {
+            return pokemon;
+          }
+          return null;
+        })
+        .filter(Boolean),
+    [typeData],
+  );
 
   return (
     <Box flexalign={{ xxs: 'center', lg: 'flex-start' }} flexgap="1em" {...rest}>
@@ -65,7 +84,7 @@ const TypeTabs = ({ typeInfo, typeMoves, typeName, ...rest }: TypeTabsProps) => 
             key={`${name}-type-pokemon`}
           >
             <SectionTitle>{`${typeName} Type Pokemon (${pokemon.length})`}</SectionTitle>
-            <InfiniteScroll pokemonList={pokemon} />
+            <InfiniteScroll pokemonList={pokemonList} />
           </TabContainer>
         )}
         {currTab === 'moves' && (
@@ -76,9 +95,8 @@ const TypeTabs = ({ typeInfo, typeMoves, typeName, ...rest }: TypeTabsProps) => 
             variants={fadeInUpVariant}
             key={`${name}-type-moves`}
           >
-            <SectionTitle>{`${typeName} Type Moves (${typeMoves.length})`}</SectionTitle>{' '}
-            {/* <TypeMoves moves={typeMoves} /> */}
-            <MovesTable moves={typeMoves} />
+            <SectionTitle>{`${typeName} Type Moves (${moves.length})`}</SectionTitle>
+            {isLoading ? <Loading /> : <MovesTable moves={movesData} />}
           </TabContainer>
         )}
       </AnimatePresence>

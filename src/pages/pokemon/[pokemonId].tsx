@@ -14,7 +14,6 @@ import {
   formatFlavorText,
   gameVersions,
   findEnglishName,
-  fetchAutocompleteData,
   getResourceId,
 } from '@/helpers';
 // components
@@ -81,7 +80,6 @@ const PokestatsPokemonPage: NextPage<PokestatsPokemonPageProps> = ({
       </Head>
       <Layout
         withHeader={{
-          autocompleteList: [...allPokemon, ...autocompleteList],
           currPokemon: props.species,
         }}
       >
@@ -114,10 +112,12 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
   try {
     // fetch data
-    const pokemonDataResults = await PokemonApi.getByName(pokemonName);
-    const { allMovesData, allPokemonData, allTypesData } = await fetchAutocompleteData();
+    const [pokemonDataResults, { results: allPokemonData }] = await Promise.all([
+      PokemonApi.getByName(pokemonName),
+      PokemonApi.listPokemons(0, 905),
+    ]);
 
-    if (!allPokemonData || !allTypesData || !allMovesData || !pokemonDataResults) {
+    if (!allPokemonData || !pokemonDataResults) {
       console.log('Failed to fetch allPokemonData, typesData, pokemonData');
       return { notFound: true };
     }
@@ -158,7 +158,6 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     return {
       props: {
         allPokemon: allPokemonData,
-        autocompleteList: [...allTypesData, ...allMovesData],
         pokemon: pokemonDataResults,
         abilities: pokemonAbilitiesResults.map(ability => ({
           name: ability.name,

@@ -4,7 +4,9 @@ export const LocationApi = {
   getByName: async (name: string) => await MainClient.location.getLocationByName(name),
 
   getAllNames: async () =>
-    (await MainClient.location.listLocations(0, 814)).results.map(location => location.name),
+    await MainClient.location
+      .listLocations(0, 814)
+      .then(({ results }) => results.map(({ name }) => name)),
 };
 
 export const RegionApi = {

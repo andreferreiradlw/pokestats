@@ -2,10 +2,12 @@ import MainClient from './MainClient';
 
 export const GrowthRateApi = {
   getAllData: async () => {
-    const listResponse = await MainClient.pokemon.listGrowthRates();
-    const growthRateNames = listResponse.results.map(growthRate => growthRate.name);
-    return await Promise.all(
-      growthRateNames.map(name => MainClient.pokemon.getGrowthRateByName(name)),
-    );
+    const growthRatePromises = await MainClient.pokemon
+      .listGrowthRates()
+      .then(({ results }) =>
+        results.map(({ name }) => MainClient.pokemon.getGrowthRateByName(name)),
+      );
+
+    return await Promise.all(growthRatePromises);
   },
 };

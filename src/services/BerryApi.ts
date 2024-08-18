@@ -1,7 +1,10 @@
 import MainClient from './MainClient';
 
 export const BerryApi = {
-  getAll: async () => (await MainClient.berry.listBerries(0, 64)).results.map(berry => berry.name),
+  getAllNames: async () =>
+    await MainClient.berry
+      .listBerries(0, 64)
+      .then(({ results }) => results.map(({ name }) => name)),
 
   getByNames: async (names: Array<string>) =>
     await Promise.all(names.map(name => MainClient.berry.getBerryByName(name))),

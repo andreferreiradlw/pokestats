@@ -6,10 +6,7 @@ export const TypesApi = {
 
   getByName: async (name: string) => await MainClient.pokemon.getTypeByName(name),
 
-  getAllNames: async () =>
-    await MainClient.pokemon
-      .listTypes(0, 18)
-      .then(({ results }) => results.map(({ name }) => name)),
+  getAll: async () => await MainClient.pokemon.listTypes(0, 18).then(({ results }) => results),
 
   listTypes: async (from: number, to: number) => await MainClient.pokemon.listTypes(from, to),
 };

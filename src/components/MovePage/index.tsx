@@ -1,9 +1,7 @@
-import { useMemo } from 'react';
 // types
 import type { PokestatsMovePageProps } from '@/pages/move/[moveId]';
-import type { Pokemon } from '@/types';
 // helpers
-import { findEnglishName, pageContainerVariant, getIdFromURL } from '@/helpers';
+import { findEnglishName, pageContainerVariant } from '@/helpers';
 // styles
 import { Divider, PageHeading } from '@/BaseStyles';
 // components
@@ -31,15 +29,6 @@ const MovePage = ({
 }: MovePageProps): JSX.Element => {
   // data
   const { name, names: moveNames, type, flavor_text_entries, learned_by_pokemon } = move;
-  // memo
-  const pokemonList = useMemo(
-    () =>
-      learned_by_pokemon.map(pokemon => ({
-        name: pokemon.name,
-        id: getIdFromURL(pokemon.url, 'pokemon'),
-      })),
-    [learned_by_pokemon],
-  );
 
   const moveName = findEnglishName(moveNames);
 
@@ -120,7 +109,7 @@ const MovePage = ({
           </Box>
         </Box>
         <Divider />
-        <MovePokemon pokemonList={pokemonList as Pokemon[]} />
+        <MovePokemon pokemonList={learned_by_pokemon} />
         <Divider />
       </MainContainer>
     </AnimatePresence>

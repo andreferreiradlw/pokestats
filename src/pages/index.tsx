@@ -6,11 +6,10 @@ import { PokestatsPageTitle } from '@/components/Head';
 import Head from 'next/head';
 import Layout from '@/components/Layout';
 import Homepage from '@/components/Homepage';
-import { PokemonApi, TypesApi } from '@/services';
+import { TypesApi } from '@/services';
 import { NamedAPIResource } from 'pokenode-ts';
 
 export interface PokestatsHomepageProps {
-  allPokemon: NamedAPIResource[];
   pokemonTypes: NamedAPIResource[];
 }
 
@@ -32,19 +31,15 @@ const PokestatsHomepage: NextPage<PokestatsHomepageProps> = props => (
 
 export const getStaticProps: GetStaticProps = async () => {
   try {
-    const [pokemonResponse, typesResponse] = await Promise.all([
-      PokemonApi.listPokemons(0, 905),
-      TypesApi.listTypes(0, 18),
-    ]);
+    const typesResponse = await TypesApi.getAll();
 
-    if (!pokemonResponse || !typesResponse) {
+    if (!typesResponse) {
       return { notFound: true };
     }
 
     return {
       props: {
-        allPokemon: pokemonResponse.results,
-        pokemonTypes: typesResponse.results,
+        pokemonTypes: typesResponse,
       },
     };
   } catch (error) {

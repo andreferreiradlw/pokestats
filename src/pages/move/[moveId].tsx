@@ -1,44 +1,29 @@
 import { useRouter } from 'next/router';
-// types
 import type { GetStaticPaths, GetStaticProps, NextPage } from 'next';
-import type { MoveType, Pokemon, PokemonType } from '@/types';
-// helpers
-import {
-  MoveClient,
-  MachineClient,
-  Move,
-  MoveTarget,
-  ContestClient,
-  SuperContestEffect,
-  ContestEffect,
-} from 'pokenode-ts';
+import { MoveClient, Move, MoveTarget, SuperContestEffect, ContestEffect } from 'pokenode-ts';
 import {
   capitalise,
-  fetchAutocompleteData,
   findEnglishName,
   formatFlavorText,
-  getIdFromURL,
-  listGamesByGroup,
-  listMoveGroupsByGroup,
   removeDash,
   mapGeneration,
+  getResourceId,
 } from '@/helpers';
-// components
 import Head from 'next/head';
 import Layout from '@/components/Layout';
 import MovePage from '@/components/MovePage';
 import Loading from '@/components/Loading';
+import { ContestApi, MachineApi, type MoveMachinesData, MovesApi } from '@/services';
 
 export interface PokestatsMovePageProps {
-  autocompleteList: (Pokemon | PokemonType | MoveType)[];
   move: Move;
-  moveMachines: { [key: string]: { machine: string; groups: string[][] } } | null;
+  moveMachines: MoveMachinesData;
   target: MoveTarget;
   superContestEffect: SuperContestEffect;
   contestEffect: ContestEffect;
 }
 
-const PokestatsMovePage: NextPage<PokestatsMovePageProps> = ({ autocompleteList, ...props }) => {
+const PokestatsMovePage: NextPage<PokestatsMovePageProps> = props => {
   const router = useRouter();
 
   if (router.isFallback) {
@@ -52,12 +37,10 @@ const PokestatsMovePage: NextPage<PokestatsMovePageProps> = ({ autocompleteList,
     );
   }
 
-  const moveName = props.move?.names
-    ? findEnglishName(props.move.names)
-    : capitalise(removeDash(props.move.name));
-  const pageTitle = `${moveName} (${capitalise(
-    props.move.type.name,
-  )} Type Pokémon Move) - Pokestats.gg`;
+  console.log(props);
+
+  const moveName = findEnglishName(props.move.names) ?? capitalise(removeDash(props.move.name));
+  const pageTitle = `${moveName} (${capitalise(props.move.type.name)} Type Pokémon Move) - Pokestats.gg`;
   const moveFlavorText = props.move.flavor_text_entries.at(-1)?.flavor_text;
   const pageDescription = moveFlavorText
     ? formatFlavorText(moveFlavorText)
@@ -76,11 +59,11 @@ const PokestatsMovePage: NextPage<PokestatsMovePageProps> = ({ autocompleteList,
             props.move.type.name,
           )} Type, Move, TM, HM, TR, Machines, Target, Effect, PP, Accuracy, Power`}
         />
-        {/** Open Graph */}
+        {/* Open Graph */}
         <meta property="og:title" content={pageTitle} />
         <meta property="og:description" content={pageDescription} />
       </Head>
-      <Layout withHeader={{ autocompleteList: autocompleteList }}>
+      <Layout withHeader>
         <MovePage {...props} />
       </Layout>
     </>
@@ -88,20 +71,13 @@ const PokestatsMovePage: NextPage<PokestatsMovePageProps> = ({ autocompleteList,
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  // clients
   const moveClient = new MoveClient();
-
   const moveList = await moveClient.listMoves(0, 50);
 
-  const paths = moveList.results.map(move => {
-    return {
-      params: {
-        moveId: move.name,
-      },
-    };
-  });
+  const paths = moveList.results.map(move => ({
+    params: { moveId: move.name },
+  }));
 
-  // return static paths
   return {
     paths,
     fallback: true,
@@ -109,112 +85,34 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  // clients
-  const moveClient = new MoveClient();
-  const machineClient = new MachineClient();
-  const contestClient = new ContestClient();
-
   const moveName = params.moveId as string;
 
   try {
-    // fetch data
-    let moveData: Move;
+    const [moveData, allMovesData] = await Promise.all([
+      MovesApi.getMoveData(moveName),
+      MovesApi.listMoves(0, 850),
+    ]);
 
-    if (moveName === 'pound') {
-      // multiple pound named moves in last gen
-      moveData = await moveClient.getMoveById(1);
-    } else {
-      moveData = await moveClient.getMoveByName(moveName);
-    }
-    const { allMovesData, allPokemonData, allTypesData } = await fetchAutocompleteData();
-
-    if (!allPokemonData || !allTypesData || !allMovesData || !moveData) {
-      console.log('Failed to fetch moveData');
+    if (!allMovesData || !moveData) {
       return { notFound: true };
     }
 
-    // move target data
-    const targetData = await moveClient.getMoveTargetById(
-      getIdFromURL(moveData.target.url, 'move-target'),
-    );
-
-    if (!targetData) {
-      console.log('Failed to fetch targetData');
-      return { notFound: true };
-    }
-
-    // moves machine data
-    let moveMachinesData = {};
-
-    if (moveData.machines?.length > 0) {
-      for await (const { version_group, machine } of moveData.machines) {
-        const currGenGroups = listMoveGroupsByGroup(version_group.name);
-        // check if gen group already has a key
-        if (
-          currGenGroups &&
-          !moveMachinesData[version_group.name] &&
-          !moveMachinesData[currGenGroups[0]] &&
-          version_group.name === currGenGroups[0]
-        ) {
-          // fetch machine data
-          const currMachineData = await machineClient.getMachineById(
-            getIdFromURL(machine.url, 'machine'),
-          );
-          // update results object
-          moveMachinesData[version_group.name] = {
-            machine: currMachineData.item.name.toUpperCase(),
-            groups: currGenGroups.map(group => listGamesByGroup(group)),
-          };
-        }
-      }
-    } else {
-      moveMachinesData = null;
-    }
-
-    // move contest data
-    let superContestEffectData: SuperContestEffect;
-    let contestEffectData: ContestEffect;
-
-    if (moveData?.super_contest_effect) {
-      superContestEffectData = await contestClient.getSuperContestEffectById(
-        getIdFromURL(moveData.super_contest_effect.url, 'super-contest-effect'),
-      );
-
-      delete superContestEffectData.moves;
-      superContestEffectData.flavor_text_entries =
-        superContestEffectData.flavor_text_entries.filter(({ language }) => language.name === 'en');
-    }
-
-    if (moveData?.contest_effect) {
-      contestEffectData = await contestClient.getContestEffectById(
-        getIdFromURL(moveData.contest_effect.url, 'contest-effect'),
-      );
-    }
-
-    // delete unnecessary data
-    delete targetData.moves;
-    targetData.descriptions = targetData.descriptions.filter(
-      ({ language }) => language.name === 'en',
-    );
-
-    // move english flavor text
-    moveData.flavor_text_entries = moveData.flavor_text_entries.filter(
-      entry => entry.language.name === 'en',
-    );
+    const targetData = await MovesApi.getMoveTarget(getResourceId(moveData.target.url));
+    const moveMachinesData = await MachineApi.getMoveMachinesData(moveData.machines);
+    const { superContestEffectData, contestEffectData } =
+      await ContestApi.getMoveContestEffects(moveData);
 
     return {
       props: {
-        autocompleteList: [...allPokemonData, ...allTypesData, ...allMovesData],
         move: moveData,
         moveMachines: moveMachinesData,
         target: targetData,
-        superContestEffect: superContestEffectData || null,
-        contestEffect: contestEffectData || null,
+        superContestEffect: superContestEffectData,
+        contestEffect: contestEffectData,
       },
     };
   } catch (error) {
-    console.error(error);
-    // redirects to 404 page
+    console.error('Error fetching move data:', error);
     return { notFound: true };
   }
 };

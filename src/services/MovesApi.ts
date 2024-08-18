@@ -14,4 +14,23 @@ export const MovesApi = {
   getTargetById: async (id: number) => await MainClient.move.getMoveTargetById(id),
 
   listMoves: async (from: number, to: number) => await MainClient.move.listMoves(from, to),
+
+  getMoveData: async (moveName: string) => {
+    if (moveName === 'pound') {
+      return MovesApi.getById(1);
+    }
+    return MovesApi.getByName(moveName);
+  },
+
+  getMoveTarget: async (targetId: number) => {
+    const targetData = await MovesApi.getTargetById(targetId);
+
+    delete targetData.moves;
+
+    targetData.descriptions = targetData.descriptions.filter(
+      ({ language }) => language.name === 'en',
+    );
+
+    return targetData;
+  },
 };

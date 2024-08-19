@@ -103,9 +103,6 @@ const InfiniteScroll = ({
             key={`infinite-scroll-${name}`}
             pokemonName={name}
             pokemonId={getResourceId(url)}
-            whileHover="hover"
-            whileTap="tap"
-            variants={fadeInUpVariant}
           />
         ))}
       </Grid>

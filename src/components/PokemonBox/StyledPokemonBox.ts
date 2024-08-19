@@ -2,13 +2,11 @@ import { styled, css } from '@mui/system';
 // styles
 import { float } from '@/components/BaseStyles';
 // components
-import { motion } from 'framer-motion';
+import { Paper } from '@mui/material';
 
-const PokeBox = styled(motion.a)(
+const PokeBox = styled(Paper)(
   ({ theme }) => css`
     align-items: center;
-    background-color: ${theme.palette.background.paper};
-    border: 1px solid ${theme.palette.primary.dark};
     border-radius: 5px;
     display: flex;
     flex-basis: auto;
@@ -24,18 +22,8 @@ const PokeBox = styled(motion.a)(
     transition: border 0.1s ease-in-out;
     width: 125px;
 
-    &:active {
-      transition: box-shadow 0.01s ease-in-out;
-      box-shadow: 1px 1px 2px 0px ${theme.palette.primary.light} inset;
-    }
-
-    ${theme.breakpoints.up('md')} {
-      max-width: 175px;
-      width: 175px;
-    }
-
     &:hover {
-      box-shadow: 1px 1px 3px 0px ${theme.palette.primary.light};
+      box-shadow: 1px 1px 3px 0px ${theme.palette.secondary.main};
       cursor: pointer;
 
       img {
@@ -43,6 +31,16 @@ const PokeBox = styled(motion.a)(
           animation: ${float} infinite 3s ease-in-out;
         }
       }
+    }
+
+    &:active {
+      transition: box-shadow 0.01s ease-in-out;
+      box-shadow: 1px 1px 2px 0px ${theme.palette.secondary.light} inset;
+    }
+
+    ${theme.breakpoints.up('md')} {
+      max-width: 175px;
+      width: 175px;
     }
   `,
 );

@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 // helpers
-import { fadeInUpVariant, getResourceId } from '@/helpers';
+import { getResourceId } from '@/helpers';
 // types
 import { NamedAPIResource } from 'pokenode-ts';
 // components

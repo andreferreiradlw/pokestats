@@ -7,14 +7,12 @@ const Grid: {
     styleOverrides: {
       root: {
         display: 'flex',
-        flexDirection: 'column',
-        flexWrap: 'nowrap',
       },
-      container: {
-        gap: '1.5em',
+      container: ({ theme }) => ({
+        gap: theme.spacing(4),
         alignItems: 'flex-start',
         justifyContent: 'flex-start',
-      },
+      }),
     },
   },
 };

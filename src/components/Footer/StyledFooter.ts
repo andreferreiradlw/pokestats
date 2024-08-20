@@ -1,22 +1,48 @@
-import styled from 'styled-components';
 // styles
 import { riseUp } from '@/components/BaseStyles';
 // components
 import BoxWrapper from '../Box/StyledBox';
 // icons
 import Potion from 'public/static/iconLibrary/potion.svg';
+import { Box, Container, css, Stack, styled } from '@mui/material';
 
-const FooterContainer = styled.footer`
-  align-items: center;
-  background: ${({ theme }) => theme.colors.primary.main};
-  display: flex;
-  flex-direction: column;
-  font-weight: 500;
-  gap: ${({ theme }) => theme.layout.gap};
-  justify-content: center;
-  padding-bottom: ${({ theme }) => theme.layout.gap};
-  width: 100%;
-`;
+const FooterContainer = styled(Box)(
+  ({ theme }) => css`
+    background: ${theme.palette.background.default};
+    font-weight: ${theme.typography.fontWeightMedium};
+    padding-bottom: ${theme.spacing(2)};
+    padding-top: ${theme.spacing(2)};
+    width: 100%;
+  `,
+);
+
+const FooterContainerInner = styled(Container)(
+  ({ theme }) => css`
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    gap: ${theme.spacing(2)};
+    justify-content: center;
+  `,
+);
+
+const FooterContent = styled(Stack)(
+  ({ theme }) => css`
+    align-items: center;
+    flex-direction: column;
+    gap: ${theme.spacing(2)};
+    justify-content: center;
+    text-align: center;
+    width: 100%;
+
+    ${theme.breakpoints.up('md')} {
+      align-items: flex-start;
+      flex-direction: row;
+      justify-content: space-between;
+      text-align: left;
+    }
+  `,
+);
 
 const Anchor = styled(BoxWrapper)`
   white-space: nowrap;
@@ -50,4 +76,4 @@ const PokestatsIcon = styled(Potion)`
   }
 `;
 
-export { FooterContainer, PokestatsIcon, Anchor };
+export { FooterContainer, FooterContainerInner, FooterContent, PokestatsIcon, Anchor };

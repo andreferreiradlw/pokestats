@@ -64,11 +64,11 @@ const PokemonList = ({ pokemon, ...rest }: PokemonListProps): JSX.Element => {
   }, [filteredPokemon, sortBy]);
 
   return (
-    <Grid container {...rest}>
+    <Grid container direction="column" {...rest}>
       <Typography variant="sectionTitle">
         {`Select your Pokemon (${sortedAndFilteredPokemon.length})`}
       </Typography>
-      <Grid item container flexDirection="row" flexWrap="wrap" gap={{ xs: '1em', md: '2em' }}>
+      <Grid item container flexDirection="row" flexWrap="wrap" gap={{ xs: 2, md: 4 }}>
         <DropdownV2
           label="Game Generation"
           options={generationOptions}

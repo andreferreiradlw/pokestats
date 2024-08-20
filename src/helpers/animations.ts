@@ -163,7 +163,7 @@ export const fadeInUpVariant = {
     opacity: 0,
   },
   hover: {
-    zIndex: 1,
+    // zIndex: 1,
     scale: [1, 1.05, 1.02],
     rotate: [0, 1, -1, 0],
     transition: {

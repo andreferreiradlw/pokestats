@@ -2,22 +2,20 @@ import { useMemo, useEffect } from 'react';
 import { useRouter } from 'next/router';
 // heplpers
 import { usePlausible } from 'next-plausible';
-import { fadeInUpVariant, getRandomInt } from '@/helpers';
+import { getRandomInt, hoverVariant } from '@/helpers';
+import { usePokemonList } from '@/hooks/usePokemonList';
 // types
 import type { PokestatsHomepageProps } from '@/pages/index';
 // styles
-import { Container, GithubLink, ListContainer, Pokeball } from './styledHomepage';
+import { FirstSection, GithubLink, Pokeball } from './styledHomepage';
 // components
-import Particles from '@/components/Particles';
 import PokemonList from './PokemonList';
 import TypeList from './TypeList';
-import Box from '@/components/Box';
-import { motion } from 'framer-motion';
+import AutocompleteV2 from '../AutocompleteV2';
+import { Button, Container, Divider, Stack, Typography } from '@mui/material';
 // icons
 import Github from 'public/static/iconLibrary/github.svg';
-import AutocompleteV2 from '../AutocompleteV2';
-import { Button, Divider, Typography } from '@mui/material';
-import { usePokemonList } from '@/hooks/usePokemonList';
+
 import Loading from '../Loading';
 
 const Homepage = ({ pokemonTypes }: PokestatsHomepageProps): JSX.Element => {
@@ -39,60 +37,45 @@ const Homepage = ({ pokemonTypes }: PokestatsHomepageProps): JSX.Element => {
 
   return (
     <>
-      <motion.div
-        initial="hidden"
-        animate="show"
-        variants={fadeInUpVariant}
-        key="homepage-container"
+      <GithubLink
+        href="https://github.com/andreferreiradlw/pokestats"
+        target="_blank"
+        rel="noopener"
+        whileHover="hover"
+        whileTap="tap"
+        variants={hoverVariant}
+        key="homepage-github"
+        onClick={() => plausible('Github Homepage')}
       >
-        <GithubLink
-          href="https://github.com/andreferreiradlw/pokestats"
-          target="_blank"
-          rel="noopener"
-          whileHover="hover"
-          whileTap="tap"
-          variants={fadeInUpVariant}
-          key="homepage-github"
-          onClick={() => plausible('Github Homepage')}
+        <Github />
+      </GithubLink>
+      <FirstSection>
+        <Typography variant="mainHeading">PokeStats</Typography>
+        <AutocompleteV2 />
+        <Button
+          onClick={async () => {
+            plausible('Random Pokemon');
+            await router.push(randomPokemonUrl);
+          }}
+          variant="contained"
+          color="secondary"
         >
-          <Github />
-        </GithubLink>
-        <Container
-          flexheight="100vh"
-          flexalign="center"
-          flexdirection="column"
-          flexgap="1em"
-          $contained
-          $withGutter
-        >
-          <Typography variant="mainHeading">PokeStats</Typography>
-          <AutocompleteV2 />
-          <Button
-            onClick={async () => {
-              plausible('Random Pokemon');
-              await router.push(randomPokemonUrl);
-            }}
-            variant="contained"
-            color="secondary"
-          >
-            Random Pokemon
-            <Pokeball />
-          </Button>
-        </Container>
-        <ListContainer flexpadding="1.5em 0" flexalign="center" flexjustify="center">
-          <Box $contained $withGutter flexgap="1.5em">
+          Random Pokemon
+          <Pokeball />
+        </Button>
+      </FirstSection>
+      <Stack alignItems="center" justifyContent="center" bgcolor="Background" width="100%">
+        <Container maxWidth="xl">
+          <Stack gap="1.5em" padding={{ xs: 2, md: 4 }} divider={<Divider />}>
             <TypeList types={pokemonTypes} />
-            <Divider />
             {isLoading ? (
               <Loading $withGutter $iconWidth="50px" />
             ) : (
               <PokemonList pokemon={allPokemon} />
             )}
-            <Divider />
-          </Box>
-        </ListContainer>
-      </motion.div>
-      <Particles />
+          </Stack>
+        </Container>
+      </Stack>
     </>
   );
 };

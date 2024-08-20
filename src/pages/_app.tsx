@@ -58,7 +58,7 @@ const App = ({ Component, pageProps, router }: AppProps): JSX.Element => {
             </PlausibleProvider>
           </motion.div>
         </AnimatePresence>
-        <ReactQueryDevtools initialIsOpen={false} />
+        <ReactQueryDevtools initialIsOpen={false} buttonPosition="bottom-left" />
       </QueryClientProvider>
     </ThemeProvider>
   );

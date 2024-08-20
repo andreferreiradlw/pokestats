@@ -15,6 +15,7 @@ const FormInputs: {
         flexDirection: 'row',
         alignItems: 'center',
         gap: '0.5em',
+        flexWrap: 'wrap',
       },
     },
   },

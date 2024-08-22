@@ -1,4 +1,4 @@
-import { AppBar, Container, css, styled } from '@mui/material';
+import { AppBar, css, Stack, styled } from '@mui/material';
 import { motion } from 'framer-motion';
 
 const HeaderContainer = styled(AppBar)(
@@ -9,12 +9,14 @@ const HeaderContainer = styled(AppBar)(
   `,
 );
 
-const ContentContainer = styled(Container)(
+const ContentContainer = styled(Stack)(
   ({ theme }) => css`
     align-items: center;
-    display: flex;
     flex-direction: column;
     justify-content: space-between;
+    margin: auto;
+    max-width: ${theme.breakpoints.values.xl}px;
+    width: 100%;
 
     ${theme.breakpoints.up('md')} {
       align-items: flex-start;

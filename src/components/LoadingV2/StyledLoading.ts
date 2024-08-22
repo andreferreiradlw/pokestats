@@ -5,12 +5,12 @@ import Record from 'public/static/iconLibrary/record.svg';
 import { ellipsis, pokeballShake, riseUp, rotate, shake } from '@/BaseStyles';
 import { css, Stack, StackProps, styled, Typography } from '@mui/material';
 
-const IconContainer = styled(Stack)<StackProps & { iconWidth: any }>(
-  ({ iconWidth, theme }) => css`
-    ${iconWidth &&
+const IconContainer = styled(Stack)<StackProps & { $iconWidth: number }>(
+  ({ $iconWidth, theme }) => css`
+    ${$iconWidth &&
     css`
       & svg {
-        width: ${theme.spacing(iconWidth)};
+        width: ${theme.spacing($iconWidth)};
       }
     `}
   `,

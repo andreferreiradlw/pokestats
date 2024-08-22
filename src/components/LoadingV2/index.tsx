@@ -7,7 +7,7 @@ import { motion } from 'framer-motion';
 import { Description, IconContainer, PokeballIcon, PotionIcon, RecordIcon } from './StyledLoading';
 
 export interface LoadingV2Props extends StackProps {
-  iconWidth?: StackProps['width'];
+  $iconWidth?: number;
   description?: string;
   iconShape?: 'potion' | 'pokeball' | 'record';
 }
@@ -27,7 +27,12 @@ const LoadingIcon = ({ icon }: LoadingIconProps): JSX.Element => {
   }
 };
 
-const LoadingV2 = ({ iconWidth, iconShape, description, ...rest }: LoadingV2Props): JSX.Element => {
+const LoadingV2 = ({
+  $iconWidth,
+  iconShape,
+  description,
+  ...rest
+}: LoadingV2Props): JSX.Element => {
   return (
     <Stack
       alignItems="center"
@@ -41,7 +46,7 @@ const LoadingV2 = ({ iconWidth, iconShape, description, ...rest }: LoadingV2Prop
       variants={loadingChild}
       {...rest}
     >
-      <IconContainer iconWidth={iconWidth || 12}>
+      <IconContainer $iconWidth={$iconWidth || 12}>
         <LoadingIcon icon={iconShape} />
       </IconContainer>
       {description && <Description>{description}</Description>}

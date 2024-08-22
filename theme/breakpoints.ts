@@ -8,7 +8,7 @@ const customBreakpoints: ThemeOptions = {
       sm: 528, // 528px
       md: 768, // 768px
       lg: 1024, // 1024px
-      xl: 1440, // 1440px
+      xl: 1500, // 1500px
       xxl: 2560, // 2560px
     },
   },

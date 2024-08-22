@@ -2,7 +2,6 @@ import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle` 
   // Resetting margins, paddings, and borders
-  html, body,
   h1, h2, h3, h4, h5, h6,
   a, p, span,
   em, small, strong,
@@ -11,10 +10,7 @@ const GlobalStyle = createGlobalStyle`
   abbr, dfn,
   blockquote, q, cite,
   code, pre,
-  ol, ul, li, dl, dt, dd,
-  div, section, article,
-  main, aside, nav,
-  header, hgroup, footer,
+  ol, ul, li, dl, dt, dd, section, article, aside, hgroup, footer,
   img, figure, figcaption,
   address, time,
   audio, video,
@@ -31,24 +27,19 @@ const GlobalStyle = createGlobalStyle`
   }
 
   // typography
-  html {
-    font-size: 100%;
-  }
   body {
     overflow-x: hidden;
-    width: 100%;
     min-height: 100%;
-    font-size: 1rem;
-    margin: 0;
-    background-color: white;
-    font-family: 'Montserrat', sans-serif;
   }
+
   h1, h2, h3, h4, h5, h6 {
     font-family: 'Quicksand', sans-serif;
   }
+
   input, textarea, button {
     font-family: inherit
   }
+
   a {
     text-decoration: none;
     color: inherit;
@@ -58,22 +49,10 @@ const GlobalStyle = createGlobalStyle`
   }
 
   // Layout & box sizing
-  article,
-  aside,
-  footer,
-  header,
-  nav,
-  section,
-  main {
-    display: block;
-  }
   * {
     box-sizing: border-box;
   }
-  *:before,
-  *:after {
-    box-sizing: inherit;
-  }
+
 
   // Resetting specific element styles
   table {
@@ -90,7 +69,6 @@ const GlobalStyle = createGlobalStyle`
   }
   img {
     border-style: none;
-    height: auto;
   }
   blockquote,
   q {
@@ -113,15 +91,6 @@ const GlobalStyle = createGlobalStyle`
   }
   :focus:not(:focus-visible) {
     outline: none;
-  }
-
-  // lazy load
-  .lazyload-wrapper {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
   }
 `;
 

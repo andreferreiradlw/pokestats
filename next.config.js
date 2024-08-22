@@ -9,9 +9,6 @@ module.exports = {
     styledComponents: true,
   },
   staticPageGenerationTimeout: 90,
-  experimental: {
-    largePageDataBytes: 300 * 100000,
-  },
   images: {
     unoptimized: true,
     remotePatterns: [

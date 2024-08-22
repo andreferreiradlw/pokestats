@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 // heplpers
 import { usePlausible } from 'next-plausible';
 import { getRandomInt, hoverVariant } from '@/helpers';
-import { usePokemonList } from '@/hooks/usePokemonList';
+import { usePokemonList } from '@/hooks';
 // types
 import type { PokestatsHomepageProps } from '@/pages/index';
 // styles
@@ -13,10 +13,10 @@ import PokemonList from './PokemonList';
 import TypeList from './TypeList';
 import AutocompleteV2 from '../AutocompleteV2';
 import { Button, Container, Divider, Stack, Typography } from '@mui/material';
+import LoadingV2 from '../LoadingV2';
 // icons
 import Github from 'public/static/iconLibrary/github.svg';
-
-import Loading from '../Loading';
+import { AnimatePresence } from 'framer-motion';
 
 const Homepage = ({ pokemonTypes }: PokestatsHomepageProps): JSX.Element => {
   // hooks
@@ -68,11 +68,9 @@ const Homepage = ({ pokemonTypes }: PokestatsHomepageProps): JSX.Element => {
         <Container maxWidth="xl">
           <Stack gap="1.5em" padding={{ xs: 2, md: 4 }} divider={<Divider />}>
             <TypeList types={pokemonTypes} />
-            {isLoading ? (
-              <Loading $withGutter $iconWidth="50px" />
-            ) : (
-              <PokemonList pokemon={allPokemon} />
-            )}
+            <AnimatePresence mode="wait">
+              {isLoading ? <LoadingV2 iconWidth={12} /> : <PokemonList pokemon={allPokemon} />}
+            </AnimatePresence>
           </Stack>
         </Container>
       </Stack>

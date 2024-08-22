@@ -3,11 +3,12 @@ import { useState, useEffect, useMemo, useCallback } from 'react';
 import { NamedAPIResource } from 'pokenode-ts';
 // helpers
 import { usePlausible } from 'next-plausible';
-import { generationOptions, getResourceId, mapIdToGeneration } from '@/helpers';
+import { fadeInUpVariant, generationOptions, getResourceId, mapIdToGeneration } from '@/helpers';
 // components
 import { Grid, GridProps, SelectChangeEvent, Typography } from '@mui/material';
 import InfiniteScroll from '@/components/InfiniteScroll';
 import DropdownV2 from '@/components/DropdownV2';
+import { motion } from 'framer-motion';
 
 interface PokemonListProps extends GridProps {
   pokemon: NamedAPIResource[];
@@ -64,7 +65,15 @@ const PokemonList = ({ pokemon, ...rest }: PokemonListProps): JSX.Element => {
   }, [filteredPokemon, sortBy]);
 
   return (
-    <Grid container direction="column" {...rest}>
+    <Grid
+      container
+      direction="column"
+      component={motion.div}
+      initial="hidden"
+      animate="show"
+      variants={fadeInUpVariant}
+      {...rest}
+    >
       <Typography variant="sectionTitle">
         {`Select your Pokemon (${sortedAndFilteredPokemon.length})`}
       </Typography>

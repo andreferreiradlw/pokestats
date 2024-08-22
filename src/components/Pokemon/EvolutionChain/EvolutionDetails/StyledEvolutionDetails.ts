@@ -9,19 +9,21 @@ const Container = styled(Stack)(
   `,
 );
 
-const Details = styled(Typography)`
-  font-weight: 500;
-  text-align: center;
-  white-space: normal;
-  word-break: break-word;
+const Details = styled(Typography)(
+  () => css`
+    font-weight: 500;
+    text-align: center;
+    white-space: normal;
+    word-break: break-word;
 
-  &:first-letter {
-    text-transform: uppercase;
-  }
-`;
+    &:first-letter {
+      text-transform: uppercase;
+    }
+  `,
+);
 
-const ItemImage = styled('img')`
-  width: 50px;
-`;
+const ItemImage = styled('img')({
+  width: '50px',
+});
 
 export { Container, Details, ItemImage };

@@ -9,13 +9,21 @@ import { Stack, styled, css } from '@mui/material';
 const FirstSection = styled(Stack)(
   () => css`
     align-items: center;
-    flex-direction: column;
     gap: 1em;
     height: 50vh;
     justify-content: center;
     margin: auto;
     min-height: 50vh;
     position: relative;
+    width: 100%;
+  `,
+);
+
+const SecondSection = styled(Stack)(
+  ({ theme }) => css`
+    align-items: center;
+    background-color: ${theme.palette.background.default};
+    justify-content: center;
     width: 100%;
   `,
 );
@@ -54,4 +62,4 @@ const Pokeball = styled(PokeballIcon)(
   `,
 );
 
-export { FirstSection, GithubLink, Pokeball };
+export { FirstSection, SecondSection, GithubLink, Pokeball };

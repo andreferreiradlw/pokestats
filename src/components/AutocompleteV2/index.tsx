@@ -112,7 +112,7 @@ const AutocompleteV2 = ({
                 ...InputProps,
                 endAdornment: (
                   <>
-                    {isLoading && <LoadingV2 iconWidth={5} py={0} />}
+                    {isLoading && <LoadingV2 $iconWidth={5} py={0} />}
                     {InputProps.endAdornment}
                   </>
                 ),

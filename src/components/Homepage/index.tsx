@@ -7,7 +7,7 @@ import { usePokemonList } from '@/hooks';
 // types
 import type { PokestatsHomepageProps } from '@/pages/index';
 // styles
-import { FirstSection, GithubLink, Pokeball } from './styledHomepage';
+import { FirstSection, GithubLink, Pokeball, SecondSection } from './styledHomepage';
 // components
 import PokemonList from './PokemonList';
 import TypeList from './TypeList';
@@ -64,16 +64,16 @@ const Homepage = ({ pokemonTypes }: PokestatsHomepageProps): JSX.Element => {
           <Pokeball />
         </Button>
       </FirstSection>
-      <Stack alignItems="center" justifyContent="center" bgcolor="Background" width="100%">
+      <SecondSection>
         <Container maxWidth="xl">
           <Stack gap="1.5em" padding={{ xs: 2, md: 4 }} divider={<Divider />}>
             <TypeList types={pokemonTypes} />
             <AnimatePresence mode="wait">
-              {isLoading ? <LoadingV2 iconWidth={12} /> : <PokemonList pokemon={allPokemon} />}
+              {isLoading ? <LoadingV2 $iconWidth={12} /> : <PokemonList pokemon={allPokemon} />}
             </AnimatePresence>
           </Stack>
         </Container>
-      </Stack>
+      </SecondSection>
     </>
   );
 };

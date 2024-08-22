@@ -32,7 +32,11 @@
     "fix:prettier": "prettier --write \"**/*.*\""
   },
   "dependencies": {
+    "@emotion/cache": "^11.13.1",
+    "@emotion/react": "^11.13.3",
+    "@emotion/server": "^11.11.0",
     "@mui/material": "^5.16.7",
+    "@mui/material-nextjs": "^5.16.6",
     "@mui/styled-engine": "npm:@mui/styled-engine-sc@latest",
     "@mui/styled-engine-sc": "^5.14.12",
     "@tanstack/react-query": "^5.51.21",
@@ -85,4 +89,3 @@
     "not op_mini all"
   ]
 }
-

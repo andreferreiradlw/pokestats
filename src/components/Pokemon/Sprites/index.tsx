@@ -4,10 +4,11 @@ import type { Pokemon, PokemonSpecies, PokemonSprites } from 'pokenode-ts';
 // helpers
 import { removeUnderscore, prefixId, capitalise, removeDash } from '@/helpers';
 // styles
-import { SectionTitle, Divider } from '@/components/BaseStyles';
+import { SectionTitle } from '@/components/BaseStyles';
 import { SpriteContainer, Sprite, NoSprites } from './StyledSprites';
 // components
 import Box, { BoxProps } from '@/components/Box';
+import { Divider } from '@mui/material';
 
 interface SpritesProps extends BoxProps {
   pokemonSprites: PokemonSprites;

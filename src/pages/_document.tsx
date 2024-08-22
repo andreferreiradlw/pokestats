@@ -6,7 +6,6 @@ import {
   DocumentHeadTagsProps,
   documentGetInitialProps,
 } from '@mui/material-nextjs/v14-pagesRouter';
-import createCache from '@emotion/cache';
 
 // export default class MyDocument extends Document {
 //   public render(props): JSX.Element {
@@ -58,73 +57,27 @@ export default function MyDocument(props: DocumentProps & DocumentHeadTagsProps)
   );
 }
 
-// https://github.com/vercel/next.js/blob/master/examples/with-styled-components/pages/_document.js
-// MyDocument.getInitialProps = async ctx => {
-//   const sheet = new ServerStyleSheet();
-//   const originalRenderPage = ctx.renderPage;
-
-//   try {
-//     ctx.renderPage = () =>
-//       originalRenderPage({
-//         enhanceApp: App => props => sheet.collectStyles(<App {...props} />),
-//       });
-
-//     const initialProps = await Document.getInitialProps(ctx);
-//     return {
-//       ...initialProps,
-//       styles: (
-//         <>
-//           {initialProps.styles}
-//           {sheet.getStyleElement()}
-//         </>
-//       ),
-//     };
-//   } finally {
-//     sheet.seal();
-//   }
-// };
-
 MyDocument.getInitialProps = async ctx => {
-  // const jssSheets = new JSSServerStyleSheets();
-  const styledComponentsSheet = new ServerStyleSheet();
+  const sheet = new ServerStyleSheet();
+  const originalRenderPage = ctx.renderPage;
 
   try {
-    const finalProps = await documentGetInitialProps(ctx, {
-      emotionCache: createCache({ key: 'css' }),
-      plugins: [
-        {
-          // styled-components
-          enhanceApp: App => props => styledComponentsSheet.collectStyles(<App {...props} />),
-          resolveProps: async initialProps => ({
-            ...initialProps,
-            // @ts-expect-error: test
-            styles: [styledComponentsSheet.getStyleElement(), ...initialProps.styles],
-          }),
-        },
-        // {
-        //   // JSS
-        //   enhanceApp: App => props => jssSheets.collect(<App {...props} />),
-        //   resolveProps: async initialProps => {
-        //     const css = jssSheets.toString();
-        //     return {
-        //       ...initialProps,
-        //       styles: [
-        //         ...initialProps.styles,
-        //         <style
-        //           id="jss-server-side"
-        //           key="jss-server-side"
-        //           // eslint-disable-next-line react/no-danger
-        //           dangerouslySetInnerHTML={{ __html: css }}
-        //         />,
-        //         <style id="insertion-point-jss" key="insertion-point-jss" />,
-        //       ],
-        //     };
-        //   },
-        // },
-      ],
-    });
-    return finalProps;
+    ctx.renderPage = () =>
+      originalRenderPage({
+        enhanceApp: App => props => sheet.collectStyles(<App {...props} />),
+      });
+
+    const initialProps = await documentGetInitialProps(ctx);
+    return {
+      ...initialProps,
+      styles: (
+        <>
+          {initialProps.styles}
+          {sheet.getStyleElement()}
+        </>
+      ),
+    };
   } finally {
-    styledComponentsSheet.seal();
+    sheet.seal();
   }
 };

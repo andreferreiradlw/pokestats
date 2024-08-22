@@ -18,10 +18,11 @@ import {
 } from '@/helpers';
 // components
 import Head from 'next/head';
-import Layout from '@/components/Layout';
 import PokemonPage from '@/components/Pokemon';
 import Loading from '@/components/Loading';
 import { AbilityApi, EvolutionApi, PokemonApi, SpeciesApi } from '@/services';
+import LayoutV2 from '@/components/LayoutV2';
+import { GameVersionProvider } from '@/context';
 
 export interface PokestatsPokemonPageProps {
   allPokemon: Pokemon[];
@@ -56,7 +57,7 @@ const PokestatsPokemonPage: NextPage<PokestatsPokemonPageProps> = ({ allPokemon,
     .join(', ');
 
   return (
-    <>
+    <GameVersionProvider pokemon={props.species}>
       <Head>
         <title>{pageTitle}</title>
         <meta name="description" content={pageDescription} />
@@ -74,10 +75,10 @@ const PokestatsPokemonPage: NextPage<PokestatsPokemonPageProps> = ({ allPokemon,
           )}.png`}
         />
       </Head>
-      <Layout withHeader currPokemon={props.species}>
+      <LayoutV2 withHeader showGenSelect>
         <PokemonPage allPokemon={allPokemon} {...props} />
-      </Layout>
-    </>
+      </LayoutV2>
+    </GameVersionProvider>
   );
 };
 

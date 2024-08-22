@@ -23,7 +23,7 @@ const PokeBox = styled(Paper)(
     width: 125px;
 
     &:hover {
-      box-shadow: 1px 1px 3px 0px ${theme.palette.secondary.main};
+      box-shadow: 1px 1px 3px 0px ${theme.palette.primary.main};
       cursor: pointer;
 
       img {
@@ -31,11 +31,11 @@ const PokeBox = styled(Paper)(
           animation: ${float} infinite 3s ease-in-out;
         }
       }
-    }
 
-    &:active {
-      transition: box-shadow 0.01s ease-in-out;
-      box-shadow: 1px 1px 2px 0px ${theme.palette.secondary.light} inset;
+      &:active {
+        transition: box-shadow 0.01s ease-in-out;
+        box-shadow: 1px 1px 2px 0px ${theme.palette.primary.light} inset;
+      }
     }
 
     ${theme.breakpoints.up('md')} {

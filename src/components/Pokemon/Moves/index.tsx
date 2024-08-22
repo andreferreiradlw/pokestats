@@ -43,9 +43,14 @@ const PokemonMoves = ({ pokemon, ...rest }: PokemonMovesProps): JSX.Element => {
   });
 
   return (
-    <Grid container alignItems={{ xxs: 'center', lg: 'flex-start' }} {...rest}>
+    <Grid
+      container
+      flexDirection="column"
+      alignItems={{ xxs: 'center', lg: 'flex-start' }}
+      {...rest}
+    >
       <Typography variant="sectionTitle">Move Pool</Typography>
-      <Grid item flexDirection="row" gap="1.5em">
+      <Grid item gap={4}>
         <DropdownV2
           label="Type"
           options={LearnMethodOptions}

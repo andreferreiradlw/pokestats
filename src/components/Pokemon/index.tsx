@@ -41,7 +41,6 @@ const PokemonPage = ({
         variants={pageContainerVariant}
         key={`pokemon-${name}`}
       >
-        <Divider />
         <Box
           flexdirection={{ xxs: 'column-reverse', lg: 'row' }}
           flexalign="center"
@@ -110,7 +109,6 @@ const PokemonPage = ({
         <Box flexalign="flex-start" flexjustify="flex-start">
           <Navigation allPokemon={allPokemon} pokemonId={id} />
         </Box>
-        <Divider />
       </MainContainer>
     </AnimatePresence>
   );

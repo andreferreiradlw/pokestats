@@ -19,7 +19,7 @@ const TableRow = styled(motion.tr)(
     cursor: pointer;
 
     &:hover {
-      background: ${theme.palette.primary.light};
+      background: ${theme.palette.primary.main};
     }
   `,
 );
@@ -38,14 +38,14 @@ const TableContainer = styled(motion.div)(
 
 const MovesTableEl = styled('table')(
   ({ theme }) => css`
-    border: 2px solid ${theme.palette.primary.light};
+    border: 2px solid ${theme.palette.primary.main};
     font-size: 0.7em;
     line-height: 0.7em;
     text-align: center;
     width: 100%;
 
     & thead {
-      background: ${theme.palette.primary.light};
+      background: ${theme.palette.primary.main};
     }
 
     & th,
@@ -63,7 +63,7 @@ const MovesTableEl = styled('table')(
     }
 
     & tr:not(:last-of-type) {
-      border-bottom: 2px solid ${theme.palette.primary.light};
+      border-bottom: 2px solid ${theme.palette.primary.main};
     }
 
     ${theme.breakpoints.up('md')} {

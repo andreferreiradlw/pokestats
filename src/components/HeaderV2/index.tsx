@@ -6,7 +6,7 @@ import { AppBarProps, Stack } from '@mui/material';
 // helpers
 import { hoverVariant } from '@/helpers';
 // styles
-import { ContentContainer, HeaderContainer, Logo } from './styledHeader';
+import { ContentContainer, HeaderContainer, Logo } from './styledHeaderV2';
 
 export interface HeaderV2Props extends AppBarProps {
   showGenSelect?: boolean;

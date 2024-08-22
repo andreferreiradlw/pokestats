@@ -11,6 +11,9 @@ const Select: {
       IconComponent: Chevron,
     },
     styleOverrides: {
+      root: ({ theme }) => ({
+        backgroundColor: theme.palette.background.paper,
+      }),
       select: {
         padding: '5px 10px',
       },

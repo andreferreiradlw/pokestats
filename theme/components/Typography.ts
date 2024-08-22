@@ -1,5 +1,3 @@
-// import { Theme, type Components } from '@mui/material';
-
 const Typography = {
   MuiTypography: {
     defaultProps: {

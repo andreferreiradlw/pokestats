@@ -1,4 +1,4 @@
-import { AppBar, Stack } from '@mui/material';
+import { AppBar } from '@mui/material';
 import { styled, css } from '@mui/material/styles';
 import { motion } from 'framer-motion';
 

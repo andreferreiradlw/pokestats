@@ -10,7 +10,8 @@ const HeaderContainer = styled(AppBar)(
   `,
 );
 
-const ContentContainer = styled(Stack)(({ theme }) => ({
+const ContentContainer = styled('div')(({ theme }) => ({
+  display: 'flex',
   alignItems: 'center',
   flexDirection: 'column',
   justifyContent: 'space-between',

@@ -3,7 +3,7 @@ import { useIsClient, useWindowSize } from 'usehooks-ts';
 // helpers
 import { fadeInOutUpVariant, pageContainerVariant, scrollToTop } from '@/helpers';
 // components
-import { Stack, StackProps, useScrollTrigger } from '@mui/material';
+import { Container, Stack, StackProps, useScrollTrigger } from '@mui/material';
 import { AnimatePresence, motion, HTMLMotionProps } from 'framer-motion';
 import Footer from '../Footer';
 import HeaderV2, { HeaderV2Props } from '../HeaderV2';
@@ -15,6 +15,7 @@ import ChevronTop from 'public/static/iconLibrary/chevron_top.svg';
 interface LayoutV2Props extends Omit<HTMLMotionProps<'main'>, keyof StackProps>, StackProps {
   withHeader?: boolean;
   showGenSelect?: HeaderV2Props['showGenSelect'];
+  key: string; // make it mandatory for animation purposes
 }
 
 const LayoutV2 = ({ children, withHeader, showGenSelect, ...rest }: LayoutV2Props): JSX.Element => {
@@ -28,11 +29,13 @@ const LayoutV2 = ({ children, withHeader, showGenSelect, ...rest }: LayoutV2Prop
 
   return (
     <LayoutContainer maxWidth={false} disableGutters>
+      {withHeader && <HeaderV2 showGenSelect={showGenSelect} />}
       <AnimatePresence>
         <Stack
           direction="column"
           alignItems="center"
           position="relative"
+          width="100%"
           component={motion.main}
           initial="hidden"
           animate="visible"
@@ -41,10 +44,11 @@ const LayoutV2 = ({ children, withHeader, showGenSelect, ...rest }: LayoutV2Prop
           key="layout-grid-container"
           {...rest}
         >
-          {withHeader && <HeaderV2 showGenSelect={showGenSelect} />}
-          {children}
-          <Footer />
+          <Container maxWidth="xl" disableGutters>
+            {children}
+          </Container>
         </Stack>
+        <Footer />
         {width > 768 && scrollPosition && (
           <ScrollButton
             onClick={isClient && scrollToTop}

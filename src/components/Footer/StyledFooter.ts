@@ -4,10 +4,10 @@ import { riseUp } from '@/components/BaseStyles';
 import BoxWrapper from '../Box/StyledBox';
 // icons
 import Potion from 'public/static/iconLibrary/potion.svg';
-import { Box, Container, Stack } from '@mui/material';
+import { Container, Stack } from '@mui/material';
 import { styled, css } from '@mui/material/styles';
 
-const FooterContainer = styled(Box)(
+const FooterContainer = styled('footer')(
   ({ theme }) => css`
     background: ${theme.palette.background.default};
     font-weight: ${theme.typography.fontWeightMedium};

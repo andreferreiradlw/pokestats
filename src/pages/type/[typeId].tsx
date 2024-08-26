@@ -5,9 +5,9 @@ import { Type } from 'pokenode-ts';
 import { findEnglishName } from '@/helpers';
 // components
 import Head from 'next/head';
-import Layout from '@/components/Layout';
 import TypePage from '@/components/Type';
 import { TypesApi } from '@/services';
+import LayoutV2 from '@/components/LayoutV2';
 
 export interface PokestatsTypePageProps {
   typeData: Type;
@@ -36,9 +36,9 @@ const PokestatsTypePage: NextPage<PokestatsTypePageProps> = props => {
           content={`public/static/typeIcons/${name.toLocaleLowerCase()}.svg`}
         />
       </Head>
-      <Layout withHeader>
+      <LayoutV2 withHeader key={`type-${props.typeData.id}`}>
         <TypePage {...props} />
-      </Layout>
+      </LayoutV2>
     </>
   );
 };

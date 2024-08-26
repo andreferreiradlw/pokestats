@@ -10,10 +10,10 @@ import {
   getResourceId,
 } from '@/helpers';
 import Head from 'next/head';
-import Layout from '@/components/Layout';
 import MovePage from '@/components/MovePage';
 import Loading from '@/components/Loading';
 import { ContestApi, MachineApi, type MoveMachinesData, MovesApi } from '@/services';
+import LayoutV2 from '@/components/LayoutV2';
 
 export interface PokestatsMovePageProps {
   move: Move;
@@ -61,9 +61,9 @@ const PokestatsMovePage: NextPage<PokestatsMovePageProps> = props => {
         <meta property="og:title" content={pageTitle} />
         <meta property="og:description" content={pageDescription} />
       </Head>
-      <Layout withHeader>
+      <LayoutV2 withHeader key={`move-${props.move.id}`}>
         <MovePage {...props} />
-      </Layout>
+      </LayoutV2>
     </>
   );
 };

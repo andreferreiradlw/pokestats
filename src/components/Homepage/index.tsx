@@ -12,11 +12,12 @@ import { FirstSection, GithubLink, Pokeball, SecondSection } from './styledHomep
 import PokemonList from './PokemonList';
 import TypeList from './TypeList';
 import AutocompleteV2 from '../AutocompleteV2';
-import { Button, Container, Divider, Stack, Typography } from '@mui/material';
+import { Container, Divider, Stack, Typography } from '@mui/material';
 import LoadingV2 from '../LoadingV2';
 // icons
 import Github from 'public/static/iconLibrary/github.svg';
 import { AnimatePresence } from 'framer-motion';
+import Button from '../Button';
 
 const Homepage = ({ pokemonTypes }: PokestatsHomepageProps): JSX.Element => {
   // hooks

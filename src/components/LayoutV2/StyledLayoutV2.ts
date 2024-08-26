@@ -1,4 +1,5 @@
-import { Container, styled } from '@mui/material';
+import { Container } from '@mui/material';
+import { styled } from '@mui/material/styles';
 import { motion } from 'framer-motion';
 
 const LayoutContainer = styled(Container)`

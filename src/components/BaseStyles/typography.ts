@@ -1,65 +1,62 @@
-import { default as styledSC } from 'styled-components';
 import { motion } from 'framer-motion';
+import { styled, css } from '@mui/material/styles';
+import { Link } from '@mui/material';
 
-import { Link, styled, css } from '@mui/material';
+const SectionTitle = styled(motion.h2)(
+  ({ theme }) => css`
+    font-size: 1.5em;
+    font-weight: 600;
 
-const SectionTitle = styledSC(motion.h2)`
-  font-size: 1.5em;
-  font-weight: 600;
-
-  ${({ theme }) => css`
-    @media ${theme.device.sm} {
+    ${theme.breakpoints.up('sm')} {
       font-size: 2em;
     }
-  `}
-`;
+  `,
+);
 
-const SectionSubTitle = styledSC(motion.h3)`
-  font-size: 1.2em;
-  font-weight: 600;
+const SectionSubTitle = styled(motion.h3)(
+  ({ theme }) => css`
+    font-size: 1.2em;
+    font-weight: 600;
 
-  ${({ theme }) => css`
-    @media ${theme.device.xs} {
+    ${theme.breakpoints.up('xs')} {
       font-size: 1.5em;
     }
-  `}
-`;
+  `,
+);
 
-const SectionMessage = styledSC(motion.p)`
-  font-size: 1em;
-  text-align: center;
-  width: 100%;
-`;
+const SectionMessage = styled(motion.p)({
+  fontSize: '1em',
+  textAlign: 'center',
+  width: '100%',
+});
 
-const JpnName = styledSC(motion.span)`
-  position: absolute;
-  top: 0;
-  right: 0;
-  z-index: -1;
-  writing-mode: vertical-rl; // show text vertically
-  line-height: 1;
-  text-transform: uppercase;
-  text-align: center;
-  font-size: 2.5em;
-  font-weight: bold;
-  user-select: none;
-  width: 1em;
+const JpnName = styled(motion.span)(
+  ({ theme }) => css`
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: -1;
+    writing-mode: vertical-rl; // show text vertically
+    line-height: 1;
+    text-transform: uppercase;
+    text-align: center;
+    font-size: 2.5em;
+    font-weight: bold;
+    user-select: none;
+    width: 1em;
+    color: ${theme.palette.secondary.main};
 
-  ${({ theme }) => css`
-    color: ${theme.colors.secondary.main};
-
-    @media ${theme.device.xxs} {
+    ${theme.breakpoints.down('lg')} {
       display: none;
     }
-    @media ${theme.device.md} {
-      display: inline-block;
-    }
-  `}
-`;
+  `,
+);
 
-const BoldSpan = styledSC.span`
-  font-weight: 600 !important;
-`;
+const BoldSpan = styled('span')(
+  () => css`
+    font-weight: 600 !important;
+  `,
+);
 
 const Anchor = styled(Link)(
   ({ theme }) => css`

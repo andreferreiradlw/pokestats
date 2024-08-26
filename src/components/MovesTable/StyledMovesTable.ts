@@ -1,6 +1,6 @@
 import { default as styledSC } from 'styled-components';
 // components
-import { css, styled } from '@mui/material';
+import { styled, css } from '@mui/material/styles';
 import { motion } from 'framer-motion';
 
 const TableBody = styledSC.tbody``;

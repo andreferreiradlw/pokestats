@@ -1,4 +1,5 @@
-import { AppBar, css, Stack, styled } from '@mui/material';
+import { AppBar, Stack } from '@mui/material';
+import { styled, css } from '@mui/material/styles';
 import { motion } from 'framer-motion';
 
 const HeaderContainer = styled(AppBar)(
@@ -9,21 +10,19 @@ const HeaderContainer = styled(AppBar)(
   `,
 );
 
-const ContentContainer = styled(Stack)(
-  ({ theme }) => css`
-    align-items: center;
-    flex-direction: column;
-    justify-content: space-between;
-    margin: auto;
-    max-width: ${theme.breakpoints.values.xl}px;
-    width: 100%;
+const ContentContainer = styled(Stack)(({ theme }) => ({
+  alignItems: 'center',
+  flexDirection: 'column',
+  justifyContent: 'space-between',
+  margin: 'auto',
+  maxWidth: `${theme.breakpoints.values.xl}px`,
+  width: '100%',
 
-    ${theme.breakpoints.up('md')} {
-      align-items: flex-start;
-      flex-direction: row;
-    }
-  `,
-);
+  [theme.breakpoints.up('md')]: {
+    alignItems: 'flex-start',
+    flexDirection: 'row',
+  },
+}));
 
 const Logo = styled(motion.a)(
   ({ theme }) => css`

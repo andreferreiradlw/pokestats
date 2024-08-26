@@ -4,7 +4,8 @@ import { riseUp } from '@/components/BaseStyles';
 import BoxWrapper from '../Box/StyledBox';
 // icons
 import Potion from 'public/static/iconLibrary/potion.svg';
-import { Box, Container, css, Stack, styled } from '@mui/material';
+import { Box, Container, Stack } from '@mui/material';
+import { styled, css } from '@mui/material/styles';
 
 const FooterContainer = styled(Box)(
   ({ theme }) => css`

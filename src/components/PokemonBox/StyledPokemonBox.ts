@@ -1,4 +1,4 @@
-import { styled, css } from '@mui/system';
+import { styled, css } from '@mui/material/styles';
 // styles
 import { float } from '@/components/BaseStyles';
 // components

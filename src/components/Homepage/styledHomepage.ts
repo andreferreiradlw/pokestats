@@ -4,7 +4,8 @@ import { rotate } from '@/BaseStyles';
 import { motion } from 'framer-motion';
 // icons
 import PokeballIcon from 'public/static/iconLibrary/pokeball.svg';
-import { Stack, styled, css } from '@mui/material';
+import { Stack } from '@mui/material';
+import { styled, css } from '@mui/material/styles';
 
 const FirstSection = styled(Stack)(
   () => css`

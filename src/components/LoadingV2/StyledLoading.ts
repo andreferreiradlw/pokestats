@@ -2,8 +2,10 @@
 import Potion from 'public/static/iconLibrary/potion.svg';
 import Pokeball from 'public/static/iconLibrary/pokeball.svg';
 import Record from 'public/static/iconLibrary/record.svg';
+// styles
 import { ellipsis, pokeballShake, riseUp, rotate, shake } from '@/BaseStyles';
-import { css, Stack, StackProps, styled, Typography } from '@mui/material';
+import { Stack, StackProps, Typography } from '@mui/material';
+import { styled, css } from '@mui/material/styles';
 
 const IconContainer = styled(Stack)<StackProps & { $iconWidth: number }>(
   ({ $iconWidth, theme }) => css`

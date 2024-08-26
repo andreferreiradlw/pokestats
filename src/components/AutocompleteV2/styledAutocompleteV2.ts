@@ -1,4 +1,5 @@
-import { css, styled, Typography } from '@mui/material';
+import { Typography } from '@mui/material';
+import { styled, css } from '@mui/material/styles';
 import { motion } from 'framer-motion';
 import { AutocompleteV2Props } from '.';
 

@@ -1,4 +1,5 @@
-import { css, Stack, styled, Typography } from '@mui/material';
+import { Stack, Typography } from '@mui/material';
+import { styled, css } from '@mui/material/styles';
 
 const Container = styled(Stack)(
   ({ theme }) => css`

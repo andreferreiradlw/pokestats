@@ -12,7 +12,6 @@ const EvolutionContainer = styled(motion.div)({
   flexGrow: 0,
   gap: '1em',
   justifyContent: 'space-between',
-  minWidth: 0,
 });
 
 const EvoArrow = styled(Arrow)(

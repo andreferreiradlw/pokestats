@@ -7,10 +7,10 @@ import Evolution from './Evolution';
 import { motion } from 'framer-motion';
 // styles
 import { useEvolutionChain } from '@/hooks';
-import { capitalize, Grid, GridProps, Typography } from '@mui/material';
+import { capitalize, Grid2, Grid2Props, Typography } from '@mui/material';
 import Loading from '@/components/Loading';
 
-interface EvolutionChainProps extends GridProps {
+interface EvolutionChainProps extends Grid2Props {
   pokemonSpecies: PokemonSpecies;
   evolutionChain: EvoChainType;
 }
@@ -24,45 +24,43 @@ const EvolutionChain = ({
   const { data, isLoading } = useEvolutionChain(evolutionChain, pokemonSpecies);
 
   return (
-    <Grid container gap="1em" {...rest}>
+    <Grid2 container gap="1em" width="100%" direction="column" {...rest}>
       <Typography variant="sectionTitle">Evolution Chain</Typography>
       {isLoading ? (
         <Loading flexheight="100%" $iconWidth={{ xxs: '20%', xs: '15%', md: '10%', lg: '5%' }} />
       ) : (
         <>
-          <Grid
-            item
+          <Grid2
             container
-            flexDirection="column"
+            direction="column"
             justifyContent="center"
             alignItems="center"
-            width="100%"
+            size={12}
             gap="1em"
           >
             <Evolution noArrow species={data.firstEvolution} style={{ width: 'auto' }} />
             {data.secondEvolution.length > 0 && (
-              <Grid
-                item
-                flexDirection="row"
+              <Grid2
+                direction="row"
                 alignItems="stretch"
                 justifyContent="space-evenly"
                 gap="1em"
                 maxWidth="100%"
-                width="100%"
+                size={12}
                 pb={1}
                 sx={{
                   overflow: data.firstEvolution.name === 'eevee' ? 'scroll hidden' : 'visible',
                 }}
               >
                 {data.secondEvolution.map(({ species, evolutionDetails, thirdEvolution }) => (
-                  <Grid item key="second-evo-container" gap="1em" flexDirection="column">
+                  <Grid2 key="second-evo-container" gap="1em" direction="column">
                     <Evolution
                       species={species}
                       evolutionDetails={evolutionDetails}
                       key="second-evo"
                     />
                     {thirdEvolution.length > 0 && (
-                      <Grid flexDirection="row" justifyContent="space-evenly" gap="1em">
+                      <Grid2 justifyContent="space-evenly" gap="1em">
                         {thirdEvolution.map(({ species, evolutionDetails }) => (
                           <Evolution
                             key="third-evo"
@@ -70,13 +68,13 @@ const EvolutionChain = ({
                             evolutionDetails={evolutionDetails}
                           />
                         ))}
-                      </Grid>
+                      </Grid2>
                     )}
-                  </Grid>
+                  </Grid2>
                 ))}
-              </Grid>
+              </Grid2>
             )}
-          </Grid>
+          </Grid2>
           {!data.secondEvolution.length && (
             <Typography
               variant="sectionMessage"
@@ -91,7 +89,7 @@ const EvolutionChain = ({
           )}
         </>
       )}
-    </Grid>
+    </Grid2>
   );
 };
 

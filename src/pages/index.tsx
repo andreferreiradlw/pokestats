@@ -10,14 +10,14 @@ import { TypesApi } from '@/services';
 import { NamedAPIResource } from 'pokenode-ts';
 import LayoutV2 from '@/components/LayoutV2';
 import Particles from '@/components/Particles';
-import { Grid } from '@mui/material';
+import { Grid2 } from '@mui/material';
 
 export interface PokestatsHomepageProps {
   pokemonTypes: NamedAPIResource[];
 }
 
 const PokestatsHomepage: NextPage<PokestatsHomepageProps> = props => (
-  <Grid item container>
+  <Grid2 container>
     <Head>
       <meta property="og:title" content={PokestatsPageTitle} />
       <meta
@@ -30,7 +30,7 @@ const PokestatsHomepage: NextPage<PokestatsHomepageProps> = props => (
       <Homepage {...props} />
     </LayoutV2>
     <Particles />
-  </Grid>
+  </Grid2>
 );
 
 export const getStaticProps: GetStaticProps = async () => {

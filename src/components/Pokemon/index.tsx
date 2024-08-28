@@ -77,7 +77,7 @@ const PokemonPage = ({
       </Stack>
       {/** EVOLUTION CHAIN */}
       <Stack alignItems="flex-start" justifyContent="flex-start">
-        <EvolutionChain item evolutionChain={evolutionData} pokemonSpecies={species} />
+        <EvolutionChain evolutionChain={evolutionData} pokemonSpecies={species} />
       </Stack>
       {/** MOVES */}
       <Stack alignItems="flex-start" justifyContent="flex-start">

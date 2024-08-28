@@ -6,9 +6,9 @@ import { NamedAPIResource } from 'pokenode-ts';
 // components
 import Loading from '@/components/Loading';
 import PokemonBox from '@/components/PokemonBox';
-import { Grid, GridProps } from '@mui/material';
+import { Grid2, Grid2Props } from '@mui/material';
 
-export interface InfiniteScrollProps extends GridProps {
+export interface InfiniteScrollProps extends Grid2Props {
   pokemonList: NamedAPIResource[];
   itemsPerPage?: number;
 }
@@ -90,10 +90,10 @@ const InfiniteScroll = ({
 
   return (
     <>
-      <Grid
-        flexDirection="row"
+      <Grid2
+        container
         alignItems="flex-start"
-        flexWrap="wrap"
+        wrap="wrap"
         justifyContent="center"
         gap="1.5em"
         {...rest}
@@ -105,7 +105,7 @@ const InfiniteScroll = ({
             pokemonId={getResourceId(url)}
           />
         ))}
-      </Grid>
+      </Grid2>
       {/* Render the Loading component only if there are more items to load */}
       {state.showList.length > 0 && state.showList.length < pokemonList.length && (
         <Loading flexheight="100px" $iconWidth="5%" flexpadding="1em 0" ref={nodeRef} />

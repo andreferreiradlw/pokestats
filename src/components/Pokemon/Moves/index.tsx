@@ -5,7 +5,7 @@ import { mapVersionToGroup, filterMoves, fadeInUpVariant } from '@/helpers';
 import { AnimatePresence, motion } from 'framer-motion';
 import Loading from '@/components/Loading';
 import MovesTable from '@/components/MovesTable';
-import { Grid, GridProps, Typography } from '@mui/material';
+import { Grid2, Grid2Props, Typography } from '@mui/material';
 import DropdownV2 from '@/components/DropdownV2';
 import GameGenSelect from '@/components/GameGenSelect';
 import { useMachines, usePokemonMoves } from '@/hooks';
@@ -17,7 +17,7 @@ const LearnMethodOptions = [
   { label: 'Tutor', value: 'tutor' },
 ];
 
-interface PokemonMovesProps extends GridProps {
+interface PokemonMovesProps extends Grid2Props {
   pokemon: Pokemon;
 }
 
@@ -43,14 +43,16 @@ const PokemonMoves = ({ pokemon, ...rest }: PokemonMovesProps): JSX.Element => {
   });
 
   return (
-    <Grid
+    <Grid2
       container
-      flexDirection="column"
+      direction="column"
       alignItems={{ xxs: 'center', lg: 'flex-start' }}
+      gap={4}
+      width="100%"
       {...rest}
     >
       <Typography variant="sectionTitle">Move Pool</Typography>
-      <Grid item gap={4}>
+      <Grid2 gap={4}>
         <DropdownV2
           label="Type"
           options={LearnMethodOptions}
@@ -58,7 +60,7 @@ const PokemonMoves = ({ pokemon, ...rest }: PokemonMovesProps): JSX.Element => {
           value={learnMethod}
         />
         <GameGenSelect />
-      </Grid>
+      </Grid2>
       {movesLoading || machinesLoading ? (
         <Loading flexheight="100%" $iconWidth={{ xxs: '20%', xs: '15%', md: '10%', lg: '5%' }} />
       ) : (
@@ -80,7 +82,7 @@ const PokemonMoves = ({ pokemon, ...rest }: PokemonMovesProps): JSX.Element => {
           )}
         </AnimatePresence>
       )}
-    </Grid>
+    </Grid2>
   );
 };
 

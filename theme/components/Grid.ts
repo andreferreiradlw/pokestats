@@ -1,18 +1,18 @@
 import { Theme, type Components } from '@mui/material';
 
 const Grid: {
-  MuiGrid: Components<Theme>['MuiGrid'];
+  MuiGrid2: Components<Theme>['MuiGrid2'];
 } = {
-  MuiGrid: {
+  MuiGrid2: {
     styleOverrides: {
       root: {
-        display: 'flex',
+        // display: 'flex',
       },
-      container: ({ theme }) => ({
-        gap: theme.spacing(4),
-        alignItems: 'flex-start',
-        justifyContent: 'flex-start',
-      }),
+      // container: ({ theme }) => ({
+      //   gap: theme.spacing(4),
+      //   alignItems: 'flex-start',
+      //   justifyContent: 'flex-start',
+      // }),
     },
   },
 };

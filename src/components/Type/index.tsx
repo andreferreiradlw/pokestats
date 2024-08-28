@@ -1,17 +1,16 @@
 // types
 import type { PokestatsTypePageProps } from '@/pages/type/[typeId]';
 // helpers
-import { findEnglishName, pageContainerVariant } from '@/helpers';
+import { findEnglishName } from '@/helpers';
 // components
-import { AnimatePresence } from 'framer-motion';
-import { MainContainer } from '@/components/Layout';
 import Box from '@/components/Box';
 import TypeInfo from './Info';
 import TypeRelations from './Relations';
 import TypeIcon from './TypeIcon';
 import Tabs from './Tabs';
 // styles
-import { PageHeading, Divider } from '@/components/BaseStyles';
+import { PageHeading } from '@/components/BaseStyles';
+import { Divider, Stack } from '@mui/material';
 
 export type TypePageProps = Omit<PokestatsTypePageProps, 'autocompleteList'>;
 
@@ -22,50 +21,31 @@ const TypePage = ({ typeData }: TypePageProps): JSX.Element => {
   const typeName = findEnglishName(names);
 
   return (
-    <AnimatePresence mode="wait">
-      <MainContainer
-        flexjustify="flex-start"
-        flexalign="flex-start"
-        $contained
-        $withGutter
-        initial="hidden"
-        animate="visible"
-        exit="fade"
-        variants={pageContainerVariant}
-        key={`type-${name}`}
-      >
-        <Box
-          flexdirection={{ xxs: 'column-reverse', lg: 'row' }}
-          flexalign="flex-start"
-          flexjustify="flex-start"
-          flexgap="2em"
+    <Stack divider={<Divider />} gap={4} py={2}>
+      <Stack flexDirection={{ xxs: 'column-reverse', lg: 'row' }} gap="2em">
+        <Stack
+          justifyContent={{ xxs: 'center', lg: 'flex-start' }}
+          alignItems={{ xxs: 'center', lg: 'flex-start' }}
+          gap="2em"
         >
+          <PageHeading>{typeName}</PageHeading>
           <Box
-            flexjustify={{ xxs: 'center', lg: 'flex-start' }}
-            flexalign={{ xxs: 'center', lg: 'flex-start' }}
+            flexdirection={{ xxs: 'column', md: 'row' }}
+            flexjustify={{ xxs: 'center', md: 'flex-start' }}
+            flexalign={{ xxs: 'center', md: 'flex-start' }}
+            screensizes={{ xxs: 12, lg: 8 }}
             flexgap="2em"
           >
-            <PageHeading>{typeName}</PageHeading>
-            <Box
-              flexdirection={{ xxs: 'column', md: 'row' }}
-              flexjustify={{ xxs: 'center', md: 'flex-start' }}
-              flexalign={{ xxs: 'center', md: 'flex-start' }}
-              screensizes={{ xxs: 12, lg: 8 }}
-              flexgap="2em"
-            >
-              <TypeInfo type={typeData} />
-              <TypeRelations relations={damage_relations} />
-            </Box>
+            <TypeInfo type={typeData} />
+            <TypeRelations relations={damage_relations} />
           </Box>
-          <TypeIcon screensizes={{ xxs: 12, lg: 4 }} typeName={name} otherNames={names} />
-        </Box>
-        <Divider />
-        <Box flexalign="flex-start" flexjustify="flex-start">
-          <Tabs typeData={typeData} typeName={typeName} screensizes={12} />
-        </Box>
-        <Divider />
-      </MainContainer>
-    </AnimatePresence>
+        </Stack>
+        <TypeIcon screensizes={{ xxs: 12, lg: 4 }} typeName={name} otherNames={names} />
+      </Stack>
+      <Stack>
+        <Tabs typeData={typeData} typeName={typeName} screensizes={12} />
+      </Stack>
+    </Stack>
   );
 };
 

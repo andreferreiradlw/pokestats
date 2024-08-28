@@ -1,8 +1,6 @@
 import styled, { css } from 'styled-components';
 // types
 import type { DropdownProps } from './index';
-// styles
-import { focusStyles } from '@/BaseStyles';
 // components
 import Box from '@/components/Box';
 // icons
@@ -47,8 +45,6 @@ const SelectButton = styled.button<{ $isOpen: Boolean }>`
     border: 2px solid ${theme.colors.secondary.main};
     color: ${theme.colors.primary.contrastText};
   `}
-
-  ${focusStyles}
 
   ${({ $isOpen }) => css`
     border-radius: ${$isOpen ? '5px 5px 0 0' : '5px'};

@@ -1,9 +1,7 @@
 import { useRouter } from 'next/router';
-// helpers
-import { fadeInUpVariant } from '@/helpers/animations';
 // styles
 import { Container, Title, Message, Image } from './StyledNotFound';
-import { Button } from '@/components/BaseStyles';
+import CustomButton from '@/components/CustomButton';
 // components
 import Link from 'next/link';
 import Particles from '@/components/Particles';
@@ -22,9 +20,7 @@ const NotFound = (): JSX.Element => {
         Check that you typed the URL correctly!
       </Message>
       <Link href="/" passHref>
-        <Button whileHover="hover" whileTap="tap" variants={fadeInUpVariant} key="404-notfound-btn">
-          Go back home
-        </Button>
+        <CustomButton key="404-notfound-btn">Go back home</CustomButton>
       </Link>
       <Particles />
     </Container>

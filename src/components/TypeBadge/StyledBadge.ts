@@ -4,16 +4,14 @@ import { motion } from 'framer-motion';
 import type { Type } from 'pokenode-ts';
 import type { TypeBadgeProps } from './index';
 // styles
-import { float as floatAnim, focusStyles } from '@/components/BaseStyles';
+import { float as floatAnim } from '@/components/BaseStyles';
 // components
 import Link from 'next/link';
 
 const isDarkBackground = (type: Type['name']): boolean =>
   !!type.match(/^(dark|dragon|fighting|ghost|poison|shadow|unknown)$/);
 
-const Anchor = styled(Link)`
-  ${focusStyles}
-`;
+const Anchor = styled(Link)``;
 
 const Badge = styled(motion.div)<TypeBadgeProps>`
   align-items: center;

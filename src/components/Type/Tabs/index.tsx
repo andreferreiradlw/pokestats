@@ -4,16 +4,17 @@ import styled from 'styled-components';
 import type { TypePageProps } from '../index';
 // helpers
 import { AnimatePresence } from 'framer-motion';
-import { hoverVariant, fadeInUpVariant, getResourceId } from '@/helpers';
+import { fadeInUpVariant, getResourceId } from '@/helpers';
+import { useTypeMoves } from '@/hooks/useTypeMoves';
 // styles
-import { Button, SectionTitle } from '@/components/BaseStyles';
+import { SectionTitle } from '@/components/BaseStyles';
 // components
 import Box, { BoxProps } from '@/components/Box';
 import BoxWrapper from '@/components/Box/StyledBox';
 import InfiniteScroll from '@/components/InfiniteScroll';
 import MovesTable from '@/components/MovesTable';
-import { useTypeMoves } from '@/hooks/useTypeMoves';
 import Loading from '@/components/Loading';
+import CustomButton from '@/components/CustomButton';
 
 const TabContainer = styled(BoxWrapper)`
   display: flex;
@@ -53,26 +54,12 @@ const TypeTabs = ({ typeData, typeName, ...rest }: TypeTabsProps) => {
   return (
     <Box flexalign={{ xxs: 'center', lg: 'flex-start' }} flexgap="1em" {...rest}>
       <Box flexdirection="row" flexjustify="space-evenly" flexwrap="wrap">
-        <Button
-          $active={currTab === 'pokemon'}
-          onClick={() => setCurrTab('pokemon')}
-          whileHover="hover"
-          whileTap="tap"
-          variants={hoverVariant}
-          key="type-pokemon-btn"
-        >
+        <CustomButton onClick={() => setCurrTab('pokemon')} key="type-pokemon-btn">
           Pokemon
-        </Button>
-        <Button
-          $active={currTab === 'moves'}
-          onClick={() => setCurrTab('moves')}
-          whileHover="hover"
-          whileTap="tap"
-          variants={hoverVariant}
-          key="type-moves-btn"
-        >
+        </CustomButton>
+        <CustomButton onClick={() => setCurrTab('moves')} key="type-moves-btn">
           Moves
-        </Button>
+        </CustomButton>
       </Box>
       <AnimatePresence mode="wait">
         {currTab === 'pokemon' && (

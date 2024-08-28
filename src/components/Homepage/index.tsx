@@ -17,7 +17,7 @@ import LoadingV2 from '../LoadingV2';
 // icons
 import Github from 'public/static/iconLibrary/github.svg';
 import { AnimatePresence } from 'framer-motion';
-import Button from '../Button';
+import CustomButton from '@/components/CustomButton';
 
 const Homepage = ({ pokemonTypes }: PokestatsHomepageProps): JSX.Element => {
   // hooks
@@ -53,7 +53,7 @@ const Homepage = ({ pokemonTypes }: PokestatsHomepageProps): JSX.Element => {
       <FirstSection>
         <Typography variant="mainHeading">PokeStats</Typography>
         <AutocompleteV2 />
-        <Button
+        <CustomButton
           onClick={async () => {
             plausible('Random Pokemon');
             await router.push(randomPokemonUrl);
@@ -63,7 +63,7 @@ const Homepage = ({ pokemonTypes }: PokestatsHomepageProps): JSX.Element => {
         >
           Random Pokemon
           <Pokeball />
-        </Button>
+        </CustomButton>
       </FirstSection>
       <SecondSection>
         <Container maxWidth="xl">

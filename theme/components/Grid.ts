@@ -6,7 +6,7 @@ const Grid: {
   MuiGrid2: {
     styleOverrides: {
       root: {
-        // display: 'flex',
+        display: 'flex',
       },
       // container: ({ theme }) => ({
       //   gap: theme.spacing(4),

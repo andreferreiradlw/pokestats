@@ -2,6 +2,8 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
+      "@/animations": ["src/animations"],
+      "@/animations/*": ["src/animations/*"],
       "@/BaseStyles": ["src/components/BaseStyles"],
       "@/BaseStyles/*": ["src/components/BaseStyles/*"],
       "@/components": ["src/components"],

@@ -1,22 +1,19 @@
-import { AppBar } from '@mui/material';
-import { styled, css } from '@mui/material/styles';
+import { AppBar, Container } from '@mui/material';
+import { styled } from '@mui/material/styles';
 import { motion } from 'framer-motion';
 
-const HeaderContainer = styled(AppBar)(
-  ({ theme }) => css`
-    margin-bottom: ${theme.spacing(4)};
-    padding-bottom: ${theme.spacing(2)};
-    padding-top: ${theme.spacing(2)};
-  `,
-);
+const HeaderContainer = styled(AppBar)(({ theme }) => ({
+  marginBottom: theme.spacing(4),
+  paddingBottom: theme.spacing(2),
+  paddingTop: theme.spacing(2),
+}));
 
-const ContentContainer = styled('div')(({ theme }) => ({
+const ContentContainer = styled(Container)(({ theme }) => ({
   display: 'flex',
   alignItems: 'center',
   flexDirection: 'column',
   justifyContent: 'space-between',
   margin: 'auto',
-  maxWidth: `${theme.breakpoints.values.xl}px`,
   width: '100%',
 
   [theme.breakpoints.up('md')]: {
@@ -25,19 +22,17 @@ const ContentContainer = styled('div')(({ theme }) => ({
   },
 }));
 
-const Logo = styled(motion.a)(
-  ({ theme }) => css`
-    ${{ ...theme.typography.mainHeading }}
+const Logo = styled(motion.a)(({ theme }) => ({
+  ...theme.typography.mainHeading,
 
-    &:hover {
-      cursor: pointer;
-    }
+  '&:hover': {
+    cursor: 'pointer',
+  },
 
-    ${theme.breakpoints.up('xxs')} {
-      font-size: 4.2em;
-      line-height: 1;
-    }
-  `,
-);
+  [theme.breakpoints.up('xxs')]: {
+    fontSize: '4.2em',
+    lineHeight: 1,
+  },
+}));
 
 export { HeaderContainer, ContentContainer, Logo };

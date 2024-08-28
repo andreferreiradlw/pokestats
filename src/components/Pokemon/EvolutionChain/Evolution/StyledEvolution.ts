@@ -1,4 +1,4 @@
-import { styled, css } from '@mui/material/styles';
+import { styled } from '@mui/material/styles';
 // components
 import { motion } from 'framer-motion';
 // svg
@@ -14,29 +14,25 @@ const EvolutionContainer = styled(motion.div)({
   justifyContent: 'space-between',
 });
 
-const EvoArrow = styled(Arrow)(
-  () => css`
-    flex-shrink: 0;
-    transform: rotateZ(90deg);
-    transition: transform 0.2s ease-in-out;
-    width: 35px;
-  `,
-);
+const EvoArrow = styled(Arrow)`
+  flex-shrink: 0;
+  transform: rotateZ(90deg);
+  transition: transform 0.2s ease-in-out;
+  width: 35px;
+`;
 
-const EvoDetailsContainer = styled(motion.div)(
-  () => css`
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1;
-    gap: 1em;
-    justify-content: space-between;
-    width: auto;
+const EvoDetailsContainer = styled(motion.div)`
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  gap: 1em;
+  justify-content: space-between;
+  width: auto;
 
-    &:hover ${EvoArrow} {
-      transform: translateY(0.75em) rotateZ(90deg);
-    }
-  `,
-);
+  &:hover ${EvoArrow} {
+    transform: translateY(0.75em) rotateZ(90deg);
+  }
+`;
 
 export { EvolutionContainer, EvoDetailsContainer, EvoArrow };

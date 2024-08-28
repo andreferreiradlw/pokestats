@@ -41,7 +41,6 @@ const EvolutionChain = ({
             <Evolution noArrow species={data.firstEvolution} style={{ width: 'auto' }} />
             {data.secondEvolution.length > 0 && (
               <Grid2
-                direction="row"
                 alignItems="stretch"
                 justifyContent="space-evenly"
                 gap="1em"
@@ -53,7 +52,7 @@ const EvolutionChain = ({
                 }}
               >
                 {data.secondEvolution.map(({ species, evolutionDetails, thirdEvolution }) => (
-                  <Grid2 key="second-evo-container" gap="1em" direction="column">
+                  <Grid2 key="second-evo-container" gap="1em" flexDirection="column">
                     <Evolution
                       species={species}
                       evolutionDetails={evolutionDetails}

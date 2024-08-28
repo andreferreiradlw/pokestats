@@ -14,7 +14,7 @@ export interface HeaderV2Props extends AppBarProps {
 
 const HeaderV2 = ({ showGenSelect, ...rest }: HeaderV2Props): JSX.Element => (
   <HeaderContainer position="static" elevation={2} {...rest}>
-    <ContentContainer>
+    <ContentContainer maxWidth="xl">
       <Stack width="auto" justifyContent="flex-start" alignItems="flex-start">
         <Link href="/" passHref legacyBehavior>
           <Logo whileHover="hover" whileTap="tap" variants={hoverVariant}>

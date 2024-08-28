@@ -6,7 +6,6 @@ import { tumble } from '@/components/BaseStyles';
 // components
 import { motion } from 'framer-motion';
 import Image from 'next/image';
-import Box from '@/components/Box/';
 // icons
 import EggIcon from 'public/static/iconLibrary/egg.svg';
 import Error404Icon from 'public/static/iconLibrary/404_error.svg';
@@ -23,10 +22,16 @@ const ImageElement = styled(Image)<{ pixelatedimg?: ImageNextProps['pixelatedimg
     `}
 `;
 
-const ImageContainer = styled(Box)<{
+const ImageContainer = styled(motion.div)<{
   width?: ImageNextProps['width'];
   height?: ImageNextProps['height'];
 }>`
+  align-items: center;
+  display: flex;
+  flex-basis: auto;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: center;
   position: relative;
 
   ${({ width }) =>

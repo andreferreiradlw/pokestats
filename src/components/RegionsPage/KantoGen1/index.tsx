@@ -312,7 +312,6 @@ const KantoGen1 = ({
                   <LocationTable location={currArea} screensizes={8} />
                 ) : (
                   <MapImage
-                    containerProps={{ screensizes: 6 }}
                     alt={`Map view of ${currArea.label}`}
                     src={`https://raw.githubusercontent.com/andreferreiradlw/pokestats_media/main/assets/regions/kanto/gen1/${currArea.key}.png`}
                   />

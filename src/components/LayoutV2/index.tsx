@@ -44,9 +44,7 @@ const LayoutV2 = ({ children, withHeader, showGenSelect, ...rest }: LayoutV2Prop
           key="layout-grid-container"
           {...rest}
         >
-          <Container maxWidth="xl" disableGutters>
-            {children}
-          </Container>
+          <Container maxWidth="xl">{children}</Container>
         </Stack>
         <Footer />
         {width > 768 && scrollPosition && (

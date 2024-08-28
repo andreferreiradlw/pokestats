@@ -1,7 +1,6 @@
 import { useState } from 'react';
 // types
 import type { ImageProps } from 'next/image';
-import type { BoxProps } from '../Box';
 // helpers
 import { placeholderVariant, fadeInUpVariant } from '@/helpers';
 // styles
@@ -15,12 +14,12 @@ import {
   ImageWrapper,
 } from './StyledImageNext';
 // components
-import { AnimatePresence } from 'framer-motion';
+import { AnimatePresence, HTMLMotionProps } from 'framer-motion';
 
 export interface ImageNextProps extends ImageProps {
   pixelatedimg?: boolean;
   placeholderwidth?: string;
-  containerProps?: BoxProps;
+  containerProps?: HTMLMotionProps<'div'>;
 }
 
 const ImageNext = ({

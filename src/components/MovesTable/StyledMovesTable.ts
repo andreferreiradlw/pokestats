@@ -1,81 +1,73 @@
-import { default as styledSC } from 'styled-components';
-// components
-import { styled, css } from '@mui/material/styles';
+import { styled } from '@mui/material/styles';
 import { motion } from 'framer-motion';
 
-const TableBody = styledSC.tbody``;
+// Use MUI's `styled` directly for all elements
+const TableBody = styled('tbody')``;
 
-const DataCell = styledSC.td``;
+const DataCell = styled('td')``;
 
-const NameTH = styledSC.th``;
+const NameTH = styled('th')``;
 
 const NameTD = styled(DataCell)`
   font-weight: 500;
   text-transform: capitalize;
 `;
 
-const TableRow = styled(motion.tr)(
-  ({ theme }) => css`
-    cursor: pointer;
+const TableRow = styled(motion.tr)(({ theme }) => ({
+  cursor: 'pointer',
 
-    &:hover {
-      background: ${theme.palette.primary.main};
-    }
-  `,
-);
+  '&:hover': {
+    background: theme.palette.primary.main,
+  },
+}));
 
-const TableContainer = styled(motion.div)(
-  ({ theme }) => css`
-    border-radius: 5px;
-    overflow: hidden;
-    width: 100%;
+const TableContainer = styled(motion.div)(({ theme }) => ({
+  borderRadius: '5px',
+  overflow: 'hidden',
+  width: '100%',
 
-    ${theme.breakpoints.up('lg')} {
-      overflow-x: hidden;
-    }
-  `,
-);
+  [theme.breakpoints.up('lg')]: {
+    overflowX: 'hidden',
+  },
+}));
 
-const MovesTableEl = styled('table')(
-  ({ theme }) => css`
-    border: 2px solid ${theme.palette.primary.main};
-    font-size: 0.7em;
-    line-height: 0.7em;
-    text-align: center;
-    width: 100%;
+const MovesTableEl = styled('table')(({ theme }) => ({
+  border: `2px solid ${theme.palette.primary.main}`,
+  fontSize: '0.7em',
+  lineHeight: '0.7em',
+  textAlign: 'center',
+  width: '100%',
 
-    & thead {
-      background: ${theme.palette.primary.main};
-    }
+  '& thead': {
+    background: theme.palette.primary.main,
+  },
 
-    & th,
-    & td {
-      height: 40px;
-      overflow: hidden;
-      padding: 0.5em;
-      text-align: center;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
+  '& th, & td': {
+    height: '40px',
+    overflow: 'hidden',
+    padding: '0.5em',
+    textAlign: 'center',
+    textOverflow: 'ellipsis',
+    whiteSpace: 'nowrap',
+  },
 
-    & ${NameTH}, & ${NameTD} {
-      width: 25%;
-    }
+  [`& ${NameTH}, & ${NameTD}`]: {
+    width: '25%',
+  },
 
-    & tr:not(:last-of-type) {
-      border-bottom: 2px solid ${theme.palette.primary.main};
-    }
+  '& tr:not(:last-of-type)': {
+    borderBottom: `2px solid ${theme.palette.primary.main}`,
+  },
 
-    ${theme.breakpoints.up('md')} {
-      font-size: 0.8em;
-      line-height: 0.8em;
-    }
+  [theme.breakpoints.up('md')]: {
+    fontSize: '0.8em',
+    lineHeight: '0.8em',
+  },
 
-    ${theme.breakpoints.up('lg')} {
-      font-size: 1em;
-      line-height: 1em;
-    }
-  `,
-);
+  [theme.breakpoints.up('lg')]: {
+    fontSize: '1em',
+    lineHeight: '1em',
+  },
+}));
 
 export { TableContainer, MovesTableEl, TableBody, NameTH, DataCell, NameTD, TableRow };

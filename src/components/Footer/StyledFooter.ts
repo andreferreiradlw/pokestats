@@ -1,57 +1,46 @@
-// styles
 import { riseUp } from '@/components/BaseStyles';
-// components
 import BoxWrapper from '../Box/StyledBox';
-// icons
 import Potion from 'public/static/iconLibrary/potion.svg';
 import { Container, Stack } from '@mui/material';
-import { styled, css } from '@mui/material/styles';
+import { styled } from '@mui/material/styles';
 
-const FooterContainer = styled('footer')(
-  ({ theme }) => css`
-    background: ${theme.palette.background.default};
-    font-weight: ${theme.typography.fontWeightMedium};
-    padding-bottom: ${theme.spacing(2)};
-    padding-top: ${theme.spacing(2)};
-    width: 100%;
-  `,
-);
+const FooterContainer = styled('footer')(({ theme }) => ({
+  background: theme.palette.background.default,
+  fontWeight: theme.typography.fontWeightMedium,
+  paddingBottom: theme.spacing(2),
+  paddingTop: theme.spacing(2),
+  width: '100%',
+}));
 
-const FooterContainerInner = styled(Container)(
-  ({ theme }) => css`
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-    gap: ${theme.spacing(2)};
-    justify-content: center;
-  `,
-);
+const FooterContainerInner = styled(Container)(({ theme }) => ({
+  alignItems: 'center',
+  display: 'flex',
+  flexDirection: 'column',
+  gap: theme.spacing(2),
+  justifyContent: 'center',
+}));
 
-const FooterContent = styled(Stack)(
-  ({ theme }) => css`
-    align-items: center;
-    flex-direction: column;
-    gap: ${theme.spacing(2)};
-    justify-content: center;
-    text-align: center;
-    width: 100%;
+const FooterContent = styled(Stack)(({ theme }) => ({
+  alignItems: 'center',
+  flexDirection: 'column',
+  gap: theme.spacing(2),
+  justifyContent: 'center',
+  textAlign: 'center',
+  width: '100%',
+  [theme.breakpoints.up('md')]: {
+    alignItems: 'flex-start',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    textAlign: 'left',
+  },
+}));
 
-    ${theme.breakpoints.up('md')} {
-      align-items: flex-start;
-      flex-direction: row;
-      justify-content: space-between;
-      text-align: left;
-    }
-  `,
-);
-
-const Anchor = styled(BoxWrapper)`
-  white-space: nowrap;
-
-  &:hover {
-    text-decoration: underline;
-  }
-`;
+const Anchor = styled(BoxWrapper)({
+  whiteSpace: 'nowrap',
+  '&:hover': {
+    textDecoration: 'underline',
+  },
+});
 
 const PokestatsIcon = styled(Potion)`
   height: auto;

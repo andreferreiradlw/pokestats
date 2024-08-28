@@ -3,14 +3,13 @@ import type { PokestatsTypePageProps } from '@/pages/type/[typeId]';
 // helpers
 import { findEnglishName } from '@/helpers';
 // components
-import Box from '@/components/Box';
 import TypeInfo from './Info';
 import TypeRelations from './Relations';
 import TypeIcon from './TypeIcon';
 import Tabs from './Tabs';
 // styles
 import { PageHeading } from '@/components/BaseStyles';
-import { Divider, Stack } from '@mui/material';
+import { Divider, Grid2, Stack } from '@mui/material';
 
 export type TypePageProps = Omit<PokestatsTypePageProps, 'autocompleteList'>;
 
@@ -22,29 +21,23 @@ const TypePage = ({ typeData }: TypePageProps): JSX.Element => {
 
   return (
     <Stack divider={<Divider />} gap={4} py={2}>
-      <Stack flexDirection={{ xxs: 'column-reverse', lg: 'row' }} gap="2em">
-        <Stack
-          justifyContent={{ xxs: 'center', lg: 'flex-start' }}
-          alignItems={{ xxs: 'center', lg: 'flex-start' }}
-          gap="2em"
-        >
+      <Grid2 container spacing={4} direction="column">
+        <Grid2>
           <PageHeading>{typeName}</PageHeading>
-          <Box
-            flexdirection={{ xxs: 'column', md: 'row' }}
-            flexjustify={{ xxs: 'center', md: 'flex-start' }}
-            flexalign={{ xxs: 'center', md: 'flex-start' }}
-            screensizes={{ xxs: 12, lg: 8 }}
-            flexgap="2em"
-          >
+        </Grid2>
+        <Grid2 container spacing={2} direction={{ xxs: 'column-reverse', lg: 'row' }} size={12}>
+          <Grid2 size={{ xxs: 12, lg: 3 }}>
             <TypeInfo type={typeData} />
+          </Grid2>
+          <Grid2 size={{ xxs: 12, lg: 6 }}>
             <TypeRelations relations={damage_relations} />
-          </Box>
-        </Stack>
-        <TypeIcon screensizes={{ xxs: 12, lg: 4 }} typeName={name} otherNames={names} />
-      </Stack>
-      <Stack>
-        <Tabs typeData={typeData} typeName={typeName} screensizes={12} />
-      </Stack>
+          </Grid2>
+          <Grid2 size={{ xxs: 12, lg: 3 }}>
+            <TypeIcon typeName={name} otherNames={names} />
+          </Grid2>
+        </Grid2>
+      </Grid2>
+      <Tabs typeData={typeData} typeName={typeName} screensizes={12} />
     </Stack>
   );
 };

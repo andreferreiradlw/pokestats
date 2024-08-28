@@ -4,11 +4,11 @@ import type { Type } from 'pokenode-ts';
 // helpers
 import { mapGeneration, removeDash } from '@/helpers';
 // components
-import Box, { BoxProps } from '@/components/Box';
+import { Stack, StackProps } from '@mui/material';
 // styles
 import { Table, UppercasedTd } from '@/BaseStyles';
 
-interface TypeInfoProps extends BoxProps {
+interface TypeInfoProps extends StackProps {
   type: Type;
 }
 
@@ -18,7 +18,7 @@ const TypeInfo = ({ type, ...rest }: TypeInfoProps): JSX.Element => {
   const generationName = useMemo(() => mapGeneration(generation.name), [generation.name]);
 
   return (
-    <Box {...rest}>
+    <Stack flexGrow={1} {...rest}>
       <Table>
         <tbody>
           <tr>
@@ -39,7 +39,7 @@ const TypeInfo = ({ type, ...rest }: TypeInfoProps): JSX.Element => {
           )}
         </tbody>
       </Table>
-    </Box>
+    </Stack>
   );
 };
 

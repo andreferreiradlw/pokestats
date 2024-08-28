@@ -2,12 +2,12 @@ import { useMemo } from 'react';
 // types
 import type { Name } from 'pokenode-ts';
 // components
-import Box, { BoxProps } from '@/components/Box';
+import { Stack, StackProps } from '@mui/material';
 import TypeBadge from '@/components/TypeBadge';
 // styles
 import { JpnName } from '@/components/BaseStyles';
 
-interface TypeIconProps extends BoxProps {
+interface TypeIconProps extends StackProps {
   typeName: string;
   otherNames: Name[];
 }
@@ -20,7 +20,14 @@ const TypeIcon = ({ typeName, otherNames, ...rest }: TypeIconProps): JSX.Element
   );
 
   return (
-    <Box $isRelative minheight={{ xxs: '250px', lg: '350px' }} {...rest}>
+    <Stack
+      position="relative"
+      minHeight={{ xxs: '250px', lg: '350px' }}
+      flexGrow={1}
+      justifyContent="center"
+      alignItems="center"
+      {...rest}
+    >
       <TypeBadge
         $typename={typeName}
         key={`type-icon-${typeName}`}
@@ -31,7 +38,7 @@ const TypeIcon = ({ typeName, otherNames, ...rest }: TypeIconProps): JSX.Element
         $iconHeight="150px"
       />
       {japanName && <JpnName>{`${japanName}タイプ`}</JpnName>}
-    </Box>
+    </Stack>
   );
 };
 

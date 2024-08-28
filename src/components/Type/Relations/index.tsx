@@ -4,7 +4,7 @@ import type { TypeRelations as PokeNodeTypeRelations } from 'pokenode-ts';
 // helpers
 import { removeUnderscore } from '@/helpers';
 // components
-import Box, { BoxProps } from '@/components/Box';
+import { Stack, StackProps } from '@mui/material';
 import TypeBadge from '@/components/TypeBadge';
 // styles
 import { Table, SectionTitle, TypesCell, UppercasedTd } from '@/components/BaseStyles';
@@ -21,12 +21,12 @@ const RelationTitle = styled(SectionTitle)`
   `}
 `;
 
-interface TypeRelationsProps extends BoxProps {
+interface TypeRelationsProps extends StackProps {
   relations: PokeNodeTypeRelations;
 }
 
 const TypeRelations = ({ relations, ...rest }: TypeRelationsProps): JSX.Element => (
-  <Box {...rest}>
+  <Stack flexGrow={1} {...rest}>
     <RelationTitle>Damage Relations</RelationTitle>
     <RelationsTable>
       <tbody>
@@ -48,7 +48,7 @@ const TypeRelations = ({ relations, ...rest }: TypeRelationsProps): JSX.Element 
         ))}
       </tbody>
     </RelationsTable>
-  </Box>
+  </Stack>
 );
 
 export default TypeRelations;

@@ -1,4 +1,4 @@
-import { useContext, useMemo, useState, useEffect } from 'react';
+import { useContext, useState, useEffect, useMemo } from 'react';
 // types
 import type { PokestatsPokemonPageProps } from '@/pages/pokemon/[pokemonId]';
 import type { Ability } from 'pokenode-ts';
@@ -29,10 +29,9 @@ const PokemonDetails = ({
   species,
   ...rest
 }: PokemonDetailsProps): JSX.Element => {
-  // game version
   const { gameVersion } = useContext(GameVersionContext);
-  // data
-  // @ts-expect-error: cries not correctly defined
+
+  // @ts-expect-error: cries is incorrectly defined in pokemon type
   const { types, abilities: pokemonAbilities, id, weight, height, cries } = pokemon;
   const {
     genera,
@@ -46,65 +45,51 @@ const PokemonDetails = ({
     names,
   } = species;
 
-  // load pokemon cry sound
-  const [latestAudio, setLatestAudio] = useState<HTMLAudioElement>();
-  const [legacyAudio, setLegacyAudio] = useState<HTMLAudioElement | null>();
+  const [audio, setAudio] = useState<{ latest: HTMLAudioElement; legacy: HTMLAudioElement | null }>(
+    {
+      latest: new Audio(),
+      legacy: null,
+    },
+  );
 
   useEffect(() => {
-    setLatestAudio(() => {
-      const tempAudio = new Audio(cries.latest);
-      tempAudio.volume = 0.5;
-      return tempAudio;
-    });
-    setLegacyAudio(() => {
-      const tempAudio = new Audio(cries.legacy);
-      tempAudio.volume = 0.5;
-      return tempAudio;
-    });
+    if (cries) {
+      setAudio({
+        latest: new Audio(cries.latest),
+        legacy: cries.legacy ? new Audio(cries.legacy) : null,
+      });
+    }
   }, [cries]);
 
-  const generationName = useMemo(() => mapGeneration(generation?.name), [generation]);
+  const generationName = useMemo(() => mapGeneration(generation?.name ?? ''), [generation]);
 
   const flavorText = useMemo(() => {
     // @ts-expect-error: valid text entries
-    const versionEntry = flavor_text_entries.filter(entry => entry.version.name === gameVersion);
-    // return formatted text
-    // page breaks are treated just like newlines
-    // soft hyphens followed by newlines vanish
-    // letter-hyphen-newline becomes letter-hyphen, to preserve real hyphenation
-    // any other newline becomes a space
-    return versionEntry.length
-      ? formatFlavorText(versionEntry[0].flavor_text)
+    const versionEntry = flavor_text_entries.find(entry => entry.version.name === gameVersion);
+    return versionEntry
+      ? formatFlavorText(versionEntry.flavor_text)
       : 'No description available for currently selected generation.';
   }, [gameVersion, flavor_text_entries]);
 
-  const pokemonWeight = useMemo(
-    () => `${weight / 10} kg (${Math.round(weight * 2.2046) / 10} lbs)`,
-    [weight],
-  );
+  const pokemonWeight = `${weight / 10} kg (${Math.round(weight * 2.2046) / 10} lbs)`;
 
   const pokemonHeight = useMemo(() => {
-    // calculate height in feet
     const heightInFeet = Math.round(height * 3.2808) / 10;
-    // split number
-    const numbers = heightInFeet.toString().split('.');
-    // return string
-    return `${height / 10} m (${numbers[0] || '0'}'${numbers[1] || '0'}")`;
+    const [feet, inches] = heightInFeet.toString().split('.');
+    return `${height / 10} m (${feet || '0'}'${inches || '0'}")`;
   }, [height]);
 
-  const renderAbilities = useMemo(
-    () =>
-      pokemonAbilities.map(({ ability, is_hidden }, i) => (
-        <Numbered key={ability.name}>
-          <Typography fontWeight="500" textTransform="capitalize">
-            {`${i + 1}. ${removeDash(ability.name)}`}
-            {is_hidden && ' (Hidden Ability)'}
-          </Typography>
-          <span>{abilities[i].effect_entries[0]?.short_effect}</span>
-        </Numbered>
-      )),
-    [pokemonAbilities, abilities],
-  );
+  const renderAbilities = pokemonAbilities.map(({ ability, is_hidden }, i) => (
+    <Numbered key={ability.name}>
+      <Typography fontWeight="500" textTransform="capitalize">
+        {`${i + 1}. ${removeDash(ability.name)}`}
+        {is_hidden && ' (Hidden Ability)'}
+      </Typography>
+      <span>
+        {abilities[i]?.effect_entries[0]?.short_effect || 'No effect description available.'}
+      </span>
+    </Numbered>
+  ));
 
   return (
     <Grid2
@@ -118,7 +103,7 @@ const PokemonDetails = ({
         flexDirection={{ xxs: 'column-reverse', lg: 'column' }}
         gap={{ xxs: '0.5em', lg: '0.3em' }}
       >
-        {!!types?.length && (
+        {types?.length > 0 && (
           <Stack flexDirection="row" flexWrap="wrap" width="auto" gap={2}>
             {types.map(({ type }) => (
               <TypeBadge $typename={type.name} key={`${type.name}-detail-${id}`} />
@@ -131,18 +116,18 @@ const PokemonDetails = ({
         <Chip
           label="Latest Cry"
           icon={<VolumeUpIcon />}
-          onClick={() => latestAudio?.play()}
+          onClick={() => audio.latest?.play()}
           component={motion.div}
           whileHover="hover"
           whileTap="tap"
           variants={hoverVariant}
         />
-        {legacyAudio && (
+        {audio.legacy && (
           <Chip
             label="Legacy Cry"
             variant="outlined"
             icon={<VolumeDownIcon />}
-            onClick={() => legacyAudio?.play()}
+            onClick={() => audio.legacy?.play()}
             component={motion.div}
             whileHover="hover"
             whileTap="tap"

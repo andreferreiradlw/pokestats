@@ -31,6 +31,7 @@ const PokemonDetails = ({
 }: PokemonDetailsProps): JSX.Element => {
   const { gameVersion } = useContext(GameVersionContext);
 
+  // @ts-expect-error: cries is missing in pokemon type
   const { types, abilities: pokemonAbilities, id, weight, height, cries } = pokemon;
   const {
     genera,
@@ -65,6 +66,7 @@ const PokemonDetails = ({
   const generationName = useMemo(() => mapGeneration(generation?.name ?? ''), [generation]);
 
   const flavorText = useMemo(() => {
+    // @ts-expect-error: valid text entries
     const versionEntry = flavor_text_entries.find(entry => entry.version.name === gameVersion);
     return versionEntry
       ? formatFlavorText(versionEntry.flavor_text)

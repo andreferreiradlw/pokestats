@@ -1,8 +1,11 @@
+// helpers
 import { riseUp } from '@/components/BaseStyles';
-import BoxWrapper from '../Box/StyledBox';
-import Potion from 'public/static/iconLibrary/potion.svg';
-import { Container, Stack } from '@mui/material';
 import { styled } from '@mui/material/styles';
+// components
+import { Container, Stack } from '@mui/material';
+import Link from 'next/link';
+// svg
+import Potion from 'public/static/iconLibrary/potion.svg';
 
 const FooterContainer = styled('footer')(({ theme }) => ({
   background: theme.palette.background.default,
@@ -27,6 +30,7 @@ const FooterContent = styled(Stack)(({ theme }) => ({
   justifyContent: 'center',
   textAlign: 'center',
   width: '100%',
+
   [theme.breakpoints.up('md')]: {
     alignItems: 'flex-start',
     flexDirection: 'row',
@@ -35,8 +39,9 @@ const FooterContent = styled(Stack)(({ theme }) => ({
   },
 }));
 
-const Anchor = styled(BoxWrapper)({
+const Anchor = styled(Link)({
   whiteSpace: 'nowrap',
+
   '&:hover': {
     textDecoration: 'underline',
   },

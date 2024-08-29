@@ -1,6 +1,6 @@
 // helpers
 import { usePlausible } from 'next-plausible';
-import { hoverVariant } from '@/helpers';
+import { hoverVariant } from '@/animations';
 // styles
 import {
   FooterContainer,
@@ -57,7 +57,6 @@ const Footer = (): JSX.Element => {
               key="pokeapi-anchor-footer"
             >
               <Anchor
-                as="a"
                 href="https://pokeapi.co/"
                 target="_blank"
                 rel="noopener"

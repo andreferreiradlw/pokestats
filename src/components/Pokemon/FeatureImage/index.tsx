@@ -1,6 +1,5 @@
 // types
 import type { Pokemon, PokemonSpecies } from 'pokenode-ts';
-import type { BoxProps } from '@/components/Box';
 import { useMemo } from 'react';
 // helpers
 import { scaleInVariant, prefixId } from '@/helpers';
@@ -9,8 +8,9 @@ import { JpnName } from '@/components/BaseStyles';
 import { ImageContainer } from './StyledFeatureImage';
 // components
 import ImageNext from '@/components/ImageNext';
+import { Grid2Props } from '@mui/material';
 
-interface FeaturedImageProps extends BoxProps {
+interface FeaturedImageProps extends Grid2Props {
   specieNames: PokemonSpecies['names'];
   pokemonId: Pokemon['id'];
 }

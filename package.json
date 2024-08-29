@@ -35,6 +35,7 @@
     "@emotion/cache": "^11.13.1",
     "@emotion/react": "^11.13.3",
     "@emotion/server": "^11.11.0",
+    "@mui/icons-material": "^6.0.1",
     "@mui/material": "^6.0.0",
     "@mui/material-nextjs": "^6.0.0",
     "@mui/styled-engine": "npm:@mui/styled-engine-sc@latest",

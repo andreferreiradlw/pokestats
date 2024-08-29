@@ -1,37 +1,36 @@
-import styled, { css } from 'styled-components';
+import { styled } from '@mui/material/styles';
 // components
-import Box from '@/components/Box';
+import { Grid2 } from '@mui/material';
 // styles
 import { float } from '@/components/BaseStyles';
 
-const ImageContainer = styled(Box)`
+const ImageContainer = styled(Grid2)`
   height: 100%;
   position: relative;
 
-  ${({ theme }) => css`
-    @media ${theme.device.lg} {
-      min-height: 500px;
-    }
-  `}
+  ${({ theme }) => theme.breakpoints.up('lg')} {
+    min-height: 500px;
+  }
 
   & img {
     margin: 1.5rem 0;
     max-width: 80%;
 
-    ${({ theme }) => css`
-      @media ${theme.device.xs} {
-        max-width: 65%;
-      }
-      @media ${theme.device.sm} {
-        max-width: 60%;
-      }
-      @media ${theme.device.md} {
-        max-width: 55%;
-      }
-      @media ${theme.device.lg} {
-        max-width: 69%;
-      }
-    `}
+    ${({ theme }) => theme.breakpoints.up('xs')} {
+      max-width: 65%;
+    }
+
+    ${({ theme }) => theme.breakpoints.up('sm')} {
+      max-width: 60%;
+    }
+
+    ${({ theme }) => theme.breakpoints.up('md')} {
+      max-width: 55%;
+    }
+
+    ${({ theme }) => theme.breakpoints.up('lg')} {
+      max-width: 60%;
+    }
 
     @media (prefers-reduced-motion: no-preference) {
       animation: ${float} infinite 3s ease-in-out;

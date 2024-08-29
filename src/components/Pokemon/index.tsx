@@ -12,7 +12,7 @@ import PokemonForms from './Forms';
 import Moves from './Moves';
 import Sprites from './Sprites';
 import Navigation from './Navigation';
-import { Divider, Stack } from '@mui/material';
+import { Divider, Grid2, Stack } from '@mui/material';
 
 const PokemonPage = ({
   allPokemon,
@@ -22,26 +22,26 @@ const PokemonPage = ({
   evolutionData,
 }: Omit<PokestatsPokemonPageProps, 'autocompleteList' | 'pokemonGen'>): JSX.Element => {
   // data
-  const { id, name, stats, types, sprites } = pokemon;
+  const { id, stats, types, sprites } = pokemon;
   const { names, varieties } = species;
 
   return (
     <Stack divider={<Divider />} gap={4} py={2}>
-      <Stack
+      <Grid2
+        container
         direction={{ xxs: 'column-reverse', lg: 'row' }}
         alignItems="center"
         justifyContent="flex-start"
-        gap="2em"
+        spacing={4}
       >
         <Details
-          screensizes={{ xxs: 12, lg: 5 }}
-          key={`pokemon-details-${name}`}
+          size={{ xxs: 12, lg: 5 }}
           pokemon={pokemon}
           abilities={abilities}
           species={species}
         />
-        <FeaturedImage screensizes={{ xxs: 12, lg: 7 }} specieNames={names} pokemonId={id} />
-      </Stack>
+        <FeaturedImage size={{ xxs: 12, lg: 7 }} specieNames={names} pokemonId={id} />
+      </Grid2>
       {/** BREEDING, TRAINING, MULTIPLIERS */}
       <Stack
         direction={{ xxs: 'column', md: 'row' }}

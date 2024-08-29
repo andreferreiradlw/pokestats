@@ -1,34 +1,23 @@
 import { useContext, useMemo, useState, useEffect } from 'react';
 // types
-import type { BoxProps } from '@/components/Box';
 import type { PokestatsPokemonPageProps } from '@/pages/pokemon/[pokemonId]';
 import type { Ability } from 'pokenode-ts';
 // helpers
 import { GameVersionContext } from '@/context';
-import { AnimatePresence } from 'framer-motion';
-import {
-  removeDash,
-  fadeInUpVariant,
-  mapGeneration,
-  formatFlavorText,
-  findEnglishName,
-} from '@/helpers';
+import { removeDash, mapGeneration, formatFlavorText, findEnglishName } from '@/helpers';
 // components
-import Box from '@/components/Box';
-import BoxWrapper from '@/components/Box/StyledBox';
 import TypeBadge from '@/components/TypeBadge';
+import { capitalize, Chip, Grid2, Grid2Props, Stack, Typography } from '@mui/material';
 // styles
-import { PageHeading, Table, Numbered, UppercasedTd } from '@/components/BaseStyles';
-import {
-  TypeContainer,
-  IconContainer,
-  CriesIcon,
-  AbilityName,
-  Genera,
-  Flavor,
-} from './StyledDetails';
+import { Table, Numbered } from '@/components/BaseStyles';
+import { Flavor } from './StyledDetails';
+import { motion } from 'framer-motion';
+import { hoverVariant } from '@/animations';
+// icons
+import VolumeUpIcon from '@mui/icons-material/VolumeUp';
+import VolumeDownIcon from '@mui/icons-material/VolumeDown';
 
-interface PokemonDetailsProps extends BoxProps {
+interface PokemonDetailsProps extends Grid2Props {
   pokemon: PokestatsPokemonPageProps['pokemon'];
   abilities: Ability[];
   species: PokestatsPokemonPageProps['species'];
@@ -43,7 +32,8 @@ const PokemonDetails = ({
   // game version
   const { gameVersion } = useContext(GameVersionContext);
   // data
-  const { types, abilities: pokemonAbilities, id, name, weight, height } = pokemon;
+  // @ts-expect-error: cries not correctly defined
+  const { types, abilities: pokemonAbilities, id, weight, height, cries } = pokemon;
   const {
     genera,
     flavor_text_entries,
@@ -55,20 +45,26 @@ const PokemonDetails = ({
     generation,
     names,
   } = species;
+
   // load pokemon cry sound
-  const [cry, setCry] = useState(null);
+  const [latestAudio, setLatestAudio] = useState<HTMLAudioElement>();
+  const [legacyAudio, setLegacyAudio] = useState<HTMLAudioElement | null>();
+
   useEffect(() => {
-    if (id <= 802) {
-      setCry(
-        new Audio(
-          `https://raw.githubusercontent.com/andreferreiradlw/pokestats_media/main/assets/cries/${id}.${
-            id >= 722 ? 'wav' : 'mp3'
-          }`,
-        ),
-      );
-    }
-  }, [id]);
+    setLatestAudio(() => {
+      const tempAudio = new Audio(cries.latest);
+      tempAudio.volume = 0.5;
+      return tempAudio;
+    });
+    setLegacyAudio(() => {
+      const tempAudio = new Audio(cries.legacy);
+      tempAudio.volume = 0.5;
+      return tempAudio;
+    });
+  }, [cries]);
+
   const generationName = useMemo(() => mapGeneration(generation?.name), [generation]);
+
   const flavorText = useMemo(() => {
     // @ts-expect-error: valid text entries
     const versionEntry = flavor_text_entries.filter(entry => entry.version.name === gameVersion);
@@ -100,10 +96,10 @@ const PokemonDetails = ({
     () =>
       pokemonAbilities.map(({ ability, is_hidden }, i) => (
         <Numbered key={ability.name}>
-          <AbilityName as="p">
+          <Typography fontWeight="500" textTransform="capitalize">
             {`${i + 1}. ${removeDash(ability.name)}`}
             {is_hidden && ' (Hidden Ability)'}
-          </AbilityName>
+          </Typography>
           <span>{abilities[i].effect_entries[0]?.short_effect}</span>
         </Numbered>
       )),
@@ -111,98 +107,95 @@ const PokemonDetails = ({
   );
 
   return (
-    <AnimatePresence mode="wait">
-      <BoxWrapper
-        flexdirection="column"
-        flexalign={{ xxs: 'center', lg: 'flex-start' }}
-        flexgap="1em"
-        width="100%"
-        initial="hidden"
-        animate="show"
-        variants={fadeInUpVariant}
-        key={`pokemon-details-${name}`}
-        {...rest}
+    <Grid2
+      flexDirection="column"
+      alignItems={{ xxs: 'center', lg: 'flex-start' }}
+      gap={2}
+      {...rest}
+    >
+      <Stack
+        alignItems={{ xxs: 'center', lg: 'flex-start' }}
+        flexDirection={{ xxs: 'column-reverse', lg: 'column' }}
+        gap={{ xxs: '0.5em', lg: '0.3em' }}
       >
-        <Box
-          flexalign={{ xxs: 'center', lg: 'flex-start' }}
-          flexdirection={{ xxs: 'column-reverse', lg: 'column' }}
-          flexgap={{ xxs: '0.5em', lg: '0.3em' }}
-        >
-          {!!types?.length && (
-            <TypeContainer flexdirection="row" flexwrap="wrap" width="auto">
-              {types.map(({ type }) => (
-                <TypeBadge $typename={type.name} key={`${type.name}-detail-${id}`} />
-              ))}
-            </TypeContainer>
-          )}
-          <Box
-            flexdirection="row"
-            flexjustify="flex-start"
-            flexalign="center"
-            flexgap="0.5em"
-            width="auto"
-          >
-            <PageHeading>{findEnglishName(names)}</PageHeading>
-            {id <= 802 && (
-              <IconContainer
-                whileHover="hover"
-                whileTap="tap"
-                variants={fadeInUpVariant}
-                key="cries-icon-container-pokemon"
-                onClick={() => cry?.play()}
-              >
-                <CriesIcon />
-              </IconContainer>
-            )}
-          </Box>
-        </Box>
-        {(is_baby || is_legendary || is_mythical) && (
-          <Genera>
-            {is_baby && 'Baby '}
-            {is_legendary && 'Legendary '}
-            {is_mythical && 'Mythical '}
-            Pokemon
-          </Genera>
+        {!!types?.length && (
+          <Stack flexDirection="row" flexWrap="wrap" width="auto" gap={2}>
+            {types.map(({ type }) => (
+              <TypeBadge $typename={type.name} key={`${type.name}-detail-${id}`} />
+            ))}
+          </Stack>
         )}
-        <Flavor>{flavorText}</Flavor>
-        <Table forwardedAs="table">
-          <tbody>
-            <tr>
-              <th>Pokédex №</th>
-              <td>{`#${id}`}</td>
-            </tr>
-            <tr>
-              <th>Introduced</th>
-              <td>{generationName}</td>
-            </tr>
-            <tr>
-              <th>Category</th>
-              <td>{genera[0].genus}</td>
-            </tr>
-            <tr>
-              <th>Weight</th>
-              <td>{pokemonWeight}</td>
-            </tr>
-            <tr>
-              <th>Height</th>
-              <td>{pokemonHeight}</td>
-            </tr>
-            <tr>
-              <th>Abilities</th>
-              <td>{renderAbilities}</td>
-            </tr>
-            <tr>
-              <th>Shape</th>
-              <UppercasedTd>{shape ? removeDash(shape.name) : 'No shape'}</UppercasedTd>
-            </tr>
-            <tr>
-              <th>Color</th>
-              <UppercasedTd>{color.name}</UppercasedTd>
-            </tr>
-          </tbody>
-        </Table>
-      </BoxWrapper>
-    </AnimatePresence>
+        <Typography variant="pageHeading">{findEnglishName(names)}</Typography>
+      </Stack>
+      <Stack direction="row" spacing={1}>
+        <Chip
+          label="Latest Cry"
+          icon={<VolumeUpIcon />}
+          onClick={() => latestAudio?.play()}
+          component={motion.div}
+          whileHover="hover"
+          whileTap="tap"
+          variants={hoverVariant}
+        />
+        {legacyAudio && (
+          <Chip
+            label="Legacy Cry"
+            variant="outlined"
+            icon={<VolumeDownIcon />}
+            onClick={() => legacyAudio?.play()}
+            component={motion.div}
+            whileHover="hover"
+            whileTap="tap"
+            variants={hoverVariant}
+          />
+        )}
+      </Stack>
+      {(is_baby || is_legendary || is_mythical) && (
+        <Typography fontWeight="700">
+          {is_baby && 'Baby '}
+          {is_legendary && 'Legendary '}
+          {is_mythical && 'Mythical '}
+          Pokemon
+        </Typography>
+      )}
+      <Flavor>{flavorText}</Flavor>
+      <Table forwardedAs="table">
+        <tbody>
+          <tr>
+            <th>Pokédex №</th>
+            <td>{`#${id}`}</td>
+          </tr>
+          <tr>
+            <th>Introduced</th>
+            <td>{generationName}</td>
+          </tr>
+          <tr>
+            <th>Category</th>
+            <td>{genera[0].genus}</td>
+          </tr>
+          <tr>
+            <th>Weight</th>
+            <td>{pokemonWeight}</td>
+          </tr>
+          <tr>
+            <th>Height</th>
+            <td>{pokemonHeight}</td>
+          </tr>
+          <tr>
+            <th>Abilities</th>
+            <td>{renderAbilities}</td>
+          </tr>
+          <tr>
+            <th>Shape</th>
+            <td>{shape ? capitalize(removeDash(shape.name)) : 'No shape'}</td>
+          </tr>
+          <tr>
+            <th>Color</th>
+            <td>{capitalize(color.name)}</td>
+          </tr>
+        </tbody>
+      </Table>
+    </Grid2>
   );
 };
 

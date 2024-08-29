@@ -232,7 +232,7 @@ const KantoGen1 = ({
               />
             </ImageContainer>
           </Box>
-          <Box screensizes={6} width="50%">
+          {/* <Box screensizes={6} width="50%">
             <NewMapper
               containerRef={mapRef}
               src="/static/regions/kantoGen1/kanto-map.png"
@@ -250,7 +250,7 @@ const KantoGen1 = ({
               onMouseEnter={(area: any) => setMapHover(area.title)}
               onMouseLeave={() => setMapHover(null)}
             />
-          </Box>
+          </Box> */}
           <Box
             flexdirection={{ xxs: 'column', lg: 'row' }}
             flexalign="flex-start"

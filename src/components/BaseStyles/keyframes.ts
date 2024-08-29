@@ -1,4 +1,4 @@
-import { keyframes } from 'styled-components';
+import { css, keyframes } from '@mui/material/styles';
 
 // Create the keyframes for floating img
 const float = keyframes`
@@ -147,8 +147,12 @@ const rotate = keyframes`
   to { transform: rotate(360deg); }
 `;
 
-const blink = (color: string, property = 'border-color') => keyframes`
-  50% { ${property}: ${color}; }
-`;
+const blink = (color: string, property = 'border-color') => {
+  return css`
+    ${keyframes`
+      50% { ${property}: ${color}; }
+    `}
+  `;
+};
 
 export { float, ellipsis, shake, riseUp, tumble, bounce, pokeballShake, rotate, blink };

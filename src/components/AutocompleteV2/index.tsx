@@ -108,14 +108,21 @@ const AutocompleteV2 = ({
             <TextField
               placeholder={placeholder || 'Search Pokestats'}
               autoComplete="off"
-              InputProps={{
-                ...InputProps,
-                endAdornment: (
-                  <>
-                    {isLoading && <LoadingV2 $iconWidth={5} py={0} />}
-                    {InputProps.endAdornment}
-                  </>
-                ),
+              slotProps={{
+                input: {
+                  ...InputProps,
+                  endAdornment: (
+                    <>
+                      {isLoading && (
+                        <LoadingV2
+                          $iconWidth={autocompleteOptions?.size === 'small' ? 3 : 5}
+                          py={0}
+                        />
+                      )}
+                      {InputProps.endAdornment}
+                    </>
+                  ),
+                },
               }}
               {...fieldProps}
             />

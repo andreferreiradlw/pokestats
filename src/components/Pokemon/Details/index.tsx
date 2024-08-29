@@ -31,7 +31,6 @@ const PokemonDetails = ({
 }: PokemonDetailsProps): JSX.Element => {
   const { gameVersion } = useContext(GameVersionContext);
 
-  // @ts-expect-error: cries is incorrectly defined in pokemon type
   const { types, abilities: pokemonAbilities, id, weight, height, cries } = pokemon;
   const {
     genera,
@@ -45,15 +44,17 @@ const PokemonDetails = ({
     names,
   } = species;
 
-  const [audio, setAudio] = useState<{ latest: HTMLAudioElement; legacy: HTMLAudioElement | null }>(
-    {
-      latest: new Audio(),
-      legacy: null,
-    },
-  );
+  const [audio, setAudio] = useState<{
+    latest: HTMLAudioElement | null;
+    legacy: HTMLAudioElement | null;
+  }>({
+    latest: null,
+    legacy: null,
+  });
 
   useEffect(() => {
-    if (cries) {
+    if (typeof window !== 'undefined' && cries) {
+      // Ensure this code runs only in the browser
       setAudio({
         latest: new Audio(cries.latest),
         legacy: cries.legacy ? new Audio(cries.legacy) : null,
@@ -64,7 +65,6 @@ const PokemonDetails = ({
   const generationName = useMemo(() => mapGeneration(generation?.name ?? ''), [generation]);
 
   const flavorText = useMemo(() => {
-    // @ts-expect-error: valid text entries
     const versionEntry = flavor_text_entries.find(entry => entry.version.name === gameVersion);
     return versionEntry
       ? formatFlavorText(versionEntry.flavor_text)

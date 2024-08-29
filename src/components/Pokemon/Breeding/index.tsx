@@ -1,18 +1,18 @@
 import { useMemo } from 'react';
-import styled from 'styled-components';
 // helpers
 import { removeDash } from '@/helpers';
+import { styled } from '@mui/material/styles';
 // types
 import type { PokemonSpecies, EvolutionChain } from 'pokenode-ts';
 // styles
-import { SectionTitle, Table, Numbered, UppercasedTd } from '@/components/BaseStyles';
+import { Table, Numbered } from '@/components/BaseStyles';
 // components
-import Box, { BoxProps } from '@/components/Box';
+import { capitalize, Grid2, Grid2Props, Typography } from '@mui/material';
 // icons
-import MaleIcon from 'public/static/iconLibrary/male.svg';
-import FemaleIcon from 'public/static/iconLibrary/female.svg';
+import MaleIcon from '@mui/icons-material/Male';
+import FemaleIcon from '@mui/icons-material/Female';
 
-const Ratio = styled.p`
+const Ratio = styled(Typography)`
   white-space: nowrap;
 
   svg {
@@ -21,7 +21,7 @@ const Ratio = styled.p`
   }
 `;
 
-interface BreedingProps extends BoxProps {
+interface BreedingProps extends Grid2Props {
   species: PokemonSpecies;
   babyTriggerItem: EvolutionChain['baby_trigger_item'];
 }
@@ -29,73 +29,77 @@ interface BreedingProps extends BoxProps {
 const Breeding = ({ species, babyTriggerItem, ...rest }: BreedingProps): JSX.Element => {
   // data
   const { gender_rate, egg_groups, hatch_counter, habitat, growth_rate } = species;
-  // memo
-  const genderRatio = useMemo(
-    () => (
+
+  // Gender ratio calculation
+  const genderRatio = useMemo(() => {
+    if (gender_rate === -1) return 'Genderless';
+    return (
       <Ratio>
-        {`${12.5 * (8 - gender_rate)}%`}
-        <MaleIcon />
-        {`, ${12.5 * gender_rate}%`}
-        <FemaleIcon />
+        {`${12.5 * (8 - gender_rate)}%`} <MaleIcon /> , {`${12.5 * gender_rate}%`} <FemaleIcon />
       </Ratio>
-    ),
-    [gender_rate],
-  );
-  const eggGroups = useMemo(
-    () =>
-      egg_groups?.map((group, i) => (
-        <Numbered key={`${group.name}-${i}`} style={{ paddingBottom: 0 }}>
-          <UppercasedTd as="p">{`${egg_groups.length > 1 ? `${i + 1}. ` : ``}${removeDash(
-            group.name,
-          )}`}</UppercasedTd>
-        </Numbered>
-      )),
-    [egg_groups],
-  );
-  const eggCycle = useMemo(
-    () => (
+    );
+  }, [gender_rate]);
+
+  // Egg groups list
+  const eggGroups = useMemo(() => {
+    if (!egg_groups || egg_groups.length === 0) return 'No Egg Groups';
+    return egg_groups.map((group, i) => (
+      <Numbered key={`${group.name}-${i}`}>
+        <Typography textTransform="capitalize">{`${egg_groups.length > 1 ? `${i + 1}. ` : ''}${removeDash(group.name)}`}</Typography>
+      </Numbered>
+    ));
+  }, [egg_groups]);
+
+  // Egg cycle calculation
+  const eggCycle = useMemo(() => {
+    if (!hatch_counter) return 'No Egg Cycles';
+    const steps = 255 * (hatch_counter + 1);
+    return (
       <>
         <p>{`${hatch_counter} cycles`}</p>
-        <span>{`(${255 * (hatch_counter + 1)} steps)`}</span>
+        <span>{`(${steps} steps)`}</span>
       </>
-    ),
-    [hatch_counter],
-  );
+    );
+  }, [hatch_counter]);
 
   return (
-    <Box flexalign="flex-start" flexjustify="flex-start" flexgap="1em" {...rest}>
-      <SectionTitle>Breeding</SectionTitle>
+    <Grid2
+      alignItems="flex-start"
+      justifyContent="flex-start"
+      gap={2}
+      flexDirection="column"
+      {...rest}
+    >
+      <Typography variant="sectionTitle">Breeding</Typography>
       <Table>
         <tbody>
           <tr>
             <th>Gender Distribution</th>
-            <td>{gender_rate === -1 ? 'Genderless' : genderRatio}</td>
+            <td>{genderRatio}</td>
           </tr>
           <tr>
             <th>Growth Rate</th>
-            <UppercasedTd>{removeDash(growth_rate.name)}</UppercasedTd>
+            <td>{capitalize(removeDash(growth_rate.name))}</td>
           </tr>
           <tr>
             <th>Egg Groups</th>
-            <UppercasedTd>{egg_groups?.length ? eggGroups : 'No Egg Groups'}</UppercasedTd>
+            <td>{eggGroups}</td>
           </tr>
           <tr>
             <th>Egg Cycles</th>
-            <UppercasedTd>{hatch_counter ? eggCycle : 'No Egg Cycles'}</UppercasedTd>
+            <td>{eggCycle}</td>
           </tr>
           <tr>
             <th>Baby Trigger Item</th>
-            <UppercasedTd>
-              {babyTriggerItem ? removeDash(babyTriggerItem.name) : 'None'}
-            </UppercasedTd>
+            <td>{babyTriggerItem ? capitalize(removeDash(babyTriggerItem.name)) : 'None'}</td>
           </tr>
           <tr>
             <th>Habitat</th>
-            <UppercasedTd>{habitat ? removeDash(habitat.name) : 'None'}</UppercasedTd>
+            <td>{habitat ? capitalize(removeDash(habitat.name)) : 'None'}</td>
           </tr>
         </tbody>
       </Table>
-    </Box>
+    </Grid2>
   );
 };
 

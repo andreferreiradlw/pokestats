@@ -8,7 +8,10 @@ const capitalise = (str: string): string => str.replace(/(^\w|\s\w)/g, m => m.to
 const removeUnderscore = (str: string): string => str.replace(/_/g, ' ');
 
 // remove dashes
-const removeDash = (str: string): string => str?.replace(/-/g, ' ');
+const removeDash = (str: string): string => {
+  if (!str.includes('-')) return str; // Early return if no dashes are found
+  return str.replace(/-/g, ' ');
+};
 
 // return text between parenthesis
 const betweentParenthesis = (str: string): string => {

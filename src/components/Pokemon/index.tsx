@@ -43,18 +43,18 @@ const PokemonPage = ({
         <FeaturedImage size={{ xxs: 12, lg: 7 }} specieNames={names} pokemonId={id} />
       </Grid2>
       {/** BREEDING, TRAINING, MULTIPLIERS */}
-      <Stack
+      <Grid2
+        container
         direction={{ xxs: 'column', md: 'row' }}
         alignItems="stretch"
         justifyContent="space-between"
-        gap="2em"
-        flexWrap="wrap"
+        spacing={4}
+        wrap="wrap"
       >
         <Breeding
           species={species}
           babyTriggerItem={evolutionData.baby_trigger_item}
-          screensizes={{ xxs: 12, md: 6, lg: 4 }}
-          $parentGap="2em"
+          size={{ xxs: 12, md: 6, lg: 4 }}
         />
         <Training
           pokemon={pokemon}
@@ -74,7 +74,7 @@ const PokemonPage = ({
           $parentGap="2em"
         />
         <BaseStats stats={stats} screensizes={{ xxs: 12, lg: 8 }} />
-      </Stack>
+      </Grid2>
       {/** EVOLUTION CHAIN */}
       <Stack alignItems="flex-start" justifyContent="flex-start">
         <EvolutionChain evolutionChain={evolutionData} pokemonSpecies={species} />

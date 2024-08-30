@@ -33,7 +33,6 @@ const TypeIcon = ({ typeName, otherNames, ...rest }: TypeIconProps): JSX.Element
         key={`type-icon-${typeName}`}
         $iconOnly
         $fill
-        $float
         $iconWidth="auto"
         $iconHeight="150px"
       />

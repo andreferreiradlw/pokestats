@@ -4,40 +4,49 @@ import type { PokemonSpecies } from 'pokenode-ts';
 // data
 import genderDescriptions from './genderDescriptions.json';
 // components
-import Box, { BoxProps } from '@/components/Box';
+import { Table, Numbered } from '@/components/BaseStyles';
+import { Grid2, Grid2Props, Typography } from '@mui/material';
 // helpers
 import { removeDash } from '@/helpers';
-// styles
-import { SectionTitle, Table, Numbered, UppercasedTd } from '@/components/BaseStyles';
 
-interface PokemonFormsProps extends BoxProps {
+interface PokemonFormsProps extends Grid2Props {
   pokemonId: number;
   species: PokemonSpecies;
 }
 
 const PokemonForms = ({ pokemonId, species, ...rest }: PokemonFormsProps): JSX.Element => {
-  // data
   const { forms_switchable, varieties, has_gender_differences } = species;
-  // memo
-  const currForms = useMemo(
-    () =>
-      varieties?.map((form, i) => {
-        const varietyName = removeDash(form.pokemon.name);
-        return (
-          <Numbered key={`${form.pokemon.name}-${i}`}>
-            {`${varieties.length > 1 ? `${i + 1}. ` : ``}${varietyName.substring(
-              varietyName.indexOf(' ') + 1,
-            )}`}
-            {form.is_default && <span>{` (Default)`}</span>}
-          </Numbered>
-        );
-      }),
-    [varieties],
-  );
+
+  // Memoize the gender description since it's static data.
+  const genderDescription = useMemo(() => genderDescriptions[pokemonId], [pokemonId]);
+
+  // Memoize the current forms
+  const currForms = useMemo(() => {
+    if (!varieties?.length) return 'None';
+
+    return varieties.map((form, i) => {
+      const varietyName = removeDash(form.pokemon.name);
+      const displayName = varietyName.substring(varietyName.indexOf(' ') + 1);
+
+      return (
+        <Numbered key={`${form.pokemon.name}-${i}`}>
+          {varieties.length > 1 ? `${i + 1}. ` : ''}
+          {displayName}
+          {form.is_default && <span> (Default)</span>}
+        </Numbered>
+      );
+    });
+  }, [varieties]);
 
   return (
-    <Box flexalign="flex-start" flexjustify="flex-start" flexgap="1em" {...rest}>
-      <SectionTitle>Forms</SectionTitle>
+    <Grid2
+      flexDirection="column"
+      alignItems="flex-start"
+      justifyContent="flex-start"
+      gap="1em"
+      {...rest}
+    >
+      <Typography variant="sectionTitle">Forms</Typography>
       <Table>
         <tbody>
           <tr>
@@ -46,15 +55,17 @@ const PokemonForms = ({ pokemonId, species, ...rest }: PokemonFormsProps): JSX.E
           </tr>
           <tr>
             <th>Varieties</th>
-            <UppercasedTd>{currForms}</UppercasedTd>
+            <Typography textTransform="capitalize" component="td">
+              {currForms}
+            </Typography>
           </tr>
           <tr>
             <th>Gender Differences</th>
-            <td>{has_gender_differences ? genderDescriptions[pokemonId] : 'None'}</td>
+            <td>{has_gender_differences ? genderDescription : 'None'}</td>
           </tr>
         </tbody>
       </Table>
-    </Box>
+    </Grid2>
   );
 };
 

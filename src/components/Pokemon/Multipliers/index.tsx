@@ -75,9 +75,9 @@ const Multipliers = ({ pokemonTypes, ...rest }: MultipliersProps): JSX.Element =
         flexWrap="wrap"
         gap={2}
       >
-        <Typography variant="h6">Relations</Typography>
+        <Typography variant="sectionTitle">Relations</Typography>
         <Stack flexDirection="row" alignItems="center" gap={1}>
-          <Tooltip title="Defending">
+          <Tooltip title="Defending" placement="top">
             <ShieldIcon color="secondary" />
           </Tooltip>
           <Switch
@@ -86,7 +86,7 @@ const Multipliers = ({ pokemonTypes, ...rest }: MultipliersProps): JSX.Element =
             onChange={handleSwitchChange}
             inputProps={{ 'aria-label': 'Toggle attack/defense mode' }}
           />
-          <Tooltip title="Attacking">
+          <Tooltip title="Attacking" placement="top">
             <ConnectWithoutContactIcon color="secondary" />
           </Tooltip>
         </Stack>

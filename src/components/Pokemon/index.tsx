@@ -70,7 +70,7 @@ const PokemonPage = ({
         <Moves pokemon={pokemon} />
       </Stack>
       {/** SPRITES & NAVIGATION */}
-      <Stack alignItems="flex-start" justifyContent="flex-start" gap={2}>
+      <Stack alignItems="flex-start" justifyContent="flex-start" gap={4}>
         <Sprites pokemonSprites={sprites} pokemonId={id} forms={varieties} />
         <Navigation allPokemon={allPokemon} pokemonId={id} />
       </Stack>

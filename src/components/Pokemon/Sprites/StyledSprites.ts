@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import { styled } from '@mui/material/styles';
 // components
 import ImageNext from '@/components/ImageNext';
 import { Stack } from '@mui/material';

@@ -39,7 +39,7 @@ const JpnName = styled(motion.span)(({ theme }) => ({
   fontWeight: 'bold',
   userSelect: 'none',
   width: '1em',
-  color: theme.palette.secondary.main,
+  color: theme.palette.text.primary,
 
   [theme.breakpoints.down('lg')]: {
     display: 'none',

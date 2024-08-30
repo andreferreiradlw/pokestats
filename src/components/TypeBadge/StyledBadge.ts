@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import { styled, alpha } from '@mui/material/styles';
 import { motion } from 'framer-motion';
 // types
 import type { Type } from 'pokenode-ts';
@@ -8,84 +8,71 @@ import { float as floatAnim } from '@/components/BaseStyles';
 // components
 import Link from 'next/link';
 
+// Helper to determine if the type has a dark background
 const isDarkBackground = (type: Type['name']): boolean =>
   !!type.match(/^(dark|dragon|fighting|ghost|poison|shadow|unknown)$/);
 
-const Anchor = styled(Link)``;
+// Styled components using MUI's styled utility
+const Anchor = styled(Link)({});
 
-const Badge = styled(motion.div)<TypeBadgeProps>`
-  align-items: center;
-  border-radius: 4px;
-  display: flex;
-  flex-direction: row;
-  font-family: 'Quicksand', sans-serif;
-  font-size: 1em;
-  font-weight: 600;
-  gap: 0.5em;
-  justify-content: center;
-  text-transform: capitalize;
-  transform: background 0.5 ease-in-out;
-  transition: box-shadow 0.05s ease-in-out;
-  width: auto;
+const Badge = styled(motion.div)<TypeBadgeProps>(
+  ({ theme, $typename, $fill, $iconOnly, $float, $iconWidth, $iconHeight, flexmargin }) => ({
+    alignItems: 'center',
+    borderRadius: 4,
+    display: 'flex',
+    flexDirection: 'row',
+    fontFamily: "'Quicksand', sans-serif",
+    fontSize: '1em',
+    fontWeight: 600,
+    gap: '0.5em',
+    justifyContent: 'center',
+    textTransform: 'capitalize',
+    transition: 'background 0.5s ease-in-out, box-shadow 0.05s ease-in-out',
+    width: 'auto',
 
-  ${({ theme, $typename, $fill }) => css`
-    ${!$fill && `background: ${theme.colors.typesHalf[$typename]};`};
-    border: 1px solid ${theme.colors.primary.main};
-    color: ${isDarkBackground($typename) ? theme.colors.lightText : theme.colors.darkText};
+    // Background and color styles
+    background: $fill
+      ? theme.palette.types[$typename]
+      : alpha(theme.palette.types[$typename], 0.75),
+    border: `1px solid ${theme.palette.primary.main}`,
+    color: isDarkBackground($typename)
+      ? theme.palette.getContrastText(theme.palette.types[$typename])
+      : theme.palette.text.primary,
 
-    &:hover {
-      ${!$fill && `background: ${theme.colors.types[$typename]};`}
-      box-shadow: ${theme.colors.defaultBoxShadow};
-    }
+    '&:hover': {
+      background: $fill ? theme.palette.types[$typename] : theme.palette.types[$typename],
+      boxShadow: theme.shadows[3], // Use theme shadow for hover
+    },
 
-    &:active {
-      box-shadow: ${theme.colors.defaultInsetBoxShadow};
-    }
-  `}
+    '&:active': {
+      boxShadow: theme.shadows[1], // Use theme shadow for active state
+    },
 
-  ${({ theme, $iconOnly, flexmargin }) =>
-    $iconOnly
-      ? css`
-          display: inline-flex;
-          ${flexmargin && `margin: ${flexmargin};`}
-          padding: 0.3em;
-        `
-      : css`
-          ${flexmargin && `margin: ${flexmargin};`}
-          padding: 0.25em;
+    // Icon Only and Margin Styles
+    ...(flexmargin && { margin: flexmargin }),
+    padding: $iconOnly ? '0.3em' : '0.25em',
 
-          @media ${theme.device.md} {
-            padding: 0.5em;
-          }
-        `}
+    [theme.breakpoints.up('md')]: {
+      padding: $iconOnly ? '0.3em' : '0.5em',
+    },
 
-  ${({ $float }) =>
-    $float &&
-    css`
-      @media (prefers-reduced-motion: no-preference) {
-        animation: ${floatAnim} infinite 3s ease-in-out;
-      }
-    `}
+    // Floating Animation
+    ...($float && {
+      '@media (prefers-reduced-motion: no-preference)': {
+        animation: `${floatAnim} infinite 3s ease-in-out`,
+      },
+    }),
 
-  & svg {
-    ${({ $iconOnly, $iconWidth, $iconHeight }) =>
-      !$iconOnly
-        ? css`
-            height: ${$iconHeight || '25px'};
-            width: ${$iconWidth || '25px'};
-          `
-        : css`
-            height: ${$iconHeight || '15px'};
-            width: ${$iconWidth || '15px'};
-          `}
-
-    path {
-      ${({ theme, $typename, $fill }) => css`
-        fill: ${$fill ? theme.colors.types[$typename] : theme.colors.primary.main};
-        stroke: ${theme.colors.primary.contrastText};
-      `};
-    }
-  }
-`;
+    // Icon Styles
+    '& svg': {
+      height: $iconOnly ? $iconHeight || '15px' : $iconHeight || '25px',
+      width: $iconOnly ? $iconWidth || '15px' : $iconWidth || '25px',
+      '& path': {
+        fill: $fill ? theme.palette.types[$typename] : theme.palette.common.white,
+        stroke: theme.palette.common.black,
+      },
+    },
+  }),
+);
 
 export { Anchor, Badge };

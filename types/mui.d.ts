@@ -19,13 +19,64 @@ declare module '@mui/material/styles' {
     sectionMessage: React.CSSProperties;
   }
 
-  // allow configuration using `createTheme`
   interface TypographyVariantsOptions {
     mainHeading?: React.CSSProperties;
     pageHeading?: React.CSSProperties;
     sectionTitle?: React.CSSProperties;
     sectionSubTitle?: React.CSSProperties;
     sectionMessage?: React.CSSProperties;
+  }
+
+  // Extend the MUI Palette interface to add custom `types` colors
+  interface Palette {
+    types: {
+      bug: string;
+      dark: string;
+      dragon: string;
+      electric: string;
+      fairy: string;
+      fighting: string;
+      fire: string;
+      flying: string;
+      ghost: string;
+      grass: string;
+      ground: string;
+      ice: string;
+      normal: string;
+      poison: string;
+      psychic: string;
+      rock: string;
+      shadow: string;
+      steel: string;
+      unknown: string;
+      water: string;
+    };
+  }
+
+  // Extend the MUI PaletteOptions interface to add custom `types` colors
+  interface PaletteOptions {
+    types?: {
+      bug?: string;
+      dark?: string;
+      dragon?: string;
+      electric?: string;
+      fairy?: string;
+      fighting?: string;
+      fire?: string;
+      flying?: string;
+      ghost?: string;
+      grass?: string;
+      ground?: string;
+      ice?: string;
+      normal?: string;
+      poison?: string;
+      psychic?: string;
+      rock?: string;
+      shadow?: string;
+      steel?: string;
+      unknown?: string;
+      water?: string;
+    };
   }
 }
 

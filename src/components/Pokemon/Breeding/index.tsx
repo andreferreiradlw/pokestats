@@ -56,8 +56,8 @@ const Breeding = ({ species, babyTriggerItem, ...rest }: BreedingProps): JSX.Ele
     const steps = 255 * (hatch_counter + 1);
     return (
       <>
-        <p>{`${hatch_counter} cycles`}</p>
-        <span>{`(${steps} steps)`}</span>
+        <Typography>{`${hatch_counter} cycles`}</Typography>
+        <Typography variant="body2" component="span">{`(${steps} steps)`}</Typography>
       </>
     );
   }, [hatch_counter]);

@@ -56,12 +56,7 @@ const PokemonPage = ({
           babyTriggerItem={evolutionData.baby_trigger_item}
           size={{ xxs: 12, md: 6, lg: 4 }}
         />
-        <Training
-          pokemon={pokemon}
-          species={species}
-          screensizes={{ xxs: 12, md: 6, lg: 4 }}
-          $parentGap="2em"
-        />
+        <Training pokemon={pokemon} species={species} size={{ xxs: 12, md: 6, lg: 4 }} />
         <Multipliers
           pokemonTypes={types}
           screensizes={{ xxs: 12, md: 6, lg: 4 }}

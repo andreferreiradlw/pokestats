@@ -87,9 +87,9 @@ const PokemonDetails = ({
         {`${i + 1}. ${removeDash(ability.name)}`}
         {is_hidden && ' (Hidden Ability)'}
       </Typography>
-      <span>
+      <Typography variant="body2" component="span">
         {abilities[i]?.effect_entries[0]?.short_effect || 'No effect description available.'}
-      </span>
+      </Typography>
     </Numbered>
   ));
 
@@ -145,7 +145,9 @@ const PokemonDetails = ({
           Pokemon
         </Typography>
       )}
-      <Flavor>{flavorText}</Flavor>
+      <Flavor variant="h5" component="h2">
+        {flavorText}
+      </Flavor>
       <Table forwardedAs="table">
         <tbody>
           <tr>

@@ -1,5 +1,5 @@
 import { Theme, type Components } from '@mui/material';
-import Chevron from 'public/static/iconLibrary/chevron.svg';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 const Select: {
   MuiSelect: Components<Theme>['MuiSelect'];
@@ -8,7 +8,7 @@ const Select: {
     defaultProps: {
       variant: 'outlined',
       size: 'small',
-      IconComponent: Chevron,
+      IconComponent: ExpandMoreIcon,
     },
     styleOverrides: {
       root: ({ theme }) => ({

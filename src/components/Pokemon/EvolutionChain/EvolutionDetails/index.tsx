@@ -13,6 +13,7 @@ import BedtimeIcon from '@mui/icons-material/Bedtime';
 import WbSunnyIcon from '@mui/icons-material/WbSunny';
 import WbTwilightIcon from '@mui/icons-material/WbTwilight';
 import LoopIcon from '@mui/icons-material/Loop';
+import SignpostIcon from '@mui/icons-material/Signpost';
 
 type TriggerNameProps = EvolutionTrigger['name'] | 'three-critical-hits';
 
@@ -114,6 +115,7 @@ const EvolutionDetailItem = React.memo(
             />
           )}
           {!!time_of_day && timeOfDayIcons[time_of_day]}
+          {location && <SignpostIcon fontSize="large" />}
         </Stack>
         <Details>
           {min_level ? `reach level ${min_level}` : triggerDisplay}

@@ -5,11 +5,11 @@ import { motion } from 'framer-motion';
 // helpers
 import { removeDash, mapGeneration, fadeInUpVariant, mapIdToGeneration } from '@/helpers';
 // styles
-import { PokeBox, NumberId, PokeName, PokeGen } from './StyledPokemonBox';
+import { PokeBox } from './StyledPokemonBox';
 // components
 import ImageNext from '@/components/ImageNext';
 import Link from 'next/link';
-import { CardProps } from '@mui/material';
+import { CardProps, Typography } from '@mui/material';
 
 export interface PokemonBoxProps extends CardProps {
   pokemonId: Pokemon['id'];
@@ -50,9 +50,11 @@ const PokemonBox = ({
             width="100"
             height="100"
           />
-          <NumberId>{`#${pokemonId}`}</NumberId>
-          <PokeName>{nameFormat ? removeDash(pokemonName) : pokemonName}</PokeName>
-          <PokeGen>{generationName || mapGeneration(mapIdToGeneration(pokemonId))}</PokeGen>
+          <Typography variant="h3" component="span">{`#${pokemonId}`}</Typography>
+          <Typography variant="h5" component="span">
+            {nameFormat ? removeDash(pokemonName) : pokemonName}
+          </Typography>
+          <Typography>{generationName || mapGeneration(mapIdToGeneration(pokemonId))}</Typography>
         </PokeBox>
       </motion.a>
     </Link>

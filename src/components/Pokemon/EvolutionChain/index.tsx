@@ -62,7 +62,7 @@ const EvolutionChain = ({
                       <Grid2 justifyContent="space-evenly" gap="1em">
                         {thirdEvolution.map(({ species, evolutionDetails }) => (
                           <Evolution
-                            key="third-evo"
+                            key={`third-evo-${species.id}`}
                             species={species}
                             evolutionDetails={evolutionDetails}
                           />

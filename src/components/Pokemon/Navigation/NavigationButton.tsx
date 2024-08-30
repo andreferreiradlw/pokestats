@@ -3,8 +3,9 @@ import { removeDash, prefixId } from '@/helpers';
 // animations
 import { hoverVariant } from '@/animations';
 // components
-import { BtnContainer, BtnAnchor, Title, Arrow, PokemonID, PokemonName } from './StyledNavigation';
+import { BtnContainer, BtnAnchor, Title, Arrow } from './StyledNavigation';
 import ImageNext from '@/components/ImageNext';
+import { Typography } from '@mui/material';
 
 export interface NavigationButtonProps {
   pokemonName: string;
@@ -37,8 +38,13 @@ const NavigationButton: React.FC<NavigationButtonProps> = ({
         />
       </Arrow>
       <Title>
-        <PokemonID>{`#${direction === 'left' ? pokemonId - 1 : pokemonId + 1}`}</PokemonID>
-        <PokemonName>{removeDash(pokemonName)}</PokemonName>
+        <Typography
+          variant="h4"
+          component="span"
+        >{`#${direction === 'left' ? pokemonId - 1 : pokemonId + 1}`}</Typography>
+        <Typography textTransform="capitalize" variant="subtitle2" component="span">
+          {removeDash(pokemonName)}
+        </Typography>
       </Title>
     </BtnAnchor>
   </BtnContainer>

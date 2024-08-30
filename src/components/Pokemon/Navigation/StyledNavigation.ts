@@ -23,7 +23,6 @@ const BtnSpan = styled('span')({
   justifyContent: 'center',
   height: '90px',
   padding: '0 0.5rem',
-  position: 'relative',
 });
 
 const Arrow = styled(BtnSpan, {
@@ -110,13 +109,4 @@ const BtnAnchor = styled(Link, {
   },
 }));
 
-const PokemonID = styled('p')({
-  fontSize: '2em',
-});
-
-const PokemonName = styled('p')({
-  fontSize: '1.1em',
-  textTransform: 'capitalize',
-});
-
-export { BtnContainer, BtnAnchor, Title, Arrow, PokemonID, PokemonName };
+export { BtnContainer, BtnAnchor, Title, Arrow };

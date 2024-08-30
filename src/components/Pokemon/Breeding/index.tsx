@@ -44,7 +44,7 @@ const Breeding = ({ species, babyTriggerItem, ...rest }: BreedingProps): JSX.Ele
   const eggGroups = useMemo(() => {
     if (!egg_groups || egg_groups.length === 0) return 'No Egg Groups';
     return egg_groups.map((group, i) => (
-      <Numbered key={`${group.name}-${i}`}>
+      <Numbered key={group.name}>
         <Typography textTransform="capitalize">{`${egg_groups.length > 1 ? `${i + 1}. ` : ''}${removeDash(group.name)}`}</Typography>
       </Numbered>
     ));

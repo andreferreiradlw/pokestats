@@ -24,12 +24,12 @@ const PokemonForms = ({ pokemonId, species, ...rest }: PokemonFormsProps): JSX.E
   const currForms = useMemo(() => {
     if (!varieties?.length) return 'None';
 
-    return varieties.map((form, i) => {
+    return varieties.map(form => {
       const varietyName = removeDash(form.pokemon.name);
       const displayName = varietyName.substring(varietyName.indexOf(' ') + 1);
 
       return (
-        <Numbered key={`${form.pokemon.name}-${i}`}>
+        <Numbered key={form.pokemon.name}>
           {varieties.length > 1 ? `${i + 1}. ` : ''}
           {displayName}
           {form.is_default && <span> (Default)</span>}

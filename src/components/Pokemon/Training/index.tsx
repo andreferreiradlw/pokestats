@@ -33,8 +33,8 @@ const Training = ({ pokemon, species, ...rest }: TrainingProps): JSX.Element => 
   const EVYield = useMemo(() => {
     return stats
       .filter(stat => stat.effort > 0)
-      .map((currStat, i) => (
-        <Typography textTransform="capitalize" key={`${currStat.stat.name}-${i}`}>
+      .map(currStat => (
+        <Typography textTransform="capitalize" key={currStat.stat.name}>
           {`${currStat.effort} ${removeDash(currStat.stat.name)}`}
         </Typography>
       ));
@@ -87,9 +87,9 @@ const Training = ({ pokemon, species, ...rest }: TrainingProps): JSX.Element => 
 
     if (!versionItems.length) return 'None';
 
-    return versionItems.map(({ item_details, version_details }, i) => (
+    return versionItems.map(({ item_details, version_details }) => (
       <Stack
-        key={`${item_details.name}-${i}`}
+        key={item_details.name}
         flexDirection="row"
         justifyContent={{ xxs: 'flex-start', md: 'space-between' }}
         gap="0.5em"

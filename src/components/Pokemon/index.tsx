@@ -59,7 +59,7 @@ const PokemonPage = ({
         <Training pokemon={pokemon} species={species} size={{ xxs: 12, md: 6, lg: 4 }} />
         <Multipliers pokemonTypes={types} size={{ xxs: 12, md: 6, lg: 4 }} />
         <PokemonForms pokemonId={id} species={species} size={{ xxs: 12, md: 6, lg: 4 }} />
-        <BaseStats stats={stats} screensizes={{ xxs: 12, lg: 8 }} />
+        <BaseStats stats={stats} size={{ xxs: 12, lg: 8 }} />
       </Grid2>
       {/** EVOLUTION CHAIN */}
       <Stack alignItems="flex-start" justifyContent="flex-start">

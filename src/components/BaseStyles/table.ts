@@ -15,7 +15,7 @@ const Table = styled(motion.table)(({ theme }) => ({
   },
 
   '& tr:not(:last-of-type)': {
-    borderBottom: `1px solid ${theme.palette.primary.light}`,
+    borderBottom: `1px solid ${theme.palette.secondary.light}`,
     width: '100%',
   },
 

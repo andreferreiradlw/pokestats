@@ -43,7 +43,7 @@ const PokemonForms = ({ pokemonId, species, ...rest }: PokemonFormsProps): JSX.E
       flexDirection="column"
       alignItems="flex-start"
       justifyContent="flex-start"
-      gap="1em"
+      gap={2}
       {...rest}
     >
       <Typography variant="sectionTitle">Forms</Typography>

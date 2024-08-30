@@ -9,14 +9,10 @@ const Badge = styled(motion.a)<TypeBadgeProps>(
     borderRadius: '4px',
     display: 'flex',
     flexDirection: 'row',
-    fontFamily: "'Quicksand', sans-serif",
-    fontSize: '1em',
-    fontWeight: 600,
     gap: '0.5em',
     justifyContent: 'center',
     textTransform: 'capitalize',
-    transition: 'background 0.5s ease-in-out, box-shadow 0.05s ease-in-out',
-    width: 'auto',
+    transition: 'background 0.25s ease-in-out, box-shadow 0.03s ease-in-out',
     padding: $iconOnly ? '0.3em' : '0.25em',
     background: $fill
       ? theme.palette.types[$typename]

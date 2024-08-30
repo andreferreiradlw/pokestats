@@ -7,6 +7,7 @@ import { Badge } from './StyledBadge';
 // components
 import TypeIcon from '@/components/TypeIcon';
 import Link from 'next/link';
+import { capitalize, Tooltip, Typography } from '@mui/material';
 
 export interface TypeBadgeProps {
   $iconOnly?: boolean;
@@ -23,18 +24,19 @@ const TypeBadge = ({ $typename, hideIcon, $iconOnly, ...rest }: TypeBadgeProps):
 
   return (
     <Link href={`/type/${$typename}`} prefetch={false} legacyBehavior passHref>
-      <Badge
-        $typename={$typename}
-        $iconOnly={$iconOnly}
-        whileHover="hover"
-        whileTap="tap"
-        variants={hoverVariant}
-        title={$iconOnly && $typename.toUpperCase()}
-        {...rest}
-      >
-        {!hideIcon && <TypeIcon type={$typename} />}
-        {!$iconOnly && <span>{$typename}</span>}
-      </Badge>
+      <Tooltip title={$iconOnly ? capitalize($typename) : ''} placement="right">
+        <Badge
+          $typename={$typename}
+          $iconOnly={$iconOnly}
+          whileHover="hover"
+          whileTap="tap"
+          variants={hoverVariant}
+          {...rest}
+        >
+          {!hideIcon && <TypeIcon type={$typename} />}
+          {!$iconOnly && <Typography fontWeight="500">{$typename}</Typography>}
+        </Badge>
+      </Tooltip>
     </Link>
   );
 };

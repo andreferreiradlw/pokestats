@@ -14,10 +14,10 @@ import TypeList from './TypeList';
 import AutocompleteV2 from '../AutocompleteV2';
 import { Container, Divider, Stack, Typography } from '@mui/material';
 import LoadingV2 from '../LoadingV2';
-// icons
-import Github from 'public/static/iconLibrary/github.svg';
 import { AnimatePresence } from 'framer-motion';
 import CustomButton from '@/components/CustomButton';
+// icons
+import Github from 'public/static/iconLibrary/github.svg';
 
 const Homepage = ({ pokemonTypes }: PokestatsHomepageProps): JSX.Element => {
   // hooks
@@ -61,7 +61,7 @@ const Homepage = ({ pokemonTypes }: PokestatsHomepageProps): JSX.Element => {
           variant="contained"
           color="secondary"
         >
-          Random Pokemon
+          Random Pokémon
           <Pokeball />
         </CustomButton>
       </FirstSection>

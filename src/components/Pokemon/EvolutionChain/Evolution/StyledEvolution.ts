@@ -2,7 +2,7 @@ import { styled } from '@mui/material/styles';
 // components
 import { motion } from 'framer-motion';
 // svg
-import Arrow from 'public/static/iconLibrary/arrow_right.svg';
+import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 
 const EvolutionContainer = styled(motion.div)({
   alignItems: 'center',
@@ -14,11 +14,10 @@ const EvolutionContainer = styled(motion.div)({
   justifyContent: 'space-between',
 });
 
-const EvoArrow = styled(Arrow)`
+const EvoArrow = styled(ArrowDownwardIcon)`
   flex-shrink: 0;
-  transform: rotateZ(90deg);
   transition: transform 0.2s ease-in-out;
-  width: 35px;
+  width: 50px;
 `;
 
 const EvoDetailsContainer = styled(motion.div)`
@@ -31,7 +30,7 @@ const EvoDetailsContainer = styled(motion.div)`
   width: auto;
 
   &:hover ${EvoArrow} {
-    transform: translateY(0.75em) rotateZ(90deg);
+    transform: translateY(0.25em);
   }
 `;
 

@@ -1,15 +1,18 @@
 import React, { useMemo, useCallback } from 'react';
+// types
 import type { EvolutionDetail, EvolutionTrigger } from 'pokenode-ts';
+// helpers
 import { removeDash, getResourceId } from '@/helpers';
+// components
 import { Anchor } from '@/BaseStyles';
+import Link from 'next/link';
 import { Container, Details, ItemImage } from './StyledEvolutionDetails';
 import { capitalize, Stack, StackProps } from '@mui/material';
 // svg icons
-import Moon from 'public/static/iconLibrary/moon.svg';
-import Sun from 'public/static/iconLibrary/sun.svg';
-import Sunset from 'public/static/iconLibrary/sunset.svg';
-import Swap from 'public/static/iconLibrary/swap.svg';
-import Link from 'next/link';
+import BedtimeIcon from '@mui/icons-material/Bedtime';
+import WbSunnyIcon from '@mui/icons-material/WbSunny';
+import WbTwilightIcon from '@mui/icons-material/WbTwilight';
+import LoopIcon from '@mui/icons-material/Loop';
 
 type TriggerNameProps = EvolutionTrigger['name'] | 'three-critical-hits';
 
@@ -18,9 +21,9 @@ interface EvolutionDetailsProps extends StackProps {
 }
 
 const timeOfDayIcons = {
-  day: <Sun width="35px" />,
-  night: <Moon width="30px" />,
-  dusk: <Sunset width="40px" />,
+  day: <WbSunnyIcon fontSize="large" />,
+  night: <BedtimeIcon fontSize="large" />,
+  dusk: <WbTwilightIcon fontSize="large" />,
 };
 
 const physicalStatsMap = {
@@ -80,14 +83,14 @@ const EvolutionDetailItem = React.memo(
 
     return (
       <Container gap="0.3em" alignItems="center">
-        <Stack flexDirection="row" gap="0.5em" width="auto">
+        <Stack flexDirection="row" alignItems="center" gap={1}>
           {min_level && (
             <ItemImage
               src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/rare-candy.png"
               alt="Rare Candy"
             />
           )}
-          {trigger?.name === 'trade' && <Swap width="35px" />}
+          {trigger?.name === 'trade' && <LoopIcon fontSize="large" />}
           {trade_species && (
             <img
               loading="lazy"

@@ -87,7 +87,7 @@ const Training = ({ pokemon, species, ...rest }: TrainingProps): JSX.Element => 
 
     if (!versionItems.length) return 'None';
 
-    return versionItems.map(({ item_details, version_details }) => (
+    return versionItems.map(({ item_details, version_details }, i) => (
       <Stack
         key={item_details.name}
         flexDirection="row"

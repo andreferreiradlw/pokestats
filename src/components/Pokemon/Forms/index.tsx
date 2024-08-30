@@ -24,7 +24,7 @@ const PokemonForms = ({ pokemonId, species, ...rest }: PokemonFormsProps): JSX.E
   const currForms = useMemo(() => {
     if (!varieties?.length) return 'None';
 
-    return varieties.map(form => {
+    return varieties.map((form, i) => {
       const varietyName = removeDash(form.pokemon.name);
       const displayName = varietyName.substring(varietyName.indexOf(' ') + 1);
 

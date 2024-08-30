@@ -6,14 +6,14 @@ interface ProgressBarProps {
 }
 
 const Bar = styled('div')<ProgressBarProps>(({ theme, color, progress }) => ({
-  borderBottom: `2px solid ${theme.palette.text.primary}`,
-  borderTop: `2px solid ${theme.palette.text.primary}`,
+  borderBottom: `2px solid ${theme.palette.secondary.main}`,
+  borderTop: `2px solid ${theme.palette.secondary.main}`,
   height: '12px',
   position: 'relative',
   width: '100%',
 
   '&::before, &::after': {
-    backgroundColor: theme.palette.text.primary,
+    backgroundColor: theme.palette.secondary.main,
     content: '""',
     height: '8px',
     position: 'absolute',

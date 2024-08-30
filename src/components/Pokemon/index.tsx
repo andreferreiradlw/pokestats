@@ -57,11 +57,7 @@ const PokemonPage = ({
           size={{ xxs: 12, md: 6, lg: 4 }}
         />
         <Training pokemon={pokemon} species={species} size={{ xxs: 12, md: 6, lg: 4 }} />
-        <Multipliers
-          pokemonTypes={types}
-          screensizes={{ xxs: 12, md: 6, lg: 4 }}
-          $parentGap="2em"
-        />
+        <Multipliers pokemonTypes={types} size={{ xxs: 12, md: 6, lg: 4 }} />
         <PokemonForms
           pokemonId={id}
           species={species}

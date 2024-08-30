@@ -145,7 +145,7 @@ const PokemonDetails = ({
           Pokemon
         </Typography>
       )}
-      <Flavor variant="h5" component="h2">
+      <Flavor variant="h5" component="h3">
         {flavorText}
       </Flavor>
       <Table forwardedAs="table">

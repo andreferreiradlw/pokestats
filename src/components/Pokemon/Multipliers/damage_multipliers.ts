@@ -18,107 +18,89 @@ export interface MultipliersRes {
   };
 }
 
-const getMultipliers = (types: Type['name'][]): MultipliersRes => {
-  let multipliers = {
-    defense: {},
-    attack: {},
+const damageCategories = {
+  no_damage: 0,
+  quarter_damage: 0.25,
+  half_damage: 0.5,
+  double_damage: 2,
+  quadruple_damage: 4,
+} as const;
+
+type DamageCategory = keyof typeof damageCategories;
+type MultiplierMap = Record<Type['name'], number>;
+
+const updateMultiplierMap = (
+  map: MultiplierMap,
+  types: Type['name'][],
+  multiplier: number,
+): void => {
+  types.forEach(type => {
+    map[type] = (map[type] || 1) * multiplier;
+  });
+};
+
+const categorizeMultipliers = (map: MultiplierMap): Record<DamageCategory, Type['name'][]> => {
+  const categorized: Record<DamageCategory, Type['name'][]> = {
+    no_damage: [],
+    quarter_damage: [],
+    half_damage: [],
+    double_damage: [],
+    quadruple_damage: [],
   };
 
-  types.forEach(type => {
-    const damage_relations = type_relations[type];
-    let no_damage_to = damage_relations.attack.zero as Type['name'][];
-    let no_damage_from = damage_relations.defense.zero as Type['name'][];
-    let half_damage_to = damage_relations.attack.half as Type['name'][];
-    let half_damage_from = damage_relations.defense.half as Type['name'][];
-    let double_damage_to = damage_relations.attack.double as Type['name'][];
-    let double_damage_from = damage_relations.defense.double as Type['name'][];
-
-    no_damage_to.forEach(type => {
-      if (Object.prototype.hasOwnProperty.call(multipliers.attack, type)) {
-        multipliers.attack[type] = multipliers.attack[type] * 0;
-      } else {
-        multipliers.attack[type] = 0;
+  Object.entries(map).forEach(([type, value]) => {
+    for (const [category, multiplier] of Object.entries(damageCategories)) {
+      if (value === multiplier) {
+        categorized[category as DamageCategory].push(type as Type['name']);
+        break;
       }
-    });
-
-    no_damage_from.forEach(type => {
-      if (Object.prototype.hasOwnProperty.call(multipliers.defense, type)) {
-        multipliers.defense[type] = multipliers.defense[type] * 0;
-      } else {
-        multipliers.defense[type] = 0;
-      }
-    });
-
-    half_damage_to.forEach(type => {
-      if (Object.prototype.hasOwnProperty.call(multipliers.attack, type)) {
-        multipliers.attack[type] = multipliers.attack[type] * 0.5;
-      } else {
-        multipliers.attack[type] = 0.5;
-      }
-    });
-
-    half_damage_from.forEach(type => {
-      if (Object.prototype.hasOwnProperty.call(multipliers.defense, type)) {
-        multipliers.defense[type] = multipliers.defense[type] * 0.5;
-      } else {
-        multipliers.defense[type] = 0.5;
-      }
-    });
-
-    double_damage_to.forEach(type => {
-      if (Object.prototype.hasOwnProperty.call(multipliers.attack, type)) {
-        multipliers.attack[type] = multipliers.attack[type] * 2;
-      } else {
-        multipliers.attack[type] = 2;
-      }
-    });
-
-    double_damage_from.forEach(type => {
-      if (Object.prototype.hasOwnProperty.call(multipliers.defense, type)) {
-        multipliers.defense[type] = multipliers.defense[type] * 2;
-      } else {
-        multipliers.defense[type] = 2;
-      }
-    });
+    }
   });
 
-  // remove x1.0 and sort multipliers by name
-  let multipliersObj = {
-    defense: {
-      no_damage: [],
-      quarter_damage: [],
-      half_damage: [],
-      double_damage: [],
-      quadruple_damage: [],
-    },
-    attack: {
-      no_damage: [],
-      quarter_damage: [],
-      half_damage: [],
-      double_damage: [],
-      quadruple_damage: [],
-    },
+  return categorized;
+};
+
+const getMultipliers = (types: Type['name'][]): MultipliersRes => {
+  const attackMultipliers: MultiplierMap = {};
+  const defenseMultipliers: MultiplierMap = {};
+
+  types.forEach(type => {
+    const damageRelations = type_relations[type];
+    if (!damageRelations) return;
+
+    updateMultiplierMap(attackMultipliers, damageRelations.attack.zero, damageCategories.no_damage);
+    updateMultiplierMap(
+      attackMultipliers,
+      damageRelations.attack.half,
+      damageCategories.half_damage,
+    );
+    updateMultiplierMap(
+      attackMultipliers,
+      damageRelations.attack.double,
+      damageCategories.double_damage,
+    );
+
+    updateMultiplierMap(
+      defenseMultipliers,
+      damageRelations.defense.zero,
+      damageCategories.no_damage,
+    );
+    updateMultiplierMap(
+      defenseMultipliers,
+      damageRelations.defense.half,
+      damageCategories.half_damage,
+    );
+    updateMultiplierMap(
+      defenseMultipliers,
+      damageRelations.defense.double,
+      damageCategories.double_damage,
+    );
+  });
+
+  return {
+    attack: categorizeMultipliers(attackMultipliers),
+    defense: categorizeMultipliers(defenseMultipliers),
   };
-
-  // attack
-  for (const [key, value] of Object.entries(multipliers.attack)) {
-    if (value === 0) multipliersObj.attack.no_damage.push(key);
-    if (value === 0.25) multipliersObj.attack.quarter_damage.push(key);
-    if (value === 0.5) multipliersObj.attack.half_damage.push(key);
-    if (value === 2) multipliersObj.attack.double_damage.push(key);
-    if (value === 4) multipliersObj.attack.quadruple_damage.push(key);
-  }
-
-  // defense
-  for (const [key, value] of Object.entries(multipliers.defense)) {
-    if (value === 0) multipliersObj.defense.no_damage.push(key);
-    if (value === 0.25) multipliersObj.defense.quarter_damage.push(key);
-    if (value === 0.5) multipliersObj.defense.half_damage.push(key);
-    if (value === 2) multipliersObj.defense.double_damage.push(key);
-    if (value === 4) multipliersObj.defense.quadruple_damage.push(key);
-  }
-
-  return multipliersObj;
 };
 
 export default getMultipliers;

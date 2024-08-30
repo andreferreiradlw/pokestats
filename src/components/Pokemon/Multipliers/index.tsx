@@ -1,17 +1,18 @@
-import { useState, useEffect } from 'react';
+import React, { useMemo, useState } from 'react';
 // types
 import type { PokemonType } from 'pokenode-ts';
 // helpers
 import getMultipliers, { MultipliersRes } from './damage_multipliers';
 import { removeUnderscore } from '@/helpers';
 // components
-import Box, { BoxProps } from '@/components/Box';
 import TypeBadge from '@/components/TypeBadge';
-import Dropdown from '@/components/Dropdown';
-// styles
-import { SectionTitle, Table, TypesCell, UppercasedTd } from '@/components/BaseStyles';
+import { Table } from '@/components/BaseStyles';
+import { Grid2, Grid2Props, Stack, Switch, Tooltip, Typography } from '@mui/material';
+// icons
+import ShieldIcon from '@mui/icons-material/Shield';
+import ConnectWithoutContactIcon from '@mui/icons-material/ConnectWithoutContact';
 
-interface MultipliersProps extends BoxProps {
+interface MultipliersProps extends Grid2Props {
   pokemonTypes: PokemonType[];
 }
 
@@ -20,76 +21,81 @@ interface TypesTableProps {
   multiplierType: 'attack' | 'defense';
 }
 
-const dropdownOptions = [
-  { label: 'Defense', value: 'defense' },
-  { label: 'Attack', value: 'attack' },
-];
-
-const TypesTable = ({ multipliers, multiplierType }: TypesTableProps): JSX.Element => (
-  <Table>
-    <tbody>
-      {Object.keys(multipliers).map((relation, i) => (
-        <tr key={`multiplier-${multiplierType}-${i}`}>
-          <UppercasedTd as="th">{removeUnderscore(relation)}</UppercasedTd>
-          <TypesCell>
-            {!multipliers[relation]?.length
-              ? 'None'
-              : multipliers[relation].map((type: string, i: number) => (
-                  <TypeBadge
-                    key={`${multiplierType}-${type}-${relation}-${i}`}
-                    $typename={type}
-                    $iconOnly
-                  />
-                ))}
-          </TypesCell>
-        </tr>
-      ))}
-    </tbody>
-  </Table>
+const TypesTable = React.memo(
+  ({ multipliers, multiplierType }: TypesTableProps): JSX.Element => (
+    <Table>
+      <tbody>
+        {Object.entries(multipliers).map(([relation, types]) => (
+          <tr key={`${multiplierType}-${relation}`}>
+            <th>
+              <Typography textTransform="capitalize">{removeUnderscore(relation)}</Typography>
+            </th>
+            <td>
+              <Stack direction="row" alignItems="center" gap={1} flexWrap="wrap">
+                {types.length === 0 ? (
+                  <Typography variant="body2">None</Typography>
+                ) : (
+                  types.map(type => (
+                    <TypeBadge
+                      key={`${multiplierType}-${relation}-${type}`}
+                      $typename={type}
+                      $iconOnly
+                    />
+                  ))
+                )}
+              </Stack>
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </Table>
+  ),
 );
 
 const Multipliers = ({ pokemonTypes, ...rest }: MultipliersProps): JSX.Element => {
-  // multipliers
-  const [attackMultipliers, setAttackMultipliers] = useState<MultipliersRes['attack']>();
-  const [defenseMultipliers, setDefenseMultipliers] = useState<MultipliersRes['defense']>();
-  // select
-  const [optionSelected, setOptionSelected] =
-    useState<TypesTableProps['multiplierType']>('defense');
+  const [isAttackMode, setIsAttackMode] = useState(true);
 
-  useEffect(() => {
-    const currTypes = pokemonTypes.map(currType => {
-      return currType.type.name;
-    });
-    const currMultipliers = getMultipliers(currTypes);
-    // updates states
-    setAttackMultipliers(currMultipliers.attack);
-    setDefenseMultipliers(currMultipliers.defense);
-  }, []);
+  const currTypes = useMemo(() => pokemonTypes.map(currType => currType.type.name), [pokemonTypes]);
+
+  const { attack: attackMultipliers, defense: defenseMultipliers } = useMemo(
+    () => getMultipliers(currTypes),
+    [currTypes],
+  );
+
+  const handleSwitchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setIsAttackMode(event.target.checked);
+  };
 
   return (
-    <Box flexalign="flex-start" flexjustify="flex-start" flexgap="1em" {...rest}>
-      <Box
-        flexdirection="row"
-        flexjustify={{ xxs: 'center', md: 'space-between' }}
-        flexwrap="wrap"
-        flexgap="0.5em"
-        width={{ xxs: 'auto', md: '100%' }}
+    <Grid2 flexDirection="column" gap={2} {...rest}>
+      <Stack
+        flexDirection="row"
+        justifyContent="space-between"
+        alignItems="center"
+        flexWrap="wrap"
+        gap={2}
       >
-        <SectionTitle>Relations</SectionTitle>
-        <Dropdown
-          options={dropdownOptions}
-          onChange={e => setOptionSelected(e.target.value as TypesTableProps['multiplierType'])}
-          value={optionSelected}
-          minWidth="125px"
-        />
-      </Box>
-      {defenseMultipliers && attackMultipliers && (
-        <TypesTable
-          multipliers={optionSelected === 'defense' ? defenseMultipliers : attackMultipliers}
-          multiplierType={optionSelected}
-        />
-      )}
-    </Box>
+        <Typography variant="h6">Relations</Typography>
+        <Stack flexDirection="row" alignItems="center" gap={1}>
+          <Tooltip title="Defending">
+            <ShieldIcon color="secondary" />
+          </Tooltip>
+          <Switch
+            color="secondary"
+            checked={isAttackMode}
+            onChange={handleSwitchChange}
+            inputProps={{ 'aria-label': 'Toggle attack/defense mode' }}
+          />
+          <Tooltip title="Attacking">
+            <ConnectWithoutContactIcon color="secondary" />
+          </Tooltip>
+        </Stack>
+      </Stack>
+      <TypesTable
+        multipliers={isAttackMode ? attackMultipliers : defenseMultipliers}
+        multiplierType={isAttackMode ? 'attack' : 'defense'}
+      />
+    </Grid2>
   );
 };
 

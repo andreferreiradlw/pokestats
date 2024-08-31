@@ -1,54 +1,48 @@
-import styled, { css } from 'styled-components';
-// components
-import Box from '@/components/Box';
-// styles
-import { MainHeading, SectionMessage } from '@/components/BaseStyles';
+import { styled, alpha } from '@mui/material/styles';
+import { Stack, Typography } from '@mui/material';
 
-const Container = styled(Box)`
-  background-color: rgba(0, 0, 0, 0.7);
-  color: white;
-  height: 100vh;
-  margin: auto;
-  min-height: 100vh;
-  z-index: 1;
-`;
+const Container = styled(Stack)(({ theme }) => ({
+  backgroundColor: alpha(theme.palette.common.black, 0.7),
+  color: theme.palette.common.white,
+  height: '100vh',
+  margin: 'auto',
+  minHeight: '100vh',
+  width: '100%',
+  zIndex: 1,
+}));
 
-const Title = styled(MainHeading)`
-  font-style: italic;
-  margin-bottom: 0;
-`;
+const Title = styled(Typography)({
+  fontStyle: 'italic',
+  marginBottom: 0,
+});
 
-const Message = styled(SectionMessage)`
-  font-weight: 500;
-  margin: 0 auto 1.5rem;
-  max-width: 90%;
-  word-break: break-word;
+const Message = styled(Typography)(({ theme }) => ({
+  fontWeight: 500,
+  margin: '0 auto 1.5rem',
+  maxWidth: '90%',
+  wordBreak: 'break-word',
 
-  span {
-    background-color: black;
-    border-radius: 4px;
-    font-weight: 700;
-    padding: 3px 5px;
-  }
+  '& span': {
+    backgroundColor: theme.palette.common.black,
+    borderRadius: '4px',
+    fontWeight: 700,
+    padding: '3px 5px',
+  },
 
-  ${({ theme }) => css`
-    @media ${theme.device.md} {
-      max-width: 75%;
-      margin: 0 auto 2rem;
-    }
-  `}
-`;
+  [theme.breakpoints.up('md')]: {
+    maxWidth: '75%',
+    margin: '0 auto 2rem',
+  },
+}));
 
-const Image = styled.img`
-  image-rendering: pixelated;
-  margin-bottom: 2rem;
-  width: 150px;
+const Image = styled('img')(({ theme }) => ({
+  imageRendering: 'pixelated',
+  marginBottom: '2rem',
+  width: '150px',
 
-  ${({ theme }) => css`
-    @media ${theme.device.md} {
-      width: 200px;
-    }
-  `}
-`;
+  [theme.breakpoints.up('md')]: {
+    width: '200px',
+  },
+}));
 
 export { Container, Title, Message, Image };

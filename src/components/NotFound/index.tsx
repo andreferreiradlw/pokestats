@@ -11,10 +11,10 @@ const NotFound = (): JSX.Element => {
   const router = useRouter();
 
   return (
-    <Container flexjustify="center" flexalign="center">
+    <Container justifyContent="center" alignItems="center">
       <Image src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/shiny/250.gif" />
-      <Title>HO-OH!</Title>
-      <Message>
+      <Title variant="mainHeading">HO-OH!</Title>
+      <Message variant="sectionMessage">
         The requested page {router.asPath && <span>{router.asPath}</span>} could not be found.
         <br />
         Check that you typed the URL correctly!

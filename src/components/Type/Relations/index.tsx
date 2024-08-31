@@ -1,54 +1,51 @@
-import styled, { css } from 'styled-components';
 // types
 import type { TypeRelations as PokeNodeTypeRelations } from 'pokenode-ts';
 // helpers
 import { removeUnderscore } from '@/helpers';
 // components
-import { Stack, StackProps } from '@mui/material';
 import TypeBadge from '@/components/TypeBadge';
-// styles
-import { Table, SectionTitle, TypesCell, UppercasedTd } from '@/components/BaseStyles';
-
-const RelationsTable = styled(Table)`
-  width: 100%;
-`;
-
-const RelationTitle = styled(SectionTitle)`
-  ${({ theme }) => css`
-    @media ${theme.device.md} {
-      display: none;
-    }
-  `}
-`;
+import { Table, TypesCell } from '@/components/BaseStyles';
+import { Stack, StackProps, Typography, Box, useTheme, useMediaQuery } from '@mui/material';
 
 interface TypeRelationsProps extends StackProps {
   relations: PokeNodeTypeRelations;
 }
 
-const TypeRelations = ({ relations, ...rest }: TypeRelationsProps): JSX.Element => (
-  <Stack flexGrow={1} {...rest}>
-    <RelationTitle>Damage Relations</RelationTitle>
-    <RelationsTable>
-      <tbody>
-        {Object.keys(relations).map((relation, i) => (
-          <tr key={`type-relation-${i}`}>
-            <UppercasedTd as="th">{removeUnderscore(relation)}</UppercasedTd>
-            <TypesCell>
-              {!relations[relation].length
-                ? 'None'
-                : relations[relation].map((type, i) => (
-                    <TypeBadge
-                      key={`${type.name}-${relation}-${i}`}
-                      $typename={type.name}
-                      $iconOnly
-                    />
-                  ))}
-            </TypesCell>
-          </tr>
-        ))}
-      </tbody>
-    </RelationsTable>
-  </Stack>
-);
+const TypeRelations = ({ relations, ...rest }: TypeRelationsProps): JSX.Element => {
+  const theme = useTheme();
+  const isMediumUp = useMediaQuery(theme.breakpoints.up('md'));
+
+  return (
+    <Stack flexGrow={1} {...rest}>
+      {!isMediumUp && (
+        <Typography variant="sectionTitle" gutterBottom>
+          Damage Relations
+        </Typography>
+      )}
+      <Box component={Table} width="100%">
+        <tbody>
+          {Object.keys(relations).map(relation => (
+            <tr key={`type-relation-${relation}`}>
+              <Typography textTransform="capitalize" component="th">
+                {removeUnderscore(relation)}
+              </Typography>
+              <TypesCell>
+                {!relations[relation].length
+                  ? 'None'
+                  : relations[relation].map(type => (
+                      <TypeBadge
+                        key={`${type.name}-${relation}}`}
+                        $typename={type.name}
+                        $iconOnly
+                      />
+                    ))}
+              </TypesCell>
+            </tr>
+          ))}
+        </tbody>
+      </Box>
+    </Stack>
+  );
+};
 
 export default TypeRelations;

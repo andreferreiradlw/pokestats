@@ -4,9 +4,9 @@ import type { Type } from 'pokenode-ts';
 // helpers
 import { mapGeneration, removeDash } from '@/helpers';
 // components
-import { Stack, StackProps } from '@mui/material';
+import { Stack, StackProps, Typography } from '@mui/material';
 // styles
-import { Table, UppercasedTd } from '@/BaseStyles';
+import { Table } from '@/BaseStyles';
 
 interface TypeInfoProps extends StackProps {
   type: Type;
@@ -34,7 +34,9 @@ const TypeInfo = ({ type, ...rest }: TypeInfoProps): JSX.Element => {
           {move_damage_class && (
             <tr>
               <th>Move Damage Class</th>
-              <UppercasedTd>{removeDash(move_damage_class.name)}</UppercasedTd>
+              <Typography textTransform="capitalize" component="td">
+                {removeDash(move_damage_class.name)}
+              </Typography>
             </tr>
           )}
         </tbody>

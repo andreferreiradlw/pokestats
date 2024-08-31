@@ -1,5 +1,5 @@
 import { styled } from '@mui/material/styles';
-import { float } from '@/components/BaseStyles';
+import { float } from '@/animations';
 import { Paper } from '@mui/material';
 
 const PokeBox = styled(Paper)`

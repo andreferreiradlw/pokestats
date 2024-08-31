@@ -51,7 +51,7 @@ const PokemonBox = ({
             height="100"
           />
           <Typography variant="h3" component="span">{`#${pokemonId}`}</Typography>
-          <Typography variant="h5" component="span">
+          <Typography variant="h5" component="span" textTransform="capitalize">
             {nameFormat ? removeDash(pokemonName) : pokemonName}
           </Typography>
           <Typography>{generationName || mapGeneration(mapIdToGeneration(pokemonId))}</Typography>

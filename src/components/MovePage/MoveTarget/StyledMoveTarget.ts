@@ -1,115 +1,96 @@
-import styled, { css } from 'styled-components';
-// styles
-import { blink } from '@/animations';
+import { styled } from '@mui/material/styles';
+// animations
+// import { blink } from '@/animations';
 // components
-import Box from '@/components/Box';
+import { Stack } from '@mui/material';
 
-const BattleContainer = styled(Box)`
-  position: relative;
-`;
+// Define types for the Badge component props
+interface BadgeProps {
+  $isAffected?: boolean;
+  $isSelected?: boolean;
+}
 
-const PokemonContainer = styled.div`
-  align-items: center;
-  display: flex;
-  flex-basis: 33%;
-  flex-direction: column;
-  flex-shrink: 0;
-  justify-content: center;
-  overflow: hidden;
-`;
+const BattleContainer = styled(Stack)({
+  position: 'relative',
+  width: '100%',
+});
 
-const Badge = styled.div<{ $isAffected?: boolean; $isSelected?: boolean }>`
-  align-items: center;
-  border: 2px solid transparent;
-  border-radius: 5px;
-  display: flex;
-  font-weight: 600;
-  gap: 0.25em;
-  min-width: 50%;
-  padding: 0.2em 0.5em;
-  text-align: center;
+const PokemonContainer = styled('div')({
+  alignItems: 'center',
+  display: 'flex',
+  flexBasis: '33%',
+  flexDirection: 'column',
+  flexShrink: 0,
+  justifyContent: 'center',
+  overflow: 'hidden',
+});
 
-  ${({ theme, $isAffected }) =>
-    $isAffected &&
-    css`
-      border: 2px dotted ${theme.colors.secondary.main};
-    `}
+const Badge = styled('div', {
+  shouldForwardProp: prop => prop !== '$isAffected' && prop !== '$isSelected',
+})<BadgeProps>(({ theme, $isAffected, $isSelected }) => ({
+  alignItems: 'center',
+  border: '2px solid transparent',
+  borderRadius: '5px',
+  display: 'flex',
+  fontWeight: 600,
+  gap: '0.25em',
+  minWidth: '50%',
+  padding: '0.2em 0.5em',
+  textAlign: 'center',
 
-  ${({ theme, $isSelected, $isAffected }) =>
-    ($isSelected || $isAffected) &&
-    css`
-      &:before {
-        background-image: url('/static/iconLibrary/arrow_right.svg');
-      }
+  ...($isAffected && {
+    border: `2px dotted ${theme.palette.text.primary}`,
+  }),
 
-      &:after {
-        background-image: url('/static/iconLibrary/arrow_left.svg');
-      }
+  ...(($isSelected || $isAffected) && {
+    '&:before': {
+      backgroundImage: 'url("/static/iconLibrary/arrow_right.svg")',
+    },
 
-      &:before,
-      &:after {
-        animation: ${blink(theme.colors.primary.main, 'background')} 2s infinite ease-in-out 1s;
-        background-size: 20px 20px;
-        content: '';
-        display: inline-flex;
-        height: 20px;
-        width: 20px;
-      }
-    `}
-`;
+    '&:after': {
+      backgroundImage: 'url("/static/iconLibrary/arrow_left.svg")',
+    },
 
-const ImageContainer = styled.div`
-  width: 80%;
-`;
+    '&:before, &:after': {
+      // animation: `${blink(theme.palette.background.default, 'background')} 2s infinite ease-in-out 1s`,
+      backgroundSize: '20px 20px',
+      content: '""',
+      display: 'inline-flex',
+      height: '20px',
+      width: '20px',
+    },
+  }),
+}));
 
-const AllyImg = styled.img`
-  transform: translateY(1em);
-  width: 100%;
-  /* z-index: -1; */
-`;
+const ImageContainer = styled('div')({
+  width: '80%',
+});
 
-const FoeImg = styled.img`
-  width: 85%;
-`;
+const AllyImg = styled('img')({
+  transform: 'translateY(1em)',
+  width: '100%',
+});
 
-const Description = styled.p`
-  font-size: 1em;
-  font-weight: 500;
-  width: 100%;
+const FoeImg = styled('img')({
+  width: '85%',
+});
 
-  ${({ theme }) => css`
-    @media ${theme.device.sm} {
-      font-size: 1.2em;
-    }
-  `}
-`;
+const BattleGround = styled('div')(({ theme }) => ({
+  background: 'radial-gradient(ellipse at center, #ffffff 19%, #cecece 57%, #ffffff 67%)',
+  display: 'none',
+  filter:
+    "progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#ffffff',GradientType=1 )",
+  height: '30%',
+  left: '50%',
+  position: 'absolute',
+  top: '50%',
+  transform: 'translate(-50%, -50%) matrix(2.9, 0.1, -1.5, 2.1, 50, 35)',
+  width: '30%',
+  zIndex: -2,
 
-const BattleGround = styled.div`
-  background: radial-gradient(ellipse at center, #ffffff 19%, #cecece 57%, #ffffff 67%);
-  display: none;
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#ffffff',GradientType=1 );
-  height: 30%;
-  left: 50%;
-  position: absolute;
-  top: 50%;
-  transform: translate(-50%, -50%) matrix(2.9, 0.1, -1.5, 2.1, 50, 35);
-  width: 30%;
-  z-index: -2;
+  [theme.breakpoints.up('sm')]: {
+    display: 'block',
+  },
+}));
 
-  ${({ theme }) => css`
-    @media ${theme.device.sm} {
-      display: block;
-    }
-  `}
-`;
-
-export {
-  BattleContainer,
-  PokemonContainer,
-  Badge,
-  ImageContainer,
-  FoeImg,
-  AllyImg,
-  Description,
-  BattleGround,
-};
+export { BattleContainer, PokemonContainer, Badge, ImageContainer, FoeImg, AllyImg, BattleGround };

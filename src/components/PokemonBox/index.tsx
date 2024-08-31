@@ -3,7 +3,8 @@ import { useMemo } from 'react';
 import type { Pokemon, PokemonSpecies } from 'pokenode-ts';
 import { motion } from 'framer-motion';
 // helpers
-import { removeDash, mapGeneration, fadeInUpVariant, mapIdToGeneration } from '@/helpers';
+import { removeDash, mapGeneration, mapIdToGeneration } from '@/helpers';
+import { hoverVariant } from '@/animations';
 // styles
 import { PokeBox } from './StyledPokemonBox';
 // components
@@ -39,7 +40,7 @@ const PokemonBox = ({
       <motion.a
         whileHover="hover"
         whileTap="tap"
-        variants={fadeInUpVariant}
+        variants={hoverVariant}
         key={`pokemonbox-${pokemonId}`}
       >
         <PokeBox elevation={2} {...rest}>

@@ -1,7 +1,7 @@
 // types
 import type { EvolutionChain as EvoChainType, PokemonSpecies } from 'pokenode-ts';
 // helpers
-import { fadeInUpVariant } from '@/helpers';
+import { fadeInUpVariant } from '@/animations';
 // components
 import Evolution from './Evolution';
 import { motion } from 'framer-motion';

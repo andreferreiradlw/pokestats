@@ -1,57 +1,66 @@
-import { BoldSpan, SectionTitle, Table } from '@/BaseStyles';
-import Box, { BoxProps } from '@/components/Box';
-import { formatFlavorText, listGamesByGroup, listGenGroupsByGroup } from '@/helpers';
-import { MoveFlavorText as PokenodeMoveFlavorText } from 'pokenode-ts';
 import { useMemo, Fragment } from 'react';
+// types
+import type { MoveFlavorText as PokenodeMoveFlavorText } from 'pokenode-ts';
+// helpers
+import { formatFlavorText, listGamesByGroup, listGenGroupsByGroup } from '@/helpers';
+// components
+import { Table } from '@/BaseStyles';
+import { Box, Grid2, Grid2Props, Typography } from '@mui/material';
 
 interface GroupedFlavorText {
   flavor: string;
   games: string[][];
 }
-interface MoveFlavorTextProps extends BoxProps {
+interface MoveFlavorTextProps extends Grid2Props {
   flavorTexts: PokenodeMoveFlavorText[];
 }
 
+// Helper function to group and format flavor texts
+const groupFlavorTexts = (
+  flavorTexts: PokenodeMoveFlavorText[],
+): Record<string, GroupedFlavorText> => {
+  const grouped = flavorTexts
+    .filter(({ language }) => language.name === 'en') // Filter out non-English texts
+    .reduce((acc: Record<string, GroupedFlavorText>, { version_group, flavor_text }) => {
+      const genGroups = listGenGroupsByGroup(version_group.name); // Get generation groups by version group
+      const primaryGroup = genGroups[0];
+
+      if (!acc[primaryGroup]) {
+        acc[primaryGroup] = {
+          flavor: formatFlavorText(flavor_text), // Format flavor text
+          games: genGroups.map(group => listGamesByGroup(group)), // List games by group
+        };
+      }
+      return acc;
+    }, {});
+  return grouped;
+};
+
 const MoveFlavorText = ({ flavorTexts, ...rest }: MoveFlavorTextProps): JSX.Element => {
-  // memo
-  const groupFlavorByVersionGroup = useMemo(
-    () =>
-      flavorTexts.reduce(
-        (acc: Record<string, GroupedFlavorText>, { version_group, flavor_text, language }) => {
-          if (language.name !== 'en') return acc;
-
-          const genGroups = listGenGroupsByGroup(version_group.name);
-          const primaryGroup = genGroups[0];
-
-          if (!acc[primaryGroup]) {
-            acc[primaryGroup] = {
-              flavor: formatFlavorText(flavor_text),
-              games: genGroups.map(group => listGamesByGroup(group)),
-            };
-          }
-
-          return acc;
-        },
-        {},
-      ),
-    [flavorTexts],
-  );
+  // Memoized computation for grouped flavor texts
+  const groupFlavorByVersionGroup = useMemo(() => groupFlavorTexts(flavorTexts), [flavorTexts]);
 
   return (
-    <Box flexalign="flex-start" flexjustify="flex-start" flexgap="0.5em" {...rest}>
-      <SectionTitle>Descriptions</SectionTitle>
-      <Table>
+    <Grid2
+      flexDirection="column"
+      alignItems="flex-start"
+      justifyContent="flex-start"
+      gap={1}
+      {...rest}
+    >
+      <Typography variant="sectionTitle">Descriptions</Typography>
+      <Box component={Table}>
         <tbody>
-          {Object.entries(groupFlavorByVersionGroup).map(([groupKey, { flavor, games }], i) => (
-            <tr key={`attack-flavor-${i}`}>
+          {Object.entries(groupFlavorByVersionGroup).map(([groupKey, { flavor, games }]) => (
+            <tr key={`attack-flavor-${groupKey}`}>
               <th>
                 {games.map((gameGroup, j) => (
-                  <Fragment key={`move-${groupKey}`}>
-                    <BoldSpan>
+                  <Fragment key={`move-${groupKey}-${j}`}>
+                    <Typography fontWeight="600" component="span">
                       {gameGroup.map(
                         (game, k) => `${game}${k < gameGroup.length - 1 ? ' / ' : ''}`,
                       )}
-                    </BoldSpan>
+                    </Typography>
                     {j < games.length - 1 && <br />}
                   </Fragment>
                 ))}
@@ -60,8 +69,8 @@ const MoveFlavorText = ({ flavorTexts, ...rest }: MoveFlavorTextProps): JSX.Elem
             </tr>
           ))}
         </tbody>
-      </Table>
-    </Box>
+      </Box>
+    </Grid2>
   );
 };
 

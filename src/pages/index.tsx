@@ -2,7 +2,7 @@
 import type { GetStaticProps, NextPage } from 'next';
 // helpers
 import { PokestatsPageTitle } from '@/components/Head';
-import { fadeInUpVariant } from '@/helpers';
+import { fadeInUpVariant } from '@/animations';
 // components
 import Head from 'next/head';
 import Homepage from '@/components/Homepage';

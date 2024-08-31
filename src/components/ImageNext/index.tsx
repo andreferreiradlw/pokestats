@@ -2,7 +2,7 @@ import { useState } from 'react';
 // types
 import type { ImageProps } from 'next/image';
 // helpers
-import { placeholderVariant, fadeInUpVariant } from '@/helpers';
+import { placeholderVariant, fadeInUpVariant } from '@/animations';
 // styles
 import {
   ImageElement,

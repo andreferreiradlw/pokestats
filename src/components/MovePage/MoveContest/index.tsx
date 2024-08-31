@@ -1,13 +1,12 @@
 // types
 import type { ContestEffect, Move, SuperContestEffect } from 'pokenode-ts';
 // helpers
-import { capitalise, removeDash } from '@/helpers';
+import { removeDash } from '@/helpers';
 // components
-import Box, { BoxProps } from '@/components/Box';
 import Contest from './Contest';
-import { BoldSpan, SectionTitle } from '@/BaseStyles';
+import { capitalize, Grid2, Grid2Props, Typography } from '@mui/material';
 
-interface MoveContestProps extends BoxProps {
+interface MoveContestProps extends Grid2Props {
   move: Move;
   moveName: string;
   superContestEffect: SuperContestEffect;
@@ -21,21 +20,31 @@ const MoveContest = ({
   superContestEffect,
   ...rest
 }: MoveContestProps): JSX.Element => {
-  // @ts-ignore
+  // @ts-expect-error: invalid types
   const { contest_type, contest_combos } = move;
   const { normal: normalCombos, super: superCombos } = contest_combos || {};
 
   return (
-    <Box flexalign="flex-start" flexjustify="flex-start" flexgap="1em" {...rest}>
-      <SectionTitle>Contests</SectionTitle>
+    <Grid2
+      flexDirection="column"
+      alignItems="flex-start"
+      justifyContent="flex-start"
+      gap={2}
+      {...rest}
+    >
+      <Typography variant="sectionTitle">Contests</Typography>
       {contest_type ? (
         <>
-          <p>
-            <BoldSpan>{moveName}</BoldSpan>
+          <Typography>
+            <Typography fontWeight="600" component="span">
+              {moveName}
+            </Typography>
             {` has the `}
-            <BoldSpan>{capitalise(removeDash(contest_type.name))}</BoldSpan>
+            <Typography fontWeight="600" component="span">
+              {capitalize(removeDash(contest_type.name))}
+            </Typography>
             {` contest type.`}
-          </p>
+          </Typography>
           {contestEffect && (
             <Contest
               combos={normalCombos}
@@ -55,9 +64,9 @@ const MoveContest = ({
           )}
         </>
       ) : (
-        <p>{`${moveName} has no contest types.`}</p>
+        <Typography>{`${moveName} has no contest types.`}</Typography>
       )}
-    </Box>
+    </Grid2>
   );
 };
 

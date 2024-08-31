@@ -1,13 +1,13 @@
 // types
 import type { Move } from 'pokenode-ts';
 // helpers
-import { capitalise, removeDash } from '@/helpers';
+import { removeDash } from '@/helpers';
 // styles
-import { BoldSpan, SectionTitle, Table } from '@/BaseStyles';
+import { Table } from '@/BaseStyles';
 // components
-import Box, { BoxProps } from '@/components/Box';
+import { Box, capitalize, Grid2, Grid2Props, Typography } from '@mui/material';
 
-interface MoveStatsProps extends BoxProps {
+interface MoveStatsProps extends Grid2Props {
   move: Move;
   moveName: string;
 }
@@ -17,26 +17,34 @@ const MoveStats = ({ move, moveName, ...rest }: MoveStatsProps): JSX.Element => 
   const { name, stat_changes } = move;
 
   return (
-    <Box flexalign="flex-start" flexjustify="flex-start" flexgap="0.5em" {...rest}>
-      <SectionTitle>Stat Changes</SectionTitle>
+    <Grid2
+      flexDirection="column"
+      alignItems="flex-start"
+      justifyContent="flex-start"
+      gap={1}
+      {...rest}
+    >
+      <Typography variant="sectionTitle">Stat Changes</Typography>
       {stat_changes?.length > 0 ? (
-        <Table style={{ maxWidth: '300px' }}>
+        <Box component={Table} maxWidth="300px">
           <tbody>
             {stat_changes.map(({ change, stat }, i) => (
               <tr key={`stat-change-${name}-${stat.name}-${i}`}>
-                <th>{capitalise(removeDash(stat.name))}</th>
+                <th>{capitalize(removeDash(stat.name))}</th>
                 <td>{change}</td>
               </tr>
             ))}
           </tbody>
-        </Table>
+        </Box>
       ) : (
-        <p>
-          <BoldSpan>{moveName}</BoldSpan>
+        <Typography>
+          <Typography fontWeight="600" component="span">
+            {moveName}
+          </Typography>
           {` doesn't affect any stats when used.`}
-        </p>
+        </Typography>
       )}
-    </Box>
+    </Grid2>
   );
 };
 

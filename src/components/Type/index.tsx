@@ -36,7 +36,7 @@ const TypePage = ({ typeData }: TypePageProps): JSX.Element => {
           </Grid2>
         </Grid2>
       </Grid2>
-      <Tabs typeData={typeData} typeName={typeName} screensizes={12} />
+      <Tabs typeData={typeData} typeName={typeName} />
     </Stack>
   );
 };

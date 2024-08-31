@@ -1,15 +1,13 @@
 import { useMemo } from 'react';
 // types
 import type { NamedAPIResource } from 'pokenode-ts';
-// styles
-import { SectionTitle } from '@/BaseStyles';
 // components
-import Box, { BoxProps } from '@/components/Box';
 import InfiniteScroll from '@/components/InfiniteScroll';
 // helpers
 import { getResourceId } from '@/helpers';
+import { Stack, StackProps, Typography } from '@mui/material';
 
-interface MovePokemonProps extends BoxProps {
+interface MovePokemonProps extends StackProps {
   pokemonList: NamedAPIResource[];
 }
 
@@ -21,10 +19,10 @@ const MovePokemon = ({ pokemonList, ...rest }: MovePokemonProps): JSX.Element =>
   );
 
   return (
-    <Box flexalign="flex-start" flexjustify="flex-start" flexgap="1em" {...rest}>
-      <SectionTitle>{`Learnset (${displayPokemon?.length})`}</SectionTitle>
+    <Stack alignItems="flex-start" justifyContent="flex-start" gap={2} {...rest}>
+      <Typography variant="sectionTitle">{`Learnset (${displayPokemon?.length})`}</Typography>
       <InfiniteScroll pokemonList={displayPokemon} />
-    </Box>
+    </Stack>
   );
 };
 

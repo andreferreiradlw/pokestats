@@ -11,7 +11,7 @@ const Table = styled(motion.table)(({ theme }) => ({
   wordBreak: 'keep-all',
 
   '& tr span': {
-    fontWeight: 400,
+    // fontWeight: 400,
   },
 
   '& tr:not(:last-of-type)': {

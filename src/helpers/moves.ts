@@ -6,7 +6,7 @@ export interface FilteredMove extends PokemonMove {
   current_version_machine?: string;
 }
 
-const filterMoves = (
+export const filterMoves = (
   moves: PokemonMove[],
   learnMethod: MoveLearnMethod['name'],
   versionGroup: string,
@@ -37,7 +37,7 @@ const filterMoves = (
     .filter((move): move is FilteredMove => move !== null)
     .sort((a, b) => (learnMethod === 'level-up' ? a.level_learned_at - b.level_learned_at : 0));
 
-const removeDuplicateMoves = (moves: NamedAPIResource[]): NamedAPIResource[] => {
+export const removeDuplicateMoves = (moves: NamedAPIResource[]): NamedAPIResource[] => {
   const uniqueMovesMap = new Map<string, NamedAPIResource>();
 
   moves.forEach(move => {
@@ -49,4 +49,44 @@ const removeDuplicateMoves = (moves: NamedAPIResource[]): NamedAPIResource[] => 
   return Array.from(uniqueMovesMap.values());
 };
 
-export { filterMoves, removeDuplicateMoves };
+export const mapTypeToPokemonId = (typeName: string): number | undefined => {
+  const typeToIdMap: Record<string, number> = {
+    fire: 392, // Infernape
+    dragon: 149, // Dragonite
+    water: 131, // Lapras
+    electric: 26, // Raichu
+    normal: 493, // Arceus
+    fighting: 257, // Blaziken
+    flying: 249, // Lugia
+    poison: 110, // Weezing
+    ground: 95, // Onyx
+    rock: 377, // Regirock
+    bug: 212, // Scizor
+    ghost: 92, // Gasly
+    steel: 208, // Steelix
+    grass: 154, // Meganium
+    psychic: 65, // Alakazam
+    ice: 144, // Articuno
+    dark: 491, // Darkrai
+    fairy: 36, // Clefable
+  };
+
+  return typeToIdMap[typeName];
+};
+
+export const isFoeAffected = (targetName: string): boolean =>
+  ['all-other-pokemon', 'all-opponents', 'entire-field', 'opponents-field'].includes(targetName);
+
+export const isFoeSelected = (targetName: string): boolean =>
+  ['selected-pokemon', 'selected-pokemon-me-first'].includes(targetName);
+
+export const isAllyAffected = (targetName: string): boolean =>
+  ['all-other-pokemon', 'entire-field', 'users-field', 'user-and-allies'].includes(targetName);
+
+export const isAllySelected = (targetName: string): boolean =>
+  ['selected-pokemon', 'ally'].includes(targetName);
+
+export const isSelfAffected = (targetName: string): boolean =>
+  ['entire-field', 'user-and-allies', 'users-field'].includes(targetName);
+
+export const isSelfSelected = (targetName: string): boolean => targetName === 'user';

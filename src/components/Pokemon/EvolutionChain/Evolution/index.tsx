@@ -1,7 +1,8 @@
 // types
 import type { PokemonSpecies, EvolutionDetail } from 'pokenode-ts';
 // helpers
-import { fadeInUpVariant, findEnglishName } from '@/helpers';
+import { findEnglishName } from '@/helpers';
+import { fadeInUpVariant } from '@/animations';
 import { EvolutionContainer, EvoDetailsContainer, EvoArrow } from './StyledEvolution';
 // components
 import PokemonBox from '@/components/PokemonBox';

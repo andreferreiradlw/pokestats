@@ -27,24 +27,22 @@ const TypesTable = React.memo(
       <tbody>
         {Object.entries(multipliers).map(([relation, types]) => (
           <tr key={`${multiplierType}-${relation}`}>
-            <th>
-              <Typography textTransform="capitalize">{removeUnderscore(relation)}</Typography>
-            </th>
-            <td>
-              <Stack direction="row" alignItems="center" gap={1} flexWrap="wrap">
-                {types.length === 0 ? (
-                  <Typography variant="body2">None</Typography>
-                ) : (
-                  types.map(type => (
-                    <TypeBadge
-                      key={`${multiplierType}-${relation}-${type}`}
-                      $typename={type}
-                      $iconOnly
-                    />
-                  ))
-                )}
-              </Stack>
-            </td>
+            <Typography textTransform="capitalize" component="th">
+              {removeUnderscore(relation)}
+            </Typography>
+            <Stack direction="row" alignItems="center" gap={1} flexWrap="wrap" component="td">
+              {types.length === 0 ? (
+                <Typography variant="body2">None</Typography>
+              ) : (
+                types.map(type => (
+                  <TypeBadge
+                    key={`${multiplierType}-${relation}-${type}`}
+                    $typename={type}
+                    $iconOnly
+                  />
+                ))
+              )}
+            </Stack>
           </tr>
         ))}
       </tbody>

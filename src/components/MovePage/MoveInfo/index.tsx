@@ -4,11 +4,11 @@ import type { Move } from 'pokenode-ts';
 // helpers
 import { mapGeneration, removeDash } from '@/helpers';
 // styles
-import { Table, UppercasedTd } from '@/BaseStyles';
+import { Table } from '@/BaseStyles';
 // components
-import Box, { BoxProps } from '@/components/Box';
+import { Grid2, Grid2Props, Typography } from '@mui/material';
 
-interface MoveInfoProps extends BoxProps {
+interface MoveInfoProps extends Grid2Props {
   move: Move;
 }
 
@@ -19,12 +19,14 @@ const MoveInfo = ({ move, ...rest }: MoveInfoProps): JSX.Element => {
   const generationName = useMemo(() => mapGeneration(generation.name), [generation.name]);
 
   return (
-    <Box flexalign="flex-start" flexjustify="flex-start" flexgap="1em" {...rest}>
+    <Grid2 {...rest}>
       <Table>
         <tbody>
           <tr>
             <th>Category</th>
-            <UppercasedTd>{removeDash(damage_class.name)}</UppercasedTd>
+            <Typography textTransform="capitalize" component="td">
+              {removeDash(damage_class.name)}
+            </Typography>
           </tr>
           <tr>
             <th>Power</th>
@@ -48,7 +50,7 @@ const MoveInfo = ({ move, ...rest }: MoveInfoProps): JSX.Element => {
           </tr>
         </tbody>
       </Table>
-    </Box>
+    </Grid2>
   );
 };
 

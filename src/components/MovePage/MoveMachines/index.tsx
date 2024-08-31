@@ -2,12 +2,12 @@ import { Fragment } from 'react';
 // helpers
 import { NamedAPIResource } from 'pokenode-ts';
 // styles
-import { BoldSpan, SectionTitle, Table } from '@/BaseStyles';
+import { Table } from '@/BaseStyles';
 // components
-import Box, { BoxProps } from '@/components/Box';
 import { MovePageProps } from '..';
+import { Box, Grid2, Grid2Props, Stack, Typography } from '@mui/material';
 
-interface MoveMachinesProps extends BoxProps {
+interface MoveMachinesProps extends Grid2Props {
   moveName: string;
   machines: MovePageProps['moveMachines'];
   moveType: NamedAPIResource['name'];
@@ -20,54 +20,61 @@ const MoveMachines = ({
   ...rest
 }: MoveMachinesProps): JSX.Element => {
   return (
-    <Box flexalign="flex-start" flexjustify="flex-start" flexgap="0.5em" {...rest}>
-      <SectionTitle>Machines</SectionTitle>
+    <Grid2
+      flexDirection="column"
+      alignItems="flex-start"
+      justifyContent="flex-start"
+      gap={1}
+      {...rest}
+    >
+      <Typography variant="sectionTitle">Machines</Typography>
       {machines ? (
-        <Table>
+        <Box component={Table}>
           <tbody>
             {Object.keys(machines).map((currKey, i) => (
               <tr key={`move-machine-${i}`}>
                 <th>
                   {machines[currKey].groups.map((currMachine, i) => (
                     <Fragment key={`machine-${currKey}-${i}`}>
-                      <BoldSpan style={{ whiteSpace: 'normal' }}>
+                      <Typography whiteSpace="normal" fontWeight="600" component="span">
                         {currMachine.map(
                           (machine, i) => `${machine}${currMachine.length > i + 1 ? ' / ' : ''}`,
                         )}
-                      </BoldSpan>
+                      </Typography>
                       {machines[currKey].groups.length > 1 && <br />}
                     </Fragment>
                   ))}
                 </th>
-                <td>
-                  <Box
-                    flexdirection="row"
-                    flexjustify="flex-end"
-                    width="100%"
-                    flexmargin="0 auto"
-                    flexgap="0.1em"
-                  >
-                    <span>{machines[currKey].machine}</span>
-                    <img
-                      src={`https://raw.githubusercontent.com/msikma/pokesprite/master/items/${
-                        machines[currKey].machine.includes('hm') ? 'hm' : 'tm'
-                      }/${moveType}.png`}
-                      alt={moveType}
-                      width="30"
-                    />
-                  </Box>
-                </td>
+                <Stack
+                  flexDirection="row"
+                  justifyContent="flex-end"
+                  width="100%"
+                  margin="0 auto"
+                  gap={0.5}
+                  component="td"
+                >
+                  <Typography component="span">{machines[currKey].machine}</Typography>
+                  <img
+                    src={`https://raw.githubusercontent.com/msikma/pokesprite/master/items/${
+                      machines[currKey].machine.includes('hm') ? 'hm' : 'tm'
+                    }/${moveType}.png`}
+                    alt={moveType}
+                    width="30"
+                  />
+                </Stack>
               </tr>
             ))}
           </tbody>
-        </Table>
+        </Box>
       ) : (
-        <p>
-          <BoldSpan>{moveName}</BoldSpan>
+        <Typography>
+          <Typography fontWeight="600" component="span">
+            {moveName}
+          </Typography>
           {` has no machine names in any version.`}
-        </p>
+        </Typography>
       )}
-    </Box>
+    </Grid2>
   );
 };
 

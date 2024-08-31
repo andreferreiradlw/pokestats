@@ -9,11 +9,12 @@ import type {
 // helpers
 import { capitalise, removeDash } from '@/helpers';
 // styles
-import { Anchor, BoldSpan, SectionSubTitle, Table } from '@/BaseStyles';
+import { Table } from '@/BaseStyles';
 // components
-import Box, { BoxProps } from '@/components/Box';
+import { Box, Grid2Props, Link as MuiLink, Stack, Typography } from '@mui/material';
+import Link from 'next/link';
 
-interface ContestProps extends BoxProps {
+interface ContestProps extends Grid2Props {
   combos: ContestComboDetail;
   contestType: any;
   moveName: string;
@@ -21,74 +22,89 @@ interface ContestProps extends BoxProps {
   title?: string;
 }
 
-const renderLinks = (combos: NamedAPIResource[], lastDivider = 'or'): JSX.Element => {
-  const combosLength = combos.length;
+// Render combo links
+const renderLinks = (combos: NamedAPIResource[], lastDivider = 'or'): JSX.Element => (
+  <>
+    {combos.map(({ name }, i) => (
+      <React.Fragment key={`${name}-combo-${i}`}>
+        <MuiLink href={`/move/${name}`} component={Link}>
+          {capitalise(removeDash(name))}
+        </MuiLink>
+        {i < combos.length - 1 && (i === combos.length - 2 ? ` ${lastDivider} ` : ', ')}
+      </React.Fragment>
+    ))}
+  </>
+);
 
-  return (
-    <>
-      {combos.map(({ name }, i) => (
-        <React.Fragment key={`${name}-combo-${i}`}>
-          <Anchor href={`/move/${name}`}>{capitalise(removeDash(name))}</Anchor>
-          {`${i + 1 === combosLength ? '' : combosLength > i + 2 ? ', ' : ` ${lastDivider} `}`}
-        </React.Fragment>
-      ))}
-    </>
-  );
-};
+// Render the combo text
+const renderComboText = (
+  comboMoves: NamedAPIResource[],
+  moveName: string,
+  appeal?: number,
+  useAfter?: boolean,
+): JSX.Element => (
+  <Typography>
+    <Typography fontWeight="600" component="span">
+      Combo:{' '}
+    </Typography>
+    {`If `}
+    {useAfter ? (
+      renderLinks(comboMoves)
+    ) : (
+      <Typography fontWeight="600" component="span">
+        {moveName}
+      </Typography>
+    )}
+    {` ${useAfter ? 'is used before' : 'is used after'} `}
+    {useAfter ? (
+      <Typography fontWeight="600" component="span">
+        {moveName}
+      </Typography>
+    ) : (
+      renderLinks(comboMoves)
+    )}
+    {useAfter
+      ? `, the user gains ${appeal ? appeal * 2 : 'double'} appeal points instead of ${appeal}.`
+      : ` causes the second move to score double the normal appeal.`}
+  </Typography>
+);
 
 const Contest = ({ combos, moveName, effect, title, ...rest }: ContestProps): JSX.Element => {
-  // @ts-ignore
-  const { appeal, jam } = effect || {};
-  // memo
+  // Extract appeal and jam safely
+  const appeal = effect && 'appeal' in effect ? effect.appeal : undefined;
+  const jam = effect && 'jam' in effect ? effect.jam : undefined;
+
+  // Memoize the contest flavor text
   const contestFlavorText = useMemo(
     () =>
       effect
-        ? effect.flavor_text_entries.find(flavor => flavor.language.name === 'en').flavor_text
+        ? effect.flavor_text_entries.find(flavor => flavor.language.name === 'en')?.flavor_text ||
+          'No flavor text available for this move.'
         : 'No flavor text available for this move.',
     [effect],
   );
 
   return (
-    <Box flexalign="flex-start" flexjustify="flex-start" flexgap="0.5em" {...rest}>
-      {title && <SectionSubTitle>{title}</SectionSubTitle>}
-      <Table style={{ maxWidth: '300px' }}>
+    <Stack alignItems="flex-start" justifyContent="flex-start" gap={1} {...rest}>
+      {title && <Typography variant="sectionSubTitle">{title}</Typography>}
+      <Box maxWidth="300px" component={Table}>
         <tbody>
           <tr>
             <th>Appeal</th>
-            <td>{appeal}</td>
+            <td>{appeal ?? 'N/A'}</td>
           </tr>
-          {/** @ts-ignore */}
           {jam !== undefined && (
             <tr>
               <th>Jam</th>
-              {/** @ts-ignore */}
               <td>{jam}</td>
             </tr>
           )}
         </tbody>
-      </Table>
-      <p>{contestFlavorText}</p>
-      {combos?.use_after && (
-        <p>
-          <BoldSpan>Combo: </BoldSpan>
-          {`If `}
-          {renderLinks(combos.use_after)}
-          {` is used before `}
-          <BoldSpan>{moveName}</BoldSpan>
-          {`, the user gains ${appeal * 2} appeal points instead of ${appeal}.`}
-        </p>
-      )}
-      {combos?.use_before && (
-        <p>
-          <BoldSpan>Combo: </BoldSpan>
-          {`If `}
-          <BoldSpan>{moveName}</BoldSpan>
-          {` is used before `}
-          {renderLinks(combos.use_before)}
-          {` causes the second move to score double the normal appeal.`}
-        </p>
-      )}
-    </Box>
+      </Box>
+      <Typography>{contestFlavorText}</Typography>
+      {combos?.use_after && renderComboText(combos.use_after, moveName, appeal, true)}
+      {combos?.use_before && renderComboText(combos.use_before, moveName, appeal, false)}
+    </Stack>
   );
 };
 

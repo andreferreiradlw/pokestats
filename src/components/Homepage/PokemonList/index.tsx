@@ -3,7 +3,8 @@ import { useState, useEffect, useMemo, useCallback } from 'react';
 import { NamedAPIResource } from 'pokenode-ts';
 // helpers
 import { usePlausible } from 'next-plausible';
-import { fadeInUpVariant, generationOptions, getResourceId, mapIdToGeneration } from '@/helpers';
+import { generationOptions, getResourceId, mapIdToGeneration } from '@/helpers';
+import { fadeInUpVariant } from '@/animations';
 // components
 import { Grid2, Grid2Props, SelectChangeEvent, Typography } from '@mui/material';
 import InfiniteScroll from '@/components/InfiniteScroll';

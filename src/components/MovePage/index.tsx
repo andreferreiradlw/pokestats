@@ -2,10 +2,7 @@
 import type { PokestatsMovePageProps } from '@/pages/move/[moveId]';
 // helpers
 import { findEnglishName } from '@/helpers';
-// styles
-import { PageHeading } from '@/BaseStyles';
 // components
-import Box from '@/components/Box';
 import TypeBadge from '@/components/TypeBadge';
 import MoveInfo from './MoveInfo';
 import MoveEntries from './MoveEntries';
@@ -15,7 +12,7 @@ import MoveMachines from './MoveMachines';
 import MoveTarget from './MoveTarget';
 import MovePokemon from './MovePokemon';
 import MoveStats from './MoveStats';
-import { Divider, Stack } from '@mui/material';
+import { Divider, Grid2, Stack, Typography } from '@mui/material';
 
 export type MovePageProps = Omit<PokestatsMovePageProps, 'autocompleteList'>;
 
@@ -33,58 +30,51 @@ const MovePage = ({
 
   return (
     <Stack divider={<Divider />} gap={4} py={2}>
-      <Box
-        flexdirection={{ xxs: 'column-reverse', lg: 'row' }}
-        flexalign="flex-start"
-        flexjustify="flex-start"
-        flexgap="2em"
+      <Stack
+        justifyContent={{ xxs: 'center', lg: 'flex-start' }}
+        alignItems={{ xxs: 'center', lg: 'flex-start' }}
+        gap={4}
+        width="100%"
       >
-        <Box
-          flexjustify={{ xxs: 'center', lg: 'flex-start' }}
-          flexalign={{ xxs: 'center', lg: 'flex-start' }}
-          flexgap="1.5em"
+        <Stack
+          alignItems={{ xxs: 'center', lg: 'flex-start' }}
+          flexDirection={{ xxs: 'column-reverse', lg: 'column' }}
+          gap={{ xxs: 2, lg: 1 }}
         >
-          <Box
-            flexalign={{ xxs: 'center', lg: 'flex-start' }}
-            flexdirection={{ xxs: 'column-reverse', lg: 'column' }}
-            flexgap={{ xxs: '0.5em', lg: '0.3em' }}
+          <TypeBadge $typename={type.name} />
+          <Typography variant="pageHeading">{moveName}</Typography>
+        </Stack>
+        <Grid2
+          container
+          direction={{ xxs: 'column', lg: 'row' }}
+          alignItems={{ xxs: 'center', lg: 'flex-start' }}
+          justifyContent="flex-start"
+          spacing={4}
+        >
+          <Grid2
+            container
+            size={4}
+            direction={{ xxs: 'column', sm: 'row', lg: 'column' }}
+            spacing={2}
           >
-            <TypeBadge $typename={type.name} />
-            <PageHeading>{moveName}</PageHeading>
-          </Box>
-          <Box
-            flexdirection={{ xxs: 'column', lg: 'row' }}
-            flexalign={{ xxs: 'center', lg: 'flex-start' }}
-            flexjustify="flex-start"
-            flexgap="1.5em"
-          >
-            <Box
-              screensizes={4}
-              flexdirection={{ xxs: 'column', sm: 'row', lg: 'column' }}
-              flexgap="1.5em"
-            >
-              <MoveInfo move={move} />
-              <MoveMachines moveName={moveName} moveType={type.name} machines={moveMachines} />
-            </Box>
-            <MoveFlavorText flavorTexts={flavor_text_entries} screensizes={8} />
-          </Box>
-        </Box>
-      </Box>
-      <Box
-        flexjustify={{ xxs: 'center', lg: 'flex-start' }}
-        flexalign={{ xxs: 'center', lg: 'flex-start' }}
-        flexdirection={{ xxs: 'column', lg: 'row' }}
-        flexgap="3em"
+            <MoveInfo move={move} />
+            <MoveMachines moveName={moveName} moveType={type.name} machines={moveMachines} />
+          </Grid2>
+          <MoveFlavorText flavorTexts={flavor_text_entries} size={8} />
+        </Grid2>
+      </Stack>
+      <Grid2
+        container
+        justifyContent={{ xxs: 'center', lg: 'flex-start' }}
+        alignItems={{ xxs: 'center', lg: 'flex-start' }}
+        direction={{ xxs: 'column', lg: 'row' }}
+        spacing={4}
       >
-        <Box
-          screensizes={6}
-          flexdirection={{ xxs: 'column-reverse', lg: 'column' }}
-          flexgap="1.5em"
-        >
+        <Grid2 container size={6} direction={{ xxs: 'column-reverse', lg: 'column' }} spacing={2}>
           <MoveTarget target={target} moveType={type} />
           <MoveStats move={move} moveName={moveName} />
-        </Box>
-        <Box screensizes={6} flexgap="1.5em">
+        </Grid2>
+        <Grid2 container size={6} spacing={2}>
           <MoveEntries move={move} moveName={moveName} />
           <MoveContest
             move={move}
@@ -92,8 +82,8 @@ const MovePage = ({
             contestEffect={contestEffect}
             superContestEffect={superContestEffect}
           />
-        </Box>
-      </Box>
+        </Grid2>
+      </Grid2>
       <MovePokemon pokemonList={learned_by_pokemon} />
     </Stack>
   );

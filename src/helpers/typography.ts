@@ -29,11 +29,17 @@ const formatFlavorText = (text: string): string =>
 // prefixes id with zeros by length
 const prefixId = (id: number, length = 3): string => id.toString().padStart(length, '0');
 
-// creates sentences with commas based on string array
-const createSentence = (elements: string[], lastDivider = 'and', prefix = 'has'): string =>
-  `${prefix} ${elements.slice(0, -2).join(', ')} ${
-    elements.slice(0, -2).length ? ', ' : ''
-  } ${elements.slice(-2).join(` ${lastDivider} `)}`;
+const createSentence = (elements: string[], lastDivider = 'and', prefix = 'has'): string => {
+  if (elements.length === 0) return ''; // Handle empty array
+  if (elements.length === 1) return `${prefix} ${elements[0]}`; // Handle single element
+
+  const allButLastTwo = elements.slice(0, -2); // All elements except the last two
+  const lastTwo = elements.slice(-2).join(` ${lastDivider} `); // Last two elements joined by the lastDivider
+
+  const middlePart = allButLastTwo.length ? `${allButLastTwo.join(', ')}, ` : ''; // Middle part with comma separation if there are more than two elements
+
+  return `${prefix} ${middlePart}${lastTwo}`; // Construct the final sentence
+};
 
 export {
   capitalise,

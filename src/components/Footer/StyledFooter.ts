@@ -1,5 +1,5 @@
 // helpers
-import { riseUp } from '@/components/BaseStyles';
+import { riseUp } from '@/animations';
 import { styled } from '@mui/material/styles';
 // components
 import { Container, Stack } from '@mui/material';

@@ -1,7 +1,7 @@
 import Potion from 'public/static/iconLibrary/potion.svg';
 import Pokeball from 'public/static/iconLibrary/pokeball.svg';
 import Record from 'public/static/iconLibrary/record.svg';
-import { ellipsis, pokeballShake, riseUp, rotate, shake } from '@/BaseStyles';
+import { ellipsis, pokeballShake, riseUp, rotate, shake } from '@/animations';
 import { Stack, StackProps, Typography } from '@mui/material';
 import { styled } from '@mui/material/styles';
 

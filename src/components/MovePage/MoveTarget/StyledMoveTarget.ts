@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 // styles
-import { blink } from '@/BaseStyles';
+import { blink } from '@/animations';
 // components
 import Box from '@/components/Box';
 

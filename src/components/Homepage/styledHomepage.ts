@@ -1,8 +1,8 @@
-import { rotate } from '@/BaseStyles';
 import { motion } from 'framer-motion';
 import PokeballIcon from 'public/static/iconLibrary/pokeball.svg';
 import { Stack } from '@mui/material';
 import { styled } from '@mui/material/styles';
+import { rotate } from '@/animations';
 
 const FirstSection = styled(Stack)({
   alignItems: 'center',

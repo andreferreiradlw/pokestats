@@ -2,7 +2,7 @@ import { styled } from '@mui/material/styles';
 // components
 import { Grid2 } from '@mui/material';
 // styles
-import { float } from '@/components/BaseStyles';
+import { float } from '@/animations';
 
 const ImageContainer = styled(Grid2)`
   height: 100%;

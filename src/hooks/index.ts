@@ -4,3 +4,4 @@ export * from './useMachines';
 export * from './usePokemonList';
 export * from './usePokemonMoves';
 export * from './useScrollPosition';
+export * from './useTypeMoves';

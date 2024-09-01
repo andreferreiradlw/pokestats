@@ -1,6 +1,6 @@
 {
   "extends": ["alloy", "alloy/react", "alloy/typescript", "plugin:jsx-a11y/recommended"],
-  "plugins": ["prettier", "react", "react-hooks", "@typescript-eslint", "better-styled-components"],
+  "plugins": ["prettier", "react", "react-hooks", "@typescript-eslint"],
   "rules": {
     "eqeqeq": "error",
     "prefer-object-has-own": "off",
@@ -14,7 +14,6 @@
     "react/react-in-jsx-scope": "off",
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "off",
-    "better-styled-components/sort-declarations-alphabetically": 2,
     "@typescript-eslint/no-unused-vars": "error",
   },
   "parserOptions": {

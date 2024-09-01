@@ -7,6 +7,7 @@ import type {
   CustomArea,
   AreaEvent,
   ImageMapperProps,
+  CTX,
 } from '@/types/imageMapper';
 // helpers
 import equal from 'fast-deep-equal';
@@ -49,38 +50,40 @@ const ImageMapper = (props: ImageMapperProps): JSX.Element => {
     onClick,
   } = props;
   // states
-  const [map, setMap] = useState<Map>(mapProp);
-  const [storedMap, setStoredMap] = useState<Map>(map);
+  const [map, setMap] = useState(mapProp);
+  const [storedMap, setStoredMap] = useState(map);
   const [isRendered, setRendered] = useState<boolean>(false);
   const container = useRef<Container>(null);
   const imageRef = useRef<HTMLImageElement>(null);
   const hoverCanvasRef = useRef<HTMLCanvasElement>(null);
   const highlightCanvasRef = useRef<HTMLCanvasElement>(null);
-  const renderingCtx = useRef<CanvasRenderingContext2D>(null);
+  const renderingCtx = useRef<CTX>();
   const highlightCtx = useRef<CanvasRenderingContext2D>(null);
   // hooks
   const isFirstRender = useIsFirstRender();
   // memo
   const scaleCoords = useCallback(
     (coords: number[]): number[] =>
-      coords.map(coord => coord / (imageRef.current.naturalWidth / parentWidth)),
+      coords.map(coord => coord / (imageRef?.current?.naturalWidth! / parentWidth)),
     [parentWidth, imageRef],
   );
 
   const renderPrefilledAreas = useCallback(
     (mapObj = map) => {
-      mapObj.areas.forEach(area => {
+      mapObj?.areas.forEach(area => {
         if (!area.preFillColor) return;
 
-        drawAreas(
-          area.shape,
-          scaleCoords(area.coords),
-          area.preFillColor,
-          area.lineWidth || lineWidthProp,
-          area.strokeColor || strokeColorProp,
-          true,
-          renderingCtx,
-        );
+        if (renderingCtx)
+          drawAreas(
+            area.shape,
+            scaleCoords(area.coords),
+            area.preFillColor,
+            area.lineWidth || lineWidthProp!,
+            area.strokeColor || strokeColorProp!,
+            true,
+            // @ts-ignore
+            renderingCtx,
+          );
       });
     },
     [map, lineWidthProp, strokeColorProp, scaleCoords],

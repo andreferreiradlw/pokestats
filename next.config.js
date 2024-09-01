@@ -1,12 +1,13 @@
 /** @type {import('next').NextConfig} */
 
 module.exports = {
+  reactStrictMode: true,
+  swcMinify: true, // Ensure SWC minification is enabled
+  compiler: {
+    emotion: true,
+  },
   publicRuntimeConfig: {
     NEXT_PUBLIC_ANALYTICS: process.env.NEXT_PUBLIC_ANALYTICS,
-  },
-  compiler: {
-    // Enables the styled-components SWC transform
-    styledComponents: true,
   },
   staticPageGenerationTimeout: 90,
   images: {
@@ -46,10 +47,6 @@ module.exports = {
       test: /\.svg$/,
       use: ['@svgr/webpack'],
     });
-    config.resolve.alias = {
-      ...config.resolve.alias,
-      '@mui/styled-engine': '@mui/styled-engine-sc',
-    };
     return config;
   },
 };

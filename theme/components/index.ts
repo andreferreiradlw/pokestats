@@ -1,4 +1,5 @@
 import Button from './Button';
+import CssBaseline from './CssBaseline';
 import Divider from './Divider';
 import FormInputs from './FormInputs';
 import Select from './Select';
@@ -9,6 +10,7 @@ import { ThemeOptions } from '@mui/material';
 const styledMuiComponents: ThemeOptions = {
   components: {
     ...Button,
+    ...CssBaseline,
     ...Divider,
     ...Select,
     ...FormInputs,

@@ -4,7 +4,6 @@ export * from './findName';
 export * from './gameVersion';
 export * from './moves';
 export * from './random';
-export * from './refs';
 export * from './responsiveProps';
 export * from './scrollToTop';
 export * from './sprites';

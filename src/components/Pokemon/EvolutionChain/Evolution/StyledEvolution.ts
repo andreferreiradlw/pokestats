@@ -29,7 +29,7 @@ const EvoDetailsContainer = styled(motion.div)`
   justify-content: space-between;
   width: auto;
 
-  &:hover ${EvoArrow} {
+  &:hover svg {
     transform: translateY(0.25em);
   }
 `;

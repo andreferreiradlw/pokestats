@@ -45,7 +45,7 @@ interface AutocompleteIconProps {
   id?: number;
 }
 
-const AutocompleteIcon = ({ assetType, name, id }: AutocompleteIconProps): JSX.Element => {
+const AutocompleteIcon = ({ assetType, name, id }: AutocompleteIconProps): JSX.Element | null => {
   switch (assetType) {
     case 'pokemon':
       return (
@@ -139,6 +139,7 @@ const AutocompleteV2 = ({
             {assetType === 'pokemon' && <PokeID variant="h5">{`#${id}`}</PokeID>}
           </OptionWrapper>
         )}
+        // @ts-expect-error
         ListboxComponent={ListWrapper}
         ListboxProps={{
           // @ts-expect-error: cannot set custom props for ListboxComponent

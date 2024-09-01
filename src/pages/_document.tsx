@@ -1,11 +1,10 @@
-import { Html, Head, Main, NextScript, DocumentProps } from 'next/document';
-import theme from '@/MuiTheme';
-import { ServerStyleSheet } from 'styled-components';
+import { Html, Head, Main, NextScript, DocumentProps, DocumentContext } from 'next/document';
 import {
   DocumentHeadTags,
   DocumentHeadTagsProps,
   documentGetInitialProps,
 } from '@mui/material-nextjs/v14-pagesRouter';
+import theme from '@/MuiTheme';
 
 export default function MyDocument(props: DocumentProps & DocumentHeadTagsProps) {
   return (
@@ -31,27 +30,7 @@ export default function MyDocument(props: DocumentProps & DocumentHeadTagsProps)
   );
 }
 
-MyDocument.getInitialProps = async ctx => {
-  const sheet = new ServerStyleSheet();
-  const originalRenderPage = ctx.renderPage;
-
-  try {
-    ctx.renderPage = () =>
-      originalRenderPage({
-        enhanceApp: App => props => sheet.collectStyles(<App {...props} />),
-      });
-
-    const initialProps = await documentGetInitialProps(ctx);
-    return {
-      ...initialProps,
-      styles: (
-        <>
-          {initialProps.styles}
-          {sheet.getStyleElement()}
-        </>
-      ),
-    };
-  } finally {
-    sheet.seal();
-  }
+MyDocument.getInitialProps = async (ctx: DocumentContext) => {
+  const finalProps = await documentGetInitialProps(ctx);
+  return finalProps;
 };

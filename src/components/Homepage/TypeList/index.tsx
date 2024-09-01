@@ -8,7 +8,7 @@ interface TypeListProps extends Grid2Props {
   types: NamedAPIResource[];
 }
 
-const TypeList = ({ types, ...rest }: TypeListProps): JSX.Element => {
+const TypeList = ({ types, ...rest }: TypeListProps): JSX.Element | null => {
   if (!types) return null;
 
   return (

@@ -71,7 +71,7 @@ const Homepage = ({ pokemonTypes }: PokestatsHomepageProps): JSX.Element => {
           <Stack gap="1.5em" padding={{ xs: 2, md: 4 }} divider={<Divider />}>
             <TypeList types={pokemonTypes} />
             <AnimatePresence mode="wait">
-              {isLoading ? <Loading $iconWidth={12} /> : <PokemonList pokemon={allPokemon} />}
+              {isLoading ? <Loading $iconWidth={12} /> : <PokemonList pokemon={allPokemon!} />}
             </AnimatePresence>
           </Stack>
         </Container>

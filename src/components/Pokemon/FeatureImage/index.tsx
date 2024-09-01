@@ -1,8 +1,9 @@
+import { useMemo } from 'react';
 // types
 import type { Pokemon, PokemonSpecies } from 'pokenode-ts';
-import { useMemo } from 'react';
 // helpers
-import { scaleInVariant, prefixId } from '@/helpers';
+import { prefixId } from '@/helpers';
+import { scaleInVariant } from '@/animations';
 // styles
 import { JpnName } from '@/components/BaseStyles';
 import { ImageContainer } from './StyledFeatureImage';

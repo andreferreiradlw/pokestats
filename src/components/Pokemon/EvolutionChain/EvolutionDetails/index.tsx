@@ -4,10 +4,9 @@ import type { EvolutionDetail, EvolutionTrigger } from 'pokenode-ts';
 // helpers
 import { removeDash, getResourceId } from '@/helpers';
 // components
-import { Anchor } from '@/BaseStyles';
 import Link from 'next/link';
 import { Container, Details, ItemImage } from './StyledEvolutionDetails';
-import { capitalize, Stack, StackProps } from '@mui/material';
+import { capitalize, Stack, StackProps, Link as MuiLink } from '@mui/material';
 // svg icons
 import BedtimeIcon from '@mui/icons-material/Bedtime';
 import WbSunnyIcon from '@mui/icons-material/WbSunny';
@@ -123,9 +122,9 @@ const EvolutionDetailItem = React.memo(
           {trade_species && (
             <>
               {' for '}
-              <Link href={`/pokemon/${trade_species.name}`} legacyBehavior passHref>
-                <Anchor>{capitalize(removeDash(trade_species.name))}</Anchor>
-              </Link>
+              <MuiLink href={`/pokemon/${trade_species.name}`} component={Link}>
+                {capitalize(removeDash(trade_species.name))}
+              </MuiLink>
             </>
           )}
           {held_item && ` while holding ${capitalize(removeDash(held_item.name))}`}
@@ -142,9 +141,9 @@ const EvolutionDetailItem = React.memo(
           {known_move_type && (
             <>
               {' learn move from '}
-              <Link href={`/type/${known_move_type.name}`} legacyBehavior passHref>
-                <Anchor>{capitalize(removeDash(known_move_type.name))}</Anchor>
-              </Link>
+              <MuiLink href={`/type/${known_move_type.name}`} component={Link}>
+                {capitalize(removeDash(known_move_type.name))}
+              </MuiLink>
 
               {' type'}
             </>
@@ -152,9 +151,9 @@ const EvolutionDetailItem = React.memo(
           {party_type && (
             <>
               {' with a Pokémon of type '}
-              <Link href={`/type/${party_type.name}`} legacyBehavior passHref>
-                <Anchor>{capitalize(removeDash(party_type.name))}</Anchor>
-              </Link>
+              <MuiLink href={`/type/${party_type.name}`} component={Link}>
+                {capitalize(removeDash(party_type.name))}
+              </MuiLink>
 
               {' in party'}
             </>
@@ -162,9 +161,9 @@ const EvolutionDetailItem = React.memo(
           {party_species && (
             <>
               {' if there is a '}
-              <Link href={`/pokemon/${party_species.name}`} legacyBehavior passHref>
-                <Anchor>{capitalize(removeDash(party_species.name))}</Anchor>
-              </Link>
+              <MuiLink href={`/pokemon/${party_species.name}`} component={Link}>
+                {capitalize(removeDash(party_species.name))}
+              </MuiLink>
 
               {' in party'}
             </>

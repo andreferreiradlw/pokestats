@@ -1,9 +1,13 @@
 import { useMemo, useCallback } from 'react';
+// hooks
 import { useRouter } from 'next/router';
-import type { Move, MoveLearnMethod } from 'pokenode-ts';
 import { usePlausible } from 'next-plausible';
-import { removeDash, mapGeneration, fadeInUpVariant, rowVariant, FilteredMove } from '@/helpers';
-import { UppercasedTd } from '@/components/BaseStyles';
+// types
+import type { Move, MoveLearnMethod } from 'pokenode-ts';
+// helpers
+import { removeDash, mapGeneration, FilteredMove } from '@/helpers';
+import { fadeInUpVariant, rowVariant } from '@/animations';
+// styles
 import {
   TableContainer,
   MovesTableEl,
@@ -13,6 +17,7 @@ import {
   NameTD,
   TableRow,
 } from './StyledMovesTable';
+// components
 import { AnimatePresence, HTMLMotionProps, motion } from 'framer-motion';
 import TypeBadge from '@/components/TypeBadge';
 import { Stack, Typography } from '@mui/material';
@@ -137,9 +142,13 @@ const MovesTable = ({ moves, learnMethod, machineNames, ...rest }: TypeMovesProp
                     <DataCell>
                       <TypeBadge flexmargin="0" $iconOnly $typename={move.type.name} />
                     </DataCell>
-                    <UppercasedTd onClick={() => onCellClick(move.name, move.id)}>
+                    <Typography
+                      textTransform="capitalize"
+                      component="td"
+                      onClick={() => onCellClick(move.name, move.id)}
+                    >
                       {move.damage_class.name}
-                    </UppercasedTd>
+                    </Typography>
                     <DataCell onClick={() => onCellClick(move.name, move.id)}>
                       {move.power || '-'}
                     </DataCell>

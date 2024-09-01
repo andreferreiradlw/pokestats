@@ -7,11 +7,11 @@ import type {
   SuperContestEffect,
 } from 'pokenode-ts';
 // helpers
-import { capitalise, removeDash } from '@/helpers';
+import { removeDash } from '@/helpers';
 // styles
 import { Table } from '@/BaseStyles';
 // components
-import { Box, Grid2Props, Link as MuiLink, Stack, Typography } from '@mui/material';
+import { Box, capitalize, Grid2Props, Link as MuiLink, Stack, Typography } from '@mui/material';
 import Link from 'next/link';
 
 interface ContestProps extends Grid2Props {
@@ -28,7 +28,7 @@ const renderLinks = (combos: NamedAPIResource[], lastDivider = 'or'): JSX.Elemen
     {combos.map(({ name }, i) => (
       <React.Fragment key={`${name}-combo-${i}`}>
         <MuiLink href={`/move/${name}`} component={Link}>
-          {capitalise(removeDash(name))}
+          {capitalize(removeDash(name))}
         </MuiLink>
         {i < combos.length - 1 && (i === combos.length - 2 ? ` ${lastDivider} ` : ', ')}
       </React.Fragment>

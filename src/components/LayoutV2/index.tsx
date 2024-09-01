@@ -1,7 +1,8 @@
 // hooks
 import { useIsClient, useWindowSize } from 'usehooks-ts';
 // helpers
-import { fadeInOutUpVariant, pageContainerVariant, scrollToTop } from '@/helpers';
+import { scrollToTop } from '@/helpers';
+import { fadeInUpVariant, pageContainerVariant } from '@/animations';
 // components
 import { Container, Stack, StackProps, useScrollTrigger } from '@mui/material';
 import { AnimatePresence, motion, HTMLMotionProps } from 'framer-motion';
@@ -56,7 +57,7 @@ const LayoutV2 = ({ children, withHeader, showGenSelect, ...rest }: LayoutV2Prop
             initial="hidden"
             animate="show"
             exit="exit"
-            variants={fadeInOutUpVariant}
+            variants={fadeInUpVariant}
             key="layout-back-top"
           >
             <ChevronTop width="50px" />

@@ -74,8 +74,4 @@ const TypesCell = styled('td')({
   gap: '0.5em',
 });
 
-const UppercasedTd = styled('td')({
-  textTransform: 'capitalize',
-});
-
-export { Table, Numbered, TypesCell, UppercasedTd };
+export { Table, Numbered, TypesCell };

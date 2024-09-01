@@ -2,7 +2,6 @@ import { useRouter } from 'next/router';
 import type { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 import { MoveClient, Move, MoveTarget, SuperContestEffect, ContestEffect } from 'pokenode-ts';
 import {
-  capitalise,
   findEnglishName,
   formatFlavorText,
   removeDash,
@@ -14,6 +13,7 @@ import MovePage from '@/components/MovePage';
 import Loading from '@/components/Loading';
 import { ContestApi, MachineApi, type MoveMachinesData, MovesApi } from '@/services';
 import LayoutV2 from '@/components/LayoutV2';
+import { capitalize } from '@mui/material';
 
 export interface PokestatsMovePageProps {
   move: Move;
@@ -37,12 +37,12 @@ const PokestatsMovePage: NextPage<PokestatsMovePageProps> = props => {
     );
   }
 
-  const moveName = findEnglishName(props.move.names) ?? capitalise(removeDash(props.move.name));
-  const pageTitle = `${moveName} (${capitalise(props.move.type.name)} Type Pokémon Move) - Pokestats.gg`;
+  const moveName = findEnglishName(props.move.names) ?? capitalize(removeDash(props.move.name));
+  const pageTitle = `${moveName} (${capitalize(props.move.type.name)} Type Pokémon Move) - Pokestats.gg`;
   const moveFlavorText = props.move.flavor_text_entries.at(-1)?.flavor_text;
   const pageDescription = moveFlavorText
     ? formatFlavorText(moveFlavorText)
-    : `${moveName} is a ${capitalise(props.move.type.name)}-type ${capitalise(
+    : `${moveName} is a ${capitalize(props.move.type.name)}-type ${capitalize(
         props.move.damage_class.name,
       )} move introduced in ${mapGeneration(props.move.generation.name)}`;
 
@@ -53,7 +53,7 @@ const PokestatsMovePage: NextPage<PokestatsMovePageProps> = props => {
         <meta name="description" content={pageDescription} />
         <meta
           name="keywords"
-          content={`${moveName}, Move, Pokémon, Pokémon Move, ${capitalise(
+          content={`${moveName}, Move, Pokémon, Pokémon Move, ${capitalize(
             props.move.type.name,
           )} Type, Move, TM, HM, TR, Machines, Target, Effect, PP, Accuracy, Power`}
         />

@@ -1,7 +1,7 @@
 // types
 import type { Type } from 'pokenode-ts';
 // helpers
-import { hoverVariant } from '@/helpers';
+import { hoverVariant } from '@/animations';
 // styles
 import { Badge } from './StyledBadge';
 // components

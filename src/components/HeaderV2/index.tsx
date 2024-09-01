@@ -4,7 +4,7 @@ import GameGenSelect from '../GameGenSelect';
 import AutocompleteV2 from '../AutocompleteV2';
 import { AppBarProps, Stack } from '@mui/material';
 // helpers
-import { hoverVariant } from '@/helpers';
+import { hoverVariant } from '@/animations';
 // styles
 import { ContentContainer, HeaderContainer, Logo } from './styledHeaderV2';
 

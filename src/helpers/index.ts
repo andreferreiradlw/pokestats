@@ -1,4 +1,3 @@
-export * from './animations';
 export * from './autocomplete';
 export * from './draw';
 export * from './findName';

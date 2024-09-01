@@ -1,13 +1,14 @@
+import { CSSProperties } from 'react';
 // types
 import type { HTMLMotionProps } from 'framer-motion';
-import type { CSSProperties } from '@mui/styled-engine-sc';
 import type { MoveType, Pokemon, PokemonType } from '@/types';
 // hooks
 import { useRouter } from 'next/router';
 import { usePlausible } from 'next-plausible';
 import { AutocompleteListOption, useAutocompleteOptions } from '@/hooks';
 // helpers
-import { fadeInDownVariant, removeDash } from '@/helpers';
+import { removeDash } from '@/helpers';
+import { fadeInDownVariant } from '@/animations';
 // components
 import {
   Autocomplete,

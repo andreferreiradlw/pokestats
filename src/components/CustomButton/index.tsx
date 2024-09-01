@@ -1,4 +1,4 @@
-import { hoverVariant } from '@/helpers';
+import { hoverVariant } from '@/animations';
 import { ButtonProps, Button as MuiButton } from '@mui/material';
 import { motion } from 'framer-motion';
 

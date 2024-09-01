@@ -3,8 +3,9 @@ import { Fragment, useCallback } from 'react';
 import type { Location } from '@/pages/regions/kanto-gen1';
 import type { PokemonEncounter } from 'pokenode-ts';
 // helpers
-import { capitalise, getIdFromURL, removeDash, rowVariant } from '@/helpers';
+import { getIdFromURL, removeDash } from '@/helpers';
 import equal from 'fast-deep-equal';
+import { rowVariant } from '@/animations';
 // styles
 import {
   MethodContainer,
@@ -22,7 +23,7 @@ import {
   DataCell,
 } from '@/components/MovesTable/StyledMovesTable';
 // components
-import { Grid2, Grid2Props, Stack, Typography } from '@mui/material';
+import { capitalize, Grid2, Grid2Props, Stack, Typography } from '@mui/material';
 
 interface LocationTableProps extends Grid2Props {
   location: Location;
@@ -276,7 +277,7 @@ const LocationTable = ({ location, ...rest }: LocationTableProps): JSX.Element =
       {locationAreas?.length > 0
         ? locationAreas.map(
             ({ pokemon_encounters, name: areaName, id: areaId, location: areaLocation }) => {
-              const areaSubName = capitalise(
+              const areaSubName = capitalize(
                 removeDash(areaName.replace(areaLocation.name, '')),
               ).trim();
               //
@@ -285,7 +286,7 @@ const LocationTable = ({ location, ...rest }: LocationTableProps): JSX.Element =
               return (
                 <Stack key={`${key}-${areaName}-${areaId}`} alignItems="flex-start" gap={2}>
                   {areaSubName && areaSubName !== 'Area' && (
-                    <Typography variant="sectionSubTitle">{capitalise(areaSubName)}</Typography>
+                    <Typography variant="sectionSubTitle">{capitalize(areaSubName)}</Typography>
                   )}
                   {formattedEncounters.length > 0 ? (
                     <TableContainer>

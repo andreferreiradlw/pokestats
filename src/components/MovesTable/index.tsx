@@ -162,7 +162,7 @@ const MovesTable = ({ moves, learnMethod, machineNames, ...rest }: TypeMovesProp
                       {move.priority}
                     </DataCell>
                     <DataCell onClick={() => onCellClick(move.name, move.id)}>
-                      {mapGeneration(move.generation.name)}
+                      {mapGeneration(move.generation?.name)}
                     </DataCell>
                   </TableRow>
                 );

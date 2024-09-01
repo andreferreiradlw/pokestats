@@ -1,6 +1,5 @@
 export * from './animations';
 export * from './autocomplete';
-export * from './box';
 export * from './draw';
 export * from './findName';
 export * from './gameVersion';
@@ -8,6 +7,7 @@ export * from './layout';
 export * from './moves';
 export * from './random';
 export * from './refs';
+export * from './responsiveProps';
 export * from './sprites';
 export * from './typography';
 export * from './getIdFromUrl';

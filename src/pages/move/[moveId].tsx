@@ -29,7 +29,7 @@ const PokestatsMovePage: NextPage<PokestatsMovePageProps> = props => {
   if (router.isFallback) {
     return (
       <Loading
-        flexheight="100vh"
+        height="100vh"
         icon="record"
         text="Learning Move"
         $iconWidth={{ xxs: '20%', xs: '15%', md: '10%', lg: '5%' }}

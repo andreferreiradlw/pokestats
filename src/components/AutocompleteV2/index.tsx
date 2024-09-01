@@ -17,7 +17,7 @@ import {
   Stack,
   TextField,
 } from '@mui/material';
-import LoadingV2 from '../LoadingV2';
+import Loading from '@/components/Loading';
 // styles
 import {
   Container,
@@ -114,7 +114,8 @@ const AutocompleteV2 = ({
                   endAdornment: (
                     <>
                       {isLoading && (
-                        <LoadingV2
+                        <Loading
+                          alignItems="flex-end"
                           $iconWidth={autocompleteOptions?.size === 'small' ? 3 : 5}
                           py={0}
                         />

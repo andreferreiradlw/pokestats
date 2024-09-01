@@ -1,15 +1,15 @@
 import { forwardRef } from 'react';
-// types
-import type { BoxProps } from '@/components/Box';
+// animations
+import { loadingChild, staggerExitLoadingVariant } from '@/animations';
 // styles
 import { LoadingContainer, PotionIcon, PokeballIcon, RecordIcon, Text } from './StyledLoading';
 // components
-import BoxWrapper from '@/components/Box/StyledBox';
-// helpers
-import { staggerExitLoadingVariant, loadingChild } from '@/helpers/animations';
+import { Stack, StackProps } from '@mui/material';
 
-export interface LoadingProps extends BoxProps {
-  $iconWidth?: string | Record<string, any>;
+import { motion } from 'framer-motion';
+
+export interface LoadingProps extends StackProps {
+  $iconWidth?: number | string | Record<string, string | number>;
   noIcon?: boolean;
   passKey?: string;
   text?: string;
@@ -33,51 +33,47 @@ const LoadingIcon = ({ width, icon }: LoadingIconProps): JSX.Element => {
 };
 
 const Loading = forwardRef(
-  (
-    {
-      flexheight,
-      $iconWidth,
-      noIcon,
-      icon,
-      text,
-      flexjustify = 'center',
-      flexalign = 'center',
-      passKey,
-      ...rest
-    }: LoadingProps,
-    ref: any,
-  ): JSX.Element => (
-    <LoadingContainer
+  ({ $iconWidth, noIcon, icon, text, passKey, ...rest }: LoadingProps, ref: any): JSX.Element => (
+    <Stack
       ref={ref}
-      flexjustify={flexjustify}
-      flexalign={flexalign}
-      flexheight={flexheight}
-      flexgap="1em"
+      justifyContent="center"
+      alignItems="center"
+      height="auto"
+      flexGrow={1}
+      gap={2}
+      width="100%"
+      component={LoadingContainer}
       initial="initial"
       animate="animate"
       exit="exit"
       variants={staggerExitLoadingVariant}
       key={passKey}
-      $flexgrow
-      width="100%"
       {...rest}
     >
       {!noIcon && (
-        <BoxWrapper
-          width="100%"
-          flexjustify="center"
+        <Stack
+          justifyContent="center"
+          alignItems="center"
+          component={motion.div}
           variants={loadingChild}
           key={`icon-${passKey}`}
         >
           <LoadingIcon width={$iconWidth} icon={icon} />
-        </BoxWrapper>
+        </Stack>
       )}
       {text && (
-        <BoxWrapper variants={loadingChild} key={`text-${passKey}`}>
-          <Text>{text}</Text>
-        </BoxWrapper>
+        <Stack
+          width="100%"
+          justifyContent="center"
+          alignItems="center"
+          component={motion.div}
+          variants={loadingChild}
+          key={`text-${passKey}`}
+        >
+          <Text variant="sectionSubTitle">{text}</Text>
+        </Stack>
       )}
-    </LoadingContainer>
+    </Stack>
   ),
 );
 

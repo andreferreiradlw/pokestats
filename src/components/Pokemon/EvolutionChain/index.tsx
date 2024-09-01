@@ -27,7 +27,7 @@ const EvolutionChain = ({
     <Grid2 container gap="1em" width="100%" direction="column" {...rest}>
       <Typography variant="sectionTitle">Evolution Chain</Typography>
       {isLoading ? (
-        <Loading flexheight="100%" $iconWidth={{ xxs: '20%', xs: '15%', md: '10%', lg: '5%' }} />
+        <Loading height="100%" $iconWidth={{ xxs: '20%', xs: '15%', md: '10%', lg: '5%' }} />
       ) : (
         <>
           <Grid2

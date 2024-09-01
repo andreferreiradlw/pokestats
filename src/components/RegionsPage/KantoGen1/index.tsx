@@ -15,7 +15,6 @@ import {
   PauseIcon,
 } from './StyledKantoGen1';
 // components
-import Box from '@/components/Box';
 import ImageMapper from '@/components/ImageMapper';
 // import NewMapper from '@/components/ImageMapper/newMapper';
 import CustomButton from '@/components/CustomButton';

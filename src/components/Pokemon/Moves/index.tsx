@@ -67,7 +67,7 @@ const PokemonMoves = ({ pokemon, ...rest }: PokemonMovesProps): JSX.Element => {
         <GameGenSelect />
       </Grid2>
       {movesLoading || machinesLoading ? (
-        <Loading flexheight="100%" $iconWidth={{ xxs: '20%', xs: '15%', md: '10%', lg: '5%' }} />
+        <Loading height="100%" $iconWidth={{ xxs: '20%', xs: '15%', md: '10%', lg: '5%' }} />
       ) : (
         <AnimatePresence mode="wait">
           {filteredMoves.length ? (

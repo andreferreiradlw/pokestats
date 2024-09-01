@@ -1,44 +1,25 @@
-import styled, { css } from 'styled-components';
 // types
 import type { LoadingProps } from './index';
-// components
-import BoxWrapper from '@/components/Box/StyledBox';
 // styles
-import {
-  SectionSubTitle,
-  ellipsis,
-  shake,
-  riseUp,
-  pokeballShake,
-  rotate,
-} from '@/components/BaseStyles';
+import { ellipsis, shake, riseUp, pokeballShake, rotate } from '@/animations';
 // helpers
-import { responsiveProps } from '@/helpers';
+import { responsivePropsV2 } from '@/helpers';
+// components
+import { styled, Typography } from '@mui/material';
+import { motion } from 'framer-motion';
 // svg
 import Potion from 'public/static/iconLibrary/potion.svg';
 import Pokeball from 'public/static/iconLibrary/pokeball.svg';
 import Record from 'public/static/iconLibrary/record.svg';
 
-const LoadingContainer = styled(BoxWrapper)`
-  align-items: center;
+const LoadingContainer = styled(motion.div)`
   flex-direction: column;
-  justify-content: center;
   z-index: 2;
-
-  ${({ flexheight }) =>
-    flexheight
-      ? css`
-          height: ${flexheight};
-          max-height: ${flexheight};
-        `
-      : css`
-          height: auto;
-        `}
 `;
 
 const PotionIcon = styled(Potion)<{ $iconwidth?: LoadingProps['$iconWidth'] }>`
   height: auto;
-  ${({ $iconWidth }) => $iconWidth && responsiveProps('width', $iconWidth)}
+  ${({ $iconWidth }) => $iconWidth && responsivePropsV2('width', $iconWidth)}
   // shake
   animation: 20s ${shake} 0ms infinite ease-in-out;
   // rise up
@@ -65,12 +46,12 @@ const PotionIcon = styled(Potion)<{ $iconwidth?: LoadingProps['$iconWidth'] }>`
 const PokeballIcon = styled(Pokeball)<{ $iconwidth?: LoadingProps['$iconWidth'] }>`
   animation: 2.5s ${pokeballShake} 0ms infinite ease-in-out;
   height: auto;
-  ${({ $iconWidth }) => $iconWidth && responsiveProps('width', $iconWidth)}
+  ${({ $iconWidth }) => $iconWidth && responsivePropsV2('width', $iconWidth)}
 `;
 
 const RecordIcon = styled(Record)<{ $iconwidth?: LoadingProps['$iconWidth'] }>`
   height: auto;
-  ${({ $iconWidth }) => $iconWidth && responsiveProps('width', $iconWidth)}
+  ${({ $iconWidth }) => $iconWidth && responsivePropsV2('width', $iconWidth)}
 
   .record_svg__roll {
     animation: 2s linear 0ms infinite ${rotate};
@@ -79,7 +60,7 @@ const RecordIcon = styled(Record)<{ $iconwidth?: LoadingProps['$iconWidth'] }>`
   }
 `;
 
-const Text = styled(SectionSubTitle)`
+const Text = styled(Typography)`
   &:after {
     animation: ${ellipsis} 1.25s infinite;
     content: '.';

@@ -15,8 +15,7 @@ import {
 } from './StyledMovesTable';
 import { AnimatePresence, HTMLMotionProps, motion } from 'framer-motion';
 import TypeBadge from '@/components/TypeBadge';
-import Box from '@/components/Box';
-import { Typography } from '@mui/material';
+import { Stack, Typography } from '@mui/material';
 
 interface TypeMovesProps extends HTMLMotionProps<'div'> {
   moves: (FilteredMove | Move)[];
@@ -67,12 +66,12 @@ const MovesTable = ({ moves, learnMethod, machineNames, ...rest }: TypeMovesProp
           return (
             <DataCell onClick={() => onCellClick(move.name, move.id)}>
               {!!machineNames?.length && machineNames[index] ? (
-                <Box
-                  flexdirection="row"
-                  flexjustify="space-between"
+                <Stack
+                  flexDirection="row"
+                  justifyContent="space-between"
                   width="75%"
-                  flexmargin="0 auto"
-                  flexgap="0.1em"
+                  margin="0 auto"
+                  gap={0.2}
                 >
                   <span>{machineNames[index].toUpperCase()}</span>
                   <img
@@ -80,7 +79,7 @@ const MovesTable = ({ moves, learnMethod, machineNames, ...rest }: TypeMovesProp
                     alt={move.type.name}
                     width="30"
                   />
-                </Box>
+                </Stack>
               ) : (
                 '-'
               )}

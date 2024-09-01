@@ -108,7 +108,7 @@ const InfiniteScroll = ({
       </Grid2>
       {/* Render the Loading component only if there are more items to load */}
       {state.showList.length > 0 && state.showList.length < pokemonList.length && (
-        <Loading flexheight="100px" $iconWidth="5%" flexpadding="1em 0" ref={nodeRef} />
+        <Loading height="100px" $iconWidth="5%" py={2} ref={nodeRef} />
       )}
     </>
   );

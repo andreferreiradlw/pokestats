@@ -1,4 +1,4 @@
-import { FilteredMove, getIdFromMachine } from '@/helpers';
+import { type FilteredMove, getResourceId } from '@/helpers';
 import { MachineApi } from '@/services';
 import { useQuery, UseQueryOptions, UseQueryResult } from '@tanstack/react-query';
 
@@ -12,7 +12,7 @@ export const useMachines = (
     queryFn: async () => {
       const machineIds = moves
         .filter(({ current_version_machine }) => current_version_machine)
-        .map(({ current_version_machine }) => getIdFromMachine(current_version_machine));
+        .map(({ current_version_machine }) => getResourceId(current_version_machine));
 
       const machines = await MachineApi.getByIds(machineIds);
 

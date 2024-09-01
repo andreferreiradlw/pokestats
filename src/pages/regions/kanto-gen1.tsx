@@ -1,11 +1,11 @@
 // types
 import type { GetStaticProps, NextPage } from 'next';
 // helpers
+import { findEnglishName, getResourceId } from '@/helpers';
 import { Location as PokenodeLocation, LocationArea, LocationClient, Region } from 'pokenode-ts';
 // components
 import Head from 'next/head';
 import KantoGen1 from '@/components/RegionsPage/KantoGen1';
-import { findEnglishName, getIdFromURL } from '@/helpers';
 import LayoutV2 from '@/components/LayoutV2';
 
 export interface Location {
@@ -48,7 +48,7 @@ export const getStaticProps: GetStaticProps<PokestatsKantoGen1PageProps> = async
     let locations = [];
     // create an axios request for each region location
     kantoData.locations.forEach(({ url }) =>
-      locations.push(locationClient.getLocationById(getIdFromURL(url, 'location'))),
+      locations.push(locationClient.getLocationById(getResourceId(url))),
     );
 
     const kantoLocationsData: PokenodeLocation[] = await Promise.all(locations);
@@ -71,9 +71,7 @@ export const getStaticProps: GetStaticProps<PokestatsKantoGen1PageProps> = async
         if (id > 234) return;
 
         const locationAreaData = await Promise.all(
-          areas.map(async ({ url }) =>
-            locationClient.getLocationAreaById(getIdFromURL(url, 'location-area')),
-          ),
+          areas.map(async ({ url }) => locationClient.getLocationAreaById(getResourceId(url))),
         );
 
         if (locationAreaData.length) {

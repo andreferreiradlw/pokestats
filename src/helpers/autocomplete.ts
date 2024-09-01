@@ -3,7 +3,7 @@ import type { Pokemon, PokemonType, MoveType } from '@/types';
 // helpers
 import { MoveClient, PokemonClient } from 'pokenode-ts';
 import { removeDuplicateMoves } from './moves';
-import { getIdFromURL } from './getIdFromUrl';
+import { getResourceId } from './getIdFromUrl';
 
 export interface AutocompleteListType {
   allPokemonData: Pokemon[];
@@ -41,7 +41,7 @@ const fetchAutocompleteData = async (): Promise<AutocompleteListType> => {
 
   const movesData = removeDuplicateMoves(allMovesDataResults).map(currMove => ({
     ...currMove,
-    id: getIdFromURL(currMove.url, 'move'),
+    id: getResourceId(currMove.url),
     assetType: 'move',
   }));
 

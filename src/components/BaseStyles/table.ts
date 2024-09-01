@@ -9,6 +9,7 @@ const Table = styled(motion.table)(({ theme }) => ({
   lineHeight: '1.2em',
   width: '100%',
   wordBreak: 'keep-all',
+  'border-collapse': 'collapse',
 
   '& tr span': {
     // fontWeight: 400,

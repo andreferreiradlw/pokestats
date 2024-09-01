@@ -1,13 +1,11 @@
 // types
 import type { GetStaticProps, NextPage } from 'next';
-// import type { Pokemon, PokemonType, MoveType } from '@/types';
 // helpers
 import { LocationClient, NamedAPIResource } from 'pokenode-ts';
-// import { PokestatsPageTitle } from '@/components/Head';
 // components
 import Head from 'next/head';
-import Layout from '@/components/Layout';
 import RegionsPage from '@/components/RegionsPage';
+import LayoutV2 from '@/components/LayoutV2';
 
 export interface PokestatsRegionsPageProps {
   regions: NamedAPIResource[];
@@ -18,9 +16,9 @@ const PokestatsRegionsPage: NextPage<PokestatsRegionsPageProps> = props => (
     <Head>
       <meta property="og:title" content="Regions" />
     </Head>
-    <Layout $withGutter={false} layoutGap="0">
+    <LayoutV2 withHeader key="regions-homepage">
       <RegionsPage {...props} />
-    </Layout>
+    </LayoutV2>
   </>
 );
 

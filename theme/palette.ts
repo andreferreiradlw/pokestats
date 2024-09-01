@@ -44,4 +44,10 @@ const typeColors = {
   water: '#6390F0',
 };
 
-export { lightPalette, typeColors };
+const gameColors = {
+  red: '#EB0000',
+  blue: '#1111FF',
+  yellow: '#FFD733',
+};
+
+export { lightPalette, typeColors, gameColors };

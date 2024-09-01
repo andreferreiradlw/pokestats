@@ -4,9 +4,9 @@ import type { GetStaticProps, NextPage } from 'next';
 import { Location as PokenodeLocation, LocationArea, LocationClient, Region } from 'pokenode-ts';
 // components
 import Head from 'next/head';
-import Layout from '@/components/Layout';
 import KantoGen1 from '@/components/RegionsPage/KantoGen1';
 import { findEnglishName, getIdFromURL } from '@/helpers';
+import LayoutV2 from '@/components/LayoutV2';
 
 export interface Location {
   key: string;
@@ -28,9 +28,9 @@ const PokestatsRegionsPage: NextPage<PokestatsKantoGen1PageProps> = props => {
           content="The Kanto region (Japanese: カントー地方 Kanto region) is a region of the Pokémon world. Kanto is located east of Johto, which together form a joint landmass that is south of Sinnoh."
         />
       </Head>
-      <Layout withHeader $withGutter={false} layoutGap="0">
+      <LayoutV2 withHeader key="kanto-gen1-region">
         <KantoGen1 {...props} />
-      </Layout>
+      </LayoutV2>
     </>
   );
 };

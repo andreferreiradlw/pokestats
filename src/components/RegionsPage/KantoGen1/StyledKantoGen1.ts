@@ -1,13 +1,12 @@
-import styled from 'styled-components';
 // components
-import Box from '@/components/Box';
+import { Stack, styled } from '@mui/material';
 import ImageNext from '@/components/ImageNext';
 import { motion } from 'framer-motion';
 // icon
 import StartIcon from 'public/static/iconLibrary/play.svg';
 import PausedIcon from 'public/static/iconLibrary/pause.svg';
 
-const ImageContainer = styled(Box)`
+const ImageContainer = styled(Stack)`
   position: relative;
 
   area {
@@ -15,7 +14,7 @@ const ImageContainer = styled(Box)`
   }
 `;
 
-const CurrentLocation = styled.span`
+const CurrentLocation = styled('span')`
   bottom: 5%;
   font-size: 1.2em;
   font-weight: 600;

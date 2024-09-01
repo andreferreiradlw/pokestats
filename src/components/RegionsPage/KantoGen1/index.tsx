@@ -20,7 +20,7 @@ import ImageMapper from '@/components/ImageMapper';
 // import NewMapper from '@/components/ImageMapper/newMapper';
 import CustomButton from '@/components/CustomButton';
 import LocationTable from '@/components/LocationTable';
-import { capitalize, Typography } from '@mui/material';
+import { capitalize, Grid2, Stack, Typography } from '@mui/material';
 // data
 import kantoZones from './kanto-zones.json';
 
@@ -177,25 +177,25 @@ const KantoGen1 = ({
   }, [dimensionsRef]);
 
   return (
-    <Box flexalign="flex-start" flexjustify="flex-start" flexgap="2em" $flexgrow>
-      <Box
-        flexdirection={{ xxs: 'column', lg: 'row' }}
-        flexalign="flex-start"
-        flexjustify="flex-start"
-        flexgap="2em"
+    <Stack alignItems="flex-start" justifyContent="flex-start" gap={4}>
+      <Stack
+        flexDirection={{ xxs: 'column', lg: 'row' }}
+        alignItems="flex-start"
+        justifyContent="flex-start"
+        gap={4}
         ref={dimensionsRef}
       >
-        <Box flexgap="0.5em" flexalign="flex-start">
+        <Stack gap={1} alignItems="flex-start">
           <Typography variant="pageHeading">Kanto</Typography>
           <Typography variant="sectionTitle">Generation I</Typography>
-          <p>
+          <Typography>
             <b>Kanto</b> is a region of the Pokémon world. It is located east of <b>Johto</b>, which
             together form a joint landmass that is south of <b>Sinnoh</b>.It is the setting of the
             first generation of games and can also be explored in Generations II, III, IV, and VII.
-          </p>
+          </Typography>
           <CustomButton onClick={handleHighlightsClick}>Toggle Highlights</CustomButton>
           {showAllAreas ? 'true' : 'false'}
-        </Box>
+        </Stack>
         <ImageContainer width="auto">
           <CurrentLocation>{mapHover || currArea?.label || 'Hover me!'}</CurrentLocation>
           <ImageMapper
@@ -216,7 +216,7 @@ const KantoGen1 = ({
             onMouseLeave={() => setMapHover(null)}
           />
         </ImageContainer>
-      </Box>
+      </Stack>
       {/* <Box screensizes={6} width="50%">
             <NewMapper
               containerRef={mapRef}
@@ -236,24 +236,26 @@ const KantoGen1 = ({
               onMouseLeave={() => setMapHover(null)}
             />
           </Box> */}
-      <Box
-        flexdirection={{ xxs: 'column', lg: 'row' }}
-        flexalign="flex-start"
-        flexjustify="flex-start"
-        flexgap="2em"
+      <Grid2
+        container
+        direction={{ xxs: 'column', lg: 'row' }}
+        alignItems="flex-start"
+        justifyContent="flex-start"
+        spacing={4}
       >
         {currArea && (
           <>
-            <Box
-              screensizes={currArea.locationAreas?.length > 0 ? 4 : 6}
-              flexalign="flex-start"
-              flexgap="1em"
+            <Grid2
+              size={currArea.locationAreas?.length > 0 ? 4 : 6}
+              flexDirection="column"
+              alignItems="flex-start"
+              gap={2}
             >
-              <Box
-                flexdirection="row"
-                flexjustify="flex-start"
-                flexalign="center"
-                flexgap="0.5em"
+              <Stack
+                flexDirection="row"
+                justifyContent="flex-start"
+                alignItems="center"
+                gap={1}
                 width="auto"
               >
                 <Typography variant="sectionTitle">{currArea.label}</Typography>
@@ -266,20 +268,20 @@ const KantoGen1 = ({
                 >
                   {isPlaying ? <PauseIcon /> : <PlayIcon />}
                 </PlayIconContainer>
-              </Box>
-              <p>{currAreaDescription}</p>
+              </Stack>
+              <Typography>{currAreaDescription}</Typography>
               {!!currArea.locationAreas &&
-                currArea.locationAreas.map(({ name, location, names }, i) => {
+                currArea.locationAreas.map(({ name, location, names }) => {
                   const areaSubName = capitalize(
                     removeDash(name.replace(location.name, '')),
                   ).trim();
 
                   return (
-                    <Box
-                      key={`location-area-map-${name}-${i}`}
-                      flexalign="flex-start"
-                      flexjustify="flex-start"
-                      flexgap="0.5em"
+                    <Stack
+                      key={`location-area-map-${name}`}
+                      alignItems="flex-start"
+                      justifyContent="flex-start"
+                      gap={1}
                     >
                       {areaSubName && areaSubName !== 'Area' && (
                         <Typography variant="sectionSubTitle">{areaSubName}</Typography>
@@ -289,12 +291,12 @@ const KantoGen1 = ({
                         src={`https://raw.githubusercontent.com/andreferreiradlw/pokestats_media/main/assets/regions/kanto/gen1/${name}.png`}
                         placeholderwidth="10%"
                       />
-                    </Box>
+                    </Stack>
                   );
                 })}
-            </Box>
+            </Grid2>
             {currArea.locationAreas ? (
-              <LocationTable location={currArea} screensizes={8} />
+              <LocationTable location={currArea} size={8} />
             ) : (
               <MapImage
                 alt={`Map view of ${currArea.label}`}
@@ -303,8 +305,8 @@ const KantoGen1 = ({
             )}
           </>
         )}
-      </Box>
-    </Box>
+      </Grid2>
+    </Stack>
   );
 };
 

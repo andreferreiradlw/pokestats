@@ -15,7 +15,6 @@ import {
   GamesContainer,
   GamePill,
 } from './StyledLocationTable';
-import { SectionSubTitle, UppercasedTd } from '@/components/BaseStyles';
 import {
   TableContainer,
   MovesTableEl,
@@ -23,10 +22,9 @@ import {
   DataCell,
 } from '@/components/MovesTable/StyledMovesTable';
 // components
-import { AnimatePresence } from 'framer-motion';
-import Box, { BoxProps } from '../Box';
+import { Grid2, Grid2Props, Stack, Typography } from '@mui/material';
 
-interface LocationTableProps extends BoxProps {
+interface LocationTableProps extends Grid2Props {
   location: Location;
 }
 
@@ -274,213 +272,211 @@ const LocationTable = ({ location, ...rest }: LocationTableProps): JSX.Element =
   // console.log('currArea', location);
 
   return (
-    <AnimatePresence mode="wait">
-      <Box flexgap="1.5em" {...rest}>
-        {locationAreas?.length > 0
-          ? locationAreas.map(
-              ({ pokemon_encounters, name: areaName, id: areaId, location: areaLocation }, i) => {
-                const areaSubName = capitalise(
-                  removeDash(areaName.replace(areaLocation.name, '')),
-                ).trim();
-                //
-                const formattedEncounters = formatEncounters(pokemon_encounters);
-                //
-                return (
-                  <Box
-                    key={`${key}-${areaName}-${areaId}-${i}`}
-                    flexalign="flex-start"
-                    flexgap="1em"
-                  >
-                    {areaSubName && areaSubName !== 'Area' && (
-                      <SectionSubTitle>{capitalise(areaSubName)}</SectionSubTitle>
-                    )}
-                    {formattedEncounters.length > 0 ? (
-                      <TableContainer>
-                        <MovesTableEl>
-                          <thead>
-                            <tr>
-                              <th rowSpan={2}>Method</th>
-                              <th rowSpan={2}>Pokemon</th>
-                              <th rowSpan={2}>Versions</th>
-                              <th rowSpan={2}>Levels</th>
-                              <th colSpan={3}>Likelihood</th>
-                            </tr>
-                            <tr>
-                              <td>Morning</td>
-                              <td>Day</td>
-                              <td>Night</td>
-                            </tr>
-                          </thead>
-                          <TableBody>
-                            {formattedEncounters.map(({ name: methodName, pokemon }, i) => {
-                              let methodRowSpan = 0;
+    <Grid2 gap={4} flexDirection="column" {...rest}>
+      {locationAreas?.length > 0
+        ? locationAreas.map(
+            ({ pokemon_encounters, name: areaName, id: areaId, location: areaLocation }) => {
+              const areaSubName = capitalise(
+                removeDash(areaName.replace(areaLocation.name, '')),
+              ).trim();
+              //
+              const formattedEncounters = formatEncounters(pokemon_encounters);
+              //
+              return (
+                <Stack key={`${key}-${areaName}-${areaId}`} alignItems="flex-start" gap={2}>
+                  {areaSubName && areaSubName !== 'Area' && (
+                    <Typography variant="sectionSubTitle">{capitalise(areaSubName)}</Typography>
+                  )}
+                  {formattedEncounters.length > 0 ? (
+                    <TableContainer>
+                      <MovesTableEl>
+                        <thead>
+                          <tr>
+                            <th rowSpan={2}>Method</th>
+                            <th rowSpan={2}>Pokemon</th>
+                            <th rowSpan={2}>Versions</th>
+                            <th rowSpan={2}>Levels</th>
+                            <th colSpan={3}>Likelihood</th>
+                          </tr>
+                          <tr>
+                            <td>Morning</td>
+                            <td>Day</td>
+                            <td>Night</td>
+                          </tr>
+                        </thead>
+                        <TableBody>
+                          {formattedEncounters.map(({ name: methodName, pokemon }, i) => {
+                            let methodRowSpan = 0;
 
-                              pokemon.forEach(currPokemon => {
-                                methodRowSpan += currPokemon.versions.length;
-                              });
+                            pokemon.forEach(currPokemon => {
+                              methodRowSpan += currPokemon.versions.length;
+                            });
 
-                              const firstPokemon = pokemon.shift();
-                              const { name: firstPokemonName, versions: firstPokemonVersions } =
-                                firstPokemon;
+                            const firstPokemon = pokemon.shift();
+                            const { name: firstPokemonName, versions: firstPokemonVersions } =
+                              firstPokemon;
 
-                              const firstVersion = firstPokemonVersions.shift();
+                            const firstVersion = firstPokemonVersions.shift();
 
-                              return (
-                                <Fragment key={`${areaName}-${areaId}-${methodName}`}>
-                                  <tr>
-                                    <UppercasedTd rowSpan={methodRowSpan}>
-                                      <MethodContainer>
-                                        <img
-                                          alt="pokeflute"
-                                          src={mapMethodIcon(methodName, firstPokemonName, key)}
-                                        />
-                                        <MethodName>{removeDash(methodName)}</MethodName>
-                                      </MethodContainer>
-                                    </UppercasedTd>
-                                    <PokemonCell
-                                      rowSpan={firstPokemonVersions.length + 1}
-                                      whileHover="hover"
-                                      whileTap="tap"
-                                      variants={rowVariant}
-                                      key={`pokemon-${methodName}-${i}-${firstPokemonName}`}
-                                    >
-                                      <LocationAnchor href={`/pokemon/${firstPokemonName}`}>
-                                        <PokeImg
-                                          src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${firstVersion.id}.png`}
-                                        />
-                                        {firstPokemonName}
-                                      </LocationAnchor>
-                                    </PokemonCell>
-                                    <DataCell>
-                                      <GamesContainer>
-                                        {firstVersion.games.map((game, i) => (
-                                          <GamePill
-                                            key={`${firstPokemonName}-${game}-${i}`}
-                                            game={game}
-                                          >
-                                            {game}
-                                          </GamePill>
-                                        ))}
-                                      </GamesContainer>
-                                    </DataCell>
-                                    <DataCell>
-                                      {firstVersion.minLevel === firstVersion.maxLevel
-                                        ? firstVersion.maxLevel
-                                        : `${firstVersion.minLevel} to ${firstVersion.maxLevel}`}
-                                    </DataCell>
-                                    <DataCell colSpan={3}>{`${firstVersion.maxChance}%`}</DataCell>
-                                  </tr>
-                                  {firstPokemonVersions.length > 0 &&
-                                    firstPokemonVersions.map(
-                                      ({ minLevel, maxChance, maxLevel, games }, i) => (
-                                        <tr key={`${methodName}-${firstPokemonName}-version-${i}`}>
-                                          <DataCell>
-                                            <GamesContainer>
-                                              {games.map((game, i) => (
-                                                <GamePill
-                                                  key={`${firstPokemonName}-${game}-others-${i}`}
-                                                  game={game}
-                                                >
-                                                  {game}
-                                                </GamePill>
-                                              ))}
-                                            </GamesContainer>
-                                          </DataCell>
-                                          <DataCell>
-                                            {minLevel === maxLevel
-                                              ? maxLevel
-                                              : `${minLevel} to ${maxLevel}`}
-                                          </DataCell>
-                                          <DataCell colSpan={3}>{`${maxChance}%`}</DataCell>
-                                        </tr>
-                                      ),
-                                    )}
-                                  {pokemon.map(({ name: pokemonName, versions }, i) => {
-                                    const pokemonFirstVersion = versions.shift();
+                            return (
+                              <Fragment key={`${areaName}-${areaId}-${methodName}`}>
+                                <tr>
+                                  <Typography
+                                    textTransform="capitalize"
+                                    component="td"
+                                    rowSpan={methodRowSpan}
+                                  >
+                                    <MethodContainer>
+                                      <img
+                                        alt="pokeflute"
+                                        src={mapMethodIcon(methodName, firstPokemonName, key)}
+                                      />
+                                      <MethodName>{removeDash(methodName)}</MethodName>
+                                    </MethodContainer>
+                                  </Typography>
+                                  <PokemonCell
+                                    rowSpan={firstPokemonVersions.length + 1}
+                                    whileHover="hover"
+                                    whileTap="tap"
+                                    variants={rowVariant}
+                                    key={`pokemon-${methodName}-${i}-${firstPokemonName}`}
+                                  >
+                                    <LocationAnchor href={`/pokemon/${firstPokemonName}`}>
+                                      <PokeImg
+                                        src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${firstVersion.id}.png`}
+                                      />
+                                      {firstPokemonName}
+                                    </LocationAnchor>
+                                  </PokemonCell>
+                                  <DataCell>
+                                    <GamesContainer>
+                                      {firstVersion.games.map((game, i) => (
+                                        <GamePill
+                                          key={`${firstPokemonName}-${game}-${i}`}
+                                          game={game}
+                                        >
+                                          {game}
+                                        </GamePill>
+                                      ))}
+                                    </GamesContainer>
+                                  </DataCell>
+                                  <DataCell>
+                                    {firstVersion.minLevel === firstVersion.maxLevel
+                                      ? firstVersion.maxLevel
+                                      : `${firstVersion.minLevel} to ${firstVersion.maxLevel}`}
+                                  </DataCell>
+                                  <DataCell colSpan={3}>{`${firstVersion.maxChance}%`}</DataCell>
+                                </tr>
+                                {firstPokemonVersions.length > 0 &&
+                                  firstPokemonVersions.map(
+                                    ({ minLevel, maxChance, maxLevel, games }, i) => (
+                                      <tr key={`${methodName}-${firstPokemonName}-version-${i}`}>
+                                        <DataCell>
+                                          <GamesContainer>
+                                            {games.map((game, i) => (
+                                              <GamePill
+                                                key={`${firstPokemonName}-${game}-others-${i}`}
+                                                game={game}
+                                              >
+                                                {game}
+                                              </GamePill>
+                                            ))}
+                                          </GamesContainer>
+                                        </DataCell>
+                                        <DataCell>
+                                          {minLevel === maxLevel
+                                            ? maxLevel
+                                            : `${minLevel} to ${maxLevel}`}
+                                        </DataCell>
+                                        <DataCell colSpan={3}>{`${maxChance}%`}</DataCell>
+                                      </tr>
+                                    ),
+                                  )}
+                                {pokemon.map(({ name: pokemonName, versions }, i) => {
+                                  const pokemonFirstVersion = versions.shift();
 
-                                    return (
-                                      <Fragment key={`${methodName}-${pokemonName}-${i}`}>
-                                        <tr>
-                                          <PokemonCell
-                                            rowSpan={versions.length + 1}
-                                            whileHover="hover"
-                                            whileTap="tap"
-                                            variants={rowVariant}
-                                            key={`pokemon-${methodName}-${i}-${pokemonName}`}
-                                          >
-                                            <LocationAnchor href={`/pokemon/${pokemonName}`}>
-                                              <PokeImg
-                                                src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemonFirstVersion.id}.png`}
-                                              />
-                                              {pokemonName}
-                                            </LocationAnchor>
-                                          </PokemonCell>
-                                          <DataCell>
-                                            <GamesContainer>
-                                              {pokemonFirstVersion.games.map((game, i) => (
-                                                <GamePill
-                                                  key={`${pokemonName}-${game}-${i}`}
-                                                  game={game}
-                                                >
-                                                  {game}
-                                                </GamePill>
-                                              ))}
-                                            </GamesContainer>
-                                          </DataCell>
-                                          <DataCell>
-                                            {pokemonFirstVersion.minLevel ===
-                                            pokemonFirstVersion.maxLevel
-                                              ? pokemonFirstVersion.maxLevel
-                                              : `${pokemonFirstVersion.minLevel} to ${pokemonFirstVersion.maxLevel}`}
-                                          </DataCell>
-                                          <DataCell
-                                            colSpan={3}
-                                          >{`${pokemonFirstVersion.maxChance}%`}</DataCell>
-                                        </tr>
-                                        {versions.length > 0 &&
-                                          versions.map(
-                                            ({ minLevel, maxChance, maxLevel, games }, i) => (
-                                              <tr key={`${methodName}-${pokemonName}-version-${i}`}>
-                                                <DataCell>
-                                                  <GamesContainer>
-                                                    {games.map((game, i) => (
-                                                      <GamePill
-                                                        key={`${pokemonName}-${game}-others-${i}`}
-                                                        game={game}
-                                                      >
-                                                        {game}
-                                                      </GamePill>
-                                                    ))}
-                                                  </GamesContainer>
-                                                </DataCell>
-                                                <DataCell>
-                                                  {minLevel === maxLevel
-                                                    ? maxLevel
-                                                    : `${minLevel} to ${maxLevel}`}
-                                                </DataCell>
-                                                <DataCell colSpan={3}>{`${maxChance}%`}</DataCell>
-                                              </tr>
-                                            ),
-                                          )}
-                                      </Fragment>
-                                    );
-                                  })}
-                                </Fragment>
-                              );
-                            })}
-                          </TableBody>
-                        </MovesTableEl>
-                      </TableContainer>
-                    ) : (
-                      'No pokemon encounters in this area.'
-                    )}
-                  </Box>
-                );
-              },
-            )
-          : 'No areas to show in current location.'}
-      </Box>
-    </AnimatePresence>
+                                  return (
+                                    <Fragment key={`${methodName}-${pokemonName}-${i}`}>
+                                      <tr>
+                                        <PokemonCell
+                                          rowSpan={versions.length + 1}
+                                          whileHover="hover"
+                                          whileTap="tap"
+                                          variants={rowVariant}
+                                          key={`pokemon-${methodName}-${i}-${pokemonName}`}
+                                        >
+                                          <LocationAnchor href={`/pokemon/${pokemonName}`}>
+                                            <PokeImg
+                                              src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemonFirstVersion.id}.png`}
+                                            />
+                                            {pokemonName}
+                                          </LocationAnchor>
+                                        </PokemonCell>
+                                        <DataCell>
+                                          <GamesContainer>
+                                            {pokemonFirstVersion.games.map((game, i) => (
+                                              <GamePill
+                                                key={`${pokemonName}-${game}-${i}`}
+                                                game={game}
+                                              >
+                                                {game}
+                                              </GamePill>
+                                            ))}
+                                          </GamesContainer>
+                                        </DataCell>
+                                        <DataCell>
+                                          {pokemonFirstVersion.minLevel ===
+                                          pokemonFirstVersion.maxLevel
+                                            ? pokemonFirstVersion.maxLevel
+                                            : `${pokemonFirstVersion.minLevel} to ${pokemonFirstVersion.maxLevel}`}
+                                        </DataCell>
+                                        <DataCell
+                                          colSpan={3}
+                                        >{`${pokemonFirstVersion.maxChance}%`}</DataCell>
+                                      </tr>
+                                      {versions.length > 0 &&
+                                        versions.map(
+                                          ({ minLevel, maxChance, maxLevel, games }, i) => (
+                                            <tr key={`${methodName}-${pokemonName}-version-${i}`}>
+                                              <DataCell>
+                                                <GamesContainer>
+                                                  {games.map((game, i) => (
+                                                    <GamePill
+                                                      key={`${pokemonName}-${game}-others-${i}`}
+                                                      game={game}
+                                                    >
+                                                      {game}
+                                                    </GamePill>
+                                                  ))}
+                                                </GamesContainer>
+                                              </DataCell>
+                                              <DataCell>
+                                                {minLevel === maxLevel
+                                                  ? maxLevel
+                                                  : `${minLevel} to ${maxLevel}`}
+                                              </DataCell>
+                                              <DataCell colSpan={3}>{`${maxChance}%`}</DataCell>
+                                            </tr>
+                                          ),
+                                        )}
+                                    </Fragment>
+                                  );
+                                })}
+                              </Fragment>
+                            );
+                          })}
+                        </TableBody>
+                      </MovesTableEl>
+                    </TableContainer>
+                  ) : (
+                    'No pokemon encounters in this area.'
+                  )}
+                </Stack>
+              );
+            },
+          )
+        : 'No areas to show in current location.'}
+    </Grid2>
   );
 };
 

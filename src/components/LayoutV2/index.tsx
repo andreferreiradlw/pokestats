@@ -36,6 +36,7 @@ const LayoutV2 = ({ children, withHeader, showGenSelect, ...rest }: LayoutV2Prop
           alignItems="center"
           position="relative"
           width="100%"
+          flexGrow={1}
           component={motion.main}
           initial="hidden"
           animate="visible"

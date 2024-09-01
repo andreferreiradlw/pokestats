@@ -3,7 +3,7 @@ import { Fragment, useCallback } from 'react';
 import type { Location } from '@/pages/regions/kanto-gen1';
 import type { PokemonEncounter } from 'pokenode-ts';
 // helpers
-import { getIdFromURL, removeDash } from '@/helpers';
+import { getResourceId, removeDash } from '@/helpers';
 import equal from 'fast-deep-equal';
 import { rowVariant } from '@/animations';
 // styles
@@ -127,7 +127,7 @@ const LocationTable = ({ location, ...rest }: LocationTableProps): JSX.Element =
       pokemonEncounters.forEach(({ pokemon, version_details: encounterVersions }, i) => {
         const { name: pokemonName, url } = pokemon;
 
-        const pokemonId = getIdFromURL(url, 'pokemon');
+        const pokemonId = getResourceId(url);
 
         encounterVersions.forEach(({ encounter_details, max_chance, version }, i) => {
           let maxChance = max_chance > 100 ? null : max_chance;

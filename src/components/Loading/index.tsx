@@ -33,7 +33,10 @@ const LoadingIcon = ({ width, icon }: LoadingIconProps): JSX.Element => {
 };
 
 const Loading = forwardRef(
-  ({ $iconWidth, noIcon, icon, text, passKey, ...rest }: LoadingProps, ref: any): JSX.Element => (
+  (
+    { $iconWidth, noIcon, icon, text, passKey, alignItems, ...rest }: LoadingProps,
+    ref: any,
+  ): JSX.Element => (
     <Stack
       ref={ref}
       justifyContent="center"
@@ -52,8 +55,9 @@ const Loading = forwardRef(
     >
       {!noIcon && (
         <Stack
+          width="100%"
           justifyContent="center"
-          alignItems="center"
+          alignItems={alignItems || 'center'}
           component={motion.div}
           variants={loadingChild}
           key={`icon-${passKey}`}
@@ -70,7 +74,9 @@ const Loading = forwardRef(
           variants={loadingChild}
           key={`text-${passKey}`}
         >
-          <Text variant="sectionSubTitle">{text}</Text>
+          <Text variant="sectionSubTitle" textTransform="capitalize">
+            {text}
+          </Text>
         </Stack>
       )}
     </Stack>

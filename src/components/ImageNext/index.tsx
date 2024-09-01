@@ -1,11 +1,10 @@
-import { useState } from 'react';
+import React, { useState, useCallback, memo } from 'react';
 // types
 import type { ImageProps } from 'next/image';
 // helpers
 import { placeholderVariant, fadeInUpVariant } from '@/animations';
 // styles
 import {
-  ImageElement,
   ImageContainer,
   LoadingIcon,
   ErrorIcon,
@@ -15,6 +14,7 @@ import {
 } from './StyledImageNext';
 // components
 import { AnimatePresence, HTMLMotionProps } from 'framer-motion';
+import Image from 'next/image';
 
 export interface ImageNextProps extends ImageProps {
   pixelatedimg?: boolean;
@@ -36,23 +36,33 @@ const ImageNext = ({
   const [showPlaceholder, setShowPlaceholder] = useState(true);
   const [hasError, setHasError] = useState(false);
 
+  // Memoized handlers to prevent re-creation on each render
+  const handleLoad = useCallback(() => setShowPlaceholder(false), []);
+  const handleError = useCallback(() => setHasError(true), []);
+
+  // Memoized derived values
+  const loadingProps = React.useMemo(
+    () => ({
+      initial: 'initial',
+      animate: 'animate',
+      variants: placeholderVariant,
+      placeholderwidth,
+      height,
+    }),
+    [placeholderwidth, height],
+  );
+
   return (
     <ImageContainer
       width={width as any}
       height={height}
+      $pixelatedimg={pixelatedimg}
       key={`image-container-${src}`}
       {...containerProps}
     >
       <AnimatePresence>
         {showPlaceholder && !hasError && (
-          <LoadingContainer
-            initial="initial"
-            animate="animate"
-            key={`loading-placeholder-${src}`}
-            variants={placeholderVariant}
-            placeholderwidth={placeholderwidth}
-            height={height}
-          >
+          <LoadingContainer key={`loading-placeholder-${src}`} {...loadingProps}>
             <LoadingIcon />
           </LoadingContainer>
         )}
@@ -63,29 +73,20 @@ const ImageNext = ({
             variants={fadeInUpVariant}
             key={`image-${src}`}
           >
-            <ImageElement
+            <Image
               loading={priority ? 'eager' : 'lazy'}
               priority={priority}
               fill={fill}
               sizes={fill && '(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'}
               src={src}
               draggable={false}
-              pixelatedimg={pixelatedimg}
-              onLoad={() => setShowPlaceholder(false)}
-              onError={() => setHasError(true)}
+              onLoad={handleLoad}
+              onError={handleError}
               {...rest}
             />
           </ImageWrapper>
         ) : (
-          <PlaceholderContainer
-            initial="initial"
-            animate="animate"
-            exit="exit"
-            key={`error-placeholder-${src}`}
-            variants={placeholderVariant}
-            placeholderwidth={placeholderwidth}
-            height={height}
-          >
+          <PlaceholderContainer key={`error-placeholder-${src}`} {...loadingProps}>
             <ErrorIcon />
           </PlaceholderContainer>
         )}
@@ -94,4 +95,5 @@ const ImageNext = ({
   );
 };
 
-export default ImageNext;
+// Memoize the component to prevent unnecessary re-renders
+export default memo(ImageNext);

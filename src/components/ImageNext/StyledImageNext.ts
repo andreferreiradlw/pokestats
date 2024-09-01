@@ -1,102 +1,93 @@
-import styled, { css } from 'styled-components';
+import { styled } from '@mui/material/styles';
 // types
 import type { ImageNextProps } from './index';
-// helpers
-import { tumble } from '@/components/BaseStyles';
+// animations
+import { tumble } from '@/animations';
 // components
 import { motion } from 'framer-motion';
-import Image from 'next/image';
-// icons
+// svg
 import EggIcon from 'public/static/iconLibrary/egg.svg';
 import Error404Icon from 'public/static/iconLibrary/404_error.svg';
 
-const ImageElement = styled(Image)<{ pixelatedimg?: ImageNextProps['pixelatedimg'] }>`
-  object-fit: contain;
-  position: relative !important;
-  will-change: opacity;
-
-  ${({ pixelatedimg }) =>
-    pixelatedimg &&
-    css`
-      image-rendering: pixelated;
-    `}
-`;
-
-const ImageContainer = styled(motion.div)<{
+const ImageContainer = styled(motion.div, {
+  shouldForwardProp: prop => prop !== 'width' && prop !== 'height', // Ensure custom props are not passed to DOM
+})<{
   width?: ImageNextProps['width'];
   height?: ImageNextProps['height'];
-}>`
-  align-items: center;
-  display: flex;
-  flex-basis: auto;
-  flex-direction: column;
-  flex-wrap: nowrap;
-  justify-content: center;
-  position: relative;
+  $pixelatedimg?: ImageNextProps['pixelatedimg'];
+}>(({ width, height, $pixelatedimg }) => ({
+  alignItems: 'center',
+  display: 'flex',
+  flexBasis: 'auto',
+  flexDirection: 'column',
+  flexWrap: 'nowrap',
+  justifyContent: 'center',
+  position: 'relative',
 
-  ${({ width }) =>
-    width &&
-    css`
-      width: ${width}px;
-    `}
+  ...(width && {
+    width: `${width}px`,
+  }),
 
-  ${({ height }) => css`
-    height: ${height ? `${height}px` : 'auto'};
+  height: height ? `${height}px` : 'auto',
 
-    ${ImageElement} {
-      height: ${height ? `${height}px` : 'auto'} !important;
-      min-height: ${height ? `${height}px` : 'auto'};
-      ${height && 'width: auto !important;'}
-    }
-  `}
-`;
+  [`& img`]: {
+    height: height ? `${height}px !important` : 'auto !important',
+    minHeight: height ? `${height}px` : 'auto',
+    objectFit: 'contain',
+    position: 'relative !important',
+    willChange: 'opacity',
+
+    ...(height && { width: 'auto !important' }),
+
+    ...($pixelatedimg && {
+      imageRendering: 'pixelated',
+    }),
+  },
+}));
+
+const ImageWrapper = styled(motion.div)({
+  alignItems: 'center',
+  display: 'flex',
+  justifyContent: 'center',
+  position: 'relative',
+  width: '100%',
+});
 
 const LoadingIcon = styled(EggIcon)`
   animation: ${tumble} 5s ease-in-out 0s infinite;
 `;
 
-const ErrorIcon = styled(Error404Icon)``;
+const ErrorIcon = styled(Error404Icon)({});
 
-const PlaceholderContainer = styled(motion.div)<{
+const PlaceholderContainer = styled(motion.div, {
+  shouldForwardProp: prop => prop !== 'placeholderwidth' && prop !== 'height', // Ensure custom props are not passed to DOM
+})<{
   placeholderwidth?: ImageNextProps['placeholderwidth'];
   height?: ImageNextProps['height'];
-}>`
-  align-items: center;
-  display: flex;
-  height: 100%;
-  justify-content: center;
-  padding: 15px 0;
-  position: relative;
+}>(({ height, placeholderwidth }) => ({
+  alignItems: 'center',
+  display: 'flex',
+  height: '100%',
+  justifyContent: 'center',
+  padding: '15px 0',
+  position: 'relative',
 
-  ${LoadingIcon}, ${ErrorIcon} {
-    ${({ height }) => css`
-      height: ${height ? `${height}px` : '100%'};
-      width: ${height ? 'auto' : '100%'};
-    `}
-  }
-  // width relative to container
-  ${({ placeholderwidth }) => css`
-    width: ${placeholderwidth ? `${placeholderwidth}` : '100%'};
-  `}
-`;
+  [`& ${LoadingIcon}, & ${ErrorIcon}`]: {
+    height: height ? `${height}px` : '100%',
+    width: height ? 'auto' : '100%',
+  },
 
-const LoadingContainer = styled(PlaceholderContainer)`
-  left: 50%;
-  position: absolute;
-  top: 50%;
-  transform: translate(-50%, -50%) !important;
-`;
+  width: placeholderwidth ? `${placeholderwidth}` : '100%',
+}));
 
-const ImageWrapper = styled(motion.div)`
-  align-items: center;
-  display: flex;
-  justify-content: center;
-  position: relative;
-  width: 100%;
-`;
+const LoadingContainer = styled(PlaceholderContainer)({
+  left: '50%',
+  position: 'absolute',
+  top: '50%',
+  transform: 'translate(-50%, -50%) !important',
+});
 
 export {
-  ImageElement,
   ImageContainer,
   LoadingIcon,
   ErrorIcon,

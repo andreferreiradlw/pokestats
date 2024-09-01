@@ -444,7 +444,7 @@ const checkIfArceus = (pokemonId: number): boolean => pokemonId > 898 && pokemon
 const mapVersionToGroup = (currentVersion: string): Game['group'] =>
   gameVersions.filter(version => version.value === currentVersion).map(version => version.group)[0];
 
-const mapGeneration = (generationValue: string): string =>
+const mapGeneration = (generationValue: string) =>
   generationValue ? generations.find(gen => gen.value === generationValue)?.label : '';
 
 const mapGenerationToGame = (value: string, pokemonId: number): Game['value'] => {
@@ -463,11 +463,11 @@ const checkIfEarlierGen = (newGen: string, currGen: string): boolean => {
   return versionValues.indexOf(newGen) > versionValues.indexOf(currGen);
 };
 
-const mapGroupToGeneration = (groupName: string): Game['generation'] =>
-  gameVersions.find(version => version.group === groupName).generation;
+const mapGroupToGeneration = (groupName: string): Game['generation'] | undefined =>
+  gameVersions.find(version => version.group === groupName)?.generation;
 
-const mapGroupToGenerationValue = (groupName: string): Game['genValue'] =>
-  gameVersions.find(version => version.group === groupName).genValue;
+const mapGroupToGenerationValue = (groupName: string): Game['genValue'] | undefined =>
+  gameVersions.find(version => version.group === groupName)?.genValue;
 
 const listGamesByGen = (generation: string): Game[] =>
   gameVersions.filter(game => game.genValue === generation);
@@ -475,10 +475,10 @@ const listGamesByGen = (generation: string): Game[] =>
 const listGamesByGroup = (group: string): Game['label'][] =>
   gameVersions.filter(game => game.group === group).map(currGame => currGame.label);
 
-const listGenGroupsByGroup = (genGroup: string): Game['genGroups'] =>
+const listGenGroupsByGroup = (genGroup: string): Game['genGroups'] | undefined =>
   gameVersions.find(version => version.group === genGroup)?.genGroups;
 
-const listMoveGroupsByGroup = (moveGroup: string): Game['genGroups'] =>
+const listMoveGroupsByGroup = (moveGroup: string): Game['genGroups'] | undefined =>
   gameVersions.find(version => version.group === moveGroup)?.moveGroups;
 
 export {

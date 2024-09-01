@@ -1,4 +1,4 @@
-import { Move } from 'pokenode-ts';
+import { Move, SuperContestEffect } from 'pokenode-ts';
 import MainClient from './MainClient';
 import { getResourceId } from '@/helpers';
 
@@ -25,7 +25,9 @@ export const ContestApi = {
     ]);
 
     if (superContestEffectData) {
-      delete superContestEffectData.moves;
+      // Use type assertion to allow deletion
+      delete (superContestEffectData as Partial<SuperContestEffect>).moves;
+
       superContestEffectData.flavor_text_entries =
         superContestEffectData.flavor_text_entries.filter(({ language }) => language.name === 'en');
     }

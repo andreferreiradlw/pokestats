@@ -39,11 +39,5 @@
     "incremental": true
   },
   "include": ["types/*.d.ts", "src/**/*.ts", "src/**/*.tsx"],
-  "exclude": [
-    "node_modules",
-    "dist",
-    "src/**/*.js",
-    "src/**/*.jsx",
-    "src/components/ImageMapper/index.tsx"
-  ]
+  "exclude": ["node_modules", "dist", "src/**/*.js", "src/**/*.jsx"]
 }

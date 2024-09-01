@@ -19,11 +19,11 @@ interface FeaturedImageProps extends Grid2Props {
 const FeaturedImage = ({ specieNames, pokemonId, ...rest }: FeaturedImageProps): JSX.Element => {
   // memo
   const englishName = useMemo(
-    () => specieNames?.find(name => name.language.name === 'en').name,
+    () => specieNames.find(name => name.language.name === 'en')?.name,
     [specieNames],
   );
   const hiraganaName = useMemo(
-    () => specieNames?.find(name => name.language.name === 'ja').name,
+    () => specieNames.find(name => name.language.name === 'ja')?.name,
     [specieNames],
   );
 
@@ -33,7 +33,7 @@ const FeaturedImage = ({ specieNames, pokemonId, ...rest }: FeaturedImageProps):
         priority
         loading="eager"
         placeholderwidth="20%"
-        alt={englishName}
+        alt={englishName!}
         src={`https://raw.githubusercontent.com/andreferreiradlw/pokestats_media/main/assets/images/${prefixId(
           pokemonId,
         )}.png`}

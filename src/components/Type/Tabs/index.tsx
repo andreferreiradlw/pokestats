@@ -1,6 +1,7 @@
 import { useMemo, useState, useCallback } from 'react';
 // types
 import type { TypePageProps } from '../index';
+import type { NamedAPIResource } from 'pokenode-ts';
 // helpers
 import { getResourceId } from '@/helpers';
 import { useTypeMoves } from '@/hooks';
@@ -69,7 +70,7 @@ const TypeTabs = ({ typeData, typeName, ...rest }: TypeTabsProps) => {
             key={`${name}-type-pokemon`}
           >
             <Typography variant="sectionTitle">{`${typeName} Type Pokemon (${pokemon.length})`}</Typography>
-            <InfiniteScroll pokemonList={pokemonList} />
+            <InfiniteScroll pokemonList={pokemonList as NamedAPIResource[]} />
           </TabContainer>
         ) : (
           <TabContainer
@@ -80,7 +81,7 @@ const TypeTabs = ({ typeData, typeName, ...rest }: TypeTabsProps) => {
             key={`${name}-type-moves`}
           >
             <Typography variant="sectionTitle">{`${typeName} Type Moves (${moves.length})`}</Typography>
-            {isLoadingMoves ? <Loading /> : <MovesTable moves={movesData} />}
+            {isLoadingMoves ? <Loading /> : movesData && <MovesTable moves={movesData} />}
           </TabContainer>
         )}
       </AnimatePresence>

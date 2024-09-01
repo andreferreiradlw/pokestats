@@ -8,7 +8,7 @@ import TypeRelations from './Relations';
 import TypeIcon from './TypeIcon';
 import Tabs from './Tabs';
 // styles
-import { Divider, Grid2, Stack, Typography } from '@mui/material';
+import { Divider, Grid2, Stack, Theme, Typography } from '@mui/material';
 
 export type TypePageProps = Omit<PokestatsTypePageProps, 'autocompleteList'>;
 
@@ -32,11 +32,11 @@ const TypePage = ({ typeData }: TypePageProps): JSX.Element => {
             <TypeRelations relations={damage_relations} />
           </Grid2>
           <Grid2 size={{ xxs: 12, lg: 3 }}>
-            <TypeIcon typeName={name} otherNames={names} />
+            <TypeIcon typeName={name as keyof Theme['palette']['types']} otherNames={names} />
           </Grid2>
         </Grid2>
       </Grid2>
-      <Tabs typeData={typeData} typeName={typeName} />
+      <Tabs typeData={typeData} typeName={typeName as keyof Theme['palette']['types']} />
     </Stack>
   );
 };

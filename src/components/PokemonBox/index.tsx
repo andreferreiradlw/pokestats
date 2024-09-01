@@ -28,7 +28,7 @@ const PokemonBox = ({
   defaultVarietyName,
   ...rest
 }: PokemonBoxProps): JSX.Element => {
-  const generationName = useMemo(() => mapGeneration(pokemonGen), [pokemonGen]);
+  const generationName = useMemo(() => pokemonGen && mapGeneration(pokemonGen), [pokemonGen]);
 
   return (
     <Link

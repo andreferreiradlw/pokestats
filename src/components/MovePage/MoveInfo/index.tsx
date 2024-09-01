@@ -25,7 +25,7 @@ const MoveInfo = ({ move, ...rest }: MoveInfoProps): JSX.Element => {
           <tr>
             <th>Category</th>
             <Typography textTransform="capitalize" component="td">
-              {removeDash(damage_class.name)}
+              {removeDash(damage_class?.name)}
             </Typography>
           </tr>
           <tr>
@@ -38,7 +38,7 @@ const MoveInfo = ({ move, ...rest }: MoveInfoProps): JSX.Element => {
           </tr>
           <tr>
             <th>PP</th>
-            <td>{`${pp} (max ${(pp * 8) / 5})`}</td>
+            <td>{pp ? `${pp} (max ${(pp * 8) / 5})` : 'No info.'}</td>
           </tr>
           <tr>
             <th>Priority</th>

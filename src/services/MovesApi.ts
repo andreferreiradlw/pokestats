@@ -1,3 +1,4 @@
+import { MoveTarget } from 'pokenode-ts';
 import MainClient from './MainClient';
 
 export const MovesApi = {
@@ -25,7 +26,8 @@ export const MovesApi = {
   getMoveTarget: async (targetId: number) => {
     const targetData = await MovesApi.getTargetById(targetId);
 
-    delete targetData.moves;
+    // Use type assertion with Partial to allow deletion
+    delete (targetData as Partial<MoveTarget>).moves;
 
     targetData.descriptions = targetData.descriptions.filter(
       ({ language }) => language.name === 'en',

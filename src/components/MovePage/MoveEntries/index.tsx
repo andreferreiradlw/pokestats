@@ -66,12 +66,13 @@ const MoveEntries = ({ move, moveName, ...rest }: MoveEntriesProps): JSX.Element
   );
 
   const renderEffectEntries = () =>
+    effect_chance &&
     effectEntries.length > 0 && (
       <Stack alignItems="flex-start" justifyContent="flex-start" gap={1}>
         <Typography variant="sectionTitle">Effect Entries</Typography>
         {effectEntries.map(({ effect }) => (
           <Typography key={`effect-entry-${effect}`}>
-            {effect.replace('$effect_chance', effect_chance?.toString())}
+            {effect.replace('$effect_chance', effect_chance.toString())}
           </Typography>
         ))}
       </Stack>

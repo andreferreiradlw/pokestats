@@ -43,7 +43,7 @@ const PokestatsMovePage: NextPage<PokestatsMovePageProps> = props => {
   const pageDescription = moveFlavorText
     ? formatFlavorText(moveFlavorText)
     : `${moveName} is a ${capitalize(props.move.type.name)}-type ${capitalize(
-        props.move.damage_class.name,
+        props.move.damage_class!.name,
       )} move introduced in ${mapGeneration(props.move.generation.name)}`;
 
   return (
@@ -83,7 +83,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const moveName = params.moveId as string;
+  const moveName = params?.moveId as string;
 
   try {
     const [moveData, allMovesData] = await Promise.all([

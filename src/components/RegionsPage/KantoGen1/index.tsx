@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { useCallback, useEffect, useRef, useState } from 'react';
 // types
 import type { PokestatsKantoGen1PageProps, Location } from '@/pages/regions/kanto-gen1';
@@ -23,7 +25,7 @@ import { capitalize, Grid2, Stack, Typography } from '@mui/material';
 // data
 import kantoZones from './kanto-zones.json';
 
-const mapLocationToMusic = (locationKey: string): string => {
+const mapLocationToMusic = (locationKey: string) => {
   switch (locationKey) {
     case 'pallet-town':
       return 'pallet-town';

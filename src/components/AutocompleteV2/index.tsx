@@ -17,6 +17,7 @@ import {
   createFilterOptions,
   Stack,
   TextField,
+  Theme,
 } from '@mui/material';
 import Loading from '@/components/Loading';
 // styles
@@ -55,7 +56,7 @@ const AutocompleteIcon = ({ assetType, name, id }: AutocompleteIconProps): JSX.E
         />
       );
     case 'type':
-      return <TypeIcon type={name} />;
+      return <TypeIcon type={name as keyof Theme['palette']['types']} />;
     case 'move':
       return (
         <ItemIcon

@@ -11,7 +11,7 @@ import { HTMLMotionProps } from 'framer-motion';
 
 export interface EvolutionProps extends HTMLMotionProps<'div'> {
   noArrow?: boolean;
-  species: PokemonSpecies;
+  species?: PokemonSpecies;
   evolutionDetails?: EvolutionDetail[];
 }
 
@@ -20,11 +20,12 @@ const Evolution = ({
   species,
   evolutionDetails,
   ...rest
-}: EvolutionProps): JSX.Element => {
+}: EvolutionProps): JSX.Element | null => {
+  if (!species) return null;
   // data
   const { id, name, generation, varieties, names } = species;
 
-  const pokemonName = findEnglishName(names);
+  const pokemonName = findEnglishName(names) || '';
 
   return (
     <EvolutionContainer

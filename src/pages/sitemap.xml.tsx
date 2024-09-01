@@ -43,7 +43,7 @@ export const getServerSideProps: GetServerSideProps = async context => {
 
     // sitemap
     const sitemap = createSitemap(
-      req.headers.host,
+      req.headers.host!,
       routes,
       allPokemonData,
       allTypesData,

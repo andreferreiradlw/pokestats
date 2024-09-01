@@ -19,7 +19,13 @@ interface LayoutV2Props extends Omit<HTMLMotionProps<'main'>, keyof StackProps>,
   key: string; // make it mandatory for animation purposes
 }
 
-const LayoutV2 = ({ children, withHeader, showGenSelect, ...rest }: LayoutV2Props): JSX.Element => {
+const LayoutV2 = ({
+  children,
+  withHeader,
+  showGenSelect,
+  key,
+  ...rest
+}: LayoutV2Props): JSX.Element => {
   // hooks
   const isClient = useIsClient();
   const { width } = useWindowSize();
@@ -43,7 +49,7 @@ const LayoutV2 = ({ children, withHeader, showGenSelect, ...rest }: LayoutV2Prop
           animate="visible"
           exit="fade"
           variants={pageContainerVariant}
-          key="layout-grid-container"
+          key={key || 'layout-grid-container'}
           {...rest}
         >
           <Container maxWidth="xl">{children}</Container>
@@ -51,7 +57,7 @@ const LayoutV2 = ({ children, withHeader, showGenSelect, ...rest }: LayoutV2Prop
         <Footer />
         {width > 768 && scrollPosition && (
           <ScrollButton
-            onClick={isClient && scrollToTop}
+            onClick={isClient ? scrollToTop : undefined}
             whileHover="hover"
             whileTap="tap"
             initial="hidden"

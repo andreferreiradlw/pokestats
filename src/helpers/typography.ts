@@ -5,26 +5,24 @@ const capitalise = (str: string): string => str.replace(/(^\w|\s\w)/g, m => m.to
 const removeUnderscore = (str: string): string => str.replace(/_/g, ' ');
 
 // remove dashes
-const removeDash = (str: string): string => {
-  if (!str.includes('-')) return str; // Early return if no dashes are found
-  return str.replace(/-/g, ' ');
+const removeDash = (str?: string): string => {
+  if (typeof str !== 'string') return ''; // Return an empty string if the input is undefined or not a string
+  return str.replace(/-/g, ' '); // Replace all dashes with spaces
 };
-
 // return text between parenthesis
-const betweentParenthesis = (str: string): string => {
-  const match = str.match(/\((.*)\)/)?.pop();
-  // if no parenthesis, return original str
-  return match || null;
-};
+const betweentParenthesis = (str: string) => str.match(/\((.*)\)/)?.pop();
 
 // formats game ROMs flavor text
-const formatFlavorText = (text: string): string =>
-  text
+const formatFlavorText = (text?: string): string => {
+  if (!text) return '';
+
+  return text
     .replace(/\u00AD/g, '')
     .replace(/\u000C/g, ' ')
     .replace(/u' -\n'/, ' - ')
     .replace(/u'-\n'/, '-')
     .replace(/(\r\n|\n|\r)/gm, ' ');
+};
 
 // prefixes id with zeros by length
 const prefixId = (id: number, length = 3): string => id.toString().padStart(length, '0');

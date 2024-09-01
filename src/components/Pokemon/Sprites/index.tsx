@@ -1,12 +1,13 @@
 import { useMemo } from 'react';
 // types
-import type { Pokemon, PokemonSpecies, PokemonSprites } from 'pokenode-ts';
+import type { OtherPokemonSprites, Pokemon, PokemonSpecies, PokemonSprites } from 'pokenode-ts';
 // helpers
 import { removeUnderscore, prefixId, capitalise, removeDash } from '@/helpers';
 // styles
 import { SpriteContainer, Sprite } from './StyledSprites';
 // components
 import { Divider, Grid2, Stack, StackProps, Typography } from '@mui/material';
+import { ImageNextProps } from '@/components/ImageNext';
 
 interface SpritesProps extends StackProps {
   pokemonSprites: PokemonSprites;
@@ -14,25 +15,56 @@ interface SpritesProps extends StackProps {
   forms: PokemonSpecies['varieties'];
 }
 
+interface SpriteWithLabelProps {
+  src: ImageNextProps['src'];
+  alt: ImageNextProps['alt'];
+  label: string;
+  height?: ImageNextProps['height'];
+}
+
+// Define a type for Dream World sprites
+interface DreamWorldSprites {
+  front_default?: string;
+  front_female?: string;
+}
+
+// Define a type for Official Artwork sprites
+interface OfficialArtworkSprites {
+  front_default?: string;
+  front_shiny?: string;
+}
+
+type ExtendedOtherPokemonSprites = OtherPokemonSprites & {
+  dream_world: DreamWorldSprites;
+  'official-artwork': OfficialArtworkSprites;
+};
+
+// Extend PokemonSprites to use the extended version of `other`
+interface ExtendedPokemonSprites extends Omit<PokemonSprites, 'other'> {
+  other: ExtendedOtherPokemonSprites;
+}
+
 // Reusable component for rendering sprite with a label
-const SpriteWithLabel = ({ src, alt, label, height = 100 }) => (
+const SpriteWithLabel = ({ src, alt, label, height = 100 }: SpriteWithLabelProps): JSX.Element => (
   <SpriteContainer>
     <Sprite unoptimized alt={alt} src={src} height={height} pixelatedimg />
     <Stack>
-      <p>{label}</p>
-      <p>{removeUnderscore(alt)}</p>
+      <Typography>{label}</Typography>
+      <Typography>{removeUnderscore(alt)}</Typography>
     </Stack>
   </SpriteContainer>
 );
 
 const Sprites = ({ pokemonSprites, pokemonId, forms, ...rest }: SpritesProps): JSX.Element => {
-  // Extract necessary sprites
+  // Cast pokemonSprites to the extended type to access custom properties
   const { animated } = pokemonSprites.versions['generation-v']['black-white'];
-  const { dream_world: dreamWorldSprites, 'official-artwork': officialArtworkSprites } =
-    pokemonSprites.other;
+  const { dream_world: dreamWorldSprites, 'official-artwork': officialArtworkSprites } = (
+    pokemonSprites as ExtendedPokemonSprites
+  ).other;
 
   const defaultVarietyName = useMemo(() => {
-    const defaultForm = removeDash(forms.find(form => form.is_default).pokemon.name);
+    const defaultForm = removeDash(forms.find(form => form.is_default)?.pokemon.name);
+
     return capitalise(defaultForm.substring(defaultForm.indexOf(' ') + 1));
   }, [forms]);
 

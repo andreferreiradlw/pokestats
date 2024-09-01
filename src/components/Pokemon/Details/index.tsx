@@ -7,7 +7,7 @@ import { GameVersionContext } from '@/context';
 import { removeDash, mapGeneration, formatFlavorText, findEnglishName } from '@/helpers';
 // components
 import TypeBadge from '@/components/TypeBadge';
-import { capitalize, Chip, Grid2, Grid2Props, Stack, Typography } from '@mui/material';
+import { capitalize, Chip, Grid2, Grid2Props, Stack, Theme, Typography } from '@mui/material';
 // styles
 import { Table, Numbered } from '@/components/BaseStyles';
 import { Flavor } from './StyledDetails';
@@ -108,7 +108,10 @@ const PokemonDetails = ({
         {types?.length > 0 && (
           <Stack flexDirection="row" flexWrap="wrap" width="auto" gap={2}>
             {types.map(({ type }) => (
-              <TypeBadge $typename={type.name} key={`${type.name}-detail-${id}`} />
+              <TypeBadge
+                $typename={type.name as keyof Theme['palette']['types']}
+                key={`${type.name}-detail-${id}`}
+              />
             ))}
           </Stack>
         )}
@@ -148,7 +151,7 @@ const PokemonDetails = ({
       <Flavor variant="h5" component="h3">
         {flavorText}
       </Flavor>
-      <Table forwardedAs="table">
+      <Table>
         <tbody>
           <tr>
             <th>Pokédex №</th>

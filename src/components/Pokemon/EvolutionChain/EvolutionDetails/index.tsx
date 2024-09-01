@@ -17,7 +17,7 @@ import SignpostIcon from '@mui/icons-material/Signpost';
 type TriggerNameProps = EvolutionTrigger['name'] | 'three-critical-hits';
 
 interface EvolutionDetailsProps extends StackProps {
-  details: EvolutionDetail[];
+  details?: EvolutionDetail[];
 }
 
 const timeOfDayIcons = {
@@ -113,6 +113,7 @@ const EvolutionDetailItem = React.memo(
               alt={`using-item-${item.name}`}
             />
           )}
+          {/* @ts-ignore */}
           {!!time_of_day && timeOfDayIcons[time_of_day]}
           {location && <SignpostIcon fontSize="large" />}
         </Stack>
@@ -179,8 +180,10 @@ const EvolutionDetails = React.memo(
   ({ details, ...rest }: EvolutionDetailsProps): JSX.Element | null => {
     const sortedDetails = useMemo(() => {
       if (!details?.length) return [];
+
       return [...details].sort((a, b) => {
         const triggerOrder = { 'use-item': 1, trade: 2 };
+        // @ts-ignore: trigger names are a key of triggerOrder
         return (triggerOrder[b.trigger?.name] || 0) - (triggerOrder[a.trigger?.name] || 0);
       });
     }, [details]);

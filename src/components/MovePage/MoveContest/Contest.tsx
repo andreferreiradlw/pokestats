@@ -15,7 +15,7 @@ import { Box, capitalize, Grid2Props, Link as MuiLink, Stack, Typography } from 
 import Link from 'next/link';
 
 interface ContestProps extends Grid2Props {
-  combos: ContestComboDetail;
+  combos?: ContestComboDetail;
   contestType: any;
   moveName: string;
   effect: ContestEffect | SuperContestEffect;

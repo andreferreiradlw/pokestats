@@ -12,7 +12,7 @@ import MoveMachines from './MoveMachines';
 import MoveTarget from './MoveTarget';
 import MovePokemon from './MovePokemon';
 import MoveStats from './MoveStats';
-import { Divider, Grid2, Stack, Typography } from '@mui/material';
+import { Divider, Grid2, Stack, Theme, Typography } from '@mui/material';
 
 export type MovePageProps = Omit<PokestatsMovePageProps, 'autocompleteList'>;
 
@@ -26,7 +26,7 @@ const MovePage = ({
   // data
   const { names: moveNames, type, flavor_text_entries, learned_by_pokemon } = move;
 
-  const moveName = findEnglishName(moveNames);
+  const moveName = findEnglishName(moveNames) || '';
 
   return (
     <Stack divider={<Divider />} gap={4} py={2}>
@@ -41,7 +41,7 @@ const MovePage = ({
           flexDirection={{ xxs: 'column-reverse', lg: 'column' }}
           gap={{ xxs: 2, lg: 1 }}
         >
-          <TypeBadge $typename={type.name} />
+          <TypeBadge $typename={type.name as keyof Theme['palette']['types']} />
           <Typography variant="pageHeading">{moveName}</Typography>
         </Stack>
         <Grid2

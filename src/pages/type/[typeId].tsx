@@ -19,7 +19,7 @@ const PokestatsTypePage: NextPage<PokestatsTypePageProps> = props => {
   const typeName = findEnglishName(names);
   const pageTitle = `${typeName} (Type) - Pokestats.gg`;
   const pageDescription = `The ${typeName} type ( Japanese: ${
-    names.find(({ language }) => language.name === 'ja-Hrkt').name
+    names.find(({ language }) => language.name === 'ja-Hrkt')?.name
   }タイプ ) is one of the eighteen elemental types in the Pokémon world.`;
 
   return (
@@ -64,7 +64,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   // params
-  const typeName = params.typeId as string;
+  const typeName = params?.typeId as string;
 
   try {
     // fetch data

@@ -5,7 +5,7 @@ import { EvolutionChain, EvolutionDetail, PokemonSpecies } from 'pokenode-ts';
 export interface EvolutionChainPokestats {
   chainId: number;
   babyTriggerItem: EvolutionChain['baby_trigger_item'];
-  firstEvolution: PokemonSpecies;
+  firstEvolution: PokemonSpecies | undefined; // Allow null if not found
   secondEvolution: {
     species: PokemonSpecies;
     evolutionDetails: EvolutionDetail[];
@@ -33,21 +33,26 @@ const processThirdEvolution = async (
 ) => {
   if (thirdEvolutions.length === 0) return [];
 
-  return await Promise.all(
-    thirdEvolutions.map(async thirdEvolution => {
-      const thirdEvolutionData = await fetchEvolutionDetails(
-        thirdEvolution.species.name,
-        currentSpecies,
-      );
-      if (thirdEvolutionData) {
-        return {
-          species: thirdEvolutionData,
-          evolutionDetails: thirdEvolution.evolution_details,
-        };
-      }
-      return null;
-    }),
-  ).then(results => results.filter(Boolean)); // Filter out nulls
+  return (
+    await Promise.all(
+      thirdEvolutions.map(async thirdEvolution => {
+        const thirdEvolutionData = await fetchEvolutionDetails(
+          thirdEvolution.species.name,
+          currentSpecies,
+        );
+        if (thirdEvolutionData) {
+          return {
+            species: thirdEvolutionData,
+            evolutionDetails: thirdEvolution.evolution_details,
+          };
+        }
+        return null;
+      }),
+    )
+  ).filter(
+    (evolution): evolution is { species: PokemonSpecies; evolutionDetails: EvolutionDetail[] } =>
+      evolution !== null,
+  ); // Filter out nulls and ensure correct type
 };
 
 // Process second evolution step and nested third evolution step
@@ -57,26 +62,39 @@ const processSecondEvolution = async (
 ) => {
   if (secondEvolutions.length === 0) return [];
 
-  return await Promise.all(
-    secondEvolutions.map(async secondEvolution => {
-      const secondEvolutionData = await fetchEvolutionDetails(
-        secondEvolution.species.name,
-        currentSpecies,
-      );
-      if (secondEvolutionData) {
-        const thirdEvolution = await processThirdEvolution(
-          secondEvolution.evolves_to,
+  return (
+    await Promise.all(
+      secondEvolutions.map(async secondEvolution => {
+        const secondEvolutionData = await fetchEvolutionDetails(
+          secondEvolution.species.name,
           currentSpecies,
         );
-        return {
-          species: secondEvolutionData,
-          evolutionDetails: secondEvolution.evolution_details,
-          thirdEvolution,
-        };
-      }
-      return null;
-    }),
-  ).then(results => results.filter(Boolean)); // Filter out nulls
+        if (secondEvolutionData) {
+          const thirdEvolution = await processThirdEvolution(
+            secondEvolution.evolves_to,
+            currentSpecies,
+          );
+          return {
+            species: secondEvolutionData,
+            evolutionDetails: secondEvolution.evolution_details,
+            thirdEvolution,
+          };
+        }
+        return null;
+      }),
+    )
+  ).filter(
+    (
+      evolution,
+    ): evolution is {
+      species: PokemonSpecies;
+      evolutionDetails: EvolutionDetail[];
+      thirdEvolution: {
+        species: PokemonSpecies;
+        evolutionDetails: EvolutionDetail[];
+      }[];
+    } => evolution !== null,
+  ); // Filter out nulls and ensure correct type
 };
 
 // Main hook to fetch and process the entire evolution chain
@@ -87,7 +105,7 @@ export const useEvolutionChain = (
 ): UseQueryResult<EvolutionChainPokestats> =>
   useQuery<EvolutionChainPokestats>({
     queryKey: ['evolutionChain', evolutionChain.id],
-    queryFn: async () => {
+    queryFn: async (): Promise<EvolutionChainPokestats> => {
       const firstEvolutionSpecies = evolutionChain.chain.species.name;
 
       const firstEvolution = await fetchEvolutionDetails(firstEvolutionSpecies, species);
@@ -100,7 +118,7 @@ export const useEvolutionChain = (
       return {
         chainId: evolutionChain.id,
         babyTriggerItem: evolutionChain.baby_trigger_item,
-        firstEvolution,
+        firstEvolution: firstEvolution as PokemonSpecies,
         secondEvolution,
       };
     },

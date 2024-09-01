@@ -23,12 +23,12 @@ const groupFlavorTexts = (
     .filter(({ language }) => language.name === 'en') // Filter out non-English texts
     .reduce((acc: Record<string, GroupedFlavorText>, { version_group, flavor_text }) => {
       const genGroups = listGenGroupsByGroup(version_group.name); // Get generation groups by version group
-      const primaryGroup = genGroups[0];
+      const primaryGroup = genGroups?.[0];
 
-      if (!acc[primaryGroup]) {
+      if (primaryGroup && !acc[primaryGroup]) {
         acc[primaryGroup] = {
           flavor: formatFlavorText(flavor_text), // Format flavor text
-          games: genGroups.map(group => listGamesByGroup(group)), // List games by group
+          games: genGroups?.map(group => listGamesByGroup(group)), // List games by group
         };
       }
       return acc;

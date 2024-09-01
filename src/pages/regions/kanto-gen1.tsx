@@ -45,7 +45,7 @@ export const getStaticProps: GetStaticProps<PokestatsKantoGen1PageProps> = async
       return { notFound: true };
     }
 
-    let locations = [];
+    let locations: Promise<PokenodeLocation>[] = [];
     // create an axios request for each region location
     kantoData.locations.forEach(({ url }) =>
       locations.push(locationClient.getLocationById(getResourceId(url))),
@@ -103,9 +103,9 @@ export const getStaticProps: GetStaticProps<PokestatsKantoGen1PageProps> = async
         // add location area data
         regionLocationAreas.push({
           key: locationName,
-          label: findEnglishName(names),
+          label: findEnglishName(names) || '',
           locationId: id,
-          locationAreas: locationAreaData.length ? locationAreaData : null,
+          locationAreas: locationAreaData,
         });
       }),
     );

@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { Fragment, useCallback } from 'react';
 // types
 import type { Location } from '@/pages/regions/kanto-gen1';

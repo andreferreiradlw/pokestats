@@ -6,10 +6,10 @@ import { NamedAPIResource } from 'pokenode-ts';
 // components
 import Loading from '@/components/Loading';
 import PokemonBox from '@/components/PokemonBox';
-import { Grid2, Grid2Props } from '@mui/material';
+import { Grid2, Grid2Props, Typography } from '@mui/material';
 
 export interface InfiniteScrollProps extends Grid2Props {
-  pokemonList: NamedAPIResource[];
+  pokemonList?: NamedAPIResource[] | null; // Allow undefined or null values
   itemsPerPage?: number;
 }
 
@@ -34,7 +34,9 @@ const InfiniteScroll = ({
   // Function to slice the pokemon list based on the current page
   const sliceNewPage = useCallback(
     (page: number): NamedAPIResource[] =>
-      pokemonList.slice(page === 1 ? 0 : (page - 1) * itemsPerPage, page * itemsPerPage),
+      pokemonList
+        ? pokemonList.slice(page === 1 ? 0 : (page - 1) * itemsPerPage, page * itemsPerPage)
+        : [],
     [itemsPerPage, pokemonList],
   );
 
@@ -65,7 +67,7 @@ const InfiniteScroll = ({
 
   // Effect to set up the IntersectionObserver when the list has items
   useEffect(() => {
-    if (state.showList.length > 0 && state.showList.length < pokemonList.length) {
+    if (pokemonList && state.showList.length > 0 && state.showList.length < pokemonList.length) {
       const options = {
         root: null,
         rootMargin: '0px',
@@ -76,17 +78,22 @@ const InfiniteScroll = ({
       if (nodeRef.current) observer.current.observe(nodeRef.current); // Observe the target node
       return () => observer.current?.disconnect(); // Cleanup on component unmount
     }
-  }, [state.showList.length, handleObserver, pokemonList.length]);
+  }, [state.showList.length, handleObserver, pokemonList]);
 
   // Effect to load more items when the current page changes
   useEffect(() => {
-    if (state.currPage > 1) {
+    if (state.currPage > 1 && pokemonList) {
       setState(prevState => ({
         ...prevState,
         showList: [...prevState.showList, ...sliceNewPage(state.currPage)], // Append new items to the list
       }));
     }
-  }, [state.currPage, sliceNewPage]);
+  }, [state.currPage, sliceNewPage, pokemonList]);
+
+  // If pokemonList is null or undefined, display a message instead of the component
+  if (!pokemonList) {
+    return <Typography variant="body1">No Pokémon available to display.</Typography>;
+  }
 
   return (
     <>

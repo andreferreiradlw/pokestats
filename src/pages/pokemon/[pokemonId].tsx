@@ -50,7 +50,7 @@ const PokestatsPokemonPage: NextPage<PokestatsPokemonPageProps> = ({ allPokemon,
 
   const pokemonName = findEnglishName(props.species.names);
   const pageTitle = `${pokemonName} (Pokémon #${props.pokemon.id}) - Pokestats.gg`;
-  const pageDescription = formatFlavorText(props.species.flavor_text_entries.at(-1)?.flavor_text);
+  const pageDescription = formatFlavorText(props.species.flavor_text_entries!.at(-1)?.flavor_text);
   const generationDescriptions = gameVersions
     .filter(version => version.genValue === props.species.generation.name)
     .map(game => game.label)
@@ -101,7 +101,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   // get current pokemon name from url params
-  const pokemonName = params.pokemonId as string;
+  const pokemonName = params?.pokemonId as string;
 
   try {
     // fetch data

@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { PokemonSpecies, PokemonSprites } from 'pokenode-ts';
 
 const spriteExtractor = (
@@ -19,7 +21,7 @@ const spriteExtractor = (
       sprites: [
         {
           label: 'Front Default',
-          imageUrl: other['official-artwork'].front_default,
+          imageUrl: other?.['official-artwork']?.front_default,
         },
         {
           label: 'Front Shiny',

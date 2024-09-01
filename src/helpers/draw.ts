@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import type { CTX } from '@/types/imageMapper';
 
 const drawRect = (

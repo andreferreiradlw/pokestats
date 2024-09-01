@@ -1,5 +1,3 @@
-// types
-import type { Type } from 'pokenode-ts';
 // helpers
 import { hoverVariant } from '@/animations';
 // styles
@@ -7,19 +5,24 @@ import { Badge } from './StyledBadge';
 // components
 import TypeIcon from '@/components/TypeIcon';
 import Link from 'next/link';
-import { capitalize, Tooltip, Typography } from '@mui/material';
+import { capitalize, Theme, Tooltip, Typography } from '@mui/material';
 
 export interface TypeBadgeProps {
   $iconOnly?: boolean;
   $iconWidth?: string;
   $iconHeight?: string;
-  $typename: Type['name'];
+  $typename: keyof Theme['palette']['types'];
   hideIcon?: boolean;
   flexmargin?: string;
   $fill?: boolean;
 }
 
-const TypeBadge = ({ $typename, hideIcon, $iconOnly, ...rest }: TypeBadgeProps): JSX.Element => {
+const TypeBadge = ({
+  $typename,
+  hideIcon,
+  $iconOnly,
+  ...rest
+}: TypeBadgeProps): JSX.Element | null => {
   if (!$typename) return null;
 
   return (

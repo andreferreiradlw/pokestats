@@ -5,7 +5,7 @@ import { removeUnderscore } from '@/helpers';
 // components
 import TypeBadge from '@/components/TypeBadge';
 import { Table, TypesCell } from '@/components/BaseStyles';
-import { Stack, StackProps, Typography, Box, useTheme, useMediaQuery } from '@mui/material';
+import { Stack, StackProps, Typography, Box, useTheme, useMediaQuery, Theme } from '@mui/material';
 
 interface TypeRelationsProps extends StackProps {
   relations: PokeNodeTypeRelations;
@@ -30,12 +30,12 @@ const TypeRelations = ({ relations, ...rest }: TypeRelationsProps): JSX.Element 
                 {removeUnderscore(relation)}
               </Typography>
               <TypesCell>
-                {!relations[relation].length
+                {!relations[relation as keyof PokeNodeTypeRelations].length
                   ? 'None'
-                  : relations[relation].map(type => (
+                  : relations[relation as keyof PokeNodeTypeRelations].map(type => (
                       <TypeBadge
                         key={`${type.name}-${relation}}`}
-                        $typename={type.name}
+                        $typename={type.name as keyof Theme['palette']['types']}
                         $iconOnly
                       />
                     ))}

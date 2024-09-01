@@ -20,7 +20,7 @@ import {
 // components
 import { AnimatePresence, HTMLMotionProps, motion } from 'framer-motion';
 import TypeBadge from '@/components/TypeBadge';
-import { Stack, Typography } from '@mui/material';
+import { Stack, Theme, Typography } from '@mui/material';
 
 interface TypeMovesProps extends HTMLMotionProps<'div'> {
   moves: (FilteredMove | Move)[];
@@ -140,14 +140,18 @@ const MovesTable = ({ moves, learnMethod, machineNames, ...rest }: TypeMovesProp
                       {removeDash(move.name)}
                     </NameTD>
                     <DataCell>
-                      <TypeBadge flexmargin="0" $iconOnly $typename={move.type.name} />
+                      <TypeBadge
+                        flexmargin="0"
+                        $iconOnly
+                        $typename={move.type.name as keyof Theme['palette']['types']}
+                      />
                     </DataCell>
                     <Typography
                       textTransform="capitalize"
                       component="td"
                       onClick={() => onCellClick(move.name, move.id)}
                     >
-                      {move.damage_class.name}
+                      {move.damage_class?.name}
                     </Typography>
                     <DataCell onClick={() => onCellClick(move.name, move.id)}>
                       {move.power || '-'}

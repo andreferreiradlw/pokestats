@@ -7,7 +7,7 @@ import { removeUnderscore } from '@/helpers';
 // components
 import TypeBadge from '@/components/TypeBadge';
 import { Table } from '@/components/BaseStyles';
-import { Grid2, Grid2Props, Stack, Switch, Tooltip, Typography } from '@mui/material';
+import { Grid2, Grid2Props, Stack, Switch, Theme, Tooltip, Typography } from '@mui/material';
 // icons
 import ShieldIcon from '@mui/icons-material/Shield';
 import ConnectWithoutContactIcon from '@mui/icons-material/ConnectWithoutContact';
@@ -37,7 +37,7 @@ const TypesTable = React.memo(
                 types.map(type => (
                   <TypeBadge
                     key={`${multiplierType}-${relation}-${type}`}
-                    $typename={type}
+                    $typename={type as keyof Theme['palette']['types']}
                     $iconOnly
                   />
                 ))

@@ -10,7 +10,6 @@ import { capitalize, Stack, Link as MuiLink } from '@mui/material';
 // svg icons
 import LoopIcon from '@mui/icons-material/Loop';
 import SignpostIcon from '@mui/icons-material/Signpost';
-
 import BedtimeIcon from '@mui/icons-material/Bedtime';
 import WbSunnyIcon from '@mui/icons-material/WbSunny';
 import WbTwilightIcon from '@mui/icons-material/WbTwilight';

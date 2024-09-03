@@ -24,7 +24,15 @@ const EvolutionChain = ({
   const { data, isLoading } = useEvolutionChain(evolutionChain, pokemonSpecies);
 
   return (
-    <Grid2 container gap="1em" width="100%" direction="column" {...rest}>
+    <Grid2
+      container
+      gap={4}
+      width="100%"
+      direction="column"
+      overflow="hidden
+    "
+      {...rest}
+    >
       <Typography variant="sectionTitle">Evolution Chain</Typography>
       {isLoading ? (
         <Loading height="100%" $iconWidth={{ xxs: '20%', xs: '15%', md: '10%', lg: '5%' }} />
@@ -37,30 +45,36 @@ const EvolutionChain = ({
               justifyContent="center"
               alignItems="center"
               size={12}
-              gap="1em"
+              gap={4}
             >
               <Evolution noArrow species={data.firstEvolution} style={{ width: 'auto' }} />
               {data.secondEvolution.length > 0 && (
                 <Grid2
                   alignItems="stretch"
                   justifyContent="space-evenly"
-                  gap="1em"
-                  maxWidth="100%"
-                  size={12}
-                  pb={1}
+                  gap={4}
+                  pb={2}
+                  px={2}
+                  width="100%"
                   sx={{
                     overflow: data.firstEvolution?.name === 'eevee' ? 'scroll hidden' : 'visible',
                   }}
                 >
                   {data.secondEvolution.map(({ species, evolutionDetails, thirdEvolution }) => (
-                    <Grid2 key="second-evo-container" gap="1em" flexDirection="column">
+                    <Grid2
+                      key="second-evo-container"
+                      gap={2}
+                      flexDirection="column"
+                      flexBasis="100%"
+                      minWidth="auto"
+                    >
                       <Evolution
                         species={species}
                         evolutionDetails={evolutionDetails}
                         key="second-evo"
                       />
                       {thirdEvolution.length > 0 && (
-                        <Grid2 justifyContent="space-evenly" gap="1em">
+                        <Grid2 justifyContent="space-evenly" gap={2}>
                           {thirdEvolution.map(({ species, evolutionDetails }) => (
                             <Evolution
                               key={`third-evo-${species.id}`}

@@ -38,7 +38,7 @@ const Evolution = ({
       {!noArrow && (
         <EvoDetailsContainer>
           <EvolutionDetails details={evolutionDetails} />
-          <EvoArrow fontSize="large" />
+          <EvoArrow fontSize="large" className="evo-arrow" />
         </EvoDetailsContainer>
       )}
       <PokemonBox

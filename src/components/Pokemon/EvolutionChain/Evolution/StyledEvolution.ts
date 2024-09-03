@@ -9,7 +9,7 @@ const EvolutionContainer = styled(motion.div)({
   display: 'flex',
   flexBasis: 0,
   flexDirection: 'column',
-  flexGrow: 0,
+  flexGrow: 1,
   gap: '1em',
   justifyContent: 'space-between',
 });
@@ -29,7 +29,7 @@ const EvoDetailsContainer = styled(motion.div)`
   justify-content: space-between;
   width: auto;
 
-  &:hover svg {
+  &:hover .evo-arrow {
     transform: translateY(0.25em);
   }
 `;

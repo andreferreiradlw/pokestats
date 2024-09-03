@@ -436,7 +436,7 @@ const LocationTable = ({ location, ...rest }: LocationTableProps): JSX.Element =
                                           <tr key={`${methodName}-${pokemonName}-version`}>
                                             <DataCell>
                                               <GamesContainer>
-                                                {games.map((game, i) => (
+                                                {games.map(game => (
                                                   <GamePill
                                                     key={`${pokemonName}-${game}-others`}
                                                     game={game}

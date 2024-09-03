@@ -38,7 +38,7 @@ const triggerNameMap: Record<
   TriggerNameProps,
   string | JSX.Element | ((hasTrade: boolean) => string)
 > = {
-  'level-up': 'level up',
+  'level-up': '',
   'use-item': 'use',
   trade: (hasTrade: boolean) => `trade ${!hasTrade ? 'for any Pokémon' : ''}`,
   shed: (
@@ -59,11 +59,13 @@ const ConditionalLinkText = memo(
   ({
     item,
     prefix,
+    suffix,
     transform,
     path,
   }: {
     item?: NamedAPIResource | null;
     prefix: string;
+    suffix?: string;
     transform: (text: string) => string;
     path: string;
   }) => {
@@ -74,6 +76,7 @@ const ConditionalLinkText = memo(
         <MuiLink href={`${path}${item.name}`} component={Link}>
           {capitalize(transform(item.name))}
         </MuiLink>
+        {suffix}
       </>
     );
   },
@@ -185,38 +188,42 @@ const EvolutionDetailsText = memo(
       />
       <ConditionalLinkText
         item={known_move}
-        prefix=" learn move "
+        prefix=" by learning "
+        suffix=" move"
         transform={removeDash}
         path="/move/"
       />
+      <ConditionalLinkText
+        item={known_move_type}
+        prefix=" by learning a "
+        suffix="-type move"
+        transform={removeDash}
+        path="/type/"
+      />
       {held_item && ` while holding ${capitalize(removeDash(held_item.name))}`}
       {item && ` ${capitalize(removeDash(item.name))}`}
-      {min_happiness && ` has over ${min_happiness} Happiness`}
-      {min_affection && ` has over ${min_affection} Affection`}
-      {min_beauty && ` has over ${min_beauty} beauty`}
+      {min_happiness && ` if it has over ${min_happiness} Happiness`}
+      {min_affection && ` if it has over ${min_affection} Affection`}
+      {min_beauty && ` if it has over ${min_beauty} beauty`}
       {time_of_day && ` during the ${time_of_day}`}
       {needs_overworld_rain && ' in the rain'}
       {gender !== null && ` (${gender === 1 ? 'female' : 'male'} only)`}
       {relative_physical_stats !== null && ` having ${physicalStatsMap[relative_physical_stats]}`}
       <ConditionalLinkText
-        item={known_move_type}
-        prefix=" learn move from "
-        transform={removeDash}
-        path="/type/"
-      />
-      <ConditionalLinkText
         item={party_type}
         prefix=" with a Pokémon of type "
+        suffix=" in the party"
         transform={removeDash}
         path="/type/"
       />
       <ConditionalLinkText
         item={party_species}
         prefix=" if there is a "
+        suffix=" in the party"
         transform={removeDash}
         path="/pokemon/"
       />
-      {turn_upside_down && ' by turning console upside-down'}
+      {turn_upside_down && ' by turning the console upside-down'}
     </>
   ),
 );

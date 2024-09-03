@@ -7,7 +7,16 @@ import { GameVersionContext } from '@/context';
 import { removeDash, mapGeneration, formatFlavorText, findEnglishName } from '@/helpers';
 // components
 import TypeBadge from '@/components/TypeBadge';
-import { capitalize, Chip, Grid2, Grid2Props, Stack, Theme, Typography } from '@mui/material';
+import {
+  Badge,
+  capitalize,
+  Chip,
+  Grid2,
+  Grid2Props,
+  Stack,
+  Theme,
+  Typography,
+} from '@mui/material';
 // styles
 import { Table, Numbered } from '@/components/BaseStyles';
 import { Flavor } from './StyledDetails';
@@ -103,7 +112,7 @@ const PokemonDetails = ({
       <Stack
         alignItems={{ xxs: 'center', lg: 'flex-start' }}
         flexDirection={{ xxs: 'column-reverse', lg: 'column' }}
-        gap={{ xxs: '0.5em', lg: '0.3em' }}
+        gap={{ xxs: 1, lg: 4 }}
       >
         {types?.length > 0 && (
           <Stack flexDirection="row" flexWrap="wrap" width="auto" gap={2}>
@@ -115,7 +124,20 @@ const PokemonDetails = ({
             ))}
           </Stack>
         )}
-        <Typography variant="pageHeading">{findEnglishName(names)}</Typography>
+        <Badge
+          color="secondary"
+          badgeContent={
+            <>
+              {is_baby && 'Baby'}
+              {is_legendary && 'Legendary'}
+              {is_mythical && 'Mythical'}
+            </>
+          }
+        >
+          <Typography variant="pageHeading" lineHeight={1.25}>
+            {findEnglishName(names)}
+          </Typography>
+        </Badge>
       </Stack>
       <Stack direction="row" spacing={1}>
         <Chip
@@ -140,14 +162,7 @@ const PokemonDetails = ({
           />
         )}
       </Stack>
-      {(is_baby || is_legendary || is_mythical) && (
-        <Typography fontWeight="700">
-          {is_baby && 'Baby '}
-          {is_legendary && 'Legendary '}
-          {is_mythical && 'Mythical '}
-          Pokemon
-        </Typography>
-      )}
+
       <Flavor variant="h5" component="h3">
         {flavorText}
       </Flavor>

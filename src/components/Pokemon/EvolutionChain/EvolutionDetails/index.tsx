@@ -5,7 +5,7 @@ import type { EvolutionDetail } from 'pokenode-ts';
 import { getResourceId } from '@/helpers';
 // components
 import { Stack, StackProps } from '@mui/material';
-import EvolutionDetailItem from './EvolutionDetailItem'; // Import the separated component
+import EvolutionDetailItem from './EvolutionDetailItem';
 
 interface EvolutionDetailsProps extends StackProps {
   details?: EvolutionDetail[];
@@ -17,7 +17,6 @@ const EvolutionDetails = React.memo(
 
     const triggerOrder = { 'use-item': 1, trade: 2 };
 
-    // Sort and render in one pass
     const renderedItems = details
       .sort((a, b) => {
         return (
@@ -38,7 +37,7 @@ const EvolutionDetails = React.memo(
           />
         );
       })
-      .filter(Boolean); // Filter out any null values
+      .filter(Boolean);
 
     if (!renderedItems.length) return null;
 

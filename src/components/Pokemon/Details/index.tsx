@@ -126,6 +126,7 @@ const PokemonDetails = ({
         )}
         <Badge
           color="secondary"
+          invisible={!is_baby && !is_legendary && !is_mythical}
           badgeContent={
             <>
               {is_baby && 'Baby'}

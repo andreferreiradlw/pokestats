@@ -41,47 +41,6 @@ const allies = [
   { name: 'Electrivire', id: 466 },
 ];
 
-const MoveTarget = ({ target, moveType, ...rest }: MoveTargetProps): JSX.Element => {
-  // data
-  const { descriptions, name } = target;
-
-  const targetDescription = useMemo(
-    () => descriptions.find(flavor => flavor.language.name === 'en')?.description || '',
-    [descriptions],
-  );
-
-  return (
-    <Grid2
-      flexDirection="column"
-      alignItems="flex-start"
-      justifyContent="flex-start"
-      gap={2}
-      {...rest}
-    >
-      <Typography variant="sectionTitle">Target</Typography>
-      <Typography variant="sectionSubTitle">
-        {`This move targets ${targetDescription.charAt(0).toLowerCase() + targetDescription.slice(1)}`}
-      </Typography>
-      <BattleContainer gap={6}>
-        <TargetList
-          items={foes}
-          affected={isFoeAffected(name)}
-          selected={isFoeSelected(name)}
-          label="Foe"
-        />
-        <UserAndAllies
-          moveType={moveType}
-          affectedSelf={isSelfAffected(name)}
-          selectedSelf={isSelfSelected(name)}
-          affectedAlly={isAllyAffected(name)}
-          selectedAlly={isAllySelected(name)}
-        />
-        <BattleGround />
-      </BattleContainer>
-    </Grid2>
-  );
-};
-
 const TargetList = ({
   items,
   affected,
@@ -101,8 +60,8 @@ const TargetList = ({
     gap={1}
     alignSelf="flex-end"
   >
-    {items.map(({ name, id }, i) => (
-      <PokemonContainer key={`${label.toLowerCase()}-${i}`}>
+    {items.map(({ name, id }) => (
+      <PokemonContainer key={`${label.toLowerCase()}-${id}`}>
         <Badge $isAffected={affected} $isSelected={selected}>
           {label}
         </Badge>
@@ -148,8 +107,8 @@ const UserAndAllies = ({
         User
       </Badge>
     </PokemonContainer>
-    {allies.map(({ name, id }, i) => (
-      <PokemonContainer key={`target-ally-${i}`}>
+    {allies.map(({ name, id }) => (
+      <PokemonContainer key={`target-ally-${id}`}>
         <ImageContainer>
           <AllyImg
             alt={`front view of ${name}`}
@@ -163,5 +122,46 @@ const UserAndAllies = ({
     ))}
   </Stack>
 );
+
+const MoveTarget = ({ target, moveType, ...rest }: MoveTargetProps): JSX.Element => {
+  // data
+  const { descriptions, name } = target;
+
+  const targetDescription = useMemo(
+    () => descriptions.find(flavor => flavor.language.name === 'en')?.description || '',
+    [descriptions],
+  );
+
+  return (
+    <Grid2
+      flexDirection="column"
+      alignItems="flex-start"
+      justifyContent="flex-start"
+      gap={2}
+      {...rest}
+    >
+      <Typography variant="sectionTitle">Target</Typography>
+      <Typography variant="sectionSubTitle">
+        {`This move targets ${targetDescription.charAt(0).toLowerCase() + targetDescription.slice(1)}`}
+      </Typography>
+      <BattleContainer gap={6}>
+        <TargetList
+          items={foes}
+          affected={isFoeAffected(name)}
+          selected={isFoeSelected(name)}
+          label="Foe"
+        />
+        <UserAndAllies
+          moveType={moveType}
+          affectedSelf={isSelfAffected(name)}
+          selectedSelf={isSelfSelected(name)}
+          affectedAlly={isAllyAffected(name)}
+          selectedAlly={isAllySelected(name)}
+        />
+        <BattleGround />
+      </BattleContainer>
+    </Grid2>
+  );
+};
 
 export default MoveTarget;

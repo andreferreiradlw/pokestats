@@ -26,7 +26,7 @@ interface ContestProps extends Grid2Props {
 const renderLinks = (combos: NamedAPIResource[], lastDivider = 'or'): JSX.Element => (
   <>
     {combos.map(({ name }, i) => (
-      <React.Fragment key={`${name}-combo-${i}`}>
+      <React.Fragment key={`${name}-combo`}>
         <MuiLink href={`/move/${name}`} component={Link}>
           {capitalize(removeDash(name))}
         </MuiLink>
@@ -47,7 +47,7 @@ const renderComboText = (
     <Typography fontWeight="600" component="span">
       Combo:{' '}
     </Typography>
-    {`If `}
+    {'If '}
     {useAfter ? (
       renderLinks(comboMoves)
     ) : (
@@ -65,7 +65,7 @@ const renderComboText = (
     )}
     {useAfter
       ? `, the user gains ${appeal ? appeal * 2 : 'double'} appeal points instead of ${appeal}.`
-      : ` causes the second move to score double the normal appeal.`}
+      : ' causes the second move to score double the normal appeal.'}
   </Typography>
 );
 

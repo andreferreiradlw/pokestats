@@ -83,7 +83,7 @@ const ImageMapper = (props: ImageMapperProps): JSX.Element => {
             area.lineWidth || lineWidthProp!,
             area.strokeColor || strokeColorProp!,
             true,
-            // @ts-ignore
+            // @ts-expect-error
             renderingCtx,
           );
       });

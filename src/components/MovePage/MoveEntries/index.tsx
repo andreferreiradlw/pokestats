@@ -33,6 +33,8 @@ const buildValuesPhrase = (
         case 'accuracy':
           phraseElements.push(`accuracy of ${value}%`);
           break;
+        default:
+          break;
       }
     }
   });

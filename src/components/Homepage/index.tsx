@@ -61,6 +61,7 @@ const Homepage = ({ pokemonTypes }: PokestatsHomepageProps): JSX.Element => {
           }}
           variant="contained"
           color="secondary"
+          size="large"
         >
           Random Pokémon
           <Pokeball />

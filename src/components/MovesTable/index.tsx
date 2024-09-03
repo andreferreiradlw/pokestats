@@ -63,7 +63,7 @@ const MovesTable = ({ moves, learnMethod, machineNames, ...rest }: TypeMovesProp
         case 'level-up':
           return (
             <DataCell onClick={() => onCellClick(move.name, move.id)}>
-              {/** @ts-ignore */}
+              {/** @ts-expect-error */}
               {move?.level_learned_at || '-'}
             </DataCell>
           );

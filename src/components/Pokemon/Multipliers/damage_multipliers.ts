@@ -65,7 +65,7 @@ const getMultipliers = (types: Type['name'][]): MultipliersRes => {
   const defenseMultipliers: MultiplierMap = {};
 
   types.forEach(type => {
-    // @ts-ignore: cannot update json types
+    // @ts-expect-error: cannot update json types
     const damageRelations = type_relations[type];
     if (!damageRelations) return;
 

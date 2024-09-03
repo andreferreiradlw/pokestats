@@ -92,6 +92,8 @@ const mapLocationToMusic = (locationKey: string) => {
     case 'power-plant':
     case 'cerulean-cave':
       return 'rocket-hideout';
+    default:
+      return 'unknown-location';
   }
 };
 
@@ -207,9 +209,9 @@ const KantoGen1 = ({
               areas: kantoZones as MapAreas[],
             }}
             parentWidth={imgWidth}
-            stayHighlighted={true}
+            stayHighlighted
             highlightAllAreas={showAllAreas}
-            toggleHighlighted={true}
+            toggleHighlighted
             fillColor="#eab54d4d"
             strokeColor="black"
             onClick={area => handleAreaClick(Number(area.id))}

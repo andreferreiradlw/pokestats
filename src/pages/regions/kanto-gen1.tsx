@@ -45,7 +45,7 @@ export const getStaticProps: GetStaticProps<PokestatsKantoGen1PageProps> = async
       return { notFound: true };
     }
 
-    let locations: Promise<PokenodeLocation>[] = [];
+    const locations: Promise<PokenodeLocation>[] = [];
     // create an axios request for each region location
     kantoData.locations.forEach(({ url }) =>
       locations.push(locationClient.getLocationById(getResourceId(url))),
@@ -71,7 +71,7 @@ export const getStaticProps: GetStaticProps<PokestatsKantoGen1PageProps> = async
         if (id > 234) return;
 
         const locationAreaData = await Promise.all(
-          areas.map(async ({ url }) => locationClient.getLocationAreaById(getResourceId(url))),
+          areas.map(({ url }) => locationClient.getLocationAreaById(getResourceId(url))),
         );
 
         if (locationAreaData.length) {

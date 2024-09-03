@@ -18,7 +18,7 @@ const PokemonForms = ({ pokemonId, species, ...rest }: PokemonFormsProps): JSX.E
   const { forms_switchable, varieties, has_gender_differences } = species;
 
   // Memoize the gender description since it's static data
-  // @ts-ignore: cannot update json types
+  // @ts-expect-error: cannot update json types
   const genderDescription = useMemo(() => genderDescriptions[pokemonId], [pokemonId]);
 
   // Memoize the current forms

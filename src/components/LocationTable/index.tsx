@@ -308,7 +308,7 @@ const LocationTable = ({ location, ...rest }: LocationTableProps): JSX.Element =
                           </tr>
                         </thead>
                         <TableBody>
-                          {formattedEncounters.map(({ name: methodName, pokemon }, i) => {
+                          {formattedEncounters.map(({ name: methodName, pokemon }) => {
                             let methodRowSpan = 0;
 
                             pokemon.forEach(currPokemon => {
@@ -342,7 +342,7 @@ const LocationTable = ({ location, ...rest }: LocationTableProps): JSX.Element =
                                     whileHover="hover"
                                     whileTap="tap"
                                     variants={rowVariant}
-                                    key={`pokemon-${methodName}-${i}-${firstPokemonName}`}
+                                    key={`pokemon-${methodName}-${firstPokemonName}`}
                                   >
                                     <LocationAnchor href={`/pokemon/${firstPokemonName}`}>
                                       <PokeImg
@@ -353,11 +353,8 @@ const LocationTable = ({ location, ...rest }: LocationTableProps): JSX.Element =
                                   </PokemonCell>
                                   <DataCell>
                                     <GamesContainer>
-                                      {firstVersion.games.map((game, i) => (
-                                        <GamePill
-                                          key={`${firstPokemonName}-${game}-${i}`}
-                                          game={game}
-                                        >
+                                      {firstVersion.games.map(game => (
+                                        <GamePill key={`${firstPokemonName}-${game}`} game={game}>
                                           {game}
                                         </GamePill>
                                       ))}
@@ -372,13 +369,13 @@ const LocationTable = ({ location, ...rest }: LocationTableProps): JSX.Element =
                                 </tr>
                                 {firstPokemonVersions.length > 0 &&
                                   firstPokemonVersions.map(
-                                    ({ minLevel, maxChance, maxLevel, games }, i) => (
-                                      <tr key={`${methodName}-${firstPokemonName}-version-${i}`}>
+                                    ({ minLevel, maxChance, maxLevel, games }) => (
+                                      <tr key={`${methodName}-${firstPokemonName}-version`}>
                                         <DataCell>
                                           <GamesContainer>
-                                            {games.map((game, i) => (
+                                            {games.map(game => (
                                               <GamePill
-                                                key={`${firstPokemonName}-${game}-others-${i}`}
+                                                key={`${firstPokemonName}-${game}-others`}
                                                 game={game}
                                               >
                                                 {game}
@@ -395,18 +392,18 @@ const LocationTable = ({ location, ...rest }: LocationTableProps): JSX.Element =
                                       </tr>
                                     ),
                                   )}
-                                {pokemon.map(({ name: pokemonName, versions }, i) => {
+                                {pokemon.map(({ name: pokemonName, versions }) => {
                                   const pokemonFirstVersion = versions.shift();
 
                                   return (
-                                    <Fragment key={`${methodName}-${pokemonName}-${i}`}>
+                                    <Fragment key={`${methodName}-${pokemonName}`}>
                                       <tr>
                                         <PokemonCell
                                           rowSpan={versions.length + 1}
                                           whileHover="hover"
                                           whileTap="tap"
                                           variants={rowVariant}
-                                          key={`pokemon-${methodName}-${i}-${pokemonName}`}
+                                          key={`pokemon-${methodName}-${pokemonName}`}
                                         >
                                           <LocationAnchor href={`/pokemon/${pokemonName}`}>
                                             <PokeImg
@@ -417,11 +414,8 @@ const LocationTable = ({ location, ...rest }: LocationTableProps): JSX.Element =
                                         </PokemonCell>
                                         <DataCell>
                                           <GamesContainer>
-                                            {pokemonFirstVersion.games.map((game, i) => (
-                                              <GamePill
-                                                key={`${pokemonName}-${game}-${i}`}
-                                                game={game}
-                                              >
+                                            {pokemonFirstVersion.games.map(game => (
+                                              <GamePill key={`${pokemonName}-${game}`} game={game}>
                                                 {game}
                                               </GamePill>
                                             ))}
@@ -438,30 +432,28 @@ const LocationTable = ({ location, ...rest }: LocationTableProps): JSX.Element =
                                         >{`${pokemonFirstVersion.maxChance}%`}</DataCell>
                                       </tr>
                                       {versions.length > 0 &&
-                                        versions.map(
-                                          ({ minLevel, maxChance, maxLevel, games }, i) => (
-                                            <tr key={`${methodName}-${pokemonName}-version-${i}`}>
-                                              <DataCell>
-                                                <GamesContainer>
-                                                  {games.map((game, i) => (
-                                                    <GamePill
-                                                      key={`${pokemonName}-${game}-others-${i}`}
-                                                      game={game}
-                                                    >
-                                                      {game}
-                                                    </GamePill>
-                                                  ))}
-                                                </GamesContainer>
-                                              </DataCell>
-                                              <DataCell>
-                                                {minLevel === maxLevel
-                                                  ? maxLevel
-                                                  : `${minLevel} to ${maxLevel}`}
-                                              </DataCell>
-                                              <DataCell colSpan={3}>{`${maxChance}%`}</DataCell>
-                                            </tr>
-                                          ),
-                                        )}
+                                        versions.map(({ minLevel, maxChance, maxLevel, games }) => (
+                                          <tr key={`${methodName}-${pokemonName}-version`}>
+                                            <DataCell>
+                                              <GamesContainer>
+                                                {games.map((game, i) => (
+                                                  <GamePill
+                                                    key={`${pokemonName}-${game}-others`}
+                                                    game={game}
+                                                  >
+                                                    {game}
+                                                  </GamePill>
+                                                ))}
+                                              </GamesContainer>
+                                            </DataCell>
+                                            <DataCell>
+                                              {minLevel === maxLevel
+                                                ? maxLevel
+                                                : `${minLevel} to ${maxLevel}`}
+                                            </DataCell>
+                                            <DataCell colSpan={3}>{`${maxChance}%`}</DataCell>
+                                          </tr>
+                                        ))}
                                     </Fragment>
                                   );
                                 })}

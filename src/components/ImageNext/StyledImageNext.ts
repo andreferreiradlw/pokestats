@@ -30,7 +30,7 @@ const ImageContainer = styled(motion.div, {
 
   height: height ? `${height}px` : 'auto',
 
-  [`& img`]: {
+  '& img': {
     height: height ? `${height}px !important` : 'auto !important',
     minHeight: height ? `${height}px` : 'auto',
     objectFit: 'contain',

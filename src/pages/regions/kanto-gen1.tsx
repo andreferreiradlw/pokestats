@@ -2,7 +2,8 @@
 import type { GetStaticProps, NextPage } from 'next';
 // helpers
 import { findEnglishName, getResourceId } from '@/helpers';
-import { Location as PokenodeLocation, LocationArea, LocationClient, Region } from 'pokenode-ts';
+import type { Location as PokenodeLocation, LocationArea, Region } from 'pokenode-ts';
+import { LocationClient } from 'pokenode-ts';
 // components
 import Head from 'next/head';
 import KantoGen1 from '@/components/RegionsPage/KantoGen1';

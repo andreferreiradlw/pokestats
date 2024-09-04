@@ -1,7 +1,7 @@
 import { Typography } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { motion } from 'framer-motion';
-import { AutocompleteV2Props } from '.';
+import type { AutocompleteV2Props } from '.';
 
 const Container = styled(motion.div, {
   shouldForwardProp: prop => prop !== 'width',

@@ -1,11 +1,12 @@
 import { Fragment } from 'react';
 // helpers
-import { NamedAPIResource } from 'pokenode-ts';
+import type { NamedAPIResource } from 'pokenode-ts';
 // styles
 import { Table } from '@/BaseStyles';
 // components
-import { MovePageProps } from '..';
-import { Box, Grid2, Grid2Props, Stack, Typography } from '@mui/material';
+import type { MovePageProps } from '..';
+import type { Grid2Props } from '@mui/material';
+import { Box, Grid2, Stack, Typography } from '@mui/material';
 
 interface MoveMachinesProps extends Grid2Props {
   moveName: string;

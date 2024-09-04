@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import { PokemonSpecies, PokemonSprites } from 'pokenode-ts';
+import type { PokemonSpecies, PokemonSprites } from 'pokenode-ts';
 
 const spriteExtractor = (
   pokemonSprites: PokemonSprites,

@@ -4,7 +4,8 @@ import type { Type } from 'pokenode-ts';
 // helpers
 import { mapGeneration, removeDash } from '@/helpers';
 // components
-import { Stack, StackProps, Typography } from '@mui/material';
+import type { StackProps } from '@mui/material';
+import { Stack, Typography } from '@mui/material';
 // styles
 import { Table } from '@/BaseStyles';
 

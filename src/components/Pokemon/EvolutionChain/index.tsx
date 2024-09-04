@@ -7,7 +7,8 @@ import Evolution from './Evolution';
 import { motion } from 'framer-motion';
 // styles
 import { useEvolutionChain } from '@/hooks';
-import { capitalize, Grid2, Grid2Props, Typography } from '@mui/material';
+import type { Grid2Props } from '@mui/material';
+import { capitalize, Grid2, Typography } from '@mui/material';
 import Loading from '@/components/Loading';
 
 interface EvolutionChainProps extends Grid2Props {

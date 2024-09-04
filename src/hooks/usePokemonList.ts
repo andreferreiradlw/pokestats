@@ -1,6 +1,7 @@
 import { PokemonApi } from '@/services';
-import { useQuery, UseQueryOptions, UseQueryResult } from '@tanstack/react-query';
-import { NamedAPIResource } from 'pokenode-ts';
+import type { UseQueryOptions, UseQueryResult } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
+import type { NamedAPIResource } from 'pokenode-ts';
 
 export const usePokemonList = (
   options?: Partial<UseQueryOptions<NamedAPIResource[]>>,

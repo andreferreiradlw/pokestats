@@ -1,4 +1,4 @@
-import { Theme } from '@mui/material';
+import type { Theme } from '@mui/material';
 import dynamic from 'next/dynamic';
 
 // icons

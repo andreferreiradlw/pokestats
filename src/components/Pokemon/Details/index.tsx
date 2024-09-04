@@ -7,16 +7,8 @@ import { GameVersionContext } from '@/context';
 import { removeDash, mapGeneration, formatFlavorText, findEnglishName } from '@/helpers';
 // components
 import TypeBadge from '@/components/TypeBadge';
-import {
-  Badge,
-  capitalize,
-  Chip,
-  Grid2,
-  Grid2Props,
-  Stack,
-  Theme,
-  Typography,
-} from '@mui/material';
+import type { Grid2Props, Theme } from '@mui/material';
+import { Badge, capitalize, Chip, Grid2, Stack, Typography } from '@mui/material';
 // styles
 import { Table, Numbered } from '@/components/BaseStyles';
 import { Flavor } from './StyledDetails';

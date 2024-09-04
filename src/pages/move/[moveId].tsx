@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router';
 import type { GetStaticPaths, GetStaticProps, NextPage } from 'next';
-import { MoveClient, Move, MoveTarget, SuperContestEffect, ContestEffect } from 'pokenode-ts';
+import type { Move, MoveTarget, SuperContestEffect, ContestEffect } from 'pokenode-ts';
+import { MoveClient } from 'pokenode-ts';
 import {
   findEnglishName,
   formatFlavorText,

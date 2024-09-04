@@ -11,7 +11,8 @@ import { removeDash } from '@/helpers';
 // styles
 import { Table } from '@/BaseStyles';
 // components
-import { Box, capitalize, Grid2Props, Link as MuiLink, Stack, Typography } from '@mui/material';
+import type { Grid2Props } from '@mui/material';
+import { Box, capitalize, Link as MuiLink, Stack, Typography } from '@mui/material';
 import Link from 'next/link';
 
 interface ContestProps extends Grid2Props {

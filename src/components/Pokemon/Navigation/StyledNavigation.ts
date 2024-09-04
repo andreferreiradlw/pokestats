@@ -2,7 +2,7 @@
 import { motion } from 'framer-motion';
 import { styled } from '@mui/material/styles';
 import Link from 'next/link';
-import { NavigationButtonProps } from './NavigationButton';
+import type { NavigationButtonProps } from './NavigationButton';
 
 const BtnContainer = styled(motion.div)(({ theme }) => ({
   transition: 'box-shadow 0.05s ease-in-out',

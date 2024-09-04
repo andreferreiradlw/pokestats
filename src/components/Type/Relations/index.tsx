@@ -5,7 +5,8 @@ import { removeUnderscore } from '@/helpers';
 // components
 import TypeBadge from '@/components/TypeBadge';
 import { Table, TypesCell } from '@/components/BaseStyles';
-import { Stack, StackProps, Typography, Box, useTheme, useMediaQuery, Theme } from '@mui/material';
+import type { StackProps, Theme } from '@mui/material';
+import { Stack, Typography, Box, useTheme, useMediaQuery } from '@mui/material';
 
 interface TypeRelationsProps extends StackProps {
   relations: PokeNodeTypeRelations;

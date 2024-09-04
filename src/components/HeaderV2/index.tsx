@@ -2,7 +2,8 @@
 import Link from 'next/link';
 import GameGenSelect from '../GameGenSelect';
 import AutocompleteV2 from '../AutocompleteV2';
-import { AppBarProps, Stack } from '@mui/material';
+import type { AppBarProps } from '@mui/material';
+import { Stack } from '@mui/material';
 // helpers
 import { hoverVariant } from '@/animations';
 // styles

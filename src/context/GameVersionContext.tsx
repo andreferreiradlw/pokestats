@@ -1,6 +1,7 @@
 import React, { createContext, useState, useEffect, useMemo } from 'react';
 // helpers
-import { checkIfEarlierGen, Game, gameVersions, mapGenerationToGame } from '@/helpers';
+import type { Game } from '@/helpers';
+import { checkIfEarlierGen, gameVersions, mapGenerationToGame } from '@/helpers';
 // types
 import type { PokemonSpecies } from 'pokenode-ts';
 

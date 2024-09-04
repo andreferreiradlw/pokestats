@@ -7,7 +7,8 @@ import type {
   PokemonSpecies,
 } from 'pokenode-ts';
 // components
-import { Grid2, Grid2Props, Typography, Stack } from '@mui/material';
+import type { Grid2Props } from '@mui/material';
+import { Grid2, Typography, Stack } from '@mui/material';
 // helpers
 import { GameVersionContext } from '@/context';
 import { removeDash } from '@/helpers';

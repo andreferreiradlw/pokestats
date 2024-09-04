@@ -7,7 +7,8 @@ import { getResourceId } from '@/helpers';
 import { useTypeMoves } from '@/hooks';
 // components
 import InfiniteScroll from '@/components/InfiniteScroll';
-import { Stack, Typography, Tabs, Tab, StackProps, Paper } from '@mui/material';
+import type { StackProps } from '@mui/material';
+import { Stack, Typography, Tabs, Tab, Paper } from '@mui/material';
 import MovesTableV2 from '@/components/MovesTableV2';
 
 interface TypeTabsProps extends StackProps, TypePageProps {

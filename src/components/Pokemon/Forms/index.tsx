@@ -5,7 +5,8 @@ import type { PokemonSpecies } from 'pokenode-ts';
 import genderDescriptions from './genderDescriptions.json';
 // components
 import { Table, Numbered } from '@/components/BaseStyles';
-import { Grid2, Grid2Props, Typography } from '@mui/material';
+import type { Grid2Props } from '@mui/material';
+import { Grid2, Typography } from '@mui/material';
 // helpers
 import { removeDash } from '@/helpers';
 

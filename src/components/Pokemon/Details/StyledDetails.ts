@@ -1,4 +1,5 @@
-import { Typography, TypographyProps } from '@mui/material';
+import type { TypographyProps } from '@mui/material';
+import { Typography } from '@mui/material';
 import { styled } from '@mui/material/styles';
 
 const Flavor = styled(Typography)<TypographyProps>(({ theme }) => ({

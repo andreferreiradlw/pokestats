@@ -13,7 +13,8 @@ import {
   BattleGround,
 } from './StyledMoveTarget';
 // components
-import { Grid2, Grid2Props, Stack, Typography } from '@mui/material';
+import type { Grid2Props } from '@mui/material';
+import { Grid2, Stack, Typography } from '@mui/material';
 // utilities
 import {
   mapTypeToPokemonId,

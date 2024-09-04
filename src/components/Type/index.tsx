@@ -8,7 +8,8 @@ import TypeRelations from './Relations';
 import TypeIcon from './TypeIcon';
 import Tabs from './Tabs';
 // styles
-import { Divider, Grid2, Stack, Theme, Typography, useMediaQuery, useTheme } from '@mui/material';
+import type { Theme } from '@mui/material';
+import { Divider, Grid2, Stack, Typography, useMediaQuery, useTheme } from '@mui/material';
 
 export type TypePageProps = Omit<PokestatsTypePageProps, 'autocompleteList'>;
 

@@ -5,7 +5,8 @@ import { removeDash } from '@/helpers';
 // styles
 import { Table } from '@/BaseStyles';
 // components
-import { Box, capitalize, Grid2, Grid2Props, Typography } from '@mui/material';
+import type { Grid2Props } from '@mui/material';
+import { Box, capitalize, Grid2, Typography } from '@mui/material';
 
 interface MoveStatsProps extends Grid2Props {
   move: Move;

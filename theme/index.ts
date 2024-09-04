@@ -1,4 +1,5 @@
-import { createTheme, responsiveFontSizes, ThemeOptions } from '@mui/material/styles';
+import type { ThemeOptions } from '@mui/material/styles';
+import { createTheme, responsiveFontSizes } from '@mui/material/styles';
 import { lightPalette, darkPalette, typeColors, gameColors } from './palette';
 import styledMuiComponents from './components';
 import customTypography from './typography';

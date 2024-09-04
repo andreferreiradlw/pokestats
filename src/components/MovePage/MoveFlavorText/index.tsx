@@ -5,7 +5,8 @@ import type { MoveFlavorText as PokenodeMoveFlavorText } from 'pokenode-ts';
 import { formatFlavorText, listGamesByGroup, listGenGroupsByGroup } from '@/helpers';
 // components
 import { Table } from '@/BaseStyles';
-import { Box, Grid2, Grid2Props, Typography } from '@mui/material';
+import type { Grid2Props } from '@mui/material';
+import { Box, Grid2, Typography } from '@mui/material';
 
 interface GroupedFlavorText {
   flavor: string;

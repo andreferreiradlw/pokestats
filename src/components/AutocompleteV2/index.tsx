@@ -1,24 +1,18 @@
-import { CSSProperties } from 'react';
+import type { CSSProperties } from 'react';
 // types
 import type { HTMLMotionProps } from 'framer-motion';
 import type { MoveType, Pokemon, PokemonType } from '@/types';
 // hooks
 import { useRouter } from 'next/router';
 import { usePlausible } from 'next-plausible';
-import { AutocompleteListOption, useAutocompleteOptions } from '@/hooks';
+import type { AutocompleteListOption } from '@/hooks';
+import { useAutocompleteOptions } from '@/hooks';
 // helpers
 import { removeDash } from '@/helpers';
 import { fadeInDownVariant } from '@/animations';
 // components
-import {
-  Autocomplete,
-  AutocompleteProps,
-  capitalize,
-  createFilterOptions,
-  Stack,
-  TextField,
-  Theme,
-} from '@mui/material';
+import type { AutocompleteProps, Theme } from '@mui/material';
+import { Autocomplete, capitalize, createFilterOptions, Stack, TextField } from '@mui/material';
 import Loading from '@/components/Loading';
 // styles
 import {

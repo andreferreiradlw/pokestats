@@ -1,14 +1,13 @@
 import { fadeInUpVariant, rowVariant } from '@/animations';
 // components
+import type { TableCellProps, TableProps } from '@mui/material';
 import {
   Paper,
   Table,
   TableBody,
   TableCell,
-  TableCellProps,
   TableContainer,
   TableHead,
-  TableProps,
   TableRow,
 } from '@mui/material';
 import { motion } from 'framer-motion';

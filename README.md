@@ -22,11 +22,9 @@
 
 <div align="center">
 
-![Build Status](https://circleci.com/gh/andreferreiradlw/pokestats.svg?style=shield)
 ![Issues](https://img.shields.io/github/issues/andreferreiradlw/pokestats)
 ![Repo Size](https://img.shields.io/github/repo-size/andreferreiradlw/pokestats)
 ![License](https://img.shields.io/github/license/andreferreiradlw/pokestats)
-[![style: styled-components](https://img.shields.io/badge/style-%F0%9F%92%85%20styled--components-orange.svg?colorB=daa357&colorA=db748e)](https://github.com/styled-components/styled-components)
 ![Stars](https://img.shields.io/github/stars/andreferreiradlw/pokestats?style=social)
 
 </div>
@@ -35,32 +33,6 @@
   <strong><a href="https://pokestats.gg" target="_blank">PokeStats.gg</a> is an online encyclopaedia of Pokémon species containing information such as Pokédex entries, descriptions, evolution chains, moves, stats and much more!</strong>
   <br />
 </div>
-
-## Getting Started
-
-### Install dependencies
-
-```shell
-  $ yarn install
-```
-
-### Run project locally
-
-```shell
-  $ yarn run dev
-```
-
-### Linting
-
-```shell
-  $ yarn run lint
-```
-
-### Code Formatting
-
-```shell
-  $ yarn run prettier
-```
 
 ## Roadmap
 
@@ -112,10 +84,4 @@ Please consider donating if you think pokestats is helpful to you and want to se
 
 <a href="https://www.buymeacoffee.com/pokestats">
   <img alt="bmc-button" src="https://img.shields.io/badge/Buy_Me_A_Coffee-FFDD00?style=for-the-badge&logo=buy-me-a-coffee&logoColor=black">
-</a>
-<a href="https://buy.stripe.com/8wMeXm5Wwac8dfG6oo">
-  <img alt="stripe-button" src="https://img.shields.io/badge/Stripe-008cdd?style=for-the-badge&logo=stripe&logoColor=white">
-</a>
-<a href="https://www.paypal.com/donate/?hosted_button_id=ZBQKDGC7ZGH98">
-  <img alt="paypal-button" src="https://img.shields.io/badge/PayPal-00457C?style=for-the-badge&logo=paypal&logoColor=white">
 </a>

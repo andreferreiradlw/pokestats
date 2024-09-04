@@ -1,7 +1,7 @@
 export const rowVariant = {
   hover: {
     zIndex: 1,
-    scale: [1, 1.01],
+    scale: [1, 1.005],
     transition: {
       duration: 0.2,
     },

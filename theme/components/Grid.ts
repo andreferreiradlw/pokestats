@@ -8,11 +8,6 @@ const Grid: {
       root: {
         display: 'flex',
       },
-      // container: ({ theme }) => ({
-      //   gap: theme.spacing(4),
-      //   alignItems: 'flex-start',
-      //   justifyContent: 'flex-start',
-      // }),
     },
   },
 };

@@ -88,13 +88,7 @@ const MovesTableV2 = ({
             return move?.level_learned_at || '-';
           case 'machine':
             return machineNames && machineNames[index] ? (
-              <Stack
-                flexDirection="row"
-                justifyContent="space-between"
-                width="75%"
-                margin="0 auto"
-                gap={0.2}
-              >
+              <Stack flexDirection="row" justifyContent="center" alignItems="center" gap={1}>
                 <span>{machineNames[index].toUpperCase()}</span>
                 <img
                   src={`https://raw.githubusercontent.com/msikma/pokesprite/master/items/${machineNames[index].includes('hm') ? 'hm' : 'tm'}/${move.type.name}.png`}

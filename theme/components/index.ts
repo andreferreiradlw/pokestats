@@ -3,6 +3,7 @@ import CssBaseline from './CssBaseline';
 import Divider from './Divider';
 import FormInputs from './FormInputs';
 import Select from './Select';
+import Table from './Table';
 import Grid from './Grid';
 import Typography from './Typography';
 import { ThemeOptions } from '@mui/material';
@@ -13,6 +14,7 @@ const styledMuiComponents: ThemeOptions = {
     ...CssBaseline,
     ...Divider,
     ...Select,
+    ...Table,
     ...FormInputs,
     ...Grid,
     ...Typography,

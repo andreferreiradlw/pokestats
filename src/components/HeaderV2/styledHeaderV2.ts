@@ -15,6 +15,7 @@ const ContentContainer = styled(Container)(({ theme }) => ({
   justifyContent: 'space-between',
   margin: 'auto',
   width: '100%',
+  gap: theme.spacing(2),
 
   [theme.breakpoints.up('md')]: {
     alignItems: 'flex-start',

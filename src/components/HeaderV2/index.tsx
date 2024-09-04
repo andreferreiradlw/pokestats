@@ -7,6 +7,7 @@ import { AppBarProps, Stack } from '@mui/material';
 import { hoverVariant } from '@/animations';
 // styles
 import { ContentContainer, HeaderContainer, Logo } from './styledHeaderV2';
+import ThemeToggleButton from '../ThemeToggleButton';
 
 export interface HeaderV2Props extends AppBarProps {
   showGenSelect?: boolean;
@@ -23,7 +24,17 @@ const HeaderV2 = ({ showGenSelect, ...rest }: HeaderV2Props): JSX.Element => (
         </Link>
         {showGenSelect && <GameGenSelect />}
       </Stack>
-      <AutocompleteV2 width="350px" autocompleteOptions={{ size: 'small' }} />
+      <Stack
+        width="auto"
+        direction={{ xxs: 'row-reverse', md: 'row' }}
+        justifyContent={{ xxs: 'center', md: 'flex-end' }}
+        alignItems="center"
+        gap={2}
+        flexWrap={{ xxs: 'wrap', md: 'nowrap' }}
+      >
+        <ThemeToggleButton />
+        <AutocompleteV2 width="350px" autocompleteOptions={{ size: 'small' }} />
+      </Stack>
     </ContentContainer>
   </HeaderContainer>
 );

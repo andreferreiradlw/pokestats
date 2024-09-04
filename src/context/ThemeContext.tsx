@@ -1,13 +1,16 @@
+// src/context/ThemeContext.tsx
 import { createContext, useState, useMemo, useEffect, ReactNode } from 'react';
 import { ThemeProvider } from '@mui/material/styles';
 import generateTheme, { ThemeMode } from '@/MuiTheme';
 
 interface ColorModeContextProps {
   toggleColorMode: () => void;
+  mode: ThemeMode; // Add mode to the context
 }
 
 export const ColorModeContext = createContext<ColorModeContextProps>({
   toggleColorMode: () => {},
+  mode: 'light', // Default value for mode
 });
 
 interface ThemeContextProviderProps {
@@ -62,8 +65,9 @@ export function ThemeContextProvider({ children }: ThemeContextProviderProps) {
           return newMode;
         });
       },
+      mode, // Provide the current mode
     }),
-    [],
+    [mode], // Add mode as a dependency to ensure it updates correctly
   );
 
   const theme = useMemo(() => generateTheme(mode), [mode]);

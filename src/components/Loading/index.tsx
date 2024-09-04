@@ -5,7 +5,6 @@ import { loadingChild, staggerExitLoadingVariant } from '@/animations';
 import { LoadingContainer, PotionIcon, PokeballIcon, RecordIcon, Text } from './StyledLoading';
 // components
 import { Stack, StackProps } from '@mui/material';
-
 import { motion } from 'framer-motion';
 
 export interface LoadingProps extends StackProps {

@@ -56,8 +56,10 @@ const PokemonMoves = ({ pokemon, ...rest }: PokemonMovesProps): JSX.Element => {
       width="100%"
       {...rest}
     >
-      <Typography variant="sectionTitle">Move Pool</Typography>
-      <Grid2 gap={4}>
+      <Grid2 size={12}>
+        <Typography variant="sectionTitle">Move Pool</Typography>
+      </Grid2>
+      <Grid2 size={12} gap={4}>
         <DropdownV2
           label="Type"
           options={LearnMethodOptions}
@@ -66,27 +68,15 @@ const PokemonMoves = ({ pokemon, ...rest }: PokemonMovesProps): JSX.Element => {
         />
         <GameGenSelect />
       </Grid2>
-      {movesLoading || machinesLoading ? (
-        <Loading height="100%" $iconWidth={{ xxs: '20%', xs: '15%', md: '10%', lg: '5%' }} />
-      ) : (
-        <AnimatePresence mode="wait">
-          {filteredMoves.length ? (
-            <MovesTableV2 moves={filteredMoves} machineNames={machines} learnMethod={learnMethod} />
-          ) : (
-            <Typography
-              variant="sectionMessage"
-              component={motion.p}
-              initial="hidden"
-              animate="show"
-              exit="exit"
-              variants={fadeInUpVariant}
-              key={`moves-${learnMethod}-nomoves-message`}
-            >
-              {`No ${learnMethod} moves for currently selected game version.`}
-            </Typography>
-          )}
-        </AnimatePresence>
-      )}
+      <Grid2 size={12}>
+        <MovesTableV2
+          moves={filteredMoves}
+          machineNames={machines}
+          learnMethod={learnMethod}
+          isLoading={movesLoading || machinesLoading}
+          noMovesText={`No ${learnMethod} moves for currently selected game version.`}
+        />
+      </Grid2>
     </Grid2>
   );
 };

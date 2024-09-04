@@ -13,17 +13,22 @@ import { Stack, TableProps, Theme, Typography } from '@mui/material';
 import { AnimatePresence, motion } from 'framer-motion';
 import TypeBadge from '@/components/TypeBadge';
 import CustomTable, { CustomTableProps } from '@/components/CustomTable';
+import Loading from '@/components/Loading';
 
 interface TypeMovesProps extends TableProps {
   moves: (FilteredMove | Move)[];
   learnMethod?: MoveLearnMethod['name'];
   machineNames?: string[];
+  isLoading?: boolean;
+  noMovesText?: string;
 }
 
 const MovesTableV2 = ({
   moves,
   learnMethod,
   machineNames,
+  isLoading,
+  noMovesText,
   ...rest
 }: TypeMovesProps): JSX.Element => {
   const router = useRouter();
@@ -139,7 +144,13 @@ const MovesTableV2 = ({
 
   return (
     <AnimatePresence mode="wait">
-      {moves.length > 0 ? (
+      {isLoading ? (
+        <Loading
+          height="100%"
+          $iconWidth={{ xxs: '20%', xs: '15%', md: '10%', lg: '5%' }}
+          py={12}
+        />
+      ) : moves.length > 0 ? (
         <CustomTable
           columns={columns}
           data={tableData}
@@ -148,7 +159,8 @@ const MovesTableV2 = ({
         />
       ) : (
         <Typography
-          variant="sectionMessage"
+          variant="sectionSubTitle"
+          py={4}
           component={motion.p}
           initial="hidden"
           animate="show"
@@ -156,7 +168,7 @@ const MovesTableV2 = ({
           variants={fadeInUpVariant}
           key="type-nomoves-message"
         >
-          No moves for current type.
+          {noMovesText || 'No moves for current type.'}
         </Typography>
       )}
     </AnimatePresence>

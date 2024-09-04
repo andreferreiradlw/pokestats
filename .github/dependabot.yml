@@ -1,6 +1,6 @@
 version: 2
 updates:
-  - package-ecosystem: 'npm' # Replace with your package manager (e.g., "pip" for Python, "bundler" for Ruby, etc.)
-    directory: '/' # The directory where dependencies are managed ("/" for the root directory)
+  - package-ecosystem: 'npm'
+    directory: '/'
     schedule:
-      interval: 'daily' # Set the interval to "daily" for daily updates
+      interval: 'daily'

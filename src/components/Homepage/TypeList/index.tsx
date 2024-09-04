@@ -12,8 +12,10 @@ const TypeList = ({ types, ...rest }: TypeListProps): JSX.Element | null => {
   if (!types) return null;
 
   return (
-    <Grid2 container direction="column" {...rest}>
-      <Typography variant="sectionTitle">Types</Typography>
+    <Grid2 container direction="column" gap={4} {...rest}>
+      <Grid2>
+        <Typography variant="sectionTitle">Types</Typography>
+      </Grid2>
       <Grid2 container alignItems="center" justifyContent="center" gap={2} wrap="wrap">
         {types?.map(({ name }) => (
           <Grid2 key={`homepage-typebadge-${name}`}>

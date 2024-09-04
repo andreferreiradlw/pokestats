@@ -2,12 +2,14 @@ import React, { useMemo, useState } from 'react';
 // types
 import type { PokemonType } from 'pokenode-ts';
 // helpers
-import getMultipliers, { MultipliersRes } from './damage_multipliers';
+import type { MultipliersRes } from './damage_multipliers';
+import getMultipliers from './damage_multipliers';
 import { removeUnderscore } from '@/helpers';
 // components
 import TypeBadge from '@/components/TypeBadge';
 import { Table } from '@/components/BaseStyles';
-import { Grid2, Grid2Props, Stack, Switch, Theme, Tooltip, Typography } from '@mui/material';
+import type { Grid2Props, Theme } from '@mui/material';
+import { Grid2, Stack, Switch, Tooltip, Typography } from '@mui/material';
 // icons
 import ShieldIcon from '@mui/icons-material/Shield';
 import ConnectWithoutContactIcon from '@mui/icons-material/ConnectWithoutContact';

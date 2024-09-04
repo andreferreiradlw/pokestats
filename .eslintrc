@@ -47,5 +47,8 @@
     "src/components/ImageMapper/*",
     "src/components/LocationTable/*",
     "src/components/RegionsPage/*",
+    "*.md",
+    "*.json",
+    "yarn.lock",
   ],
 }

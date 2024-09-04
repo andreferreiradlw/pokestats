@@ -1,5 +1,6 @@
 import { hoverVariant } from '@/animations';
-import { ButtonProps, Button as MuiButton } from '@mui/material';
+import type { ButtonProps } from '@mui/material';
+import { Button as MuiButton } from '@mui/material';
 import { motion } from 'framer-motion';
 
 const CustomButton = ({ children, ...rest }: ButtonProps): JSX.Element => (

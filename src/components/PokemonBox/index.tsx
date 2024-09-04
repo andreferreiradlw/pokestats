@@ -10,7 +10,8 @@ import { PokeBox } from './StyledPokemonBox';
 // components
 import ImageNext from '@/components/ImageNext';
 import Link from 'next/link';
-import { CardProps, Typography } from '@mui/material';
+import type { CardProps } from '@mui/material';
+import { Typography } from '@mui/material';
 
 export interface PokemonBoxProps extends CardProps {
   pokemonId: Pokemon['id'];

@@ -1,6 +1,7 @@
 import { type FilteredMove, getResourceId } from '@/helpers';
 import { MachineApi } from '@/services';
-import { useQuery, UseQueryOptions, UseQueryResult } from '@tanstack/react-query';
+import type { UseQueryOptions, UseQueryResult } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 
 export const useMachines = (
   moves: FilteredMove[],

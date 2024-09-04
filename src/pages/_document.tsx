@@ -1,9 +1,7 @@
-import { Html, Head, Main, NextScript, DocumentProps, DocumentContext } from 'next/document';
-import {
-  DocumentHeadTags,
-  DocumentHeadTagsProps,
-  documentGetInitialProps,
-} from '@mui/material-nextjs/v14-pagesRouter';
+import type { DocumentProps, DocumentContext } from 'next/document';
+import { Html, Head, Main, NextScript } from 'next/document';
+import type { DocumentHeadTagsProps } from '@mui/material-nextjs/v14-pagesRouter';
+import { DocumentHeadTags, documentGetInitialProps } from '@mui/material-nextjs/v14-pagesRouter';
 import generateTheme from '@/MuiTheme';
 
 interface MyDocumentProps extends DocumentProps, DocumentHeadTagsProps {

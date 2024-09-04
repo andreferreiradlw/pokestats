@@ -1,7 +1,7 @@
 // types
 import type { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 // helpers
-import { Type } from 'pokenode-ts';
+import type { Type } from 'pokenode-ts';
 import { findEnglishName } from '@/helpers';
 // components
 import Head from 'next/head';

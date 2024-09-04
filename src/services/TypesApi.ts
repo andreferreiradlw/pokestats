@@ -1,4 +1,4 @@
-import { Type } from 'pokenode-ts';
+import type { Type } from 'pokenode-ts';
 import MainClient from './MainClient';
 import { MovesApi } from './MovesApi';
 import { getResourceId } from '@/helpers';

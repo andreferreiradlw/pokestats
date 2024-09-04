@@ -4,7 +4,8 @@ import type { PokemonStat, Stat } from 'pokenode-ts';
 // helpers
 import { removeDash } from '@/helpers';
 // components
-import { Grid2, Grid2Props, Typography } from '@mui/material';
+import type { Grid2Props } from '@mui/material';
+import { Grid2, Typography } from '@mui/material';
 import ProgressBar from './ProgressBar';
 import { Table } from '@/BaseStyles';
 

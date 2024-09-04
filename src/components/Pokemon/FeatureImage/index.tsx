@@ -9,7 +9,7 @@ import { JpnName } from '@/components/BaseStyles';
 import { ImageContainer } from './StyledFeatureImage';
 // components
 import ImageNext from '@/components/ImageNext';
-import { Grid2Props } from '@mui/material';
+import type { Grid2Props } from '@mui/material';
 
 interface FeaturedImageProps extends Grid2Props {
   specieNames: PokemonSpecies['names'];

@@ -1,7 +1,8 @@
 import { getResourceId, removeDuplicateMoves } from '@/helpers';
 import { MovesApi, PokemonApi, TypesApi } from '@/services';
-import { MoveType, Pokemon, PokemonType } from '@/types';
-import { useQuery, UseQueryOptions, UseQueryResult } from '@tanstack/react-query';
+import type { MoveType, Pokemon, PokemonType } from '@/types';
+import type { UseQueryOptions, UseQueryResult } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 
 export type AutocompleteListOption = Pokemon | PokemonType | MoveType;
 

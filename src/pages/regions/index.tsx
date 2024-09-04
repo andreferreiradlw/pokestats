@@ -1,7 +1,8 @@
 // types
 import type { GetStaticProps, NextPage } from 'next';
 // helpers
-import { LocationClient, NamedAPIResource } from 'pokenode-ts';
+import type { NamedAPIResource } from 'pokenode-ts';
+import { LocationClient } from 'pokenode-ts';
 // components
 import Head from 'next/head';
 import RegionsPage from '@/components/RegionsPage';

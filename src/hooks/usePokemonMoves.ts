@@ -1,4 +1,5 @@
-import { useQuery, UseQueryOptions, UseQueryResult } from '@tanstack/react-query';
+import type { UseQueryOptions, UseQueryResult } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 import { MovesApi } from '@/services';
 // types
 import type { PokemonMove } from '@/types';

@@ -4,10 +4,13 @@ import { useIsClient, useWindowSize } from 'usehooks-ts';
 import { scrollToTop } from '@/helpers';
 import { fadeInUpVariant, pageContainerVariant } from '@/animations';
 // components
-import { Container, Stack, StackProps, useScrollTrigger } from '@mui/material';
-import { AnimatePresence, motion, HTMLMotionProps } from 'framer-motion';
+import type { StackProps } from '@mui/material';
+import { Container, Stack, useScrollTrigger } from '@mui/material';
+import type { HTMLMotionProps } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import Footer from '../Footer';
-import HeaderV2, { HeaderV2Props } from '../HeaderV2';
+import type { HeaderV2Props } from '../HeaderV2';
+import HeaderV2 from '../HeaderV2';
 // styles
 import { LayoutContainer, ScrollButton } from './StyledLayoutV2';
 // icons

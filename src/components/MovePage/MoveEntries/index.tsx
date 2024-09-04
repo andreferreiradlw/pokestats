@@ -4,7 +4,8 @@ import type { AbilityEffectChange, Move, PastMoveStatValues } from 'pokenode-ts'
 // helpers
 import { createSentence, mapGroupToGeneration, removeUnderscore } from '@/helpers';
 // components
-import { capitalize, Grid2, Grid2Props, Stack, Typography } from '@mui/material';
+import type { Grid2Props } from '@mui/material';
+import { capitalize, Grid2, Stack, Typography } from '@mui/material';
 
 interface MoveEntriesProps extends Grid2Props {
   move: Move;

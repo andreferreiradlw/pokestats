@@ -1,4 +1,4 @@
-import { Pokemon } from 'pokenode-ts';
+import type { Pokemon } from 'pokenode-ts';
 import MainClient from './MainClient';
 
 export const AbilityApi = {

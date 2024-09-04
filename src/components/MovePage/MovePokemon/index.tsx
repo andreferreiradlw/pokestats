@@ -5,7 +5,8 @@ import type { NamedAPIResource } from 'pokenode-ts';
 import InfiniteScroll from '@/components/InfiniteScroll';
 // helpers
 import { getResourceId } from '@/helpers';
-import { Stack, StackProps, Typography } from '@mui/material';
+import type { StackProps } from '@mui/material';
+import { Stack, Typography } from '@mui/material';
 
 interface MovePokemonProps extends StackProps {
   pokemonList: NamedAPIResource[];

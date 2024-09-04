@@ -13,7 +13,8 @@ import {
   ImageWrapper,
 } from './StyledImageNext';
 // components
-import { AnimatePresence, HTMLMotionProps } from 'framer-motion';
+import type { HTMLMotionProps } from 'framer-motion';
+import { AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
 
 export interface ImageNextProps extends ImageProps {

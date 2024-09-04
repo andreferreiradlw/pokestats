@@ -1,4 +1,4 @@
-import { MoveTarget } from 'pokenode-ts';
+import type { MoveTarget } from 'pokenode-ts';
 import MainClient from './MainClient';
 
 export const MovesApi = {

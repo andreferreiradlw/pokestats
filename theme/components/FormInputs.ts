@@ -1,4 +1,5 @@
-import { inputLabelClasses, Theme, type Components } from '@mui/material';
+import type { Theme } from '@mui/material';
+import { inputLabelClasses, type Components } from '@mui/material';
 
 const FormInputs: {
   MuiFormControl: Components<Theme>['MuiFormControl'];

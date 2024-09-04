@@ -1,4 +1,5 @@
-import { Theme, type Components } from '@mui/material';
+import type { Theme } from '@mui/material';
+import type { Components } from '@mui/material';
 
 const Divider: {
   MuiDivider: Components<Theme>['MuiDivider'];

@@ -4,7 +4,8 @@ import type { ContestEffect, Move, SuperContestEffect } from 'pokenode-ts';
 import { removeDash } from '@/helpers';
 // components
 import Contest from './Contest';
-import { capitalize, Grid2, Grid2Props, Typography } from '@mui/material';
+import type { Grid2Props } from '@mui/material';
+import { capitalize, Grid2, Typography } from '@mui/material';
 
 interface MoveContestProps extends Grid2Props {
   move: Move;

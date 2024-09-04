@@ -1,11 +1,5 @@
-import {
-  FormControl,
-  FormControlProps,
-  InputLabel,
-  MenuItem,
-  Select,
-  SelectProps,
-} from '@mui/material';
+import type { FormControlProps, SelectProps } from '@mui/material';
+import { FormControl, InputLabel, MenuItem, Select } from '@mui/material';
 
 export interface DropdownProps extends Omit<SelectProps<string>, 'children'> {
   label: string;

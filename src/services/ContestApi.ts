@@ -1,4 +1,4 @@
-import { Move, SuperContestEffect } from 'pokenode-ts';
+import type { Move, SuperContestEffect } from 'pokenode-ts';
 import MainClient from './MainClient';
 import { getResourceId } from '@/helpers';
 

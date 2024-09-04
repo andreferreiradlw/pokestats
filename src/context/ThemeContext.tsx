@@ -1,7 +1,9 @@
 // src/context/ThemeContext.tsx
-import { createContext, useState, useMemo, useEffect, ReactNode } from 'react';
+import type { ReactNode } from 'react';
+import { createContext, useState, useMemo, useEffect } from 'react';
 import { ThemeProvider } from '@mui/material/styles';
-import generateTheme, { ThemeMode } from '@/MuiTheme';
+import type { ThemeMode } from '@/MuiTheme';
+import generateTheme from '@/MuiTheme';
 
 interface ColorModeContextProps {
   toggleColorMode: () => void;

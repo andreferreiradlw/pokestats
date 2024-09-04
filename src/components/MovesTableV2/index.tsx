@@ -5,14 +5,17 @@ import { usePlausible } from 'next-plausible';
 // types
 import type { Move, MoveLearnMethod } from 'pokenode-ts';
 // helpers
-import { removeDash, mapGeneration, FilteredMove } from '@/helpers';
+import type { FilteredMove } from '@/helpers';
+import { removeDash, mapGeneration } from '@/helpers';
 import { fadeInUpVariant } from '@/animations';
 // styles
-import { Stack, TableProps, Theme, Typography } from '@mui/material';
+import type { TableProps, Theme } from '@mui/material';
+import { Stack, Typography } from '@mui/material';
 // components
 import { AnimatePresence, motion } from 'framer-motion';
 import TypeBadge from '@/components/TypeBadge';
-import CustomTable, { CustomTableProps } from '@/components/CustomTable';
+import type { CustomTableProps } from '@/components/CustomTable';
+import CustomTable from '@/components/CustomTable';
 import Loading from '@/components/Loading';
 
 interface TypeMovesProps extends TableProps {

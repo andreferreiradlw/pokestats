@@ -7,7 +7,7 @@ import { fadeInUpVariant } from '@/animations';
 import Head from 'next/head';
 import Homepage from '@/components/Homepage';
 import { TypesApi } from '@/services';
-import { NamedAPIResource } from 'pokenode-ts';
+import type { NamedAPIResource } from 'pokenode-ts';
 import LayoutV2 from '@/components/LayoutV2';
 import Particles from '@/components/Particles';
 import { Grid2 } from '@mui/material';

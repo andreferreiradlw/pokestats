@@ -4,7 +4,8 @@ import type { EvolutionDetail } from 'pokenode-ts';
 // helpers
 import { getResourceId } from '@/helpers';
 // components
-import { Stack, StackProps } from '@mui/material';
+import type { StackProps } from '@mui/material';
+import { Stack } from '@mui/material';
 import EvolutionDetailItem from './EvolutionDetailItem';
 
 interface EvolutionDetailsProps extends StackProps {

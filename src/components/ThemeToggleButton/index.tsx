@@ -1,7 +1,8 @@
 import { useContext } from 'react';
 import { ColorModeContext } from '@/context';
 import { ThemeSwitch } from './styledThemeToggleButton';
-import { Stack, StackProps } from '@mui/material';
+import type { StackProps } from '@mui/material';
+import { Stack } from '@mui/material';
 
 const ThemeToggleButton = (props: StackProps): JSX.Element => {
   const colorMode = useContext(ColorModeContext);

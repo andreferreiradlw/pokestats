@@ -12,7 +12,8 @@ import MoveMachines from './MoveMachines';
 import MoveTarget from './MoveTarget';
 import MovePokemon from './MovePokemon';
 import MoveStats from './MoveStats';
-import { Divider, Grid2, Stack, Theme, Typography } from '@mui/material';
+import type { Theme } from '@mui/material';
+import { Divider, Grid2, Stack, Typography } from '@mui/material';
 
 export type MovePageProps = Omit<PokestatsMovePageProps, 'autocompleteList'>;
 

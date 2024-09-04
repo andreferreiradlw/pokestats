@@ -1,12 +1,13 @@
 import { useState, useEffect, useMemo, useCallback } from 'react';
 // types
-import { NamedAPIResource } from 'pokenode-ts';
+import type { NamedAPIResource } from 'pokenode-ts';
 // helpers
 import { usePlausible } from 'next-plausible';
 import { generationOptions, getResourceId, mapIdToGeneration } from '@/helpers';
 import { fadeInUpVariant } from '@/animations';
 // components
-import { Grid2, Grid2Props, SelectChangeEvent, Typography } from '@mui/material';
+import type { Grid2Props, SelectChangeEvent } from '@mui/material';
+import { Grid2, Typography } from '@mui/material';
 import InfiniteScroll from '@/components/InfiniteScroll';
 import DropdownV2 from '@/components/DropdownV2';
 import { motion } from 'framer-motion';

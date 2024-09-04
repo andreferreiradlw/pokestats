@@ -6,8 +6,9 @@ import { removeUnderscore, prefixId, capitalise, removeDash } from '@/helpers';
 // styles
 import { SpriteContainer, Sprite } from './StyledSprites';
 // components
-import { Divider, Grid2, Stack, StackProps, Typography } from '@mui/material';
-import { ImageNextProps } from '@/components/ImageNext';
+import type { StackProps } from '@mui/material';
+import { Divider, Grid2, Stack, Typography } from '@mui/material';
+import type { ImageNextProps } from '@/components/ImageNext';
 
 interface SpritesProps extends StackProps {
   pokemonSprites: PokemonSprites;

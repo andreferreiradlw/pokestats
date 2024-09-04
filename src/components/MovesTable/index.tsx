@@ -5,7 +5,8 @@ import { usePlausible } from 'next-plausible';
 // types
 import type { Move, MoveLearnMethod } from 'pokenode-ts';
 // helpers
-import { removeDash, mapGeneration, FilteredMove } from '@/helpers';
+import type { FilteredMove } from '@/helpers';
+import { removeDash, mapGeneration } from '@/helpers';
 import { fadeInUpVariant, rowVariant } from '@/animations';
 // styles
 import {
@@ -18,9 +19,11 @@ import {
   TableRow,
 } from './StyledMovesTable';
 // components
-import { AnimatePresence, HTMLMotionProps, motion } from 'framer-motion';
+import type { HTMLMotionProps } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import TypeBadge from '@/components/TypeBadge';
-import { Stack, Theme, Typography } from '@mui/material';
+import type { Theme } from '@mui/material';
+import { Stack, Typography } from '@mui/material';
 
 interface TypeMovesProps extends HTMLMotionProps<'div'> {
   moves: (FilteredMove | Move)[];

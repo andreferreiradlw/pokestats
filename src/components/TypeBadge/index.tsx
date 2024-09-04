@@ -5,7 +5,8 @@ import { Badge } from './StyledBadge';
 // components
 import TypeIcon from '@/components/TypeIcon';
 import Link from 'next/link';
-import { capitalize, Theme, Tooltip, Typography } from '@mui/material';
+import type { Theme } from '@mui/material';
+import { capitalize, Tooltip, Typography } from '@mui/material';
 
 export interface TypeBadgeProps {
   $iconOnly?: boolean;

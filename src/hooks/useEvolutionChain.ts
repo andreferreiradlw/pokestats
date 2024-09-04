@@ -1,6 +1,7 @@
 import { SpeciesApi } from '@/services';
-import { useQuery, UseQueryOptions, UseQueryResult } from '@tanstack/react-query';
-import { EvolutionChain, EvolutionDetail, PokemonSpecies } from 'pokenode-ts';
+import type { UseQueryOptions, UseQueryResult } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
+import type { EvolutionChain, EvolutionDetail, PokemonSpecies } from 'pokenode-ts';
 
 export interface EvolutionChainPokestats {
   chainId: number;

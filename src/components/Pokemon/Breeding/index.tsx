@@ -7,7 +7,8 @@ import type { PokemonSpecies, EvolutionChain } from 'pokenode-ts';
 // styles
 import { Table, Numbered } from '@/components/BaseStyles';
 // components
-import { capitalize, Grid2, Grid2Props, Typography } from '@mui/material';
+import type { Grid2Props } from '@mui/material';
+import { capitalize, Grid2, Typography } from '@mui/material';
 // icons
 import MaleIcon from '@mui/icons-material/Male';
 import FemaleIcon from '@mui/icons-material/Female';

@@ -5,7 +5,8 @@ import type { Pokemon } from 'pokenode-ts';
 import { usePlausible } from 'next-plausible';
 // components
 import NavigationButton from './NavigationButton';
-import { Stack, StackProps } from '@mui/material';
+import type { StackProps } from '@mui/material';
+import { Stack } from '@mui/material';
 
 interface NavigationProps extends StackProps {
   allPokemon: PokestatsPokemonPageProps['allPokemon'];

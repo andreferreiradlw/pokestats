@@ -2,11 +2,12 @@ import { useState, useEffect, useRef, useCallback } from 'react';
 // helpers
 import { getResourceId } from '@/helpers';
 // types
-import { NamedAPIResource } from 'pokenode-ts';
+import type { NamedAPIResource } from 'pokenode-ts';
 // components
 import Loading from '@/components/Loading';
 import PokemonBox from '@/components/PokemonBox';
-import { Grid2, Grid2Props, Typography } from '@mui/material';
+import type { Grid2Props } from '@mui/material';
+import { Grid2, Typography } from '@mui/material';
 
 export interface InfiniteScrollProps extends Grid2Props {
   pokemonList?: NamedAPIResource[] | null; // Allow undefined or null values

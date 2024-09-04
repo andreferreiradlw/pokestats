@@ -2,7 +2,8 @@ import { useMemo } from 'react';
 // types
 import type { Name } from 'pokenode-ts';
 // components
-import { Stack, StackProps, Theme } from '@mui/material';
+import type { StackProps, Theme } from '@mui/material';
+import { Stack } from '@mui/material';
 import TypeBadge from '@/components/TypeBadge';
 // styles
 import { JpnName } from '@/components/BaseStyles';

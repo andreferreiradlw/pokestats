@@ -7,7 +7,7 @@ import { EvolutionContainer, EvoDetailsContainer, EvoArrow } from './StyledEvolu
 // components
 import PokemonBox from '@/components/PokemonBox';
 import EvolutionDetails from '../EvolutionDetails';
-import { HTMLMotionProps } from 'framer-motion';
+import type { HTMLMotionProps } from 'framer-motion';
 
 export interface EvolutionProps extends HTMLMotionProps<'div'> {
   noArrow?: boolean;

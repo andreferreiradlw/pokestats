@@ -4,8 +4,8 @@ import { motion } from 'framer-motion';
 
 const HeaderContainer = styled(AppBar)(({ theme }) => ({
   marginBottom: theme.spacing(4),
-  paddingBottom: theme.spacing(2),
-  paddingTop: theme.spacing(2),
+  paddingBottom: theme.spacing(3),
+  paddingTop: theme.spacing(3),
 }));
 
 const ContentContainer = styled(Container)(({ theme }) => ({

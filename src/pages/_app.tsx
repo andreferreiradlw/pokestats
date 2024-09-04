@@ -26,7 +26,10 @@ const App = (props: AppProps): JSX.Element => {
     <AppCacheProvider {...props}>
       <QueryClientProvider client={queryClient}>
         <PokestatsHead />
-        <PlausibleProvider domain="pokestats.gg" enabled={process.env.NODE_ENV === 'production'}>
+        <PlausibleProvider
+          domain="pokestats.gg"
+          enabled={process.env.NEXT_PUBLIC_ENV_VAR === 'prod_deployment'}
+        >
           <ThemeContextProvider>
             <CssBaseline />
             <Component {...pageProps} />

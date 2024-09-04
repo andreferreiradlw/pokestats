@@ -7,6 +7,7 @@ const LayoutContainer = styled(Container)`
   flex-direction: column;
   min-height: 100vh;
   position: relative;
+  overflow: hidden;
 `;
 
 const ScrollButton = styled(motion.div)`

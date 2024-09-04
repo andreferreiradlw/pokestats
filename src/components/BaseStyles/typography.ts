@@ -15,6 +15,7 @@ const JpnName = styled(motion.span)(({ theme }) => ({
   userSelect: 'none',
   width: '1em',
   color: theme.palette.text.primary,
+  wordBreak: 'keep-all',
 
   [theme.breakpoints.down('lg')]: {
     display: 'none',

@@ -71,6 +71,7 @@
 ✅ Typescript Refactoring <br />
 ✅ Generation 8 Pokemon + Legends: Arceus ([some data is incomplete](https://github.com/PokeAPI/pokeapi/issues/520)) <br />
 ✅ [Move Page](https://pokeapi.api-docs.io/v2.0/moves/rNQ5oSyuW7AJ3mqEe) <br />
+✅ Dark Mode <br />
 🛠️ [Encounters](https://pokeapi.api-docs.io/v2.0/encounters) & [Item](https://pokeapi.api-docs.io/v2.0/locations/h6KztxeJv67pvfT5F) Maps <br />
 &nbsp;&nbsp; 🛠️ Kanto (Gen I) <br />
 &nbsp;&nbsp; 🗒️ Johto + Kanto (Gen II) <br />
@@ -80,7 +81,6 @@
 🗒️ [Headbutt Tree Encounters](https://bulbapedia.bulbagarden.net/wiki/Headbutt_tree) Map <br />
 🗒️ [Item Page](https://pokeapi.api-docs.io/v2.0/items/kBoBXQHp45mFi4oNb) <br />
 🗒️ [Berry Page](https://pokeapi.api-docs.io/v2.0/berries/pHc3vWdv6Pkyk377Q) <br />
-🗒️ Dark Mode <br />
 
 ## Contributing
 

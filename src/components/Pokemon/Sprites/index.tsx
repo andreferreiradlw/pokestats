@@ -141,7 +141,7 @@ const Sprites = ({ pokemonSprites, pokemonId, forms, ...rest }: SpritesProps): J
           {/* Varieties */}
           <Grid2
             container
-            direction={{ xxs: 'column', sm: 'row' }}
+            direction="row"
             alignItems={{ xxs: 'center', md: 'stretch' }}
             justifyContent={{ xxs: 'center', md: 'space-around' }}
             spacing={4}
@@ -153,7 +153,7 @@ const Sprites = ({ pokemonSprites, pokemonId, forms, ...rest }: SpritesProps): J
                 flexDirection="column"
                 alignItems="center"
                 justifyContent="space-between"
-                size={3}
+                size={{ xxs: 12, sm: 6, md: 3 }}
                 gap={2}
               >
                 <SpriteContainer width={{ xxs: '100%', md: 'auto' }}>
@@ -172,7 +172,7 @@ const Sprites = ({ pokemonSprites, pokemonId, forms, ...rest }: SpritesProps): J
                 flexDirection="column"
                 alignItems="center"
                 justifyContent="space-between"
-                size={3}
+                size={{ xxs: 12, sm: 6, md: 3 }}
                 gap={2}
               >
                 <Stack flexDirection="row" justifyContent="center" flexWrap="wrap">
@@ -198,7 +198,7 @@ const Sprites = ({ pokemonSprites, pokemonId, forms, ...rest }: SpritesProps): J
                 flexDirection="column"
                 alignItems="center"
                 justifyContent="space-between"
-                size={3}
+                size={{ xxs: 12, sm: 6, md: 3 }}
                 gap={2}
                 key={`pokemon-variety-${name}`}
               >

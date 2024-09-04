@@ -33,6 +33,7 @@ const PokemonPage = ({
         alignItems="center"
         justifyContent="flex-start"
         spacing={4}
+        size={12}
       >
         <Details
           size={{ xxs: 12, lg: 5 }}
@@ -49,6 +50,7 @@ const PokemonPage = ({
         alignItems="stretch"
         justifyContent="space-between"
         spacing={4}
+        size={12}
         wrap="wrap"
       >
         <Breeding

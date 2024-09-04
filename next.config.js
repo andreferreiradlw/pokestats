@@ -8,6 +8,7 @@ module.exports = {
   },
   publicRuntimeConfig: {
     NEXT_PUBLIC_ANALYTICS: process.env.NEXT_PUBLIC_ANALYTICS,
+    NEXT_PUBLIC_ENV_VAR: process.env.NEXT_PUBLIC_ENV_VAR,
   },
   staticPageGenerationTimeout: 90,
   images: {

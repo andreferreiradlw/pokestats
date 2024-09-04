@@ -2,25 +2,15 @@ import { useState, useContext, useMemo } from 'react';
 // types
 import type { MoveLearnMethod, Pokemon } from 'pokenode-ts';
 // helpers
-import { fadeInUpVariant } from '@/animations';
 import { GameVersionContext } from '@/context';
 import { mapVersionToGroup, filterMoves } from '@/helpers';
 // hooks
 import { useMachines, usePokemonMoves } from '@/hooks';
 // components
-import { AnimatePresence, motion } from 'framer-motion';
-import Loading from '@/components/Loading';
 import { Grid2, Grid2Props, Typography } from '@mui/material';
 import DropdownV2 from '@/components/DropdownV2';
 import GameGenSelect from '@/components/GameGenSelect';
 import MovesTableV2 from '@/components/MovesTableV2';
-
-const LearnMethodOptions = [
-  { label: 'Level Up', value: 'level-up' },
-  { label: 'Machines', value: 'machine' },
-  { label: 'Egg', value: 'egg' },
-  { label: 'Tutor', value: 'tutor' },
-];
 
 interface PokemonMovesProps extends Grid2Props {
   pokemon: Pokemon;
@@ -62,7 +52,12 @@ const PokemonMoves = ({ pokemon, ...rest }: PokemonMovesProps): JSX.Element => {
       <Grid2 size={12} gap={4}>
         <DropdownV2
           label="Type"
-          options={LearnMethodOptions}
+          options={[
+            { label: 'Level Up', value: 'level-up' },
+            { label: 'Machines', value: 'machine' },
+            { label: 'Egg', value: 'egg' },
+            { label: 'Tutor', value: 'tutor' },
+          ]}
           onChange={e => setLearnMethod(e.target.value)}
           value={learnMethod}
         />

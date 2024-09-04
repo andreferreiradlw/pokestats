@@ -16,7 +16,7 @@ import CustomTable, { CustomTableProps } from '@/components/CustomTable';
 import Loading from '@/components/Loading';
 
 interface TypeMovesProps extends TableProps {
-  moves: (FilteredMove | Move)[];
+  moves?: (FilteredMove | Move)[];
   learnMethod?: MoveLearnMethod['name'];
   machineNames?: string[];
   isLoading?: boolean;
@@ -76,6 +76,8 @@ const MovesTableV2 = ({
 
   // Transform data for CustomTable
   const tableData: CustomTableProps['data'] = useMemo(() => {
+    if (!moves) return [];
+
     return moves.map((move, index) => {
       const methodCellContent = (() => {
         if (!learnMethod) return '-';
@@ -121,7 +123,6 @@ const MovesTableV2 = ({
           render: (
             <TypeBadge $iconOnly $typename={move.type.name as keyof Theme['palette']['types']} />
           ),
-          onClick: () => onCellClick(move.name, move.id),
         },
         category: {
           render: <Typography textTransform="capitalize">{move.damage_class?.name}</Typography>,
@@ -150,7 +151,7 @@ const MovesTableV2 = ({
           $iconWidth={{ xxs: '20%', xs: '15%', md: '10%', lg: '5%' }}
           py={12}
         />
-      ) : moves.length > 0 ? (
+      ) : tableData.length > 0 ? (
         <CustomTable
           columns={columns}
           data={tableData}

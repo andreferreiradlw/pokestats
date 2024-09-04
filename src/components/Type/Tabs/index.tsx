@@ -5,21 +5,10 @@ import type { NamedAPIResource } from 'pokenode-ts';
 // helpers
 import { getResourceId } from '@/helpers';
 import { useTypeMoves } from '@/hooks';
-import { styled } from '@mui/material/styles';
-import { fadeInUpVariant } from '@/animations';
 // components
-import { AnimatePresence, motion } from 'framer-motion';
 import InfiniteScroll from '@/components/InfiniteScroll';
-import MovesTable from '@/components/MovesTable';
-import Loading from '@/components/Loading';
 import { Stack, Typography, Tabs, Tab, StackProps, Paper } from '@mui/material';
-
-const TabContainer = styled(motion.div)`
-  display: flex;
-  flex-direction: column;
-  gap: 1em;
-  width: 100%;
-`;
+import MovesTableV2 from '@/components/MovesTableV2';
 
 interface TypeTabsProps extends StackProps, TypePageProps {
   typeName: string;
@@ -30,7 +19,7 @@ const TypeTabs = ({ typeData, typeName, ...rest }: TypeTabsProps) => {
   const [currTab, setCurrTab] = useState<'pokemon' | 'moves'>('pokemon');
 
   // data
-  const { name, pokemon, moves } = typeData;
+  const { pokemon, moves } = typeData;
   const { data: movesData, isLoading: isLoadingMoves } = useTypeMoves(typeData, {
     enabled: currTab === 'moves',
   });
@@ -60,31 +49,21 @@ const TypeTabs = ({ typeData, typeName, ...rest }: TypeTabsProps) => {
           <Tab label="Moves" value="moves" />
         </Tabs>
       </Paper>
-      <AnimatePresence mode="wait">
-        {currTab === 'pokemon' ? (
-          <TabContainer
-            initial="hidden"
-            animate="show"
-            exit="exit"
-            variants={fadeInUpVariant}
-            key={`${name}-type-pokemon`}
-          >
-            <Typography variant="sectionTitle">{`${typeName} Type Pokemon (${pokemon.length})`}</Typography>
-            <InfiniteScroll pokemonList={pokemonList as NamedAPIResource[]} />
-          </TabContainer>
-        ) : (
-          <TabContainer
-            initial="hidden"
-            animate="show"
-            exit="exit"
-            variants={fadeInUpVariant}
-            key={`${name}-type-moves`}
-          >
-            <Typography variant="sectionTitle">{`${typeName} Type Moves (${moves.length})`}</Typography>
-            {isLoadingMoves ? <Loading /> : movesData && <MovesTable moves={movesData} />}
-          </TabContainer>
-        )}
-      </AnimatePresence>
+      {currTab === 'pokemon' ? (
+        <Stack width="100%" gap={2}>
+          <Typography variant="sectionTitle">{`${typeName} Type Pokémon (${pokemon.length})`}</Typography>
+          <InfiniteScroll pokemonList={pokemonList as NamedAPIResource[]} />
+        </Stack>
+      ) : (
+        <Stack width="100%" gap={2}>
+          <Typography variant="sectionTitle">{`${typeName} Type Moves (${moves.length})`}</Typography>
+          <MovesTableV2
+            moves={movesData}
+            isLoading={isLoadingMoves}
+            noMovesText="No moves for current type."
+          />
+        </Stack>
+      )}
     </Stack>
   );
 };

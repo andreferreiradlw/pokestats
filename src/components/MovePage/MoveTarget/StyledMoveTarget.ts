@@ -76,10 +76,9 @@ const FoeImg = styled('img')({
 });
 
 const BattleGround = styled('div')(({ theme }) => ({
-  background: 'radial-gradient(ellipse at center, #ffffff 19%, #cecece 57%, #ffffff 67%)',
+  background: `radial-gradient(ellipse at center, ${theme.palette.background.default} 19%, ${theme.palette.primary.dark} 57%, ${theme.palette.background.default} 67%)`,
   display: 'none',
-  filter:
-    "progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#ffffff',GradientType=1 )",
+  filter: `progid:DXImageTransform.Microsoft.gradient( startColorstr='${theme.palette.background.default}', endColorstr='${theme.palette.background.default}', GradientType=1 )`,
   height: '30%',
   left: '50%',
   position: 'absolute',

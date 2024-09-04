@@ -50,17 +50,23 @@ const MovePage = ({
           alignItems={{ xxs: 'center', lg: 'flex-start' }}
           justifyContent="flex-start"
           spacing={4}
+          size={12}
         >
           <Grid2
             container
-            size={4}
+            size={{ xxs: 12, lg: 4 }}
             direction={{ xxs: 'column', sm: 'row', lg: 'column' }}
             spacing={2}
           >
-            <MoveInfo move={move} />
-            <MoveMachines moveName={moveName} moveType={type.name} machines={moveMachines} />
+            <MoveInfo move={move} size={{ xxs: 6, lg: 12 }} />
+            <MoveMachines
+              moveName={moveName}
+              moveType={type.name}
+              machines={moveMachines}
+              size={{ xxs: 6, lg: 12 }}
+            />
           </Grid2>
-          <MoveFlavorText flavorTexts={flavor_text_entries} size={8} />
+          <MoveFlavorText flavorTexts={flavor_text_entries} size={{ xxs: 12, lg: 8 }} />
         </Grid2>
       </Stack>
       <Grid2
@@ -69,18 +75,25 @@ const MovePage = ({
         alignItems={{ xxs: 'center', lg: 'flex-start' }}
         direction={{ xxs: 'column', lg: 'row' }}
         spacing={4}
+        size={12}
       >
-        <Grid2 container size={6} direction={{ xxs: 'column-reverse', lg: 'column' }} spacing={2}>
-          <MoveTarget target={target} moveType={type} />
-          <MoveStats move={move} moveName={moveName} />
+        <Grid2
+          container
+          size={{ xxs: 12, lg: 6 }}
+          direction={{ xxs: 'column-reverse', lg: 'column' }}
+          spacing={2}
+        >
+          <MoveTarget target={target} moveType={type} size={12} />
+          <MoveStats move={move} moveName={moveName} size={12} />
         </Grid2>
-        <Grid2 container size={6} spacing={2}>
-          <MoveEntries move={move} moveName={moveName} />
+        <Grid2 container size={{ xxs: 12, lg: 6 }} spacing={2}>
+          <MoveEntries move={move} moveName={moveName} size={12} />
           <MoveContest
             move={move}
             moveName={moveName}
             contestEffect={contestEffect}
             superContestEffect={superContestEffect}
+            size={12}
           />
         </Grid2>
       </Grid2>

@@ -19,7 +19,7 @@ const MovePokemon = ({ pokemonList, ...rest }: MovePokemonProps): JSX.Element =>
   );
 
   return (
-    <Stack alignItems="flex-start" justifyContent="flex-start" gap={2} {...rest}>
+    <Stack alignItems="flex-start" justifyContent="flex-start" gap={2} width="100%" {...rest}>
       <Typography variant="sectionTitle">{`Learnset (${displayPokemon?.length})`}</Typography>
       <InfiniteScroll pokemonList={displayPokemon} />
     </Stack>

@@ -4,13 +4,9 @@ const lightPalette: ThemeOptions = {
   palette: {
     primary: {
       main: '#F4C095', // peach
-      // light: '#ffe7e6',
-      // dark: '#513b3b',
     },
     secondary: {
       main: '#474044', // jet
-      // light: '#ada9af',
-      // dark: '#0f0a11',
     },
     error: {
       main: '#EE2E31', // red
@@ -18,6 +14,31 @@ const lightPalette: ThemeOptions = {
     divider: '#679289', // viridian
     contrastThreshold: 4.5,
     mode: 'light',
+  },
+};
+
+const darkPalette: ThemeOptions = {
+  palette: {
+    primary: {
+      main: '#D29F7E', // soft peach (muted version of light primary)
+    },
+    secondary: {
+      main: '#7A7175', // muted mauve (similar to jet but slightly lighter)
+    },
+    background: {
+      default: '#2E2A2C', // dark charcoal
+      paper: '#3C383A', // slightly lighter charcoal
+    },
+    text: {
+      primary: '#F1EDEE', // light grey (to contrast with dark background)
+      secondary: '#D4CFCF', // softer grey for secondary text
+    },
+    error: {
+      main: '#FF6B6B', // bright red for error to stand out
+    },
+    divider: '#4A7070', // muted viridian
+    contrastThreshold: 4.5,
+    mode: 'dark',
   },
 };
 
@@ -50,4 +71,4 @@ const gameColors = {
   yellow: '#FFD733',
 };
 
-export { lightPalette, typeColors, gameColors };
+export { lightPalette, darkPalette, typeColors, gameColors };

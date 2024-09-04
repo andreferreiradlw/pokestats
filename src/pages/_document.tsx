@@ -4,14 +4,18 @@ import {
   DocumentHeadTagsProps,
   documentGetInitialProps,
 } from '@mui/material-nextjs/v14-pagesRouter';
-import theme from '@/MuiTheme';
+import generateTheme from '@/MuiTheme';
 
-export default function MyDocument(props: DocumentProps & DocumentHeadTagsProps) {
+interface MyDocumentProps extends DocumentProps, DocumentHeadTagsProps {
+  themeColor: string;
+}
+
+export default function MyDocument(props: MyDocumentProps) {
   return (
     <Html lang="en">
       <Head>
         {/* PWA primary color */}
-        <meta name="theme-color" content={theme.palette.primary.main} />
+        <meta name="theme-color" content={props.themeColor} />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" />
         <link
@@ -31,6 +35,14 @@ export default function MyDocument(props: DocumentProps & DocumentHeadTagsProps)
 }
 
 MyDocument.getInitialProps = async (ctx: DocumentContext) => {
-  const finalProps = await documentGetInitialProps(ctx);
-  return finalProps;
+  const initialProps = await documentGetInitialProps(ctx);
+
+  // Generate the theme and get the primary color
+  const theme = generateTheme('light');
+  const themeColor = theme.palette.primary.main;
+
+  return {
+    ...initialProps,
+    themeColor, // Pass the primary color to the document props
+  };
 };

@@ -1,5 +1,6 @@
 import { createContext, useState, useMemo, useEffect, ReactNode } from 'react';
-import { createTheme, ThemeProvider, Theme } from '@mui/material/styles';
+import { ThemeProvider } from '@mui/material/styles';
+import generateTheme, { ThemeMode } from '@/MuiTheme';
 
 interface ColorModeContextProps {
   toggleColorMode: () => void;
@@ -14,11 +15,12 @@ interface ThemeContextProviderProps {
 }
 
 export function ThemeContextProvider({ children }: ThemeContextProviderProps) {
-  const [mode, setMode] = useState<'light' | 'dark'>('light');
+  const [mode, setMode] = useState<ThemeMode>('light'); // Default to 'light'
+  const [mounted, setMounted] = useState(false); // Track if the component is mounted
 
   // Function to get initial theme from localStorage or system preference
-  const getInitialTheme = (): 'light' | 'dark' => {
-    const savedMode = localStorage.getItem('theme') as 'light' | 'dark';
+  const getInitialTheme = (): ThemeMode => {
+    const savedMode = localStorage.getItem('theme') as ThemeMode;
     if (savedMode) {
       return savedMode;
     }
@@ -31,6 +33,7 @@ export function ThemeContextProvider({ children }: ThemeContextProviderProps) {
   // Set the initial theme on component mount
   useEffect(() => {
     setMode(getInitialTheme());
+    setMounted(true); // Indicate that the component has mounted
   }, []);
 
   // Listen for changes in the user's system theme preference
@@ -54,7 +57,7 @@ export function ThemeContextProvider({ children }: ThemeContextProviderProps) {
     () => ({
       toggleColorMode: () => {
         setMode(prevMode => {
-          const newMode = prevMode === 'light' ? 'dark' : 'light';
+          const newMode: ThemeMode = prevMode === 'light' ? 'dark' : 'light';
           localStorage.setItem('theme', newMode); // Save the new mode to localStorage
           return newMode;
         });
@@ -63,15 +66,12 @@ export function ThemeContextProvider({ children }: ThemeContextProviderProps) {
     [],
   );
 
-  const theme: Theme = useMemo(
-    () =>
-      createTheme({
-        palette: {
-          mode,
-        },
-      }),
-    [mode],
-  );
+  const theme = useMemo(() => generateTheme(mode), [mode]);
+
+  // Conditionally render the ThemeProvider only after the component has mounted
+  if (!mounted) {
+    return null;
+  }
 
   return (
     <ColorModeContext.Provider value={colorMode}>

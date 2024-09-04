@@ -7,10 +7,9 @@ import type { AppProps } from 'next/app';
 import PokestatsHead from '@/components/Head';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 // mui
-import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
-import theme from '@/MuiTheme';
 import { AppCacheProvider } from '@mui/material-nextjs/v14-pagesRouter';
+import { ThemeContextProvider } from '@/context';
 
 const App = (props: AppProps): JSX.Element => {
   const { Component, pageProps } = props;
@@ -28,10 +27,10 @@ const App = (props: AppProps): JSX.Element => {
       <QueryClientProvider client={queryClient}>
         <PokestatsHead />
         <PlausibleProvider domain="pokestats.gg" enabled={process.env.NODE_ENV === 'production'}>
-          <ThemeProvider theme={theme}>
+          <ThemeContextProvider>
             <CssBaseline />
             <Component {...pageProps} />
-          </ThemeProvider>
+          </ThemeContextProvider>
         </PlausibleProvider>
         <ReactQueryDevtools initialIsOpen={false} buttonPosition="bottom-left" />
       </QueryClientProvider>

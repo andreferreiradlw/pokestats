@@ -19,6 +19,7 @@ import CustomButton from '@/components/CustomButton';
 import Loading from '@/components/Loading';
 // icons
 import Github from 'public/static/iconLibrary/github.svg';
+import ThemeToggleButton from '../ThemeToggleButton';
 
 const Homepage = ({ pokemonTypes }: PokestatsHomepageProps): JSX.Element => {
   // hooks
@@ -39,6 +40,7 @@ const Homepage = ({ pokemonTypes }: PokestatsHomepageProps): JSX.Element => {
 
   return (
     <>
+      <ThemeToggleButton position="absolute" top="20px" right="20px" />
       <GithubLink
         href="https://github.com/andreferreiradlw/pokestats"
         target="_blank"

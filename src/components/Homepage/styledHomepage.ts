@@ -24,7 +24,7 @@ const SecondSection = styled(Stack)(({ theme }) => ({
 
 const GithubLink = styled(motion.a)(({ theme }) => ({
   position: 'absolute',
-  right: '20px',
+  left: '20px',
   top: '20px',
   zIndex: 3,
 

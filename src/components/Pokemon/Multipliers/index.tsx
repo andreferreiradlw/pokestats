@@ -76,16 +76,15 @@ const Multipliers = ({ pokemonTypes, ...rest }: MultipliersProps): JSX.Element =
         <Typography variant="sectionTitle">Relations</Typography>
         <Stack flexDirection="row" alignItems="center" gap={1}>
           <Tooltip title="Defending" placement="top">
-            <ShieldIcon color="secondary" />
+            <ShieldIcon />
           </Tooltip>
           <Switch
-            color="secondary"
             checked={isAttackMode}
             onChange={handleSwitchChange}
             inputProps={{ 'aria-label': 'Toggle attack/defense mode' }}
           />
           <Tooltip title="Attacking" placement="top">
-            <ConnectWithoutContactIcon color="secondary" />
+            <ConnectWithoutContactIcon />
           </Tooltip>
         </Stack>
       </Stack>

@@ -2921,10 +2921,10 @@ escape-string-regexp@^4.0.0:
   resolved "https://registry.yarnpkg.com/escape-string-regexp/-/escape-string-regexp-4.0.0.tgz#14ba83a5d373e3d311e5afca29cf5bfad965bf34"
   integrity sha512-TtpcNJ3XAzx3Gq8sWRzJaVajRs0uVxA2YAkdb1jm2YkPz4G6egUFAyA3n5vtEIZefPk5Wa4UXbKuS5fKkJWdgA==
 
-eslint-config-alloy@^4.7.0:
-  version "4.9.0"
-  resolved "https://registry.yarnpkg.com/eslint-config-alloy/-/eslint-config-alloy-4.9.0.tgz#44ed777e8eb0ee595baabeb5d6cb568c2e6461c2"
-  integrity sha512-4DfiN0sXByf5WuXioZrrZJdfzZw+lgdoQfFTuQyFenJ2XeIKrsXYctArLiZAoAsTxyZnmUFYqrgwUIXx26q0gg==
+eslint-config-alloy@^5.1.2:
+  version "5.1.2"
+  resolved "https://registry.yarnpkg.com/eslint-config-alloy/-/eslint-config-alloy-5.1.2.tgz#e9950fc8006f1daffc26f82beb57e4f92a578e6b"
+  integrity sha512-jppzCxNqlhvMYPgfUzvPq4f9fEu070+m3CRIjWdUx/GJLZ6dXHARzMIrIhFuIvzYI5Qo40ht1gunguLnRhIB7A==
 
 eslint-config-prettier@^8.5.0:
   version "8.10.0"

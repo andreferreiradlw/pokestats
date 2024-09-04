@@ -28,7 +28,7 @@ const FeaturedImage = ({ specieNames, pokemonId, ...rest }: FeaturedImageProps):
   );
 
   return (
-    <ImageContainer {...rest}>
+    <ImageContainer alignItems="center" justifyContent="center" {...rest}>
       <ImageNext
         priority
         loading="eager"

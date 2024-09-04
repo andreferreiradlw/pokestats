@@ -26,7 +26,7 @@ const TypePage = ({ typeData }: TypePageProps): JSX.Element => {
     <Stack divider={<Divider />} gap={4} py={2}>
       <Grid2 container spacing={4} direction="column">
         <Grid2>
-          <Typography variant="pageHeading">{typeName}</Typography>
+          <Typography variant="pageHeading">{typeName} Type</Typography>
         </Grid2>
         <Grid2 container spacing={4} direction={{ xxs: 'column', lg: 'row' }} size={12}>
           <Grid2 size={{ xxs: 12, lg: 3 }}>

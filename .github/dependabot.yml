@@ -1,42 +1,29 @@
 version: 2
 updates:
-  # Group 1: Core runtime dependencies for Next.js and React
+  # Single npm configuration for all groups
   - package-ecosystem: 'npm'
-    directory: '/'
+    directory: '/' # Root directory for the npm packages
     schedule:
       interval: 'weekly'
       day: 'sunday'
       time: '04:00'
       timezone: 'Etc/UTC'
     groups:
+      # Group 1: Core runtime dependencies for Next.js and React
       runtime:
         patterns:
           - 'next'
           - 'react'
           - 'react-dom'
           - 'react-is'
-    commit-message:
-      prefix: '[dependabot][runtime]'
 
-  # Group 2: MUI and Emotion dependencies
-  - package-ecosystem: 'npm'
-    directory: '/'
-    schedule:
-      interval: 'weekly'
-    groups:
+      # Group 2: MUI and Emotion dependencies
       mui-emotion:
         patterns:
           - '@mui/**'
           - '@emotion/**'
-    commit-message:
-      prefix: '[dependabot][mui-emotion]'
 
-  # Group 3: Development tools and linters
-  - package-ecosystem: 'npm'
-    directory: '/'
-    schedule:
-      interval: 'weekly'
-    groups:
+      # Group 3: Development tools and linters
       dev-tools:
         patterns:
           - 'eslint*'
@@ -44,15 +31,8 @@ updates:
           - 'typescript'
           - '@typescript-eslint/**'
           - 'webpack'
-    commit-message:
-      prefix: '[dependabot][dev-tools]'
 
-  # Group 4: Other npm dependencies
-  - package-ecosystem: 'npm'
-    directory: '/'
-    schedule:
-      interval: 'weekly'
-    groups:
+      # Group 4: Other npm dependencies
       other-dependencies:
         patterns:
           - '*' # Matches all dependencies
@@ -68,11 +48,13 @@ updates:
           - 'typescript'
           - '@typescript-eslint/**'
           - 'webpack'
-    commit-message:
-      prefix: '[dependabot][other-dependencies]'
 
+    commit-message:
+      prefix: '[dependabot]'
+
+  # Separate configuration for GitHub Actions
   - package-ecosystem: 'github-actions'
-    directory: '/'
+    directory: '/' # Root directory for GitHub Actions
     schedule:
       interval: 'weekly'
     commit-message:

@@ -445,16 +445,6 @@ const mapVersionToGroup = (currentVersion: string): Game['group'] =>
 const mapGeneration = (generationValue: string) =>
   generationValue ? generations.find(gen => gen.value === generationValue)?.label : '';
 
-const mapGenerationToGame = (value: string, pokemonId: number): Game['value'] => {
-  const genGames = gameVersions.filter(gen => gen.genValue === value);
-
-  if (checkIfArceus(pokemonId)) {
-    return genGames[2].value;
-  } else {
-    return genGames[0].value;
-  }
-};
-
 const mapGroupToGeneration = (groupName: string): Game['generation'] | undefined =>
   gameVersions.find(version => version.group === groupName)?.generation;
 
@@ -477,7 +467,6 @@ export {
   mapIdToGeneration,
   mapVersionToGroup,
   mapGeneration,
-  mapGenerationToGame,
   mapGroupToGeneration,
   mapGameValueToGenerationValue,
   listGamesByGroup,

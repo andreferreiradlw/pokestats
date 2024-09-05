@@ -1,6 +1,12 @@
 {
-  "extends": ["alloy", "alloy/react", "alloy/typescript", "plugin:jsx-a11y/recommended"],
-  "plugins": ["prettier", "react", "react-hooks", "@typescript-eslint"],
+  "extends": [
+    "alloy",
+    "alloy/react",
+    "alloy/typescript",
+    "plugin:jsx-a11y/recommended",
+    "plugin:@next/next/recommended",
+  ],
+  "plugins": ["prettier", "react", "react-hooks", "@typescript-eslint", "@next/eslint-plugin-next"],
   "rules": {
     "eqeqeq": "error",
     "prefer-object-has-own": "off",
@@ -16,6 +22,11 @@
     "react-hooks/exhaustive-deps": "off",
     "@typescript-eslint/no-unused-vars": "error",
     "@typescript-eslint/prefer-optional-chain": "off",
+    "@next/next/no-img-element": "off",
+    "@typescript-eslint/consistent-type-imports": [
+      "error",
+      { "prefer": "type-imports", "fixStyle": "inline-type-imports" },
+    ],
   },
   "parserOptions": {
     "ecmaVersion": 6,

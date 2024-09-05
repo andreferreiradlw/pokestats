@@ -1,8 +1,79 @@
 version: 2
 updates:
+  # Group 1: Core runtime dependencies for Next.js and React
   - package-ecosystem: 'npm'
     directory: '/'
     schedule:
-      interval: 'daily'
+      interval: 'weekly'
+      day: 'sunday'
+      time: '04:00'
+      timezone: 'Etc/UTC'
+    groups:
+      runtime:
+        patterns:
+          - 'next'
+          - 'react'
+          - 'react-dom'
+          - 'react-is'
     commit-message:
-      prefix: '[dependabot] '
+      prefix: '[dependabot][runtime]'
+
+  # Group 2: MUI and Emotion dependencies
+  - package-ecosystem: 'npm'
+    directory: '/'
+    schedule:
+      interval: 'weekly'
+    groups:
+      mui-emotion:
+        patterns:
+          - '@mui/**'
+          - '@emotion/**'
+    commit-message:
+      prefix: '[dependabot][mui-emotion]'
+
+  # Group 3: Development tools and linters
+  - package-ecosystem: 'npm'
+    directory: '/'
+    schedule:
+      interval: 'weekly'
+    groups:
+      dev-tools:
+        patterns:
+          - 'eslint*'
+          - 'prettier'
+          - 'typescript'
+          - '@typescript-eslint/**'
+          - 'webpack'
+    commit-message:
+      prefix: '[dependabot][dev-tools]'
+
+  # Group 4: Other npm dependencies
+  - package-ecosystem: 'npm'
+    directory: '/'
+    schedule:
+      interval: 'weekly'
+    groups:
+      other-dependencies:
+        patterns:
+          - '*' # Matches all dependencies
+        exclude-patterns:
+          - 'next'
+          - 'react'
+          - 'react-dom'
+          - 'react-is'
+          - '@mui/**'
+          - '@emotion/**'
+          - 'eslint*'
+          - 'prettier'
+          - 'typescript'
+          - '@typescript-eslint/**'
+          - 'webpack'
+    commit-message:
+      prefix: '[dependabot][other-dependencies]'
+
+  - package-ecosystem: 'github-actions'
+    directory: '/'
+    schedule:
+      interval: 'weekly'
+    commit-message:
+      prefix: '[dependabot][github-actions]'

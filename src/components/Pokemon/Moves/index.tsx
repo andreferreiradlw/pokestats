@@ -39,14 +39,7 @@ const PokemonMoves = ({ pokemon, ...rest }: PokemonMovesProps): JSX.Element => {
   });
 
   return (
-    <Grid2
-      container
-      direction="column"
-      alignItems={{ xxs: 'center', lg: 'flex-start' }}
-      gap={4}
-      width="100%"
-      {...rest}
-    >
+    <Grid2 container direction="column" gap={4} size={12} {...rest}>
       <Grid2 size={12}>
         <Typography variant="sectionTitle">Move Pool</Typography>
       </Grid2>

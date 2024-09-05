@@ -13,7 +13,7 @@ const PokestatsHead = ({ children }: PokestatsHeadProps): JSX.Element => {
       {process.env.NODE_ENV === 'production' && (
         <>
           <script defer data-domain="pokestats.gg" src="/js/script.js" />
-          <Script>{`window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }`}</Script>
+          <Script id="plausible-script">{`window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }`}</Script>
         </>
       )}
       <meta charSet="utf-8" />

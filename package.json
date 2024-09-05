@@ -56,7 +56,7 @@
   },
   "devDependencies": {
     "@emotion/babel-plugin": "^11.12.0",
-    "@next/eslint-plugin-next": "^13.0.6",
+    "@next/eslint-plugin-next": "^14.2.8",
     "@svgr/webpack": "^8.1.0",
     "@tanstack/react-query-devtools": "^5.51.21",
     "@types/node": "^18.11.13",
@@ -67,7 +67,7 @@
     "axios-cache-interceptor": "^1.5.3",
     "eslint": "^8.29.0",
     "eslint-config-alloy": "^5.1.2",
-    "eslint-config-prettier": "^8.5.0",
+    "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-jsx-a11y": "^6.10.0",
     "eslint-plugin-prettier": "^5.2.1",
     "eslint-plugin-react": "^7.31.11",

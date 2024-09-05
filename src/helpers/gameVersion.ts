@@ -439,8 +439,6 @@ const mapIdToGeneration = (id: number): string => {
   }
 };
 
-const checkIfArceus = (pokemonId: number): boolean => pokemonId > 898 && pokemonId <= 905;
-
 const mapVersionToGroup = (currentVersion: string): Game['group'] =>
   gameVersions.filter(version => version.value === currentVersion).map(version => version.group)[0];
 
@@ -457,20 +455,11 @@ const mapGenerationToGame = (value: string, pokemonId: number): Game['value'] =>
   }
 };
 
-const checkIfEarlierGen = (newGen: string, currGen: string): boolean => {
-  const versionValues = gameVersions.map(version => version.value);
-
-  return versionValues.indexOf(newGen) > versionValues.indexOf(currGen);
-};
-
 const mapGroupToGeneration = (groupName: string): Game['generation'] | undefined =>
   gameVersions.find(version => version.group === groupName)?.generation;
 
-const mapGroupToGenerationValue = (groupName: string): Game['genValue'] | undefined =>
-  gameVersions.find(version => version.group === groupName)?.genValue;
-
-const listGamesByGen = (generation: string): Game[] =>
-  gameVersions.filter(game => game.genValue === generation);
+const mapGameValueToGenerationValue = (gameValue: string): Game['genValue'] | undefined =>
+  gameVersions.find(({ value }) => value === gameValue)?.genValue;
 
 const listGamesByGroup = (group: string): Game['label'][] =>
   gameVersions.filter(game => game.group === group).map(currGame => currGame.label);
@@ -489,11 +478,8 @@ export {
   mapVersionToGroup,
   mapGeneration,
   mapGenerationToGame,
-  checkIfEarlierGen,
-  checkIfArceus,
   mapGroupToGeneration,
-  mapGroupToGenerationValue,
-  listGamesByGen,
+  mapGameValueToGenerationValue,
   listGamesByGroup,
   listGenGroupsByGroup,
   listMoveGroupsByGroup,

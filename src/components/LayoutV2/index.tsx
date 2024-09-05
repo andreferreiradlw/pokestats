@@ -19,14 +19,14 @@ import ChevronTop from 'public/static/iconLibrary/chevron_top.svg';
 interface LayoutV2Props extends Omit<HTMLMotionProps<'main'>, keyof StackProps>, StackProps {
   withHeader?: boolean;
   showGenSelect?: HeaderV2Props['showGenSelect'];
-  key: string; // make it mandatory for animation purposes
+  customKey: string;
 }
 
 const LayoutV2 = ({
   children,
   withHeader,
   showGenSelect,
-  key,
+  customKey,
   ...rest
 }: LayoutV2Props): JSX.Element => {
   // hooks
@@ -52,7 +52,7 @@ const LayoutV2 = ({
           animate="visible"
           exit="fade"
           variants={pageContainerVariant}
-          key={key || 'layout-grid-container'}
+          key={customKey || 'layout-grid-container'}
           {...rest}
         >
           <Container maxWidth="xl">{children}</Container>

@@ -75,7 +75,7 @@ const PokestatsPokemonPage: NextPage<PokestatsPokemonPageProps> = ({ allPokemon,
           )}.png`}
         />
       </Head>
-      <LayoutV2 withHeader showGenSelect key={`pokemon-${props.species.id}`}>
+      <LayoutV2 withHeader showGenSelect customKey={`pokemon-${props.species.id}`}>
         <PokemonPage allPokemon={allPokemon} {...props} />
       </LayoutV2>
     </GameVersionProvider>

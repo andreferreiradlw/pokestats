@@ -62,7 +62,7 @@ const PokestatsMovePage: NextPage<PokestatsMovePageProps> = props => {
         <meta property="og:title" content={pageTitle} />
         <meta property="og:description" content={pageDescription} />
       </Head>
-      <LayoutV2 withHeader key={`move-${props.move.id}`}>
+      <LayoutV2 withHeader customKey={`move-${props.move.id}`}>
         <MovePage {...props} />
       </LayoutV2>
     </>

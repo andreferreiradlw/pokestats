@@ -26,7 +26,12 @@ const PokestatsHomepage: NextPage<PokestatsHomepageProps> = props => (
       />
       <meta property="og:image" content="/static/android-icon-512x512.png" />
     </Head>
-    <LayoutV2 initial="hidden" animate="show" variants={fadeInUpVariant} key="homepage-container">
+    <LayoutV2
+      initial="hidden"
+      animate="show"
+      variants={fadeInUpVariant}
+      customKey="homepage-container"
+    >
       <Homepage {...props} />
     </LayoutV2>
     <Particles />

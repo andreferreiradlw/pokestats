@@ -29,7 +29,7 @@ const PokestatsRegionsPage: NextPage<PokestatsKantoGen1PageProps> = props => {
           content="The Kanto region (Japanese: カントー地方 Kanto region) is a region of the Pokémon world. Kanto is located east of Johto, which together form a joint landmass that is south of Sinnoh."
         />
       </Head>
-      <LayoutV2 withHeader key="kanto-gen1-region">
+      <LayoutV2 withHeader customKey="kanto-gen1-region">
         <KantoGen1 {...props} />
       </LayoutV2>
     </>

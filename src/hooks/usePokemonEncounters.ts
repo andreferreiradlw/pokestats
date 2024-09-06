@@ -2,7 +2,7 @@ import { EncountersApi, LocationAreaApi } from '@/services';
 import { useQuery, type UseQueryOptions, type UseQueryResult } from '@tanstack/react-query';
 import type { LocationArea, NamedAPIResource, VersionEncounterDetail } from 'pokenode-ts';
 
-interface Encounters {
+export interface EncounterData {
   location_area: LocationArea;
   version_details: VersionEncounterDetail;
 }
@@ -10,9 +10,9 @@ interface Encounters {
 export const usePokemonEncounters = (
   id: number,
   gameVersion: string,
-  options?: Partial<UseQueryOptions<Encounters[]>>,
-): UseQueryResult<Encounters[]> =>
-  useQuery<Encounters[]>({
+  options?: Partial<UseQueryOptions<EncounterData[]>>,
+): UseQueryResult<EncounterData[]> =>
+  useQuery<EncounterData[]>({
     queryKey: ['pokemonEncounters', id, gameVersion],
     queryFn: async () => {
       const encounters = await EncountersApi.getById(id);

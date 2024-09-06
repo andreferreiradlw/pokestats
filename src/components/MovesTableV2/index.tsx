@@ -152,7 +152,7 @@ const MovesTableV2 = ({
         <CustomTable
           columns={columns}
           data={tableData}
-          key={`moves-table-container-${learnMethod}`}
+          customKey={`moves-table-container-${learnMethod}`}
           {...rest}
         />
       ) : (

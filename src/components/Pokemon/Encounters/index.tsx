@@ -1,51 +1,26 @@
-import { useContext, useMemo } from 'react';
+import { useContext } from 'react';
 // helpers
 import { usePokemonEncounters } from '@/hooks';
 import { GameVersionContext } from '@/context';
 // types
-import type { LocationAreaEncounter, PokemonSpecies } from 'pokenode-ts';
+import type { PokemonSpecies } from 'pokenode-ts';
 // components
 import { Grid2, Typography, type Grid2Props } from '@mui/material';
 import { AnimatePresence, motion } from 'framer-motion';
-import { fadeInUpVariant } from '@/animations';
+import { fadeInUpVariant, staggerContainerVariant } from '@/animations';
 import GameGenSelect from '@/components/GameGenSelect';
 import Loading from '@/components/Loading';
+import EncounterCard from './EncounterCard';
 
 interface EncountersProps extends Grid2Props {
   species: PokemonSpecies;
 }
 
 const Encounters = ({ species, ...rest }: EncountersProps): JSX.Element => {
-  // data
-  const { data, isLoading } = usePokemonEncounters(species.id);
   // context
   const { gameVersion } = useContext(GameVersionContext);
-
-  // Memoized computation of encounter details
-  const encounterDetails = useMemo(() => {
-    if (!data || !gameVersion) return [];
-
-    return data.reduce(
-      (acc, area) => {
-        const relevantDetails = area.version_details.find(
-          details => details.version.name === gameVersion,
-        );
-
-        if (relevantDetails) {
-          acc.push({
-            location_area: area.location_area,
-            version_details: relevantDetails,
-          });
-        }
-
-        return acc;
-      },
-      [] as Array<{
-        location_area: LocationAreaEncounter['location_area'];
-        version_details: LocationAreaEncounter['version_details'][number];
-      }>,
-    );
-  }, [data, gameVersion]);
+  // data
+  const { data: encounterDetails, isLoading } = usePokemonEncounters(species.id, gameVersion);
 
   return (
     <Grid2 container direction="column" spacing={4} size={12} {...rest}>
@@ -55,17 +30,35 @@ const Encounters = ({ species, ...rest }: EncountersProps): JSX.Element => {
       <Grid2 size={12}>
         <GameGenSelect />
       </Grid2>
-      <AnimatePresence mode="wait">
+      <Grid2>
         {isLoading ? (
           <Loading
             height="100%"
             $iconWidth={{ xxs: '20%', xs: '15%', md: '10%', lg: '5%' }}
             py={12}
+            key="encounters-loading"
           />
-        ) : encounterDetails.length > 0 ? (
-          encounterDetails.map((encounter, index) => (
-            <Typography key={index}>{`Area: ${encounter.location_area.name}`}</Typography>
-          ))
+        ) : encounterDetails && encounterDetails.length > 0 ? (
+          <AnimatePresence>
+            <Grid2
+              container
+              size={12}
+              spacing={4}
+              direction="row"
+              component={motion.div}
+              initial="hidden"
+              animate="visible"
+              variants={staggerContainerVariant}
+              key="encounter-details"
+            >
+              {encounterDetails.map(encounter => (
+                <EncounterCard
+                  key={`${encounter.location_area.id}-${encounter.version_details.version.name}`}
+                  encounter={encounter}
+                />
+              ))}
+            </Grid2>
+          </AnimatePresence>
         ) : (
           <Typography
             variant="sectionSubTitle"
@@ -80,7 +73,7 @@ const Encounters = ({ species, ...rest }: EncountersProps): JSX.Element => {
             No encounters for selected game version.
           </Typography>
         )}
-      </AnimatePresence>
+      </Grid2>
     </Grid2>
   );
 };

@@ -6,7 +6,7 @@ import { fadeInUpVariant } from '@/animations';
 // components
 import Head from 'next/head';
 import Homepage from '@/components/Homepage';
-import { TypesApi } from '@/services';
+import { PokemonApi, TypesApi } from '@/services';
 import type { NamedAPIResource } from 'pokenode-ts';
 import LayoutV2 from '@/components/LayoutV2';
 import Particles from '@/components/Particles';
@@ -14,6 +14,7 @@ import { Grid2 } from '@mui/material';
 
 export interface PokestatsHomepageProps {
   pokemonTypes: NamedAPIResource[];
+  pokemonList: NamedAPIResource[];
 }
 
 const PokestatsHomepage: NextPage<PokestatsHomepageProps> = props => (
@@ -40,7 +41,11 @@ const PokestatsHomepage: NextPage<PokestatsHomepageProps> = props => (
 
 export const getStaticProps: GetStaticProps = async () => {
   try {
-    const typesResponse = await TypesApi.getAll();
+    // fetch data
+    const [typesResponse, pokemonList] = await Promise.all([
+      TypesApi.getAll(),
+      PokemonApi.listPokemons(0, 905).then(({ results }) => results),
+    ]);
 
     if (!typesResponse) {
       return { notFound: true };
@@ -49,6 +54,7 @@ export const getStaticProps: GetStaticProps = async () => {
     return {
       props: {
         pokemonTypes: typesResponse,
+        pokemonList,
       },
     };
   } catch (error) {

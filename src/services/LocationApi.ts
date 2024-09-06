@@ -15,6 +15,8 @@ export const RegionApi = {
 };
 
 export const LocationAreaApi = {
+  getByName: async (name: string) => await MainClient.location.getLocationAreaByName(name),
+
   getByNames: async (names: Array<string>) =>
     await Promise.all(names.map(name => MainClient.location.getLocationAreaByName(name))),
 };

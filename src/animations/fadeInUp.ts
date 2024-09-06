@@ -14,11 +14,11 @@ export const fadeInUpVariant = {
     },
   },
   exit: {
-    y: 0,
     opacity: 0,
+    scale: 0,
+    y: 20,
   },
   hover: {
-    // zIndex: 1,
     scale: [1, 1.05, 1.02],
     rotate: [0, 1, -1, 0],
     transition: {

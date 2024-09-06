@@ -31,48 +31,56 @@ const Encounters = ({ species, ...rest }: EncountersProps): JSX.Element => {
         <GameGenSelect />
       </Grid2>
       <Grid2>
-        {isLoading ? (
-          <Loading
-            height="100%"
-            $iconWidth={{ xxs: '20%', xs: '15%', md: '10%', lg: '5%' }}
-            py={12}
-            key="encounters-loading"
-          />
-        ) : encounterDetails && encounterDetails.length > 0 ? (
-          <AnimatePresence>
-            <Grid2
-              container
-              size={12}
-              spacing={4}
-              direction="row"
-              component={motion.div}
-              initial="hidden"
-              animate="visible"
-              variants={staggerContainerVariant}
-              key="encounter-details"
-            >
-              {encounterDetails.map(encounter => (
-                <EncounterCard
-                  key={`${encounter.location_area.id}-${encounter.version_details.version.name}`}
-                  encounter={encounter}
-                />
-              ))}
+        <AnimatePresence mode="wait">
+          {isLoading ? (
+            <Grid2 size={12}>
+              <Loading
+                height="100%"
+                $iconWidth={{ xxs: '20%', xs: '15%', md: '10%', lg: '5%' }}
+                py={12}
+                key="encounters-loading"
+              />
             </Grid2>
-          </AnimatePresence>
-        ) : (
-          <Typography
-            variant="sectionSubTitle"
-            py={4}
-            component={motion.p}
-            initial="hidden"
-            animate="show"
-            exit="exit"
-            variants={fadeInUpVariant}
-            key="type-nomoves-message"
-          >
-            No encounters for selected game version.
-          </Typography>
-        )}
+          ) : encounterDetails && encounterDetails.length > 0 ? (
+            <AnimatePresence mode="wait">
+              <Grid2
+                container
+                size={12}
+                spacing={4}
+                direction="row"
+                wrap="wrap"
+                component={motion.div}
+                initial="hidden"
+                animate="show"
+                exit="exit"
+                variants={staggerContainerVariant}
+                key={`encounters-container-${gameVersion}`}
+              >
+                {encounterDetails.map((encounter, i) => (
+                  <EncounterCard
+                    key={`${encounter.location_area.id}-${encounter.version_details.version.name}-${i}`}
+                    encounter={encounter}
+                  />
+                ))}
+              </Grid2>
+            </AnimatePresence>
+          ) : (
+            <Grid2 size={12}>
+              <Typography
+                variant="sectionSubTitle"
+                py={4}
+                component={motion.p}
+                initial="hidden"
+                animate="show"
+                exit="exit"
+                variants={fadeInUpVariant}
+                key="type-nomoves-message"
+              >
+                No encounters for selected game version.
+              </Typography>
+            </Grid2>
+          )}
+        </AnimatePresence>
       </Grid2>
     </Grid2>
   );

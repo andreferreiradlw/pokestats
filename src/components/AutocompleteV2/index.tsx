@@ -111,6 +111,7 @@ const AutocompleteV2 = ({
                     <>
                       {isLoading && (
                         <Loading
+                          width="auto"
                           alignItems="flex-end"
                           $iconWidth={autocompleteOptions?.size === 'small' ? 3 : 5}
                           py={0}

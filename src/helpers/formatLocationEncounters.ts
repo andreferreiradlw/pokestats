@@ -1,6 +1,6 @@
 import equal from 'fast-deep-equal';
 import type { PokemonEncounter } from 'pokenode-ts';
-import { getResourceId } from '@/helpers';
+import { type GameValue, getResourceId, gameVersions } from '@/helpers'; // Ensure gameVersions is imported
 
 interface VersionEntry {
   maxLevel: number;
@@ -10,10 +10,12 @@ interface VersionEntry {
 }
 
 type PokemonEntry = Record<string, VersionEntry>;
-
 type MethodEntry = Record<string, PokemonEntry>;
-
 type AreaMethods = Record<string, MethodEntry>;
+
+interface VersionEntryWithGames extends VersionEntry {
+  games: GameValue[];
+}
 
 export interface AreaEncounters {
   name: string;
@@ -23,49 +25,40 @@ export interface AreaEncounters {
   }[];
 }
 
-interface VersionEntryWithGames extends VersionEntry {
-  games: string[];
-}
-
 // Helper function to merge versions
 const mergeVersions = (
   pokemonKey: string,
-  versions: Record<string, VersionEntry>,
+  versions: Record<GameValue, VersionEntry>,
 ): AreaEncounters['pokemon'][number] => {
-  const currRed = versions.red;
-  const currBlue = versions.blue;
-  const currYellow = versions.yellow;
+  const gameValues = Object.keys(versions) as GameValue[];
 
-  if (currRed && currBlue && equal(currRed, currBlue)) {
-    if (currYellow && equal(currRed, currYellow)) {
-      return {
-        name: pokemonKey,
-        versions: [{ ...currRed, games: ['red', 'blue', 'yellow'] }],
-      };
+  const groupedVersions: VersionEntryWithGames[] = [];
+
+  gameValues.forEach(gameValue => {
+    const matchingEntry = groupedVersions.find(group =>
+      equal(group, { ...versions[gameValue], games: group.games }),
+    );
+
+    if (matchingEntry) {
+      matchingEntry.games.push(gameValue);
     } else {
-      return {
-        name: pokemonKey,
-        versions: [
-          { ...currRed, games: ['red', 'blue'] },
-          ...(currYellow ? [{ ...currYellow, games: ['yellow'] }] : []),
-        ],
-      };
+      groupedVersions.push({
+        ...versions[gameValue],
+        games: [gameValue],
+      });
     }
-  } else {
-    const pokemonVersions = [
-      currRed && { ...currRed, games: ['red'] },
-      currBlue && { ...currBlue, games: ['blue'] },
-      currYellow && { ...currYellow, games: ['yellow'] },
-    ].filter(Boolean) as VersionEntryWithGames[];
+  });
 
-    return { name: pokemonKey, versions: pokemonVersions };
-  }
+  return {
+    name: pokemonKey,
+    versions: groupedVersions,
+  };
 };
 
+// Main function to format encounters
 export const formatLocationEncounters = (
   pokemonEncounters: PokemonEncounter[],
 ): AreaEncounters[] => {
-  // Use reduce to process the encounters
   const areaMethods = pokemonEncounters.reduce<AreaMethods>(
     (acc: AreaMethods, { pokemon, version_details: encounterVersions }) => {
       const { name: pokemonName, url } = pokemon;
@@ -77,23 +70,20 @@ export const formatLocationEncounters = (
         encounter_details?.forEach(({ max_level, min_level, method: currMethod, chance }) => {
           const methodName = currMethod.name;
 
-          // Initialize method and pokemon entries if they don't exist
           if (!acc[methodName]) acc[methodName] = {};
           if (!acc[methodName][pokemonName]) acc[methodName][pokemonName] = {};
 
           const existingEntry = acc[methodName][pokemonName][version.name];
 
           if (existingEntry) {
-            // Update existing entry with the maximum and minimum values
             existingEntry.maxLevel = Math.max(existingEntry.maxLevel, max_level);
             existingEntry.minLevel = Math.min(existingEntry.minLevel, min_level);
             existingEntry.maxChance = Math.max(existingEntry.maxChance, chance);
           } else {
-            // Create a new entry for the current version
             acc[methodName][pokemonName][version.name] = {
               maxLevel: max_level,
               minLevel: min_level,
-              maxChance: Math.max(chance, maxChance ?? 0), // Ensure maxChance is a number
+              maxChance: Math.max(chance, maxChance ?? 0),
               id: pokemonId,
             };
           }
@@ -111,7 +101,21 @@ export const formatLocationEncounters = (
 
     Object.keys(areaMethods[methodKey]).forEach(pokemonKey => {
       const versions = areaMethods[methodKey][pokemonKey];
-      method.pokemon.push(mergeVersions(pokemonKey, versions));
+
+      // Ensuring only valid GameValues are passed to mergeVersions
+      const validVersions: Record<GameValue, VersionEntry> = Object.keys(versions)
+        .filter((key): key is GameValue => {
+          return gameVersions.some(game => game.value === key);
+        })
+        .reduce<Record<GameValue, VersionEntry>>(
+          (obj, key) => {
+            obj[key as GameValue] = versions[key];
+            return obj;
+          },
+          {} as Record<GameValue, VersionEntry>,
+        );
+
+      method.pokemon.push(mergeVersions(pokemonKey, validVersions));
     });
 
     return method;

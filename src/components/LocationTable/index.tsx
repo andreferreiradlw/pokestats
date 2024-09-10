@@ -30,20 +30,6 @@ interface LocationTableProps extends Grid2Props {
   location: Location;
 }
 
-interface AreaEncounters {
-  name: string;
-  pokemon: {
-    name: string;
-    versions: {
-      maxLevel: number;
-      minLevel: number;
-      maxChance: number;
-      id: number;
-      games: string[];
-    }[];
-  }[];
-}
-
 const LocationTable = ({ location, ...rest }: LocationTableProps): JSX.Element => {
   const { key, locationAreas } = location;
 

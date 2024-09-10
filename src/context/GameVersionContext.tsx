@@ -1,6 +1,6 @@
 import React, { createContext, useState, useMemo } from 'react';
 // helpers
-import { gameVersions, mapGameValueToGenerationValue, type Game } from '@/helpers';
+import { type GameValue, gameVersions, mapGameValueToGenerationValue, type Game } from '@/helpers';
 // types
 import type { PokemonSpecies } from 'pokenode-ts';
 
@@ -47,7 +47,7 @@ export const GameVersionProvider = ({ children, pokemon }: GameVersionProviderPr
   const contextValue = useMemo(
     () => ({
       gameVersion,
-      gameGeneration: mapGameValueToGenerationValue(gameVersion) || '',
+      gameGeneration: mapGameValueToGenerationValue(gameVersion as GameValue) || '',
       setGameVersion,
       dropdownOptions,
     }),

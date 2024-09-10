@@ -8,6 +8,7 @@ import {
   removeDash,
   mapGeneration,
   getResourceId,
+  type GameGenValue,
 } from '@/helpers';
 import Head from 'next/head';
 import MovePage from '@/components/MovePage';
@@ -45,7 +46,7 @@ const PokestatsMovePage: NextPage<PokestatsMovePageProps> = props => {
     ? formatFlavorText(moveFlavorText)
     : `${moveName} is a ${capitalize(props.move.type.name)}-type ${capitalize(
         props.move.damage_class!.name,
-      )} move introduced in ${mapGeneration(props.move.generation.name)}`;
+      )} move introduced in ${mapGeneration(props.move.generation.name as GameGenValue)}`;
 
   return (
     <>

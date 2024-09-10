@@ -2,7 +2,12 @@ import { useMemo, Fragment } from 'react';
 // types
 import type { MoveFlavorText as PokenodeMoveFlavorText } from 'pokenode-ts';
 // helpers
-import { formatFlavorText, listGamesByGroup, listGenGroupsByGroup } from '@/helpers';
+import {
+  formatFlavorText,
+  type GameGroup,
+  listGamesByGroup,
+  listGenGroupsByGroup,
+} from '@/helpers';
 // components
 import { Table } from '@/BaseStyles';
 import type { Grid2Props } from '@mui/material';
@@ -23,7 +28,7 @@ const groupFlavorTexts = (
   const grouped = flavorTexts
     .filter(({ language }) => language.name === 'en') // Filter out non-English texts
     .reduce((acc: Record<string, GroupedFlavorText>, { version_group, flavor_text }) => {
-      const genGroups = listGenGroupsByGroup(version_group.name); // Get generation groups by version group
+      const genGroups = listGenGroupsByGroup(version_group.name as GameGroup); // Get generation groups by version group
       const primaryGroup = genGroups?.[0];
 
       if (primaryGroup && !acc[primaryGroup]) {

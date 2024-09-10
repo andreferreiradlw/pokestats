@@ -1,9 +1,11 @@
 import { useMemo } from 'react';
+// helpers
 import { staggerChildVariant } from '@/animations';
-import { Table } from '@/BaseStyles';
-import { findEnglishName, mapEncounterMethodIcons, parseLocationName } from '@/helpers';
+import { mapEncounterMethodIcons, parseLocationName } from '@/helpers';
+// hooks
 import type { EncounterData } from '@/hooks';
 // components
+import { Table } from '@/BaseStyles';
 import {
   capitalize,
   Card,
@@ -41,8 +43,6 @@ const EncounterCard = ({
   ...rest
 }: EncounterCardProps): JSX.Element => {
   const { location_area } = encounter;
-
-  console.log('encounter', encounter);
 
   const formattedEncounter = useMemo(() => {
     const { location_area, version_details } = encounter;
@@ -111,8 +111,10 @@ const EncounterCard = ({
             <Table>
               <tbody>
                 {Object.keys(formattedEncounter.encounterDetails).map(key => {
+                  // encounter details
                   const { maxLevel, minLevel, methodName, iconUrl, maxChance } =
                     formattedEncounter.encounterDetails[key];
+                  // table row
                   return (
                     <tr key={methodName}>
                       <Stack component="th" alignItems="center">

@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 // types
 import type { AbilityEffectChange, Move, PastMoveStatValues } from 'pokenode-ts';
 // helpers
-import { createSentence, mapGroupToGeneration, removeUnderscore } from '@/helpers';
+import { createSentence, type GameGroup, mapGroupToGeneration, removeUnderscore } from '@/helpers';
 // components
 import type { Grid2Props } from '@mui/material';
 import { capitalize, Grid2, Stack, Typography } from '@mui/material';
@@ -90,7 +90,7 @@ const MoveEntries = ({ move, moveName, ...rest }: MoveEntriesProps): JSX.Element
 
           return phrase ? (
             <Typography key={`move-past-value-${i}`}>
-              {`Prior to ${mapGroupToGeneration(value.version_group.name)}, `}
+              {`Prior to ${mapGroupToGeneration(value.version_group.name as GameGroup)}, `}
               <Typography fontWeight="600" component="span">
                 {moveName}
               </Typography>

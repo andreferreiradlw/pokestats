@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 // types
 import type { Type } from 'pokenode-ts';
 // helpers
-import { mapGeneration, removeDash } from '@/helpers';
+import { type GameGenValue, mapGeneration, removeDash } from '@/helpers';
 // components
 import type { StackProps } from '@mui/material';
 import { Stack, Typography } from '@mui/material';
@@ -16,7 +16,10 @@ interface TypeInfoProps extends StackProps {
 const TypeInfo = ({ type, ...rest }: TypeInfoProps): JSX.Element => {
   const { id, generation, move_damage_class } = type;
   // memo
-  const generationName = useMemo(() => mapGeneration(generation.name), [generation.name]);
+  const generationName = useMemo(
+    () => mapGeneration(generation.name as GameGenValue),
+    [generation.name],
+  );
 
   return (
     <Stack flexGrow={1} {...rest}>

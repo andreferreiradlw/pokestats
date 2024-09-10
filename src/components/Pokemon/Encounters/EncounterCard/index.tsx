@@ -1,13 +1,92 @@
+import { useMemo } from 'react';
 import { staggerChildVariant } from '@/animations';
+import { Table } from '@/BaseStyles';
+import { findEnglishName, mapEncounterMethodIcons, parseLocationName } from '@/helpers';
 import type { EncounterData } from '@/hooks';
-import { Card, CardContent, Grid2, Typography, type Grid2Props } from '@mui/material';
+// components
+import {
+  capitalize,
+  Card,
+  CardContent,
+  CardHeader,
+  CardMedia,
+  Grid2,
+  Stack,
+  Typography,
+  type Grid2Props,
+} from '@mui/material';
 import { motion } from 'framer-motion';
 
 interface EncounterCardProps extends Grid2Props {
   encounter: EncounterData;
+  generation: string;
+  pokemonName: string;
 }
 
-const EncounterCard = ({ encounter, ...rest }: EncounterCardProps): JSX.Element => {
+type FormattedEncounter = Record<
+  string,
+  {
+    maxLevel: number;
+    minLevel: number;
+    maxChance: number;
+    methodName: string;
+    iconUrl: string;
+  }
+>;
+
+const EncounterCard = ({
+  encounter,
+  generation,
+  pokemonName,
+  ...rest
+}: EncounterCardProps): JSX.Element => {
+  const { location_area } = encounter;
+
+  const formattedEncounter = useMemo(() => {
+    const { location_area, version_details } = encounter;
+    // format location area data
+    const area = {
+      id: location_area.name,
+      ...parseLocationName(findEnglishName(location_area.names)),
+    };
+
+    // format version details data
+    const encounterDetails = version_details.encounter_details.reduce(
+      (acc, { chance, max_level, min_level, method: currMethod }) => {
+        const methodName = currMethod.name;
+        const existingEntry = acc[methodName];
+
+        if (!existingEntry) {
+          acc[methodName] = {
+            maxLevel: max_level,
+            minLevel: min_level,
+            maxChance: chance,
+            methodName: capitalize(methodName),
+            iconUrl: mapEncounterMethodIcons(
+              methodName,
+              pokemonName,
+              location_area.name,
+              generation,
+            ),
+          };
+
+          return acc;
+        }
+
+        // Update existing entry with the maximum and minimum values
+        existingEntry.maxLevel = Math.max(existingEntry.maxLevel, max_level);
+        existingEntry.minLevel = Math.min(existingEntry.minLevel, min_level);
+        existingEntry.maxChance = Math.max(existingEntry.maxChance, chance);
+
+        return acc;
+      },
+      {} as FormattedEncounter,
+    );
+
+    // return formatted data
+    return { area, encounterDetails };
+  }, [encounter, generation, pokemonName]);
+
   return (
     <Grid2
       size={{ xxs: 6, md: 4, lg: 3 }}
@@ -15,15 +94,41 @@ const EncounterCard = ({ encounter, ...rest }: EncounterCardProps): JSX.Element 
       variants={staggerChildVariant}
       {...rest}
     >
-      <Card>
+      <Card sx={{ width: '100%' }}>
+        <CardHeader
+          title={formattedEncounter.area.title}
+          subheader={formattedEncounter.area.subtitle}
+        />
+        <CardMedia
+          sx={{ height: 200 }}
+          image={`https://raw.githubusercontent.com/andreferreiradlw/pokestats_media/main/assets/regions/${generation}/${location_area.name}.png`}
+          title={location_area.name}
+        />
         <CardContent>
-          <Typography gutterBottom variant="h5" component="div">
-            {`${encounter.location_area.id}-${encounter.version_details.version.name}`}
-          </Typography>
-          <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-            Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging
-            across all continents except Antarctica
-          </Typography>
+          {formattedEncounter && (
+            <Table>
+              <tbody>
+                {Object.keys(formattedEncounter.encounterDetails).map(key => {
+                  const { maxLevel, minLevel, methodName, iconUrl, maxChance } =
+                    formattedEncounter.encounterDetails[key];
+                  return (
+                    <tr key={methodName}>
+                      <Stack component="th" alignItems="center">
+                        <img src={iconUrl} alt={methodName} width="40px" />
+                        <Typography variant="body2">{methodName}</Typography>
+                      </Stack>
+                      <td>
+                        <Typography gutterBottom>
+                          Level: {minLevel === maxLevel ? maxLevel : `${minLevel} to ${maxLevel}`}
+                        </Typography>
+                        <Typography>{`Chance: ${maxChance}%`}</Typography>
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </Table>
+          )}
         </CardContent>
       </Card>
     </Grid2>

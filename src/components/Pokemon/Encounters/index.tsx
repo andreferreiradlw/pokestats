@@ -18,7 +18,7 @@ interface EncountersProps extends Grid2Props {
 
 const Encounters = ({ species, ...rest }: EncountersProps): JSX.Element => {
   // context
-  const { gameVersion } = useContext(GameVersionContext);
+  const { gameVersion, gameGeneration } = useContext(GameVersionContext);
   // data
   const { data: encounterDetails, isLoading } = usePokemonEncounters(species.id, gameVersion);
 
@@ -60,6 +60,8 @@ const Encounters = ({ species, ...rest }: EncountersProps): JSX.Element => {
                   <EncounterCard
                     key={`${encounter.location_area.id}-${encounter.version_details.version.name}-${i}`}
                     encounter={encounter}
+                    generation={gameGeneration}
+                    pokemonName={species.name}
                   />
                 ))}
               </Grid2>

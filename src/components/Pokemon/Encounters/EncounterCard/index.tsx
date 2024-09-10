@@ -42,12 +42,14 @@ const EncounterCard = ({
 }: EncounterCardProps): JSX.Element => {
   const { location_area } = encounter;
 
+  console.log('encounter', encounter);
+
   const formattedEncounter = useMemo(() => {
     const { location_area, version_details } = encounter;
     // format location area data
     const area = {
       id: location_area.name,
-      ...parseLocationName(findEnglishName(location_area.names)),
+      ...parseLocationName(location_area),
     };
 
     // format version details data

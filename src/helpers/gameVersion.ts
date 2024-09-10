@@ -507,7 +507,7 @@ const mapVersionToGroup = (currentVersion: GameValue): GameGroup =>
 
 // Function to map a generation value to its label
 const mapGeneration = (generationValue: GameGenValue): string =>
-  generationValue ? (generations.find(gen => gen.value === generationValue)?.label ?? '') : '';
+  generationValue ? generations.find(gen => gen.value === generationValue)?.label ?? '' : '';
 
 // Function to map a group to its generation
 const mapGroupToGeneration = (groupName: GameGroup): GameGeneration | undefined =>

@@ -30,7 +30,7 @@ const Encounters = ({ species, ...rest }: EncountersProps): JSX.Element => {
       <Grid2 size={12}>
         <GameGenSelect />
       </Grid2>
-      <Grid2>
+      <Grid2 container size={12}>
         <AnimatePresence mode="wait">
           {isLoading ? (
             <Grid2 size={12}>

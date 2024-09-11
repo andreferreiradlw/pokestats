@@ -10,6 +10,7 @@ const Table = styled(motion.table)(({ theme }) => ({
   width: '100%',
   wordBreak: 'keep-all',
   'border-collapse': 'collapse',
+  tableLayout: 'fixed',
 
   '& tr span': {
     // fontWeight: 400,

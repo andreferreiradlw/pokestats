@@ -99,6 +99,8 @@ const mapGen2Icons = (methodName: string, pokemonName: string): string => {
   const onlyOneIcons: Record<string, string> = {
     suicune: `${baseUrl}/suicune-gif.png`,
     'ho-oh': `${baseUrl}/ho-oh-gif.png`,
+    lugia: `${baseUrl}/lugia.png`,
+    celebi: `${baseUrl}/celebi.png`,
   };
 
   // Handle "only-one" method cases

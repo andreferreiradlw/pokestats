@@ -1,32 +1,17 @@
+import type { GameGenValue } from './gameVersion';
+
 const mapGen1Icons = (methodName: string, pokemonName: string, areaKey: string): string => {
-  // Define base URL for icons
   const baseUrl =
     'https://raw.githubusercontent.com/andreferreiradlw/pokestats_media/main/assets/icons/generation-i';
 
-  // Define types for special URLs, method icons, and area-specific icons
-  interface SpecialUrls {
-    [key: string]: string;
-  }
-
-  interface MethodIcons {
-    [key: string]: string;
-  }
-
-  interface AreaIcons {
-    [key: string]: string;
-  }
-
-  interface GiftPokemonAreas {
-    [pokemonName: string]: string | AreaIcons;
-  }
-
-  // Define special URLs and method icons
-  const specialUrls: SpecialUrls = {
+  const specialUrls: Record<string, string> = {
     pokeflute:
       'https://raw.githubusercontent.com/msikma/pokesprite/master/items/key-item/poke-flute.png',
   };
 
-  const methodIcons: MethodIcons = {
+  if (specialUrls[methodName]) return specialUrls[methodName];
+
+  const methodIcons: Record<string, string> = {
     walk: `${baseUrl}/walk.png`,
     surf: `${baseUrl}/surf.png`,
     'good-rod': `${baseUrl}/rod.png`,
@@ -34,10 +19,19 @@ const mapGen1Icons = (methodName: string, pokemonName: string, areaKey: string):
     'old-rod': `${baseUrl}/rod.png`,
   };
 
-  // Define legendary Pokémon and gift Pokémon by area
-  const legendaryPokemon: string[] = ['articuno', 'moltres', 'zapdos'];
+  if (methodIcons[methodName]) return methodIcons[methodName];
 
-  const giftPokemonByArea: GiftPokemonAreas = {
+  const legendaryPokemon = ['articuno', 'moltres', 'zapdos'];
+
+  if (methodName === 'only-one') {
+    return legendaryPokemon.includes(pokemonName)
+      ? `${baseUrl}/legendary.png`
+      : pokemonName === 'mewtwo'
+        ? `${baseUrl}/monster.png`
+        : `${baseUrl}/only_one.png`;
+  }
+
+  const giftPokemonByArea: Record<string, string | Record<string, string>> = {
     bulbasaur: {
       'cerulean-city': `${baseUrl}/female_trainer.png`,
       default: `${baseUrl}/professor_oak.png`,
@@ -64,50 +58,92 @@ const mapGen1Icons = (methodName: string, pokemonName: string, areaKey: string):
     lapras: `${baseUrl}/silphco_employee.png`,
   };
 
-  // Check for special URLs
-  if (methodName in specialUrls) {
-    return specialUrls[methodName];
-  }
-
-  // Check for method-based icons
-  if (methodName in methodIcons) {
-    return methodIcons[methodName];
-  }
-
-  // Handle "only-one" method with specific logic
-  if (methodName === 'only-one') {
-    if (legendaryPokemon.includes(pokemonName)) {
-      return `${baseUrl}/legendary.png`;
-    }
-    if (pokemonName === 'mewtwo') {
-      return `${baseUrl}/monster.png`;
-    }
-    return `${baseUrl}/only_one.png`;
-  }
-
-  // Handle "gift" method with specific logic
   if (methodName === 'gift') {
     const pokemonAreas = giftPokemonByArea[pokemonName];
-    if (typeof pokemonAreas === 'string') return pokemonAreas; // Return direct URL
 
-    if (pokemonAreas && areaKey in pokemonAreas) {
-      return pokemonAreas[areaKey];
-    }
-    return pokemonAreas?.['default'] || `${baseUrl}/only_one.png`;
+    if (typeof pokemonAreas === 'string') return pokemonAreas;
+
+    return pokemonAreas?.[areaKey] || pokemonAreas?.['default'] || `${baseUrl}/only_one.png`;
   }
 
+  return `${baseUrl}/walk.png`;
+};
+
+const mapGen2Icons = (methodName: string, pokemonName: string): string => {
+  const baseUrl = `https://raw.githubusercontent.com/andreferreiradlw/pokestats_media/main/assets/icons/generation-ii`;
+
+  // Handle special cases for pokeflute
+  if (methodName === 'pokeflute' && pokemonName === 'snorlax') return `${baseUrl}/snorlax.png`;
+
+  const specialCases: Record<string, string> = {
+    headbutt: `${baseUrl}/headbutt.png`,
+    gift: `${baseUrl}/gift.png`,
+    'gift-egg': `${baseUrl}/gift-egg.png`,
+    'squirt-bottle': `${baseUrl}/squirt-bottle.png`,
+    'rock-smash': `${baseUrl}/boulder.png`,
+  };
+
+  // Handle special cases directly
+  if (specialCases[methodName]) return specialCases[methodName];
+
+  const roamingGrassIcons: Record<string, string> = {
+    raikou: `${baseUrl}/raikou-gif.png`,
+    entei: `${baseUrl}/entei-gif.png`,
+    suicune: `${baseUrl}/suicune-gif.png`,
+  };
+
+  // Handle roaming grass cases
+  if (methodName === 'roaming-grass' && roamingGrassIcons[pokemonName])
+    return roamingGrassIcons[pokemonName];
+
+  const onlyOneIcons: Record<string, string> = {
+    suicune: `${baseUrl}/suicune-gif.png`,
+    'ho-oh': `${baseUrl}/ho-oh-gif.png`,
+  };
+
+  // Handle "only-one" method cases
+  if (methodName === 'only-one' && onlyOneIcons[pokemonName]) return onlyOneIcons[pokemonName];
+
+  const methodIcons: Record<string, string> = {
+    walk: `${baseUrl}/grass.png`,
+    surf: `${baseUrl}/surf.png`,
+    'good-rod': `${baseUrl}/rod.png`,
+    'super-rod': `${baseUrl}/rod-female.png`,
+    'old-rod': `${baseUrl}/rod.png`,
+  };
+
+  // Handle method-based icons
+  if (methodIcons[methodName]) return methodIcons[methodName];
+
   // Default fallback
-  return `${baseUrl}/only_one.png`;
+  return `${baseUrl}/walk.png`;
+};
+
+const mapGen3Icons = (methodName: string, pokemonName: string, regionName: string): string => {
+  // Define base URL for icons
+  const baseUrl = `https://raw.githubusercontent.com/andreferreiradlw/pokestats_media/main/assets/icons/generation-ii/${regionName}`;
 };
 
 export const mapEncounterMethodIcons = (
   methodName: string,
   pokemonName: string,
   areaKey: string,
-  generation: string,
+  generation: GameGenValue,
+  regionName: string,
 ): string => {
+  console.log('map icon', methodName, pokemonName, areaKey, generation);
+
   if (generation === 'generation-i') {
     return mapGen1Icons(methodName, pokemonName, areaKey);
   }
+
+  if (generation === 'generation-ii') {
+    return mapGen2Icons(methodName, pokemonName);
+  }
+
+  if (generation === 'generation-ii') {
+    return mapGen3Icons(methodName, pokemonName, regionName);
+  }
+
   return '';
 };

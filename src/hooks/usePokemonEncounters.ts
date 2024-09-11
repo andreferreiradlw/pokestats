@@ -1,8 +1,9 @@
-import { EncountersApi, LocationAreaApi } from '@/services';
+import { EncountersApi, LocationApi, LocationAreaApi } from '@/services';
 import { useQuery, type UseQueryOptions, type UseQueryResult } from '@tanstack/react-query';
-import type { LocationArea, NamedAPIResource, VersionEncounterDetail } from 'pokenode-ts';
+import type { Location, LocationArea, NamedAPIResource, VersionEncounterDetail } from 'pokenode-ts';
 
 export interface EncounterData {
+  location: Location;
   location_area: LocationArea;
   version_details: VersionEncounterDetail;
 }
@@ -41,15 +42,20 @@ export const usePokemonEncounters = (
       }
 
       // Fetch location data in parallel
-      const locationData = await Promise.all(
+      const locationAreaData = await Promise.all(
         filteredEncounters.map(({ location_area }) =>
           LocationAreaApi.getByName(location_area.name),
         ),
       );
 
+      const locationData = await Promise.all(
+        locationAreaData.map(({ location }) => LocationApi.getByName(location.name)),
+      );
+
       // Combine filtered encounters with their corresponding location data
       return filteredEncounters.map(({ version_details }, index) => ({
-        location_area: locationData[index],
+        location: locationData[index],
+        location_area: locationAreaData[index],
         version_details,
       }));
     },

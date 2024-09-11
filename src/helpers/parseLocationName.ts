@@ -15,5 +15,5 @@ export const parseLocationName = (
 
   return match
     ? { title: match[1].trim(), subtitle: capitalise(match[2].trim()) }
-    : { title: locationName.trim() };
+    : { title: locationName.trim(), subtitle: 'Area' };
 };

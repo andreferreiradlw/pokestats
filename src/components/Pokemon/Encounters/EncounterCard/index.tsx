@@ -1,7 +1,12 @@
 import { useMemo } from 'react';
 // helpers
 import { staggerChildVariant } from '@/animations';
-import { mapEncounterMethodIcons, parseLocationName } from '@/helpers';
+import {
+  type GameGenValue,
+  mapEncounterMethodIcons,
+  parseLocationName,
+  removeDash,
+} from '@/helpers';
 // hooks
 import type { EncounterData } from '@/hooks';
 // components
@@ -21,7 +26,7 @@ import { motion } from 'framer-motion';
 
 interface EncounterCardProps extends Grid2Props {
   encounter: EncounterData;
-  generation: string;
+  generation: GameGenValue;
   pokemonName: string;
 }
 
@@ -44,8 +49,13 @@ const EncounterCard = ({
 }: EncounterCardProps): JSX.Element => {
   const { location_area } = encounter;
 
+  // console.log(encounter);
+
   const formattedEncounter = useMemo(() => {
-    const { location_area, version_details } = encounter;
+    const { location_area, version_details, location } = encounter;
+
+    const regionName = location.region!.name;
+
     // format location area data
     const area = {
       id: location_area.name,
@@ -63,12 +73,13 @@ const EncounterCard = ({
             maxLevel: max_level,
             minLevel: min_level,
             maxChance: chance,
-            methodName: capitalize(methodName),
+            methodName: capitalize(removeDash(methodName)),
             iconUrl: mapEncounterMethodIcons(
               methodName,
               pokemonName,
               location_area.name,
               generation,
+              regionName,
             ),
           };
 
@@ -85,8 +96,10 @@ const EncounterCard = ({
       {} as FormattedEncounter,
     );
 
+    console.log('formatted encounter', { area, encounterDetails, regionName });
+
     // return formatted data
-    return { area, encounterDetails };
+    return { area, encounterDetails, regionName };
   }, [encounter, generation, pokemonName]);
 
   return (
@@ -117,8 +130,8 @@ const EncounterCard = ({
                   // table row
                   return (
                     <tr key={methodName}>
-                      <Stack component="th" alignItems="center">
-                        <img src={iconUrl} alt={methodName} width="40px" />
+                      <Stack component="th" alignItems="center" gap={1}>
+                        <img src={iconUrl} alt={methodName} height="35px" />
                         <Typography variant="body2">{methodName}</Typography>
                       </Stack>
                       <td>

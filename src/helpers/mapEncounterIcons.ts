@@ -4,126 +4,131 @@ const mapGen1Icons = (methodName: string, pokemonName: string, areaKey: string):
   const baseUrl =
     'https://raw.githubusercontent.com/andreferreiradlw/pokestats_media/main/assets/icons/generation-i';
 
-  const specialUrls: Record<string, string> = {
-    pokeflute:
+  // Consolidate all icons into a single lookup object for faster access
+  const icons: Record<string, string> = {
+    'special:pokeflute':
       'https://raw.githubusercontent.com/msikma/pokesprite/master/items/key-item/poke-flute.png',
+    'method:walk': `${baseUrl}/walk.png`,
+    'method:surf': `${baseUrl}/surf.png`,
+    'method:good-rod': `${baseUrl}/rod.png`,
+    'method:super-rod': `${baseUrl}/rod.png`,
+    'method:old-rod': `${baseUrl}/rod.png`,
+    'only-one:legendary': `${baseUrl}/legendary.png`,
+    'only-one:mewtwo': `${baseUrl}/monster.png`,
+    'only-one:default': `${baseUrl}/only_one.png`,
+    'gift:bulbasaur:cerulean-city': `${baseUrl}/female_trainer.png`,
+    'gift:bulbasaur:default': `${baseUrl}/professor_oak.png`,
+    'gift:charmander:kanto-route-24': `${baseUrl}/male_trainer.png`,
+    'gift:charmander:default': `${baseUrl}/professor_oak.png`,
+    'gift:squirtle:vermilion-city': `${baseUrl}/officer_jenny.png`,
+    'gift:squirtle:default': `${baseUrl}/professor_oak.png`,
+    'gift:pikachu': `${baseUrl}/professor_oak.png`,
+    'gift:magikarp': `${baseUrl}/magikarp_salesman.png`,
+    'gift:omanyte': `${baseUrl}/super_nerd.png`,
+    'gift:kabuto': `${baseUrl}/super_nerd.png`,
+    'gift:aerodactyl': `${baseUrl}/museum_scientist.png`,
+    'gift:hitmonlee': `${baseUrl}/karate_trainer.png`,
+    'gift:hitmonchan': `${baseUrl}/karate_trainer.png`,
+    'gift:eevee:saffron-city': `${baseUrl}/karate_trainer.png`,
+    'gift:eevee:default': `${baseUrl}/only_one.png`,
+    'gift:lapras': `${baseUrl}/silphco_employee.png`,
   };
 
-  if (specialUrls[methodName]) return specialUrls[methodName];
+  // Special URL handling
+  if (icons[`special:${methodName}`]) return icons[`special:${methodName}`];
 
-  const methodIcons: Record<string, string> = {
-    walk: `${baseUrl}/walk.png`,
-    surf: `${baseUrl}/surf.png`,
-    'good-rod': `${baseUrl}/rod.png`,
-    'super-rod': `${baseUrl}/rod.png`,
-    'old-rod': `${baseUrl}/rod.png`,
-  };
+  // Method-based icon handling
+  if (icons[`method:${methodName}`]) return icons[`method:${methodName}`];
 
-  if (methodIcons[methodName]) return methodIcons[methodName];
-
-  const legendaryPokemon = ['articuno', 'moltres', 'zapdos'];
-
+  // "Only-one" method handling
   if (methodName === 'only-one') {
-    return legendaryPokemon.includes(pokemonName)
-      ? `${baseUrl}/legendary.png`
-      : pokemonName === 'mewtwo'
-        ? `${baseUrl}/monster.png`
-        : `${baseUrl}/only_one.png`;
+    if (['articuno', 'moltres', 'zapdos'].includes(pokemonName)) return icons['only-one:legendary'];
+    if (pokemonName === 'mewtwo') return icons['only-one:mewtwo'];
+    return icons['only-one:default'];
   }
 
-  const giftPokemonByArea: Record<string, string | Record<string, string>> = {
-    bulbasaur: {
-      'cerulean-city': `${baseUrl}/female_trainer.png`,
-      default: `${baseUrl}/professor_oak.png`,
-    },
-    charmander: {
-      'kanto-route-24': `${baseUrl}/male_trainer.png`,
-      default: `${baseUrl}/professor_oak.png`,
-    },
-    squirtle: {
-      'vermilion-city': `${baseUrl}/officer_jenny.png`,
-      default: `${baseUrl}/professor_oak.png`,
-    },
-    pikachu: `${baseUrl}/professor_oak.png`,
-    magikarp: `${baseUrl}/magikarp_salesman.png`,
-    omanyte: `${baseUrl}/super_nerd.png`,
-    kabuto: `${baseUrl}/super_nerd.png`,
-    aerodactyl: `${baseUrl}/museum_scientist.png`,
-    hitmonlee: `${baseUrl}/karate_trainer.png`,
-    hitmonchan: `${baseUrl}/karate_trainer.png`,
-    eevee: {
-      'saffron-city': `${baseUrl}/karate_trainer.png`,
-      default: `${baseUrl}/only_one.png`,
-    },
-    lapras: `${baseUrl}/silphco_employee.png`,
-  };
-
+  // Gift method handling
   if (methodName === 'gift') {
-    const pokemonAreas = giftPokemonByArea[pokemonName];
-
-    if (typeof pokemonAreas === 'string') return pokemonAreas;
-
-    return pokemonAreas?.[areaKey] || pokemonAreas?.['default'] || `${baseUrl}/only_one.png`;
+    const giftIconKey = `gift:${pokemonName}:${areaKey}`;
+    const defaultGiftIconKey = `gift:${pokemonName}:default`;
+    return (
+      icons[giftIconKey] ||
+      icons[defaultGiftIconKey] ||
+      icons[`gift:${pokemonName}`] ||
+      icons['only-one:default']
+    );
   }
 
+  // Default fallback
   return `${baseUrl}/walk.png`;
 };
 
 const mapGen2Icons = (methodName: string, pokemonName: string): string => {
   const baseUrl = `https://raw.githubusercontent.com/andreferreiradlw/pokestats_media/main/assets/icons/generation-ii`;
 
-  // Handle special cases for pokeflute
-  if (methodName === 'pokeflute' && pokemonName === 'snorlax') return `${baseUrl}/snorlax.png`;
-
-  const specialCases: Record<string, string> = {
-    headbutt: `${baseUrl}/headbutt.png`,
-    gift: `${baseUrl}/gift.png`,
-    'gift-egg': `${baseUrl}/gift-egg.png`,
-    'squirt-bottle': `${baseUrl}/squirt-bottle.png`,
-    'rock-smash': `${baseUrl}/boulder.png`,
-  };
-
-  // Handle special cases directly
-  if (specialCases[methodName]) return specialCases[methodName];
-
-  const roamingGrassIcons: Record<string, string> = {
-    raikou: `${baseUrl}/raikou-gif.png`,
-    entei: `${baseUrl}/entei-gif.png`,
-    suicune: `${baseUrl}/suicune-gif.png`,
-  };
-
-  // Handle roaming grass cases
-  if (methodName === 'roaming-grass' && roamingGrassIcons[pokemonName])
-    return roamingGrassIcons[pokemonName];
-
-  const onlyOneIcons: Record<string, string> = {
-    suicune: `${baseUrl}/suicune-gif.png`,
-    'ho-oh': `${baseUrl}/ho-oh-gif.png`,
-    lugia: `${baseUrl}/lugia.png`,
-    celebi: `${baseUrl}/celebi.png`,
-  };
-
-  // Handle "only-one" method cases
-  if (methodName === 'only-one' && onlyOneIcons[pokemonName]) return onlyOneIcons[pokemonName];
-
-  const methodIcons: Record<string, string> = {
+  // Consolidate all icons into a single lookup object for faster access
+  const icons: Record<string, string> = {
     walk: `${baseUrl}/grass.png`,
     surf: `${baseUrl}/surf.png`,
     'good-rod': `${baseUrl}/rod.png`,
     'super-rod': `${baseUrl}/rod-female.png`,
     'old-rod': `${baseUrl}/rod.png`,
+    headbutt: `${baseUrl}/headbutt.png`,
+    gift: `${baseUrl}/gift.png`,
+    'gift-egg': `${baseUrl}/gift-egg.png`,
+    'squirt-bottle': `${baseUrl}/squirt-bottle.png`,
+    'rock-smash': `${baseUrl}/boulder.png`,
+    'pokeflute:snorlax': `${baseUrl}/snorlax.png`,
+    'roaming-grass:raikou': `${baseUrl}/raikou-gif.png`,
+    'roaming-grass:entei': `${baseUrl}/entei-gif.png`,
+    'roaming-grass:suicune': `${baseUrl}/suicune-gif.png`,
+    'only-one:suicune': `${baseUrl}/suicune-gif.png`,
+    'only-one:ho-oh': `${baseUrl}/ho-oh-gif.png`,
+    'only-one:lugia': `${baseUrl}/lugia.png`,
+    'only-one:celebi': `${baseUrl}/celebi.png`,
   };
 
-  // Handle method-based icons
-  if (methodIcons[methodName]) return methodIcons[methodName];
+  // Attempt to find a match for specific combinations
+  const combinedKey = `${methodName}:${pokemonName}`;
 
-  // Default fallback
-  return `${baseUrl}/walk.png`;
+  if (icons[combinedKey]) return icons[combinedKey];
+
+  // Return method-specific icon or default fallback
+  return icons[methodName] || `${baseUrl}/walk.png`;
 };
 
 const mapGen3Icons = (methodName: string, pokemonName: string, regionName: string): string => {
-  // Define base URL for icons
   const baseUrl = `https://raw.githubusercontent.com/andreferreiradlw/pokestats_media/main/assets/icons/generation-ii/${regionName}`;
+
+  // Consolidate all icons into one object for faster lookup
+  const icons: Record<string, string> = {
+    walk: `${baseUrl}/grass.png`,
+    surf: `${baseUrl}/surf.png`,
+    'good-rod': `${baseUrl}/rod.png`,
+    'super-rod': `${baseUrl}/rod-female.png`,
+    'old-rod': `${baseUrl}/rod.png`,
+    gift: `${baseUrl}/gift.png`,
+    seaweed: `${baseUrl}/seaweed.png`,
+    'rock-smash': `${baseUrl}/boulder.png`,
+    'roaming-grass:latias': `${baseUrl}/latias.png`,
+    'roaming-water:latias': `${baseUrl}/latias.png`,
+    'only-one:latias': `${baseUrl}/latias.png`,
+    'only-one:kyogre': `${baseUrl}/kyogre.png`,
+    'only-one:groudon': `${baseUrl}/groudon.png`,
+    'only-one:rayquaza': `${baseUrl}/rayquaza.png`,
+    'only-one:registeel': `${baseUrl}/registeel.png`,
+    'only-one:regirock': `${baseUrl}/regirock.png`,
+    'only-one:regice': `${baseUrl}/regice.png`,
+    'only-one:deoxys': `${baseUrl}/deoxys.png`,
+  };
+
+  // Attempt to find a match for specific combinations
+  const combinedKey = `${methodName}:${pokemonName}`;
+
+  if (icons[combinedKey]) return icons[combinedKey];
+
+  // Return method-specific icon or default fallback
+  return icons[methodName] || `${baseUrl}/walk.png`;
 };
 
 export const mapEncounterMethodIcons = (
@@ -143,7 +148,7 @@ export const mapEncounterMethodIcons = (
     return mapGen2Icons(methodName, pokemonName);
   }
 
-  if (generation === 'generation-ii') {
+  if (generation === 'generation-iii') {
     return mapGen3Icons(methodName, pokemonName, regionName);
   }
 

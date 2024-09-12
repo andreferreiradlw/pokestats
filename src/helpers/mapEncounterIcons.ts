@@ -13,9 +13,9 @@ const mapGen1Icons = (methodName: string, pokemonName: string, areaKey: string):
     // Method-specific icons
     'method:walk': `${baseUrl}/walk.png`,
     'method:surf': `${baseUrl}/surf.png`,
+    'method:old-rod': `${baseUrl}/rod.png`,
     'method:good-rod': `${baseUrl}/rod.png`,
     'method:super-rod': `${baseUrl}/rod.png`,
-    'method:old-rod': `${baseUrl}/rod.png`,
 
     // "Only-one" specific icons
     'only-one:legendary': `${baseUrl}/legendary.png`,
@@ -66,9 +66,9 @@ const mapGen2Icons = (methodName: string, pokemonName: string): string => {
   const icons: Record<string, string> = {
     walk: `${baseUrl}/grass.png`,
     surf: `${baseUrl}/surf.png`,
+    'old-rod': `${baseUrl}/rod.png`,
     'good-rod': `${baseUrl}/rod.png`,
     'super-rod': `${baseUrl}/rod-female.png`,
-    'old-rod': `${baseUrl}/rod.png`,
     headbutt: `${baseUrl}/headbutt.png`,
     gift: `${baseUrl}/gift.png`,
     'gift-egg': `${baseUrl}/gift-egg.png`,
@@ -101,9 +101,9 @@ const mapGen3Icons = (methodName: string, pokemonName: string, regionName: strin
     // Method-specific icons
     walk: `${baseUrl}/grass.png`,
     surf: `${baseUrl}/surf.png`,
+    'old-rod': `${baseUrl}/rod.png`,
     'good-rod': `${baseUrl}/rod.png`,
     'super-rod': `${baseUrl}/rod-female.png`,
-    'old-rod': `${baseUrl}/rod.png`,
     gift: `${baseUrl}/gift.png`,
     'gift-egg': `${baseUrl}/gift-egg.png`,
     seaweed: `${baseUrl}/seaweed.png`,
@@ -143,6 +143,69 @@ const mapGen3Icons = (methodName: string, pokemonName: string, regionName: strin
   return icons[deoxysKey] || icons[combinedKey] || icons[methodName] || `${baseUrl}/walk.png`;
 };
 
+const mapGen4Icons = (methodName: string, pokemonName: string, regionName: string): string => {
+  const baseUrl = `https://raw.githubusercontent.com/andreferreiradlw/pokestats_media/main/assets/icons/generation-iii/${regionName}`;
+
+  // Consolidate all icons into one object for faster lookup
+  const icons: Record<string, string> = {
+    // Method-specific icons
+    walk: `${baseUrl}/grass.png`,
+    surf: `${baseUrl}/surf.png`,
+    'old-rod': `${baseUrl}/rod.png`,
+    'good-rod': `${baseUrl}/rod.png`,
+    'super-rod': `${baseUrl}/rod.png`,
+    'rock-smash': `${baseUrl}/boulder.png`,
+    gift: `${baseUrl}/gift.png`,
+    'gift-egg': `${baseUrl}/gift-egg.png`,
+
+    // Roaming and only-one specific icons
+    'roaming-grass:cresselia': `${baseUrl}/cresselia.png`,
+    'roaming-grass:mesprit': `${baseUrl}/mesprit.png`,
+    'roaming-grass:latios': `${baseUrl}/latios.png`,
+    'roaming-grass:latias': `${baseUrl}/latias.png`,
+    'roaming-grass:moltres': `${baseUrl}/moltres.png`,
+    'roaming-grass:zapdos': `${baseUrl}/zapdos.png`,
+    'roaming-grass:articuno': `${baseUrl}/articuno.png`,
+    'roaming-grass:raikou': `${baseUrl}/raikou.png`,
+    'roaming-grass:entei': `${baseUrl}/entei.png`,
+    'roaming-water:moltres': `${baseUrl}/moltres.png`,
+    'roaming-water:zapdos': `${baseUrl}/zapdos.png`,
+    'roaming-water:cresselia': `${baseUrl}/cresselia.png`,
+    'roaming-water:mesprit': `${baseUrl}/mesprit.png`,
+    'roaming-water:articuno': `${baseUrl}/articuno.png`,
+    'only-one:shaymin': `${baseUrl}/shaymin.png`,
+    'only-one:darkray': `${baseUrl}/darkrai.png`,
+    'only-one:regigigas': `${baseUrl}/regigigas.png`,
+    'only-one:palkia': `${baseUrl}/palkia.png`,
+    'only-one:giratina': `${baseUrl}/giratina.png`,
+    'only-one:heatran': `${baseUrl}/heatran.png`,
+    'only-one:dialga': `${baseUrl}/dialga.png`,
+    'only-one:azelf': `${baseUrl}/azelf.png`,
+    'only-one:uxie': `${baseUrl}/uxie.png`,
+    'only-one:arceus': `${baseUrl}/arceus.png`,
+    'only-one:electrode': `${baseUrl}/electrode.png`,
+    'only-one:lugia': `${baseUrl}/lugia.png`,
+    'only-one:moltres': `${baseUrl}/moltres.png`,
+    'only-one:zapdos': `${baseUrl}/zapdos.png`,
+    'only-one:articuno': `${baseUrl}/articuno.png`,
+    'only-one:koffing': `${baseUrl}/koffing.png`,
+    'only-one:geodude': `${baseUrl}/geodude.png`,
+    'only-one:mewtwo': `${baseUrl}/mewtwo.png`,
+    'only-one:kyogre': `${baseUrl}/kyogre.png`,
+    'only-one:groudon': `${baseUrl}/groudon.png`,
+    'only-one:suicune': `${baseUrl}/suicune.png`,
+    'only-one:rayquaza': `${baseUrl}/rayquaza.png`,
+    'pokeflute:snorlax': `${baseUrl}/snorlax.png`,
+  };
+
+  // Generate the combined key for lookup
+  const combinedKey = `${methodName}:${pokemonName}`;
+  // const deoxysKey = `${combinedKey}:${regionName}`;
+
+  // Return the appropriate icon or default fallback
+  return icons[combinedKey] || icons[methodName] || `${baseUrl}/walk.png`;
+};
+
 export const mapEncounterMethodIcons = (
   methodName: string,
   pokemonName: string,
@@ -162,6 +225,10 @@ export const mapEncounterMethodIcons = (
 
   if (generation === 'generation-iii') {
     return mapGen3Icons(methodName, pokemonName, regionName);
+  }
+
+  if (generation === 'generation-iv') {
+    return mapGen4Icons(methodName, pokemonName, regionName);
   }
 
   return '';

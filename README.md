@@ -46,16 +46,16 @@
 ✅ Material UI Implementation <br />
 ✅ Dark Mode <br />
 ✅ Pokemon Encounters Section <br />
-🛠️ Encounters & Item Maps <br />
-&nbsp;&nbsp; 🛠️ Kanto (Gen I) <br />
+🛠️ Sprites Page <br />
+🗒️ Interactive Region Maps <br />
+&nbsp;&nbsp; 🗒️ Kanto (Gen I) <br />
 &nbsp;&nbsp; 🗒️ Johto + Kanto (Gen II) <br />
 &nbsp;&nbsp; 🗒️ Hoenn (Gen III) <br />
 &nbsp;&nbsp; 🗒️ Sinnoh (Gen IV) <br />
 &nbsp;&nbsp; 🗒️ Unova (Gen V) <br />
-🗒️ Sprites Page <br />
-🗒️ Headbutt Tree Encounters Map <br />
 🗒️ Item Page <br />
 🗒️ Berry Page <br />
+🗒️ Headbutt Tree Encounters Map <br />
 
 ## Contributing
 

@@ -4,7 +4,6 @@ const mapGen1Icons = (methodName: string, pokemonName: string, areaKey: string):
   const baseUrl =
     'https://raw.githubusercontent.com/andreferreiradlw/pokestats_media/main/assets/icons/generation-i';
 
-  // Consolidate all icons into a single lookup object for faster access
   const icons: Record<string, string> = {
     // Special icons
     'special:pokeflute':
@@ -62,7 +61,6 @@ const mapGen1Icons = (methodName: string, pokemonName: string, areaKey: string):
 const mapGen2Icons = (methodName: string, pokemonName: string): string => {
   const baseUrl = `https://raw.githubusercontent.com/andreferreiradlw/pokestats_media/main/assets/icons/generation-ii`;
 
-  // Consolidate all icons into a single lookup object for faster access
   const icons: Record<string, string> = {
     walk: `${baseUrl}/grass.png`,
     surf: `${baseUrl}/surf.png`,
@@ -96,7 +94,6 @@ const mapGen2Icons = (methodName: string, pokemonName: string): string => {
 const mapGen3Icons = (methodName: string, pokemonName: string, regionName: string): string => {
   const baseUrl = `https://raw.githubusercontent.com/andreferreiradlw/pokestats_media/main/assets/icons/generation-iii/${regionName}`;
 
-  // Consolidate all icons into one object for faster lookup
   const icons: Record<string, string> = {
     // Method-specific icons
     walk: `${baseUrl}/grass.png`,
@@ -144,9 +141,8 @@ const mapGen3Icons = (methodName: string, pokemonName: string, regionName: strin
 };
 
 const mapGen4Icons = (methodName: string, pokemonName: string, regionName: string): string => {
-  const baseUrl = `https://raw.githubusercontent.com/andreferreiradlw/pokestats_media/main/assets/icons/generation-iii/${regionName}`;
+  const baseUrl = `https://raw.githubusercontent.com/andreferreiradlw/pokestats_media/main/assets/icons/generation-iv/${regionName}`;
 
-  // Consolidate all icons into one object for faster lookup
   const icons: Record<string, string> = {
     // Method-specific icons
     walk: `${baseUrl}/grass.png`,
@@ -200,10 +196,31 @@ const mapGen4Icons = (methodName: string, pokemonName: string, regionName: strin
 
   // Generate the combined key for lookup
   const combinedKey = `${methodName}:${pokemonName}`;
-  // const deoxysKey = `${combinedKey}:${regionName}`;
 
   // Return the appropriate icon or default fallback
   return icons[combinedKey] || icons[methodName] || `${baseUrl}/walk.png`;
+};
+
+const mapGen5Icons = (methodName: string): string => {
+  const baseUrl = `https://raw.githubusercontent.com/andreferreiradlw/pokestats_media/main/assets/icons/generation-v`;
+
+  const icons: Record<string, string> = {
+    walk: `${baseUrl}/walk-grass.png`,
+    surf: `${baseUrl}/surf.png`,
+    'super-rod': `${baseUrl}/rod.png`,
+    'super-rod-spots': `${baseUrl}/splash.png`,
+    'surf-spots': `${baseUrl}/splash.png`,
+    'grass-spots': `${baseUrl}/grass.png`,
+    'dark-grass': `${baseUrl}/dark-grass.png`,
+    gift: `${baseUrl}/gift.png`,
+    'gift-egg': `${baseUrl}/gift-egg.png`,
+    'cave-spots': `${baseUrl}/cave.png`,
+    'bridge-spots': `${baseUrl}/shadow.png`,
+
+  };
+
+  // Return the appropriate icon or default fallback
+  return icons[methodName] || `${baseUrl}/walk.png`;
 };
 
 export const mapEncounterMethodIcons = (
@@ -229,6 +246,10 @@ export const mapEncounterMethodIcons = (
 
   if (generation === 'generation-iv') {
     return mapGen4Icons(methodName, pokemonName, regionName);
+  }
+
+  if (generation === 'generation-v') {
+    return mapGen5Icons(methodName);
   }
 
   return '';

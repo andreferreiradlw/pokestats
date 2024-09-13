@@ -217,7 +217,6 @@ const mapGen5Icons = (methodName: string): string => {
     'gift-egg': `${baseUrl}/gift-egg.png`,
     'cave-spots': `${baseUrl}/cave.png`,
     'bridge-spots': `${baseUrl}/shadow.png`,
-
   };
 
   // Return the appropriate icon or default fallback
@@ -231,8 +230,6 @@ export const mapEncounterMethodIcons = (
   generation: GameGenValue,
   regionName: string,
 ): string => {
-  console.log('map icon', methodName, pokemonName, areaKey, generation);
-
   if (generation === 'generation-i') {
     return mapGen1Icons(methodName, pokemonName, areaKey);
   }

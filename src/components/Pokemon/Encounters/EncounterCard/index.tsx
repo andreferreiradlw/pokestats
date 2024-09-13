@@ -96,8 +96,6 @@ const EncounterCard = ({
       {} as FormattedEncounter,
     );
 
-    console.log('formatted encounter', { area, encounterDetails, regionName });
-
     // return formatted data
     return { area, encounterDetails, regionName };
   }, [encounter, generation, pokemonName]);

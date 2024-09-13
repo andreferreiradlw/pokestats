@@ -18,7 +18,7 @@ const LoadingContainer = styled(motion.div)`
 `;
 
 const PotionIcon = styled(Potion, {
-  shouldForwardProp: (prop) => prop !== '$iconWidth',
+  shouldForwardProp: prop => prop !== '$iconWidth',
 })<{ $iconWidth?: LoadingProps['$iconWidth'] }>`
   height: auto;
 
@@ -48,9 +48,8 @@ const PotionIcon = styled(Potion, {
   }
 `;
 
-
 const PokeballIcon = styled(Pokeball, {
-  shouldForwardProp: (prop) => prop !== '$iconWidth',
+  shouldForwardProp: prop => prop !== '$iconWidth',
 })<{ $iconWidth?: LoadingProps['$iconWidth'] }>`
   animation: 2.5s ${pokeballShake} 0ms infinite ease-in-out;
   height: auto;
@@ -58,9 +57,8 @@ const PokeballIcon = styled(Pokeball, {
   ${({ $iconWidth }) => $iconWidth && responsivePropsV2('width', $iconWidth)}
 `;
 
-
 const RecordIcon = styled(Record, {
-  shouldForwardProp: (prop) => prop !== '$iconWidth',
+  shouldForwardProp: prop => prop !== '$iconWidth',
 })<{ $iconWidth?: LoadingProps['$iconWidth'] }>`
   height: auto;
 
@@ -72,7 +70,6 @@ const RecordIcon = styled(Record, {
     transform-origin: center center;
   }
 `;
-
 
 const Text = styled(Typography)`
   &:after {

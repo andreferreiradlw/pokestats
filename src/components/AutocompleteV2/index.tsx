@@ -55,7 +55,7 @@ const AutocompleteIcon = ({ assetType, name, id }: AutocompleteIconProps): JSX.E
       return (
         <ItemIcon
           alt={`${name} pokemon move`}
-          src="https://raw.githubusercontent.com/msikma/pokesprite/master/items/hm/normal.png"
+          src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/grass-memory.png"
         />
       );
     default:
@@ -144,7 +144,6 @@ const AutocompleteV2 = ({
           whileTap: 'tap',
           exit: 'exit',
           variants: fadeInDownVariant,
-          key: 'autocomplete-list-wrapper',
         }}
         onHighlightChange={async (_, option) => {
           if (option) await router.prefetch(`/${option.assetType}/${option.name}`);

@@ -191,6 +191,7 @@ const mapGen4Icons = (methodName: string, pokemonName: string, regionName: strin
     'only-one:groudon': `${baseUrl}/groudon.png`,
     'only-one:suicune': `${baseUrl}/suicune.png`,
     'only-one:rayquaza': `${baseUrl}/rayquaza.png`,
+    'only-one:rotom': `${baseUrl}/rotom.png`,
     'pokeflute:snorlax': `${baseUrl}/snorlax.png`,
   };
 

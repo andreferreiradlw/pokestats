@@ -10,7 +10,8 @@ import EggIcon from 'public/static/iconLibrary/egg.svg';
 import Error404Icon from 'public/static/iconLibrary/404_error.svg';
 
 const ImageContainer = styled(motion.div, {
-  shouldForwardProp: prop => prop !== 'width' && prop !== 'height', // Ensure custom props are not passed to DOM
+  shouldForwardProp: (prop) =>
+    prop !== 'width' && prop !== 'height' && prop !== '$pixelatedimg',
 })<{
   width?: ImageNextProps['width'];
   height?: ImageNextProps['height'];
@@ -44,6 +45,7 @@ const ImageContainer = styled(motion.div, {
     }),
   },
 }));
+
 
 const ImageWrapper = styled(motion.div)({
   alignItems: 'center',

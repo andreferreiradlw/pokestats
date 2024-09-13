@@ -3,7 +3,14 @@ import { motion } from 'framer-motion';
 // types
 import type { TypeBadgeProps } from './index';
 
-const Badge = styled(motion.a)<TypeBadgeProps>(
+const Badge = styled(motion.a, {
+  shouldForwardProp: (prop) =>
+    prop !== '$typename' &&
+    prop !== '$fill' &&
+    prop !== '$iconOnly' &&
+    prop !== '$iconWidth' &&
+    prop !== '$iconHeight',
+})<TypeBadgeProps>(
   ({ theme, $typename, $fill, $iconOnly, $iconWidth, $iconHeight }) => ({
     alignItems: 'center',
     borderRadius: '4px',

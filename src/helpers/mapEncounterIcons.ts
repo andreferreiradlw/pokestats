@@ -318,5 +318,5 @@ export const mapEncounterMethodIcons = (
     return mapGen7Icons(methodName, pokemonName);
   }
 
-  return '';
+  return 'https://raw.githubusercontent.com/andreferreiradlw/pokestats_media/main/assets/icons/generation-vi/walk.png';
 };

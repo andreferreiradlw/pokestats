@@ -5,7 +5,7 @@ import { GameVersionContext } from '@/context';
 // types
 import type { PokemonSpecies } from 'pokenode-ts';
 // components
-import { Grid2, Typography, type Grid2Props } from '@mui/material';
+import { Alert, AlertTitle, Grid2, Link, Typography, type Grid2Props } from '@mui/material';
 import { AnimatePresence, motion } from 'framer-motion';
 import { fadeInUpVariant, staggerContainerVariant } from '@/animations';
 import GameGenSelect from '@/components/GameGenSelect';
@@ -26,6 +26,27 @@ const Encounters = ({ species, ...rest }: EncountersProps): JSX.Element => {
     <Grid2 container direction="column" spacing={4} size={12} {...rest}>
       <Grid2 size={12}>
         <Typography variant="sectionTitle">Encounters</Typography>
+      </Grid2>
+      <Grid2 size={12}>
+        <Alert severity="warning" sx={{ width: '100%' }}>
+          <AlertTitle>This data might not be accurate</AlertTitle>
+          <Typography gutterBottom variant="body2">
+            Some encounter information is missing from the API, especially for newer titles such as
+            Sword and Shield.
+          </Typography>
+          <Typography variant="body2">
+            Area images and encounter icons might be broken or incorrect, please let me know if you
+            find something by openning a new issue{' '}
+            <Link
+              href="https://github.com/andreferreiradlw/pokestats/issues"
+              target="_blank"
+              color="inherit"
+            >
+              here
+            </Link>
+            . Please bear with me while I keep improving this section.
+          </Typography>
+        </Alert>
       </Grid2>
       <Grid2 size={12}>
         <GameGenSelect />

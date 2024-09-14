@@ -23,6 +23,7 @@
     "@typescript-eslint/no-unused-vars": "error",
     "@typescript-eslint/prefer-optional-chain": "off",
     "@next/next/no-img-element": "off",
+    "@typescript-eslint/consistent-type-assertions": "off",
     "@typescript-eslint/consistent-type-imports": [
       "error",
       { "prefer": "type-imports", "fixStyle": "inline-type-imports" },

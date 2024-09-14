@@ -13,6 +13,7 @@ import Moves from './Moves';
 import Sprites from './Sprites';
 import Navigation from './Navigation';
 import { Divider, Grid2, Stack } from '@mui/material';
+import Encounters from './Encounters';
 
 const PokemonPage = ({
   allPokemon,
@@ -70,6 +71,10 @@ const PokemonPage = ({
       {/** MOVES */}
       <Stack alignItems="flex-start" justifyContent="flex-start">
         <Moves pokemon={pokemon} />
+      </Stack>
+      {/** ENCOUNTERS */}
+      <Stack alignItems="flex-start" justifyContent="flex-start">
+        <Encounters species={species} />
       </Stack>
       {/** SPRITES & NAVIGATION */}
       <Stack alignItems="flex-start" justifyContent="flex-start" gap={4}>

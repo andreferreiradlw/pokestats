@@ -1,10 +1,15 @@
 export const staggerExitLoadingVariant = {
+  initial: {
+    y: 0,
+    opacity: 1,
+  },
+  show: {
+    y: 0,
+    opacity: 1,
+  },
   exit: {
-    transition: {
-      staggerChildren: 0.2,
-      staggerDirection: -1,
-      delayChildren: 0.2,
-      when: 'afterChildren',
-    },
+    opacity: 0,
+    scale: 0,
+    y: 20,
   },
 };

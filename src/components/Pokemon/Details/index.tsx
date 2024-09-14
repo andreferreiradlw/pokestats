@@ -4,7 +4,13 @@ import type { PokestatsPokemonPageProps } from '@/pages/pokemon/[pokemonId]';
 import type { Ability } from 'pokenode-ts';
 // helpers
 import { GameVersionContext } from '@/context';
-import { removeDash, mapGeneration, formatFlavorText, findEnglishName } from '@/helpers';
+import {
+  removeDash,
+  mapGeneration,
+  formatFlavorText,
+  findEnglishName,
+  type GameGenValue,
+} from '@/helpers';
 // components
 import TypeBadge from '@/components/TypeBadge';
 import type { Grid2Props, Theme } from '@mui/material';
@@ -64,7 +70,10 @@ const PokemonDetails = ({
     }
   }, [cries]);
 
-  const generationName = useMemo(() => mapGeneration(generation?.name ?? ''), [generation]);
+  const generationName = useMemo(
+    () => mapGeneration(generation.name as GameGenValue),
+    [generation],
+  );
 
   const flavorText = useMemo(() => {
     // @ts-expect-error: valid text entries

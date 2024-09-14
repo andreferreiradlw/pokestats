@@ -51,7 +51,7 @@ const BaseStats = ({ stats, ...rest }: BaseStatsProps): JSX.Element => {
       {...rest}
     >
       <Typography variant="sectionTitle">Base Stats</Typography>
-      <Table>
+      <Table sx={{ tableLayout: 'auto' }}>
         <tbody>
           {stats.map(({ base_stat, stat }) => {
             const statName = stat.name as Stat['name'];

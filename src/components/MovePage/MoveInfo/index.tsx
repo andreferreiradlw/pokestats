@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 // types
 import type { Move } from 'pokenode-ts';
 // helpers
-import { mapGeneration, removeDash } from '@/helpers';
+import { type GameGenValue, mapGeneration, removeDash } from '@/helpers';
 // styles
 import { Table } from '@/BaseStyles';
 // components
@@ -17,7 +17,10 @@ const MoveInfo = ({ move, ...rest }: MoveInfoProps): JSX.Element => {
   // data
   const { damage_class, accuracy, power, pp, priority, generation } = move;
   // memo
-  const generationName = useMemo(() => mapGeneration(generation.name), [generation.name]);
+  const generationName = useMemo(
+    () => mapGeneration(generation.name as GameGenValue),
+    [generation.name],
+  );
 
   return (
     <Grid2 {...rest}>

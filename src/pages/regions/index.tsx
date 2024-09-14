@@ -17,7 +17,7 @@ const PokestatsRegionsPage: NextPage<PokestatsRegionsPageProps> = props => (
     <Head>
       <meta property="og:title" content="Regions" />
     </Head>
-    <LayoutV2 withHeader key="regions-homepage">
+    <LayoutV2 withHeader customKey="regions-homepage">
       <RegionsPage {...props} />
     </LayoutV2>
   </>

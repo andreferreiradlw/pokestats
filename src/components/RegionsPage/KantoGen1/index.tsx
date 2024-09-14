@@ -245,6 +245,7 @@ const KantoGen1 = ({
         alignItems="flex-start"
         justifyContent="flex-start"
         spacing={4}
+        size={12}
       >
         {currArea && (
           <>
@@ -291,7 +292,7 @@ const KantoGen1 = ({
                       )}
                       <MapImage
                         alt={`Map view of ${names[0].name}`}
-                        src={`https://raw.githubusercontent.com/andreferreiradlw/pokestats_media/main/assets/regions/kanto/gen1/${name}.png`}
+                        src={`https://raw.githubusercontent.com/andreferreiradlw/pokestats_media/main/assets/regions/generation-i/${name}.png`}
                         placeholderwidth="10%"
                       />
                     </Stack>
@@ -303,7 +304,7 @@ const KantoGen1 = ({
             ) : (
               <MapImage
                 alt={`Map view of ${currArea.label}`}
-                src={`https://raw.githubusercontent.com/andreferreiradlw/pokestats_media/main/assets/regions/kanto/gen1/${currArea.key}.png`}
+                src={`https://raw.githubusercontent.com/andreferreiradlw/pokestats_media/main/assets/regions/generation-i/${currArea.key}.png`}
               />
             )}
           </>

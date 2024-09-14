@@ -1,6 +1,6 @@
 import type { MachineVersionDetail } from 'pokenode-ts';
 import MainClient from './MainClient';
-import { getResourceId, listGamesByGroup, listMoveGroupsByGroup } from '@/helpers';
+import { type GameGroup, getResourceId, listGamesByGroup, listMoveGroupsByGroup } from '@/helpers';
 
 export interface MoveMachinesData {
   [key: string]: { machine: string; groups: string[][] };
@@ -18,7 +18,7 @@ export const MachineApi = {
     const moveMachinesData: MoveMachinesData = {};
 
     for (const { version_group, machine } of machines) {
-      const currGenGroups = listMoveGroupsByGroup(version_group.name);
+      const currGenGroups = listMoveGroupsByGroup(version_group.name as GameGroup);
 
       if (
         currGenGroups &&

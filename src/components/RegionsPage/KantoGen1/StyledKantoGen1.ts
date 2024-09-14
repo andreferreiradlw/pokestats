@@ -25,26 +25,38 @@ const CurrentLocation = styled('span')`
 
 const MapImage = styled(ImageNext)``;
 
-const PlayIcon = styled(StartIcon)``;
+const PlayIcon = styled(StartIcon)`
+  display: block;
+  height: auto;
+  width: 2.5em;
 
-const PauseIcon = styled(PausedIcon)``;
-
-const PlayIconContainer = styled(motion.div)`
-  ${PlayIcon}, ${PauseIcon} {
-    display: block;
-    height: auto;
-    width: 2.5em;
+  &:hover {
+    cursor: pointer;
 
     &:hover {
-      cursor: pointer;
-
-      &:hover {
-        path:first-of-type {
-          stroke: white;
-        }
+      path:first-of-type {
+        stroke: white;
       }
     }
   }
 `;
+
+const PauseIcon = styled(PausedIcon)`
+  display: block;
+  height: auto;
+  width: 2.5em;
+
+  &:hover {
+    cursor: pointer;
+
+    &:hover {
+      path:first-of-type {
+        stroke: white;
+      }
+    }
+  }
+`;
+
+const PlayIconContainer = styled(motion.div)``;
 
 export { ImageContainer, CurrentLocation, MapImage, PlayIconContainer, PlayIcon, PauseIcon };

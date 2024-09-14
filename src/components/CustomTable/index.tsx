@@ -28,16 +28,17 @@ interface Row {
 export interface CustomTableProps extends TableProps {
   columns: Column[];
   data: Row[];
+  customKey: string;
 }
 
-const CustomTable = ({ columns, data, key, ...rest }: CustomTableProps): JSX.Element => {
+const CustomTable = ({ columns, data, customKey, ...rest }: CustomTableProps): JSX.Element => {
   return (
     <motion.div
       initial="hidden"
       animate="show"
       exit="exit"
       variants={fadeInUpVariant}
-      key={key}
+      key={customKey}
       style={{ width: '100%' }}
     >
       <TableContainer component={Paper}>

@@ -1,13 +1,137 @@
+export type GameLabel =
+  | 'Red'
+  | 'Blue'
+  | 'Yellow'
+  | 'Gold'
+  | 'Silver'
+  | 'Crystal'
+  | 'Ruby'
+  | 'Sapphire'
+  | 'Emerald'
+  | 'Fire Red'
+  | 'Leaf Green'
+  | 'Diamond'
+  | 'Pearl'
+  | 'Platinum'
+  | 'Heart Gold'
+  | 'Soul Silver'
+  | 'Black'
+  | 'White'
+  | 'Black 2'
+  | 'White 2'
+  | 'X'
+  | 'Y'
+  | 'Omega Ruby'
+  | 'Alpha Sapphire'
+  | 'Sun'
+  | 'Moon'
+  | 'Ultra Sun'
+  | 'Ultra Moon'
+  | "Let's Go Pikachu"
+  | "Let's Go Eevee"
+  | 'Sword'
+  | 'Shield'
+  | 'Legends: Arceus';
+
+// Define types for the `value` property
+export type GameValue =
+  | 'red'
+  | 'blue'
+  | 'yellow'
+  | 'gold'
+  | 'silver'
+  | 'crystal'
+  | 'ruby'
+  | 'sapphire'
+  | 'emerald'
+  | 'firered'
+  | 'leafgreen'
+  | 'diamond'
+  | 'pearl'
+  | 'platinum'
+  | 'heartgold'
+  | 'soulsilver'
+  | 'black'
+  | 'white'
+  | 'black-2'
+  | 'white-2'
+  | 'x'
+  | 'y'
+  | 'omega-ruby'
+  | 'alpha-sapphire'
+  | 'sun'
+  | 'moon'
+  | 'ultra-sun'
+  | 'ultra-moon'
+  | 'lets-go-pikachu'
+  | 'lets-go-eevee'
+  | 'sword'
+  | 'shield'
+  | 'legends-arceus'
+  | 'scarlet';
+
+// Define types for the `group` property
+export type GameGroup =
+  | 'red-blue'
+  | 'yellow'
+  | 'gold-silver'
+  | 'crystal'
+  | 'ruby-sapphire'
+  | 'emerald'
+  | 'firered-leafgreen'
+  | 'diamond-pearl'
+  | 'platinum'
+  | 'heartgold-soulsilver'
+  | 'black-white'
+  | 'black-2-white-2'
+  | 'x-y'
+  | 'omega-ruby-alpha-sapphire'
+  | 'sun-moon'
+  | 'ultra-sun-ultra-moon'
+  | 'lets-go-pikachu-lets-go-eevee'
+  | 'sword-shield'
+  | 'scarlet-violet';
+
+// Define types for the `generation` property
+export type GameGeneration =
+  | 'Generation I'
+  | 'Generation II'
+  | 'Generation III'
+  | 'Generation IV'
+  | 'Generation V'
+  | 'Generation VI'
+  | 'Generation VII'
+  | 'Generation VIII'
+  | 'Generation IX';
+
+// Define types for the `genValue` property
+export type GameGenValue =
+  | 'generation-i'
+  | 'generation-ii'
+  | 'generation-iii'
+  | 'generation-iv'
+  | 'generation-v'
+  | 'generation-vi'
+  | 'generation-vii'
+  | 'generation-viii'
+  | 'generation-ix';
+
+// Define types for the `genGroups` and `moveGroups` properties as arrays of `GameGroup`
+export type GameGenGroups = GameGroup[];
+export type GameMoveGroups = GameGroup[];
+
+// Use the defined types in the `Game` interface
 export interface Game {
-  label: string;
-  value: string;
-  group: string;
-  generation: string;
-  genValue: string;
-  genGroups: string[];
-  moveGroups: string[];
+  label: GameLabel;
+  value: GameValue;
+  group: GameGroup;
+  generation: GameGeneration;
+  genValue: GameGenValue;
+  genGroups: GameGenGroups;
+  moveGroups: GameMoveGroups;
 }
 
+// Define the type for a list of games
 export type GameVersions = Game[];
 
 const gameVersions: GameVersions = [
@@ -326,159 +450,83 @@ const gameVersions: GameVersions = [
   // },
 ];
 
-const generationOptions = [
+interface GenerationOption {
+  value: 'all' | GameGenValue;
+  label: string;
+}
+
+const generationOptions: GenerationOption[] = [
   { value: 'all', label: 'All' },
-  {
-    value: 'generation-i',
-    label: 'Generation I',
-  },
-  {
-    value: 'generation-ii',
-    label: 'Generation II',
-  },
-  {
-    value: 'generation-iii',
-    label: 'Generation III',
-  },
-  {
-    value: 'generation-iv',
-    label: 'Generation IV',
-  },
-  {
-    value: 'generation-v',
-    label: 'Generation V',
-  },
-  {
-    value: 'generation-vi',
-    label: 'Generation VI',
-  },
-  {
-    value: 'generation-vii',
-    label: 'Generation VII',
-  },
-  {
-    value: 'generation-viii',
-    label: 'Generation VIII',
-  },
+  { value: 'generation-i', label: 'Generation I' },
+  { value: 'generation-ii', label: 'Generation II' },
+  { value: 'generation-iii', label: 'Generation III' },
+  { value: 'generation-iv', label: 'Generation IV' },
+  { value: 'generation-v', label: 'Generation V' },
+  { value: 'generation-vi', label: 'Generation VI' },
+  { value: 'generation-vii', label: 'Generation VII' },
+  { value: 'generation-viii', label: 'Generation VIII' },
+  { value: 'generation-ix', label: 'Generation IX' },
 ];
 
-const generations = [
-  {
-    value: 'generation-i',
-    label: 'Generation I',
-    gameVersion: 'yellow',
-  },
-  {
-    value: 'generation-ii',
-    label: 'Generation II',
-    gameVersion: 'crystal',
-  },
-  {
-    value: 'generation-iii',
-    label: 'Generation III',
-    gameVersion: 'leafgreen',
-  },
-  {
-    value: 'generation-iv',
-    label: 'Generation IV',
-    gameVersion: 'soulsilver',
-  },
-  {
-    value: 'generation-v',
-    label: 'Generation V',
-    gameVersion: 'black',
-  },
-  {
-    value: 'generation-vi',
-    label: 'Generation VI',
-    gameVersion: 'alpha-sapphire',
-  },
-  {
-    value: 'generation-vii',
-    label: 'Generation VII',
-    gameVersion: 'sun',
-  },
-  {
-    value: 'generation-viii',
-    label: 'Generation VIII',
-    gameVersion: 'sword',
-  },
-  {
-    value: 'generation-viii',
-    label: 'Generation VIII',
-    gameVersion: 'legends-arceus',
-  },
-  {
-    value: 'generation-ix',
-    label: 'Generation IX',
-    gameVersion: 'scarlet',
-  },
+interface GenerationEntry {
+  value: GameGenValue;
+  label: GameGeneration;
+  gameVersion: GameValue;
+}
+
+const generations: GenerationEntry[] = [
+  { value: 'generation-i', label: 'Generation I', gameVersion: 'yellow' },
+  { value: 'generation-ii', label: 'Generation II', gameVersion: 'crystal' },
+  { value: 'generation-iii', label: 'Generation III', gameVersion: 'leafgreen' },
+  { value: 'generation-iv', label: 'Generation IV', gameVersion: 'soulsilver' },
+  { value: 'generation-v', label: 'Generation V', gameVersion: 'black' },
+  { value: 'generation-vi', label: 'Generation VI', gameVersion: 'alpha-sapphire' },
+  { value: 'generation-vii', label: 'Generation VII', gameVersion: 'sun' },
+  { value: 'generation-viii', label: 'Generation VIII', gameVersion: 'sword' },
+  { value: 'generation-viii', label: 'Generation VIII', gameVersion: 'legends-arceus' },
+  { value: 'generation-ix', label: 'Generation IX', gameVersion: 'scarlet' },
 ];
 
-const mapIdToGeneration = (id: number): string => {
-  if (id <= 151) {
-    return 'generation-i';
-  } else if (id > 151 && id <= 251) {
-    return 'generation-ii';
-  } else if (id > 251 && id <= 386) {
-    return 'generation-iii';
-  } else if (id > 386 && id <= 493) {
-    return 'generation-iv';
-  } else if (id > 483 && id <= 649) {
-    return 'generation-v';
-  } else if (id > 649 && id <= 721) {
-    return 'generation-vi';
-  } else if (id > 721 && id <= 809) {
-    return 'generation-vii';
-  } else if (id > 809 && id <= 905) {
-    return 'generation-viii';
-  } else if (id > 905 && id <= 1008) {
-    return 'generation-ix';
-  } else {
-    return 'all';
-  }
+// Function to map an ID to its generation
+const mapIdToGeneration = (id: number): GameGenValue | 'all' => {
+  if (id <= 151) return 'generation-i';
+  if (id > 151 && id <= 251) return 'generation-ii';
+  if (id > 251 && id <= 386) return 'generation-iii';
+  if (id > 386 && id <= 493) return 'generation-iv';
+  if (id > 493 && id <= 649) return 'generation-v';
+  if (id > 649 && id <= 721) return 'generation-vi';
+  if (id > 721 && id <= 809) return 'generation-vii';
+  if (id > 809 && id <= 905) return 'generation-viii';
+  if (id > 905 && id <= 1008) return 'generation-ix';
+  return 'all';
 };
 
-const checkIfArceus = (pokemonId: number): boolean => pokemonId > 898 && pokemonId <= 905;
+// Function to map a version to its group
+const mapVersionToGroup = (currentVersion: GameValue): GameGroup =>
+  gameVersions.find(version => version.value === currentVersion)?.group as GameGroup;
 
-const mapVersionToGroup = (currentVersion: string): Game['group'] =>
-  gameVersions.filter(version => version.value === currentVersion).map(version => version.group)[0];
+// Function to map a generation value to its label
+const mapGeneration = (generationValue: GameGenValue): string =>
+  generationValue ? (generations.find(gen => gen.value === generationValue)?.label ?? '') : '';
 
-const mapGeneration = (generationValue: string) =>
-  generationValue ? generations.find(gen => gen.value === generationValue)?.label : '';
-
-const mapGenerationToGame = (value: string, pokemonId: number): Game['value'] => {
-  const genGames = gameVersions.filter(gen => gen.genValue === value);
-
-  if (checkIfArceus(pokemonId)) {
-    return genGames[2].value;
-  } else {
-    return genGames[0].value;
-  }
-};
-
-const checkIfEarlierGen = (newGen: string, currGen: string): boolean => {
-  const versionValues = gameVersions.map(version => version.value);
-
-  return versionValues.indexOf(newGen) > versionValues.indexOf(currGen);
-};
-
-const mapGroupToGeneration = (groupName: string): Game['generation'] | undefined =>
+// Function to map a group to its generation
+const mapGroupToGeneration = (groupName: GameGroup): GameGeneration | undefined =>
   gameVersions.find(version => version.group === groupName)?.generation;
 
-const mapGroupToGenerationValue = (groupName: string): Game['genValue'] | undefined =>
-  gameVersions.find(version => version.group === groupName)?.genValue;
+// Function to map a game value to its generation value
+const mapGameValueToGenerationValue = (gameValue: GameValue): GameGenValue | undefined =>
+  gameVersions.find(({ value }) => value === gameValue)?.genValue;
 
-const listGamesByGen = (generation: string): Game[] =>
-  gameVersions.filter(game => game.genValue === generation);
-
-const listGamesByGroup = (group: string): Game['label'][] =>
+// Function to list games by group
+const listGamesByGroup = (group: GameGroup): GameLabel[] =>
   gameVersions.filter(game => game.group === group).map(currGame => currGame.label);
 
-const listGenGroupsByGroup = (genGroup: string): Game['genGroups'] | undefined =>
+// Function to list gen groups by group
+const listGenGroupsByGroup = (genGroup: GameGroup): GameGenGroups | undefined =>
   gameVersions.find(version => version.group === genGroup)?.genGroups;
 
-const listMoveGroupsByGroup = (moveGroup: string): Game['genGroups'] | undefined =>
+// Function to list move groups by group
+const listMoveGroupsByGroup = (moveGroup: GameGroup): GameMoveGroups | undefined =>
   gameVersions.find(version => version.group === moveGroup)?.moveGroups;
 
 export {
@@ -488,12 +536,8 @@ export {
   mapIdToGeneration,
   mapVersionToGroup,
   mapGeneration,
-  mapGenerationToGame,
-  checkIfEarlierGen,
-  checkIfArceus,
   mapGroupToGeneration,
-  mapGroupToGenerationValue,
-  listGamesByGen,
+  mapGameValueToGenerationValue,
   listGamesByGroup,
   listGenGroupsByGroup,
   listMoveGroupsByGroup,

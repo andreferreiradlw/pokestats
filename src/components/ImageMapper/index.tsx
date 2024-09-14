@@ -14,8 +14,6 @@ import type {
 // helpers
 import equal from 'fast-deep-equal';
 import { drawAreas } from '@/helpers';
-// hooks
-import { useIsFirstRender } from 'usehooks-ts';
 // constants
 import { rerenderPropsList, ImageMapperDefaultProps } from './constants';
 // events
@@ -32,7 +30,7 @@ import {
 import { ContainerEl, ImageEl, CanvasEl, MapEl } from './StyledImageMapper';
 
 const ImageMapper = (props: ImageMapperProps): JSX.Element => {
-  // data
+  // Destructure props for easier access
   const {
     containerRef,
     fillColor: fillColorProp,
@@ -51,23 +49,26 @@ const ImageMapper = (props: ImageMapperProps): JSX.Element => {
     onMouseLeave,
     onClick,
   } = props;
-  // states
+
+  // States
   const [map, setMap] = useState(mapProp);
   const [storedMap, setStoredMap] = useState(map);
   const [isRendered, setRendered] = useState<boolean>(false);
+
+  // Refs
   const container = useRef<Container>(null);
   const imageRef = useRef<HTMLImageElement>(null);
   const hoverCanvasRef = useRef<HTMLCanvasElement>(null);
   const highlightCanvasRef = useRef<HTMLCanvasElement>(null);
   const renderingCtx = useRef<CTX>();
   const highlightCtx = useRef<CanvasRenderingContext2D>(null);
-  // hooks
-  const isFirstRender = useIsFirstRender();
-  // memo
+  const isFirstRender = useRef(true); // Replacing useIsFirstRender hook
+
+  // Memoized functions
   const scaleCoords = useCallback(
     (coords: number[]): number[] =>
       coords.map(coord => coord / (imageRef?.current?.naturalWidth! / parentWidth)),
-    [parentWidth, imageRef],
+    [parentWidth],
   );
 
   const renderPrefilledAreas = useCallback(
@@ -96,7 +97,7 @@ const ImageMapper = (props: ImageMapperProps): JSX.Element => {
       if (!firstLoad && !imageRef.current) return;
 
       const imageWidth = parentWidth;
-      const imageHeight = imageRef.current.clientHeight;
+      const imageHeight = imageRef.current?.clientHeight;
 
       hoverCanvasRef.current.width = imageWidth;
       hoverCanvasRef.current.height = imageHeight;
@@ -113,7 +114,6 @@ const ImageMapper = (props: ImageMapperProps): JSX.Element => {
       if (imageRef.current) {
         renderPrefilledAreas();
 
-        // trigger onLoad fn prop
         if (onLoad) {
           onLoad(imageRef.current, {
             width: imageWidth,
@@ -124,40 +124,6 @@ const ImageMapper = (props: ImageMapperProps): JSX.Element => {
     },
     [fillColorProp, imageRef, onLoad, renderPrefilledAreas, parentWidth],
   );
-
-  // useEffect(() => {
-  //   if (highlightCtx) {
-  //     if (imageRef.current && highlightAllAreas) {
-  //       map.areas.forEach(area => {
-  //         drawAreas(
-  //           area.shape,
-  //           scaleCoords(area.coords),
-  //           'rgba(222, 98, 98, 0.5)',
-  //           2,
-  //           'black',
-  //           true,
-  //           highlightCtx,
-  //         );
-
-  //         return true;
-  //       });
-  //     } else {
-  //       map.areas.forEach(area => {
-  //         drawAreas(
-  //           area.shape,
-  //           scaleCoords(area.coords),
-  //           'rgba(222, 98, 98, 0.5)',
-  //           2,
-  //           'black',
-  //           false,
-  //           highlightCtx,
-  //         );
-
-  //         return true;
-  //       });
-  //     }
-  //   }
-  // }, [highlightAllAreas, imageRef]);
 
   const computeCenter = useCallback(
     (area: MapAreas): [number, number] => {
@@ -238,10 +204,11 @@ const ImageMapper = (props: ImageMapperProps): JSX.Element => {
   };
 
   useEffect(() => {
-    if (isFirstRender) {
+    if (isFirstRender.current) {
       initCanvas(true);
       setRendered(true);
       renderPrefilledAreas(mapProp);
+      isFirstRender.current = false; // Marking the first render complete
     } else {
       initCanvas();
       if (imageRef.current) {
@@ -254,24 +221,13 @@ const ImageMapper = (props: ImageMapperProps): JSX.Element => {
         renderPrefilledAreas(mapProp);
       }
     }
-    // update cached map
+    // Update cached map
     setMap(mapProp);
     setStoredMap(mapProp);
   }, [props]);
 
-  // useEffect(() => {
-  //   container.current.clearHighlightedArea = () => {
-  //     setMap(storedMap);
-  //     initCanvas();
-  //   };
-
-  //   if (containerRef) {
-  //     containerRef.current = container.current;
-  //   }
-  // }, [imageRef]);
-
   useEffect(() => {
-    // restart canvas when parent resizes
+    // Restart canvas when parent resizes
     initCanvas();
   }, [parentWidth, initCanvas]);
 
@@ -325,8 +281,6 @@ const ImageMapper = (props: ImageMapperProps): JSX.Element => {
 };
 
 ImageMapper.defaultProps = ImageMapperDefaultProps;
-
-// export default ImageMapper;
 
 export default React.memo<ImageMapperProps>(ImageMapper, (prevProps, nextProps) => {
   const watchedProps = [...rerenderPropsList, ...nextProps.rerenderProps!];

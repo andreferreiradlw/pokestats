@@ -17,11 +17,16 @@ const LoadingContainer = styled(motion.div)`
   z-index: 2;
 `;
 
-const PotionIcon = styled(Potion)<{ $iconwidth?: LoadingProps['$iconWidth'] }>`
+const PotionIcon = styled(Potion, {
+  shouldForwardProp: prop => prop !== '$iconWidth',
+})<{ $iconWidth?: LoadingProps['$iconWidth'] }>`
   height: auto;
+
   ${({ $iconWidth }) => $iconWidth && responsivePropsV2('width', $iconWidth)}
+
   // shake
   animation: 20s ${shake} 0ms infinite ease-in-out;
+
   // rise up
   circle {
     animation: ${riseUp} 2s infinite linear;
@@ -43,14 +48,20 @@ const PotionIcon = styled(Potion)<{ $iconwidth?: LoadingProps['$iconWidth'] }>`
   }
 `;
 
-const PokeballIcon = styled(Pokeball)<{ $iconwidth?: LoadingProps['$iconWidth'] }>`
+const PokeballIcon = styled(Pokeball, {
+  shouldForwardProp: prop => prop !== '$iconWidth',
+})<{ $iconWidth?: LoadingProps['$iconWidth'] }>`
   animation: 2.5s ${pokeballShake} 0ms infinite ease-in-out;
   height: auto;
+
   ${({ $iconWidth }) => $iconWidth && responsivePropsV2('width', $iconWidth)}
 `;
 
-const RecordIcon = styled(Record)<{ $iconwidth?: LoadingProps['$iconWidth'] }>`
+const RecordIcon = styled(Record, {
+  shouldForwardProp: prop => prop !== '$iconWidth',
+})<{ $iconWidth?: LoadingProps['$iconWidth'] }>`
   height: auto;
+
   ${({ $iconWidth }) => $iconWidth && responsivePropsV2('width', $iconWidth)}
 
   .record_svg__roll {

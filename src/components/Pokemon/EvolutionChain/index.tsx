@@ -63,7 +63,7 @@ const EvolutionChain = ({
                 >
                   {data.secondEvolution.map(({ species, evolutionDetails, thirdEvolution }) => (
                     <Grid2
-                      key="second-evo-container"
+                      key={`second-evo-container-${species.id}`}
                       gap={2}
                       flexDirection="column"
                       flexBasis="100%"

@@ -5,7 +5,7 @@ import { usePlausible } from 'next-plausible';
 // types
 import type { Move, MoveLearnMethod } from 'pokenode-ts';
 // helpers
-import type { FilteredMove } from '@/helpers';
+import type { FilteredMove, GameGenValue } from '@/helpers';
 import { removeDash, mapGeneration } from '@/helpers';
 import { fadeInUpVariant } from '@/animations';
 // styles
@@ -133,7 +133,7 @@ const MovesTableV2 = ({
         },
         priority: { render: move.priority, onClick: () => onCellClick(move.name, move.id) },
         generation: {
-          render: mapGeneration(move.generation?.name) || '-',
+          render: mapGeneration(move.generation.name as GameGenValue) || '-',
           onClick: () => onCellClick(move.name, move.id),
         },
       };
@@ -152,7 +152,7 @@ const MovesTableV2 = ({
         <CustomTable
           columns={columns}
           data={tableData}
-          key={`moves-table-container-${learnMethod}`}
+          customKey={`moves-table-container-${learnMethod}`}
           {...rest}
         />
       ) : (

@@ -1,11 +1,18 @@
 import React, { createContext, useState, useMemo } from 'react';
 // helpers
-import { gameVersions, type Game } from '@/helpers';
+import {
+  type GameValue,
+  gameVersions,
+  mapGameValueToGenerationValue,
+  type Game,
+  type GameGenValue,
+} from '@/helpers';
 // types
 import type { PokemonSpecies } from 'pokenode-ts';
 
 interface GameVersionContextProps {
   gameVersion: string;
+  gameGeneration: GameGenValue;
   setGameVersion: (version: string) => void;
   dropdownOptions: Game[];
 }
@@ -17,6 +24,7 @@ interface GameVersionProviderProps {
 
 export const GameVersionContext = createContext<GameVersionContextProps>({
   gameVersion: '',
+  gameGeneration: '' as GameGenValue,
   setGameVersion: () => {},
   dropdownOptions: [],
 });
@@ -43,7 +51,12 @@ export const GameVersionProvider = ({ children, pokemon }: GameVersionProviderPr
 
   // Memoize the context value to avoid unnecessary re-renders
   const contextValue = useMemo(
-    () => ({ gameVersion, setGameVersion, dropdownOptions }),
+    () => ({
+      gameVersion,
+      gameGeneration: mapGameValueToGenerationValue(gameVersion as GameValue)!,
+      setGameVersion,
+      dropdownOptions,
+    }),
     [gameVersion, dropdownOptions],
   );
 

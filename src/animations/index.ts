@@ -7,4 +7,5 @@ export * from './pageContainer';
 export * from './placeholder';
 export * from './row';
 export * from './scaleIn';
+export * from './staggerContainer';
 export * from './staggerExitLoading';

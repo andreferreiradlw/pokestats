@@ -3,7 +3,7 @@ import { useState, useContext, useMemo } from 'react';
 import type { MoveLearnMethod, Pokemon } from 'pokenode-ts';
 // helpers
 import { GameVersionContext } from '@/context';
-import { mapVersionToGroup, filterMoves } from '@/helpers';
+import { mapVersionToGroup, filterMoves, type GameValue } from '@/helpers';
 // hooks
 import { useMachines, usePokemonMoves } from '@/hooks';
 // components
@@ -28,7 +28,7 @@ const PokemonMoves = ({ pokemon, ...rest }: PokemonMovesProps): JSX.Element => {
   const filteredMoves = useMemo(() => {
     if (!allMoves) return [];
     // currently selected game group
-    const gameGroup = mapVersionToGroup(gameVersion);
+    const gameGroup = mapVersionToGroup(gameVersion as GameValue);
     // filter moves
     return filterMoves(allMoves, learnMethod, gameGroup);
   }, [allMoves, gameVersion, learnMethod]);
@@ -39,14 +39,7 @@ const PokemonMoves = ({ pokemon, ...rest }: PokemonMovesProps): JSX.Element => {
   });
 
   return (
-    <Grid2
-      container
-      direction="column"
-      alignItems={{ xxs: 'center', lg: 'flex-start' }}
-      gap={4}
-      width="100%"
-      {...rest}
-    >
+    <Grid2 container direction="column" gap={4} size={12} {...rest}>
       <Grid2 size={12}>
         <Typography variant="sectionTitle">Move Pool</Typography>
       </Grid2>

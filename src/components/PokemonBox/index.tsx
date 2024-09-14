@@ -3,7 +3,7 @@ import { useMemo } from 'react';
 import type { Pokemon, PokemonSpecies } from 'pokenode-ts';
 import { motion } from 'framer-motion';
 // helpers
-import { removeDash, mapGeneration, mapIdToGeneration } from '@/helpers';
+import { removeDash, mapGeneration, mapIdToGeneration, type GameGenValue } from '@/helpers';
 import { hoverVariant } from '@/animations';
 // styles
 import { PokeBox } from './StyledPokemonBox';
@@ -29,7 +29,10 @@ const PokemonBox = ({
   defaultVarietyName,
   ...rest
 }: PokemonBoxProps): JSX.Element => {
-  const generationName = useMemo(() => pokemonGen && mapGeneration(pokemonGen), [pokemonGen]);
+  const generationName = useMemo(
+    () => pokemonGen && mapGeneration(pokemonGen as GameGenValue),
+    [pokemonGen],
+  );
 
   return (
     <Link
@@ -56,7 +59,9 @@ const PokemonBox = ({
           <Typography variant="h5" component="span" textTransform="capitalize">
             {nameFormat ? removeDash(pokemonName) : pokemonName}
           </Typography>
-          <Typography>{generationName || mapGeneration(mapIdToGeneration(pokemonId))}</Typography>
+          <Typography>
+            {generationName || mapGeneration(mapIdToGeneration(pokemonId) as GameGenValue)}
+          </Typography>
         </PokeBox>
       </motion.a>
     </Link>

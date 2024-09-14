@@ -5,7 +5,7 @@ import { usePlausible } from 'next-plausible';
 // types
 import type { Move, MoveLearnMethod } from 'pokenode-ts';
 // helpers
-import type { FilteredMove } from '@/helpers';
+import type { FilteredMove, GameGenValue } from '@/helpers';
 import { removeDash, mapGeneration } from '@/helpers';
 import { fadeInUpVariant, rowVariant } from '@/animations';
 // styles
@@ -168,7 +168,7 @@ const MovesTable = ({ moves, learnMethod, machineNames, ...rest }: TypeMovesProp
                       {move.priority}
                     </DataCell>
                     <DataCell onClick={() => onCellClick(move.name, move.id)}>
-                      {mapGeneration(move.generation?.name)}
+                      {mapGeneration(move.generation.name as GameGenValue)}
                     </DataCell>
                   </TableRow>
                 );

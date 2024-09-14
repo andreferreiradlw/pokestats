@@ -23,7 +23,7 @@ import CustomButton from '@/components/CustomButton';
 import LocationTable from '@/components/LocationTable';
 import { capitalize, Grid2, Stack, Typography } from '@mui/material';
 // data
-import kantoZones from './kanto-zones.json';
+import kantoZones from '../../KantoGen1/kanto-zones.json';
 
 const mapLocationToMusic = (locationKey: string) => {
   switch (locationKey) {

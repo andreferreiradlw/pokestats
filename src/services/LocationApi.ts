@@ -10,6 +10,8 @@ export const LocationApi = {
 };
 
 export const RegionApi = {
+  getById: async (id: string) => await MainClient.location.getLocationById(id),
+
   getByIds: async (ids: Array<number>) =>
     await Promise.all(ids.map(id => MainClient.location.getRegionById(id))),
 };

@@ -14,7 +14,7 @@ import HeaderV2 from '../HeaderV2';
 // styles
 import { LayoutContainer, ScrollButton } from './StyledLayoutV2';
 // icons
-import ChevronTop from 'public/static/iconLibrary/chevron_top.svg';
+import ArrowCircleUpIcon from '@mui/icons-material/ArrowCircleUp';
 
 interface LayoutV2Props extends Omit<HTMLMotionProps<'main'>, keyof StackProps>, StackProps {
   withHeader?: boolean;
@@ -69,7 +69,7 @@ const LayoutV2 = ({
             variants={fadeInUpVariant}
             key="layout-back-top"
           >
-            <ChevronTop width="50px" />
+            <ArrowCircleUpIcon sx={{ fontSize: '40px' }} />
           </ScrollButton>
         )}
       </AnimatePresence>

@@ -11,10 +11,10 @@ const LayoutContainer = styled(Container)`
 `;
 
 const ScrollButton = styled(motion.div)`
-  bottom: 20px;
+  bottom: 30px;
   cursor: pointer;
   position: fixed;
-  right: 20px;
+  right: 30px;
   width: fit-content;
   z-index: 100;
 `;

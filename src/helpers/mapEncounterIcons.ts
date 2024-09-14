@@ -59,7 +59,8 @@ const mapGen1Icons = (methodName: string, pokemonName: string, areaKey: string):
 };
 
 const mapGen2Icons = (methodName: string, pokemonName: string): string => {
-  const baseUrl = `https://raw.githubusercontent.com/andreferreiradlw/pokestats_media/main/assets/icons/generation-ii`;
+  const baseUrl =
+    'https://raw.githubusercontent.com/andreferreiradlw/pokestats_media/main/assets/icons/generation-ii';
 
   const icons: Record<string, string> = {
     walk: `${baseUrl}/grass.png`,
@@ -109,11 +110,14 @@ const mapGen3Icons = (methodName: string, pokemonName: string, regionName: strin
 
     // Roaming and only-one specific icons
     'roaming-grass:latias': `${baseUrl}/latias.png`,
+    'roaming-grass:latios': `${baseUrl}/latios.png`,
     'roaming-grass:suicune': `${baseUrl}/suicune.png`,
     'roaming-grass:raikou': `${baseUrl}/raikou.png`,
     'roaming-grass:entei': `${baseUrl}/entei.png`,
     'roaming-water:latias': `${baseUrl}/latias.png`,
+    'roaming-water:latios': `${baseUrl}/latios.png`,
     'only-one:latias': `${baseUrl}/latias.png`,
+    'only-one:latios': `${baseUrl}/latios.png`,
     'only-one:kyogre': `${baseUrl}/kyogre.png`,
     'only-one:groudon': `${baseUrl}/groudon.png`,
     'only-one:rayquaza': `${baseUrl}/rayquaza.png`,
@@ -203,7 +207,8 @@ const mapGen4Icons = (methodName: string, pokemonName: string, regionName: strin
 };
 
 const mapGen5Icons = (methodName: string): string => {
-  const baseUrl = `https://raw.githubusercontent.com/andreferreiradlw/pokestats_media/main/assets/icons/generation-v`;
+  const baseUrl =
+    'https://raw.githubusercontent.com/andreferreiradlw/pokestats_media/main/assets/icons/generation-v';
 
   const icons: Record<string, string> = {
     walk: `${baseUrl}/walk-grass.png`,
@@ -223,6 +228,59 @@ const mapGen5Icons = (methodName: string): string => {
   return icons[methodName] || `${baseUrl}/walk.png`;
 };
 
+const mapGen6Icons = (methodName: string): string => {
+  const baseUrl = `https://raw.githubusercontent.com/andreferreiradlw/pokestats_media/main/assets/icons/generation-vii`;
+
+  const icons: Record<string, string> = {
+    walk: `${baseUrl}/walk.png`,
+    surf: `${baseUrl}/surf.png`,
+    'rock-smash': `${baseUrl}/boulder.png`,
+    'good-rod': `${baseUrl}/rod.png`,
+    'super-rod': `${baseUrl}/rod.png`,
+    gift: `${baseUrl}/gift.png`,
+    'gift-egg': `${baseUrl}/gift-egg.png`,
+    'rough-terrain': `${baseUrl}/tall-grass.png`,
+    'yellow-flowers': `${baseUrl}/yellow-flowers.png`,
+    'purple-flowers': `${baseUrl}/purple-flowers.png`,
+    'red-flowers': `${baseUrl}/red-flowers.png`,
+  };
+
+  // Return the appropriate icon or default fallback
+  return icons[methodName] || `${baseUrl}/walk.png`;
+};
+
+const mapGen7Icons = (methodName: string, regionName: string): string => {
+  const baseUrl = `https://raw.githubusercontent.com/andreferreiradlw/pokestats_media/main/assets/icons/generation-vi/${regionName}`;
+
+  const icons: Record<string, string> = {
+    walk: `${baseUrl}/walk.png`,
+    surf: `${baseUrl}/surf.png`,
+    'good-rod': `${baseUrl}/rod.png`,
+    'super-rod': `${baseUrl}/rod.png`,
+    gift: `${baseUrl}/gift.png`,
+    'sos-encounter': `${baseUrl}/sos.png`,
+    'bubbling-spots': `${baseUrl}/splash.png`,
+
+    // Only-one specific icons
+    'only-one:guzzlord': `${baseUrl}/guzzlord.png`,
+    'only-one:necrozma': `${baseUrl}/necrozma.png`,
+    'only-one:kartana': `${baseUrl}/kartana.png`,
+    'only-one:celesteela': `${baseUrl}/celesteela.png`,
+    'only-one:xurkitree': `${baseUrl}/xurkitree.png`,
+    'only-one:pheromosa': `${baseUrl}/pheromosa.png`,
+    'only-one:buzzwole': `${baseUrl}/buzzwole.png`,
+    'only-one:lunala': `${baseUrl}/lunala.png`,
+    'only-one:solgaleo': `${baseUrl}/solgaleo.png`,
+    'only-one:tapu-fini': `${baseUrl}/tapu-fini.png`,
+    'only-one:tapu-bulu': `${baseUrl}/tapu-bulu.png`,
+    'only-one:tapu-lele': `${baseUrl}/tapu-lele.png`,
+    'only-one:tapu-koko': `${baseUrl}/tapu-koko.png`,
+  };
+
+  // Return the appropriate icon or default fallback
+  return icons[methodName] || `${baseUrl}/walk.png`;
+};
+
 export const mapEncounterMethodIcons = (
   methodName: string,
   pokemonName: string,
@@ -230,6 +288,8 @@ export const mapEncounterMethodIcons = (
   generation: GameGenValue,
   regionName: string,
 ): string => {
+  console.log(methodName, pokemonName, areaKey, generation, regionName);
+
   if (generation === 'generation-i') {
     return mapGen1Icons(methodName, pokemonName, areaKey);
   }
@@ -248,6 +308,14 @@ export const mapEncounterMethodIcons = (
 
   if (generation === 'generation-v') {
     return mapGen5Icons(methodName);
+  }
+
+  if (generation === 'generation-vi') {
+    return mapGen6Icons(methodName);
+  }
+
+  if (generation === 'generation-vii') {
+    return mapGen7Icons(methodName, pokemonName);
   }
 
   return '';

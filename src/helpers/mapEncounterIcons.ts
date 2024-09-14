@@ -50,7 +50,7 @@ const mapGen1Icons = (methodName: string, pokemonName: string, areaKey: string):
     icons[`special:${methodName}`] ||
     icons[`method:${methodName}`] ||
     (methodName === 'only-one' && icons[combinedKey]) ||
-    (methodName === 'only-one' && icons[`only-one:default`]) ||
+    (methodName === 'only-one' && icons['only-one:default']) ||
     icons[giftIconKey] ||
     icons[defaultGiftIconKey] ||
     icons[combinedKey] ||
@@ -229,7 +229,8 @@ const mapGen5Icons = (methodName: string): string => {
 };
 
 const mapGen6Icons = (methodName: string): string => {
-  const baseUrl = `https://raw.githubusercontent.com/andreferreiradlw/pokestats_media/main/assets/icons/generation-vii`;
+  const baseUrl =
+    'https://raw.githubusercontent.com/andreferreiradlw/pokestats_media/main/assets/icons/generation-vii';
 
   const icons: Record<string, string> = {
     walk: `${baseUrl}/walk.png`,
@@ -288,8 +289,6 @@ export const mapEncounterMethodIcons = (
   generation: GameGenValue,
   regionName: string,
 ): string => {
-  console.log(methodName, pokemonName, areaKey, generation, regionName);
-
   if (generation === 'generation-i') {
     return mapGen1Icons(methodName, pokemonName, areaKey);
   }

@@ -77,9 +77,9 @@ const Encounters = ({ species, ...rest }: EncountersProps): JSX.Element => {
                 variants={staggerContainerVariant}
                 key={`encounters-container-${gameVersion}`}
               >
-                {encounterDetails.map((encounter, i) => (
+                {encounterDetails.map(encounter => (
                   <EncounterCard
-                    key={`${encounter.location_area.id}-${encounter.version_details.version.name}-${i}`}
+                    key={`${encounter.location_area.id}-${encounter.version_details.version.name}`}
                     encounter={encounter}
                     generation={gameGeneration}
                     pokemonName={species.name}

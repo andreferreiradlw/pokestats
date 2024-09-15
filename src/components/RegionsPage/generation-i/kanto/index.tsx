@@ -1,13 +1,15 @@
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 // components
 import CanvasMapper from '@/components/CanvasMapper';
-import { Divider, Grid2, Stack, Typography } from '@mui/material';
+import { Button, Divider, Grid2, Stack, Typography } from '@mui/material';
 
 import { kantoZones } from './zones';
 
 const KantoGen1 = (): JSX.Element => {
   // hooks
   const mapContainerRef = useRef<HTMLDivElement>(null);
+  // state
+  const [highlightAllAreas, setHighlightAllAreas] = useState(false);
 
   return (
     <Stack divider={<Divider />} gap={4} py={2}>
@@ -24,6 +26,7 @@ const KantoGen1 = (): JSX.Element => {
             together form a joint landmass that is south of <b>Sinnoh</b>.It is the setting of the
             first generation of games and can also be explored in Generations II, III, IV, and VII.
           </Typography>
+          <Button onClick={() => setHighlightAllAreas(prev => !prev)}>Highlight</Button>
         </Grid2>
         <Grid2 size={{ xxs: 12, lg: 6 }} ref={mapContainerRef}>
           <CanvasMapper
@@ -33,10 +36,10 @@ const KantoGen1 = (): JSX.Element => {
             areas={kantoZones}
             // parentWidth={imgWidth}
             stayHighlighted
-            // highlightAllAreas={showAllAreas}
+            highlightAllAreas={highlightAllAreas}
             toggleHighlighted
-            fillColor="#1b15074d"
-            strokeColor="black"
+            // fillColor="#1b15074d"
+            // strokeColor="black"
             onClick={(area, index) => console.log('click', area, index)}
             // onMouseEnter={(area: any) => setMapHover(area.title)}
             // onMouseLeave={() => setMapHover(null)}

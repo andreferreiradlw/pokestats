@@ -1,10 +1,11 @@
 import React, { useState, useEffect, useRef, useCallback, type RefObject, useMemo } from 'react';
 // helpers
 import { drawAreas } from './draw';
+import { deepEqual } from '@/helpers';
+// constants
+import { rerenderPropsList } from './constants';
 // styles
 import { ContainerEl, ImageEl, CanvasEl, MapEl } from './StyledCanvasMapper';
-import { deepEqual } from '@/helpers';
-import { rerenderPropsList } from './constants';
 
 export interface CanvasMapperArea {
   id: string;
@@ -61,9 +62,9 @@ const CanvasMapper = ({
   areas = [],
   mapName = `image-map-${Math.random()}`,
   src: srcProp,
-  fillColor: fillColorProp = 'rgba(255, 255, 255, 0.5)',
-  strokeColor: strokeColorProp = 'rgba(0, 0, 0, 0.5)',
-  lineWidth: lineWidthProp = 1,
+  fillColor: fillColorProp = 'rgba(0, 0, 0, 0.5)',
+  strokeColor: strokeColorProp = 'rgba(0, 0, 0, 1)',
+  lineWidth: lineWidthProp = 3,
   stayHighlighted = false,
   highlightAllAreas = false,
   toggleHighlighted = false,
@@ -80,25 +81,27 @@ const CanvasMapper = ({
   onMouseLeave,
   onLoad,
 }: CanvasMapperProps): JSX.Element => {
-  // States and Refs
+  // State to keep track of parent container's width and other dynamic state
   const [parentWidth, setParentWidth] = useState(0);
   const [mapAreas, setMapAreas] = useState(areas);
   const [isRendered, setRendered] = useState<boolean>(false);
-  const isFirstRender = useRef(true);
+  const isFirstRender = useRef(true); // Track first render to manage initialization logic
+
+  // Refs for DOM elements and drawing contexts
   const imageContainerRef = useRef<HTMLDivElement>(null);
   const imageRef = useRef<HTMLImageElement>(null);
   const hoverCanvasRef = useRef<HTMLCanvasElement>(null);
   const highlightCanvasRef = useRef<HTMLCanvasElement>(null);
 
-  // Mutable Refs for Contexts
-  const renderingCtx = useRef<CanvasRenderingContext2D | null>(
+  // Mutable refs for canvas drawing contexts
+  const renderingCtx = useRef<CanvasRenderingContext2D>(
     null,
   ) as React.MutableRefObject<CanvasRenderingContext2D | null>;
   const highlightCtx = useRef<CanvasRenderingContext2D | null>(
     null,
   ) as React.MutableRefObject<CanvasRenderingContext2D | null>;
 
-  // Handle Parent Width Changes
+  // Effect to handle parent width changes and initialize canvas size
   useEffect(() => {
     const handleResize = () => {
       if (parentRef.current) {
@@ -111,13 +114,13 @@ const CanvasMapper = ({
     return () => window.removeEventListener('resize', handleResize);
   }, [parentRef]);
 
-  // Scale the Canvas Area Coordinates
+  // Function to scale the coordinates of areas to match the current canvas size
   const scaleCoords = useCallback(
     (coords: number[]): number[] => {
       const naturalWidth = imageRef.current?.naturalWidth;
 
       if (!naturalWidth || !parentWidth) {
-        return coords;
+        return coords; // Return original coordinates if scaling is not possible
       }
 
       const scaleFactor = parentWidth / naturalWidth;
@@ -126,12 +129,13 @@ const CanvasMapper = ({
     [parentWidth],
   );
 
-  // Compute Center
+  // Function to compute the center point of an area
   const computeCenter = useCallback(
     (area: CanvasMapperArea): [number, number] => {
       const scaledCoords = scaleCoords(area.coords);
       if (area.shape === 'circle') return [scaledCoords[0], scaledCoords[1]];
 
+      // Compute center for polygons and rectangles
       const numPoints = scaledCoords.length / 2;
       const { x, y } = scaledCoords.reduce(
         (acc, val, i) =>
@@ -145,18 +149,24 @@ const CanvasMapper = ({
     [scaleCoords],
   );
 
-  // Render Prefilled Areas
+  // Function to render pre-filled areas on the canvas
   const renderPrefilledAreas = useCallback(
     (mapObj = areas, ctx = renderingCtx) => {
       if (!ctx.current || !hoverCanvasRef.current) return;
       ctx.current.clearRect(0, 0, hoverCanvasRef.current.width, hoverCanvasRef.current.height);
 
       mapObj.forEach(area => {
-        if (!area.preFillColor) return;
+        // Use a default light fill color when highlighting all areas
+        const fillColor = highlightAllAreas
+          ? area.preFillColor || 'rgba(0, 0, 0, 0.1)'
+          : area.preFillColor;
+
+        if (!fillColor) return; // Only draw areas with a preFillColor
+
         drawAreas(
           area.shape,
           scaleCoords(area.coords),
-          area.preFillColor,
+          fillColor,
           area.lineWidth || lineWidthProp,
           area.strokeColor || strokeColorProp,
           true,
@@ -164,10 +174,10 @@ const CanvasMapper = ({
         );
       });
     },
-    [areas, lineWidthProp, strokeColorProp, scaleCoords],
+    [areas, lineWidthProp, strokeColorProp, scaleCoords, highlightAllAreas],
   );
 
-  // Initialize Canvas
+  // Function to initialize canvas properties and contexts
   const initCanvas = useCallback(
     (firstLoad = false) => {
       if (!firstLoad && !imageRef.current) return;
@@ -193,6 +203,7 @@ const CanvasMapper = ({
       imageContainerRef.current.style.width = `${imageWidth}px`;
       imageContainerRef.current.style.height = `${imageHeight}px`;
 
+      // Initialize 2D drawing contexts
       const renderingContext = hoverCanvasRef.current.getContext('2d');
       const highlightContext = highlightCanvasRef.current.getContext('2d');
 
@@ -210,7 +221,7 @@ const CanvasMapper = ({
     [fillColorProp, imageRef, onLoad, renderPrefilledAreas, parentWidth],
   );
 
-  // Area Events
+  // Handlers for mouse events
   const onAreaEnter = useCallback(
     (area: ExtendedArea, index: number, event: AreaEvent) => {
       drawAreas(
@@ -286,12 +297,13 @@ const CanvasMapper = ({
       );
       renderPrefilledAreas(mapAreas, highlightCtx);
     }
+    // Use dynamic dependency array
   }, [initCanvas, renderPrefilledAreas, mapAreas]);
 
   // Effect for Resizing
   useEffect(() => initCanvas, [parentWidth]);
 
-  // Memoize Map Areas
+  // Memoize the areas to prevent unnecessary re-renders
   const memoizedAreas = useMemo(
     () =>
       mapAreas.map((area, index) => {

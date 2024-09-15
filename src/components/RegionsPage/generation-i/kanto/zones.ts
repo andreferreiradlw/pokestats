@@ -1,4 +1,6 @@
-export const kantoZones = [
+import { CanvasMapperProps } from '@/components/CanvasMapper';
+
+export const kantoZones: CanvasMapperProps['areas'] = [
   {
     id: '231',
     key: 'pewter-city',

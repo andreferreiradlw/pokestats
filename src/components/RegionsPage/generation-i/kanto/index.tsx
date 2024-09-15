@@ -1,7 +1,14 @@
+import { useRef } from 'react';
+// components
+import CanvasMapper from '@/components/CanvasMapper';
 import { Divider, Grid2, Stack, Typography } from '@mui/material';
-import React from 'react';
+
+import { kantoZones } from './zones';
 
 const KantoGen1 = (): JSX.Element => {
+  // hooks
+  const mapContainerRef = useRef<HTMLDivElement>(null);
+
   return (
     <Stack divider={<Divider />} gap={4} py={2}>
       <Grid2 container size={12} alignItems="flex-start" justifyContent="flex-start" spacing={4}>
@@ -18,7 +25,23 @@ const KantoGen1 = (): JSX.Element => {
             first generation of games and can also be explored in Generations II, III, IV, and VII.
           </Typography>
         </Grid2>
-        <Grid2 size={{ xxs: 12, lg: 6 }}>map</Grid2>
+        <Grid2 size={{ xxs: 12, lg: 6 }} ref={mapContainerRef}>
+          <CanvasMapper
+            parentRef={mapContainerRef}
+            src="/static/regions/kantoGen1/kanto-map.png"
+            mapName="kanto-gen1"
+            mapAreas={kantoZones}
+            // parentWidth={imgWidth}
+            stayHighlighted
+            // highlightAllAreas={showAllAreas}
+            // toggleHighlighted
+            fillColor="#eab54d4d"
+            strokeColor="black"
+            // onClick={area => handleAreaClick(Number(area.id))}
+            // onMouseEnter={(area: any) => setMapHover(area.title)}
+            // onMouseLeave={() => setMapHover(null)}
+          />
+        </Grid2>
       </Grid2>
     </Stack>
   );

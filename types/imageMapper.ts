@@ -1,4 +1,5 @@
 import type React from 'react';
+import type { RefObject } from 'react';
 
 export interface Container extends HTMLDivElement {
   clearHighlightedArea: () => void;
@@ -37,7 +38,7 @@ export interface ImageMapperProps {
   src: string;
   map?: Map;
   areaKeyName?: 'id';
-  containerRef?: { current: HTMLDivElement } | null;
+  containerRef: RefObject<HTMLDivElement>;
   fillColor?: string;
   strokeColor?: string;
   lineWidth?: number;

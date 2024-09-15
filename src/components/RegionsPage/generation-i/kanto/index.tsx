@@ -30,14 +30,14 @@ const KantoGen1 = (): JSX.Element => {
             parentRef={mapContainerRef}
             src="/static/regions/kantoGen1/kanto-map.png"
             mapName="kanto-gen1"
-            mapAreas={kantoZones}
+            areas={kantoZones}
             // parentWidth={imgWidth}
             stayHighlighted
             // highlightAllAreas={showAllAreas}
-            // toggleHighlighted
-            fillColor="#eab54d4d"
+            toggleHighlighted
+            fillColor="#1b15074d"
             strokeColor="black"
-            // onClick={area => handleAreaClick(Number(area.id))}
+            onClick={(area, index) => console.log('click', area, index)}
             // onMouseEnter={(area: any) => setMapHover(area.title)}
             // onMouseLeave={() => setMapHover(null)}
           />

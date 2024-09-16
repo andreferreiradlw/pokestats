@@ -11,6 +11,7 @@ interface RegionPageProps extends PropsWithChildren {
   regionName: string;
   generation: GameGenValue;
   mapImageUrl: string;
+  defaultLocation: string | null;
 }
 
 const RegionPage = ({
@@ -18,14 +19,14 @@ const RegionPage = ({
   regionName,
   generation,
   mapImageUrl,
+  defaultLocation,
   children,
 }: RegionPageProps): JSX.Element => {
-  // hooks
-  const mapContainerRef = useRef<HTMLDivElement>(null);
   // state
   const [highlightAllAreas, setHighlightAllAreas] = useState(false);
   const [selectedArea, setSelectedArea] = useState<CanvasMapperArea>();
   // ref
+  const mapContainerRef = useRef<HTMLDivElement>(null);
   const canvasMapperRef = useRef<CanvasMapperHandle>(null);
 
   return (
@@ -64,6 +65,7 @@ const RegionPage = ({
             highlightAllAreas={highlightAllAreas}
             toggleHighlighted
             onClick={area => setSelectedArea(area)}
+            defaultArea={defaultLocation}
           />
         </Grid2>
       </Grid2>

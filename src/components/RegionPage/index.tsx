@@ -1,20 +1,22 @@
 import { type PropsWithChildren, useRef, useState } from 'react';
 // components
 import CanvasMapper, { type CanvasMapperArea, type CanvasMapperHandle } from './CanvasMapper';
-import { Button, Divider, Grid2, Stack, Typography } from '@mui/material';
+import { Button, Grid2, Stack, Typography } from '@mui/material';
 import LocationDetails from './LocationDetails';
+import { AnimatePresence } from 'framer-motion';
+import { mapGeneration, type GameGenValue } from '@/helpers';
 
 interface RegionPageProps extends PropsWithChildren {
   areas: CanvasMapperArea[];
   regionName: string;
-  subtitle: string;
+  generation: GameGenValue;
   mapImageUrl: string;
 }
 
 const RegionPage = ({
   areas,
   regionName,
-  subtitle,
+  generation,
   mapImageUrl,
   children,
 }: RegionPageProps): JSX.Element => {
@@ -27,14 +29,14 @@ const RegionPage = ({
   const canvasMapperRef = useRef<CanvasMapperHandle>(null);
 
   return (
-    <Stack divider={<Divider />} gap={4} py={2}>
+    <Stack gap={4} py={2}>
       <Grid2 container size={12} alignItems="flex-start" justifyContent="flex-start" spacing={4}>
         <Grid2 flexDirection="column" alignItems="flex-start" size={{ xxs: 12, lg: 5 }}>
           <Typography variant="pageHeading" gutterBottom>
             {regionName}
           </Typography>
           <Typography variant="sectionTitle" gutterBottom>
-            {subtitle}
+            {mapGeneration(generation)}
           </Typography>
           <Typography>{children}</Typography>
           <Button onClick={() => setHighlightAllAreas(prev => !prev)}>Highlight All Areas</Button>
@@ -43,6 +45,7 @@ const RegionPage = ({
               if (canvasMapperRef.current) {
                 // Call the clear function directly from CanvasMapper
                 canvasMapperRef.current.clearSelection();
+                setSelectedArea(undefined);
               }
             }}
             disabled={!selectedArea}
@@ -64,7 +67,11 @@ const RegionPage = ({
           />
         </Grid2>
       </Grid2>
-      {selectedArea && <LocationDetails area={selectedArea} />}
+      <AnimatePresence mode="wait">
+        {selectedArea && (
+          <LocationDetails area={selectedArea} generation={generation} key={selectedArea.key} />
+        )}
+      </AnimatePresence>
     </Stack>
   );
 };

@@ -1,5 +1,6 @@
 export * from './useAutocompleteOptions';
 export * from './useEvolutionChain';
+export * from './useLocationAreas';
 export * from './useMachines';
 export * from './usePokemonEncounters';
 export * from './usePokemonList';

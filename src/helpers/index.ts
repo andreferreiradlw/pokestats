@@ -3,6 +3,7 @@ export * from './deepEqual';
 export * from './draw';
 export * from './findName';
 export * from './formatLocationEncounters';
+export * from './formatPokemonId';
 export * from './gameVersion';
 export * from './mapEncounterIcons';
 export * from './moves';

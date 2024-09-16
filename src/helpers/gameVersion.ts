@@ -521,6 +521,10 @@ const mapGameValueToGenerationValue = (gameValue: GameValue): GameGenValue | und
 const listGamesByGroup = (group: GameGroup): GameLabel[] =>
   gameVersions.filter(game => game.group === group).map(currGame => currGame.label);
 
+// Function to list games by generation
+const listGamesByGeneration = (generation: GameGenValue): GameValue[] =>
+  gameVersions.filter(game => game.genValue === generation).map(currGame => currGame.value);
+
 // Function to list gen groups by group
 const listGenGroupsByGroup = (genGroup: GameGroup): GameGenGroups | undefined =>
   gameVersions.find(version => version.group === genGroup)?.genGroups;
@@ -539,6 +543,7 @@ export {
   mapGroupToGeneration,
   mapGameValueToGenerationValue,
   listGamesByGroup,
+  listGamesByGeneration,
   listGenGroupsByGroup,
   listMoveGroupsByGroup,
 };

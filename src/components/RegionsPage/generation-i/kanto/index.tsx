@@ -6,7 +6,7 @@ const KantoGen1 = (): JSX.Element => {
   return (
     <RegionPage
       areas={kantoZones}
-      subtitle="Generation I"
+      generation="generation-i"
       regionName="Kanto"
       mapImageUrl="https://raw.githubusercontent.com/andreferreiradlw/pokestats_media/main/assets/maps/generation-i/map.png"
     >

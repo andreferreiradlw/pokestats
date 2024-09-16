@@ -1,6 +1,5 @@
-import equal from 'fast-deep-equal';
 import type { PokemonEncounter } from 'pokenode-ts';
-import { type GameValue, getResourceId, gameVersions } from '@/helpers'; // Ensure gameVersions is imported
+import { type GameValue, getResourceId, gameVersions, deepEqual } from '@/helpers'; // Ensure gameVersions is imported
 
 interface VersionEntry {
   maxLevel: number;
@@ -13,7 +12,7 @@ type PokemonEntry = Record<string, VersionEntry>;
 type MethodEntry = Record<string, PokemonEntry>;
 type AreaMethods = Record<string, MethodEntry>;
 
-interface VersionEntryWithGames extends VersionEntry {
+export interface VersionEntryWithGames extends VersionEntry {
   games: GameValue[];
 }
 
@@ -36,7 +35,7 @@ const mergeVersions = (
 
   gameValues.forEach(gameValue => {
     const matchingEntry = groupedVersions.find(group =>
-      equal(group, { ...versions[gameValue], games: group.games }),
+      deepEqual(group, { ...versions[gameValue], games: group.games }),
     );
 
     if (matchingEntry) {

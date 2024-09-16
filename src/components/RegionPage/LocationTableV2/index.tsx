@@ -27,6 +27,7 @@ import {
   Grid2,
   type Grid2Props,
 } from '@mui/material';
+import Link from 'next/link';
 
 interface LocationTableProps extends Grid2Props {
   locationAreas: LocationArea[];
@@ -71,7 +72,7 @@ const LocationTableV2 = ({
           <Stack key={`${areaName}-${areaId}-container`} alignItems="flex-start" gap={2}>
             {/* Display the area name if there are multiple locations */}
             {locationAreas.length > 1 && (
-              <Typography variant="h6" gutterBottom>
+              <Typography variant="sectionSubTitle" gutterBottom>
                 {findEnglishName(names)}
               </Typography>
             )}
@@ -145,8 +146,10 @@ const LocationTableV2 = ({
                                   <Stack
                                     direction="row"
                                     alignItems="center"
-                                    justifyContent="center"
+                                    justifyContent="space-evenly"
                                     gap={2}
+                                    component={Link}
+                                    href={`/pokemon/${pokemonName}`}
                                   >
                                     <img
                                       width="60px"

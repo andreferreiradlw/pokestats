@@ -1,4 +1,4 @@
-import { CanvasMapperProps } from '@/components/CanvasMapper';
+import { CanvasMapperProps } from '@/components/RegionPage/CanvasMapper';
 
 export const kantoZones: CanvasMapperProps['areas'] = [
   {

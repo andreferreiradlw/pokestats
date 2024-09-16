@@ -17,8 +17,6 @@ import {
   PauseIcon,
 } from './StyledKantoGen1';
 // components
-import ImageMapper from '@/components/ImageMapper';
-// import NewMapper from '@/components/ImageMapper/newMapper';
 import CustomButton from '@/components/CustomButton';
 import LocationTable from '@/components/LocationTable';
 import { capitalize, Grid2, Stack, Typography } from '@mui/material';
@@ -201,44 +199,9 @@ const KantoGen1 = ({
         </Stack>
         <ImageContainer width="auto">
           <CurrentLocation>{mapHover || currArea?.label || 'Hover me!'}</CurrentLocation>
-          <ImageMapper
-            containerRef={mapRef}
-            src="/static/regions/kantoGen1/kanto-map.png"
-            map={{
-              name: 'kanto-gen1',
-              areas: kantoZones as MapAreas[],
-            }}
-            parentWidth={imgWidth}
-            stayHighlighted
-            highlightAllAreas={showAllAreas}
-            toggleHighlighted
-            fillColor="#eab54d4d"
-            strokeColor="black"
-            onClick={area => handleAreaClick(Number(area.id))}
-            onMouseEnter={(area: any) => setMapHover(area.title)}
-            onMouseLeave={() => setMapHover(null)}
-          />
         </ImageContainer>
       </Stack>
-      {/* <Box screensizes={6} width="50%">
-            <NewMapper
-              containerRef={mapRef}
-              src="/static/regions/kantoGen1/kanto-map.png"
-              map={{
-                name: 'kanto-gen1',
-                areas: kantoZones as MapAreas[],
-              }}
-              parentWidth={imgWidth}
-              stayHighlighted={true}
-              highlightAllAreas={showAllAreas}
-              toggleHighlighted={true}
-              fillColor="#eab54d4d"
-              strokeColor="black"
-              onClick={area => handleAreaClick(Number(area.id))}
-              onMouseEnter={(area: any) => setMapHover(area.title)}
-              onMouseLeave={() => setMapHover(null)}
-            />
-          </Box> */}
+
       <Grid2
         container
         direction={{ xxs: 'column', lg: 'row' }}

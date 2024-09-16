@@ -1,4 +1,4 @@
-import { Fragment } from 'react';
+import { Fragment, useMemo } from 'react';
 // types
 import type { LocationArea } from 'pokenode-ts';
 // helpers
@@ -26,8 +26,13 @@ import {
   Stack,
   Grid2,
   type Grid2Props,
+  Accordion,
+  AccordionSummary,
+  AccordionDetails,
 } from '@mui/material';
 import Link from 'next/link';
+// icons
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 interface LocationTableProps extends Grid2Props {
   locationAreas: LocationArea[];
@@ -62,21 +67,32 @@ const LocationTableV2 = ({
   region,
   ...rest
 }: LocationTableProps): JSX.Element => {
-  return (
-    <Grid2 size={12} gap={4} flexDirection="column" {...rest}>
-      {locationAreas.map(({ pokemon_encounters, name: areaName, id: areaId, names }) => {
-        // Format encounters for the current area
-        const formattedEncounters = formatLocationEncounters(pokemon_encounters);
+  // Memoize formatted encounters data
+  const formattedLocationData = useMemo(() => {
+    return locationAreas.map(area => ({
+      ...area,
+      formattedEncounters: formatLocationEncounters(area.pokemon_encounters),
+    }));
+  }, [locationAreas]);
 
-        return (
-          <Stack key={`${areaName}-${areaId}-container`} alignItems="flex-start" gap={2}>
-            {/* Display the area name if there are multiple locations */}
-            {locationAreas.length > 1 && (
-              <Typography variant="sectionSubTitle" gutterBottom>
-                {findEnglishName(names)}
-              </Typography>
-            )}
-            {/* Render the table if there are encounters; otherwise, show a message */}
+  return (
+    <Grid2 size={12} flexDirection="column" {...rest}>
+      {formattedLocationData.map(({ formattedEncounters, name: areaName, id: areaId, names }) => (
+        <Accordion
+          defaultExpanded={!!formattedEncounters.length}
+          sx={{ width: '100%' }}
+          key={`${areaName}-${areaId}-container`}
+        >
+          <AccordionSummary
+            expandIcon={<ExpandMoreIcon />}
+            aria-controls={`${areaName}-${areaId}-controls`}
+            id={`${areaName}-${areaId}-header`}
+          >
+            <Typography variant="sectionSubTitle" gutterBottom>
+              {findEnglishName(names)}
+            </Typography>
+          </AccordionSummary>
+          <AccordionDetails>
             {formattedEncounters.length > 0 ? (
               <TableContainer>
                 <Table>
@@ -153,7 +169,9 @@ const LocationTableV2 = ({
                                   >
                                     <img
                                       width="60px"
-                                      src={`https://raw.githubusercontent.com/andreferreiradlw/pokestats_media/main/assets/images/${formatPokemonId(versions[0].id)}.png`}
+                                      src={`https://raw.githubusercontent.com/andreferreiradlw/pokestats_media/main/assets/images/${formatPokemonId(
+                                        versions[0].id,
+                                      )}.png`}
                                       alt={pokemonName}
                                     />
                                     <Typography textTransform="capitalize">
@@ -180,9 +198,9 @@ const LocationTableV2 = ({
             ) : (
               <Typography>No pokemon encounters in this area.</Typography>
             )}
-          </Stack>
-        );
-      })}
+          </AccordionDetails>
+        </Accordion>
+      ))}
     </Grid2>
   );
 };

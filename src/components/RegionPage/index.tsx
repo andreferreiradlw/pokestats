@@ -33,26 +33,33 @@ const RegionPage = ({
     <Stack gap={4} py={2}>
       <Grid2 container size={12} alignItems="flex-start" justifyContent="flex-start" spacing={4}>
         <Grid2 flexDirection="column" alignItems="flex-start" size={{ xxs: 12, lg: 5 }}>
-          <Typography variant="pageHeading" gutterBottom>
-            {regionName}
-          </Typography>
+          <Typography variant="pageHeading">{regionName}</Typography>
           <Typography variant="sectionTitle" gutterBottom>
             {mapGeneration(generation)}
           </Typography>
           <Typography>{children}</Typography>
-          <Button onClick={() => setHighlightAllAreas(prev => !prev)}>Highlight All Areas</Button>
-          <Button
-            onClick={() => {
-              if (canvasMapperRef.current) {
-                // Call the clear function directly from CanvasMapper
-                canvasMapperRef.current.clearSelection();
-                setSelectedArea(undefined);
-              }
-            }}
-            disabled={!selectedArea}
-          >
-            Clear Selection
-          </Button>
+          <Stack flexDirection="row" gap={2} mt={4}>
+            <Button
+              onClick={() => setHighlightAllAreas(prev => !prev)}
+              variant={highlightAllAreas ? 'contained' : 'outlined'}
+            >
+              Highlight All Areas
+            </Button>
+            <Button
+              onClick={() => {
+                if (canvasMapperRef.current) {
+                  // Call the clear function directly from CanvasMapper
+                  canvasMapperRef.current.clearSelection();
+                  setSelectedArea(undefined);
+                }
+              }}
+              disabled={!selectedArea}
+              variant="contained"
+              color="secondary"
+            >
+              Clear Selection
+            </Button>
+          </Stack>
         </Grid2>
         <Grid2 size={{ xxs: 12, lg: 7 }} ref={mapContainerRef}>
           <CanvasMapper

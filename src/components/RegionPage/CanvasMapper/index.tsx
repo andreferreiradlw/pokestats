@@ -325,7 +325,11 @@ const CanvasMapper = forwardRef<CanvasMapperHandle, CanvasMapperProps>(
 
     // Effect for initial render and updates
     useEffect(() => {
-      if (parentWidth === 0 || !imageRef.current) return;
+      if (
+        parentWidth < 1 ||
+        (imageRef.current?.naturalHeight && imageRef.current?.naturalHeight < 1)
+      )
+        return;
 
       if (isFirstRender.current) {
         initCanvas(true);
@@ -388,7 +392,13 @@ const CanvasMapper = forwardRef<CanvasMapperHandle, CanvasMapperProps>(
     }, [parentRef]);
 
     // Initiate canvas on load
-    useEffect(() => initCanvas(true), []);
+    // useEffect(() => initCanvas(), []);
+    // useEffect(() => {
+    //   console.log('parentWidth', parentWidth);
+    //   console.log('current', imageRef.current);
+    //   console.log('height', imageRef.current.naturalHeight);
+    //   console.log('--------------');
+    // }, [imageRef.current, parentWidth]);
 
     // Memoize the areas to prevent unnecessary re-renders
     const memoizedAreas = useMemo(

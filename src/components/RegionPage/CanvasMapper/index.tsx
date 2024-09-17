@@ -172,9 +172,9 @@ const CanvasMapper = forwardRef<CanvasMapperHandle, CanvasMapperProps>(
             true,
             area.shape,
             scaleCoords(area.coords),
+            area.strokeColor || strokeColorProp,
             fillColor,
             area.lineWidth || lineWidthProp,
-            area.strokeColor || strokeColorProp,
           );
         });
       },
@@ -210,9 +210,9 @@ const CanvasMapper = forwardRef<CanvasMapperHandle, CanvasMapperProps>(
           area.active ?? true,
           area.shape,
           area.scaledCoords,
+          area.strokeColor || strokeColorProp,
           area.fillColor || fillColorProp,
           area.lineWidth || lineWidthProp,
-          area.strokeColor || strokeColorProp,
         );
         // update hover area
         setHoverArea(area);

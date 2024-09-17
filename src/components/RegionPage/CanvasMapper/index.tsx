@@ -168,13 +168,13 @@ const CanvasMapper = forwardRef<CanvasMapperHandle, CanvasMapperProps>(
           if (!fillColor) return; // Only draw areas with a preFillColor
 
           drawAreas(
+            ctx,
+            true,
             area.shape,
             scaleCoords(area.coords),
             fillColor,
             area.lineWidth || lineWidthProp,
             area.strokeColor || strokeColorProp,
-            true,
-            ctx,
           );
         });
       },
@@ -206,18 +206,18 @@ const CanvasMapper = forwardRef<CanvasMapperHandle, CanvasMapperProps>(
     const onAreaEnter = useCallback(
       (area: ExtendedArea, index: number, event: AreaEvent) => {
         drawAreas(
+          renderingCtx,
+          area.active ?? true,
           area.shape,
           area.scaledCoords,
           area.fillColor || fillColorProp,
           area.lineWidth || lineWidthProp,
           area.strokeColor || strokeColorProp,
-          area.active ?? true,
-          renderingCtx,
         );
         // update hover area
         setHoverArea(area);
         // trigger events
-        onMouseEnter && onMouseEnter(area, index, event);
+        onMouseEnter?.(area, index, event);
       },
       [fillColorProp, lineWidthProp, strokeColorProp, onMouseEnter],
     );
@@ -240,7 +240,7 @@ const CanvasMapper = forwardRef<CanvasMapperHandle, CanvasMapperProps>(
         setHoverArea(undefined);
 
         // trigger events
-        onMouseLeave && onMouseLeave(area, index, event);
+        onMouseLeave?.(area, index, event);
       },
       [renderPrefilledAreas, mapAreas, onMouseLeave],
     );
@@ -266,7 +266,9 @@ const CanvasMapper = forwardRef<CanvasMapperHandle, CanvasMapperProps>(
           );
           renderPrefilledAreas(updatedAreas, highlightCtx);
         }
-        onClick && onClick(area);
+
+        // Trigger onClick event
+        onClick?.(area);
       },
       [areas, stayHighlighted, toggleHighlighted, fillColorProp, onClick],
     );
@@ -315,16 +317,14 @@ const CanvasMapper = forwardRef<CanvasMapperHandle, CanvasMapperProps>(
 
         if (!highlightCtx.current) console.warn('Highlight context not initialized.');
 
-        // renderPrefilledAreas();
-        onLoad && onLoad(imageRef.current, { width: imageWidth, height: imageHeight });
+        // Trigger onload event
+        onLoad?.(imageRef.current, { width: imageWidth, height: imageHeight });
       },
       [fillColorProp, imageRef, onLoad, renderPrefilledAreas, parentWidth],
     );
 
     // Effect for initial render and updates
     useEffect(() => {
-      console.log('parentWidth', parentWidth, isFirstRender.current);
-
       if (parentWidth === 0) return;
 
       if (isFirstRender.current) {
@@ -347,7 +347,7 @@ const CanvasMapper = forwardRef<CanvasMapperHandle, CanvasMapperProps>(
 
             renderPrefilledAreas(updatedAreas, highlightCtx);
             // trigger click event
-            onClick && onClick(defaultAreaDetails);
+            onClick?.(defaultAreaDetails);
           } else {
             // If no matching area is found, keep the original areas
             setMapAreas(areas);
@@ -387,8 +387,8 @@ const CanvasMapper = forwardRef<CanvasMapperHandle, CanvasMapperProps>(
       return () => window.removeEventListener('resize', handleResize);
     }, [parentRef]);
 
-    // Effect for resizing
-    useEffect(() => initCanvas, [parentWidth]);
+    // Initiate canvas on load
+    useEffect(() => initCanvas, []);
 
     // Memoize the areas to prevent unnecessary re-renders
     const memoizedAreas = useMemo(
@@ -405,11 +405,11 @@ const CanvasMapper = forwardRef<CanvasMapperHandle, CanvasMapperProps>(
               coords={scaledCoords.join(',')}
               onMouseEnter={event => onAreaEnter(extendedArea, index, event)}
               onMouseLeave={event => onAreaLeave(area, index, event)}
-              onMouseMove={event => onMouseMove && onMouseMove(area, index, event)}
-              onMouseDown={event => onMouseDown && onMouseDown(area, index, event)}
-              onMouseUp={event => onMouseUp && onMouseUp(area, index, event)}
-              onTouchStart={event => onTouchStart && onTouchStart(area, index, event)}
-              onTouchEnd={event => onTouchEnd && onTouchEnd(area, index, event)}
+              onMouseMove={event => onMouseMove?.(area, index, event)}
+              onMouseDown={event => onMouseDown?.(area, index, event)}
+              onMouseUp={event => onMouseUp?.(area, index, event)}
+              onTouchStart={event => onTouchStart?.(area, index, event)}
+              onTouchEnd={event => onTouchEnd?.(area, index, event)}
               onClick={() => handleAreaClick(extendedArea)}
               href={area.href}
               alt={area.key}

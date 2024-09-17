@@ -13,11 +13,11 @@ const setupContext = (
 };
 
 const drawRect = (
+  ctx2D: CanvasRenderingContext2D,
   coords: [number, number, number, number],
   fillColor = 'black',
   lineWidth = 1,
   strokeColor = 'black',
-  ctx2D: CanvasRenderingContext2D,
 ) => {
   const [left, top, right, bot] = coords;
 
@@ -28,11 +28,11 @@ const drawRect = (
 };
 
 const drawCircle = (
+  ctx2D: CanvasRenderingContext2D,
   coords: [number, number, number],
   fillColor = 'black',
   lineWidth = 1,
   strokeColor = 'black',
-  ctx2D: CanvasRenderingContext2D,
 ) => {
   const [x, y, radius] = coords;
 
@@ -46,11 +46,11 @@ const drawCircle = (
 };
 
 const drawPoly = (
+  ctx2D: CanvasRenderingContext2D,
   coords: number[],
   fillColor = 'black',
   lineWidth = 1,
   strokeColor = 'black',
-  ctx2D: CanvasRenderingContext2D,
 ) => {
   if (coords.length % 2 !== 0) {
     throw new Error('Coordinate array length must be even.');
@@ -77,37 +77,37 @@ const drawPoly = (
 };
 
 const drawAreas = (
+  ctx2D: RefObject<CanvasRenderingContext2D>,
+  isAreaActive: boolean,
   shape: 'rect' | 'circle' | 'poly',
   coords: number[],
   fillColor = 'black',
   lineWidth = 1,
   strokeColor = 'black',
-  isAreaActive: boolean,
-  ctx2D: RefObject<CanvasRenderingContext2D>,
 ) => {
   if (!isAreaActive || !ctx2D.current) return;
 
   switch (shape) {
     case 'rect':
       drawRect(
+        ctx2D.current,
         coords as [number, number, number, number],
         fillColor,
         lineWidth,
         strokeColor,
-        ctx2D.current,
       );
       break;
     case 'circle':
       drawCircle(
+        ctx2D.current,
         coords as [number, number, number],
         fillColor,
         lineWidth,
         strokeColor,
-        ctx2D.current,
       );
       break;
     case 'poly':
-      drawPoly(coords, fillColor, lineWidth, strokeColor, ctx2D.current);
+      drawPoly(ctx2D.current, coords, fillColor, lineWidth, strokeColor);
       break;
     default:
       throw new Error(`Unsupported shape: ${shape}`);

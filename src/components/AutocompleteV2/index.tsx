@@ -44,17 +44,21 @@ interface AutocompleteIconProps {
   id?: number;
 }
 
-const AutocompleteIcon = ({ assetType, name, id }: AutocompleteIconProps): JSX.Element | null => {
+const AutocompleteIcon = ({
+  assetType,
+  name,
+  id,
+}: AutocompleteIconProps): JSX.Element | undefined => {
   switch (assetType) {
     case 'pokemon':
-      return (
+      return id ? (
         <ItemIcon
           alt={`${name} pokemon`}
           src={`https://raw.githubusercontent.com/andreferreiradlw/pokestats_media/main/assets/images/${formatPokemonId(
-            id!,
+            id,
           )}.png`}
         />
-      );
+      ) : undefined;
     case 'type':
       return <TypeIcon type={name as keyof Theme['palette']['types']} />;
     case 'move':
@@ -72,7 +76,7 @@ const AutocompleteIcon = ({ assetType, name, id }: AutocompleteIconProps): JSX.E
         />
       );
     default:
-      return null;
+      return undefined;
   }
 };
 

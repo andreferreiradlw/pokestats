@@ -136,9 +136,9 @@ const LocationTableV2 = ({
                       );
 
                       return (
-                        <Fragment key={`${areaName}-${areaId}-${methodName}-row`}>
+                        <Fragment key={`${areaName}-${areaId}-${methodName}-row-container`}>
                           {pokemon.map(({ name: pokemonName, versions }, pokemonIndex) => (
-                            <Fragment key={`${methodName}-${pokemonName}-${pokemonIndex}`}>
+                            <Fragment key={`${methodName}-${pokemonName}-row`}>
                               <TableRow>
                                 {/* Render the method cell only once per method */}
                                 {pokemonIndex === 0 && (

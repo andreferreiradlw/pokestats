@@ -109,7 +109,7 @@ const CanvasMapper = forwardRef<CanvasMapperHandle, CanvasMapperProps>(
     // const [isRendered, setRendered] = useState<boolean>(false); // Tracks if the canvas has been rendered
     const [hoverArea, setHoverArea] = useState<CanvasMapperArea>(); // Tracks the current area being hovered
     const isFirstRender = useRef(true); // Tracks whether this is the first render
-
+    const [isImageloaded, setIsImageloaded] = useState(false);
     // Refs for DOM elements and canvas contexts
     const imageContainerRef = useRef<HTMLDivElement>(null);
     const imageRef = useRef<HTMLImageElement>(null);
@@ -290,10 +290,16 @@ const CanvasMapper = forwardRef<CanvasMapperHandle, CanvasMapperProps>(
 
       imageRef.current.width = parentWidth;
 
+      console.log('imageRef.current.width', imageRef.current.width);
+
+      console.log('imageRef.current.naturalHeight', imageRef.current.naturalHeight);
+
       const imageHeight =
         imageRef.current.naturalHeight * (imageWidth / imageRef.current.naturalWidth);
 
       imageRef.current.height = imageHeight;
+
+      console.log('imageRef.current.height', imageRef.current.height);
 
       hoverCanvasRef.current.width = imageWidth;
       hoverCanvasRef.current.height = imageHeight;
@@ -323,15 +329,16 @@ const CanvasMapper = forwardRef<CanvasMapperHandle, CanvasMapperProps>(
     // Effect for initial render and updates
     useEffect(() => {
       console.log('parentWidth', parentWidth);
-      console.log('current', imageRef.current);
-      console.log('height', imageRef.current?.naturalHeight);
-      console.log('--------------');
-      if (parentWidth < 1 || !imageRef.current) return;
+      // console.log('current', imageRef.current);
+      // console.log('height', imageRef.current?.naturalHeight);
+      //
+      if (parentWidth < 1 || !isImageloaded) return;
 
       console.log('isFirstRender.current', isFirstRender.current);
 
       if (isFirstRender.current) {
         initCanvas();
+        console.log('--------------');
         // Check if defaultArea is provided and find its index
         if (defaultArea) {
           const defaultAreaDetails = areas.find(({ key }) => key === defaultArea);
@@ -375,7 +382,7 @@ const CanvasMapper = forwardRef<CanvasMapperHandle, CanvasMapperProps>(
         );
         renderPrefilledAreas(mapAreas, highlightCtx);
       }
-    }, [parentWidth, highlightAllAreas, imageRef.current]);
+    }, [parentWidth, highlightAllAreas, isImageloaded]);
 
     // Effect to handle resizing and initialize canvas size
     useEffect(() => {
@@ -437,6 +444,12 @@ const CanvasMapper = forwardRef<CanvasMapperHandle, CanvasMapperProps>(
           ref={imageRef}
           onClick={onImageClick}
           onMouseMove={onImageMouseMove}
+          onLoad={() => {
+            console.log('image loaded', imageRef.current);
+            if (imageRef.current) {
+              setIsImageloaded(true);
+            }
+          }}
         />
         <CanvasEl ref={hoverCanvasRef} />
         <CanvasEl ref={highlightCanvasRef} />

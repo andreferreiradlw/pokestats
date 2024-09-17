@@ -20,8 +20,6 @@ export const useLocationAreas = (
       // get location data
       const locationData = await LocationApi.getById(locationId);
 
-      console.log('locationData', locationData);
-
       if (!locationData.areas.length)
         return {
           location: locationData,

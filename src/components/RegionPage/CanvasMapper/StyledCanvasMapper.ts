@@ -1,3 +1,4 @@
+import { Paper } from '@mui/material';
 import { styled } from '@mui/material/styles';
 
 // Reusable absolute position styles
@@ -8,7 +9,7 @@ const absolutePosition = {
 };
 
 // Styled components using MUI's `styled` utility
-const ContainerEl = styled('div')({
+const ContainerEl = styled(Paper)({
   position: 'relative',
 });
 

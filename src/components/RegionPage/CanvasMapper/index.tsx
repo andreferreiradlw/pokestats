@@ -315,7 +315,6 @@ const CanvasMapper = forwardRef<CanvasMapperHandle, CanvasMapperProps>(
       if (parentWidth === 0) return;
 
       if (isFirstRender.current) {
-        console.log(defaultArea);
         initCanvas(true);
         // Check if defaultArea is provided and find its index
         if (defaultArea) {
@@ -409,7 +408,7 @@ const CanvasMapper = forwardRef<CanvasMapperHandle, CanvasMapperProps>(
 
     // JSX return with the memoized areas
     return (
-      <ContainerEl id="img-mapper" ref={imageContainerRef}>
+      <ContainerEl elevation={6} id="img-mapper" ref={imageContainerRef}>
         <ImageEl
           role="presentation"
           alt="map"

@@ -1,39 +1,24 @@
 import { styled } from '@mui/material/styles';
 import { TableCell, Stack } from '@mui/material';
+import type { GameValue } from '@/helpers';
 
 interface GamePillProps {
-  game: string;
+  game: GameValue;
 }
 
-const GamePill = styled('span')<GamePillProps>(({ game, theme }) => {
-  let backgroundColor: string;
-  let color: string | undefined;
-
-  switch (game) {
-    case 'yellow':
-      backgroundColor = theme.palette.games.yellow;
-      color = theme.palette.getContrastText(theme.palette.games.yellow);
-      break;
-    case 'red':
-      backgroundColor = theme.palette.games.red;
-      color = theme.palette.getContrastText(theme.palette.games.red);
-      break;
-    case 'blue':
-      backgroundColor = theme.palette.games.blue;
-      color = theme.palette.getContrastText(theme.palette.games.blue);
-      break;
-    default:
-      backgroundColor = theme.palette.grey[300];
-  }
+const GamePill = styled('span', {
+  shouldForwardProp: prop => prop !== 'game',
+})<GamePillProps>(({ game, theme }) => {
+  const gameColor = theme.palette.games[game] || theme.palette.grey[300];
 
   return {
+    backgroundColor: gameColor,
+    color: theme.palette.getContrastText(gameColor),
     borderRadius: '4px',
-    fontSize: '0.75em',
-    fontWeight: 600,
-    padding: '0.25em',
+    fontSize: theme.typography.caption.fontSize,
+    fontWeight: theme.typography.fontWeightBold,
+    padding: `${theme.spacing(0.25)} ${theme.spacing(0.5)}`,
     textTransform: 'capitalize',
-    backgroundColor,
-    color,
   };
 });
 

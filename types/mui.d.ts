@@ -1,3 +1,4 @@
+import type { GameValue } from '@/helpers';
 import '@mui/material';
 
 // Extend the MUI BreakpointOverrides to include custom breakpoints
@@ -53,11 +54,7 @@ declare module '@mui/material/styles' {
       unknown: string;
       water: string;
     };
-    games: {
-      red: string;
-      blue: string;
-      yellow: string;
-    };
+    games: Record<GameValue, string>;
   }
 
   // Extend the MUI PaletteOptions interface to add custom `types` colors and `games` colors
@@ -84,11 +81,7 @@ declare module '@mui/material/styles' {
       unknown?: string;
       water?: string;
     };
-    games?: {
-      red?: string;
-      blue?: string;
-      yellow?: string;
-    };
+    games?: Partial<Record<GameValue, string>>;
   }
 }
 

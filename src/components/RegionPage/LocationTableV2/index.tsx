@@ -44,7 +44,13 @@ interface LocationTableProps extends Grid2Props {
 const renderVersionRow = (version: VersionEntryWithGames) => (
   <>
     <TableCell>
-      <Stack justifyContent="center" alignItems="center" gap={1} flexDirection="row">
+      <Stack
+        justifyContent="center"
+        alignItems="center"
+        gap={1}
+        flexDirection="row"
+        flexWrap="wrap"
+      >
         {version.games.map(game => (
           <GamePill key={`game-${version.id}-${game}`} game={game}>
             {capitalise(game)}
@@ -148,7 +154,7 @@ const LocationTableV2 = ({
                                             region,
                                           )}
                                           alt={methodName}
-                                          height="40px"
+                                          height="45px"
                                         />
                                       )}
                                       <Typography textTransform="capitalize">
@@ -163,12 +169,13 @@ const LocationTableV2 = ({
                                     direction="row"
                                     alignItems="center"
                                     justifyContent="space-evenly"
+                                    flexWrap="wrap"
                                     gap={2}
                                     component={Link}
                                     href={`/pokemon/${pokemonName}`}
                                   >
                                     <img
-                                      width="60px"
+                                      width="55px"
                                       src={`https://raw.githubusercontent.com/andreferreiradlw/pokestats_media/main/assets/images/${formatPokemonId(
                                         versions[0].id,
                                       )}.png`}

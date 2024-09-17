@@ -160,6 +160,7 @@ const CanvasMapper = forwardRef<CanvasMapperHandle, CanvasMapperProps>(
         ctx.current.clearRect(0, 0, hoverCanvasRef.current.width, hoverCanvasRef.current.height);
 
         mapObj.forEach(area => {
+          // Use a default light fill color when highlighting all areas
           const fillColor = highlightAllAreas
             ? area.preFillColor || 'rgba(0, 0, 0, 0.1)'
             : area.preFillColor;
@@ -184,6 +185,7 @@ const CanvasMapper = forwardRef<CanvasMapperHandle, CanvasMapperProps>(
     useImperativeHandle(
       ref,
       () => ({
+        // Method to clear the currently selected areas
         clearSelection() {
           setMapAreas(areas); // Reset areas to initial state
           if (highlightCtx.current && highlightCanvasRef.current) {
@@ -212,7 +214,9 @@ const CanvasMapper = forwardRef<CanvasMapperHandle, CanvasMapperProps>(
           area.fillColor || fillColorProp,
           area.lineWidth || lineWidthProp,
         );
+        // update hover area
         setHoverArea(area);
+        // trigger events
         onMouseEnter?.(area, index, event);
       },
       [fillColorProp, lineWidthProp, strokeColorProp, onMouseEnter],
@@ -229,9 +233,13 @@ const CanvasMapper = forwardRef<CanvasMapperHandle, CanvasMapperProps>(
           );
         }
 
+        // render areas
         renderPrefilledAreas(mapAreas, highlightCtx);
 
+        // remove hover area if any
         setHoverArea(undefined);
+
+        // trigger events
         onMouseLeave?.(area, index, event);
       },
       [renderPrefilledAreas, mapAreas, onMouseLeave],
@@ -259,53 +267,68 @@ const CanvasMapper = forwardRef<CanvasMapperHandle, CanvasMapperProps>(
           renderPrefilledAreas(updatedAreas, highlightCtx);
         }
 
+        // Trigger onClick event
         onClick?.(area);
       },
       [areas, stayHighlighted, toggleHighlighted, fillColorProp, onClick],
     );
 
-    // Function to initialize canvas properties and contexts after the image loads
-    const handleImageLoad = useCallback(() => {
-      if (!imageRef.current || !hoverCanvasRef.current || !highlightCanvasRef.current) {
-        console.warn('Required DOM references are not available.');
-        return;
-      }
+    // Function to initialize canvas properties and contexts
+    const initCanvas = useCallback(
+      (firstLoad = false) => {
+        if (!firstLoad && !imageRef.current) return;
 
-      // Calculate image and canvas dimensions
-      const imageWidth = parentWidth;
-      const imageHeight =
-        imageRef.current.naturalHeight * (imageWidth / imageRef.current.naturalWidth);
+        if (
+          !imageRef.current ||
+          !hoverCanvasRef.current ||
+          !highlightCanvasRef.current ||
+          !imageContainerRef.current
+        ) {
+          console.warn('Required DOM references are not available.');
+          return;
+        }
 
-      imageRef.current.width = imageWidth;
-      imageRef.current.height = imageHeight;
-      hoverCanvasRef.current.width = imageWidth;
-      hoverCanvasRef.current.height = imageHeight;
-      highlightCanvasRef.current.width = imageWidth;
-      highlightCanvasRef.current.height = imageHeight;
+        // Set the dimensions of the image and canvases
+        const imageWidth = parentWidth;
+        const imageHeight =
+          imageRef.current.naturalHeight * (imageWidth / imageRef.current.naturalWidth);
 
-      imageContainerRef.current!.style.width = `${imageWidth}px`;
-      imageContainerRef.current!.style.height = `${imageHeight}px`;
+        imageRef.current.width = imageWidth;
+        imageRef.current.height = imageHeight;
 
-      // Initialize 2D drawing contexts
-      renderingCtx.current = hoverCanvasRef.current.getContext('2d');
-      highlightCtx.current = highlightCanvasRef.current.getContext('2d');
+        hoverCanvasRef.current.width = imageWidth;
+        hoverCanvasRef.current.height = imageHeight;
 
-      if (renderingCtx.current) renderingCtx.current.fillStyle = fillColorProp;
-      else console.warn('Rendering context not initialized.');
+        highlightCanvasRef.current.width = imageWidth;
+        highlightCanvasRef.current.height = imageHeight;
 
-      if (!highlightCtx.current) console.warn('Highlight context not initialized.');
+        imageContainerRef.current.style.width = `${imageWidth}px`;
+        imageContainerRef.current.style.height = `${imageHeight}px`;
 
-      // Trigger onLoad event
-      onLoad?.(imageRef.current, { width: imageWidth, height: imageHeight });
-    }, [fillColorProp, parentWidth, onLoad]);
+        // Initialize 2D drawing contexts
+        const renderingContext = hoverCanvasRef.current.getContext('2d');
+        const highlightContext = highlightCanvasRef.current.getContext('2d');
+
+        renderingCtx.current = renderingContext ?? null;
+        highlightCtx.current = highlightContext ?? null;
+
+        if (renderingCtx.current) renderingCtx.current.fillStyle = fillColorProp;
+        else console.warn('Rendering context not initialized.');
+
+        if (!highlightCtx.current) console.warn('Highlight context not initialized.');
+
+        // Trigger onload event
+        onLoad?.(imageRef.current, { width: imageWidth, height: imageHeight });
+      },
+      [fillColorProp, imageRef, onLoad, renderPrefilledAreas, parentWidth],
+    );
 
     // Effect for initial render and updates
     useEffect(() => {
-      console.log(parentWidth, imageRef.current?.complete, isFirstRender.current);
-      if (parentWidth === 0) return;
+      if (parentWidth === 0 || !imageRef.current) return;
 
       if (isFirstRender.current) {
-        handleImageLoad();
+        initCanvas(true);
         // Check if defaultArea is provided and find its index
         if (defaultArea) {
           const defaultAreaDetails = areas.find(({ key }) => key === defaultArea);
@@ -321,9 +344,9 @@ const CanvasMapper = forwardRef<CanvasMapperHandle, CanvasMapperProps>(
             }));
 
             setMapAreas(updatedAreas);
-            renderPrefilledAreas(updatedAreas, highlightCtx);
 
-            // Trigger click event for the default area
+            renderPrefilledAreas(updatedAreas, highlightCtx);
+            // trigger click event
             onClick?.(defaultAreaDetails);
           } else {
             // If no matching area is found, keep the original areas
@@ -337,8 +360,10 @@ const CanvasMapper = forwardRef<CanvasMapperHandle, CanvasMapperProps>(
         }
 
         setRendered(true);
+
         isFirstRender.current = false;
       } else {
+        initCanvas();
         renderingCtx.current?.clearRect(
           0,
           0,
@@ -347,16 +372,7 @@ const CanvasMapper = forwardRef<CanvasMapperHandle, CanvasMapperProps>(
         );
         renderPrefilledAreas(mapAreas, highlightCtx);
       }
-    }, [
-      imageRef.current,
-      parentWidth,
-      handleImageLoad,
-      highlightAllAreas,
-      areas,
-      defaultArea,
-      fillColorProp,
-      onClick,
-    ]);
+    }, [parentWidth, highlightAllAreas, imageRef.current]);
 
     // Effect to handle resizing and initialize canvas size
     useEffect(() => {
@@ -370,6 +386,9 @@ const CanvasMapper = forwardRef<CanvasMapperHandle, CanvasMapperProps>(
       window.addEventListener('resize', handleResize);
       return () => window.removeEventListener('resize', handleResize);
     }, [parentRef]);
+
+    // Initiate canvas on load
+    // useEffect(() => initCanvas, []);
 
     // Memoize the areas to prevent unnecessary re-renders
     const memoizedAreas = useMemo(
@@ -411,7 +430,6 @@ const CanvasMapper = forwardRef<CanvasMapperHandle, CanvasMapperProps>(
           ref={imageRef}
           onClick={onImageClick}
           onMouseMove={onImageMouseMove}
-          onLoad={handleImageLoad}
         />
         <CanvasEl ref={hoverCanvasRef} />
         <CanvasEl ref={highlightCanvasRef} />

@@ -11,9 +11,28 @@ const KantoGen1 = ({ location }: PokestatsRegionsPageProps): JSX.Element => (
     mapImageUrl="https://raw.githubusercontent.com/andreferreiradlw/pokestats_media/main/assets/maps/generation-i/map.png"
     defaultLocation={location}
   >
-    <b>Kanto</b> is a region of the Pokémon world. It is located east of <b>Johto</b>, which
-    together form a joint landmass that is south of <b>Sinnoh</b>. It is the setting of the first
-    generation of games and can also be explored in Generations II, III, IV, and VII.
+    <b>Kanto</b> is the region where the first-generation games (<b>Pokémon Red, Blue, Green,</b>{' '}
+    and <b>Yellow</b>) take place. It features diverse locations like <b>Viridian Forest</b>,{' '}
+    <b>Mt. Moon</b>, and the <b>Seafoam Islands</b>. Key locations include:
+    <ul>
+      <li>
+        <b>Pallet Town</b>: Start your journey and receive your first Pokémon from Professor Oak.
+      </li>
+      <li>
+        <b>Cerulean City</b>: Face Misty, the Water-type Gym Leader.
+      </li>
+      <li>
+        <b>Celadon City</b>: Visit the Game Corner, Department Store, and challenge Gym Leader
+        Erika.
+      </li>
+      <li>
+        <b>Saffron City</b>: Battle Sabrina at the Psychic-type Gym and explore the Team Rocket HQ.
+      </li>
+    </ul>
+    Players can explore hidden areas like the <b>Safari Zone</b> in Fuchsia City or find rare
+    Pokémon such as Zapdos and Mewtwo in special locations. Kanto reappears in later generations,
+    including <b>Generations II, III, IV,</b> and <b>VII</b>, offering new ways to experience its
+    classic challenges and secrets.
   </RegionPage>
 );
 

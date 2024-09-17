@@ -106,7 +106,7 @@ const CanvasMapper = forwardRef<CanvasMapperHandle, CanvasMapperProps>(
     // State management
     const [parentWidth, setParentWidth] = useState(0); // Tracks the parent container's width
     const [mapAreas, setMapAreas] = useState(areas); // Manages the areas on the canvas
-    const [isRendered, setRendered] = useState<boolean>(false); // Tracks if the canvas has been rendered
+    // const [isRendered, setRendered] = useState<boolean>(false); // Tracks if the canvas has been rendered
     const [hoverArea, setHoverArea] = useState<CanvasMapperArea>(); // Tracks the current area being hovered
     const isFirstRender = useRef(true); // Tracks whether this is the first render
 
@@ -274,54 +274,51 @@ const CanvasMapper = forwardRef<CanvasMapperHandle, CanvasMapperProps>(
     );
 
     // Function to initialize canvas properties and contexts
-    const initCanvas = useCallback(
-      (firstLoad = false) => {
-        if (!firstLoad && !imageRef.current) return;
+    const initCanvas = useCallback(() => {
+      if (
+        !imageRef.current ||
+        !hoverCanvasRef.current ||
+        !highlightCanvasRef.current ||
+        !imageContainerRef.current
+      ) {
+        console.warn('Required DOM references are not available.');
+        return;
+      }
 
-        if (
-          !imageRef.current ||
-          !hoverCanvasRef.current ||
-          !highlightCanvasRef.current ||
-          !imageContainerRef.current
-        ) {
-          console.warn('Required DOM references are not available.');
-          return;
-        }
+      // Set the dimensions of the image and canvases
+      const imageWidth = parentWidth;
 
-        // Set the dimensions of the image and canvases
-        const imageWidth = parentWidth;
-        const imageHeight =
-          imageRef.current.naturalHeight * (imageWidth / imageRef.current.naturalWidth);
+      imageRef.current.width = parentWidth;
 
-        imageRef.current.width = imageWidth;
-        imageRef.current.height = imageHeight;
+      const imageHeight =
+        imageRef.current.naturalHeight * (imageWidth / imageRef.current.naturalWidth);
 
-        hoverCanvasRef.current.width = imageWidth;
-        hoverCanvasRef.current.height = imageHeight;
+      imageRef.current.height = imageHeight;
 
-        highlightCanvasRef.current.width = imageWidth;
-        highlightCanvasRef.current.height = imageHeight;
+      hoverCanvasRef.current.width = imageWidth;
+      hoverCanvasRef.current.height = imageHeight;
 
-        imageContainerRef.current.style.width = `${imageWidth}px`;
-        imageContainerRef.current.style.height = `${imageHeight}px`;
+      highlightCanvasRef.current.width = imageWidth;
+      highlightCanvasRef.current.height = imageHeight;
 
-        // Initialize 2D drawing contexts
-        const renderingContext = hoverCanvasRef.current.getContext('2d');
-        const highlightContext = highlightCanvasRef.current.getContext('2d');
+      imageContainerRef.current.style.width = `${imageWidth}px`;
+      imageContainerRef.current.style.height = `${imageHeight}px`;
 
-        renderingCtx.current = renderingContext ?? null;
-        highlightCtx.current = highlightContext ?? null;
+      // Initialize 2D drawing contexts
+      const renderingContext = hoverCanvasRef.current.getContext('2d');
+      const highlightContext = highlightCanvasRef.current.getContext('2d');
 
-        if (renderingCtx.current) renderingCtx.current.fillStyle = fillColorProp;
-        else console.warn('Rendering context not initialized.');
+      renderingCtx.current = renderingContext ?? null;
+      highlightCtx.current = highlightContext ?? null;
 
-        if (!highlightCtx.current) console.warn('Highlight context not initialized.');
+      if (renderingCtx.current) renderingCtx.current.fillStyle = fillColorProp;
+      else console.warn('Rendering context not initialized.');
 
-        // Trigger onload event
-        onLoad?.(imageRef.current, { width: imageWidth, height: imageHeight });
-      },
-      [fillColorProp, imageRef, onLoad, renderPrefilledAreas, parentWidth],
-    );
+      if (!highlightCtx.current) console.warn('Highlight context not initialized.');
+
+      // Trigger onload event
+      onLoad?.(imageRef.current, { width: imageWidth, height: imageHeight });
+    }, [fillColorProp, imageRef, onLoad, renderPrefilledAreas, parentWidth]);
 
     // Effect for initial render and updates
     useEffect(() => {
@@ -329,10 +326,12 @@ const CanvasMapper = forwardRef<CanvasMapperHandle, CanvasMapperProps>(
       console.log('current', imageRef.current);
       console.log('height', imageRef.current?.naturalHeight);
       console.log('--------------');
-      if (parentWidth < 1 || !imageRef.current || imageRef.current?.naturalHeight < 1) return;
+      if (parentWidth < 1 || !imageRef.current) return;
+
+      console.log('isFirstRender.current', isFirstRender.current);
 
       if (isFirstRender.current) {
-        initCanvas(true);
+        initCanvas();
         // Check if defaultArea is provided and find its index
         if (defaultArea) {
           const defaultAreaDetails = areas.find(({ key }) => key === defaultArea);
@@ -363,11 +362,11 @@ const CanvasMapper = forwardRef<CanvasMapperHandle, CanvasMapperProps>(
           renderPrefilledAreas(areas, highlightCtx);
         }
 
-        setRendered(true);
+        // setRendered(true);
 
         isFirstRender.current = false;
       } else {
-        initCanvas();
+        // initCanvas();
         renderingCtx.current?.clearRect(
           0,
           0,
@@ -393,10 +392,10 @@ const CanvasMapper = forwardRef<CanvasMapperHandle, CanvasMapperProps>(
 
     // Initiate canvas on load
     // useEffect(() => initCanvas(), []);
-    useEffect(() => {
-      console.log('height effect', imageRef.current?.naturalHeight);
-      console.log('--------------');
-    }, [imageRef.current]);
+    // useEffect(() => {
+    //   console.log('height effect', imageRef.current?.naturalHeight);
+    //   console.log('--------------');
+    // }, [imageRef.current]);
 
     // Memoize the areas to prevent unnecessary re-renders
     const memoizedAreas = useMemo(
@@ -441,7 +440,7 @@ const CanvasMapper = forwardRef<CanvasMapperHandle, CanvasMapperProps>(
         />
         <CanvasEl ref={hoverCanvasRef} />
         <CanvasEl ref={highlightCanvasRef} />
-        <MapEl name={mapName}>{isRendered && imageRef.current && memoizedAreas}</MapEl>
+        <MapEl name={mapName}>{memoizedAreas}</MapEl>
         {hoverArea && <LocationLabel>{hoverArea.title}</LocationLabel>}
       </ContainerEl>
     );

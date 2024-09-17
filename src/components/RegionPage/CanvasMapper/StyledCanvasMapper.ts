@@ -31,4 +31,16 @@ const MapEl = styled('map')({
   cursor: 'pointer',
 });
 
-export { ContainerEl, ImageEl, CanvasEl, MapEl };
+const LocationLabel = styled('div')(({ theme }) => ({
+  bottom: 0,
+  fontSize: '1.2em',
+  fontWeight: '600',
+  position: 'absolute',
+  right: 0,
+  zIndex: 2,
+  backgroundColor: theme.palette.background.paper,
+  color: theme.palette.getContrastText(theme.palette.background.paper),
+  padding: `${theme.spacing(0.5)} ${theme.spacing(1)}`,
+}));
+
+export { ContainerEl, ImageEl, CanvasEl, MapEl, LocationLabel };

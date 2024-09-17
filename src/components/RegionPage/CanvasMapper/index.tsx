@@ -14,7 +14,7 @@ import { deepEqual } from '@/helpers';
 // constants
 import { rerenderPropsList } from './constants';
 // styles
-import { ContainerEl, ImageEl, CanvasEl, MapEl } from './StyledCanvasMapper';
+import { ContainerEl, ImageEl, CanvasEl, MapEl, LocationLabel } from './StyledCanvasMapper';
 
 // Type definitions for the area and event types
 export interface CanvasMapperArea {
@@ -107,6 +107,7 @@ const CanvasMapper = forwardRef<CanvasMapperHandle, CanvasMapperProps>(
     const [parentWidth, setParentWidth] = useState(0); // Tracks the parent container's width
     const [mapAreas, setMapAreas] = useState(areas); // Manages the areas on the canvas
     const [isRendered, setRendered] = useState<boolean>(false); // Tracks if the canvas has been rendered
+    const [hoverArea, setHoverArea] = useState<CanvasMapperArea>(); // Tracks the current area being hovered
     const isFirstRender = useRef(true); // Tracks whether this is the first render
 
     // Refs for DOM elements and canvas contexts
@@ -213,6 +214,9 @@ const CanvasMapper = forwardRef<CanvasMapperHandle, CanvasMapperProps>(
           area.active ?? true,
           renderingCtx,
         );
+        // update hover area
+        setHoverArea(area);
+        // trigger events
         onMouseEnter && onMouseEnter(area, index, event);
       },
       [fillColorProp, lineWidthProp, strokeColorProp, onMouseEnter],
@@ -228,7 +232,14 @@ const CanvasMapper = forwardRef<CanvasMapperHandle, CanvasMapperProps>(
             hoverCanvasRef.current.height,
           );
         }
+
+        // render areas
         renderPrefilledAreas(mapAreas, highlightCtx);
+
+        // remove hover area if any
+        setHoverArea(undefined);
+
+        // trigger events
         onMouseLeave && onMouseLeave(area, index, event);
       },
       [renderPrefilledAreas, mapAreas, onMouseLeave],
@@ -312,6 +323,7 @@ const CanvasMapper = forwardRef<CanvasMapperHandle, CanvasMapperProps>(
 
     // Effect for initial render and updates
     useEffect(() => {
+      console.log('parentWidth', parentWidth);
       if (parentWidth === 0) return;
 
       if (isFirstRender.current) {
@@ -422,6 +434,7 @@ const CanvasMapper = forwardRef<CanvasMapperHandle, CanvasMapperProps>(
         <CanvasEl ref={hoverCanvasRef} />
         <CanvasEl ref={highlightCanvasRef} />
         <MapEl name={mapName}>{isRendered && imageRef.current && memoizedAreas}</MapEl>
+        {hoverArea && <LocationLabel>{hoverArea.title}</LocationLabel>}
       </ContainerEl>
     );
   },

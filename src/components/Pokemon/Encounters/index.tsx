@@ -25,7 +25,7 @@ const Encounters = ({ species, ...rest }: EncountersProps): JSX.Element => {
   const { data: encounterDetails, isLoading } = usePokemonEncounters(species.id, gameVersion);
 
   useEffect(() => {
-    const storedBannerSetting = sessionStorage.getItem('hideEncounterBanner');
+    const storedBannerSetting = localStorage.getItem('hideEncounterBanner');
     if (storedBannerSetting === 'true') {
       setShowAlert(false);
     }
@@ -43,7 +43,7 @@ const Encounters = ({ species, ...rest }: EncountersProps): JSX.Element => {
             sx={{ width: '100%' }}
             onClose={() => {
               setShowAlert(false);
-              sessionStorage.setItem('hideEncounterBanner', 'true');
+              localStorage.setItem('hideEncounterBanner', 'true');
             }}
           >
             <AlertTitle>This data might not be accurate</AlertTitle>

@@ -152,21 +152,23 @@ const EncounterCard = ({
             </Table>
           )}
         </CardContent>
-        <CardActions sx={{ mt: 'auto' }}>
-          <Link
-            href={`/regions/${generation}/${location.region?.name}?location=${location.name}`}
-            passHref
-            legacyBehavior
-          >
-            <CustomButton
-              size="small"
-              variant="contained"
-              onClick={() => plausible('All Area Encounters Click')}
+        {generation === 'generation-i' && (
+          <CardActions sx={{ mt: 'auto' }}>
+            <Link
+              href={`/regions/${generation}/${location.region?.name}?location=${location.name}`}
+              passHref
+              legacyBehavior
             >
-              All Area Encounters
-            </CustomButton>
-          </Link>
-        </CardActions>
+              <CustomButton
+                size="small"
+                variant="contained"
+                onClick={() => plausible('All Area Encounters Click')}
+              >
+                All Area Encounters
+              </CustomButton>
+            </Link>
+          </CardActions>
+        )}
       </Card>
     </Grid2>
   );

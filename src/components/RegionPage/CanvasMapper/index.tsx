@@ -388,7 +388,7 @@ const CanvasMapper = forwardRef<CanvasMapperHandle, CanvasMapperProps>(
     }, [parentRef]);
 
     // Initiate canvas on load
-    // useEffect(() => initCanvas, []);
+    useEffect(() => initCanvas(true), []);
 
     // Memoize the areas to prevent unnecessary re-renders
     const memoizedAreas = useMemo(

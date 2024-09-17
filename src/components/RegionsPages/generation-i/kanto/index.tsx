@@ -1,4 +1,4 @@
-import { PokestatsRegionsPageProps } from '@/pages/regions/generation-i/kanto';
+import type { PokestatsRegionsPageProps } from '@/pages/regions/generation-i/kanto';
 import { kantoZones } from './gen1KantoZones';
 // components
 import RegionPage from '@/components/RegionPage';

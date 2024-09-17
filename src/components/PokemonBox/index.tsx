@@ -3,7 +3,13 @@ import { useMemo } from 'react';
 import type { Pokemon, PokemonSpecies } from 'pokenode-ts';
 import { motion } from 'framer-motion';
 // helpers
-import { removeDash, mapGeneration, mapIdToGeneration, type GameGenValue } from '@/helpers';
+import {
+  removeDash,
+  mapGeneration,
+  mapIdToGeneration,
+  type GameGenValue,
+  formatPokemonId,
+} from '@/helpers';
 import { hoverVariant } from '@/animations';
 // styles
 import { PokeBox } from './StyledPokemonBox';
@@ -51,7 +57,9 @@ const PokemonBox = ({
           <ImageNext
             alt={pokemonName}
             key={`pokemonbox-img-${pokemonId}`}
-            src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemonId}.png`}
+            src={`https://raw.githubusercontent.com/andreferreiradlw/pokestats_media/main/assets/images/${formatPokemonId(
+              pokemonId,
+            )}.png`}
             width="100"
             height="100"
           />

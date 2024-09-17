@@ -1,5 +1,5 @@
 // helpers
-import { removeDash, prefixId } from '@/helpers';
+import { removeDash, formatPokemonId } from '@/helpers';
 // animations
 import { hoverVariant } from '@/animations';
 // components
@@ -29,7 +29,7 @@ const NavigationButton: React.FC<NavigationButtonProps> = ({
     <BtnAnchor href={`/pokemon/${pokemonName}`} onClick={handleClick} direction={direction}>
       <Arrow direction={direction}>
         <ImageNext
-          src={`https://raw.githubusercontent.com/andreferreiradlw/pokestats_media/main/assets/images/${prefixId(
+          src={`https://raw.githubusercontent.com/andreferreiradlw/pokestats_media/main/assets/images/${formatPokemonId(
             direction === 'left' ? pokemonId - 1 : pokemonId + 1,
           )}.png`}
           alt={pokemonName}

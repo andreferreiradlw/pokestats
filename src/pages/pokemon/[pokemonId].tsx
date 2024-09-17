@@ -10,11 +10,11 @@ import type {
 } from 'pokenode-ts';
 // helpers
 import {
-  prefixId,
   formatFlavorText,
   gameVersions,
   findEnglishName,
   getResourceId,
+  formatPokemonId,
 } from '@/helpers';
 // components
 import Head from 'next/head';
@@ -70,7 +70,7 @@ const PokestatsPokemonPage: NextPage<PokestatsPokemonPageProps> = ({ allPokemon,
         <meta property="og:description" content={pageDescription} />
         <meta
           property="og:image"
-          content={`https://raw.githubusercontent.com/andreferreiradlw/pokestats_media/main/assets/images/${prefixId(
+          content={`https://raw.githubusercontent.com/andreferreiradlw/pokestats_media/main/assets/images/${formatPokemonId(
             props.pokemon.id,
           )}.png`}
         />

@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 // types
 import type { OtherPokemonSprites, Pokemon, PokemonSpecies, PokemonSprites } from 'pokenode-ts';
 // helpers
-import { removeUnderscore, prefixId, capitalise, removeDash } from '@/helpers';
+import { removeUnderscore, capitalise, removeDash, formatPokemonId } from '@/helpers';
 // styles
 import { SpriteContainer, Sprite } from './StyledSprites';
 // components
@@ -206,7 +206,7 @@ const Sprites = ({ pokemonSprites, pokemonId, forms, ...rest }: SpritesProps): J
                 <SpriteContainer width={{ xxs: '100%', md: 'auto' }}>
                   <Sprite
                     alt="Official Artwork Front Default"
-                    src={`https://raw.githubusercontent.com/andreferreiradlw/pokestats_media/main/assets/images/${prefixId(
+                    src={`https://raw.githubusercontent.com/andreferreiradlw/pokestats_media/main/assets/images/${formatPokemonId(
                       pokemonId,
                     )}-${name.replace(/ /g, '-')}.png`}
                     height="180"

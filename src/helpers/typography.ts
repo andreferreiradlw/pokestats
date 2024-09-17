@@ -24,9 +24,6 @@ const formatFlavorText = (text?: string): string => {
     .replace(/(\r\n|\n|\r)/gm, ' ');
 };
 
-// prefixes id with zeros by length
-const prefixId = (id: number, length = 3): string => id.toString().padStart(length, '0');
-
 const createSentence = (elements: string[], lastDivider = 'and', prefix = 'has'): string => {
   if (elements.length === 0) return ''; // Handle empty array
   if (elements.length === 1) return `${prefix} ${elements[0]}`; // Handle single element
@@ -45,6 +42,5 @@ export {
   removeDash,
   betweentParenthesis,
   formatFlavorText,
-  prefixId,
   createSentence,
 };

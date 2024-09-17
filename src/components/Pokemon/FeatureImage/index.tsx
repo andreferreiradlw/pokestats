@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 // types
 import type { Pokemon, PokemonSpecies } from 'pokenode-ts';
 // helpers
-import { prefixId } from '@/helpers';
+import { formatPokemonId } from '@/helpers';
 import { scaleInVariant } from '@/animations';
 // styles
 import { JpnName } from '@/components/BaseStyles';
@@ -34,7 +34,7 @@ const FeaturedImage = ({ specieNames, pokemonId, ...rest }: FeaturedImageProps):
         loading="eager"
         placeholderwidth="20%"
         alt={englishName!}
-        src={`https://raw.githubusercontent.com/andreferreiradlw/pokestats_media/main/assets/images/${prefixId(
+        src={`https://raw.githubusercontent.com/andreferreiradlw/pokestats_media/main/assets/images/${formatPokemonId(
           pokemonId,
         )}.png`}
       />

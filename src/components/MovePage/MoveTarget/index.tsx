@@ -24,6 +24,7 @@ import {
   isAllySelected,
   isSelfAffected,
   isSelfSelected,
+  formatPokemonId,
 } from '@/helpers';
 
 interface MoveTargetProps extends Grid2Props {
@@ -68,7 +69,9 @@ const TargetList = ({
         </Badge>
         <FoeImg
           alt={`front view of ${name}`}
-          src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`}
+          src={`https://raw.githubusercontent.com/andreferreiradlw/pokestats_media/main/assets/images/${formatPokemonId(
+            id,
+          )}.png`}
         />
       </PokemonContainer>
     ))}

@@ -8,7 +8,7 @@ import { usePlausible } from 'next-plausible';
 import type { AutocompleteListOption } from '@/hooks';
 import { useAutocompleteOptions } from '@/hooks';
 // helpers
-import { removeDash } from '@/helpers';
+import { formatPokemonId, removeDash } from '@/helpers';
 import { fadeInDownVariant } from '@/animations';
 // components
 import type { AutocompleteProps, Theme } from '@mui/material';
@@ -46,7 +46,9 @@ const AutocompleteIcon = ({ assetType, name, id }: AutocompleteIconProps): JSX.E
       return (
         <ItemIcon
           alt={`${name} pokemon`}
-          src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`}
+          src={`https://raw.githubusercontent.com/andreferreiradlw/pokestats_media/main/assets/images/${formatPokemonId(
+            id!,
+          )}.png`}
         />
       );
     case 'type':

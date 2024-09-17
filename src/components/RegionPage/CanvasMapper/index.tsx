@@ -302,11 +302,10 @@ const CanvasMapper = forwardRef<CanvasMapperHandle, CanvasMapperProps>(
     // Effect for initial render and updates
     useEffect(() => {
       console.log(parentWidth, imageRef.current?.complete, isFirstRender.current);
-      if (parentWidth === 0 || !imageRef.current?.complete) return;
+      if (parentWidth === 0) return;
 
       if (isFirstRender.current) {
         handleImageLoad();
-        console.log('defaultArea', defaultArea);
         // Check if defaultArea is provided and find its index
         if (defaultArea) {
           const defaultAreaDetails = areas.find(({ key }) => key === defaultArea);
@@ -409,7 +408,6 @@ const CanvasMapper = forwardRef<CanvasMapperHandle, CanvasMapperProps>(
           alt="map"
           src={srcProp}
           useMap={`#${mapName}`}
-          hide={!imageRef.current}
           ref={imageRef}
           onClick={onImageClick}
           onMouseMove={onImageMouseMove}

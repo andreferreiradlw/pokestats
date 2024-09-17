@@ -14,12 +14,11 @@ const ContainerEl = styled(Paper)(({ theme }) => ({
   borderRadius: theme.shape.borderRadius,
 }));
 
-const ImageEl = styled('img')<{ hide?: boolean }>(({ hide }) => ({
+const ImageEl = styled('img')({
   ...absolutePosition,
   userSelect: 'none',
   zIndex: 1,
-  display: hide ? 'none' : 'block', // Conditional styling for hiding
-}));
+});
 
 const CanvasEl = styled('canvas')({
   ...absolutePosition,

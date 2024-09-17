@@ -5,7 +5,7 @@ import type { NamedAPIResource } from 'pokenode-ts';
 import { LocationClient } from 'pokenode-ts';
 // components
 import Head from 'next/head';
-import RegionsPage from '@/components/RegionsPage';
+import RegionsPage from '@/components/RegionsPages';
 import LayoutV2 from '@/components/LayoutV2';
 
 export interface PokestatsRegionsPageProps {

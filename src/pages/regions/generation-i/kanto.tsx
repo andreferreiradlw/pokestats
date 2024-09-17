@@ -3,7 +3,7 @@ import type { NextPage, GetServerSideProps } from 'next';
 // components
 import Head from 'next/head';
 import LayoutV2 from '@/components/LayoutV2';
-import KantoGen1 from '@/components/RegionsPage/generation-i/kanto';
+import KantoGen1 from '@/components/RegionsPages/generation-i/kanto';
 
 export interface PokestatsRegionsPageProps {
   location: string | null;

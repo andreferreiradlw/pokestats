@@ -1,10 +1,8 @@
-// types
 import type { GetServerSideProps } from 'next';
 import type { Pokemon, PokemonType, MoveType } from '@/types';
-// helpers
 import { fetchAutocompleteData } from '@/helpers';
 
-const toUrl = (host: string, route: string, priority = '1.0') => `
+const toUrl = (host: string, route: string, priority = '1.0'): string => `
   <url>
     <loc>${`https://${host}${route}`}</loc>
     <lastmod>${new Date().toISOString()}</lastmod>
@@ -19,38 +17,40 @@ const createSitemap = (
   pokemonList: Pokemon[],
   pokemonTypes: PokemonType[],
   movesList: MoveType[],
-) => `<?xml version="1.0" encoding="UTF-8"?>
-  <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-    ${routes.map(route => toUrl(host, route))}
-    ${pokemonList.map(pokemon => toUrl(host, `/pokemon/${pokemon.name}`))}
-    ${pokemonTypes.map(type => toUrl(host, `/type/${type.name}`))}
-    ${movesList.map(type => toUrl(host, `/move/${type.name}`))}
-  </urlset>`;
+): string => {
+  const urls = [
+    ...routes.map(route => toUrl(host, route)),
+    ...pokemonList.map(pokemon => toUrl(host, `/pokemon/${pokemon.name}`)),
+    ...pokemonTypes.map(type => toUrl(host, `/type/${type.name}`)),
+    ...movesList.map(move => toUrl(host, `/move/${move.name}`)),
+  ];
 
-const Sitemap = () => {};
+  return `<?xml version="1.0" encoding="UTF-8"?>
+  <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    ${urls.join('')}
+  </urlset>`;
+};
 
 export const getServerSideProps: GetServerSideProps = async context => {
   const { req, res } = context;
-  // fixed routes
+  const host = req.headers.host;
+
+  // Return 404 if host is not available
+  if (!host) {
+    return { notFound: true };
+  }
+
   const routes = [''];
 
-  const { allMovesData, allPokemonData, allTypesData } = await fetchAutocompleteData();
-
   try {
+    const { allMovesData, allPokemonData, allTypesData } = await fetchAutocompleteData();
+
     if (!allPokemonData || !allTypesData || !allMovesData) {
       return { notFound: true };
     }
 
-    // sitemap
-    const sitemap = createSitemap(
-      req.headers.host!,
-      routes,
-      allPokemonData,
-      allTypesData,
-      allMovesData,
-    );
+    const sitemap = createSitemap(host, routes, allPokemonData, allTypesData, allMovesData);
 
-    // response
     res.setHeader('Content-Type', 'text/xml');
     res.write(sitemap);
     res.end();
@@ -60,9 +60,10 @@ export const getServerSideProps: GetServerSideProps = async context => {
     };
   } catch (error) {
     console.error(error);
-    // redirects to 404 page
     return { notFound: true };
   }
 };
 
-export default Sitemap;
+export default function Sitemap() {
+  return null; // Rendering logic is handled on the server-side.
+}

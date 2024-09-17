@@ -8,12 +8,14 @@ import {
   removeDash,
 } from '@/helpers';
 // hooks
+import { usePlausible } from 'next-plausible';
 import type { EncounterData } from '@/hooks';
 // components
 import { Table } from '@/BaseStyles';
 import {
   capitalize,
   Card,
+  CardActions,
   CardContent,
   CardHeader,
   CardMedia,
@@ -23,6 +25,8 @@ import {
   type Grid2Props,
 } from '@mui/material';
 import { motion } from 'framer-motion';
+import CustomButton from '@/components/CustomButton';
+import Link from 'next/link';
 
 interface EncounterCardProps extends Grid2Props {
   encounter: EncounterData;
@@ -47,10 +51,15 @@ const EncounterCard = ({
   pokemonName,
   ...rest
 }: EncounterCardProps): JSX.Element => {
-  const { location_area } = encounter;
+  // data
+  const { location, location_area } = encounter;
 
-  // console.log(encounter);
+  // analytics
+  const plausible = usePlausible();
 
+  console.log(encounter);
+
+  // parse encounter data
   const formattedEncounter = useMemo(() => {
     const { location_area, version_details, location } = encounter;
 
@@ -107,7 +116,7 @@ const EncounterCard = ({
       variants={staggerChildVariant}
       {...rest}
     >
-      <Card sx={{ width: '100%' }}>
+      <Card sx={{ width: '100%', display: 'flex', flexDirection: 'column' }}>
         <CardHeader
           title={formattedEncounter.area.title}
           subheader={formattedEncounter.area.subtitle}
@@ -145,6 +154,21 @@ const EncounterCard = ({
             </Table>
           )}
         </CardContent>
+        <CardActions sx={{ mt: 'auto' }}>
+          <Link
+            href={`/regions/${generation}/${location.region?.name}?location=${location.name}`}
+            passHref
+            legacyBehavior
+          >
+            <CustomButton
+              size="small"
+              variant="contained"
+              onClick={() => plausible('All Area Encounters Click')}
+            >
+              All Area Encounters
+            </CustomButton>
+          </Link>
+        </CardActions>
       </Card>
     </Grid2>
   );

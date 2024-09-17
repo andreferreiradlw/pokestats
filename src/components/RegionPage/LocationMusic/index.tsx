@@ -2,10 +2,10 @@ import { useEffect, useMemo, useState, useRef, useCallback } from 'react';
 // helpers
 import { mapLocationMusic, type GameGenValue } from '@/helpers';
 // components
-import { Slider, Typography, Stack, IconButton } from '@mui/material';
+import { Slider, Typography, Stack, IconButton, Tooltip } from '@mui/material';
 import { MusicPlayerContainer } from './StyledLocationMusic';
 // icons
-import { PlayArrow, Pause, Repeat, RepeatOn } from '@mui/icons-material';
+import { PlayArrow, Pause, Repeat, RepeatOn, Download } from '@mui/icons-material';
 
 interface LocationMusicProps {
   generation: GameGenValue;
@@ -114,17 +114,34 @@ const LocationMusic = ({ generation, locationName }: LocationMusicProps): JSX.El
     setCurrentTime(newTime);
   }, []);
 
+  // Function to handle downloading the audio file
+  const handleDownload = useCallback(() => {
+    if (audioRef.current) {
+      const link = document.createElement('a');
+      link.href = audioRef.current.src; // Use the audio source URL for downloading
+      link.download = `${locationName}.mp3`; // Set the default file name for the download
+      link.click();
+    }
+  }, [locationName]);
+
   return (
     <MusicPlayerContainer>
-      <Stack direction="row" spacing={1} alignItems="center">
-        <IconButton onClick={() => setIsPlaying(prev => !prev)} color="primary" size="small">
+      <Stack direction="row" gap={1} alignItems="center">
+        <Tooltip title="Download" placement="left" disableInteractive>
+          <IconButton onClick={handleDownload} color="primary" size="small">
+            <Download fontSize="small" />
+          </IconButton>
+        </Tooltip>
+        <IconButton onClick={() => setIsPlaying(prev => !prev)} color="primary" size="large">
           {isPlaying ? <Pause fontSize="large" /> : <PlayArrow fontSize="large" />}
         </IconButton>
-        <IconButton onClick={() => setIsLooping(prev => !prev)} color="primary" size="small">
-          {isLooping ? <RepeatOn fontSize="small" /> : <Repeat fontSize="small" />}
-        </IconButton>
+        <Tooltip title="Loop" placement="right" disableInteractive>
+          <IconButton onClick={() => setIsLooping(prev => !prev)} color="primary" size="small">
+            {isLooping ? <RepeatOn fontSize="small" /> : <Repeat fontSize="small" />}
+          </IconButton>
+        </Tooltip>
       </Stack>
-      <Stack direction="row" spacing={2} alignItems="center" sx={{ width: '100%' }}>
+      <Stack direction="row" gap={2} alignItems="center" sx={{ width: '100%' }}>
         <Typography variant="caption">{formatTime(currentTime)}</Typography>
         <Slider
           value={currentTime}

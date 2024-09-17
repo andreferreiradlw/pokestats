@@ -26,7 +26,7 @@ const PokestatsRegionsPage: NextPage<PokestatsRegionsPageProps> = ({ location })
   );
 };
 
-export const getServerSideProps: GetServerSideProps = context => {
+export const getServerSideProps: GetServerSideProps = async context => {
   const { location } = context.query;
 
   return {

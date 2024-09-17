@@ -290,16 +290,10 @@ const CanvasMapper = forwardRef<CanvasMapperHandle, CanvasMapperProps>(
 
       imageRef.current.width = parentWidth;
 
-      console.log('imageRef.current.width', imageRef.current.width);
-
-      console.log('imageRef.current.naturalHeight', imageRef.current.naturalHeight);
-
       const imageHeight =
         imageRef.current.naturalHeight * (imageWidth / imageRef.current.naturalWidth);
 
       imageRef.current.height = imageHeight;
-
-      console.log('imageRef.current.height', imageRef.current.height);
 
       hoverCanvasRef.current.width = imageWidth;
       hoverCanvasRef.current.height = imageHeight;
@@ -328,17 +322,13 @@ const CanvasMapper = forwardRef<CanvasMapperHandle, CanvasMapperProps>(
 
     // Effect for initial render and updates
     useEffect(() => {
-      console.log('parentWidth', parentWidth);
-      // console.log('current', imageRef.current);
-      // console.log('height', imageRef.current?.naturalHeight);
-      //
+      // check if parent and image are completely loaded
       if (parentWidth < 1 || !isImageloaded) return;
 
-      console.log('isFirstRender.current', isFirstRender.current);
+      // initialise the canvas elements onLoad and when parent re-sizes
+      initCanvas();
 
       if (isFirstRender.current) {
-        initCanvas();
-        console.log('--------------');
         // Check if defaultArea is provided and find its index
         if (defaultArea) {
           const defaultAreaDetails = areas.find(({ key }) => key === defaultArea);
@@ -356,6 +346,7 @@ const CanvasMapper = forwardRef<CanvasMapperHandle, CanvasMapperProps>(
             setMapAreas(updatedAreas);
 
             renderPrefilledAreas(updatedAreas, highlightCtx);
+
             // trigger click event
             onClick?.(defaultAreaDetails);
           } else {
@@ -369,17 +360,17 @@ const CanvasMapper = forwardRef<CanvasMapperHandle, CanvasMapperProps>(
           renderPrefilledAreas(areas, highlightCtx);
         }
 
-        // setRendered(true);
-
+        // update isFirstRender ref
         isFirstRender.current = false;
       } else {
-        // initCanvas();
+        // reset ctx
         renderingCtx.current?.clearRect(
           0,
           0,
           hoverCanvasRef.current!.width,
           hoverCanvasRef.current!.height,
         );
+        // render areas again in the updated canvas size
         renderPrefilledAreas(mapAreas, highlightCtx);
       }
     }, [parentWidth, highlightAllAreas, isImageloaded]);
@@ -393,16 +384,11 @@ const CanvasMapper = forwardRef<CanvasMapperHandle, CanvasMapperProps>(
       };
 
       handleResize(); // Set initial width
+
       window.addEventListener('resize', handleResize);
+
       return () => window.removeEventListener('resize', handleResize);
     }, [parentRef]);
-
-    // Initiate canvas on load
-    // useEffect(() => initCanvas(), []);
-    // useEffect(() => {
-    //   console.log('height effect', imageRef.current?.naturalHeight);
-    //   console.log('--------------');
-    // }, [imageRef.current]);
 
     // Memoize the areas to prevent unnecessary re-renders
     const memoizedAreas = useMemo(
@@ -445,7 +431,6 @@ const CanvasMapper = forwardRef<CanvasMapperHandle, CanvasMapperProps>(
           onClick={onImageClick}
           onMouseMove={onImageMouseMove}
           onLoad={() => {
-            console.log('image loaded', imageRef.current);
             if (imageRef.current) {
               setIsImageloaded(true);
             }

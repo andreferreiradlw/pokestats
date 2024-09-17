@@ -43,7 +43,7 @@ const RegionPage = ({
           <Typography variant="sectionTitle" gutterBottom>
             {mapGeneration(generation)}
           </Typography>
-          <Typography>{children}</Typography>
+          {children}
           <Stack flexDirection="row" gap={2} mt={4}>
             <Button
               onClick={() => {

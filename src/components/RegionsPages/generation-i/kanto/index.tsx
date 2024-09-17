@@ -2,6 +2,7 @@ import type { PokestatsRegionsPageProps } from '@/pages/regions/generation-i/kan
 import { kantoZones } from './gen1KantoZones';
 // components
 import RegionPage from '@/components/RegionPage';
+import { Typography } from '@mui/material';
 
 const KantoGen1 = ({ location }: PokestatsRegionsPageProps): JSX.Element => (
   <RegionPage
@@ -11,9 +12,11 @@ const KantoGen1 = ({ location }: PokestatsRegionsPageProps): JSX.Element => (
     mapImageUrl="https://raw.githubusercontent.com/andreferreiradlw/pokestats_media/main/assets/maps/generation-i/map.png"
     defaultLocation={location}
   >
-    <b>Kanto</b> is the region where the first-generation games (<b>Pokémon Red, Blue, Green,</b>{' '}
-    and <b>Yellow</b>) take place. It features diverse locations like <b>Viridian Forest</b>,{' '}
-    <b>Mt. Moon</b>, and the <b>Seafoam Islands</b>. Key locations include:
+    <Typography gutterBottom>
+      <b>Kanto</b> is the region where the first-generation games (<b>Pokémon Red, Blue, Green,</b>{' '}
+      and <b>Yellow</b>) take place. It features diverse locations like <b>Viridian Forest</b>,{' '}
+      <b>Mt. Moon</b>, and the <b>Seafoam Islands</b>. Key locations include:
+    </Typography>
     <ul>
       <li>
         <b>Pallet Town</b>: Start your journey and receive your first Pokémon from Professor Oak.
@@ -29,10 +32,10 @@ const KantoGen1 = ({ location }: PokestatsRegionsPageProps): JSX.Element => (
         <b>Saffron City</b>: Battle Sabrina at the Psychic-type Gym and explore the Team Rocket HQ.
       </li>
     </ul>
-    Players can explore hidden areas like the <b>Safari Zone</b> in Fuchsia City or find rare
-    Pokémon such as Zapdos and Mewtwo in special locations. Kanto reappears in later generations,
-    including <b>Generations II, III, IV,</b> and <b>VII</b>, offering new ways to experience its
-    classic challenges and secrets.
+    <Typography>
+      Ready to explore Generation I Kanto? Select a location on the map and discover its pokemon
+      encounters!
+    </Typography>
   </RegionPage>
 );
 

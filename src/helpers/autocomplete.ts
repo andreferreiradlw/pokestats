@@ -4,11 +4,13 @@ import type { Pokemon, PokemonType, MoveType } from '@/types';
 import { MoveClient, PokemonClient } from 'pokenode-ts';
 import { removeDuplicateMoves } from './moves';
 import { getResourceId } from './getIdFromUrl';
+import { type PokestatsRegion, regionsData } from '@/hooks';
 
 export interface AutocompleteListType {
   allPokemonData: Pokemon[];
   allTypesData: PokemonType[];
   allMovesData: MoveType[];
+  allRegionsData: PokestatsRegion[];
 }
 
 const fetchAutocompleteData = async (): Promise<AutocompleteListType> => {
@@ -49,6 +51,7 @@ const fetchAutocompleteData = async (): Promise<AutocompleteListType> => {
     allPokemonData: pokemonData as Pokemon[],
     allTypesData: typesData as PokemonType[],
     allMovesData: movesData as MoveType[],
+    allRegionsData: regionsData,
   };
 };
 

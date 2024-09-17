@@ -1,6 +1,7 @@
 import type { GetServerSideProps } from 'next';
 import type { Pokemon, PokemonType, MoveType } from '@/types';
 import { fetchAutocompleteData } from '@/helpers';
+import type { PokestatsRegion } from '@/hooks';
 
 const toUrl = (host: string, route: string, priority = '1.0'): string => `
   <url>
@@ -14,12 +15,14 @@ const toUrl = (host: string, route: string, priority = '1.0'): string => `
 const createSitemap = (
   host: string,
   routes: string[],
+  regionList: PokestatsRegion[],
   pokemonList: Pokemon[],
   pokemonTypes: PokemonType[],
   movesList: MoveType[],
 ): string => {
   const urls = [
     ...routes.map(route => toUrl(host, route)),
+    ...regionList.map(region => toUrl(host, `/regions/${region.generation}/${region.name}`, '0.9')),
     ...pokemonList.map(pokemon => toUrl(host, `/pokemon/${pokemon.name}`)),
     ...pokemonTypes.map(type => toUrl(host, `/type/${type.name}`, '0.8')),
     ...movesList.map(move => toUrl(host, `/move/${move.name}`, '0.9')),
@@ -40,16 +43,24 @@ export const getServerSideProps: GetServerSideProps = async context => {
     return { notFound: true };
   }
 
-  const routes = ['', '/regions/generation-i/kanto'];
+  const routes = [''];
 
   try {
-    const { allMovesData, allPokemonData, allTypesData } = await fetchAutocompleteData();
+    const { allMovesData, allPokemonData, allTypesData, allRegionsData } =
+      await fetchAutocompleteData();
 
     if (!allPokemonData || !allTypesData || !allMovesData) {
       return { notFound: true };
     }
 
-    const sitemap = createSitemap(host, routes, allPokemonData, allTypesData, allMovesData);
+    const sitemap = createSitemap(
+      host,
+      routes,
+      allRegionsData,
+      allPokemonData,
+      allTypesData,
+      allMovesData,
+    );
 
     res.setHeader('Content-Type', 'text/xml');
     res.write(sitemap);

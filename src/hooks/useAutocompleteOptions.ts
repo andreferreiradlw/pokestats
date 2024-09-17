@@ -1,10 +1,21 @@
-import { getResourceId, removeDuplicateMoves } from '@/helpers';
+import { type GameGenValue, getResourceId, removeDuplicateMoves } from '@/helpers';
 import { MovesApi, PokemonApi, TypesApi } from '@/services';
 import type { MoveType, Pokemon, PokemonType } from '@/types';
 import type { UseQueryOptions, UseQueryResult } from '@tanstack/react-query';
 import { useQuery } from '@tanstack/react-query';
 
-export type AutocompleteListOption = Pokemon | PokemonType | MoveType;
+export interface PokestatsRegion {
+  assetType: 'region';
+  id: number;
+  name: string;
+  generation: GameGenValue;
+}
+
+export type AutocompleteListOption = Pokemon | PokemonType | MoveType | PokestatsRegion;
+
+export const regionsData: PokestatsRegion[] = [
+  { id: 1, assetType: 'region', name: 'kanto', generation: 'generation-i' },
+];
 
 export const useAutocompleteOptions = (
   options?: Partial<UseQueryOptions<AutocompleteListOption[]>>,
@@ -29,6 +40,7 @@ export const useAutocompleteOptions = (
           assetType: 'pokemon',
         });
       });
+
       // types
       typesResponse.results.forEach((currType, i) => {
         allOptions.push({
@@ -37,6 +49,7 @@ export const useAutocompleteOptions = (
           assetType: 'type',
         });
       });
+
       // moves
       removeDuplicateMoves(movesResponse.results).forEach(currMove => {
         allOptions.push({
@@ -44,6 +57,11 @@ export const useAutocompleteOptions = (
           id: getResourceId(currMove.url),
           assetType: 'move',
         });
+      });
+
+      // regions
+      regionsData.forEach(currRegion => {
+        allOptions.push(currRegion);
       });
 
       return allOptions;

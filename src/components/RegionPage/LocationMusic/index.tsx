@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState, useRef, useCallback } from 'react';
 // helpers
+import { usePlausible } from 'next-plausible';
 import { mapLocationMusic, type GameGenValue } from '@/helpers';
 // components
 import { Slider, Typography, Stack, IconButton, Tooltip } from '@mui/material';
@@ -25,6 +26,9 @@ const LocationMusic = ({ generation, locationName }: LocationMusicProps): JSX.El
   const [isLooping, setIsLooping] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
+
+  // analytics
+  const plausible = usePlausible();
 
   // Ref to store the audio element
   const audioRef = useRef<HTMLAudioElement>();
@@ -121,6 +125,7 @@ const LocationMusic = ({ generation, locationName }: LocationMusicProps): JSX.El
       link.href = audioRef.current.src; // Use the audio source URL for downloading
       link.download = `${locationName}.mp3`; // Set the default file name for the download
       link.click();
+      plausible('Download Area Music');
     }
   }, [locationName]);
 
@@ -132,7 +137,14 @@ const LocationMusic = ({ generation, locationName }: LocationMusicProps): JSX.El
             <Download fontSize="small" />
           </IconButton>
         </Tooltip>
-        <IconButton onClick={() => setIsPlaying(prev => !prev)} color="primary" size="large">
+        <IconButton
+          onClick={() => {
+            setIsPlaying(prev => !prev);
+            plausible('Play Area Music');
+          }}
+          color="primary"
+          size="large"
+        >
           {isPlaying ? <Pause fontSize="large" /> : <PlayArrow fontSize="large" />}
         </IconButton>
         <Tooltip title="Loop" placement="right" disableInteractive>

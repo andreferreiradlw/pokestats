@@ -1,10 +1,12 @@
 import { type PropsWithChildren, useRef, useState } from 'react';
+// helpers
+import { mapGeneration, type GameGenValue } from '@/helpers';
+import { usePlausible } from 'next-plausible';
 // components
 import CanvasMapper, { type CanvasMapperArea, type CanvasMapperHandle } from './CanvasMapper';
 import { Button, Grid2, Stack, Typography } from '@mui/material';
 import LocationDetails from './LocationDetails';
 import { AnimatePresence } from 'framer-motion';
-import { mapGeneration, type GameGenValue } from '@/helpers';
 
 interface RegionPageProps extends PropsWithChildren {
   areas: CanvasMapperArea[];
@@ -25,9 +27,13 @@ const RegionPage = ({
   // state
   const [highlightAllAreas, setHighlightAllAreas] = useState(false);
   const [selectedArea, setSelectedArea] = useState<CanvasMapperArea>();
+
   // ref
   const mapContainerRef = useRef<HTMLDivElement>(null);
   const canvasMapperRef = useRef<CanvasMapperHandle>(null);
+
+  // analytics
+  const plausible = usePlausible();
 
   return (
     <Stack gap={4} py={2}>
@@ -40,7 +46,10 @@ const RegionPage = ({
           <Typography>{children}</Typography>
           <Stack flexDirection="row" gap={2} mt={4}>
             <Button
-              onClick={() => setHighlightAllAreas(prev => !prev)}
+              onClick={() => {
+                setHighlightAllAreas(prev => !prev);
+                plausible('Highlight All Areas Click');
+              }}
               variant={highlightAllAreas ? 'contained' : 'outlined'}
             >
               Highlight All Areas
@@ -71,7 +80,10 @@ const RegionPage = ({
             stayHighlighted
             highlightAllAreas={highlightAllAreas}
             toggleHighlighted
-            onClick={area => setSelectedArea(area)}
+            onClick={area => {
+              setSelectedArea(area);
+              plausible('Map Canvas Click');
+            }}
             defaultArea={defaultLocation}
           />
         </Grid2>

@@ -40,7 +40,7 @@ export const getServerSideProps: GetServerSideProps = async context => {
     return { notFound: true };
   }
 
-  const routes = [''];
+  const routes = ['', '/regions/generation-i/kanto'];
 
   try {
     const { allMovesData, allPokemonData, allTypesData } = await fetchAutocompleteData();

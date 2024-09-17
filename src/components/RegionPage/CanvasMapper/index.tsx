@@ -323,7 +323,8 @@ const CanvasMapper = forwardRef<CanvasMapperHandle, CanvasMapperProps>(
 
     // Effect for initial render and updates
     useEffect(() => {
-      console.log('parentWidth', parentWidth);
+      console.log('parentWidth', parentWidth, isFirstRender.current);
+
       if (parentWidth === 0) return;
 
       if (isFirstRender.current) {

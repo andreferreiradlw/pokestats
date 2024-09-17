@@ -6,6 +6,7 @@ export * from './formatLocationEncounters';
 export * from './formatPokemonId';
 export * from './gameVersion';
 export * from './mapEncounterIcons';
+export * from './mapLocationMusic';
 export * from './moves';
 export * from './parseLocationName';
 export * from './random';

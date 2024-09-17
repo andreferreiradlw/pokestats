@@ -11,6 +11,7 @@ import { Box, Grid2, Stack, Typography, type Grid2Props } from '@mui/material';
 import Loading from '@/components/Loading';
 import LocationTableV2 from '../LocationTableV2';
 import ImageNext from '@/components/ImageNext';
+import LocationMusic from '../LocationMusic';
 
 interface LocationDetailsProps extends Grid2Props {
   area: CanvasMapperArea;
@@ -52,6 +53,7 @@ const LocationDetails = ({ area, generation, ...rest }: LocationDetailsProps): J
           <Grid2 size={4} gap={2} flexDirection="column">
             <Typography variant="h3">{findEnglishName(data.location.names)}</Typography>
             <Typography gutterBottom>{description}</Typography>
+            <LocationMusic generation={generation} locationName={key} />
             {data.locationAreas && (
               <Stack gap={4} width="100%">
                 {data.locationAreas.map(({ name, names }) => {

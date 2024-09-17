@@ -9,9 +9,10 @@ const absolutePosition = {
 };
 
 // Styled components using MUI's `styled` utility
-const ContainerEl = styled(Paper)({
+const ContainerEl = styled(Paper)(({ theme }) => ({
   position: 'relative',
-});
+  borderRadius: theme.shape.borderRadius,
+}));
 
 const ImageEl = styled('img')<{ hide?: boolean }>(({ hide }) => ({
   ...absolutePosition,

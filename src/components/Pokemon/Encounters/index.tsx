@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
 // helpers
 import { usePokemonEncounters } from '@/hooks';
 import { GameVersionContext } from '@/context';
@@ -17,37 +17,55 @@ interface EncountersProps extends Grid2Props {
 }
 
 const Encounters = ({ species, ...rest }: EncountersProps): JSX.Element => {
+  // state
+  const [showAlert, setShowAlert] = useState(true);
   // context
   const { gameVersion, gameGeneration } = useContext(GameVersionContext);
   // data
   const { data: encounterDetails, isLoading } = usePokemonEncounters(species.id, gameVersion);
+
+  useEffect(() => {
+    const storedBannerSetting = sessionStorage.getItem('hideEncounterBanner');
+    if (storedBannerSetting === 'true') {
+      setShowAlert(false);
+    }
+  }, []);
 
   return (
     <Grid2 container direction="column" spacing={4} size={12} {...rest}>
       <Grid2 size={12}>
         <Typography variant="sectionTitle">Encounters</Typography>
       </Grid2>
-      <Grid2 size={12}>
-        <Alert severity="warning" sx={{ width: '100%' }}>
-          <AlertTitle>This data might not be accurate</AlertTitle>
-          <Typography gutterBottom variant="body2">
-            Some encounter information is missing from the API, especially for newer titles such as
-            Sword and Shield.
-          </Typography>
-          <Typography variant="body2">
-            Area images and encounter icons might be broken or incorrect, please let me know if you
-            find something by openning a new issue{' '}
-            <Link
-              href="https://github.com/andreferreiradlw/pokestats/issues"
-              target="_blank"
-              color="inherit"
-            >
-              here
-            </Link>
-            . Please bear with me while I keep improving this section.
-          </Typography>
-        </Alert>
-      </Grid2>
+      {showAlert && (
+        <Grid2 size={12}>
+          <Alert
+            severity="warning"
+            sx={{ width: '100%' }}
+            onClose={() => {
+              setShowAlert(false);
+              sessionStorage.setItem('hideEncounterBanner', 'true');
+            }}
+          >
+            <AlertTitle>This data might not be accurate</AlertTitle>
+            <Typography gutterBottom variant="body2">
+              Some encounter information is missing from the API, especially for newer titles such
+              as Sword and Shield.
+            </Typography>
+            <Typography variant="body2">
+              Area images and encounter icons might be broken or incorrect, please let me know if
+              you find something by opening a new issue{' '}
+              <Link
+                href="https://github.com/andreferreiradlw/pokestats/issues"
+                target="_blank"
+                color="inherit"
+              >
+                here
+              </Link>
+              . Please bear with me while I keep improving this section.
+            </Typography>
+          </Alert>
+        </Grid2>
+      )}
       <Grid2 size={12}>
         <GameGenSelect />
       </Grid2>

@@ -21,8 +21,8 @@ const createSitemap = (
   const urls = [
     ...routes.map(route => toUrl(host, route)),
     ...pokemonList.map(pokemon => toUrl(host, `/pokemon/${pokemon.name}`)),
-    ...pokemonTypes.map(type => toUrl(host, `/type/${type.name}`)),
-    ...movesList.map(move => toUrl(host, `/move/${move.name}`)),
+    ...pokemonTypes.map(type => toUrl(host, `/type/${type.name}`, '0.8')),
+    ...movesList.map(move => toUrl(host, `/move/${move.name}`, '0.9')),
   ];
 
   return `<?xml version="1.0" encoding="UTF-8"?>

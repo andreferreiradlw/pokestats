@@ -57,8 +57,6 @@ const EncounterCard = ({
   // analytics
   const plausible = usePlausible();
 
-  console.log(encounter);
-
   // parse encounter data
   const formattedEncounter = useMemo(() => {
     const { location_area, version_details, location } = encounter;

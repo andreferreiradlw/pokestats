@@ -23,7 +23,6 @@ const PokemonList = ({ pokemon, ...rest }: PokemonListProps): JSX.Element => {
   const [sortBy, setSortBy] = useState<string>('id');
 
   useEffect(() => {
-    // This will only run on the client side
     const storedGen = sessionStorage.getItem('genSelect');
     const storedSortBy = sessionStorage.getItem('sortSelect');
     if (storedGen) setGen(storedGen);

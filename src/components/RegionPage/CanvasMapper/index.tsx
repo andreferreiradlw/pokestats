@@ -327,7 +327,7 @@ const CanvasMapper = forwardRef<CanvasMapperHandle, CanvasMapperProps>(
     useEffect(() => {
       console.log('parentWidth', parentWidth);
       console.log('current', imageRef.current);
-      console.log('height', imageRef.current.naturalHeight);
+      console.log('height', imageRef.current?.naturalHeight);
       console.log('--------------');
       if (parentWidth < 1 || !imageRef.current || imageRef.current?.naturalHeight < 1) return;
 
@@ -394,7 +394,7 @@ const CanvasMapper = forwardRef<CanvasMapperHandle, CanvasMapperProps>(
     // Initiate canvas on load
     // useEffect(() => initCanvas(), []);
     useEffect(() => {
-      console.log('height', imageRef.current?.naturalHeight);
+      console.log('height effect', imageRef.current?.naturalHeight);
       console.log('--------------');
     }, [imageRef.current]);
 

@@ -158,6 +158,7 @@ const EncounterCard = ({
               href={`/regions/${generation}/${location.region?.name}?location=${location.name}`}
               passHref
               legacyBehavior
+              prefetch
             >
               <CustomButton
                 size="small"

@@ -54,7 +54,7 @@ const LocationDetails = ({ area, generation, ...rest }: LocationDetailsProps): J
             <Typography variant="h3">{findEnglishName(data.location.names)}</Typography>
             <Typography gutterBottom>{description}</Typography>
             <LocationMusic generation={generation} locationName={key} />
-            {data.locationAreas && (
+            {data.locationAreas ? (
               <Stack gap={4} width="100%">
                 {data.locationAreas.map(({ name, names }) => {
                   const locationAreaName = findEnglishName(names);
@@ -74,6 +74,11 @@ const LocationDetails = ({ area, generation, ...rest }: LocationDetailsProps): J
                   );
                 })}
               </Stack>
+            ) : (
+              <ImageNext
+                alt={findEnglishName(data.location.names) || area.title}
+                src={`https://raw.githubusercontent.com/andreferreiradlw/pokestats_media/main/assets/regions/${generation}/${data.location.name}.png`}
+              />
             )}
           </Grid2>
           <Grid2 size={{ xs: 12, md: 8 }}>

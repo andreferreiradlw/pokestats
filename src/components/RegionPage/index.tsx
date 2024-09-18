@@ -2,9 +2,10 @@ import { type PropsWithChildren, useRef, useState } from 'react';
 // helpers
 import { mapGeneration, type GameGenValue } from '@/helpers';
 import { usePlausible } from 'next-plausible';
+import { alpha } from '@mui/material/styles';
 // components
 import CanvasMapper, { type CanvasMapperArea, type CanvasMapperHandle } from './CanvasMapper';
-import { Button, Grid2, Stack, Typography } from '@mui/material';
+import { Button, Grid2, Stack, Typography, useTheme } from '@mui/material';
 import LocationDetails from './LocationDetails';
 import { AnimatePresence } from 'framer-motion';
 
@@ -32,8 +33,9 @@ const RegionPage = ({
   const mapContainerRef = useRef<HTMLDivElement>(null);
   const canvasMapperRef = useRef<CanvasMapperHandle>(null);
 
-  // analytics
+  // hooks
   const plausible = usePlausible();
+  const theme = useTheme();
 
   return (
     <Stack gap={4} py={2}>
@@ -80,6 +82,8 @@ const RegionPage = ({
             stayHighlighted
             highlightAllAreas={highlightAllAreas}
             toggleHighlighted
+            fillColor={alpha(theme.palette.secondary.main, 0.75)}
+            strokeColor={theme.palette.secondary.dark}
             onClick={area => {
               setSelectedArea(area);
               plausible('Map Canvas Click');

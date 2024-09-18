@@ -47,9 +47,9 @@
 ✅ Dark Mode <br />
 ✅ Pokemon Encounters Section <br />
 🛠️ Sprites Page <br />
-🗒️ Interactive Region Maps <br />
-&nbsp;&nbsp; 🗒️ Kanto (Gen I) <br />
-&nbsp;&nbsp; 🗒️ Johto + Kanto (Gen II) <br />
+🛠️ Interactive Region Maps <br />
+&nbsp;&nbsp; ✅ Kanto (Gen I) <br />
+&nbsp;&nbsp; 🛠️ Johto + Kanto (Gen II) <br />
 &nbsp;&nbsp; 🗒️ Hoenn (Gen III) <br />
 &nbsp;&nbsp; 🗒️ Sinnoh (Gen IV) <br />
 &nbsp;&nbsp; 🗒️ Unova (Gen V) <br />

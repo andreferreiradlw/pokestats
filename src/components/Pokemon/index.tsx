@@ -31,7 +31,7 @@ const PokemonPage = ({
       <Grid2
         container
         direction={{ xxs: 'column-reverse', lg: 'row' }}
-        alignItems="center"
+        alignItems="stretch"
         justifyContent="flex-start"
         spacing={4}
         size={12}

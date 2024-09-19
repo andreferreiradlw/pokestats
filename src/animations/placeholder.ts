@@ -11,9 +11,6 @@ export const placeholderVariant = {
   exit: {
     opacity: 0,
     scale: 0,
-    transition: {
-      duration: 0.2,
-      ease: 'easeInOut',
-    },
+    y: 20,
   },
 };

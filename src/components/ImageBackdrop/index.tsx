@@ -1,4 +1,4 @@
-import { useState, useCallback, type MouseEvent } from 'react';
+import { useState, useCallback, type MouseEvent, useEffect } from 'react';
 // components
 import { Backdrop, Button, Grid2, Stack, Snackbar, Alert } from '@mui/material';
 import ImageNextV2 from '../ImageNextV2';
@@ -19,6 +19,20 @@ const ImageBackdrop = ({ src, alt, key }: ImageBackdropProps): JSX.Element => {
   const [open, setOpen] = useState(false);
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState('');
+
+  // Effect to disable scrolling when the backdrop is open
+  useEffect(() => {
+    if (open) {
+      document.body.style.overflow = 'hidden'; // Disable scrolling
+    } else {
+      document.body.style.overflow = ''; // Re-enable scrolling
+    }
+
+    // Cleanup function to reset the overflow style when the component unmounts
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [open]);
 
   // Toggle Backdrop
   const handleToggle = useCallback(() => {
@@ -76,13 +90,17 @@ const ImageBackdrop = ({ src, alt, key }: ImageBackdropProps): JSX.Element => {
   // Fullscreen Mode
   const handleFullscreen = useCallback((event: MouseEvent<HTMLButtonElement>) => {
     event.stopPropagation(); // Prevent the Backdrop from closing
-    const imageElement = document.getElementById('fullscreen-image');
-    if (imageElement?.requestFullscreen) {
-      imageElement.requestFullscreen().catch(error => {
-        console.error('Error entering fullscreen mode:', error);
-        setSnackbarMessage('Failed to enter fullscreen');
-        setSnackbarOpen(true);
-      });
+    const container = document.getElementById('fullscreen-container') as HTMLElement | null;
+
+    if (container) {
+      // Apply fullscreen to the container, not the image directly
+      if (container.requestFullscreen) {
+        container.requestFullscreen({ navigationUI: 'show' }).catch(error => {
+          console.error('Error entering fullscreen mode:', error);
+          setSnackbarMessage('Failed to enter fullscreen');
+          setSnackbarOpen(true);
+        });
+      }
     }
   }, []);
 
@@ -118,14 +136,13 @@ const ImageBackdrop = ({ src, alt, key }: ImageBackdropProps): JSX.Element => {
           maxWidth={theme => theme.breakpoints.values.xl}
           direction={{ xxs: 'column', lg: 'row' }}
         >
-          <Grid2 size={{ xxs: 12, lg: 8 }} justifyContent="flex-end" alignItems="flex-start">
-            <ImageNextV2
-              imageUrl={src}
-              alt={alt}
-              key={key}
-              maxHeight="90vh"
-              id="fullscreen-image"
-            />
+          <Grid2
+            size={{ xxs: 12, lg: 8 }}
+            justifyContent="flex-end"
+            alignItems="flex-start"
+            id="fullscreen-container"
+          >
+            <ImageNextV2 imageUrl={src} alt={alt} key={key} maxHeight="90vh" />
           </Grid2>
           <Grid2 size={{ xxs: 12, lg: 4 }}>
             <Stack

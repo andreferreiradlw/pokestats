@@ -66,6 +66,7 @@ const FeaturedImage = ({ specieNames, pokemonId, ...rest }: FeaturedImageProps):
       </ImageContainer>
       <Grid2 size={12} justifyContent="center">
         <ToggleButtonGroup
+          size="small"
           color="secondary"
           value={version}
           exclusive

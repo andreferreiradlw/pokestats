@@ -5,7 +5,7 @@ import { GameVersionContext } from '@/context';
 // types
 import type { PokemonSpecies } from 'pokenode-ts';
 // components
-import { Alert, AlertTitle, Grid2, Link, Typography, type Grid2Props } from '@mui/material';
+import { Alert, AlertTitle, Button, Grid2, Link, Typography, type Grid2Props } from '@mui/material';
 import { AnimatePresence, motion } from 'framer-motion';
 import { fadeInUpVariant, staggerContainerVariant } from '@/animations';
 import GameGenSelect from '@/components/GameGenSelect';
@@ -40,11 +40,19 @@ const Encounters = ({ species, ...rest }: EncountersProps): JSX.Element => {
         <Grid2 size={12}>
           <Alert
             severity="warning"
-            sx={{ width: '100%' }}
-            onClose={() => {
-              setShowAlert(false);
-              localStorage.setItem('hideEncounterBanner', 'true');
-            }}
+            action={
+              <Button
+                color="inherit"
+                size="medium"
+                variant="outlined"
+                onClick={() => {
+                  setShowAlert(false);
+                  localStorage.setItem('hideEncounterBanner', 'true');
+                }}
+              >
+                Dismiss
+              </Button>
+            }
           >
             <AlertTitle>This data might not be accurate</AlertTitle>
             <Typography gutterBottom variant="body2">

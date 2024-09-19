@@ -7,7 +7,7 @@ import { useLocationAreas } from '@/hooks';
 import { findEnglishName, type GameGenValue } from '@/helpers';
 import { fadeInUpVariant } from '@/animations';
 // components
-import { Box, Grid2, Stack, Typography, type Grid2Props } from '@mui/material';
+import { Alert, Box, Button, Grid2, Stack, Typography, type Grid2Props } from '@mui/material';
 import Loading from '@/components/Loading';
 import LocationTableV2 from '../LocationTableV2';
 import ImageNext from '@/components/ImageNext';
@@ -22,7 +22,7 @@ const LocationDetails = ({ area, generation, ...rest }: LocationDetailsProps): J
   const { id, description, key } = area;
 
   // data
-  const { data, isLoading } = useLocationAreas(Number(id), generation);
+  const { data, isLoading, refetch } = useLocationAreas(Number(id), generation);
 
   if (isLoading) {
     return (
@@ -89,12 +89,31 @@ const LocationDetails = ({ area, generation, ...rest }: LocationDetailsProps): J
                 region={data.location.region?.name}
               />
             ) : (
-              <Typography>No encounters in this area.</Typography>
+              <Stack py={12} width="100%" alignItems="center" gap={2}>
+                <ImageNext
+                  src={`/static/regions/${generation}/trainer.png`}
+                  alt="Pokemon Trainer"
+                  width={150}
+                />
+                <Typography variant="sectionSubTitle">
+                  No pokemon encounters have been found in this area.
+                </Typography>
+              </Stack>
             )}
           </Grid2>
         </>
       ) : (
-        <Typography>issue loading data</Typography>
+        <Alert
+          variant="filled"
+          severity="error"
+          action={
+            <Button color="inherit" variant="outlined" onClick={() => refetch()}>
+              Retry
+            </Button>
+          }
+        >
+          There has been an issue loading area location data.
+        </Alert>
       )}
     </Grid2>
   );

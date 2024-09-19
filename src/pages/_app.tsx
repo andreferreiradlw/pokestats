@@ -4,7 +4,6 @@ import PlausibleProvider from 'next-plausible';
 // types
 import type { AppProps } from 'next/app';
 // components
-import PokestatsHead from '@/components/Head';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 // mui
 import CssBaseline from '@mui/material/CssBaseline';
@@ -25,7 +24,6 @@ const App = (props: AppProps): JSX.Element => {
   return (
     <AppCacheProvider {...props}>
       <QueryClientProvider client={queryClient}>
-        <PokestatsHead />
         <PlausibleProvider domain="pokestats.gg" enabled={process.env.NODE_ENV === 'production'}>
           <ThemeContextProvider>
             <CssBaseline />

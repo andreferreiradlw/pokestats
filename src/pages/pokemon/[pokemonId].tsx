@@ -17,7 +17,7 @@ import {
   formatPokemonId,
 } from '@/helpers';
 // components
-import Head from 'next/head';
+import Seo from '@/components/Seo';
 import PokemonPage from '@/components/Pokemon';
 import Loading from '@/components/Loading';
 import { AbilityApi, EvolutionApi, PokemonApi, SpeciesApi } from '@/services';
@@ -48,33 +48,27 @@ const PokestatsPokemonPage: NextPage<PokestatsPokemonPageProps> = ({ allPokemon,
     );
   }
 
+  // SEO-related variables
   const pokemonName = findEnglishName(props.species.names);
-  const pageTitle = `${pokemonName} (Pokémon #${props.pokemon.id}) - Pokestats.gg`;
+  const pageTitle = `${pokemonName} (Pokémon #${props.pokemon.id})`;
   const pageDescription = formatFlavorText(props.species.flavor_text_entries!.at(-1)?.flavor_text);
   const generationDescriptions = gameVersions
     .filter(version => version.genValue === props.species.generation.name)
     .map(game => game.label)
     .join(', ');
+  const pageImage = `https://raw.githubusercontent.com/andreferreiradlw/pokestats_media/main/assets/images/${formatPokemonId(
+    props.pokemon.id,
+  )}.png`;
+  const pageKeywords = `${pokemonName}, ${pokemonName} gg, Pokemon, Pokémon, Pokédex, Pokestats, Pokestats gg, ${pokemonName} Shiny, ${generationDescriptions}`;
 
   return (
     <GameVersionProvider pokemon={props.species}>
-      <Head>
-        <title>{pageTitle}</title>
-        <meta name="description" content={pageDescription} />
-        <meta
-          name="keywords"
-          content={`${pokemonName}, ${pokemonName} gg, Pokemon, Pokémon, Pokédex, Pokestats, Pokestats gg, ${pokemonName} Shiny, ${generationDescriptions}`}
-        />
-        {/** Open Graph */}
-        <meta property="og:title" content={pageTitle} />
-        <meta property="og:description" content={pageDescription} />
-        <meta
-          property="og:image"
-          content={`https://raw.githubusercontent.com/andreferreiradlw/pokestats_media/main/assets/images/${formatPokemonId(
-            props.pokemon.id,
-          )}.png`}
-        />
-      </Head>
+      <Seo
+        title={pageTitle}
+        description={pageDescription}
+        image={pageImage}
+        keywords={pageKeywords}
+      />
       <LayoutV2 withHeader showGenSelect customKey={`pokemon-${props.species.id}`}>
         <PokemonPage allPokemon={allPokemon} {...props} />
       </LayoutV2>

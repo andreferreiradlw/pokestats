@@ -1,10 +1,9 @@
 // types
 import type { GetStaticProps, NextPage } from 'next';
 // helpers
-import { PokestatsPageTitle } from '@/components/Head';
 import { fadeInUpVariant } from '@/animations';
 // components
-import Head from 'next/head';
+import Seo from '@/components/Seo'; // Import the Seo component
 import Homepage from '@/components/Homepage';
 import { PokemonApi, TypesApi } from '@/services';
 import type { NamedAPIResource } from 'pokenode-ts';
@@ -17,27 +16,35 @@ export interface PokestatsHomepageProps {
   pokemonList: NamedAPIResource[];
 }
 
-const PokestatsHomepage: NextPage<PokestatsHomepageProps> = props => (
-  <Grid2 container>
-    <Head>
-      <meta property="og:title" content={PokestatsPageTitle} />
-      <meta
-        property="og:description"
-        content="PokeStats.gg is an online encyclopedia of Pokémon species containing information such as Pokédex entries, descriptions, abilities, evolution chains, moves learned, stats and much more!"
+const PokestatsHomepage: NextPage<PokestatsHomepageProps> = props => {
+  // SEO-related variables
+  const pageTitle = 'Pokestats.gg - Your Complete Pokémon Encyclopedia';
+  const pageDescription =
+    'PokeStats.gg is your ultimate online Pokémon encyclopedia, featuring comprehensive information on Pokémon species, Pokédex entries, abilities, evolution chains, moves, stats, and more.';
+  const pageKeywords =
+    'Pokémon, Pokédex, Pokémon stats, Pokémon abilities, Pokémon evolutions, Pokémon moves, Pokémon types, Pokémon guide, Pokémon encyclopedia, Pokestats, Pokeapi';
+  const pageImage = '/static/android-icon-512x512.png';
+
+  return (
+    <Grid2 container>
+      <Seo
+        title={pageTitle}
+        description={pageDescription}
+        image={pageImage}
+        keywords={pageKeywords}
       />
-      <meta property="og:image" content="/static/android-icon-512x512.png" />
-    </Head>
-    <LayoutV2
-      initial="hidden"
-      animate="show"
-      variants={fadeInUpVariant}
-      customKey="homepage-container"
-    >
-      <Homepage {...props} />
-    </LayoutV2>
-    <Particles />
-  </Grid2>
-);
+      <LayoutV2
+        initial="hidden"
+        animate="show"
+        variants={fadeInUpVariant}
+        customKey="homepage-container"
+      >
+        <Homepage {...props} />
+      </LayoutV2>
+      <Particles />
+    </Grid2>
+  );
+};
 
 export const getStaticProps: GetStaticProps = async () => {
   try {

@@ -1,7 +1,7 @@
 // types
 import type { NextPage, GetServerSideProps } from 'next';
 // components
-import Head from 'next/head';
+import Seo from '@/components/Seo'; // Import the Seo component
 import LayoutV2 from '@/components/LayoutV2';
 import KantoGen1 from '@/components/RegionsPages/generation-i/kanto';
 
@@ -10,15 +10,23 @@ export interface PokestatsRegionsPageProps {
 }
 
 const PokestatsRegionsPage: NextPage<PokestatsRegionsPageProps> = ({ location }) => {
+  // SEO-related variables
+  const pageTitle = 'Kanto (Generation I)';
+  const pageDescription =
+    'Explore the Kanto region from Generation I of the Pokémon series. Discover key locations and Pokémon encounters, featuring Pokémon from the original games like Red, Blue, and Yellow.';
+  const pageKeywords =
+    'Kanto, Generation I, Pokémon, Pokémon region, Pokémon Red, Pokémon Blue, Pokémon Yellow, Pokédex, Pokémon guide, Pokémon encounters, Kanto map, Pokestats';
+  const pageImage =
+    'https://raw.githubusercontent.com/andreferreiradlw/pokestats_media/main/assets/maps/generation-i/map.png';
+
   return (
     <>
-      <Head>
-        <meta property="og:title" content="Regions" />
-        <meta
-          name="description"
-          content="The Kanto region (Japanese: カントー地方 Kanto region) is a region of the Pokémon world. Kanto is located east of Johto, which together form a joint landmass that is south of Sinnoh."
-        />
-      </Head>
+      <Seo
+        title={pageTitle}
+        description={pageDescription}
+        image={pageImage}
+        keywords={pageKeywords}
+      />
       <LayoutV2 withHeader customKey="kanto-gen1-region">
         <KantoGen1 location={location} />
       </LayoutV2>

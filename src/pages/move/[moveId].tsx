@@ -10,7 +10,8 @@ import {
   getResourceId,
   type GameGenValue,
 } from '@/helpers';
-import Head from 'next/head';
+// components
+import Seo from '@/components/Seo'; // Import the Seo component
 import MovePage from '@/components/MovePage';
 import Loading from '@/components/Loading';
 import { ContestApi, MachineApi, type MoveMachinesData, MovesApi } from '@/services';
@@ -39,30 +40,30 @@ const PokestatsMovePage: NextPage<PokestatsMovePageProps> = props => {
     );
   }
 
+  // SEO-related variables
   const moveName = findEnglishName(props.move.names) ?? capitalize(removeDash(props.move.name));
-  const pageTitle = `${moveName} (${capitalize(props.move.type.name)} Type Pokémon Move) - Pokestats.gg`;
+  const pageTitle = `${moveName} (${capitalize(props.move.type.name)} Type Pokémon Move)`;
   const moveFlavorText = props.move.flavor_text_entries.at(-1)?.flavor_text;
   const pageDescription = moveFlavorText
     ? formatFlavorText(moveFlavorText)
     : `${moveName} is a ${capitalize(props.move.type.name)}-type ${capitalize(
         props.move.damage_class!.name,
-      )} move introduced in ${mapGeneration(props.move.generation.name as GameGenValue)}`;
+      )} move introduced in ${mapGeneration(props.move.generation.name as GameGenValue)}.`;
+  const pageKeywords = `${moveName}, Pokémon move, ${capitalize(
+    props.move.type.name,
+  )} type, Pokémon ${capitalize(props.move.damage_class!.name)}, TM, HM, TR, Move effects, Move target, Power, Accuracy, PP`;
 
   return (
     <>
-      <Head>
-        <title>{pageTitle}</title>
-        <meta name="description" content={pageDescription} />
-        <meta
-          name="keywords"
-          content={`${moveName}, Move, Pokémon, Pokémon Move, ${capitalize(
-            props.move.type.name,
-          )} Type, Move, TM, HM, TR, Machines, Target, Effect, PP, Accuracy, Power`}
-        />
-        {/* Open Graph */}
-        <meta property="og:title" content={pageTitle} />
-        <meta property="og:description" content={pageDescription} />
-      </Head>
+      <Seo
+        title={pageTitle}
+        description={pageDescription}
+        type="article"
+        siteName="Pokestats.gg"
+        authorName="Andre Ferreira"
+        keywords={pageKeywords}
+        image={`/static/typeIcons/${props.move.type.name.toLowerCase()}.svg`}
+      />
       <LayoutV2 withHeader customKey={`move-${props.move.id}`}>
         <MovePage {...props} />
       </LayoutV2>

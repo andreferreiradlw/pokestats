@@ -11,17 +11,15 @@ import EggIcon from 'public/static/iconLibrary/egg.svg';
 import Error404Icon from 'public/static/iconLibrary/404_error.svg';
 
 const ImageEl = styled(Image, {
-  shouldForwardProp: prop => prop !== '$pixelatedimg',
+  shouldForwardProp: prop => prop !== 'pixelatedimg',
 })<{
-  $pixelatedimg?: ImageNextV2Props['pixelatedimg'];
-}>(({ $pixelatedimg }) => ({
+  pixelatedimg?: ImageNextV2Props['pixelatedimg'];
+}>(({ pixelatedimg }) => ({
   objectFit: 'contain',
   willChange: 'opacity',
-  // maxHeight: 'inherit',
-  // maxWidth: 'inherit',
-  // height: 'auto !important',
+  maxHeight: 'inherit',
 
-  ...($pixelatedimg && {
+  ...(pixelatedimg && {
     imageRendering: 'pixelated',
   }),
 

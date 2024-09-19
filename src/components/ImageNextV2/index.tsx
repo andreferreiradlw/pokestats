@@ -2,7 +2,7 @@ import { useState, useCallback, useMemo } from 'react';
 // types
 import type { ImageProps } from 'next/image';
 // helpers
-import { placeholderVariant, fadeInUpVariant } from '@/animations';
+import { placeholderVariant, fadeInUpVariant, hoverVariant } from '@/animations';
 // styles
 import { LoadingIcon, ErrorIcon, PlaceholderContainer, ImageEl } from './StyledImageNextV2';
 // components
@@ -18,6 +18,8 @@ export interface ImageNextV2Props
   key: string;
   imageUrl: string;
   alt: string;
+  height?: string | number;
+  width?: string | number;
 }
 
 const ImageNextV2 = ({
@@ -27,32 +29,36 @@ const ImageNextV2 = ({
   key,
   imageUrl,
   alt,
+  height,
   ...rest
 }: ImageNextV2Props): JSX.Element => {
-  // no need for placeholder if iamge is local
+  // Determine if the image is a static (local) asset
   const isImageStatic = imageUrl?.startsWith('/static/');
-  // states
-  const [isLoaded, setIsLoaded] = useState(false);
-  const [showPlaceholder, setShowPlaceholder] = useState(false);
+
+  // State management for loading and error states
+  const [showPlaceholder, setShowPlaceholder] = useState(!isImageStatic);
   const [hasError, setHasError] = useState(false);
 
+  // Handler for image load success
   const handleLoad = useCallback(() => {
     setShowPlaceholder(false);
-    setIsLoaded(true);
   }, []);
 
+  // Handler for image load error
   const handleError = useCallback(() => {
     setShowPlaceholder(false);
     setHasError(true);
   }, []);
 
+  // Placeholder loading properties
   const loadingProps = useMemo(
     () => ({
       initial: 'initial',
       animate: 'animate',
-      exit: 'exit',
+      // exit: 'exit',
       variants: placeholderVariant,
       placeholderwidth,
+      height,
       py: 4,
       alignItems: 'center',
       justifyContent: 'center',
@@ -61,55 +67,68 @@ const ImageNextV2 = ({
   );
 
   return (
-    <AnimatePresence mode="wait">
-      {showPlaceholder && (
-        <Stack
-          key={`loading-placeholder-${key}`}
-          component={PlaceholderContainer}
-          {...loadingProps}
-        >
-          <LoadingIcon />
-        </Stack>
-      )}
-      {hasError ? (
-        <Stack key={`error-placeholder-${key}`} component={PlaceholderContainer} {...loadingProps}>
-          <ErrorIcon />
-        </Stack>
-      ) : (
-        <Box
-          key={`image-container-${key}`}
-          width="100%"
-          display="flex"
-          alignItems="center"
-          justifyContent="center"
-          position="relative"
-          component={motion.div}
-          initial="hidden"
-          animate="show"
-          exit="exit"
-          variants={fadeInUpVariant}
-          {...rest}
-        >
-          <ImageEl
-            $pixelatedimg={pixelatedimg}
-            loading={imageProps?.priority ? 'eager' : 'lazy'}
-            fill
-            sizes={
-              imageProps?.fill ? '(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw' : ''
-            }
-            src={imageUrl}
-            alt={alt}
-            draggable={false}
-            onLoadStart={() => {
-              if (!isImageStatic && !isLoaded) setShowPlaceholder(true);
-            }}
-            onLoad={handleLoad}
-            onError={handleError}
-            {...imageProps}
-          />
-        </Box>
-      )}
-    </AnimatePresence>
+    <Box
+      display="flex"
+      alignItems="center"
+      justifyContent="center"
+      position="relative"
+      width="100%"
+      key={`image-container-${key}`}
+      component={motion.div}
+      variants={hoverVariant}
+      {...rest}
+    >
+      <AnimatePresence mode="wait">
+        {showPlaceholder && !hasError && (
+          <Stack
+            key={`loading-placeholder-${key}`}
+            component={PlaceholderContainer}
+            {...loadingProps}
+          >
+            <LoadingIcon />
+          </Stack>
+        )}
+        {hasError ? (
+          <Stack
+            key={`error-placeholder-${key}`}
+            component={PlaceholderContainer}
+            {...loadingProps}
+          >
+            <ErrorIcon />
+          </Stack>
+        ) : (
+          <Box
+            width={!showPlaceholder ? '100%' : 0}
+            height={!showPlaceholder ? height || 'auto' : 0}
+            display="flex"
+            alignItems="center"
+            justifyContent="center"
+            position="relative"
+            maxHeight="inherit"
+            key={`image-wrapper-${key}`}
+            component={motion.div}
+            initial="hidden"
+            animate="show"
+            variants={fadeInUpVariant}
+          >
+            <ImageEl
+              pixelatedimg={pixelatedimg}
+              loading={imageProps?.priority ? 'eager' : 'lazy'}
+              sizes={
+                imageProps?.fill ? '(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw' : ''
+              }
+              fill
+              src={imageUrl}
+              alt={alt}
+              draggable={false}
+              onLoad={handleLoad}
+              onError={handleError}
+              {...imageProps}
+            />
+          </Box>
+        )}
+      </AnimatePresence>
+    </Box>
   );
 };
 

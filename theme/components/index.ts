@@ -1,4 +1,5 @@
 import Alert from './Alert';
+import Backdrop from './Backdrop';
 import Button from './Button';
 import CssBaseline from './CssBaseline';
 import Divider from './Divider';
@@ -12,6 +13,7 @@ import type { ThemeOptions } from '@mui/material';
 const styledMuiComponents: ThemeOptions = {
   components: {
     ...Alert,
+    ...Backdrop,
     ...Button,
     ...CssBaseline,
     ...Divider,

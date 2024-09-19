@@ -12,15 +12,11 @@ const Button: {
       disableTouchRipple: true,
     },
     styleOverrides: {
-      root: {
-        display: 'flex',
-        flexDirection: 'row',
-        flexWrap: 'nowrap',
-        gap: '1em',
-        justifyContent: 'center',
-        alignItems: 'center',
+      root: ({ theme }) => ({
+        gap: theme.spacing(1),
+        justifyContent: 'space-between',
         textTransform: 'capitalize',
-      },
+      }),
     },
   },
 };

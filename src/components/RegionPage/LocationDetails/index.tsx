@@ -7,11 +7,22 @@ import { useLocationAreas } from '@/hooks';
 import { findEnglishName, type GameGenValue } from '@/helpers';
 import { fadeInUpVariant } from '@/animations';
 // components
-import { Alert, Box, Button, Grid2, Stack, Typography, type Grid2Props } from '@mui/material';
+import {
+  Alert,
+  Box,
+  Button,
+  Grid2,
+  Stack,
+  Typography,
+  useMediaQuery,
+  useTheme,
+  type Grid2Props,
+} from '@mui/material';
 import Loading from '@/components/Loading';
 import LocationTableV2 from '../LocationTableV2';
-import ImageNext from '@/components/ImageNext';
 import LocationMusic from '../LocationMusic';
+import ImageBackdrop from '@/components/ImageBackdrop';
+import ImageNextV2 from '@/components/ImageNextV2';
 
 interface LocationDetailsProps extends Grid2Props {
   area: CanvasMapperArea;
@@ -19,6 +30,11 @@ interface LocationDetailsProps extends Grid2Props {
 }
 
 const LocationDetails = ({ area, generation, ...rest }: LocationDetailsProps): JSX.Element => {
+  // breakpoint
+  const theme = useTheme();
+  const isLargeUp = useMediaQuery(theme.breakpoints.up('lg'));
+
+  // area data
   const { id, description, key } = area;
 
   // data
@@ -39,7 +55,7 @@ const LocationDetails = ({ area, generation, ...rest }: LocationDetailsProps): J
     <Grid2
       container
       size={12}
-      direction={{ xs: 'column', md: 'row' }}
+      direction={{ xs: 'column-reverse', md: 'row' }}
       spacing={12}
       component={motion.div}
       initial="hidden"
@@ -50,38 +66,41 @@ const LocationDetails = ({ area, generation, ...rest }: LocationDetailsProps): J
     >
       {data ? (
         <>
-          <Grid2 size={4} gap={2} flexDirection="column">
+          <Grid2 size={{ xs: 12, lg: 4 }} gap={2} flexDirection="column">
             <Typography variant="h3">{findEnglishName(data.location.names)}</Typography>
             <Typography gutterBottom>{description}</Typography>
             <LocationMusic generation={generation} locationName={key} />
-            {data.locationAreas ? (
-              <Stack gap={4} width="100%">
-                {data.locationAreas.map(({ name, names }) => {
-                  const locationAreaName = findEnglishName(names);
+            {isLargeUp &&
+              (data.locationAreas ? (
+                <Stack my={4} gap={4} width="100%">
+                  {data.locationAreas.map(({ name, names, id }) => {
+                    const locationAreaName = findEnglishName(names);
 
-                  return (
-                    <Box key={name}>
-                      {data.locationAreas!.length > 1 && (
-                        <Typography variant="sectionSubTitle" gutterBottom>
-                          {locationAreaName}
-                        </Typography>
-                      )}
-                      <ImageNext
-                        alt={locationAreaName || name}
-                        src={`https://raw.githubusercontent.com/andreferreiradlw/pokestats_media/main/assets/regions/${generation}/${name}.png`}
-                      />
-                    </Box>
-                  );
-                })}
-              </Stack>
-            ) : (
-              <ImageNext
-                alt={findEnglishName(data.location.names) || area.title}
-                src={`https://raw.githubusercontent.com/andreferreiradlw/pokestats_media/main/assets/regions/${generation}/${data.location.name}.png`}
-              />
-            )}
+                    return (
+                      <Box key={name}>
+                        {data.locationAreas!.length > 1 && (
+                          <Typography variant="sectionSubTitle" gutterBottom>
+                            {locationAreaName}
+                          </Typography>
+                        )}
+                        <ImageBackdrop
+                          key={`${generation}-${name}-${id}`}
+                          alt={locationAreaName || name}
+                          src={`https://raw.githubusercontent.com/andreferreiradlw/pokestats_media/main/assets/regions/${generation}/${name}.png`}
+                        />
+                      </Box>
+                    );
+                  })}
+                </Stack>
+              ) : (
+                <ImageBackdrop
+                  key={`${generation}-${data.location.name}-${id}`}
+                  alt={findEnglishName(data.location.names) || area.title}
+                  src={`https://raw.githubusercontent.com/andreferreiradlw/pokestats_media/main/assets/regions/${generation}/${data.location.name}.png`}
+                />
+              ))}
           </Grid2>
-          <Grid2 size={{ xs: 12, md: 8 }}>
+          <Grid2 size={{ xs: 12, lg: 8 }}>
             {data.locationAreas?.length ? (
               <LocationTableV2
                 locationAreas={data.locationAreas}
@@ -90,8 +109,9 @@ const LocationDetails = ({ area, generation, ...rest }: LocationDetailsProps): J
               />
             ) : (
               <Stack py={12} width="100%" alignItems="center" gap={2}>
-                <ImageNext
-                  src={`/static/regions/${generation}/trainer.png`}
+                <ImageNextV2
+                  key={`no-encounters-${data.location.name}`}
+                  imageUrl={`/static/regions/${generation}/trainer.png`}
                   alt="Pokemon Trainer"
                   width={150}
                 />

@@ -3,7 +3,7 @@ import { styled } from '@mui/material/styles';
 import { motion } from 'framer-motion';
 
 const HeaderContainer = styled(AppBar)(({ theme }) => ({
-  marginBottom: theme.spacing(4),
+  marginBottom: theme.spacing(2),
   paddingBottom: theme.spacing(3),
   paddingTop: theme.spacing(3),
 }));

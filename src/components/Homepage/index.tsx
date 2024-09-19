@@ -60,9 +60,9 @@ const Homepage = ({ pokemonTypes, pokemonList }: PokestatsHomepageProps): JSX.El
           variant="contained"
           color="secondary"
           size="large"
+          endIcon={<Pokeball />}
         >
           Random Pokémon
-          <Pokeball />
         </CustomButton>
       </FirstSection>
       <SecondSection>

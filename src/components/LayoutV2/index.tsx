@@ -4,19 +4,20 @@ import { useIsClient, useWindowSize } from 'usehooks-ts';
 import { scrollToTop } from '@/helpers';
 import { fadeInUpVariant, pageContainerVariant } from '@/animations';
 // components
-import type { StackProps } from '@mui/material';
-import { Container, Stack, useScrollTrigger } from '@mui/material';
+import { type ContainerProps, useScrollTrigger } from '@mui/material';
 import type { HTMLMotionProps } from 'framer-motion';
 import { AnimatePresence, motion } from 'framer-motion';
 import Footer from '../Footer';
 import type { HeaderV2Props } from '../HeaderV2';
 import HeaderV2 from '../HeaderV2';
 // styles
-import { LayoutContainer, ScrollButton } from './StyledLayoutV2';
+import { ChildrenContainer, LayoutContainer, ScrollButton } from './StyledLayoutV2';
 // icons
 import ArrowCircleUpIcon from '@mui/icons-material/ArrowCircleUp';
 
-interface LayoutV2Props extends Omit<HTMLMotionProps<'main'>, keyof StackProps>, StackProps {
+interface LayoutV2Props
+  extends Omit<HTMLMotionProps<'main'>, keyof ContainerProps>,
+    ContainerProps {
   withHeader?: boolean;
   showGenSelect?: HeaderV2Props['showGenSelect'];
   customKey: string;
@@ -41,12 +42,8 @@ const LayoutV2 = ({
     <LayoutContainer maxWidth={false} disableGutters>
       {withHeader && <HeaderV2 showGenSelect={showGenSelect} />}
       <AnimatePresence>
-        <Stack
-          direction="column"
-          alignItems="center"
-          position="relative"
-          width="100%"
-          flexGrow={1}
+        <ChildrenContainer
+          maxWidth="xl"
           component={motion.main}
           initial="hidden"
           animate="visible"
@@ -55,8 +52,8 @@ const LayoutV2 = ({
           key={customKey || 'layout-grid-container'}
           {...rest}
         >
-          <Container maxWidth="xl">{children}</Container>
-        </Stack>
+          {children}
+        </ChildrenContainer>
         <Footer />
         {width > 768 && scrollPosition && (
           <ScrollButton

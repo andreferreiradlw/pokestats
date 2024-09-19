@@ -10,6 +10,14 @@ const LayoutContainer = styled(Container)`
   overflow: hidden;
 `;
 
+const ChildrenContainer = styled(Container)`
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  flex-grow: 1;
+`;
+
 const ScrollButton = styled(motion.div)`
   bottom: 30px;
   cursor: pointer;
@@ -19,4 +27,4 @@ const ScrollButton = styled(motion.div)`
   z-index: 100;
 `;
 
-export { LayoutContainer, ScrollButton };
+export { LayoutContainer, ChildrenContainer, ScrollButton };

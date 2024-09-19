@@ -6,6 +6,8 @@ import type { NavigationButtonProps } from './NavigationButton';
 
 const BtnContainer = styled(motion.div)(({ theme }) => ({
   transition: 'box-shadow 0.05s ease-in-out',
+  width: '300px',
+  cursor: 'pointer',
 
   '&:hover': {
     boxShadow: theme.palette.mode === 'dark' ? theme.shadows[5] : theme.shadows[3],
@@ -22,6 +24,7 @@ const BtnSpan = styled('span')({
   alignItems: 'center',
   justifyContent: 'center',
   height: '90px',
+  width: '50%',
   padding: '0 0.5rem',
 });
 
@@ -40,13 +43,13 @@ const Arrow = styled(BtnSpan, {
       borderBottom: '45px solid transparent',
       transition: 'all 0.15s ease-in-out',
       ...(direction === 'left' && {
-        borderRight: `10px solid ${primaryMainColor}`,
-        boxShadow: `10px 0 0 0 ${primaryMainColor}, 10px 3px 0 0 ${primaryMainColor}`,
+        borderRight: `15px solid ${primaryMainColor}`,
+        boxShadow: `15px 0 0 0 ${primaryMainColor}, 15px 5px 0 0 ${primaryMainColor}`,
         right: 0,
       }),
       ...(direction === 'right' && {
-        borderLeft: `10px solid ${primaryMainColor}`,
-        boxShadow: `-10px 0 0 0 ${primaryMainColor}, -10px 3px 0 0 ${primaryMainColor}`,
+        borderLeft: `15px solid ${primaryMainColor}`,
+        boxShadow: `-15px 0 0 0 ${primaryMainColor}, -15px 5px 0 0 ${primaryMainColor}`,
         left: 0,
       }),
     },
@@ -56,9 +59,9 @@ const Arrow = styled(BtnSpan, {
 const Title = styled(BtnSpan)(({ theme }) => ({
   backgroundColor: theme.palette.primary.main,
   color: theme.palette.primary.contrastText,
-  maxWidth: '130px',
+  maxWidth: '150px',
   textAlign: 'center',
-  width: '130px',
+  width: '150px',
   transition: 'all 0.15s ease-in-out',
 }));
 
@@ -74,20 +77,12 @@ const BtnAnchor = styled(Link, {
     borderRadius: '4px 0 0 4px',
     borderRight: 'none',
     flexDirection: 'row',
-
-    '& span': {
-      float: 'left',
-    },
   }),
 
   ...(direction === 'right' && {
     borderRadius: '0 4px 4px 0',
     borderLeft: 'none',
     flexDirection: 'row-reverse',
-
-    '& span': {
-      float: 'right',
-    },
   }),
 
   '& img': {
@@ -96,15 +91,13 @@ const BtnAnchor = styled(Link, {
   },
 
   '&:hover': {
-    cursor: 'pointer',
-
     '& img': {
       transform: 'scale(1.2)',
     },
 
     '& span:after': {
-      left: direction === 'right' ? '10px' : undefined,
-      right: direction === 'left' ? '10px' : undefined,
+      left: direction === 'right' ? '5px' : undefined,
+      right: direction === 'left' ? '5px' : undefined,
     },
   },
 }));

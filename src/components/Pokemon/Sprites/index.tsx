@@ -8,7 +8,7 @@ import { SpriteContainer, Sprite } from './StyledSprites';
 // components
 import type { StackProps } from '@mui/material';
 import { Divider, Grid2, Stack, Typography } from '@mui/material';
-import type { ImageNextProps } from '@/components/ImageNext';
+import type { ImageNextV2Props } from '@/components/ImageNextV2';
 
 interface SpritesProps extends StackProps {
   pokemonSprites: PokemonSprites;
@@ -17,10 +17,11 @@ interface SpritesProps extends StackProps {
 }
 
 interface SpriteWithLabelProps {
-  src: ImageNextProps['src'];
-  alt: ImageNextProps['alt'];
+  src: ImageNextV2Props['imageUrl'];
+  alt: ImageNextV2Props['alt'];
   label: string;
-  height?: ImageNextProps['height'];
+  height?: ImageNextV2Props['height'];
+  key: ImageNextV2Props['key'];
 }
 
 // Define a type for Dream World sprites
@@ -46,9 +47,22 @@ interface ExtendedPokemonSprites extends Omit<PokemonSprites, 'other'> {
 }
 
 // Reusable component for rendering sprite with a label
-const SpriteWithLabel = ({ src, alt, label, height = 100 }: SpriteWithLabelProps): JSX.Element => (
+const SpriteWithLabel = ({
+  src,
+  alt,
+  label,
+  height = 100,
+  key,
+}: SpriteWithLabelProps): JSX.Element => (
   <SpriteContainer>
-    <Sprite unoptimized alt={alt} src={src} height={height} pixelatedimg />
+    <Sprite
+      imageProps={{ unoptimized: true }}
+      alt={alt}
+      imageUrl={src}
+      height={height}
+      pixelatedimg
+      key={key}
+    />
     <Stack>
       <Typography>{label}</Typography>
       <Typography>{removeUnderscore(alt)}</Typography>
@@ -160,8 +174,9 @@ const Sprites = ({ pokemonSprites, pokemonId, forms, ...rest }: SpritesProps): J
                 <SpriteContainer width={{ xxs: '100%', md: 'auto' }}>
                   <Sprite
                     alt="Official Artwork Front Default"
-                    src={officialArtworkSprites.front_default}
-                    height="180"
+                    imageUrl={officialArtworkSprites.front_default}
+                    height="180px"
+                    key={`dreamworld-artwork-${defaultVarietyName}`}
                   />
                 </SpriteContainer>
                 <p>{defaultVarietyName}</p>
@@ -183,8 +198,9 @@ const Sprites = ({ pokemonSprites, pokemonId, forms, ...rest }: SpritesProps): J
                         <SpriteContainer key={`dreamworld-sprite-${key}`}>
                           <Sprite
                             alt={`DreamWorld Design ${removeUnderscore(key)}`}
-                            src={value}
-                            height="170"
+                            imageUrl={value}
+                            height="170px"
+                            key={`dreamworld-artwork-${pokemonId}`}
                           />
                         </SpriteContainer>
                       ),
@@ -205,11 +221,12 @@ const Sprites = ({ pokemonSprites, pokemonId, forms, ...rest }: SpritesProps): J
               >
                 <SpriteContainer width={{ xxs: '100%', md: 'auto' }}>
                   <Sprite
-                    alt="Official Artwork Front Default"
-                    src={`https://raw.githubusercontent.com/andreferreiradlw/pokestats_media/main/assets/images/${formatPokemonId(
+                    alt={`${name} alternate form`}
+                    imageUrl={`https://raw.githubusercontent.com/andreferreiradlw/pokestats_media/main/assets/images/${formatPokemonId(
                       pokemonId,
                     )}-${name.replace(/ /g, '-')}.png`}
-                    height="180"
+                    height="180px"
+                    key={`form-artwork-${pokemonId}-${name}`}
                   />
                 </SpriteContainer>
                 <p>{name}</p>

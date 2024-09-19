@@ -10,9 +10,9 @@ import {
   FooterContent,
 } from './StyledFooter';
 // components
-import ImageNext from '@/components/ImageNext';
 import { motion } from 'framer-motion';
 import { Divider, Stack } from '@mui/material';
+import ImageNextV2 from '../ImageNextV2';
 
 const Footer = (): JSX.Element => {
   // analytics
@@ -62,7 +62,12 @@ const Footer = (): JSX.Element => {
                 rel="noopener"
                 onClick={() => plausible('Pokeapi Footer')}
               >
-                <ImageNext src="/static/pokeapi_logo.png" alt="PokeApi Logo" height={25} />
+                <ImageNextV2
+                  imageUrl="/static/pokeapi_logo.png"
+                  alt="PokeApi Logo"
+                  key="pokeapi-footer"
+                  height={25}
+                />
               </Anchor>
             </motion.span>
           </Stack>

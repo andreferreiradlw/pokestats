@@ -24,7 +24,7 @@ const ImageContainer = styled(Grid2)<ImageContainerProps>`
     ${({ version }) =>
       version === 'shiny' &&
       `
-      max-width: 100%;
+      max-width: 75%;
     `}
 
     ${({ theme, version }) =>

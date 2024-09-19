@@ -14,7 +14,7 @@ export interface ImageNextV2Props
     StackProps {
   pixelatedimg?: boolean;
   placeholderwidth?: string;
-  imageProps?: ImageProps;
+  imageProps?: Partial<ImageProps>;
   key: string;
   imageUrl: string;
   alt: string;
@@ -29,10 +29,17 @@ const ImageNextV2 = ({
   alt,
   ...rest
 }: ImageNextV2Props): JSX.Element => {
-  const [showPlaceholder, setShowPlaceholder] = useState(true);
+  // no need for placeholder if iamge is local
+  const isImageStatic = imageUrl?.startsWith('/static/');
+  // states
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [showPlaceholder, setShowPlaceholder] = useState(false);
   const [hasError, setHasError] = useState(false);
 
-  const handleLoad = useCallback(() => setShowPlaceholder(false), []);
+  const handleLoad = useCallback(() => {
+    setShowPlaceholder(false);
+    setIsLoaded(true);
+  }, []);
 
   const handleError = useCallback(() => {
     setShowPlaceholder(false);
@@ -49,7 +56,6 @@ const ImageNextV2 = ({
       py: 4,
       alignItems: 'center',
       justifyContent: 'center',
-      width: '100%',
     }),
     [placeholderwidth],
   );
@@ -73,12 +79,14 @@ const ImageNextV2 = ({
         <Box
           key={`image-container-${key}`}
           width="100%"
+          display="flex"
           alignItems="center"
           justifyContent="center"
           position="relative"
           component={motion.div}
           initial="hidden"
           animate="show"
+          exit="exit"
           variants={fadeInUpVariant}
           {...rest}
         >
@@ -92,6 +100,9 @@ const ImageNextV2 = ({
             src={imageUrl}
             alt={alt}
             draggable={false}
+            onLoadStart={() => {
+              if (!isImageStatic && !isLoaded) setShowPlaceholder(true);
+            }}
             onLoad={handleLoad}
             onError={handleError}
             {...imageProps}

@@ -17,9 +17,9 @@ const ImageEl = styled(Image, {
 }>(({ $pixelatedimg }) => ({
   objectFit: 'contain',
   willChange: 'opacity',
-  maxHeight: 'inherit',
-  maxWidth: 'inherit',
-  height: 'auto !important',
+  // maxHeight: 'inherit',
+  // maxWidth: 'inherit',
+  // height: 'auto !important',
 
   ...($pixelatedimg && {
     imageRendering: 'pixelated',

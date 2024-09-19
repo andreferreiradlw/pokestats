@@ -1,7 +1,6 @@
 import { useMemo } from 'react';
 // types
 import type { Pokemon, PokemonSpecies } from 'pokenode-ts';
-import { motion } from 'framer-motion';
 // helpers
 import {
   removeDash,
@@ -14,10 +13,10 @@ import { hoverVariant } from '@/animations';
 // styles
 import { PokeBox } from './StyledPokemonBox';
 // components
-import ImageNext from '@/components/ImageNext';
+import { motion } from 'framer-motion';
 import Link from 'next/link';
-import type { CardProps } from '@mui/material';
-import { Typography } from '@mui/material';
+import { Typography, type CardProps } from '@mui/material';
+import ImageNextV2 from '../ImageNextV2';
 
 export interface PokemonBoxProps extends CardProps {
   pokemonId: Pokemon['id'];
@@ -54,14 +53,14 @@ const PokemonBox = ({
         key={`pokemonbox-${pokemonId}`}
       >
         <PokeBox elevation={2} {...rest}>
-          <ImageNext
+          <ImageNextV2
             alt={pokemonName}
             key={`pokemonbox-img-${pokemonId}`}
-            src={`https://raw.githubusercontent.com/andreferreiradlw/pokestats_media/main/assets/images/${formatPokemonId(
+            imageUrl={`https://raw.githubusercontent.com/andreferreiradlw/pokestats_media/main/assets/images/${formatPokemonId(
               pokemonId,
             )}.png`}
-            width="100"
-            height="100"
+            width="100px"
+            height="100px"
           />
           <Typography variant="h3" component="span">{`#${pokemonId}`}</Typography>
           <Typography variant="h5" component="span" textTransform="capitalize">

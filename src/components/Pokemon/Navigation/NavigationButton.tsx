@@ -4,8 +4,8 @@ import { removeDash, formatPokemonId } from '@/helpers';
 import { hoverVariant } from '@/animations';
 // components
 import { BtnContainer, BtnAnchor, Title, Arrow } from './StyledNavigation';
-import ImageNext from '@/components/ImageNext';
 import { Typography } from '@mui/material';
+import ImageNextV2 from '@/components/ImageNextV2';
 
 export interface NavigationButtonProps {
   pokemonName: string;
@@ -28,13 +28,13 @@ const NavigationButton: React.FC<NavigationButtonProps> = ({
   >
     <BtnAnchor href={`/pokemon/${pokemonName}`} onClick={handleClick} direction={direction}>
       <Arrow direction={direction}>
-        <ImageNext
-          src={`https://raw.githubusercontent.com/andreferreiradlw/pokestats_media/main/assets/images/${formatPokemonId(
+        <ImageNextV2
+          imageUrl={`https://raw.githubusercontent.com/andreferreiradlw/pokestats_media/main/assets/images/${formatPokemonId(
             direction === 'left' ? pokemonId - 1 : pokemonId + 1,
           )}.png`}
           alt={pokemonName}
           key={`navigation-${direction}-${pokemonName}`}
-          width="100"
+          width="100%"
         />
       </Arrow>
       <Title>

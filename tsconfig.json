@@ -8,7 +8,7 @@
       "@/BaseStyles/*": ["src/components/BaseStyles/*"],
       "@/components": ["src/components"],
       "@/components/*": ["src/components/*"],
-      "@/MuiTheme": ["./theme"],
+      "@/MuiTheme": ["src/theme"],
       "@/helpers": ["src/helpers"],
       "@/helpers/*": ["src/helpers/*"],
       "@/types": ["types"],

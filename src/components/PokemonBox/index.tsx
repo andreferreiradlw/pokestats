@@ -47,6 +47,7 @@ const PokemonBox = ({
       prefetch={false}
     >
       <motion.a
+        initial="rest"
         whileHover="hover"
         whileTap="tap"
         variants={hoverVariant}
@@ -55,7 +56,7 @@ const PokemonBox = ({
         <PokeBox elevation={2} {...rest}>
           <ImageNextV2
             alt={pokemonName}
-            key={`pokemonbox-img-${pokemonId}`}
+            customKey={`pokemonbox-img-${pokemonId}`}
             imageUrl={`https://raw.githubusercontent.com/andreferreiradlw/pokestats_media/main/assets/images/${formatPokemonId(
               pokemonId,
             )}.png`}

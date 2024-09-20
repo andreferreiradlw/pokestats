@@ -19,7 +19,7 @@ const HeaderV2 = ({ showGenSelect, ...rest }: HeaderV2Props): JSX.Element => (
     <ContentContainer maxWidth="xl">
       <Stack width="auto" justifyContent="flex-start" alignItems="flex-start">
         <Link href="/" passHref legacyBehavior>
-          <Logo whileHover="hover" whileTap="tap" variants={hoverVariant}>
+          <Logo initial="rest" whileHover="hover" whileTap="tap" variants={hoverVariant}>
             Pokestats
           </Logo>
         </Link>

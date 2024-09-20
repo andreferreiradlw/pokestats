@@ -31,6 +31,7 @@ const TypeBadge = ({
         <Badge
           $typename={$typename}
           $iconOnly={$iconOnly}
+          initial="rest"
           whileHover="hover"
           whileTap="tap"
           variants={hoverVariant}

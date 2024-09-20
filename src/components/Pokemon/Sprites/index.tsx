@@ -21,7 +21,7 @@ interface SpriteWithLabelProps {
   alt: ImageNextV2Props['alt'];
   label: string;
   height?: ImageNextV2Props['height'];
-  key: ImageNextV2Props['key'];
+  customKey: ImageNextV2Props['customKey'];
 }
 
 // Define a type for Dream World sprites
@@ -52,7 +52,7 @@ const SpriteWithLabel = ({
   alt,
   label,
   height = 100,
-  key,
+  customKey,
 }: SpriteWithLabelProps): JSX.Element => (
   <SpriteContainer>
     <Sprite
@@ -61,7 +61,7 @@ const SpriteWithLabel = ({
       imageUrl={src}
       height={height}
       pixelatedimg
-      key={key}
+      customKey={customKey}
     />
     <Stack>
       <Typography>{label}</Typography>
@@ -117,7 +117,13 @@ const Sprites = ({ pokemonSprites, pokemonId, forms, ...rest }: SpritesProps): J
                 ([key, value]) =>
                   value &&
                   typeof value !== 'object' && (
-                    <SpriteWithLabel key={`sprite-${key}`} src={value} alt={key} label="Static" />
+                    <SpriteWithLabel
+                      key={`sprite-${key}`}
+                      customKey={`sprite-${key}`}
+                      src={value}
+                      alt={key}
+                      label="Static"
+                    />
                   ),
               )}
             </Stack>
@@ -140,6 +146,7 @@ const Sprites = ({ pokemonSprites, pokemonId, forms, ...rest }: SpritesProps): J
                     typeof value !== 'object' && (
                       <SpriteWithLabel
                         key={`animated-sprite-${key}`}
+                        customKey={`animated-sprite-${key}`}
                         src={value}
                         alt={key}
                         label="Animated"
@@ -177,6 +184,7 @@ const Sprites = ({ pokemonSprites, pokemonId, forms, ...rest }: SpritesProps): J
                     imageUrl={officialArtworkSprites.front_default}
                     height="180px"
                     key={`dreamworld-artwork-${defaultVarietyName}`}
+                    customKey={`dreamworld-artwork-${defaultVarietyName}`}
                   />
                 </SpriteContainer>
                 <p>{defaultVarietyName}</p>
@@ -201,6 +209,7 @@ const Sprites = ({ pokemonSprites, pokemonId, forms, ...rest }: SpritesProps): J
                             imageUrl={value}
                             height="170px"
                             key={`dreamworld-artwork-${pokemonId}`}
+                            customKey={`dreamworld-artwork-${pokemonId}`}
                           />
                         </SpriteContainer>
                       ),
@@ -227,6 +236,7 @@ const Sprites = ({ pokemonSprites, pokemonId, forms, ...rest }: SpritesProps): J
                     )}-${name.replace(/ /g, '-')}.png`}
                     height="180px"
                     key={`form-artwork-${pokemonId}-${name}`}
+                    customKey={`form-artwork-${pokemonId}-${name}`}
                   />
                 </SpriteContainer>
                 <p>{name}</p>

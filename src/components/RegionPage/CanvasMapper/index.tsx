@@ -373,7 +373,7 @@ const CanvasMapper = forwardRef<CanvasMapperHandle, CanvasMapperProps>(
         // render areas again in the updated canvas size
         renderPrefilledAreas(mapAreas, highlightCtx);
       }
-    }, [parentWidth, highlightAllAreas, isImageloaded]);
+    }, [parentWidth, highlightAllAreas, isImageloaded, highlightCtx, renderingCtx.current]);
 
     // Effect to handle resizing and initialize canvas size
     useEffect(() => {

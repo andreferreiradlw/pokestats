@@ -147,6 +147,7 @@ const PokemonDetails = ({
           icon={<VolumeUpIcon />}
           onClick={() => audio.latest?.play()}
           component={motion.div}
+          initial="rest"
           whileHover="hover"
           whileTap="tap"
           variants={hoverVariant}
@@ -158,6 +159,7 @@ const PokemonDetails = ({
             icon={<VolumeDownIcon />}
             onClick={() => audio.legacy?.play()}
             component={motion.div}
+            initial="rest"
             whileHover="hover"
             whileTap="tap"
             variants={hoverVariant}

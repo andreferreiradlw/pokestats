@@ -72,7 +72,7 @@ const LocationDetails = ({ area, generation, ...rest }: LocationDetailsProps): J
             <LocationMusic generation={generation} locationName={key} />
             {isLargeUp &&
               (data.locationAreas ? (
-                <Stack my={4} gap={4} width="100%">
+                <Stack gap={4} width="100%">
                   {data.locationAreas.map(({ name, names, id }) => {
                     const locationAreaName = findEnglishName(names);
 
@@ -110,7 +110,7 @@ const LocationDetails = ({ area, generation, ...rest }: LocationDetailsProps): J
             ) : (
               <Stack py={12} width="100%" alignItems="center" gap={2}>
                 <ImageNextV2
-                  key={`no-encounters-${data.location.name}`}
+                  customKey={`no-encounters-${data.location.name}`}
                   imageUrl={`/static/regions/${generation}/trainer.png`}
                   alt="Pokemon Trainer"
                   width={150}

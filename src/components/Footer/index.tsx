@@ -51,6 +51,7 @@ const Footer = (): JSX.Element => {
           >
             Powered by
             <motion.span
+              initial="rest"
               whileHover="hover"
               whileTap="tap"
               variants={hoverVariant}
@@ -65,7 +66,7 @@ const Footer = (): JSX.Element => {
                 <ImageNextV2
                   imageUrl="/static/pokeapi_logo.png"
                   alt="PokeApi Logo"
-                  key="pokeapi-footer"
+                  customKey="pokeapi-footer"
                   height={25}
                 />
               </Anchor>

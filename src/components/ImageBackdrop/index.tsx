@@ -1,12 +1,13 @@
 import { useState, useCallback, type MouseEvent, useEffect } from 'react';
 // components
-import { Backdrop, Button, Grid2, Stack, Snackbar, Alert } from '@mui/material';
+import { Backdrop, Grid2, Stack, Snackbar, Alert } from '@mui/material';
 import ImageNextV2 from '../ImageNextV2';
 // icons
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import ImageIcon from '@mui/icons-material/Image';
 import FullscreenIcon from '@mui/icons-material/Fullscreen';
 import TabIcon from '@mui/icons-material/Tab';
+import CustomButton from '../CustomButton';
 
 interface ImageBackdropProps {
   src: string;
@@ -114,7 +115,7 @@ const ImageBackdrop = ({ src, alt, key }: ImageBackdropProps): JSX.Element => {
       <ImageNextV2
         imageUrl={src}
         alt={alt}
-        key={key}
+        customKey={key}
         onClick={handleToggle}
         sx={{ cursor: 'pointer' }}
         whileHover="hover"
@@ -142,7 +143,7 @@ const ImageBackdrop = ({ src, alt, key }: ImageBackdropProps): JSX.Element => {
             alignItems="flex-start"
             id="fullscreen-container"
           >
-            <ImageNextV2 imageUrl={src} alt={alt} key={key} maxHeight="90vh" />
+            <ImageNextV2 imageUrl={src} alt={alt} customKey={key} maxHeight="90vh" />
           </Grid2>
           <Grid2 size={{ xxs: 12, lg: 4 }}>
             <Stack
@@ -151,7 +152,8 @@ const ImageBackdrop = ({ src, alt, key }: ImageBackdropProps): JSX.Element => {
               flexWrap="wrap"
               justifyContent={{ xxs: 'center', lg: 'flex-start' }}
             >
-              <Button
+              <CustomButton
+                fullWidth
                 size="large"
                 variant="contained"
                 endIcon={<ContentCopyIcon />}
@@ -159,8 +161,9 @@ const ImageBackdrop = ({ src, alt, key }: ImageBackdropProps): JSX.Element => {
                 aria-label="Copy image URL"
               >
                 Copy Image URL
-              </Button>
-              <Button
+              </CustomButton>
+              <CustomButton
+                fullWidth
                 size="large"
                 variant="contained"
                 endIcon={<ImageIcon />}
@@ -168,8 +171,9 @@ const ImageBackdrop = ({ src, alt, key }: ImageBackdropProps): JSX.Element => {
                 aria-label="Save image"
               >
                 Download Image
-              </Button>
-              <Button
+              </CustomButton>
+              <CustomButton
+                fullWidth
                 size="large"
                 variant="contained"
                 endIcon={<FullscreenIcon />}
@@ -177,9 +181,11 @@ const ImageBackdrop = ({ src, alt, key }: ImageBackdropProps): JSX.Element => {
                 aria-label="Fullscreen mode"
               >
                 Fullscreen Mode
-              </Button>
-              <Button
+              </CustomButton>
+              <CustomButton
+                fullWidth
                 href={src}
+                // @ts-expect-error: incorrect type
                 target="_blank"
                 size="large"
                 variant="contained"
@@ -187,7 +193,7 @@ const ImageBackdrop = ({ src, alt, key }: ImageBackdropProps): JSX.Element => {
                 aria-label="Open in a new tab"
               >
                 Open in a new tab
-              </Button>
+              </CustomButton>
             </Stack>
           </Grid2>
         </Grid2>

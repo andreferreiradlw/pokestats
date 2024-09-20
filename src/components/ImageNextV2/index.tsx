@@ -15,7 +15,7 @@ export interface ImageNextV2Props
   pixelatedimg?: boolean;
   placeholderwidth?: string;
   imageProps?: Partial<ImageProps>;
-  key: string;
+  customKey: string;
   imageUrl: string;
   alt: string;
   height?: string | number;
@@ -26,7 +26,7 @@ const ImageNextV2 = ({
   pixelatedimg,
   placeholderwidth = '50%',
   imageProps,
-  key,
+  customKey,
   imageUrl,
   alt,
   height,
@@ -57,7 +57,7 @@ const ImageNextV2 = ({
       animate: 'animate',
       // exit: 'exit',
       variants: placeholderVariant,
-      placeholderwidth,
+      placeholderwidth: placeholderwidth || '100%',
       height,
       py: 4,
       alignItems: 'center',
@@ -73,15 +73,16 @@ const ImageNextV2 = ({
       justifyContent="center"
       position="relative"
       width="100%"
-      key={`image-container-${key}`}
+      key={`image-container-${customKey}`}
       component={motion.div}
+      initial="rest"
       variants={hoverVariant}
       {...rest}
     >
-      <AnimatePresence mode="wait">
+      <AnimatePresence>
         {showPlaceholder && !hasError && (
           <Stack
-            key={`loading-placeholder-${key}`}
+            key={`loading-placeholder-${customKey}`}
             component={PlaceholderContainer}
             {...loadingProps}
           >
@@ -90,7 +91,7 @@ const ImageNextV2 = ({
         )}
         {hasError ? (
           <Stack
-            key={`error-placeholder-${key}`}
+            key={`error-placeholder-${customKey}`}
             component={PlaceholderContainer}
             {...loadingProps}
           >
@@ -99,13 +100,13 @@ const ImageNextV2 = ({
         ) : (
           <Box
             width={!showPlaceholder ? '100%' : 0}
-            height={!showPlaceholder ? height || 'auto' : 0}
+            height={height || 'auto'}
             display="flex"
             alignItems="center"
             justifyContent="center"
             position="relative"
             maxHeight="inherit"
-            key={`image-wrapper-${key}`}
+            key={`image-wrapper-${customKey}`}
             component={motion.div}
             initial="hidden"
             animate="show"

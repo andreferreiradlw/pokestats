@@ -14,13 +14,14 @@ export interface NavigationButtonProps {
   handleClick: () => void;
 }
 
-const NavigationButton: React.FC<NavigationButtonProps> = ({
+const NavigationButton = ({
   pokemonName,
   pokemonId,
   direction,
   handleClick,
-}) => (
+}: NavigationButtonProps): JSX.Element => (
   <BtnContainer
+    initial="rest"
     whileHover="hover"
     whileTap="tap"
     variants={hoverVariant}
@@ -33,7 +34,7 @@ const NavigationButton: React.FC<NavigationButtonProps> = ({
             direction === 'left' ? pokemonId - 1 : pokemonId + 1,
           )}.png`}
           alt={pokemonName}
-          key={`navigation-${direction}-${pokemonName}`}
+          customKey={`navigation-${direction}-${pokemonName}`}
           width="100%"
         />
       </Arrow>

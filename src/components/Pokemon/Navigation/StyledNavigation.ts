@@ -35,6 +35,7 @@ const Arrow = styled(BtnSpan, {
 
   return {
     position: 'relative',
+    zIndex: 2,
 
     '&:after': {
       content: "''",
@@ -42,6 +43,7 @@ const Arrow = styled(BtnSpan, {
       borderTop: '45px solid transparent',
       borderBottom: '45px solid transparent',
       transition: 'all 0.15s ease-in-out',
+      zIndex: 2,
       ...(direction === 'left' && {
         borderRight: `15px solid ${primaryMainColor}`,
         boxShadow: `15px 0 0 0 ${primaryMainColor}, 15px 5px 0 0 ${primaryMainColor}`,
@@ -96,8 +98,8 @@ const BtnAnchor = styled(Link, {
     },
 
     '& span:after': {
-      left: direction === 'right' ? '5px' : undefined,
-      right: direction === 'left' ? '5px' : undefined,
+      left: direction === 'right' ? '10px' : undefined,
+      right: direction === 'left' ? '10px' : undefined,
     },
   },
 }));

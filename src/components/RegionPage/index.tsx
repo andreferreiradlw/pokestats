@@ -5,9 +5,10 @@ import { usePlausible } from 'next-plausible';
 import { alpha } from '@mui/material/styles';
 // components
 import CanvasMapper, { type CanvasMapperArea, type CanvasMapperHandle } from './CanvasMapper';
-import { Button, Grid2, Stack, Typography, useTheme } from '@mui/material';
+import { Grid2, Stack, Typography, useTheme } from '@mui/material';
 import LocationDetails from './LocationDetails';
 import { AnimatePresence } from 'framer-motion';
+import CustomButton from '../CustomButton';
 
 interface RegionPageProps extends PropsWithChildren {
   areas: CanvasMapperArea[];
@@ -47,7 +48,7 @@ const RegionPage = ({
           </Typography>
           {children}
           <Stack flexDirection="row" gap={2} mt={4}>
-            <Button
+            <CustomButton
               onClick={() => {
                 setHighlightAllAreas(prev => !prev);
                 plausible('Highlight All Areas Click');
@@ -55,8 +56,8 @@ const RegionPage = ({
               variant={highlightAllAreas ? 'contained' : 'outlined'}
             >
               Highlight All Areas
-            </Button>
-            <Button
+            </CustomButton>
+            <CustomButton
               onClick={() => {
                 if (canvasMapperRef.current) {
                   // Call the clear function directly from CanvasMapper
@@ -69,7 +70,7 @@ const RegionPage = ({
               color="secondary"
             >
               Clear Selection
-            </Button>
+            </CustomButton>
           </Stack>
         </Grid2>
         <Grid2 size={{ xxs: 12, lg: 7 }} ref={mapContainerRef}>

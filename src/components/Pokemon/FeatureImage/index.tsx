@@ -51,7 +51,7 @@ const FeaturedImage = ({ specieNames, pokemonId, ...rest }: FeaturedImageProps):
           placeholderwidth="20%"
           alt={englishName!}
           imageUrl={imageURL}
-          key={`${pokemonId}-feature-image-${version}`}
+          customKey={`${pokemonId}-feature-image-${version}`}
         />
         {specieNames && (
           <JpnName

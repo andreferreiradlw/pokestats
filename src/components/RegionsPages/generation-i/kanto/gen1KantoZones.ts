@@ -184,7 +184,7 @@ export const kantoZones: CanvasMapperProps['areas'] = [
   {
     id: '160',
     key: 'pokemon-tower',
-    title: 'Pokemon Tower',
+    title: 'Pokémon Tower',
     shape: 'rect',
     coords: [902, 224, 843, 281],
     description:
@@ -193,7 +193,7 @@ export const kantoZones: CanvasMapperProps['areas'] = [
   {
     id: '161',
     key: 'pokemon-mansion',
-    title: 'Pokemon Mansion',
+    title: 'Pokémon Mansion',
     shape: 'rect',
     coords: [227, 846, 168, 903],
     description:

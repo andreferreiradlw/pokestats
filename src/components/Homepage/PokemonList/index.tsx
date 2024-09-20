@@ -77,7 +77,7 @@ const PokemonList = ({ pokemon, ...rest }: PokemonListProps): JSX.Element => {
       {...rest}
     >
       <Typography variant="sectionTitle">
-        {`Select your Pokemon (${sortedAndFilteredPokemon.length})`}
+        {`Select your Pokémon (${sortedAndFilteredPokemon.length})`}
       </Typography>
       <Grid2 container wrap="wrap" gap={{ xs: 2, md: 4 }}>
         <DropdownV2
@@ -87,7 +87,7 @@ const PokemonList = ({ pokemon, ...rest }: PokemonListProps): JSX.Element => {
           onChange={handleGenChange}
         />
         <DropdownV2
-          label="Sort Pokemon"
+          label="Sort Pokémon"
           options={[
             { value: 'id', label: 'Number' },
             { value: 'name', label: 'Name' },

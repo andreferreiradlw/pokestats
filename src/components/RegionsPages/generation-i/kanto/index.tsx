@@ -33,7 +33,7 @@ const KantoGen1 = ({ location }: PokestatsRegionsPageProps): JSX.Element => (
       </li>
     </ul>
     <Typography>
-      Ready to explore Generation I Kanto? Select a location on the map and discover its pokemon
+      Ready to explore Generation I Kanto? Select a location on the map and discover its Pokémon
       encounters!
     </Typography>
   </RegionPage>

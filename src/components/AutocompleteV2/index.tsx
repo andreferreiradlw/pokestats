@@ -53,7 +53,7 @@ const AutocompleteIcon = ({
     case 'pokemon':
       return id ? (
         <ItemIcon
-          alt={`${name} pokemon`}
+          alt={`${name} pokémon`}
           src={`https://raw.githubusercontent.com/andreferreiradlw/pokestats_media/main/assets/images/${formatPokemonId(
             id,
           )}.png`}
@@ -64,7 +64,7 @@ const AutocompleteIcon = ({
     case 'move':
       return (
         <ItemIcon
-          alt={`${name} pokemon move`}
+          alt={`${name} pokémon move`}
           src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/grass-memory.png"
         />
       );

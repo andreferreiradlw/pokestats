@@ -37,15 +37,15 @@
 ## Roadmap
 
 ✅ Homepage (Autocomplete + Infinity Scroll) <br />
-✅ Pokemon Page <br />
+✅ Pokémon Page <br />
 ✅ Type Page <br />
 ✅ Static Generated Pages <br />
 ✅ Typescript Refactoring <br />
-✅ Generation 8 Pokemon + Legends: Arceus ([some data is incomplete](https://github.com/PokeAPI/pokeapi/issues/520)) <br />
+✅ Generation 8 Pokémon + Legends: Arceus ([some data is incomplete](https://github.com/PokeAPI/pokeapi/issues/520)) <br />
 ✅ Move Page <br />
 ✅ Material UI Implementation <br />
 ✅ Dark Mode <br />
-✅ Pokemon Encounters Section <br />
+✅ Pokémon Encounters Section <br />
 🛠️ Sprites Page <br />
 🛠️ Interactive Region Maps <br />
 &nbsp;&nbsp; ✅ Kanto (Gen I) <br />
@@ -69,7 +69,7 @@ Checkout [CONTRIBUTING.md](https://github.com/andreferreiradlw/pokestats/blob/ma
 [duiker101](https://github.com/duiker101/pokemon-type-svg-icons) for the great SVG Type Icons,
 [Gabb-c](https://github.com/Gabb-c/pokenode-ts) for the NodeJS wrapper with Typescript support,
 [msikma](https://github.com/msikma/pokesprite) for all the item sprites,
-[HybridShivam](https://github.com/HybridShivam/Pokemon) for the compressed images for each Pokemon and their varieties
+[HybridShivam](https://github.com/HybridShivam/Pokemon) for the compressed images for each Pokémon and their varieties
 
 ## License
 

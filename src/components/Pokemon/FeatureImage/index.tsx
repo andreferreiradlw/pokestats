@@ -71,7 +71,7 @@ const FeaturedImage = ({ specieNames, pokemonId, ...rest }: FeaturedImageProps):
           value={version}
           exclusive
           onChange={(_, value) => setVersion(value)}
-          aria-label="Pokemon Version"
+          aria-label="Pokémon Version"
         >
           <ToggleButton disableRipple disabled={version === 'normal'} value="normal">
             Normal

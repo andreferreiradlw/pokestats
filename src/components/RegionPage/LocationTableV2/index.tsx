@@ -203,7 +203,7 @@ const LocationTableV2 = ({
                 </Table>
               </TableContainer>
             ) : (
-              <Typography>No pokemon encounters in this area.</Typography>
+              <Typography>No Pokémon encounters in this area.</Typography>
             )}
           </AccordionDetails>
         </Accordion>

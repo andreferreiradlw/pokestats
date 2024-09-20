@@ -112,11 +112,11 @@ const LocationDetails = ({ area, generation, ...rest }: LocationDetailsProps): J
                 <ImageNextV2
                   customKey={`no-encounters-${data.location.name}`}
                   imageUrl={`/static/regions/${generation}/trainer.png`}
-                  alt="Pokemon Trainer"
+                  alt="Pokémon Trainer"
                   width={150}
                 />
                 <Typography variant="sectionSubTitle">
-                  No pokemon encounters have been found in this area.
+                  No Pokémon encounters have been found in this area.
                 </Typography>
               </Stack>
             )}

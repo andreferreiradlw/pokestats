@@ -101,7 +101,7 @@ const UserAndAllies = ({
     <PokemonContainer>
       <ImageContainer>
         <AllyImg
-          alt="Back view of Current Pokemon"
+          alt="Back view of Current Pokémon"
           src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/${mapTypeToPokemonId(
             moveType.name,
           )}.png`}

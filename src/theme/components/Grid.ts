@@ -1,5 +1,4 @@
-import type { Theme } from '@mui/material';
-import type { Components } from '@mui/material';
+import type { Components, Theme } from '@mui/material';
 
 const Grid: {
   MuiGrid2: Components<Theme>['MuiGrid2'];

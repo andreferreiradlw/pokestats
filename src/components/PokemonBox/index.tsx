@@ -62,7 +62,6 @@ const PokemonBox = ({
             )}.png`}
             width="100px"
             height="100px"
-            placeholderwidth="85%"
           />
           <Typography variant="h3" component="span">{`#${pokemonId}`}</Typography>
           <Typography variant="h5" component="span" textTransform="capitalize">

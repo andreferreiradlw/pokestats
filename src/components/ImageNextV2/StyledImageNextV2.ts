@@ -42,7 +42,7 @@ const PlaceholderContainer = styled(motion.div, {
 
 const LoadingIcon = styled(EggIcon)`
   animation: ${tumble} 5s ease-in-out 0s infinite;
-  width: 50%;
+  /* width: 50%; */
 `;
 
 const ErrorIcon = styled(Error404Icon)({ width: '50%' });

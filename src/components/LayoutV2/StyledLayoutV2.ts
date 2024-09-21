@@ -16,6 +16,11 @@ const ChildrenContainer = styled(Container)`
   position: relative;
   width: 100%;
   flex-grow: 1;
+
+  ${({ theme }) => `
+  padding-top: ${theme.spacing(4)};
+  padding-bottom: ${theme.spacing(4)};
+  `}
 `;
 
 const ScrollButton = styled(motion.div)`

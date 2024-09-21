@@ -30,7 +30,7 @@ const MovePage = ({
   const moveName = findEnglishName(moveNames) || '';
 
   return (
-    <Stack divider={<Divider />} gap={4} py={2}>
+    <Stack divider={<Divider />} gap={4}>
       <Stack
         justifyContent={{ xxs: 'center', lg: 'flex-start' }}
         alignItems={{ xxs: 'center', lg: 'flex-start' }}

@@ -27,7 +27,7 @@ const PokemonPage = ({
   const { names, varieties } = species;
 
   return (
-    <Stack divider={<Divider />} gap={4} py={2}>
+    <Stack divider={<Divider />} gap={4}>
       <Grid2
         container
         direction={{ xxs: 'column-reverse', lg: 'row' }}

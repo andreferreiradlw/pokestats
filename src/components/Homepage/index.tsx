@@ -67,7 +67,7 @@ const Homepage = ({ pokemonTypes, pokemonList }: PokestatsHomepageProps): JSX.El
       </FirstSection>
       <SecondSection>
         <Container maxWidth="xl">
-          <Stack gap="1.5em" padding={{ xs: 2, md: 4 }} divider={<Divider />}>
+          <Stack gap={4} padding={{ xs: 2, md: 4 }} divider={<Divider />}>
             <TypeList types={pokemonTypes} />
             <PokemonList pokemon={pokemonList} />
           </Stack>

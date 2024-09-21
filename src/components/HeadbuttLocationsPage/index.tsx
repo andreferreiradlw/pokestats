@@ -101,7 +101,7 @@ const HeadbuttLocationsPage = ({
   }, [gameVersion, gameGeneration]);
 
   return (
-    <Stack gap={4} py={2} width="100%">
+    <Stack gap={4} width="100%">
       <Typography variant="pageHeading">Headbutt Tree Finder</Typography>
       <Grid2 container size={12} spacing={4}>
         <Grid2 container size={{ xxs: 12, md: 3 }} direction="column">

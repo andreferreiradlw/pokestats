@@ -7,7 +7,7 @@ import { fadeInUpVariant, pageContainerVariant } from '@/animations';
 import { type ContainerProps, useScrollTrigger } from '@mui/material';
 import type { HTMLMotionProps } from 'framer-motion';
 import { AnimatePresence, motion } from 'framer-motion';
-import Footer from '../Footer';
+import Footer from './Footer';
 import type { HeaderV2Props } from '../HeaderV2';
 import HeaderV2 from '../HeaderV2';
 // styles

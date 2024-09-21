@@ -39,7 +39,7 @@ const RegionPage = ({
   const theme = useTheme();
 
   return (
-    <Stack gap={4} py={2}>
+    <Stack gap={4}>
       <Grid2 container size={12} alignItems="flex-start" justifyContent="flex-start" spacing={4}>
         <Grid2 flexDirection="column" alignItems="flex-start" size={{ xxs: 12, lg: 5 }}>
           <Typography variant="pageHeading">{regionName}</Typography>

@@ -111,7 +111,7 @@ const LocationDetails = ({ area, generation, ...rest }: LocationDetailsProps): J
               <Stack py={12} width="100%" alignItems="center" gap={2}>
                 <ImageNextV2
                   customKey={`no-encounters-${data.location.name}`}
-                  imageUrl={`/static/regions/${generation}/trainer.png`}
+                  imageUrl={`https://raw.githubusercontent.com/andreferreiradlw/pokestats_media/main/assets/misc/${generation}/trainer-back.png`}
                   alt="Pokémon Trainer"
                   width={150}
                 />

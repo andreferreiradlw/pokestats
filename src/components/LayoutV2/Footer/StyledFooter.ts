@@ -2,20 +2,17 @@
 import { riseUp } from '@/animations';
 import { styled } from '@mui/material/styles';
 // components
-import { Container, Grid2, Paper } from '@mui/material';
+import { Grid2, Paper } from '@mui/material';
 import Link from 'next/link';
 // svg
 import Potion from 'public/static/iconLibrary/potion.svg';
 
 const FooterContainer = styled(Paper)(({ theme }) => ({
-  // background: theme.palette.background.default,
   fontWeight: theme.typography.fontWeightMedium,
   paddingBottom: theme.spacing(6),
   paddingTop: theme.spacing(6),
   width: '100%',
 }));
-
-const FooterContainerInner = styled(Container)(({ theme }) => ({}));
 
 const FooterContent = styled(Grid2)(({ theme }) => ({
   alignItems: 'center',
@@ -61,4 +58,4 @@ const PokestatsIcon = styled(Potion)`
   }
 `;
 
-export { FooterContainer, FooterContainerInner, FooterContent, PokestatsIcon, Anchor };
+export { FooterContainer, FooterContent, PokestatsIcon, Anchor };

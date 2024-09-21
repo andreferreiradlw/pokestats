@@ -2,16 +2,10 @@
 import { usePlausible } from 'next-plausible';
 import { hoverVariant } from '@/animations';
 // styles
-import {
-  FooterContainer,
-  PokestatsIcon,
-  Anchor,
-  FooterContainerInner,
-  FooterContent,
-} from './StyledFooter';
+import { FooterContainer, PokestatsIcon, Anchor, FooterContent } from './StyledFooter';
 // components
 import { motion } from 'framer-motion';
-import { Grid2, Link } from '@mui/material';
+import { Container, Grid2, Link } from '@mui/material';
 import ImageNextV2 from '../../ImageNextV2';
 
 const Footer = (): JSX.Element => {
@@ -20,7 +14,7 @@ const Footer = (): JSX.Element => {
 
   return (
     <FooterContainer>
-      <FooterContainerInner maxWidth="xl">
+      <Container maxWidth="xl">
         <FooterContent size={12} container spacing={2}>
           <Grid2 size={5} alignItems="center" justifyContent="flex-start" gap={4}>
             <Link
@@ -85,7 +79,7 @@ const Footer = (): JSX.Element => {
             Pokémon are registered trademarks of Nintendo and Game Freak.
           </Grid2>
         </FooterContent>
-      </FooterContainerInner>
+      </Container>
     </FooterContainer>
   );
 };

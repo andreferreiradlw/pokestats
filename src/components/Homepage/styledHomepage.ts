@@ -31,7 +31,7 @@ const GithubLink = styled(motion.a)(({ theme }) => ({
   svg: {
     background: theme.palette.background.default,
     borderRadius: '25%',
-    fill: theme.palette.secondary.main,
+    fill: theme.palette.text.primary,
     height: 'auto',
     width: '30px',
 
@@ -40,7 +40,7 @@ const GithubLink = styled(motion.a)(({ theme }) => ({
     },
 
     '&:hover': {
-      background: theme.palette.secondary.main,
+      background: theme.palette.text.primary,
       fill: theme.palette.background.default,
     },
   },

@@ -18,15 +18,15 @@ const BtnContainer = styled(motion.div)(({ theme }) => ({
   },
 }));
 
-const BtnSpan = styled('span')({
+const BtnSpan = styled('span')(({ theme }) => ({
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
   justifyContent: 'center',
   height: '90px',
   width: '50%',
-  padding: '0 0.5rem',
-});
+  padding: `0 ${theme.spacing(2)}`,
+}));
 
 const Arrow = styled(BtnSpan, {
   shouldForwardProp: prop => prop !== 'direction',
@@ -46,12 +46,12 @@ const Arrow = styled(BtnSpan, {
       zIndex: 2,
       ...(direction === 'left' && {
         borderRight: `15px solid ${primaryMainColor}`,
-        boxShadow: `15px 0 0 0 ${primaryMainColor}, 15px 5px 0 0 ${primaryMainColor}`,
+        boxShadow: `12px 0 0 0 ${primaryMainColor}`,
         right: 0,
       }),
       ...(direction === 'right' && {
         borderLeft: `15px solid ${primaryMainColor}`,
-        boxShadow: `-15px 0 0 0 ${primaryMainColor}, -15px 5px 0 0 ${primaryMainColor}`,
+        boxShadow: `-12px 0 0 0 ${primaryMainColor}`,
         left: 0,
       }),
     },
@@ -65,6 +65,7 @@ const Title = styled(BtnSpan)(({ theme }) => ({
   textAlign: 'center',
   width: '150px',
   transition: 'all 0.15s ease-in-out',
+  zIndex: 3,
 }));
 
 const BtnAnchor = styled(Link, {
@@ -76,13 +77,13 @@ const BtnAnchor = styled(Link, {
   overflow: 'hidden',
 
   ...(direction === 'left' && {
-    borderRadius: '4px 0 0 4px',
+    borderRadius: '5px 0 0 5px',
     borderRight: 'none',
     flexDirection: 'row',
   }),
 
   ...(direction === 'right' && {
-    borderRadius: '0 4px 4px 0',
+    borderRadius: '0 5px 5px 0',
     borderLeft: 'none',
     flexDirection: 'row-reverse',
   }),

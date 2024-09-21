@@ -51,16 +51,14 @@ const EncounterCard = ({
   pokemonName,
   ...rest
 }: EncounterCardProps): JSX.Element => {
-  // data
-  const { location, location_area } = encounter;
-
   // analytics
   const plausible = usePlausible();
 
+  // data
+  const { location_area, version_details, location } = encounter;
+
   // parse encounter data
   const formattedEncounter = useMemo(() => {
-    const { location_area, version_details, location } = encounter;
-
     const regionName = location.region!.name;
 
     // format location area data
@@ -69,18 +67,31 @@ const EncounterCard = ({
       ...parseLocationName(location_area),
     };
 
-    // format version details data
+    // Define headbutt encounter methods to handle
+    const headbuttMethods = ['headbutt-normal', 'headbutt-high'];
+
+    // Format version details data, ignoring 'headbutt-low'
     const encounterDetails = version_details.encounter_details.reduce(
       (acc, { chance, max_level, min_level, method: currMethod }) => {
         const methodName = currMethod.name;
+
+        // Skip the headbutt-low method
+        if (methodName === 'headbutt-low') {
+          return acc;
+        }
+
         const existingEntry = acc[methodName];
+        const isHeadbuttMethod = headbuttMethods.includes(methodName);
 
         if (!existingEntry) {
           acc[methodName] = {
             maxLevel: max_level,
             minLevel: min_level,
             maxChance: chance,
-            methodName: capitalize(removeDash(methodName)),
+            methodName:
+              isHeadbuttMethod && methodName === 'headbutt-high'
+                ? 'Headbutt rare'
+                : capitalize(removeDash(methodName)),
             iconUrl: mapEncounterMethodIcons(
               methodName,
               pokemonName,
@@ -103,8 +114,13 @@ const EncounterCard = ({
       {} as FormattedEncounter,
     );
 
-    // return formatted data
-    return { area, encounterDetails, regionName };
+    // Determine if any headbutt methods are present, ignoring 'headbutt-low'
+    const hasHeadbutt = Object.keys(encounterDetails).some(method =>
+      headbuttMethods.includes(method),
+    );
+
+    // Return formatted data with the hasHeadbutt flag
+    return { area, encounterDetails, regionName, hasHeadbutt };
   }, [encounter, generation, pokemonName]);
 
   return (
@@ -152,21 +168,38 @@ const EncounterCard = ({
             </Table>
           )}
         </CardContent>
-        {generation === 'generation-i' && (
+        {(generation === 'generation-i' || formattedEncounter.hasHeadbutt) && (
           <CardActions sx={{ mt: 'auto' }}>
-            <Link
-              href={`/regions/${generation}/${location.region?.name}?location=${location.name}`}
-              passHref
-              legacyBehavior
-            >
-              <CustomButton
-                size="small"
-                variant="contained"
-                onClick={() => plausible('All Area Encounters Click')}
+            {generation === 'generation-i' && (
+              <Link
+                href={`/regions/${generation}/${location.region?.name}?location=${location.name}`}
+                passHref
+                legacyBehavior
               >
-                All Area Encounters
-              </CustomButton>
-            </Link>
+                <CustomButton
+                  size="small"
+                  variant="contained"
+                  onClick={() => plausible('All Area Encounters Click')}
+                >
+                  All Area Encounters
+                </CustomButton>
+              </Link>
+            )}
+            {formattedEncounter.hasHeadbutt && (
+              <Link
+                href={`/headbutt-tree-finder?location=${location.name}`}
+                passHref
+                legacyBehavior
+              >
+                <CustomButton
+                  size="small"
+                  variant="contained"
+                  onClick={() => plausible('Headbutt Tree Finder Click')}
+                >
+                  Headbutt Tree Finder
+                </CustomButton>
+              </Link>
+            )}
           </CardActions>
         )}
       </Card>

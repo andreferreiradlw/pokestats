@@ -5,15 +5,13 @@ import LayoutV2 from '@/components/LayoutV2';
 import HeadbuttLocationsPage from '@/components/HeadbuttLocationsPage';
 
 export interface PokestatsHeadbuttLocationsPageProps {
-  location: string | null;
+  defaultLocation: string | null;
 }
 
-const PokestatsHeadbuttLocationsPage: NextPage<PokestatsHeadbuttLocationsPageProps> = ({
-  location,
-}) => {
+const PokestatsHeadbuttLocationsPage: NextPage<PokestatsHeadbuttLocationsPageProps> = props => {
   return (
     <LayoutV2 withHeader customKey="kanto-gen1-region">
-      <HeadbuttLocationsPage />
+      <HeadbuttLocationsPage {...props} />
     </LayoutV2>
   );
 };
@@ -23,7 +21,7 @@ export const getServerSideProps: GetServerSideProps = async context => {
 
   return {
     props: {
-      location: typeof location === 'string' ? location : null, // Ensure location is a string or null
+      defaultLocation: typeof location === 'string' ? location : null, // Ensure location is a string or null
     },
   };
 };

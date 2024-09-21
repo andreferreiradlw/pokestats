@@ -1,9 +1,13 @@
-import { useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
+// types
+import type { PokestatsHeadbuttLocationsPageProps } from '@/pages/headbutt-tree-finder';
 // data
 import { type HeadbuttLocation, headbuttLocations } from './headbuttData';
 // helpers
 import { useDebouncedValue } from '@/hooks';
 import type { GameValue } from '@/helpers';
+// ctx
+import { GameVersionContext } from '@/context';
 // components
 import {
   Grid2,
@@ -48,12 +52,17 @@ const mapScaleMarks = [
   },
 ];
 
-const HeadbuttLocationsPage = (): JSX.Element => {
+const HeadbuttLocationsPage = ({
+  defaultLocation,
+}: PokestatsHeadbuttLocationsPageProps): JSX.Element => {
+  // context
+  const { gameVersion, gameGeneration } = useContext(GameVersionContext);
+
   // states
   const [trainerId, setTrainerId] = useState<number | ''>('');
   const [areaDetails, setAreaDetails] = useState<HeadbuttLocation>();
   const [scale, setScale] = useState<number>(1.5);
-  const [gameVersion, setGameVersion] = useState<GameValue>('gold');
+  const [gameVersionInput, setGameVersionInput] = useState<GameValue>('gold');
 
   // Use the debounced values to avoid lag
   const debouncedTrainerId = useDebouncedValue(trainerId, 1000);
@@ -75,8 +84,21 @@ const HeadbuttLocationsPage = (): JSX.Element => {
 
   const handleGameChange = (event: SelectChangeEvent<string>) => {
     const selectedVersion = event.target.value as GameValue;
-    setGameVersion(selectedVersion);
+    setGameVersionInput(selectedVersion);
   };
+
+  useEffect(() => {
+    if (defaultLocation) {
+      const location = headbuttLocations.find(({ value }) => value === defaultLocation);
+      if (location) setAreaDetails(location);
+    }
+  }, [defaultLocation]);
+
+  useEffect(() => {
+    if (gameGeneration === 'generation-ii') {
+      setGameVersionInput(gameVersion);
+    }
+  }, [gameVersion, gameGeneration]);
 
   return (
     <Stack gap={4} py={2} width="100%">
@@ -138,7 +160,7 @@ const HeadbuttLocationsPage = (): JSX.Element => {
                 { value: 'silver', label: 'Silver' },
                 { value: 'crystal', label: 'Crystal' },
               ]}
-              value={gameVersion}
+              value={gameVersionInput}
               onChange={handleGameChange}
             />
           </Grid2>
@@ -174,7 +196,7 @@ const HeadbuttLocationsPage = (): JSX.Element => {
         >
           {debouncedTrainerId && areaDetails ? (
             <>
-              <HeadbuttEncounters gameVersion={gameVersion} areaKey={areaDetails.value} />
+              <HeadbuttEncounters gameVersion={gameVersionInput} areaKey={areaDetails.value} />
               <HeadbuttMap
                 size={12}
                 areaDetails={areaDetails}

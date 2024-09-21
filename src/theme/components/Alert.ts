@@ -8,6 +8,12 @@ const Alert: {
       root: {
         width: '100%',
       },
+      action: {
+        alignItems: 'center',
+      },
+      icon: {
+        alignItems: 'center',
+      },
     },
   },
 };

@@ -1,7 +1,7 @@
 import { capitalise, type GameValue } from '@/helpers';
 import { Avatar, Chip, Grid2, Paper, Stack, Typography, type Grid2Props } from '@mui/material';
 import { useMemo, useCallback, memo } from 'react';
-import { type HeadbuttEncounter, mapAreaPokemon } from '../headbuttData';
+import { type HeadbuttEncounter, mapAreaHeadbuttEncounters } from '../headbuttData';
 import { useRouter } from 'next/router';
 
 interface HeadbuttEncountersProps extends Grid2Props {
@@ -14,7 +14,10 @@ const HeadbuttEncounters = ({
   gameVersion,
   ...rest
 }: HeadbuttEncountersProps): JSX.Element => {
-  const encounters = useMemo(() => mapAreaPokemon(gameVersion, areaKey), [areaKey, gameVersion]);
+  const encounters = useMemo(
+    () => mapAreaHeadbuttEncounters(gameVersion, areaKey),
+    [areaKey, gameVersion],
+  );
   const router = useRouter();
 
   const handleChipClick = useCallback(

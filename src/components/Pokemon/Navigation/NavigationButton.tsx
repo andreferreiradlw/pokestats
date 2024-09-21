@@ -36,6 +36,7 @@ const NavigationButton = ({
           alt={pokemonName}
           customKey={`navigation-${direction}-${pokemonName}`}
           width="100%"
+          zIndex={1}
         />
       </Arrow>
       <Title>

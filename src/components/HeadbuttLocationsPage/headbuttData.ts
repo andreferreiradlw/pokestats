@@ -283,7 +283,7 @@ const areaMappings: {
   'blackthorn-city': { goldSilver: cityGroup },
 };
 
-export const mapAreaPokemon = (
+export const mapAreaHeadbuttEncounters = (
   gameVersion: GameValue,
   areaKey?: string,
 ): EncounterGroup | undefined => {

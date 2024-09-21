@@ -11,7 +11,7 @@ import {
 import type { PokemonSpecies } from 'pokenode-ts';
 
 interface GameVersionContextProps {
-  gameVersion: string;
+  gameVersion: GameValue;
   gameGeneration: GameGenValue;
   setGameVersion: (version: string) => void;
   dropdownOptions: Game[];
@@ -23,7 +23,7 @@ interface GameVersionProviderProps {
 }
 
 export const GameVersionContext = createContext<GameVersionContextProps>({
-  gameVersion: '',
+  gameVersion: '' as GameValue,
   gameGeneration: '' as GameGenValue,
   setGameVersion: () => {},
   dropdownOptions: [],
@@ -52,7 +52,7 @@ export const GameVersionProvider = ({ children, pokemon }: GameVersionProviderPr
   // Memoize the context value to avoid unnecessary re-renders
   const contextValue = useMemo(
     () => ({
-      gameVersion,
+      gameVersion: gameVersion as GameValue,
       gameGeneration: mapGameValueToGenerationValue(gameVersion as GameValue)!,
       setGameVersion,
       dropdownOptions,

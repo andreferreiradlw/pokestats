@@ -4,6 +4,7 @@ import { alpha } from '@mui/material/styles';
 const Table: {
   MuiTableHead: Components<Theme>['MuiTableHead'];
   MuiTableRow: Components<Theme>['MuiTableRow'];
+  MuiTableCell: Components<Theme>['MuiTableCell'];
 } = {
   MuiTableHead: {
     styleOverrides: {
@@ -27,6 +28,13 @@ const Table: {
           backgroundColor: alpha(theme.palette.primary.main, 0.25),
         },
       }),
+    },
+  },
+  MuiTableCell: {
+    styleOverrides: {
+      root: {
+        color: 'inherit',
+      },
     },
   },
 };

@@ -1,9 +1,13 @@
-import { inputLabelClasses, type Components, type Theme } from '@mui/material';
+import type { Components, Theme } from '@mui/material';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 const FormInputs: {
   MuiFormControl: Components<Theme>['MuiFormControl'];
   MuiInputLabel: Components<Theme>['MuiInputLabel'];
   MuiOutlinedInput: Components<Theme>['MuiOutlinedInput'];
+  MuiSelect: Components<Theme>['MuiSelect'];
+  MuiTextField: Components<Theme>['MuiTextField'];
+  MuiInputBase: Components<Theme>['MuiInputBase'];
   MuiAutocomplete: Components<Theme>['MuiAutocomplete'];
 } = {
   MuiFormControl: {
@@ -28,9 +32,7 @@ const FormInputs: {
         position: 'relative',
         transform: 'none',
         fontWeight: theme.typography.fontWeightBold,
-        [`&.${inputLabelClasses.focused}`]: {
-          color: 'inherit',
-        },
+        color: 'inherit',
       }),
     },
   },
@@ -39,7 +41,54 @@ const FormInputs: {
       notchedOutline: ({ theme }) => ({
         borderColor: theme.palette.secondary.main,
         borderWidth: '2px',
+        top: 0,
+        [`& legend`]: {
+          display: 'none',
+        },
       }),
+    },
+  },
+  MuiSelect: {
+    defaultProps: {
+      variant: 'outlined',
+      size: 'small',
+      IconComponent: ExpandMoreIcon,
+    },
+    styleOverrides: {
+      root: ({ theme }) => ({
+        backgroundColor: theme.palette.background.paper,
+      }),
+      select: {
+        padding: '5px 10px',
+      },
+      icon: {
+        transition: 'transform 0.2s ease-in-out',
+        width: '1.5em',
+        top: 'auto',
+      },
+    },
+  },
+  MuiTextField: {
+    defaultProps: {
+      variant: 'outlined',
+      size: 'small',
+      fullWidth: true,
+      autoComplete: 'off',
+    },
+  },
+  MuiInputBase: {
+    styleOverrides: {
+      root: ({ theme }) => ({
+        padding: 0,
+        backgroundColor: theme.palette.background.paper,
+
+        // [`& .${outlinedInputClasses.notchedOutline}`]: {
+        //   top: 0,
+        // },
+      }),
+      input: {
+        padding: '5px 10px !important',
+      },
     },
   },
   MuiAutocomplete: {

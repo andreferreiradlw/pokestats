@@ -3,16 +3,24 @@ import type { ThemeOptions } from '@mui/material';
 const lightPalette: ThemeOptions = {
   palette: {
     primary: {
-      main: '#F4C095', // peach
+      main: '#8C6A54', // richer warm pastel peach to improve contrast
     },
     secondary: {
-      main: '#474044', // jet
+      main: '#9A8587', // slightly darker mauve for better contrast
+    },
+    background: {
+      default: '#F4F1EF', // light warm grey, slightly toned down for better text contrast
+      paper: '#FFFFFF', // white for optimal readability on paper surfaces
+    },
+    text: {
+      primary: '#2C2A29', // dark charcoal for strong readability
+      secondary: '#4B4848', // muted dark grey, with improved contrast
     },
     error: {
-      main: '#EE2E31', // red
+      main: '#E53935', // deeper red for more visibility and contrast in errors
     },
-    divider: '#679289', // viridian
-    contrastThreshold: 4.5,
+    divider: '#B8B3B3', // soft yet slightly darker muted grey for improved contrast
+    contrastThreshold: 4.5, // ensuring readability across elements
     mode: 'light',
   },
 };

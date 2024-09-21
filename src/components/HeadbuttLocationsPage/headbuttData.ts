@@ -8,7 +8,7 @@ export interface HeadbuttLocation {
 
 type EncounterType = 'normal' | 'rare';
 
-interface PokemonEncounter {
+export interface HeadbuttEncounter {
   name: string;
   id: string;
   games: Set<string>;
@@ -17,7 +17,7 @@ interface PokemonEncounter {
 }
 
 type EncounterGroup = {
-  [key in EncounterType]: PokemonEncounter[];
+  [key in EncounterType]: HeadbuttEncounter[];
 };
 
 export const headbuttLocations: HeadbuttLocation[] = [
@@ -137,9 +137,9 @@ const forestGroup: EncounterGroup = {
     { name: 'Caterpie', id: '010', games: new Set(['gold']), level: 10, chance: '50%' },
     { name: 'Butterfree', id: '012', games: new Set(['gold']), level: 10, chance: '5%' },
     { name: 'Weedle', id: '013', games: new Set(['silver']), level: 10, chance: '50%' },
-    { name: 'Beedrill', id: '015', games: new Set(['gold', 'silver']), level: 10, chance: '5%' },
+    { name: 'Beedrill', id: '015', games: new Set(['silver']), level: 10, chance: '5%' },
     { name: 'Exeggcute', id: '102', games: new Set(['gold', 'silver']), level: 10, chance: '15%' },
-    { name: 'Pineco', id: '204', games: new Set(['silver']), level: 10, chance: '30%' },
+    { name: 'Pineco', id: '204', games: new Set(['gold', 'silver']), level: 10, chance: '30%' },
   ],
 };
 
@@ -258,24 +258,24 @@ const areaMappings: {
   'azalea-town': { goldSilver: forestGroup, crystal: townGroupCrystal },
   'ilex-forest': { goldSilver: forestGroup, crystal: forestGroupCrystal },
   'lake-of-rage': { goldSilver: forestGroup, crystal: lakeGroupCrystal },
-  'route-26': { goldSilver: forestGroup, crystal: borderGroupCrystal },
-  'route-27': { goldSilver: forestGroup, crystal: borderGroupCrystal },
-  'route-34': { goldSilver: forestGroup, crystal: routeGroupCrystal },
-  'route-35': { goldSilver: forestGroup, crystal: routeGroupCrystal },
-  'route-36': { goldSilver: forestGroup, crystal: routeGroupCrystal },
-  'route-37': { goldSilver: forestGroup, crystal: routeGroupCrystal },
-  'route-38': { goldSilver: forestGroup, crystal: routeGroupCrystal },
-  'route-39': { goldSilver: forestGroup, crystal: routeGroupCrystal },
-  'route-29': { goldSilver: mountainGroup, crystal: routeGroupCrystal },
-  'route-30': { goldSilver: mountainGroup, crystal: routeGroupCrystal },
-  'route-31': { goldSilver: mountainGroup, crystal: routeGroupCrystal },
-  'route-32': { goldSilver: mountainGroup, crystal: borderGroupCrystal },
-  'route-33': { goldSilver: mountainGroup, crystal: townGroupCrystal },
-  'route-42': { goldSilver: mountainGroup, crystal: townGroupCrystal },
-  'route-43': { goldSilver: mountainGroup, crystal: lakeGroupCrystal },
-  'route-44': { goldSilver: mountainGroup, crystal: mountainGroupCrystal },
-  'route-45': { goldSilver: mountainGroup, crystal: mountainGroupCrystal },
-  'route-46': { goldSilver: mountainGroup, crystal: mountainGroupCrystal },
+  'kanto-route-26': { goldSilver: forestGroup, crystal: borderGroupCrystal },
+  'kanto-route-27': { goldSilver: forestGroup, crystal: borderGroupCrystal },
+  'johto-route-34': { goldSilver: forestGroup, crystal: routeGroupCrystal },
+  'johto-route-35': { goldSilver: forestGroup, crystal: routeGroupCrystal },
+  'johto-route-36': { goldSilver: forestGroup, crystal: routeGroupCrystal },
+  'johto-route-37': { goldSilver: forestGroup, crystal: routeGroupCrystal },
+  'johto-route-38': { goldSilver: forestGroup, crystal: routeGroupCrystal },
+  'johto-route-39': { goldSilver: forestGroup, crystal: routeGroupCrystal },
+  'kanto-route-29': { goldSilver: mountainGroup, crystal: routeGroupCrystal },
+  'johto-route-30': { goldSilver: mountainGroup, crystal: routeGroupCrystal },
+  'johto-route-31': { goldSilver: mountainGroup, crystal: routeGroupCrystal },
+  'johto-route-32': { goldSilver: mountainGroup, crystal: borderGroupCrystal },
+  'johto-route-33': { goldSilver: mountainGroup, crystal: townGroupCrystal },
+  'johto-route-42': { goldSilver: mountainGroup, crystal: townGroupCrystal },
+  'johto-route-43': { goldSilver: mountainGroup, crystal: lakeGroupCrystal },
+  'johto-route-44': { goldSilver: mountainGroup, crystal: mountainGroupCrystal },
+  'johto-route-45': { goldSilver: mountainGroup, crystal: mountainGroupCrystal },
+  'johto-route-46': { goldSilver: mountainGroup, crystal: mountainGroupCrystal },
   'new-bark-town': { goldSilver: cityGroup },
   'violet-city': { goldSilver: cityGroup },
   'ecruteak-city': { goldSilver: cityGroup },

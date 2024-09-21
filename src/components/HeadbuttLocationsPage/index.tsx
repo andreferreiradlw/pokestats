@@ -15,14 +15,15 @@ import {
   FormControl,
   InputLabel,
   Divider,
-  Paper,
-  Link as MuiLink,
+  Accordion,
+  AccordionSummary,
+  AccordionDetails,
 } from '@mui/material';
 import DropdownV2 from '../DropdownV2';
 import HeadbuttIndices from './HeadbuttIndices';
 import HeadbuttMap from './HeadbuttMap';
 import ImageNextV2 from '../ImageNextV2';
-import Link from 'next/link';
+import HeadbuttEncounters from './HeadbuttEncounters';
 
 const mapScaleMarks = [
   {
@@ -45,12 +46,6 @@ const mapScaleMarks = [
     value: 3,
     label: '3x',
   },
-];
-
-const gameVersionOptions = [
-  { value: 'gold', label: 'Gold' },
-  { value: 'silver', label: 'Silver' },
-  { value: 'crystal', label: 'Crystal' },
 ];
 
 const HeadbuttLocationsPage = (): JSX.Element => {
@@ -111,9 +106,10 @@ const HeadbuttLocationsPage = (): JSX.Element => {
               value={areaDetails?.value || ''}
               onChange={handleAreaChange}
             />
-            <FormControl fullWidth>
+            <FormControl fullWidth disabled={!debouncedTrainerId || !areaDetails}>
               <InputLabel>Map Scale</InputLabel>
               <Slider
+                disabled={!debouncedTrainerId || !areaDetails}
                 aria-label="Map Scale"
                 size="small"
                 value={scale}
@@ -129,43 +125,64 @@ const HeadbuttLocationsPage = (): JSX.Element => {
             <DropdownV2
               formcontrolProps={{ fullWidth: true }}
               fullWidth
+              label="Generation"
+              options={[{ value: 'generation-ii', label: 'Generation II' }]}
+              value="generation-ii"
+            />
+            <DropdownV2
+              formcontrolProps={{ fullWidth: true }}
+              fullWidth
               label="Game Version"
-              options={gameVersionOptions}
+              options={[
+                { value: 'gold', label: 'Gold' },
+                { value: 'silver', label: 'Silver' },
+                { value: 'crystal', label: 'Crystal' },
+              ]}
               value={gameVersion}
               onChange={handleGameChange}
             />
           </Grid2>
+          {debouncedTrainerId && areaDetails && (
+            <>
+              <Grid2 size={12} component={Divider} />
+              <HeadbuttIndices size={12} trainerId={debouncedTrainerId} />
+            </>
+          )}
           <Grid2 size={12} component={Divider} />
-          <HeadbuttIndices size={12} trainerId={debouncedTrainerId} />
-          <Grid2 size={12} component={Divider} />
-          <Grid2 size={12} component={Paper} flexDirection="column" p={1} gap={1}>
-            <ImageNextV2
-              customKey="headbutt-tree-demo"
-              imageUrl="https://raw.githubusercontent.com/andreferreiradlw/pokestats_media/main/assets/misc/generation-ii/headbutt-generation-ii.gif"
-              alt="Headbutting a tree in Generation II"
-            />
-            <Typography variant="caption">
-              <MuiLink href="/move/headbutt" component={Link} color="inherit">
-                Headbutting
-              </MuiLink>{' '}
-              a tree in Generation II
-            </Typography>
+          <Grid2 size={12}>
+            <Accordion>
+              <AccordionSummary aria-controls="panel1-content" id="panel1-header">
+                Headbutting a tree in Generation II
+              </AccordionSummary>
+              <AccordionDetails>
+                <ImageNextV2
+                  customKey="headbutt-tree-demo"
+                  imageUrl="https://raw.githubusercontent.com/andreferreiradlw/pokestats_media/main/assets/misc/generation-ii/headbutt-generation-ii.gif"
+                  alt="Headbutting a tree in Generation II"
+                />
+              </AccordionDetails>
+            </Accordion>
           </Grid2>
         </Grid2>
         <Grid2
           container
+          direction="column"
+          spacing={2}
           size={{ xxs: 12, md: 9 }}
           minHeight={areaDetails ? areaDetails.imageHeight * debouncedScale : 'auto'}
           sx={{ overflowY: 'hidden', overflowX: 'auto' }}
         >
           {debouncedTrainerId && areaDetails ? (
-            <HeadbuttMap
-              size={12}
-              areaDetails={areaDetails}
-              scale={debouncedScale}
-              trainerId={debouncedTrainerId}
-              key={`${areaDetails.value}-${debouncedTrainerId}-${debouncedScale}`}
-            />
+            <>
+              <HeadbuttEncounters gameVersion={gameVersion} areaKey={areaDetails.value} />
+              <HeadbuttMap
+                size={12}
+                areaDetails={areaDetails}
+                scale={debouncedScale}
+                trainerId={debouncedTrainerId}
+                key={`${areaDetails.value}-${debouncedTrainerId}-${debouncedScale}`}
+              />
+            </>
           ) : (
             <Grid2 size={12} py={12} flexDirection="column" alignItems="center" gap={2}>
               <ImageNextV2

@@ -31,8 +31,6 @@ import {
   AccordionDetails,
 } from '@mui/material';
 import Link from 'next/link';
-// icons
-import CatchingPokemonIcon from '@mui/icons-material/CatchingPokemon';
 
 interface LocationTableProps extends Grid2Props {
   locationAreas: LocationArea[];
@@ -86,11 +84,9 @@ const LocationTableV2 = ({
       {formattedLocationData.map(({ formattedEncounters, name: areaName, id: areaId, names }) => (
         <Accordion
           defaultExpanded={!!formattedEncounters.length}
-          sx={{ width: '100%' }}
           key={`${areaName}-${areaId}-container`}
         >
           <AccordionSummary
-            expandIcon={<CatchingPokemonIcon />}
             aria-controls={`${areaName}-${areaId}-controls`}
             id={`${areaName}-${areaId}-header`}
           >

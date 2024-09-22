@@ -2,22 +2,12 @@
 import { motion } from 'framer-motion';
 import type { CanvasMapperArea } from '../CanvasMapper';
 // hooks
-import { useLocationAreas } from '@/hooks';
+import { useBreakpoint, useLocationAreas } from '@/hooks';
 // helpers
 import { findEnglishName, type GameGenValue } from '@/helpers';
 import { fadeInUpVariant } from '@/animations';
 // components
-import {
-  Alert,
-  Box,
-  Button,
-  Grid2,
-  Stack,
-  Typography,
-  useMediaQuery,
-  useTheme,
-  type Grid2Props,
-} from '@mui/material';
+import { Alert, Box, Button, Grid2, Stack, Typography, type Grid2Props } from '@mui/material';
 import Loading from '@/components/Loading';
 import LocationTableV2 from '../LocationTableV2';
 import LocationMusic from '../LocationMusic';
@@ -31,8 +21,7 @@ interface LocationDetailsProps extends Grid2Props {
 
 const LocationDetails = ({ area, generation, ...rest }: LocationDetailsProps): JSX.Element => {
   // breakpoint
-  const theme = useTheme();
-  const isLargeUp = useMediaQuery(theme.breakpoints.up('lg'));
+  const isLargeUp = useBreakpoint({ breakpoint: 'lg' });
 
   // area data
   const { id, description, key } = area;

@@ -1,4 +1,5 @@
 export * from './useAutocompleteOptions';
+export * from './useBreakpoint';
 export * from './useDebouncedValue';
 export * from './useEvolutionChain';
 export * from './useLocationAreas';

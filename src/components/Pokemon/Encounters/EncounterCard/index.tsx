@@ -181,7 +181,7 @@ const EncounterCard = ({
                   variant="contained"
                   onClick={() => plausible('All Area Encounters Click')}
                 >
-                  All Area Encounters
+                  Area Encounters
                 </CustomButton>
               </Link>
             )}

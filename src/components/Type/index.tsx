@@ -2,6 +2,7 @@
 import type { PokestatsTypePageProps } from '@/pages/type/[typeId]';
 // helpers
 import { findEnglishName } from '@/helpers';
+import { useBreakpoint } from '@/hooks';
 // components
 import TypeInfo from './Info';
 import TypeRelations from './Relations';
@@ -9,14 +10,13 @@ import TypeIcon from './TypeIcon';
 import Tabs from './Tabs';
 // styles
 import type { Theme } from '@mui/material';
-import { Divider, Grid2, Stack, Typography, useMediaQuery, useTheme } from '@mui/material';
+import { Divider, Grid2, Stack, Typography } from '@mui/material';
 
 export type TypePageProps = Omit<PokestatsTypePageProps, 'autocompleteList'>;
 
 const TypePage = ({ typeData }: TypePageProps): JSX.Element => {
   // breakpoint
-  const theme = useTheme();
-  const isLargeUp = useMediaQuery(theme.breakpoints.up('lg'));
+  const isLargeUp = useBreakpoint({ breakpoint: 'lg' });
 
   // data
   const { name, names, damage_relations } = typeData;

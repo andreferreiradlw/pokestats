@@ -2,19 +2,20 @@
 import type { TypeRelations as PokeNodeTypeRelations } from 'pokenode-ts';
 // helpers
 import { removeUnderscore } from '@/helpers';
+import { useBreakpoint } from '@/hooks';
 // components
 import TypeBadge from '@/components/TypeBadge';
 import { Table, TypesCell } from '@/components/BaseStyles';
 import type { StackProps, Theme } from '@mui/material';
-import { Stack, Typography, Box, useTheme, useMediaQuery } from '@mui/material';
+import { Stack, Typography, Box } from '@mui/material';
 
 interface TypeRelationsProps extends StackProps {
   relations: PokeNodeTypeRelations;
 }
 
 const TypeRelations = ({ relations, ...rest }: TypeRelationsProps): JSX.Element => {
-  const theme = useTheme();
-  const isMediumUp = useMediaQuery(theme.breakpoints.up('md'));
+  // breakpoint
+  const isMediumUp = useBreakpoint({ breakpoint: 'md' });
 
   return (
     <Stack flexGrow={1} {...rest}>

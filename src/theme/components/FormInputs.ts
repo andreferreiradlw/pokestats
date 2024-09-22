@@ -42,7 +42,7 @@ const FormInputs: {
         borderColor: theme.palette.secondary.main,
         borderWidth: '2px',
         top: 0,
-        [`& legend`]: {
+        '& legend': {
           display: 'none',
         },
       }),

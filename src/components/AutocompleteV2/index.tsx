@@ -188,11 +188,11 @@ const AutocompleteV2 = ({
           plausible('Autocomplete Selection');
 
           if (option.assetType === 'region') {
-            await router.prefetch(`/regions/${option.generation}/${option.name}`);
+            await router.push(`/regions/${option.generation}/${option.name}`);
           } else if (option.assetType === 'tool') {
-            await router.prefetch(`/${option.name}`);
+            await router.push(`/${option.name}`);
           } else {
-            await router.prefetch(`/${option.assetType}/${option.name}`);
+            await router.push(`/${option.assetType}/${option.name}`);
           }
         }}
         noOptionsText="Nothing was found!"

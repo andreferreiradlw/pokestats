@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { styled } from '@mui/material';
+import { styled, Tooltip } from '@mui/material';
 
 interface HeadbuttGridItemProps {
   encounterRate: number;
@@ -8,42 +8,46 @@ interface HeadbuttGridItemProps {
   scale: number;
 }
 
-const Cell = styled('div')`
-  margin: 0;
-  padding: 0;
-  border: 1px solid #888888;
-  font-weight: bold;
-  opacity: 0.7;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  position: absolute;
-  z-index: 2;
-`;
+const Cell = styled('div')(({ theme }) => ({
+  margin: 0,
+  padding: 0,
+  border: `1px solid ${theme.palette.secondary.main}`,
+  fontWeight: 'bold',
+  opacity: 0.7,
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  color: theme.palette.common.white,
+  position: 'absolute',
+  zIndex: 2,
+  cursor: 'pointer',
+}));
 
-const getTreeSymbol = (encounterRate: number): string => {
-  if (encounterRate === 80) return '★'; // Star for rare encounters
-  if (encounterRate === 50) return '●'; // Circle for normal encounters
-  return ''; // Unmarked for low encounters
+// Function to determine the tree symbol and its corresponding rarity
+const getTreeSymbol = (encounterRate: number): { symbol: string; rarity: string } => {
+  if (encounterRate === 80) return { symbol: '★', rarity: 'Rare' }; // Star for rare encounters
+  if (encounterRate === 50) return { symbol: '●', rarity: 'Normal' }; // Circle for normal encounters
+  return { symbol: '', rarity: 'Low' }; // Unmarked for low encounters
 };
 
 const HeadbuttGridItem = ({ encounterRate, x, y, scale }: HeadbuttGridItemProps): JSX.Element => {
   const itemSize = useMemo(() => 16 * scale, [scale]);
-  const symbol = useMemo(() => getTreeSymbol(encounterRate), [encounterRate]);
+  const { symbol, rarity } = useMemo(() => getTreeSymbol(encounterRate), [encounterRate]);
 
   return (
-    <Cell
-      sx={{
-        top: `${y * itemSize}px`,
-        left: `${x * itemSize}px`,
-        height: `${itemSize}px`,
-        width: `${itemSize}px`,
-        fontSize: `${12 * scale}px`,
-      }}
-    >
-      {symbol}
-    </Cell>
+    <Tooltip title={rarity}>
+      <Cell
+        sx={{
+          top: `${y * itemSize}px`,
+          left: `${x * itemSize}px`,
+          height: `${itemSize}px`,
+          width: `${itemSize}px`,
+          fontSize: `${12 * scale}px`,
+        }}
+      >
+        {symbol}
+      </Cell>
+    </Tooltip>
   );
 };
 

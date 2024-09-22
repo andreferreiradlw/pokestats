@@ -75,11 +75,6 @@ const EncounterCard = ({
       (acc, { chance, max_level, min_level, method: currMethod }) => {
         const methodName = currMethod.name;
 
-        // Skip the headbutt-low method
-        if (methodName === 'headbutt-low') {
-          return acc;
-        }
-
         const existingEntry = acc[methodName];
         const isHeadbuttMethod = headbuttMethods.includes(methodName);
 

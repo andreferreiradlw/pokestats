@@ -1,11 +1,10 @@
 import type { CSSProperties } from 'react';
 // types
 import type { HTMLMotionProps } from 'framer-motion';
-import type { MoveType, Pokemon, PokemonType } from '@/types';
 // hooks
 import { useRouter } from 'next/router';
 import { usePlausible } from 'next-plausible';
-import type { AutocompleteListOption, PokestatsRegion } from '@/hooks';
+import type { AutocompleteListOption } from '@/hooks';
 import { useAutocompleteOptions } from '@/hooks';
 // helpers
 import { formatPokemonId, mapGeneration, removeDash } from '@/helpers';
@@ -35,11 +34,7 @@ export interface AutocompleteV2Props extends HTMLMotionProps<'div'> {
 }
 
 interface AutocompleteIconProps {
-  assetType:
-    | PokemonType['assetType']
-    | Pokemon['assetType']
-    | MoveType['assetType']
-    | PokestatsRegion['assetType'];
+  assetType: AutocompleteListOption['assetType'];
   name: string;
   id?: number;
 }
@@ -75,6 +70,18 @@ const AutocompleteIcon = ({
           src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/old-sea-map.png"
         />
       );
+    case 'tool':
+      switch (name) {
+        case 'headbutt-tree-finder':
+          return (
+            <ItemIcon
+              alt="Headbutt tree finder"
+              src="https://raw.githubusercontent.com/andreferreiradlw/pokestats_media/main/assets/icons/generation-ii/headbutt.png"
+            />
+          );
+        default:
+          return undefined;
+      }
     default:
       return undefined;
   }
@@ -170,17 +177,22 @@ const AutocompleteV2 = ({
           if (option) {
             if (option.assetType === 'region') {
               await router.prefetch(`/regions/${option.generation}/${option.name}`);
+            } else if (option.assetType === 'tool') {
+              await router.prefetch(`/${option.name}`);
             } else {
               await router.prefetch(`/${option.assetType}/${option.name}`);
             }
           }
         }}
-        onChange={async (_, optionSelected) => {
+        onChange={async (_, option) => {
           plausible('Autocomplete Selection');
-          if (optionSelected.assetType === 'region') {
-            await router.push(`/regions/${optionSelected.generation}/${optionSelected.name}`);
+
+          if (option.assetType === 'region') {
+            await router.prefetch(`/regions/${option.generation}/${option.name}`);
+          } else if (option.assetType === 'tool') {
+            await router.prefetch(`/${option.name}`);
           } else {
-            await router.push(`/${optionSelected.assetType}/${optionSelected.name}`);
+            await router.prefetch(`/${option.assetType}/${option.name}`);
           }
         }}
         noOptionsText="Nothing was found!"

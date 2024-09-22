@@ -11,10 +11,25 @@ export interface PokestatsRegion {
   generation: GameGenValue;
 }
 
-export type AutocompleteListOption = Pokemon | PokemonType | MoveType | PokestatsRegion;
+export interface PokestatsToolOption {
+  assetType: 'tool';
+  id: number;
+  name: string;
+}
+
+export type AutocompleteListOption =
+  | Pokemon
+  | PokemonType
+  | MoveType
+  | PokestatsRegion
+  | PokestatsToolOption;
 
 export const regionsData: PokestatsRegion[] = [
   { id: 1, assetType: 'region', name: 'kanto', generation: 'generation-i' },
+];
+
+export const headbuttData: PokestatsToolOption[] = [
+  { id: 1, assetType: 'tool', name: 'headbutt-tree-finder' },
 ];
 
 export const useAutocompleteOptions = (
@@ -23,48 +38,34 @@ export const useAutocompleteOptions = (
   useQuery<AutocompleteListOption[]>({
     queryKey: ['autocomplete'],
     queryFn: async () => {
-      // fetch data
+      // Fetch data in parallel and validate responses
       const [pokemonResponse, typesResponse, movesResponse] = await Promise.all([
         PokemonApi.listPokemons(0, 905),
         TypesApi.listTypes(0, 18),
         MovesApi.listMoves(0, 850),
       ]);
 
-      const allOptions: AutocompleteListOption[] = [];
+      // Map responses to a unified AutocompleteListOption type
+      const pokemonOptions: Pokemon[] = pokemonResponse.results.map((pokemon, index) => ({
+        ...pokemon,
+        id: index + 1,
+        assetType: 'pokemon',
+      }));
 
-      // pokemon
-      pokemonResponse.results.forEach((currPokemon, i) => {
-        allOptions.push({
-          ...currPokemon,
-          id: i + 1,
-          assetType: 'pokemon',
-        });
-      });
+      const typeOptions: PokemonType[] = typesResponse.results.map((type, index) => ({
+        ...type,
+        id: index + 1,
+        assetType: 'type',
+      }));
 
-      // types
-      typesResponse.results.forEach((currType, i) => {
-        allOptions.push({
-          ...currType,
-          id: i + 1,
-          assetType: 'type',
-        });
-      });
+      const moveOptions: MoveType[] = removeDuplicateMoves(movesResponse.results).map(move => ({
+        ...move,
+        id: getResourceId(move.url),
+        assetType: 'move',
+      }));
 
-      // moves
-      removeDuplicateMoves(movesResponse.results).forEach(currMove => {
-        allOptions.push({
-          ...currMove,
-          id: getResourceId(currMove.url),
-          assetType: 'move',
-        });
-      });
-
-      // regions
-      regionsData.forEach(currRegion => {
-        allOptions.push(currRegion);
-      });
-
-      return allOptions;
+      // Combine all options into a single array
+      return [...pokemonOptions, ...typeOptions, ...moveOptions, ...regionsData, ...headbuttData];
     },
     staleTime: 60 * 1000, // Cache for 1 minute to reduce API calls
     ...options,

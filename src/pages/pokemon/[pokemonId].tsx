@@ -1,12 +1,12 @@
 import { useRouter } from 'next/router';
 // types
 import type { GetStaticPaths, GetStaticProps, NextPage } from 'next';
-import type { Pokemon, PokemonType, PokemonMove, MoveType } from '@/types';
 import type {
   Pokemon as PokenodePokemon,
   EvolutionChain,
   PokemonSpecies,
   Ability,
+  NamedAPIResource,
 } from 'pokenode-ts';
 // helpers
 import {
@@ -24,12 +24,10 @@ import { AbilityApi, EvolutionApi, PokemonApi, SpeciesApi } from '@/services';
 import LayoutV2 from '@/components/LayoutV2';
 
 export interface PokestatsPokemonPageProps {
-  allPokemon: Pokemon[];
-  autocompleteList: (PokemonType | MoveType)[];
+  allPokemon: NamedAPIResource[];
   pokemon: PokenodePokemon;
   abilities: Ability[];
   species: PokemonSpecies;
-  pokemonMoves: PokemonMove[];
   evolutionData: EvolutionChain;
 }
 

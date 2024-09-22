@@ -46,6 +46,7 @@ const Footer = (): JSX.Element => {
             alignItems="center"
             justifyContent="center"
             gap={2}
+            whiteSpace="nowrap"
           >
             <PokestatsIcon />
             {`© Pokestats.gg ${new Date().getFullYear()} `}
@@ -83,7 +84,7 @@ const Footer = (): JSX.Element => {
               </motion.span>
             </Grid2>
           )}
-          <Grid2 size={12} justifyContent="center">
+          <Grid2 size={12} justifyContent="center" textAlign="center">
             Pokémon are registered trademarks of Nintendo and Game Freak.
           </Grid2>
         </FooterContent>

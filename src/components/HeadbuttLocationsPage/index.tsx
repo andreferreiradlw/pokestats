@@ -4,7 +4,7 @@ import type { PokestatsHeadbuttLocationsPageProps } from '@/pages/headbutt-tree-
 // data
 import { type HeadbuttLocation, headbuttLocations } from './headbuttData';
 // helpers
-import { useDebouncedValue } from '@/hooks';
+import { useBreakpoint, useDebouncedValue } from '@/hooks';
 import type { GameValue } from '@/helpers';
 // ctx
 import { GameVersionContext } from '@/context';
@@ -57,6 +57,9 @@ const HeadbuttLocationsPage = ({
 }: PokestatsHeadbuttLocationsPageProps): JSX.Element => {
   // context
   const { gameVersion, gameGeneration } = useContext(GameVersionContext);
+
+  // breakpoint
+  const isMdUp = useBreakpoint({ breakpoint: 'md' });
 
   // states
   const [trainerId, setTrainerId] = useState<number | ''>('');
@@ -170,21 +173,25 @@ const HeadbuttLocationsPage = ({
               <HeadbuttIndices size={12} trainerId={debouncedTrainerId} />
             </>
           )}
-          <Grid2 size={12} component={Divider} />
-          <Grid2 size={12}>
-            <Accordion>
-              <AccordionSummary aria-controls="panel1-content" id="panel1-header">
-                Headbutting a tree in Generation II
-              </AccordionSummary>
-              <AccordionDetails>
-                <ImageNextV2
-                  customKey="headbutt-tree-demo"
-                  imageUrl="https://raw.githubusercontent.com/andreferreiradlw/pokestats_media/main/assets/misc/generation-ii/headbutt-generation-ii.gif"
-                  alt="Headbutting a tree in Generation II"
-                />
-              </AccordionDetails>
-            </Accordion>
-          </Grid2>
+          {isMdUp && (
+            <>
+              <Grid2 size={12} component={Divider} />
+              <Grid2 size={12}>
+                <Accordion>
+                  <AccordionSummary aria-controls="panel1-content" id="panel1-header">
+                    Headbutting a tree in Generation II
+                  </AccordionSummary>
+                  <AccordionDetails>
+                    <ImageNextV2
+                      customKey="headbutt-tree-demo"
+                      imageUrl="https://raw.githubusercontent.com/andreferreiradlw/pokestats_media/main/assets/misc/generation-ii/headbutt-generation-ii.gif"
+                      alt="Headbutting a tree in Generation II"
+                    />
+                  </AccordionDetails>
+                </Accordion>
+              </Grid2>
+            </>
+          )}
         </Grid2>
         <Grid2
           container

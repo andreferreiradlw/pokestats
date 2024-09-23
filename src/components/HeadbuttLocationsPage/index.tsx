@@ -74,6 +74,7 @@ const HeadbuttLocationsPage = ({
   const handleTrainerIdChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
     setTrainerId(value === '' ? '' : Number(value));
+    localStorage.setItem('pokemonTrainerId', value);
   };
 
   const handleAreaChange = (event: SelectChangeEvent<string>) => {
@@ -102,6 +103,13 @@ const HeadbuttLocationsPage = ({
       setGameVersionInput(gameVersion);
     }
   }, [gameVersion, gameGeneration]);
+
+  useEffect(() => {
+    const storedPokemonTrainerId = localStorage.getItem('pokemonTrainerId');
+    if (storedPokemonTrainerId) {
+      setTrainerId(Number(storedPokemonTrainerId));
+    }
+  }, []);
 
   return (
     <Stack gap={4} width="100%">

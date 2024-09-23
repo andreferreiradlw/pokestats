@@ -130,7 +130,7 @@ const CanvasMapper = forwardRef<CanvasMapperHandle, CanvasMapperProps>(
         const scaleFactor = parentWidth / naturalWidth;
         return coords.map(coord => coord * scaleFactor);
       },
-      [parentWidth],
+      [parentWidth, imageRef.current?.naturalWidth],
     );
 
     // Function to compute the center of an area
@@ -178,7 +178,14 @@ const CanvasMapper = forwardRef<CanvasMapperHandle, CanvasMapperProps>(
           );
         });
       },
-      [areas, lineWidthProp, strokeColorProp, scaleCoords, highlightAllAreas],
+      [
+        areas,
+        lineWidthProp,
+        strokeColorProp,
+        scaleCoords,
+        highlightAllAreas,
+        hoverCanvasRef.current,
+      ],
     );
 
     // Expose methods to parent component via ref
@@ -199,7 +206,7 @@ const CanvasMapper = forwardRef<CanvasMapperHandle, CanvasMapperProps>(
           renderPrefilledAreas(areas, highlightCtx); // Re-render areas
         },
       }),
-      [areas, renderPrefilledAreas],
+      [areas, renderPrefilledAreas, highlightCtx.current, highlightCanvasRef.current],
     );
 
     // Handlers for mouse events

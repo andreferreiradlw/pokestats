@@ -36,26 +36,30 @@
 
 ## Roadmap
 
-✅ Homepage (Autocomplete + Infinity Scroll) <br />
-✅ Pokémon Page <br />
-✅ Type Page <br />
+✅ [Homepage (Autocomplete + Infinity Scroll)](https://pokestats.gg) <br />
+✅ [Pokémon Page](https://pokestats.gg/pokemon/gloom) <br />
+✅ [Type Page](https://pokestats.gg/type/flying) <br />
 ✅ Static Generated Pages <br />
 ✅ Typescript Refactoring <br />
 ✅ Generation 8 Pokémon + Legends: Arceus ([some data is incomplete](https://github.com/PokeAPI/pokeapi/issues/520)) <br />
-✅ Move Page <br />
+✅ [Move Page](https://pokestats.gg/move/solar-beam) <br />
 ✅ Material UI Implementation <br />
 ✅ Dark Mode <br />
-✅ Pokémon Encounters Section <br />
-🛠️ Sprites Page <br />
+✅ Pokémon Page - Encounters Section <br />
+✅ [Headbutt Tree Encounters Map](https://pokestats.gg/headbutt-tree-finder) <br />
+🛠️ Item Page <br />
 🛠️ Interactive Region Maps <br />
-&nbsp;&nbsp; ✅ Kanto (Gen I) <br />
+&nbsp;&nbsp; ✅ [Kanto (Gen I)](https://pokestats.gg/regions/generation-i/kanto) <br />
 &nbsp;&nbsp; 🛠️ Johto + Kanto (Gen II) <br />
-&nbsp;&nbsp; 🗒️ Hoenn (Gen III) <br />
-&nbsp;&nbsp; 🗒️ Sinnoh (Gen IV) <br />
-&nbsp;&nbsp; 🗒️ Unova (Gen V) <br />
-🗒️ Item Page <br />
-🗒️ Berry Page <br />
-🗒️ Headbutt Tree Encounters Map <br />
+&nbsp;&nbsp; 💡 Hoenn (Gen III) <br />
+&nbsp;&nbsp; 💡 Kanto (Gen III) <br />
+&nbsp;&nbsp; 💡 Sinnoh (Gen IV) <br />
+&nbsp;&nbsp; 💡 Johto (Gen IV) <br />
+&nbsp;&nbsp; 💡 Unova (Gen V) <br />
+&nbsp;&nbsp; 💡 Unova 2 (Gen V) <br />
+&nbsp;&nbsp; 💡 Kalos (Gen VI) <br />
+💡 Sprites Page <br />
+💡 Berry Page <br />
 
 ## Contributing
 

@@ -68,7 +68,7 @@ const EncounterCard = ({
     };
 
     // Define headbutt encounter methods to handle
-    const headbuttMethods = ['headbutt-normal', 'headbutt-high'];
+    const headbuttMethods = new Set(['headbutt-low', 'headbutt-normal', 'headbutt-high']);
 
     // Format version details data, ignoring 'headbutt-low'
     const encounterDetails = version_details.encounter_details.reduce(
@@ -76,7 +76,7 @@ const EncounterCard = ({
         const methodName = currMethod.name;
 
         const existingEntry = acc[methodName];
-        const isHeadbuttMethod = headbuttMethods.includes(methodName);
+        const isHeadbuttMethod = headbuttMethods.has(methodName);
 
         if (!existingEntry) {
           acc[methodName] = {
@@ -109,12 +109,9 @@ const EncounterCard = ({
       {} as FormattedEncounter,
     );
 
-    // Determine if any headbutt methods are present, ignoring 'headbutt-low'
-    const hasHeadbutt = Object.keys(encounterDetails).some(method =>
-      headbuttMethods.includes(method),
-    );
+    // Determine if any headbutt methods are present
+    const hasHeadbutt = Object.keys(encounterDetails).some(method => headbuttMethods.has(method));
 
-    // Return formatted data with the hasHeadbutt flag
     return { area, encounterDetails, regionName, hasHeadbutt };
   }, [encounter, generation, pokemonName]);
 

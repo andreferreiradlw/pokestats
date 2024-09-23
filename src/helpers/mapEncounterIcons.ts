@@ -231,9 +231,8 @@ const mapGen5Icons = (methodName: string): string => {
   return icons[methodName] || `${baseUrl}/walk.png`;
 };
 
-const mapGen6Icons = (methodName: string): string => {
-  const baseUrl =
-    'https://raw.githubusercontent.com/andreferreiradlw/pokestats_media/main/assets/icons/generation-vii';
+const mapGen6Icons = (methodName: string, regionName: string): string => {
+  const baseUrl = `https://raw.githubusercontent.com/andreferreiradlw/pokestats_media/main/assets/icons/generation-vi/${regionName}`;
 
   const icons: Record<string, string> = {
     walk: `${baseUrl}/walk.png`,
@@ -313,7 +312,7 @@ export const mapEncounterMethodIcons = (
   }
 
   if (generation === 'generation-vi') {
-    return mapGen6Icons(methodName);
+    return mapGen6Icons(methodName, regionName);
   }
 
   if (generation === 'generation-vii') {

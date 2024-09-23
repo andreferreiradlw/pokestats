@@ -49,6 +49,7 @@ const RegionPage = ({
           {children}
           <Stack flexDirection="row" gap={2} mt={4}>
             <CustomButton
+              size="large"
               onClick={() => {
                 setHighlightAllAreas(prev => !prev);
                 plausible('Highlight All Areas Click');
@@ -58,6 +59,7 @@ const RegionPage = ({
               Highlight All Areas
             </CustomButton>
             <CustomButton
+              size="large"
               onClick={() => {
                 if (canvasMapperRef.current) {
                   // Call the clear function directly from CanvasMapper

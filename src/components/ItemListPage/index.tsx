@@ -4,12 +4,14 @@ import type { PokestatsItemsPageProps } from '@/pages/item';
 // helpers
 import { capitalise } from '@/helpers';
 import { useDebouncedValue } from '@/hooks';
+import { fadeInUpVariant } from '@/animations';
 // components
 import { Grid2, type SelectChangeEvent, Stack, Typography } from '@mui/material';
 import CustomInput from '@/components/CustomInput';
 import DropdownV2 from '@/components/DropdownV2';
 import CustomButton from '@/components/CustomButton';
 import ItemTable from './ItemTable.tsx';
+import { motion } from 'framer-motion';
 
 const ItemListPage = ({
   itemData,
@@ -88,7 +90,25 @@ const ItemListPage = ({
           Reset
         </CustomButton>
       </Grid2>
-      <ItemTable items={filteredItems} customKey={`item-table-${selectedCategory}-${nameSearch}`} />
+      {filteredItems.length > 0 ? (
+        <ItemTable
+          items={filteredItems}
+          customKey={`item-table-${selectedCategory}-${nameSearch}`}
+        />
+      ) : (
+        <Typography
+          variant="sectionSubTitle"
+          py={4}
+          component={motion.p}
+          initial="hidden"
+          animate="show"
+          exit="exit"
+          variants={fadeInUpVariant}
+          key="noitem-message"
+        >
+          No items found for current criteria.
+        </Typography>
+      )}
     </Stack>
   );
 };

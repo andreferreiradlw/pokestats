@@ -10,8 +10,8 @@ import { capitalize, Grid2, Typography } from '@mui/material';
 interface MoveContestProps extends Grid2Props {
   move: Move;
   moveName: string;
-  superContestEffect: SuperContestEffect;
-  contestEffect: ContestEffect;
+  superContestEffect: SuperContestEffect | null;
+  contestEffect: ContestEffect | null;
 }
 
 const MoveContest = ({

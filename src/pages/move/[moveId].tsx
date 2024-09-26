@@ -1,7 +1,9 @@
 import { useRouter } from 'next/router';
+// types
 import type { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 import type { Move, MoveTarget, SuperContestEffect, ContestEffect } from 'pokenode-ts';
-import { MoveClient } from 'pokenode-ts';
+// helpers
+import { capitalize } from '@mui/material';
 import {
   findEnglishName,
   formatFlavorText,
@@ -10,20 +12,19 @@ import {
   getResourceId,
   type GameGenValue,
 } from '@/helpers';
+import { ContestApi, MachineApi, type MoveMachinesData, MovesApi } from '@/services';
 // components
 import Seo from '@/components/Seo'; // Import the Seo component
 import MovePage from '@/components/MovePage';
 import Loading from '@/components/Loading';
-import { ContestApi, MachineApi, type MoveMachinesData, MovesApi } from '@/services';
 import LayoutV2 from '@/components/LayoutV2';
-import { capitalize } from '@mui/material';
 
 export interface PokestatsMovePageProps {
   move: Move;
-  moveMachines: MoveMachinesData;
+  moveMachines: MoveMachinesData | null;
   target: MoveTarget;
-  superContestEffect: SuperContestEffect;
-  contestEffect: ContestEffect;
+  superContestEffect: SuperContestEffect | null;
+  contestEffect: ContestEffect | null;
 }
 
 const PokestatsMovePage: NextPage<PokestatsMovePageProps> = props => {
@@ -72,8 +73,7 @@ const PokestatsMovePage: NextPage<PokestatsMovePageProps> = props => {
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const moveClient = new MoveClient();
-  const moveList = await moveClient.listMoves(0, 50);
+  const moveList = await MovesApi.listMoves(0, 50);
 
   const paths = moveList.results.map(move => ({
     params: { moveId: move.name },
@@ -85,7 +85,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   };
 };
 
-export const getStaticProps: GetStaticProps = async ({ params }) => {
+export const getStaticProps: GetStaticProps<PokestatsMovePageProps> = async ({ params }) => {
   const moveName = params?.moveId as string;
 
   try {

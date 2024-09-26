@@ -6,13 +6,17 @@ import { ItemApi } from '@/services';
 import Head from 'next/head';
 import LayoutV2 from '@/components/LayoutV2';
 import ItemListPage from '@/components/ItemListPage';
-import { type ExtractedItem, formatItemData } from '@/helpers';
-import type { ItemPocket } from 'pokenode-ts';
+import {
+  type ExtractedItem,
+  formatItemData,
+  formatItemPocket,
+  type FormattedItemPocket,
+} from '@/helpers';
 
 export interface PokestatsItemsPageProps {
   itemData: ExtractedItem[];
   itemPocketNames: string[];
-  itemPocketData: ItemPocket[];
+  itemPocketData: FormattedItemPocket[];
 }
 
 const PokestatsItemsPage: NextPage<PokestatsItemsPageProps> = props => {
@@ -39,17 +43,14 @@ export const getStaticProps: GetStaticProps<PokestatsItemsPageProps> = async () 
     return { notFound: true };
   }
 
-  const itemData = await ItemApi.getByNames(allItemNames);
-  const itemPocketData = await ItemApi.getItemPocketByNames(itemPocketNames);
+  const [itemData, itemPocketData] = await Promise.all([
+    ItemApi.getByNames(allItemNames),
+    ItemApi.getItemPocketByNames(itemPocketNames),
+  ]);
 
-  // const [itemData, itemPocketData] = await Promise.all([
-  //   ItemApi.getByNames(allItemNames),
-  //   ItemApi.getItemPocketByNames(itemPocketNames),
-  // ]);
-
-  // if (!itemData || !itemPocketData) {
-  //   return { notFound: true };
-  // }
+  if (!itemData || !itemPocketData) {
+    return { notFound: true };
+  }
 
   // // Filter out unused items
   const formattedItems: ExtractedItem[] = itemData
@@ -60,11 +61,13 @@ export const getStaticProps: GetStaticProps<PokestatsItemsPageProps> = async () 
     )
     .sort((a, b) => a.name.localeCompare(b.name));
 
+  const formattedItemPocket = formatItemPocket(itemPocketData);
+
   return {
     props: {
       itemData: formattedItems,
       itemPocketNames,
-      itemPocketData,
+      itemPocketData: formattedItemPocket,
     },
   };
 };

@@ -1,5 +1,10 @@
+import { useCallback } from 'react';
+// helpers
+import { useRouter } from 'next/router';
+import { usePlausible } from 'next-plausible';
 import { fadeInUpVariant } from '@/animations';
 import { capitalise, removeDash, type ExtractedItem } from '@/helpers';
+// components
 import { Box, Stack, Typography } from '@mui/material';
 import Image from 'next/image';
 import CustomTable, {
@@ -7,9 +12,6 @@ import CustomTable, {
   type Row,
   type CustomTableProps,
 } from '@/components/CustomTable';
-import { useCallback } from 'react';
-import { useRouter } from 'next/router';
-import { usePlausible } from 'next-plausible';
 
 interface ItemTableProps extends Partial<CustomTableProps> {
   items: ExtractedItem[];

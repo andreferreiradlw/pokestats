@@ -1,4 +1,4 @@
-import type { Item } from 'pokenode-ts';
+import type { Item, ItemPocket } from 'pokenode-ts';
 import { type GameGenValue, mapGeneration, mapGroupToGeneration } from './gameVersion';
 
 export interface ExtractedItem {
@@ -20,6 +20,12 @@ export interface ExtractedItem {
     versionGroupName: string;
     generation: string;
   }[];
+}
+
+export interface FormattedItemPocket {
+  categories: string[];
+  id: ItemPocket['id'];
+  name: ItemPocket['name'];
 }
 
 export const formatItemData = (item: Item): ExtractedItem => {
@@ -83,3 +89,14 @@ export const formatItemData = (item: Item): ExtractedItem => {
     descriptions,
   };
 };
+
+export const formatItemPocket = (itemPockets: ItemPocket[]): FormattedItemPocket[] =>
+  itemPockets.map(({ categories, id, name }) => {
+    const categoryNames = categories.map(category => category.name);
+
+    return {
+      categories: categoryNames,
+      id,
+      name,
+    };
+  });

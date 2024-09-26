@@ -1,6 +1,8 @@
+// types
+import { type HTMLMotionProps, motion } from 'framer-motion';
+// helpers
 import { fadeInUpVariant, rowVariant } from '@/animations';
 // components
-import type { TableCellProps, TableProps } from '@mui/material';
 import {
   Paper,
   Table,
@@ -9,23 +11,26 @@ import {
   TableContainer,
   TableHead,
   TableRow,
+  type TableCellProps,
+  type TableProps,
 } from '@mui/material';
-import { motion } from 'framer-motion';
 
-interface Column {
+export interface Column {
   field: string;
   headerName: string;
 }
 
-interface Cell extends Omit<TableCellProps, 'children'> {
+export interface Cell extends Omit<TableCellProps, 'children'> {
   render: string | number | JSX.Element;
 }
 
-interface Row {
+export interface Row {
   [key: string]: Cell;
 }
 
-export interface CustomTableProps extends TableProps {
+export interface CustomTableProps
+  extends Omit<HTMLMotionProps<'table'>, keyof TableProps>,
+    TableProps {
   columns: Column[];
   data: Row[];
   customKey: string;
@@ -39,16 +44,13 @@ const CustomTable = ({ columns, data, customKey, ...rest }: CustomTableProps): J
       exit="exit"
       variants={fadeInUpVariant}
       key={customKey}
-      style={{ width: '100%' }}
     >
       <TableContainer component={Paper}>
         <Table sx={{ overflow: 'hidden' }} {...rest}>
           <TableHead>
             <TableRow>
               {columns.map(column => (
-                <TableCell key={column.field} align="center">
-                  {column.headerName}
-                </TableCell>
+                <TableCell key={column.field}>{column.headerName}</TableCell>
               ))}
             </TableRow>
           </TableHead>
@@ -66,7 +68,7 @@ const CustomTable = ({ columns, data, customKey, ...rest }: CustomTableProps): J
                   const { render, ...cellProps } = row[column.field];
 
                   return (
-                    <TableCell key={column.field} align="center" {...cellProps}>
+                    <TableCell key={column.field} {...cellProps}>
                       {render}
                     </TableCell>
                   );

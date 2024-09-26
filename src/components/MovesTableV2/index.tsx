@@ -14,8 +14,7 @@ import { Stack, Typography } from '@mui/material';
 // components
 import { AnimatePresence, motion } from 'framer-motion';
 import TypeBadge from '@/components/TypeBadge';
-import type { CustomTableProps } from '@/components/CustomTable';
-import CustomTable from '@/components/CustomTable';
+import CustomTable, { type CustomTableProps } from '@/components/CustomTable';
 import Loading from '@/components/Loading';
 
 interface TypeMovesProps extends TableProps {
@@ -34,6 +33,7 @@ const MovesTableV2 = ({
   noMovesText,
   ...rest
 }: TypeMovesProps): JSX.Element => {
+  // hooks
   const router = useRouter();
   const plausible = usePlausible();
 

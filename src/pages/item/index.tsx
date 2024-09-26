@@ -23,53 +23,50 @@ const PokestatsItemsPage: NextPage<PokestatsItemsPageProps> = props => {
         <meta property="og:title" content="Regions" />
       </Head>
       <LayoutV2 withHeader customKey="regions-homepage">
-        <ItemListPage />
+        <ItemListPage {...props} />
       </LayoutV2>
     </>
   );
 };
 
 export const getStaticProps: GetStaticProps<PokestatsItemsPageProps> = async () => {
-  try {
-    const [itemPocketNames, allItemNames] = await Promise.all([
-      ItemApi.getAllItemPocketNames(),
-      ItemApi.getAllItemNames(),
-    ]);
+  const [itemPocketNames, allItemNames] = await Promise.all([
+    ItemApi.getAllItemPocketNames(),
+    ItemApi.getAllItemNames(),
+  ]);
 
-    if (!itemPocketNames || !allItemNames) {
-      return { notFound: true };
-    }
-
-    const [itemData, itemPocketData] = await Promise.all([
-      ItemApi.getByNames(allItemNames),
-      ItemApi.getItemPocketByNames(itemPocketNames),
-    ]);
-
-    if (!itemData || !itemPocketData) {
-      return { notFound: true };
-    }
-
-    // Filter out unused items
-    const formattedItems: ExtractedItem[] = itemData
-      .map(formatItemData)
-      .filter(
-        ({ shortEntry, longEntry, category }) =>
-          shortEntry !== '' && longEntry !== '' && category !== 'unused',
-      )
-      .sort((a, b) => a.name.localeCompare(b.name));
-
-    return {
-      props: {
-        itemData: formattedItems,
-        itemPocketNames,
-        itemPocketData,
-      },
-    };
-  } catch (error) {
-    console.error(error);
-    // redirects to 404 page
+  if (!itemPocketNames || !allItemNames) {
     return { notFound: true };
   }
+
+  const itemData = await ItemApi.getByNames(allItemNames);
+  const itemPocketData = await ItemApi.getItemPocketByNames(itemPocketNames);
+
+  // const [itemData, itemPocketData] = await Promise.all([
+  //   ItemApi.getByNames(allItemNames),
+  //   ItemApi.getItemPocketByNames(itemPocketNames),
+  // ]);
+
+  // if (!itemData || !itemPocketData) {
+  //   return { notFound: true };
+  // }
+
+  // // Filter out unused items
+  const formattedItems: ExtractedItem[] = itemData
+    .map(formatItemData)
+    .filter(
+      ({ shortEntry, longEntry, category }) =>
+        shortEntry !== '' && longEntry !== '' && category !== 'unused',
+    )
+    .sort((a, b) => a.name.localeCompare(b.name));
+
+  return {
+    props: {
+      itemData: formattedItems,
+      itemPocketNames,
+      itemPocketData,
+    },
+  };
 };
 
 export default PokestatsItemsPage;

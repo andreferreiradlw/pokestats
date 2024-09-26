@@ -1,7 +1,14 @@
-import React from 'react';
+import type { PokestatsItemsPageProps } from '@/pages/item';
+import { Stack, Typography } from '@mui/material';
+import ItemTable from './ItemTable.tsx';
 
-const ItemListPage = (): JSX.Element => {
-  return <div>ItemListPage</div>;
+const ItemListPage = ({ itemData }: PokestatsItemsPageProps): JSX.Element => {
+  return (
+    <Stack gap={4} width="100%">
+      <Typography variant="pageHeading">Pokémon Items List</Typography>
+      <ItemTable items={itemData} />
+    </Stack>
+  );
 };
 
 export default ItemListPage;

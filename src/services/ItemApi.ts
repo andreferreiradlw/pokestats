@@ -1,6 +1,11 @@
 import MainClient from './MainClient';
 
 export const ItemApi = {
+  getAllItems: async () => await MainClient.item.listItems(),
+
+  getAllItemNames: async () =>
+    await MainClient.item.listItems(0, 1137).then(({ results }) => results.map(({ name }) => name)),
+
   getByName: async (name: string) => await MainClient.item.getItemByName(name),
 
   getByNames: async (names: Array<string>) =>
@@ -16,7 +21,4 @@ export const ItemApi = {
 
   getItemCategoriesByNames: async (names: Array<string>) =>
     await Promise.all(names.map(name => MainClient.item.getItemCategoryByName(name))),
-
-  getAllItemNames: async () =>
-    await MainClient.item.listItems(0, 1137).then(({ results }) => results.map(({ name }) => name)),
 };

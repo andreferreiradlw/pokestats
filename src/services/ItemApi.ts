@@ -6,7 +6,7 @@ export const ItemApi = {
   getByNames: async (names: Array<string>) =>
     await Promise.all(names.map(name => MainClient.item.getItemByName(name))),
 
-  getAllItemPockets: async () =>
+  getAllItemPocketNames: async () =>
     await MainClient.item.listItemPockets().then(({ results }) => results.map(({ name }) => name)),
 
   getItemPocketByName: async (name: string) => await MainClient.item.getItemPocketByName(name),
@@ -17,6 +17,6 @@ export const ItemApi = {
   getItemCategoriesByNames: async (names: Array<string>) =>
     await Promise.all(names.map(name => MainClient.item.getItemCategoryByName(name))),
 
-  getAllItems: async () =>
+  getAllItemNames: async () =>
     await MainClient.item.listItems(0, 1137).then(({ results }) => results.map(({ name }) => name)),
 };

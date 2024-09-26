@@ -2,7 +2,7 @@
 
 import type { PokemonSpecies, PokemonSprites } from 'pokenode-ts';
 
-const spriteExtractor = (
+export const formatSpriteData = (
   pokemonSprites: PokemonSprites,
   pokemonVarieties: PokemonSpecies['varieties'],
 ) => {
@@ -609,5 +609,3 @@ const spriteExtractor = (
     forms,
   };
 };
-
-export { spriteExtractor };

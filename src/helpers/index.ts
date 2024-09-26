@@ -1,8 +1,10 @@
 export * from './autocomplete';
 export * from './deepEqual';
 export * from './findName';
+export * from './formatItemData';
 export * from './formatLocationEncounters';
 export * from './formatPokemonId';
+export * from './formatSpriteData';
 export * from './gameVersion';
 export * from './getIdFromUrl';
 export * from './headbutt';
@@ -13,5 +15,4 @@ export * from './parseLocationName';
 export * from './random';
 export * from './responsiveProps';
 export * from './scrollToTop';
-export * from './sprites';
 export * from './typography';

@@ -1,4 +1,3 @@
-import { useRouter } from 'next/router';
 // types
 import type { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 import type { Move, MoveTarget, SuperContestEffect, ContestEffect } from 'pokenode-ts';
@@ -16,7 +15,6 @@ import { ContestApi, MachineApi, type MoveMachinesData, MovesApi } from '@/servi
 // components
 import Seo from '@/components/Seo'; // Import the Seo component
 import MovePage from '@/components/MovePage';
-import Loading from '@/components/Loading';
 import LayoutV2 from '@/components/LayoutV2';
 
 export interface PokestatsMovePageProps {
@@ -28,19 +26,6 @@ export interface PokestatsMovePageProps {
 }
 
 const PokestatsMovePage: NextPage<PokestatsMovePageProps> = props => {
-  const router = useRouter();
-
-  if (router.isFallback) {
-    return (
-      <Loading
-        height="100vh"
-        icon="record"
-        text="Learning Move"
-        $iconWidth={{ xxs: '20%', xs: '15%', md: '10%', lg: '5%' }}
-      />
-    );
-  }
-
   // SEO-related variables
   const moveName = findEnglishName(props.move.names) ?? capitalize(removeDash(props.move.name));
   const pageTitle = `${moveName} (${capitalize(props.move.type.name)} Type Pokémon Move)`;

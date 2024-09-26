@@ -1,4 +1,3 @@
-import { useRouter } from 'next/router';
 // types
 import type { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 import type { ItemCategory } from 'pokenode-ts';
@@ -6,7 +5,6 @@ import type { ItemCategory } from 'pokenode-ts';
 
 import { ItemApi } from '@/services';
 // components
-import Loading from '@/components/Loading';
 import LayoutV2 from '@/components/LayoutV2';
 import { type ExtractedItem, formatItemData } from '@/helpers';
 
@@ -17,19 +15,6 @@ export interface PokestatsItemPageProps {
 }
 
 const PokestatsItemPage: NextPage<PokestatsItemPageProps> = props => {
-  const router = useRouter();
-
-  if (router.isFallback) {
-    return (
-      <Loading
-        height="100vh"
-        icon="record"
-        text="Finding Item"
-        $iconWidth={{ xxs: '20%', xs: '15%', md: '10%', lg: '5%' }}
-      />
-    );
-  }
-
   console.log('item', props);
 
   return (

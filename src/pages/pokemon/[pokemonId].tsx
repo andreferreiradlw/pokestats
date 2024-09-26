@@ -1,4 +1,3 @@
-import { useRouter } from 'next/router';
 // types
 import type { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 import type {
@@ -19,7 +18,6 @@ import {
 // components
 import Seo from '@/components/Seo';
 import PokemonPage from '@/components/Pokemon';
-import Loading from '@/components/Loading';
 import { AbilityApi, EvolutionApi, PokemonApi, SpeciesApi } from '@/services';
 import LayoutV2 from '@/components/LayoutV2';
 
@@ -32,19 +30,6 @@ export interface PokestatsPokemonPageProps {
 }
 
 const PokestatsPokemonPage: NextPage<PokestatsPokemonPageProps> = ({ allPokemon, ...props }) => {
-  const router = useRouter();
-
-  if (router.isFallback) {
-    return (
-      <Loading
-        height="100vh"
-        icon="pokeball"
-        text="Catching Pokémon"
-        $iconWidth={{ xxs: '20%', xs: '15%', md: '10%', lg: '5%' }}
-      />
-    );
-  }
-
   // SEO-related variables
   const pokemonName = findEnglishName(props.species.names);
   const pageTitle = `${pokemonName} (Pokémon #${props.pokemon.id})`;

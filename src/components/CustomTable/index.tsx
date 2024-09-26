@@ -4,6 +4,7 @@ import { type HTMLMotionProps, motion } from 'framer-motion';
 import { fadeInUpVariant, rowVariant } from '@/animations';
 // components
 import {
+  Box,
   Paper,
   Table,
   TableBody,
@@ -38,12 +39,14 @@ export interface CustomTableProps
 
 const CustomTable = ({ columns, data, customKey, ...rest }: CustomTableProps): JSX.Element => {
   return (
-    <motion.div
+    <Box
+      component={motion.div}
       initial="hidden"
       animate="show"
       exit="exit"
       variants={fadeInUpVariant}
       key={customKey}
+      sx={{ width: '100%' }} // do not remove
     >
       <TableContainer component={Paper}>
         <Table sx={{ overflow: 'hidden' }} {...rest}>
@@ -78,7 +81,7 @@ const CustomTable = ({ columns, data, customKey, ...rest }: CustomTableProps): J
           </TableBody>
         </Table>
       </TableContainer>
-    </motion.div>
+    </Box>
   );
 };
 

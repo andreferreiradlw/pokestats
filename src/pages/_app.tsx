@@ -1,17 +1,20 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-// analytics
-import PlausibleProvider from 'next-plausible';
 // types
 import type { AppProps } from 'next/app';
-// components
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 // mui
 import CssBaseline from '@mui/material/CssBaseline';
 import { AppCacheProvider } from '@mui/material-nextjs/v14-pagesRouter';
-import { GameVersionProvider, ThemeContextProvider } from '@/context';
+// context providers
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import PlausibleProvider from 'next-plausible';
+import { GameVersionProvider, LoaderProvider, ThemeContextProvider } from '@/context';
+// components
+import PageLoader from '@/components/PageLoader';
 
 const App = (props: AppProps): JSX.Element => {
+  // props
   const { Component, pageProps } = props;
+
   // Create a client
   const queryClient = new QueryClient({
     defaultOptions: {
@@ -25,12 +28,15 @@ const App = (props: AppProps): JSX.Element => {
     <AppCacheProvider {...props}>
       <QueryClientProvider client={queryClient}>
         <PlausibleProvider domain="pokestats.gg" enabled={process.env.NODE_ENV === 'production'}>
-          <GameVersionProvider pokemon={pageProps?.species}>
-            <ThemeContextProvider>
-              <CssBaseline />
-              <Component {...pageProps} />
-            </ThemeContextProvider>
-          </GameVersionProvider>
+          <LoaderProvider>
+            <GameVersionProvider pokemon={pageProps?.species}>
+              <ThemeContextProvider>
+                <CssBaseline />
+                <PageLoader />
+                <Component {...pageProps} />
+              </ThemeContextProvider>
+            </GameVersionProvider>
+          </LoaderProvider>
         </PlausibleProvider>
         <ReactQueryDevtools initialIsOpen={false} buttonPosition="bottom-left" />
       </QueryClientProvider>

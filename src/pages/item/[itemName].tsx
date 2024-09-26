@@ -2,7 +2,6 @@
 import type { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 import type { ItemCategory } from 'pokenode-ts';
 // helpers
-
 import { ItemApi } from '@/services';
 // components
 import LayoutV2 from '@/components/LayoutV2';
@@ -18,14 +17,14 @@ const PokestatsItemPage: NextPage<PokestatsItemPageProps> = props => {
   console.log('item', props);
 
   return (
-    <LayoutV2 withHeader customKey={`item-${props.item.id}-page`}>
+    <LayoutV2 withHeader customKey={`item-${props.item?.id}-page`}>
       m
     </LayoutV2>
   );
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const itemList = await ItemApi.getAllItems(0, 50);
+  const itemList = await ItemApi.listItems(0, 50);
 
   const paths = itemList.results.map(({ name }) => ({
     params: { itemName: name },
@@ -33,7 +32,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
   return {
     paths,
-    fallback: true,
+    fallback: 'blocking',
   };
 };
 

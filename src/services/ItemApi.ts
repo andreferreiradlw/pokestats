@@ -1,8 +1,7 @@
 import MainClient from './MainClient';
 
 export const ItemApi = {
-  getAllItems: async (offset?: number, limit?: number) =>
-    await MainClient.item.listItems(offset, limit),
+  listItems: async (offset = 0, limit = 1137) => await MainClient.item.listItems(offset, limit),
 
   getAllItemNames: async () =>
     await MainClient.item.listItems(0, 1137).then(({ results }) => results.map(({ name }) => name)),

@@ -82,6 +82,13 @@ const AutocompleteIcon = ({
         default:
           return undefined;
       }
+    case 'item':
+      return (
+        <ItemIcon
+          alt={`${name} pokémon item`}
+          src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/${name}.png`}
+        />
+      );
     default:
       return undefined;
   }
@@ -112,9 +119,10 @@ const AutocompleteV2 = ({
         fullWidth
         autoHighlight
         disableClearable
+        clearOnBlur
         loading={isLoading}
         options={data || []}
-        getOptionLabel={({ name }) => capitalize(name)}
+        getOptionLabel={({ name }) => capitalize(removeDash(name))}
         getOptionKey={({ id, assetType }) => `${assetType}-${id}`}
         filterOptions={filterOptions}
         groupBy={({ assetType }) => assetType}
@@ -166,7 +174,7 @@ const AutocompleteV2 = ({
         // @ts-expect-error
         ListboxComponent={ListWrapper}
         ListboxProps={{
-          // @ts-expect-error: cannot set custom props for ListboxComponent
+          // @ts-expect-error: ListWrapper is a motion element
           initial: 'hidden',
           animate: 'show',
           whileTap: 'tap',

@@ -29,7 +29,7 @@ export interface PokestatsPokemonPageProps {
   evolutionData: EvolutionChain;
 }
 
-const PokestatsPokemonPage: NextPage<PokestatsPokemonPageProps> = ({ allPokemon, ...props }) => {
+const PokestatsPokemonPage: NextPage<PokestatsPokemonPageProps> = props => {
   // SEO-related variables
   const pokemonName = findEnglishName(props.species.names);
   const pageTitle = `${pokemonName} (Pokémon #${props.pokemon.id})`;
@@ -52,7 +52,7 @@ const PokestatsPokemonPage: NextPage<PokestatsPokemonPageProps> = ({ allPokemon,
         keywords={pageKeywords}
       />
       <LayoutV2 withHeader showGenSelect customKey={`pokemon-${props.species.id}`}>
-        <PokemonPage allPokemon={allPokemon} {...props} />
+        <PokemonPage {...props} />
       </LayoutV2>
     </>
   );
@@ -71,11 +71,11 @@ export const getStaticPaths: GetStaticPaths = async () => {
   // return static paths
   return {
     paths,
-    fallback: true,
+    fallback: 'blocking',
   };
 };
 
-export const getStaticProps: GetStaticProps = async ({ params }) => {
+export const getStaticProps: GetStaticProps<PokestatsPokemonPageProps> = async ({ params }) => {
   // get current pokemon name from url params
   const pokemonName = params?.pokemonId as string;
 
@@ -131,7 +131,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
         abilities: pokemonAbilitiesResults.map(ability => ({
           name: ability.name,
           effect_entries: ability.effect_entries.filter(entry => entry.language.name === 'en'),
-        })),
+        })) as Ability[],
         species: pokemonSpeciesResults,
         evolutionData: evolutionDataResults,
         revalidate: 120,

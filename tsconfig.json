@@ -8,6 +8,8 @@
       "@/BaseStyles/*": ["src/components/BaseStyles/*"],
       "@/components": ["src/components"],
       "@/components/*": ["src/components/*"],
+      "@/constants": ["src/constants"],
+      "@/constants/*": ["src/constants/*"],
       "@/MuiTheme": ["src/theme"],
       "@/helpers": ["src/helpers"],
       "@/helpers/*": ["src/helpers/*"],

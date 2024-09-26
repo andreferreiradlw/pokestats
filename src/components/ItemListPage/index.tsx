@@ -1,4 +1,4 @@
-import { type ChangeEvent, useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 // types
 import type { PokestatsItemsPageProps } from '@/pages/item';
 // helpers
@@ -6,7 +6,7 @@ import { capitalise } from '@/helpers';
 import { useDebouncedValue } from '@/hooks';
 import { fadeInUpVariant } from '@/animations';
 // components
-import { Grid2, type SelectChangeEvent, Stack, Typography } from '@mui/material';
+import { Grid2, Stack, Typography } from '@mui/material';
 import CustomInput from '@/components/CustomInput';
 import DropdownV2 from '@/components/DropdownV2';
 import CustomButton from '@/components/CustomButton';
@@ -35,17 +35,6 @@ const ItemListPage = ({
     return [{ label: 'All', value: 'all' }, ...options];
   }, [itemPocketNames]);
 
-  // Handler for name input change with debounce
-  const handleNameChange = (event: ChangeEvent<HTMLInputElement>) => {
-    console.log('search', event.target.value.toLowerCase());
-    setNameSearch(event.target.value.toLowerCase());
-  };
-
-  // Handler for category selection
-  const handleCategoryChange = (event: SelectChangeEvent<string>) => {
-    setSelectedCategory(event.target.value);
-  };
-
   // Filter items based on search input and selected category
   const filteredItems = useMemo(() => {
     let filtered = itemData;
@@ -72,12 +61,16 @@ const ItemListPage = ({
     <Stack gap={4} width="100%">
       <Typography variant="pageHeading">Pokémon Item List</Typography>
       <Grid2 direction="column" gap={2}>
-        <CustomInput label="Item Name" value={nameSearch} onChange={handleNameChange} />
+        <CustomInput
+          label="Item Name"
+          value={nameSearch}
+          onChange={event => setNameSearch(event.target.value.toLowerCase())}
+        />
         <DropdownV2
           label="Category"
           options={categoryOptions}
           value={selectedCategory}
-          onChange={handleCategoryChange}
+          onChange={event => setSelectedCategory(event.target.value)}
         />
         <CustomButton
           variant="contained"

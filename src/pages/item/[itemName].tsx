@@ -18,7 +18,7 @@ const PokestatsItemPage: NextPage<PokestatsItemPageProps> = props => {
   console.log('item', props);
 
   return (
-    <LayoutV2 withHeader customKey={`item-${props.item.id}`}>
+    <LayoutV2 withHeader customKey={`item-${props.item.id}-page`}>
       m
     </LayoutV2>
   );

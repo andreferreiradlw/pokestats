@@ -3,9 +3,9 @@ import type { GetStaticProps, NextPage } from 'next';
 // helpers
 import { ItemApi } from '@/services';
 // components
-import Head from 'next/head';
 import LayoutV2 from '@/components/LayoutV2';
 import ItemListPage from '@/components/ItemListPage';
+import Seo from '@/components/Seo'; // Import Seo component
 import {
   type ExtractedItem,
   formatItemData,
@@ -19,15 +19,34 @@ export interface PokestatsItemsPageProps {
   itemPocketData: FormattedItemPocket[];
 }
 
-const PokestatsItemsPage: NextPage<PokestatsItemsPageProps> = props => {
-  console.log(props);
+const PokestatsItemsPage: NextPage<PokestatsItemsPageProps> = ({
+  itemData,
+  itemPocketNames,
+  itemPocketData,
+}) => {
+  // Define dynamic values for SEO
+  const seoTitle = 'Pokémon Items List - Explore All Pokémon Items';
+  const seoDescription =
+    'Discover all Pokémon items including held items, evolution stones, and more.';
+  const seoKeywords =
+    'Pokémon items, held items, evolution stones, Pokémon item list, Pokédex items, Pokémon stats, Pokestats, Pokémon item database';
+
   return (
     <>
-      <Head>
-        <meta property="og:title" content="Regions" />
-      </Head>
-      <LayoutV2 withHeader customKey="regions-homepage">
-        <ItemListPage {...props} />
+      <Seo
+        title={seoTitle}
+        description={seoDescription}
+        keywords={seoKeywords}
+        type="website"
+        datePublished={new Date().toISOString()}
+        dateModified={new Date().toISOString()}
+      />
+      <LayoutV2 withHeader customKey="item-list-page">
+        <ItemListPage
+          itemData={itemData}
+          itemPocketNames={itemPocketNames}
+          itemPocketData={itemPocketData}
+        />
       </LayoutV2>
     </>
   );
@@ -52,7 +71,7 @@ export const getStaticProps: GetStaticProps<PokestatsItemsPageProps> = async () 
     return { notFound: true };
   }
 
-  // // Filter out unused items
+  // Filter and format item data
   const formattedItems: ExtractedItem[] = itemData
     .map(formatItemData)
     .filter(

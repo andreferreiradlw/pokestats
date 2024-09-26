@@ -40,11 +40,11 @@ const MoveContest = ({
             <Typography fontWeight="600" component="span">
               {moveName}
             </Typography>
-            {` has the `}
+            {' has the '}
             <Typography fontWeight="600" component="span">
               {capitalize(removeDash(contest_type.name))}
             </Typography>
-            {` contest type.`}
+            {' contest type.'}
           </Typography>
           {contestEffect && (
             <Contest

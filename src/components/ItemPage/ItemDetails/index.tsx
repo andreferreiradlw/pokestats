@@ -1,7 +1,7 @@
 // types
 import type { ItemCategory } from 'pokenode-ts';
 // helpers
-import { capitalise, findEnglishName, removeDash, type ExtractedItem } from '@/helpers';
+import { findEnglishName, type ExtractedItem } from '@/helpers';
 // components
 import { Grid2, type Grid2Props, Typography } from '@mui/material';
 import { Table } from '@/BaseStyles';
@@ -14,7 +14,7 @@ interface ItemDetailsProps extends Grid2Props {
 
 const ItemDetails = ({ item, category, ...rest }: ItemDetailsProps): JSX.Element => {
   // data
-  const { attributes, cost, fling_effect, fling_power, id, generationIntroduced } = item;
+  const { cost, fling_power, id, generationIntroduced } = item;
 
   return (
     <Grid2 gap={2} flexDirection="column" {...rest}>
@@ -29,18 +29,6 @@ const ItemDetails = ({ item, category, ...rest }: ItemDetailsProps): JSX.Element
             <th>Introduced in</th>
             <Typography component="td">{generationIntroduced}</Typography>
           </tr>
-          {attributes.length > 0 && (
-            <tr>
-              <th>Attributes</th>
-              <td>
-                {attributes.map((attribute, i) => (
-                  <Typography textTransform="capitalize" gutterBottom key={attribute}>
-                    {`${i + 1}. ${removeDash(attribute)}`}
-                  </Typography>
-                ))}
-              </td>
-            </tr>
-          )}
           <tr>
             <th>Category</th>
             <Typography component="td">{findEnglishName(category.names)}</Typography>
@@ -52,12 +40,6 @@ const ItemDetails = ({ item, category, ...rest }: ItemDetailsProps): JSX.Element
               {cost}
             </Typography>
           </tr>
-          {fling_effect && (
-            <tr>
-              <th>Fling Effect</th>
-              <Typography component="td">{capitalise(removeDash(fling_effect.name))}</Typography>
-            </tr>
-          )}
           {fling_power && (
             <tr>
               <th>Fling Power</th>

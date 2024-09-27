@@ -1,3 +1,4 @@
+import { JosefinSansFont, MontserratFont, QuicksandFont } from '@/components/Fonts';
 import { createTheme, type ThemeOptions } from '@mui/material';
 import { common } from '@mui/material/colors';
 
@@ -5,29 +6,29 @@ const theme = createTheme();
 
 const customTypography: ThemeOptions = {
   typography: {
-    fontFamily: ['Montserrat', 'sans-serif'].join(','),
+    fontFamily: MontserratFont.style.fontFamily,
     fontWeightMedium: 600,
     h1: {
-      fontFamily: ['Quicksand', 'sans-serif'].join(','),
+      fontFamily: QuicksandFont.style.fontFamily,
       fontSize: '2.5em',
     },
     h2: {
-      fontFamily: ['Quicksand', 'sans-serif'].join(','),
+      fontFamily: QuicksandFont.style.fontFamily,
     },
     h3: {
-      fontFamily: ['Quicksand', 'sans-serif'].join(','),
+      fontFamily: QuicksandFont.style.fontFamily,
     },
     h4: {
-      fontFamily: ['Quicksand', 'sans-serif'].join(','),
+      fontFamily: QuicksandFont.style.fontFamily,
     },
     h5: {
-      fontFamily: ['Quicksand', 'sans-serif'].join(','),
+      fontFamily: QuicksandFont.style.fontFamily,
     },
     h6: {
-      fontFamily: ['Quicksand', 'sans-serif'].join(','),
+      fontFamily: QuicksandFont.style.fontFamily,
     },
     mainHeading: {
-      fontFamily: 'Josefin Sans, sans-serif',
+      fontFamily: JosefinSansFont.style.fontFamily,
       fontSize: '3em',
       fontWeight: 700,
       color: common.white,
@@ -47,7 +48,7 @@ const customTypography: ThemeOptions = {
       },
     },
     pageHeading: {
-      fontFamily: 'Quicksand, sans-serif',
+      fontFamily: QuicksandFont.style.fontFamily,
       fontSize: '2.5em',
       fontWeight: 600,
       textAlign: 'center',
@@ -66,7 +67,7 @@ const customTypography: ThemeOptions = {
       },
     },
     sectionTitle: {
-      fontFamily: 'Quicksand, sans-serif',
+      fontFamily: QuicksandFont.style.fontFamily,
       fontSize: '1.5em',
       fontWeight: 600,
       [theme.breakpoints.up('sm')]: {
@@ -74,7 +75,7 @@ const customTypography: ThemeOptions = {
       },
     },
     sectionSubTitle: {
-      fontFamily: 'Quicksand, sans-serif',
+      fontFamily: QuicksandFont.style.fontFamily,
       fontSize: '1.2em',
       fontWeight: 600,
       [theme.breakpoints.up('xs')]: {

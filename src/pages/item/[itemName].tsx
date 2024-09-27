@@ -1,16 +1,19 @@
 // types
 import type { GetStaticPaths, GetStaticProps, NextPage } from 'next';
-import type { ItemCategory } from 'pokenode-ts';
+import type { ItemAttribute, ItemCategory, ItemFlingEffect } from 'pokenode-ts';
 // helpers
 import { ItemApi } from '@/services';
 // components
 import LayoutV2 from '@/components/LayoutV2';
 import { type ExtractedItem, formatItemData } from '@/helpers';
+import ItemPage from '@/components/ItemPage';
 
 export interface PokestatsItemPageProps {
   item: ExtractedItem;
   category: ItemCategory;
   categoryItems: ExtractedItem[];
+  flingEffect: ItemFlingEffect | null;
+  attributes: ItemAttribute[];
 }
 
 const PokestatsItemPage: NextPage<PokestatsItemPageProps> = props => {
@@ -18,7 +21,7 @@ const PokestatsItemPage: NextPage<PokestatsItemPageProps> = props => {
 
   return (
     <LayoutV2 withHeader customKey={`item-${props.item?.id}-page`}>
-      m
+      <ItemPage {...props} />
     </LayoutV2>
   );
 };
@@ -46,7 +49,9 @@ export const getStaticProps: GetStaticProps<PokestatsItemPageProps> = async ({ p
       return { notFound: true };
     }
 
-    const categoryData = await ItemApi.getCategoryByName(itemData.category.name);
+    const formattedItemData = formatItemData(itemData);
+
+    const categoryData = await ItemApi.getCategoryByName(formattedItemData.category);
 
     const categoryItemNames = categoryData.items.map(({ name }) => name);
 
@@ -59,11 +64,21 @@ export const getStaticProps: GetStaticProps<PokestatsItemPageProps> = async ({ p
       .filter(({ name }) => name !== itemName)
       .sort((a, b) => a.name.localeCompare(b.name));
 
+    let flingEffectData: ItemFlingEffect | null = null;
+
+    if (formattedItemData.fling_effect) {
+      flingEffectData = await ItemApi.getFlingEffectByName(formattedItemData.fling_effect.name);
+    }
+
+    const atributtesData = await ItemApi.getAttributesByNames(formattedItemData.attributes);
+
     return {
       props: {
-        item: formatItemData(itemData),
+        item: formattedItemData,
         category: categoryData,
         categoryItems: categoryItemsData,
+        flingEffect: flingEffectData,
+        attributes: atributtesData,
       },
     };
   } catch (error) {

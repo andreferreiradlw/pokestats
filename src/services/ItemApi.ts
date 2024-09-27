@@ -24,4 +24,10 @@ export const ItemApi = {
 
   getCategoryByName: async (categoryName: string) =>
     await MainClient.item.getItemCategoryByName(categoryName),
+
+  getAttributesByNames: async (names: Array<string>) =>
+    await Promise.all(names.map(name => MainClient.item.getItemAttributeByName(name))),
+
+  getFlingEffectByName: async (name: string) =>
+    await MainClient.item.getItemFlingEffectByName(name),
 };

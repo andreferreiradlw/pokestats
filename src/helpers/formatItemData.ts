@@ -12,7 +12,7 @@ export interface ExtractedItem {
   sprite: string;
   longEntry: string;
   flavourTextEntries: Item['flavor_text_entries'];
-  names: { name: string }[];
+  names: Item['names'];
   fling_effect: Item['fling_effect'];
   fling_power: Item['fling_power'];
   descriptions: {

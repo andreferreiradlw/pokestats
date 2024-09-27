@@ -5,7 +5,7 @@ import type { Type } from 'pokenode-ts';
 import { findEnglishName } from '@/helpers';
 // components
 import Seo from '@/components/Seo'; // Import the Seo component
-import TypePage from '@/components/Type';
+import TypePage from '@/components/TypePage';
 import { TypesApi } from '@/services';
 import LayoutV2 from '@/components/LayoutV2';
 

@@ -16,7 +16,7 @@ import TypeBadge from '@/components/TypeBadge';
 import type { Grid2Props, Theme } from '@mui/material';
 import { Badge, capitalize, Chip, Grid2, Stack, Typography } from '@mui/material';
 // styles
-import { Table, Numbered } from '@/components/BaseStyles';
+import { Table, Numbered } from '@/BaseStyles';
 import { Flavor } from './StyledDetails';
 import { motion } from 'framer-motion';
 import { hoverVariant } from '@/animations';

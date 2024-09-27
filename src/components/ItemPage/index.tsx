@@ -8,6 +8,7 @@ import ItemDetails from './ItemDetails';
 import Image from 'next/image';
 import ItemEffects from './ItemEffects';
 import LanguageTable from '../LanguageTable';
+import ItemFlavorText from './ItemFlavorText';
 
 const ItemPage = ({
   item,
@@ -33,6 +34,10 @@ const ItemPage = ({
         <ItemDetails size={{ xxs: 12, lg: 3 }} category={category} item={item} />
         <ItemEffects size={{ xxs: 12, lg: 5 }} attributes={attributes} flingEffect={flingEffect} />
         <LanguageTable size={{ xxs: 12, lg: 4 }} names={item.names} />
+      </Grid2>
+      <Divider />
+      <Grid2 container spacing={4} direction={{ xxs: 'column', lg: 'row' }} size={12}>
+        <ItemFlavorText size={{ xxs: 12, lg: 8 }} flavorTexts={item.flavourTextEntries} />
       </Grid2>
       <Divider />
     </Stack>

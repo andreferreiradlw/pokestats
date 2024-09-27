@@ -44,15 +44,22 @@ export const getStaticProps: GetStaticProps<PokestatsItemPageProps> = async ({ p
 
   try {
     const itemData = await ItemApi.getByName(itemName);
-
     if (!itemData) {
       return { notFound: true };
     }
 
     const formattedItemData = formatItemData(itemData);
 
-    const categoryData = await ItemApi.getCategoryByName(formattedItemData.category);
+    // Fetch category, fling effect, and attributes
+    const [categoryData, flingEffectData, attributesData] = await Promise.all([
+      ItemApi.getCategoryByName(formattedItemData.category),
+      formattedItemData.fling_effect
+        ? ItemApi.getFlingEffectByName(formattedItemData.fling_effect.name)
+        : Promise.resolve(null),
+      ItemApi.getAttributesByNames(formattedItemData.attributes),
+    ]);
 
+    // Fetch category items
     const categoryItemNames = categoryData.items.map(({ name }) => name);
 
     const categoryItemsData = (await ItemApi.getByNames(categoryItemNames))
@@ -64,25 +71,17 @@ export const getStaticProps: GetStaticProps<PokestatsItemPageProps> = async ({ p
       .filter(({ name }) => name !== itemName)
       .sort((a, b) => a.name.localeCompare(b.name));
 
-    let flingEffectData: ItemFlingEffect | null = null;
-
-    if (formattedItemData.fling_effect) {
-      flingEffectData = await ItemApi.getFlingEffectByName(formattedItemData.fling_effect.name);
-    }
-
-    const atributtesData = await ItemApi.getAttributesByNames(formattedItemData.attributes);
-
     return {
       props: {
         item: formattedItemData,
         category: categoryData,
         categoryItems: categoryItemsData,
         flingEffect: flingEffectData,
-        attributes: atributtesData,
+        attributes: attributesData,
       },
     };
   } catch (error) {
-    console.error('Error fetching move data:', error);
+    console.error('Error fetching item data:', error);
     return { notFound: true };
   }
 };

@@ -1,6 +1,6 @@
 import { useMemo, Fragment } from 'react';
 // types
-import type { MoveFlavorText as PokenodeMoveFlavorText } from 'pokenode-ts';
+import type { VersionGroupFlavorText } from 'pokenode-ts';
 // helpers
 import {
   formatFlavorText,
@@ -17,32 +17,28 @@ interface GroupedFlavorText {
   flavor: string;
   games: string[][];
 }
-interface MoveFlavorTextProps extends Grid2Props {
-  flavorTexts: PokenodeMoveFlavorText[];
+interface ItemFlavorTextProps extends Grid2Props {
+  flavorTexts: VersionGroupFlavorText[];
 }
 
 // Helper function to group and format flavor texts
-const groupFlavorTexts = (
-  flavorTexts: PokenodeMoveFlavorText[],
-): Record<string, GroupedFlavorText> => {
-  const grouped = flavorTexts
+const groupFlavorTexts = (flavorTexts: VersionGroupFlavorText[]) =>
+  flavorTexts
     .filter(({ language }) => language.name === 'en') // Filter out non-English texts
-    .reduce((acc: Record<string, GroupedFlavorText>, { version_group, flavor_text }) => {
+    .reduce((acc: Record<string, GroupedFlavorText>, { version_group, text }) => {
       const genGroups = listGenGroupsByGroup(version_group.name as GameGroup); // Get generation groups by version group
       const primaryGroup = genGroups?.[0];
 
       if (primaryGroup && !acc[primaryGroup]) {
         acc[primaryGroup] = {
-          flavor: formatFlavorText(flavor_text), // Format flavor text
+          flavor: formatFlavorText(text), // Format flavor text
           games: genGroups?.map(group => listGamesByGroup(group)), // List games by group
         };
       }
       return acc;
     }, {});
-  return grouped;
-};
 
-const MoveFlavorText = ({ flavorTexts, ...rest }: MoveFlavorTextProps): JSX.Element => {
+const ItemFlavorText = ({ flavorTexts, ...rest }: ItemFlavorTextProps): JSX.Element => {
   // grouped flavor texts
   const groupFlavorByVersionGroup = useMemo(() => groupFlavorTexts(flavorTexts), [flavorTexts]);
 
@@ -80,4 +76,4 @@ const MoveFlavorText = ({ flavorTexts, ...rest }: MoveFlavorTextProps): JSX.Elem
   );
 };
 
-export default MoveFlavorText;
+export default ItemFlavorText;

@@ -1,7 +1,7 @@
 import type { GetServerSideProps } from 'next';
 import type { Pokemon, PokemonType, MoveType } from '@/types';
 import { fetchAutocompleteData } from '@/helpers';
-import type { PokestatsRegion } from '@/hooks';
+import type { PokestatsItemOption, PokestatsRegion } from '@/hooks';
 
 const toUrl = (host: string, route: string, priority = '1.0'): string => `
   <url>
@@ -19,6 +19,7 @@ const createSitemap = (
   pokemonList: Pokemon[],
   pokemonTypes: PokemonType[],
   movesList: MoveType[],
+  allItemsData: PokestatsItemOption[],
 ): string => {
   const urls = [
     ...routes.map(route => toUrl(host, route)),
@@ -26,6 +27,7 @@ const createSitemap = (
     ...pokemonList.map(pokemon => toUrl(host, `/pokemon/${pokemon.name}`)),
     ...pokemonTypes.map(type => toUrl(host, `/type/${type.name}`, '0.8')),
     ...movesList.map(move => toUrl(host, `/move/${move.name}`, '0.9')),
+    ...allItemsData.map(item => toUrl(host, `/item/${item.name}`, '0.8')),
   ];
 
   return `<?xml version="1.0" encoding="UTF-8"?>
@@ -46,10 +48,10 @@ export const getServerSideProps: GetServerSideProps = async context => {
   const routes = ['', '/headbutt-tree-finder'];
 
   try {
-    const { allMovesData, allPokemonData, allTypesData, allRegionsData } =
+    const { allMovesData, allPokemonData, allTypesData, allRegionsData, allItemsData } =
       await fetchAutocompleteData();
 
-    if (!allPokemonData || !allTypesData || !allMovesData) {
+    if (!allPokemonData || !allTypesData || !allMovesData || !allItemsData) {
       return { notFound: true };
     }
 
@@ -60,6 +62,7 @@ export const getServerSideProps: GetServerSideProps = async context => {
       allPokemonData,
       allTypesData,
       allMovesData,
+      allItemsData,
     );
 
     res.setHeader('Content-Type', 'text/xml');

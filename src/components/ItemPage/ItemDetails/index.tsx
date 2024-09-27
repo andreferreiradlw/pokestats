@@ -1,7 +1,7 @@
 // types
 import type { ItemCategory } from 'pokenode-ts';
 // helpers
-import { findEnglishName, type ExtractedItem } from '@/helpers';
+import { capitalise, findEnglishName, type ExtractedItem } from '@/helpers';
 // components
 import { Grid2, type Grid2Props, Typography } from '@mui/material';
 import { Table } from '@/BaseStyles';
@@ -32,6 +32,10 @@ const ItemDetails = ({ item, category, ...rest }: ItemDetailsProps): JSX.Element
           <tr>
             <th>Category</th>
             <Typography component="td">{findEnglishName(category.names)}</Typography>
+          </tr>
+          <tr>
+            <th>Item Pocket</th>
+            <Typography component="td">{capitalise(category.pocket.name)}</Typography>
           </tr>
           <tr>
             <th>Cost</th>

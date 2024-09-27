@@ -9,10 +9,12 @@ import Image from 'next/image';
 import ItemEffects from './ItemEffects';
 import LanguageTable from '../LanguageTable';
 import ItemFlavorText from './ItemFlavorText';
+import CategoryItems from './CategoryItems';
 
 const ItemPage = ({
   item,
   category,
+  categoryItems,
   attributes,
   flingEffect,
 }: PokestatsItemPageProps): JSX.Element => {
@@ -40,6 +42,7 @@ const ItemPage = ({
         <ItemFlavorText size={{ xxs: 12, lg: 8 }} flavorTexts={item.flavourTextEntries} />
       </Grid2>
       <Divider />
+      <CategoryItems category={category} categoryItems={categoryItems} />
     </Stack>
   );
 };

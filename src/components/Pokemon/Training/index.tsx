@@ -14,6 +14,8 @@ import { GameVersionContext } from '@/context';
 import { removeDash } from '@/helpers';
 // styles
 import { Table, Numbered } from '@/components/BaseStyles';
+import Link from 'next/link';
+import CustomButton from '@/components/CustomButton';
 
 interface TrainingProps extends Grid2Props {
   pokemon: Pokemon;
@@ -89,27 +91,30 @@ const Training = ({ pokemon, species, ...rest }: TrainingProps): JSX.Element => 
     if (!versionItems.length) return 'None';
 
     return versionItems.map(({ item_details, version_details }, i) => (
-      <Stack
-        key={item_details.name}
-        flexDirection="row"
-        justifyContent={{ xxs: 'flex-start', md: 'space-between' }}
-        gap="0.5em"
-        margin="0 0 5px"
-      >
-        <Numbered style={{ width: 'auto' }}>
-          <Typography fontWeight="500" textTransform="capitalize">
-            {`${versionItems.length > 1 ? `${i + 1}. ` : ''}${removeDash(item_details.name)}`}
-          </Typography>
-          <Typography variant="body2" component="span">
-            {`(${version_details.rarity}% chance)`}
-          </Typography>
-        </Numbered>
-        <img
-          src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/${item_details.name}.png`}
-          alt={item_details.name}
-          width="40"
-        />
-      </Stack>
+      <Link href={`/item/${item_details.name}`} legacyBehavior passHref key={item_details.name}>
+        <Stack
+          flexDirection="row"
+          justifyContent={{ xxs: 'flex-start', md: 'space-between' }}
+          gap="0.5em"
+          margin="0 0 5px"
+          component={CustomButton}
+          variant="outlined"
+          color={theme => theme.palette.getContrastText(theme.palette.primary.contrastText)}
+          fullWidth
+        >
+          <Numbered style={{ width: 'auto' }}>
+            <Typography fontWeight="500" textTransform="capitalize">
+              {`${versionItems.length > 1 ? `${i + 1}. ` : ''}${removeDash(item_details.name)}`}
+            </Typography>
+            <Typography variant="body2">{`(${version_details.rarity}% chance)`}</Typography>
+          </Numbered>
+          <img
+            src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/${item_details.name}.png`}
+            alt={item_details.name}
+            width="40"
+          />
+        </Stack>
+      </Link>
     ));
   }, [held_items, gameVersion]);
 

@@ -39,7 +39,7 @@ const triggerNameMap: Record<
   string | JSX.Element | ((hasTrade: boolean) => string)
 > = {
   'level-up': '',
-  'use-item': 'use',
+  'use-item': 'use ',
   trade: (hasTrade: boolean) => `trade ${!hasTrade ? 'for any Pokémon' : ''}`,
   shed: (
     <>
@@ -48,7 +48,11 @@ const triggerNameMap: Record<
         alt="Rare Candy"
       />
       <br />
-      Level 20 with PokéBall in bag and open slot in party
+      Level 20 with{' '}
+      <Link href="/item/poke-ball" legacyBehavior passHref>
+        <MuiLink>Poké Ball</MuiLink>
+      </Link>{' '}
+      in bag and open slot in party
     </>
   ),
   'three-critical-hits': 'perform three critical hits',
@@ -64,7 +68,7 @@ const ConditionalLinkText = memo(
     path,
   }: {
     item?: NamedAPIResource | null;
-    prefix: string;
+    prefix?: string;
     suffix?: string;
     transform: (text: string) => string;
     path: string;
@@ -200,8 +204,13 @@ const EvolutionDetailsText = memo(
         transform={removeDash}
         path="/type/"
       />
-      {held_item && ` while holding ${capitalize(removeDash(held_item.name))}`}
-      {item && ` ${capitalize(removeDash(item.name))}`}
+      <ConditionalLinkText
+        item={held_item}
+        prefix=" while holding "
+        transform={removeDash}
+        path="/item/"
+      />
+      <ConditionalLinkText item={item} transform={removeDash} path="/item/" />
       {min_happiness && ` if it has over ${min_happiness} Happiness`}
       {min_affection && ` if it has over ${min_affection} Affection`}
       {min_beauty && ` if it has over ${min_beauty} beauty`}

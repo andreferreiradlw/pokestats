@@ -4,6 +4,7 @@ import type { ItemCategory } from 'pokenode-ts';
 import { findEnglishName, removeDash, type ExtractedItem } from '@/helpers';
 // components
 import {
+  Box,
   Card,
   CardActions,
   CardContent,
@@ -31,12 +32,16 @@ const CategoryItems = ({ category, categoryItems, ...rest }: CategoryItemsProps)
         <Grid2 size={{ xxs: 6, md: 4, lg: 2 }} key={id}>
           <Card sx={{ width: '100%', display: 'flex', flexDirection: 'column' }}>
             <Stack alignItems="center" justifyContent="center">
-              <CardMedia
-                component="img"
-                sx={{ width: 100 }}
-                image={sprite}
-                alt="Live from space album cover"
-              />
+              {sprite === '' ? (
+                <Box width={100} height={100} />
+              ) : (
+                <CardMedia
+                  component="img"
+                  sx={{ width: 100 }}
+                  image={sprite}
+                  alt={`image of ${name} item`}
+                />
+              )}
             </Stack>
             <CardContent>
               <Typography variant="sectionSubTitle" gutterBottom>
@@ -45,11 +50,14 @@ const CategoryItems = ({ category, categoryItems, ...rest }: CategoryItemsProps)
               <Typography variant="subtitle2">{shortEntry}</Typography>
             </CardContent>
             <CardActions sx={{ mt: 'auto' }}>
-              <Link href={`/item/${name}`} legacyBehavior passHref>
-                <CustomButton variant="contained" size="small">
-                  Item Details
-                </CustomButton>
-              </Link>
+              <CustomButton
+                variant="contained"
+                size="small"
+                component={Link}
+                href={`/item/${name}`}
+              >
+                Item Details
+              </CustomButton>
             </CardActions>
           </Card>
         </Grid2>

@@ -48,7 +48,11 @@
 ✅ Pokémon Page - Encounters Section <br />
 ✅ [Headbutt Tree Encounters Map](https://pokestats.gg/headbutt-tree-finder) <br />
 ✅ Item Page <br />
-🛠️ Berry Page <br />
+🛠️ Egg Groups Page <br />
+💡 Berries Page <br />
+💡 Sprites Page <br />
+💡 Growth Rates Page <br />
+💡 Type Relations Table Page <br />
 🛠️ Interactive Region Maps <br />
 &nbsp;&nbsp; ✅ [Kanto (Gen I)](https://pokestats.gg/regions/generation-i/kanto) <br />
 &nbsp;&nbsp; 🛠️ Johto + Kanto (Gen II) <br />
@@ -59,7 +63,6 @@
 &nbsp;&nbsp; 💡 Unova (Gen V) <br />
 &nbsp;&nbsp; 💡 Unova 2 (Gen V) <br />
 &nbsp;&nbsp; 💡 Kalos (Gen VI) <br />
-💡 Sprites Page <br />
 
 ## Contributing
 

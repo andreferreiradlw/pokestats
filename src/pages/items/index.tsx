@@ -1,18 +1,18 @@
 // types
 import type { GetStaticProps, NextPage } from 'next';
+import type { NamedAPIResource } from 'pokenode-ts';
 // helpers
 import { ItemApi } from '@/services';
-// components
-import LayoutV2 from '@/components/LayoutV2';
-import ItemListPage from '@/components/ItemListPage';
-import Seo from '@/components/Seo'; // Import Seo component
 import {
   type ExtractedItem,
   formatItemData,
   formatItemPocket,
   type FormattedItemPocket,
 } from '@/helpers';
-import type { NamedAPIResource } from 'pokenode-ts';
+// components
+import LayoutV2 from '@/components/LayoutV2';
+import ItemListPage from '@/components/ItemListPage';
+import Seo from '@/components/Seo';
 
 export interface PokestatsItemsPageProps {
   itemData: ExtractedItem[];
@@ -28,8 +28,6 @@ const PokestatsItemsPage: NextPage<PokestatsItemsPageProps> = props => {
     'Discover all Pokémon items including held items, evolution stones, and more.';
   const seoKeywords =
     'Pokémon items, held items, evolution stones, Pokémon item browser, Pokémon item list, Pokédex items, Pokémon stats, Pokestats, Pokémon item database';
-
-  console.log(props);
 
   return (
     <>
@@ -55,7 +53,7 @@ export const getStaticProps: GetStaticProps<PokestatsItemsPageProps> = async () 
     ItemApi.listItemAttributes(),
   ]);
 
-  if (!itemPocketNames || !allItemNames) {
+  if (!itemPocketNames || !allItemNames || !allItemAttributes) {
     return { notFound: true };
   }
 
@@ -77,13 +75,11 @@ export const getStaticProps: GetStaticProps<PokestatsItemsPageProps> = async () 
     )
     .sort((a, b) => a.name.localeCompare(b.name));
 
-  const formattedItemPocket = formatItemPocket(itemPocketData);
-
   return {
     props: {
       itemData: formattedItems,
       itemPocketNames,
-      itemPocketData: formattedItemPocket,
+      itemPocketData: formatItemPocket(itemPocketData),
       allItemAttributes,
     },
   };

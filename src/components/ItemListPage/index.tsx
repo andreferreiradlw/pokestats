@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react';
 // types
-import type { PokestatsItemsPageProps } from '@/pages/item';
+import type { PokestatsItemsPageProps } from '@/pages/items';
 // helpers
 import { capitalise, removeDash } from '@/helpers';
 import { useDebouncedValue } from '@/hooks';
@@ -55,7 +55,7 @@ const ItemListPage = ({
         : null;
 
     return itemData.filter(item => {
-      // Combine all filter conditions into a single return statement for simplicity and performance
+      // Combine all filter conditions
       return (
         (!search || item.name.replace(/-/g, ' ').toLowerCase().includes(search)) &&
         (!selectedCategories || selectedCategories.includes(item.category)) &&

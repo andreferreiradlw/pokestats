@@ -45,7 +45,7 @@ export const getServerSideProps: GetServerSideProps = async context => {
     return { notFound: true };
   }
 
-  const routes = ['', '/headbutt-tree-finder'];
+  const routes = ['', '/headbutt-tree-finder', '/items'];
 
   try {
     const { allMovesData, allPokemonData, allTypesData, allRegionsData, allItemsData } =

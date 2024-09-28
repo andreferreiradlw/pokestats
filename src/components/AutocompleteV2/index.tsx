@@ -108,9 +108,10 @@ const AutocompleteV2 = ({
 
   const filterOptions = createFilterOptions<AutocompleteListOption>({
     matchFrom: 'any',
-    // match by both name and id if option is a pokemon
-    stringify: ({ name, id, assetType }) => (assetType === 'pokemon' ? name + id : name),
+    stringify: ({ name, id, assetType }) =>
+      assetType === 'pokemon' ? `${removeDash(name)} ${id}` : removeDash(name),
     limit: 8,
+    ignoreCase: true,
   });
 
   return (

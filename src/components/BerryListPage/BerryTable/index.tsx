@@ -21,14 +21,14 @@ interface BerryTableProps extends Partial<CustomTableProps> {
 const BerryTable = ({ items }: BerryTableProps): JSX.Element => {
   // Define table columns
   const columns: Column[] = [
-    { field: 'name', headerName: 'Name' },
+    { field: 'name', headerName: 'Name', sortable: true, defaultSort: true },
     { field: 'effect', headerName: 'Effect' },
-    { field: 'growth', headerName: 'Growth Time' },
-    { field: 'smoothness', headerName: 'Smoothness' },
-    { field: 'soilDryness', headerName: 'Soil Dryness' },
+    { field: 'growth', headerName: 'Growth Time', sortable: true },
+    { field: 'smoothness', headerName: 'Smoothness', sortable: true },
+    { field: 'soilDryness', headerName: 'Soil Dryness', sortable: true },
     { field: 'firmness', headerName: 'Firmness' },
-    { field: 'size', headerName: 'Size (cm)' },
-    { field: 'maxBerries', headerName: 'Max Berries' },
+    { field: 'size', headerName: 'Size', sortable: true },
+    { field: 'maxBerries', headerName: 'Max Berries', sortable: true },
     { field: 'itemInfo', headerName: '' },
   ];
 
@@ -57,6 +57,7 @@ const BerryTable = ({ items }: BerryTableProps): JSX.Element => {
             <Typography whiteSpace="nowrap">{capitalise(removeDash(name))}</Typography>
           </Stack>
         ),
+        sortBy: name,
       },
       effect: {
         render: shortEntry ?? 'Effect not available.',
@@ -78,7 +79,9 @@ const BerryTable = ({ items }: BerryTableProps): JSX.Element => {
         align: 'center',
       },
       size: {
-        render: `${size} cm`,
+        render: `${size / 10} cm`,
+        align: 'center',
+        sortBy: size,
       },
       maxBerries: {
         render: max_harvest,

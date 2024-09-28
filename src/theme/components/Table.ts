@@ -1,10 +1,12 @@
 import type { Components, Theme } from '@mui/material';
+import { KeyboardArrowDown } from '@mui/icons-material';
 import { alpha } from '@mui/material/styles';
 
 const Table: {
   MuiTableHead: Components<Theme>['MuiTableHead'];
   MuiTableRow: Components<Theme>['MuiTableRow'];
   MuiTableCell: Components<Theme>['MuiTableCell'];
+  MuiTableSortLabel: Components<Theme>['MuiTableSortLabel'];
 } = {
   MuiTableHead: {
     styleOverrides: {
@@ -34,6 +36,19 @@ const Table: {
     styleOverrides: {
       root: {
         color: 'inherit',
+      },
+    },
+  },
+  MuiTableSortLabel: {
+    defaultProps: {
+      IconComponent: KeyboardArrowDown,
+    },
+    styleOverrides: {
+      root: {
+        color: 'inherit !important',
+      },
+      icon: {
+        color: 'inherit !important',
       },
     },
   },

@@ -2,7 +2,7 @@ import { useMemo, useState } from 'react';
 // types
 import type { PokestatsItemsPageProps } from '@/pages/item';
 // helpers
-import { capitalise } from '@/helpers';
+import { capitalise, removeDash } from '@/helpers';
 import { useDebouncedValue } from '@/hooks';
 import { fadeInUpVariant } from '@/animations';
 // components
@@ -17,15 +17,16 @@ const ItemListPage = ({
   itemData,
   itemPocketNames,
   itemPocketData,
+  allItemAttributes,
 }: PokestatsItemsPageProps): JSX.Element => {
   // States
   const [selectedCategory, setSelectedCategory] = useState('all');
+  const [selectedAttribute, setSelectedAttribute] = useState('all');
   const [nameSearch, setNameSearch] = useState('');
 
   // Debounce search input to reduce unnecessary filtering
-  const debouncedName = useDebouncedValue(nameSearch, 250);
+  const debouncedName = useDebouncedValue(nameSearch, 150);
 
-  // Memoized category options to avoid recalculating on every render
   const categoryOptions = useMemo(() => {
     const options = itemPocketNames.map(name => ({
       label: capitalise(name),
@@ -35,27 +36,33 @@ const ItemListPage = ({
     return [{ label: 'All', value: 'all' }, ...options];
   }, [itemPocketNames]);
 
+  const attributeOptions = useMemo(() => {
+    const options = allItemAttributes.map(({ name }) => ({
+      label: capitalise(removeDash(name)),
+      value: name,
+    }));
+
+    return [{ label: 'All', value: 'all' }, ...options];
+  }, [allItemAttributes]);
+
   // Filter items based on search input and selected category
   const filteredItems = useMemo(() => {
-    let filtered = itemData;
+    const search = debouncedName.trim().replace(/-/g, ' ').toLowerCase();
+    const selectedCategories =
+      selectedCategory !== 'all'
+        ? itemPocketData.find(pocket => pocket.name === selectedCategory.toLowerCase())
+            ?.categories || []
+        : null;
 
-    // Filter by debounced name to reduce frequent updates
-    if (debouncedName.trim()) {
-      const search = debouncedName.trim();
-      filtered = filtered.filter(item => item.name.replaceAll('-', ' ').includes(search));
-    }
-
-    // Filter by selected category
-    if (selectedCategory !== 'all') {
-      const selectedPocketCategories =
-        itemPocketData.find(pocket => pocket.name === selectedCategory.toLowerCase())?.categories ||
-        [];
-
-      filtered = filtered.filter(({ category }) => selectedPocketCategories.includes(category));
-    }
-
-    return filtered;
-  }, [debouncedName, selectedCategory, itemData, itemPocketData]);
+    return itemData.filter(item => {
+      // Combine all filter conditions into a single return statement for simplicity and performance
+      return (
+        (!search || item.name.replace(/-/g, ' ').toLowerCase().includes(search)) &&
+        (!selectedCategories || selectedCategories.includes(item.category)) &&
+        (selectedAttribute === 'all' || item.attributes.includes(selectedAttribute))
+      );
+    });
+  }, [debouncedName, selectedCategory, selectedAttribute, itemData, itemPocketData]);
 
   return (
     <Stack gap={4} width="100%">
@@ -72,15 +79,24 @@ const ItemListPage = ({
           value={selectedCategory}
           onChange={event => setSelectedCategory(event.target.value)}
         />
+        <DropdownV2
+          label="Attibute"
+          minWidth="200px"
+          options={attributeOptions}
+          value={selectedAttribute}
+          onChange={event => setSelectedAttribute(event.target.value)}
+        />
         <CustomButton
           variant="contained"
-          disabled={!nameSearch.trim() && selectedCategory === 'all'}
+          disabled={!nameSearch.trim() && selectedCategory === 'all' && selectedAttribute === 'all'}
           onClick={() => {
+            // reset input states
             setNameSearch('');
             setSelectedCategory('all');
+            setSelectedAttribute('all');
           }}
         >
-          Reset
+          Reset Filters
         </CustomButton>
       </Grid2>
       {filteredItems.length > 0 ? (

@@ -3,6 +3,8 @@ import MainClient from './MainClient';
 export const ItemApi = {
   listItems: async (offset = 0, limit = 1137) => await MainClient.item.listItems(offset, limit),
 
+  listItemAttributes: async () => await MainClient.item.listItemAttributes(),
+
   getAllItemNames: async () =>
     await MainClient.item.listItems(0, 1137).then(({ results }) => results.map(({ name }) => name)),
 

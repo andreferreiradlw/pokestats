@@ -110,7 +110,7 @@ const AutocompleteV2 = ({
     matchFrom: 'any',
     stringify: ({ name, id, assetType }) =>
       assetType === 'pokemon' ? `${removeDash(name)} ${id}` : removeDash(name),
-    limit: 8,
+    limit: 10,
     ignoreCase: true,
   });
 

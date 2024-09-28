@@ -12,24 +12,24 @@ import {
   formatItemPocket,
   type FormattedItemPocket,
 } from '@/helpers';
+import type { NamedAPIResource } from 'pokenode-ts';
 
 export interface PokestatsItemsPageProps {
   itemData: ExtractedItem[];
   itemPocketNames: string[];
   itemPocketData: FormattedItemPocket[];
+  allItemAttributes: NamedAPIResource[];
 }
 
-const PokestatsItemsPage: NextPage<PokestatsItemsPageProps> = ({
-  itemData,
-  itemPocketNames,
-  itemPocketData,
-}) => {
+const PokestatsItemsPage: NextPage<PokestatsItemsPageProps> = props => {
   // Define values for SEO
   const seoTitle = 'Pokémon Items List - Browse All Pokémon Items';
   const seoDescription =
     'Discover all Pokémon items including held items, evolution stones, and more.';
   const seoKeywords =
     'Pokémon items, held items, evolution stones, Pokémon item browser, Pokémon item list, Pokédex items, Pokémon stats, Pokestats, Pokémon item database';
+
+  console.log(props);
 
   return (
     <>
@@ -42,20 +42,17 @@ const PokestatsItemsPage: NextPage<PokestatsItemsPageProps> = ({
         dateModified={new Date().toISOString()}
       />
       <LayoutV2 withHeader customKey="item-list-page">
-        <ItemListPage
-          itemData={itemData}
-          itemPocketNames={itemPocketNames}
-          itemPocketData={itemPocketData}
-        />
+        <ItemListPage {...props} />
       </LayoutV2>
     </>
   );
 };
 
 export const getStaticProps: GetStaticProps<PokestatsItemsPageProps> = async () => {
-  const [itemPocketNames, allItemNames] = await Promise.all([
+  const [itemPocketNames, allItemNames, { results: allItemAttributes }] = await Promise.all([
     ItemApi.getAllItemPocketNames(),
     ItemApi.getAllItemNames(),
+    ItemApi.listItemAttributes(),
   ]);
 
   if (!itemPocketNames || !allItemNames) {
@@ -87,6 +84,7 @@ export const getStaticProps: GetStaticProps<PokestatsItemsPageProps> = async () 
       itemData: formattedItems,
       itemPocketNames,
       itemPocketData: formattedItemPocket,
+      allItemAttributes,
     },
   };
 };

@@ -47,7 +47,7 @@ const ItemTable = ({ items }: ItemTableProps): JSX.Element => {
           ) : (
             <Box width={32} height={32} />
           )}
-          <Typography>{capitalise(removeDash(name))}</Typography>
+          <Typography whiteSpace="nowrap">{capitalise(removeDash(name))}</Typography>
         </Stack>
       ),
       onClick: () => onCellClick(name),
@@ -55,6 +55,9 @@ const ItemTable = ({ items }: ItemTableProps): JSX.Element => {
     category: {
       render: capitalise(removeDash(category)),
       onClick: () => onCellClick(name),
+      sx: {
+        whiteSpace: 'nowrap',
+      },
     },
     shortEntry: {
       render: shortEntry,

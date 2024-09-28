@@ -11,11 +11,11 @@ export interface PokestatsHeadbuttLocationsPageProps {
 
 const PokestatsHeadbuttLocationsPage: NextPage<PokestatsHeadbuttLocationsPageProps> = props => {
   // Dynamic values for SEO
-  const pageTitle = 'Headbutt Tree Finder - Find Pokémon with Headbutt';
+  const pageTitle = 'Headbutt Tree Calculator - Find Pokémon with Headbutt';
   const pageDescription =
-    'This Headbutt Tree Finder tool to locate Pokémon available through headbutting trees in different Generation II game areas.';
+    'This Headbutt Tree Calculator tool helps you locate Pokémon available through headbutting trees in different Generation II game areas.';
   const pageKeywords =
-    'headbutt tree, Pokémon, tree locations, headbutt Pokémon, Pokémon finder, Pokémon Gold, Pokémon Silver, Pokémon Crystal, Headbutt Tree Finder';
+    'headbutt tree, Pokémon, tree locations, headbutt Pokémon, Pokémon finder, Pokémon Gold, Pokémon Silver, Pokémon Crystal, Headbutt Tree Calculator';
 
   return (
     <LayoutV2 withHeader customKey="kanto-gen1-region">

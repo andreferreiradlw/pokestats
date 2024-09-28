@@ -1,5 +1,6 @@
 import type { Item, ItemPocket } from 'pokenode-ts';
 import { type GameGenValue, mapGeneration, mapGroupToGeneration } from './gameVersion';
+import { formatFlavorText } from './typography';
 
 export interface ExtractedItem {
   attributes: string[];
@@ -81,7 +82,7 @@ export const formatItemData = (item: Item): ExtractedItem => {
     id,
     name,
     sprite: sprites.default ?? '',
-    longEntry: finalLongEntry,
+    longEntry: formatFlavorText(finalLongEntry),
     flavourTextEntries: flavor_text_entries,
     names,
     fling_effect,

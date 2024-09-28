@@ -7,8 +7,11 @@ const LoaderContext = createContext<{ loading: boolean }>({ loading: false });
 
 export const LoaderProvider = ({ children }: { children: React.ReactNode }) => {
   const [loading, setLoading] = useState(false);
-  const router = useRouter();
-  const delay = 250; // Adjust delay as necessary (milliseconds)
+
+  const { events } = useRouter();
+
+  const delay = 250;
+
   let loadingTimeout: NodeJS.Timeout | null = null;
 
   useEffect(() => {
@@ -28,20 +31,20 @@ export const LoaderProvider = ({ children }: { children: React.ReactNode }) => {
       setLoading(false);
     };
 
-    router.events.on('routeChangeStart', handleStart);
-    router.events.on('routeChangeComplete', handleComplete);
-    router.events.on('routeChangeError', handleComplete);
+    events.on('routeChangeStart', handleStart);
+    events.on('routeChangeComplete', handleComplete);
+    events.on('routeChangeError', handleComplete);
 
     // Cleanup event listeners and timeout on component unmount
     return () => {
       if (loadingTimeout) {
         clearTimeout(loadingTimeout);
       }
-      router.events.off('routeChangeStart', handleStart);
-      router.events.off('routeChangeComplete', handleComplete);
-      router.events.off('routeChangeError', handleComplete);
+      events.off('routeChangeStart', handleStart);
+      events.off('routeChangeComplete', handleComplete);
+      events.off('routeChangeError', handleComplete);
     };
-  }, [router, delay]);
+  }, [events, delay]);
 
   // Memoize the context value to avoid re-creating it on every render
   const contextValue = useMemo(() => ({ loading }), [loading]);

@@ -24,12 +24,12 @@ const PokestatsItemsPage: NextPage<PokestatsItemsPageProps> = ({
   itemPocketNames,
   itemPocketData,
 }) => {
-  // Define dynamic values for SEO
-  const seoTitle = 'Pokémon Items List - Explore All Pokémon Items';
+  // Define values for SEO
+  const seoTitle = 'Pokémon Items List - Browse All Pokémon Items';
   const seoDescription =
     'Discover all Pokémon items including held items, evolution stones, and more.';
   const seoKeywords =
-    'Pokémon items, held items, evolution stones, Pokémon item list, Pokédex items, Pokémon stats, Pokestats, Pokémon item database';
+    'Pokémon items, held items, evolution stones, Pokémon item browser, Pokémon item list, Pokédex items, Pokémon stats, Pokestats, Pokémon item database';
 
   return (
     <>

@@ -5,8 +5,9 @@ import type { ItemAttribute, ItemCategory, ItemFlingEffect } from 'pokenode-ts';
 import { ItemApi } from '@/services';
 // components
 import LayoutV2 from '@/components/LayoutV2';
-import { type ExtractedItem, formatItemData } from '@/helpers';
+import { type ExtractedItem, findEnglishName, formatItemData } from '@/helpers';
 import ItemPage from '@/components/ItemPage';
+import Seo from '@/components/Seo';
 
 export interface PokestatsItemPageProps {
   item: ExtractedItem;
@@ -16,12 +17,41 @@ export interface PokestatsItemPageProps {
   attributes: ItemAttribute[];
 }
 
-const PokestatsItemPage: NextPage<PokestatsItemPageProps> = props => {
-  console.log('item', props);
+const PokestatsItemPage: NextPage<PokestatsItemPageProps> = ({
+  item,
+  category,
+  categoryItems,
+  flingEffect,
+  attributes,
+}) => {
+  const itemName = findEnglishName(item.names);
+  const categoryName = findEnglishName(category.names);
+
+  // Generate dynamic SEO content based on the item details
+  const seoTitle = `${itemName} - Pokémon ${categoryName} Item`;
+  const seoDescription = `${item.longEntry} ${categoryName} Pokémon item introduced in ${item.generationIntroduced}.`;
+  const seoImage = item.sprite !== '' ? item.sprite : '/static/pokestats_logo.png';
+  const keywords = `Pokémon item, Pokémon item details, Pokémon item effects, best held items for Pokémon, how to use ${itemName} in Pokémon, ${itemName} usage in Pokémon games, all ${categoryName} items in Pokémon`;
 
   return (
-    <LayoutV2 withHeader customKey={`item-${props.item?.id}-page`}>
-      <ItemPage {...props} />
+    <LayoutV2 withHeader customKey={`item-${item.id}-page`}>
+      <Seo
+        title={seoTitle}
+        description={seoDescription}
+        image={seoImage}
+        type="article"
+        datePublished={new Date().toISOString()}
+        dateModified={new Date().toISOString()}
+        authorName="Andre Ferreira"
+        keywords={keywords}
+      />
+      <ItemPage
+        item={item}
+        category={category}
+        categoryItems={categoryItems}
+        flingEffect={flingEffect}
+        attributes={attributes}
+      />
     </LayoutV2>
   );
 };
@@ -50,7 +80,7 @@ export const getStaticProps: GetStaticProps<PokestatsItemPageProps> = async ({ p
 
     const formattedItemData = formatItemData(itemData);
 
-    // Fetch category, fling effect, and attributes
+    // Fetch category, fling effect, and attributes concurrently
     const [categoryData, flingEffectData, attributesData] = await Promise.all([
       ItemApi.getCategoryByName(formattedItemData.category),
       formattedItemData.fling_effect
@@ -59,9 +89,8 @@ export const getStaticProps: GetStaticProps<PokestatsItemPageProps> = async ({ p
       ItemApi.getAttributesByNames(formattedItemData.attributes),
     ]);
 
-    // Fetch category items
+    // Fetch category items concurrently and filter afterwards
     const categoryItemNames = categoryData.items.map(({ name }) => name);
-
     const categoryItemsData = (await ItemApi.getByNames(categoryItemNames))
       .map(formatItemData)
       .filter(

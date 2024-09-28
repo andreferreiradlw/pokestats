@@ -1,8 +1,8 @@
-import { useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 // types
 import type { PokestatsItemsPageProps } from '@/pages/items';
 // helpers
-import { capitalise, removeDash } from '@/helpers';
+import { capitalise, type ExtractedItem, removeDash } from '@/helpers';
 import { useDebouncedValue } from '@/hooks';
 import { fadeInUpVariant } from '@/animations';
 // components
@@ -23,6 +23,7 @@ const ItemListPage = ({
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [selectedAttribute, setSelectedAttribute] = useState('all');
   const [nameSearch, setNameSearch] = useState('');
+  const [filteredItems, setFilteredItems] = useState<ExtractedItem[]>([]);
 
   // Debounce search input to reduce unnecessary filtering
   const debouncedName = useDebouncedValue(nameSearch, 150);
@@ -45,8 +46,8 @@ const ItemListPage = ({
     return [{ label: 'All', value: 'all' }, ...options];
   }, [allItemAttributes]);
 
-  // Filter items based on search input and selected category
-  const filteredItems = useMemo(() => {
+  // Callback to filter items based on search input and selected category
+  const filterItems = useCallback(() => {
     const search = debouncedName.trim().replace(/-/g, ' ').toLowerCase();
     const selectedCategories =
       selectedCategory !== 'all'
@@ -54,7 +55,7 @@ const ItemListPage = ({
             ?.categories || []
         : null;
 
-    return itemData.filter(item => {
+    const filtered = itemData.filter(item => {
       // Combine all filter conditions
       return (
         (!search || item.name.replace(/-/g, ' ').toLowerCase().includes(search)) &&
@@ -62,7 +63,13 @@ const ItemListPage = ({
         (selectedAttribute === 'all' || item.attributes.includes(selectedAttribute))
       );
     });
+
+    setFilteredItems(filtered);
   }, [debouncedName, selectedCategory, selectedAttribute, itemData, itemPocketData]);
+
+  useEffect(() => {
+    if (debouncedName === nameSearch) filterItems();
+  }, [filterItems, debouncedName, nameSearch]);
 
   return (
     <Stack gap={4} width="100%">

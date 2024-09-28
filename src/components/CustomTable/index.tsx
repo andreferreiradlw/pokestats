@@ -53,7 +53,9 @@ const CustomTable = ({ columns, data, customKey, ...rest }: CustomTableProps): J
           <TableHead>
             <TableRow>
               {columns.map(column => (
-                <TableCell key={column.field}>{column.headerName}</TableCell>
+                <TableCell key={column.field} sx={{ whiteSpace: 'nowrap' }}>
+                  {column.headerName}
+                </TableCell>
               ))}
             </TableRow>
           </TableHead>

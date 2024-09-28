@@ -16,6 +16,7 @@ import { removeDash } from '@/helpers';
 import { Table, Numbered } from '@/components/BaseStyles';
 import Link from 'next/link';
 import CustomButton from '@/components/CustomButton';
+import Image from 'next/image';
 
 interface TrainingProps extends Grid2Props {
   pokemon: Pokemon;
@@ -108,10 +109,11 @@ const Training = ({ pokemon, species, ...rest }: TrainingProps): JSX.Element => 
             </Typography>
             <Typography variant="body2">{`(${version_details.rarity}% chance)`}</Typography>
           </Numbered>
-          <img
+          <Image
             src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/${item_details.name}.png`}
             alt={item_details.name}
-            width="40"
+            width={40}
+            height={40}
           />
         </Stack>
       </Link>

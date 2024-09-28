@@ -1,7 +1,7 @@
 // ctx
 import { useLoader } from '@/context';
 // components
-import { Backdrop, Zoom } from '@mui/material';
+import { Backdrop, Fade } from '@mui/material';
 import Loading from '@/components/Loading';
 
 const PageLoader = (): JSX.Element => {
@@ -11,7 +11,7 @@ const PageLoader = (): JSX.Element => {
   return (
     <Backdrop
       open={loading}
-      TransitionComponent={Zoom}
+      TransitionComponent={Fade}
       sx={{
         zIndex: theme => theme.zIndex.drawer + 100, // Ensures it appears above all other elements
       }}

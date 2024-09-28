@@ -17,24 +17,21 @@ export interface PokestatsItemPageProps {
   attributes: ItemAttribute[];
 }
 
-const PokestatsItemPage: NextPage<PokestatsItemPageProps> = ({
-  item,
-  category,
-  categoryItems,
-  flingEffect,
-  attributes,
-}) => {
-  const itemName = findEnglishName(item.names);
-  const categoryName = findEnglishName(category.names);
+const PokestatsItemPage: NextPage<PokestatsItemPageProps> = props => {
+  // item data
+  const { names, longEntry, sprite, generationIntroduced, id } = props.item;
+
+  const itemName = findEnglishName(names);
+  const categoryName = findEnglishName(props.category.names);
 
   // Generate dynamic SEO content based on the item details
   const seoTitle = `${itemName} - Pokémon ${categoryName} Item`;
-  const seoDescription = `${item.longEntry} ${categoryName} Pokémon item introduced in ${item.generationIntroduced}.`;
-  const seoImage = item.sprite !== '' ? item.sprite : '/static/pokestats_logo.png';
+  const seoDescription = `${longEntry} ${categoryName} Pokémon item introduced in ${generationIntroduced}.`;
+  const seoImage = sprite !== '' ? sprite : '/static/pokestats_logo.png';
   const keywords = `Pokémon item, Pokémon item details, Pokémon item effects, best held items for Pokémon, how to use ${itemName} in Pokémon, ${itemName} usage in Pokémon games, all ${categoryName} items in Pokémon`;
 
   return (
-    <LayoutV2 withHeader customKey={`item-${item.id}-page`}>
+    <LayoutV2 withHeader customKey={`item-${id}-page`}>
       <Seo
         title={seoTitle}
         description={seoDescription}
@@ -45,13 +42,7 @@ const PokestatsItemPage: NextPage<PokestatsItemPageProps> = ({
         authorName="Andre Ferreira"
         keywords={keywords}
       />
-      <ItemPage
-        item={item}
-        category={category}
-        categoryItems={categoryItems}
-        flingEffect={flingEffect}
-        attributes={attributes}
-      />
+      <ItemPage {...props} />
     </LayoutV2>
   );
 };

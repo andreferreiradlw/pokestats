@@ -51,7 +51,7 @@ const ItemFlavorText = ({ flavorTexts, ...rest }: ItemFlavorTextProps): JSX.Elem
       {...rest}
     >
       <Typography variant="sectionTitle">Descriptions</Typography>
-      <Box component={Table}>
+      <Box component={Table} sx={{ tableLayout: 'auto' }}>
         <tbody>
           {Object.entries(groupFlavorByVersionGroup).map(([groupKey, { flavor, games }]) => (
             <tr key={`attack-flavor-${groupKey}`}>

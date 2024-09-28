@@ -38,7 +38,7 @@ const ItemPage = ({
     </Grid2>
     <Divider />
     <Grid2 container spacing={4} direction={{ xxs: 'column', lg: 'row' }} size={12}>
-      <ItemFlavorText size={{ xxs: 12, lg: 8 }} flavorTexts={item.flavourTextEntries} />
+      <ItemFlavorText size={{ xxs: 12, lg: 10 }} flavorTexts={item.flavourTextEntries} />
     </Grid2>
     <Divider />
     <CategoryItems category={category} categoryItems={categoryItems} />

@@ -259,7 +259,7 @@ const CustomTable = ({
           sx={{ cursor: 'pointer' }}
         >
           {columns.map(column => {
-            const { render, ...cellProps } = row[column.field];
+            const { render, sortBy, ...cellProps } = row[column.field]; // eslint-disable-line
 
             return (
               <TableCell key={column.field} {...cellProps}>
@@ -282,15 +282,12 @@ const CustomTable = ({
       key={customKey}
       sx={{ width: '100%' }}
     >
-      {/* TableContainer holds the table and makes it scrollable */}
       <TableContainer component={Paper} ref={tableContainerRef}>
         <Table sx={{ overflow: 'hidden' }} {...rest}>
           {renderTableHeader()}
           {renderTableBody()}
         </Table>
       </TableContainer>
-
-      {/* Conditionally render pagination if applicable */}
       {showPagination && (
         <TablePagination
           rowsPerPageOptions={[...availableRowsPerPageOptions, { label: 'All', value: -1 }]}

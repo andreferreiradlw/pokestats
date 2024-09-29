@@ -67,6 +67,7 @@ const ItemTable = ({ items }: ItemTableProps): JSX.Element => {
 
   return (
     <CustomTable
+      paginated
       columns={columns}
       data={data}
       customKey="item-table"

@@ -48,6 +48,8 @@ export interface Row {
   [key: string]: Cell; // A row contains multiple cells, keyed by the column field
 }
 
+type ItemsPerPageOptions = 25 | 50 | 100 | 150 | 250 | 500 | -1;
+
 // Props for the CustomTable component
 export interface CustomTableProps
   extends Omit<HTMLMotionProps<'table'>, keyof TableProps>,
@@ -56,7 +58,7 @@ export interface CustomTableProps
   data: Row[]; // Array of rows to display in the table
   customKey: string; // Unique key for motion animations
   paginated?: boolean; // Whether the table is paginated
-  itemsPerPage?: number; // Number of items to display per page (default is 25)
+  itemsPerPage?: ItemsPerPageOptions; // Number of items to display per page (default is 50)
 }
 
 const CustomTable = ({
@@ -64,7 +66,7 @@ const CustomTable = ({
   data,
   customKey,
   paginated = false,
-  itemsPerPage = 25,
+  itemsPerPage = 50,
   ...rest
 }: CustomTableProps): JSX.Element => {
   const defaultSortColumn = columns.find(column => column.defaultSort && column.sortable);
@@ -91,6 +93,23 @@ const CustomTable = ({
     }
   }, [defaultSortColumn]);
 
+  const totalRows = data.length; // Total number of rows from data
+
+  useEffect(() => {
+    // List of valid per-page options
+    const availableRowsPerPageOptions: Partial<ItemsPerPageOptions[]> = [
+      25, 50, 100, 150, 250, 500,
+    ];
+
+    // If the current rowsPerPage exceeds totalRows, find the closest available option
+    if (rowsPerPage > totalRows && rowsPerPage !== -1) {
+      const closestAvailableOption =
+        availableRowsPerPageOptions.find(option => option! <= totalRows) || 25;
+      setRowsPerPage(closestAvailableOption);
+      setPage(0); // Reset to the first page
+    }
+  }, [totalRows, rowsPerPage]);
+
   // Memoize sorted data to avoid recalculating on every render
   const sortedData = useMemo(() => {
     if (!sortConfig) return data;
@@ -113,10 +132,16 @@ const CustomTable = ({
 
   // Memoize paginated data to only recalculate when relevant state changes
   const paginatedData = useMemo(() => {
+    // If pagination is disabled, return the full sortedData
+    if (!paginated) {
+      return sortedData;
+    }
+
+    // Otherwise, apply pagination logic
     return rowsPerPage > 0
       ? sortedData.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
       : sortedData;
-  }, [sortedData, page, rowsPerPage]);
+  }, [sortedData, page, rowsPerPage, paginated]);
 
   // Handler to manage sorting when a column is clicked
   const handleSort = useCallback(
@@ -144,24 +169,24 @@ const CustomTable = ({
     (event: ChangeEvent<HTMLInputElement>) => {
       const value = parseInt(event.target.value, 10);
 
-      // Check if the user selected "All"
-      if (value === -1) {
-        setRowsPerPage(value);
+      // Ensure that value is one of the valid numbers (25, 50, 100, 150, 250, 500, -1)
+      if ([25, 50, 100, 150, 250, 500, -1].includes(value)) {
+        const validValue = value as ItemsPerPageOptions; // Type assertion to ensure TypeScript understands this is valid
+
+        setRowsPerPage(validValue);
         setPage(0);
-        // Delay the scroll to ensure the table re-renders with all rows before scrolling
-        setTimeout(scrollToTableTop, 0);
-      } else {
-        setRowsPerPage(value);
-        setPage(0);
-        scrollToTableTop();
+
+        // Delay the scroll to ensure the table re-renders with the correct number of rows before scrolling
+        setTimeout(scrollToTableTop, 100); // Delay slightly to ensure rendering is complete
       }
     },
     [scrollToTableTop],
   );
 
-  const totalRows = sortedData.length; // Total number of rows after sorting
-  const showPagination = paginated && data.length > itemsPerPage; // Whether to show pagination
-  const availableRowsPerPageOptions = [25, 50, 100, 250, 500].filter(option => option <= totalRows); // Filter rowsPerPage options based on data length
+  const showPagination = paginated && totalRows > itemsPerPage; // Whether to show pagination
+  const availableRowsPerPageOptions = [25, 50, 100, 150, 250, 500].filter(
+    option => option <= totalRows,
+  ); // Filter rowsPerPage options based on data length
 
   // Helper function to render the column label, with optional sorting and tooltip
   const renderColumnLabel = (column: Column) => {

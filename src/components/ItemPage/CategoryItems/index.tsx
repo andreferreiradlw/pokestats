@@ -52,6 +52,7 @@ const CategoryItems = ({ category, categoryItems, ...rest }: CategoryItemsProps)
             <CardActions sx={{ mt: 'auto' }}>
               <CustomButton
                 variant="contained"
+                color="secondary"
                 size="small"
                 component={Link}
                 href={`/item/${name}`}

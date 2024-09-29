@@ -112,7 +112,11 @@ const BerryDetailsTable = ({ berry, ...rest }: BerryDetailsTableProps): JSX.Elem
       </Grid2>
       <Grid2 size={12}>
         <Link href="/berries" passHref legacyBehavior>
-          <CustomButton variant="contained" onClick={() => plausible('See All Berries Click')}>
+          <CustomButton
+            size="large"
+            variant="contained"
+            onClick={() => plausible('See All Berries Click')}
+          >
             See all berries
           </CustomButton>
         </Link>

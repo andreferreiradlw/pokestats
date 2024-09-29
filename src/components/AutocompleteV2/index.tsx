@@ -145,8 +145,9 @@ const AutocompleteV2 = ({
                       {isLoading && (
                         <Loading
                           width="auto"
+                          flexGrow={0}
                           alignItems="flex-end"
-                          $iconWidth={autocompleteOptions?.size === 'small' ? 3 : 5}
+                          $iconWidth={autocompleteOptions?.size === 'small' ? 3 : 4}
                           py={0}
                         />
                       )}

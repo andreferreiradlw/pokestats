@@ -14,6 +14,7 @@ const ThemeSwitch = styled(Switch)(({ theme }) => ({
       // dark mode
       transform: 'translateX(22px)',
       '& .MuiSwitch-thumb': {
+        // @ts-expect-error: incorrect typings
         backgroundColor: lightPalette.palette!.primary!.main,
         width: 32,
         height: 32,

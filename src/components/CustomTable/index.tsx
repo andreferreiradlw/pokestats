@@ -78,8 +78,9 @@ const CustomTable = ({
   const [page, setPage] = useState(0); // Current page number for pagination
   const [rowsPerPage, setRowsPerPage] = useState(itemsPerPage); // Number of rows to display per page
 
-  // Ref to the table container for scrolling to the top when page changes
+  // Refs
   const tableContainerRef = useRef<HTMLDivElement>(null);
+  const isFirstRender = useRef(true);
 
   // Helper function to scroll to the top of the table
   const scrollToTableTop = useCallback((): void => {
@@ -87,9 +88,11 @@ const CustomTable = ({
   }, []);
 
   // Update the sortConfig state when the default sort column is changed
+  // Only set the default sorting when the component first mounts
   useEffect(() => {
-    if (defaultSortColumn) {
+    if (defaultSortColumn && isFirstRender.current) {
       setSortConfig({ key: defaultSortColumn.field, direction: 'asc' });
+      isFirstRender.current = false; // Set to false after the initial mount
     }
   }, [defaultSortColumn]);
 

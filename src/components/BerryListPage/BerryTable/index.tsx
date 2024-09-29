@@ -108,6 +108,7 @@ const BerryTable = ({ items }: BerryTableProps): JSX.Element => {
       size: {
         render: `${size / 10} cm`,
         align: 'center',
+        sx: { whiteSpace: 'nowrap' },
         sortBy: size,
       },
       maxBerries: {

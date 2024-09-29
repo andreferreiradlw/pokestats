@@ -11,6 +11,7 @@
       "@/constants": ["src/constants"],
       "@/constants/*": ["src/constants/*"],
       "@/MuiTheme": ["src/theme"],
+      "@/MuiTheme/*": ["src/theme/*"],
       "@/helpers": ["src/helpers"],
       "@/helpers/*": ["src/helpers/*"],
       "@/types": ["types"],

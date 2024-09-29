@@ -8,12 +8,13 @@ const ThemeToggleButton = (props: StackProps): JSX.Element => {
   const colorMode = useContext(ColorModeContext);
 
   return (
-    <Stack
-      component={ThemeSwitch}
-      checked={colorMode.mode === 'dark'}
-      onChange={colorMode.toggleColorMode}
-      {...props}
-    />
+    <Stack {...props}>
+      <ThemeSwitch
+        value={colorMode}
+        checked={colorMode.mode === 'dark'}
+        onChange={colorMode.toggleColorMode}
+      />
+    </Stack>
   );
 };
 

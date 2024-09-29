@@ -47,9 +47,9 @@
 ✅ Dark Mode <br />
 ✅ Pokémon Page - Encounters Section <br />
 ✅ [Headbutt Tree Encounters Map](https://pokestats.gg/headbutt-tree-finder) <br />
-✅ Item Page <br />
+✅ [Item Page](https://pokestats.gg/items) <br />
+✅ [Berries Page](https://pokestats.gg/berries) <br />
 🛠️ Egg Groups Page <br />
-💡 Berries Page <br />
 💡 Sprites Page <br />
 💡 Growth Rates Page <br />
 💡 Type Relations Table Page <br />

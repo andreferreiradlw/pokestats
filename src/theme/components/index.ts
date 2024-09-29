@@ -5,8 +5,9 @@ import Button from './Button';
 import CssBaseline from './CssBaseline';
 import Divider from './Divider';
 import FormInputs from './FormInputs';
-import Table from './Table';
 import Grid from './Grid';
+import Table from './Table';
+import Tooltip from './Tooltip';
 import Typography from './Typography';
 import type { ThemeOptions } from '@mui/material';
 
@@ -21,6 +22,7 @@ const styledMuiComponents: ThemeOptions = {
     ...FormInputs,
     ...Grid,
     ...Table,
+    ...Tooltip,
     ...Typography,
   },
 };

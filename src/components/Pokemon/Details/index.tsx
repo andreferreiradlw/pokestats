@@ -94,7 +94,7 @@ const PokemonDetails = ({
   const renderAbilities = pokemonAbilities.map(({ ability, is_hidden }, i) => (
     <Numbered key={ability.name}>
       <Typography fontWeight="500" textTransform="capitalize">
-        {`${i + 1}. ${removeDash(ability.name)}`}
+        {`${pokemonAbilities.length > 1 ? `${i + 1}.` : ''} ${removeDash(ability.name)}`}
         {is_hidden && ' (Hidden Ability)'}
       </Typography>
       <Typography variant="body2" component="span">

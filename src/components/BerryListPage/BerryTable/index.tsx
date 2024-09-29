@@ -129,7 +129,6 @@ const BerryTable = ({ items }: BerryTableProps): JSX.Element => {
 
   return (
     <CustomTable
-      paginated
       columns={columns}
       data={data}
       customKey="berry-table"

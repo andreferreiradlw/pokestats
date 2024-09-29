@@ -22,8 +22,6 @@ const PokestatsItemPage: NextPage<PokestatsItemPageProps> = props => {
   // item data
   const { names, longEntry, sprite, generationIntroduced, id } = props.item;
 
-  console.log(props);
-
   const itemName = findEnglishName(names);
   const categoryName = findEnglishName(props.category.names);
 

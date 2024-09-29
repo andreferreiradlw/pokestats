@@ -29,7 +29,7 @@ const LanguageTable = ({ names, ...rest }: LanguageTableProps): JSX.Element => {
   return (
     <Grid2 container size={12} spacing={2} direction="column" {...rest}>
       <Grid2 size={12} component={Typography} variant="sectionTitle">
-        Other Languages
+        Other Names
       </Grid2>
       <Grid2 size={12}>
         <Table>

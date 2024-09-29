@@ -52,7 +52,7 @@ const ItemEffects = ({ attributes, flingEffect, ...rest }: ItemEffectsProps): JS
       <Grid2 size={12} gap={2} flexDirection="column">
         <Typography variant="sectionTitle">Attributes</Typography>
         {attributes.length > 0 ? (
-          <Table>
+          <Table sx={{ tableLayout: 'auto' }}>
             <tbody>{attributeRows}</tbody>
           </Table>
         ) : (
@@ -63,7 +63,7 @@ const ItemEffects = ({ attributes, flingEffect, ...rest }: ItemEffectsProps): JS
       {flingEffect && (
         <Grid2 size={12} gap={2} flexDirection="column">
           <Typography variant="sectionTitle">Fling Effect</Typography>
-          <Table>
+          <Table sx={{ tableLayout: 'auto' }}>
             <tbody>{flingEffectRow}</tbody>
           </Table>
         </Grid2>

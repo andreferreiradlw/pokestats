@@ -29,7 +29,7 @@ const CategoryItems = ({ category, categoryItems, ...rest }: CategoryItemsProps)
     </Grid2>
     <Grid2 container size={12} gap={2} flexWrap="wrap">
       {categoryItems.map(({ id, sprite, names, shortEntry, name }) => (
-        <Grid2 size={{ xxs: 6, md: 4, lg: 2 }} key={id}>
+        <Grid2 size={{ xxs: 12, xs: 6, md: 4, lg: 2 }} key={id}>
           <Card sx={{ width: '100%', display: 'flex', flexDirection: 'column' }}>
             <Stack alignItems="center" justifyContent="center">
               {sprite === '' ? (

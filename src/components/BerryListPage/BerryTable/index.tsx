@@ -23,12 +23,39 @@ const BerryTable = ({ items }: BerryTableProps): JSX.Element => {
   const columns: Column[] = [
     { field: 'name', headerName: 'Name', sortable: true, defaultSort: true },
     { field: 'effect', headerName: 'Effect' },
-    { field: 'growth', headerName: 'Growth Time', sortable: true },
-    { field: 'smoothness', headerName: 'Smoothness', sortable: true },
-    { field: 'soilDryness', headerName: 'Soil Dryness', sortable: true },
-    { field: 'firmness', headerName: 'Firmness' },
+    {
+      field: 'growth',
+      headerName: 'Growth Time',
+      sortable: true,
+      tooltipText:
+        'Time it takes the tree to grow one stage, in hours. Berry trees go through four of these growth stages before they can be picked.',
+    },
+    {
+      field: 'smoothness',
+      headerName: 'Smoothness',
+      sortable: true,
+      tooltipText: 'The smoothness of this Berry, used in making Pokéblocks or Poffins.',
+    },
+    {
+      field: 'soilDryness',
+      headerName: 'Soil Dryness',
+      sortable: true,
+      tooltipText:
+        'The speed at which this Berry dries out the soil as it grows. A higher rate means the soil dries more quickly.',
+    },
+    {
+      field: 'firmness',
+      headerName: 'Firmness',
+      tooltipText: 'The firmness of this berry, used in making Pokéblocks or Poffins.',
+    },
     { field: 'size', headerName: 'Size', sortable: true },
-    { field: 'maxBerries', headerName: 'Max Berries', sortable: true },
+    {
+      field: 'maxBerries',
+      headerName: 'Max Berries',
+      sortable: true,
+      tooltipText:
+        'The maximum number of these berries that can grow on one tree in Generation IV.',
+    },
     { field: 'itemInfo', headerName: '' },
   ];
 
@@ -101,6 +128,7 @@ const BerryTable = ({ items }: BerryTableProps): JSX.Element => {
 
   return (
     <CustomTable
+      paginated
       columns={columns}
       data={data}
       customKey="berry-table"

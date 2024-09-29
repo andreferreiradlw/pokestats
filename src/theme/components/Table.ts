@@ -7,6 +7,7 @@ const Table: {
   MuiTableRow: Components<Theme>['MuiTableRow'];
   MuiTableCell: Components<Theme>['MuiTableCell'];
   MuiTableSortLabel: Components<Theme>['MuiTableSortLabel'];
+  MuiTablePagination: Components<Theme>['MuiTablePagination'];
 } = {
   MuiTableHead: {
     styleOverrides: {
@@ -49,6 +50,15 @@ const Table: {
       },
       icon: {
         color: 'inherit !important',
+      },
+    },
+  },
+  MuiTablePagination: {
+    styleOverrides: {
+      select: {
+        width: '45px',
+        textAlign: 'left',
+        textAlignLast: 'left',
       },
     },
   },

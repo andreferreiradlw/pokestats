@@ -3,6 +3,7 @@ import type { BerryItem } from '@/pages/berries';
 // helpers
 import { fadeInUpVariant } from '@/animations';
 import { capitalise, removeDash } from '@/helpers';
+import { usePlausible } from 'next-plausible';
 // components
 import { Box, Stack, Typography } from '@mui/material';
 import Image from 'next/image';
@@ -19,6 +20,9 @@ interface BerryTableProps extends Partial<CustomTableProps> {
 }
 
 const BerryTable = ({ items }: BerryTableProps): JSX.Element => {
+  // analytics
+  const plausible = usePlausible();
+
   // Define table columns
   const columns: Column[] = [
     { field: 'name', headerName: 'Name', sortable: true, defaultSort: true },
@@ -118,7 +122,12 @@ const BerryTable = ({ items }: BerryTableProps): JSX.Element => {
       itemInfo: {
         render: (
           <Link href={`/item/${item.name}`}>
-            <CustomButton variant="contained" color="secondary" sx={{ whiteSpace: 'nowrap' }}>
+            <CustomButton
+              variant="contained"
+              color="secondary"
+              sx={{ whiteSpace: 'nowrap' }}
+              onClick={() => plausible('Berry Table Click')}
+            >
               Item Info
             </CustomButton>
           </Link>

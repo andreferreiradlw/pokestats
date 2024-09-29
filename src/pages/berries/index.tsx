@@ -9,7 +9,6 @@ import LayoutV2 from '@/components/LayoutV2';
 import Seo from '@/components/Seo';
 import BerryListPage from '@/components/BerryListPage';
 
-// Define a new type that combines ExtractedItem and Berry
 export type BerryItem = Partial<ExtractedItem> & Berry;
 
 export interface PokestatsBerriesPageProps {
@@ -19,16 +18,14 @@ export interface PokestatsBerriesPageProps {
 const PokestatsBerriesPage: NextPage<PokestatsBerriesPageProps> = props => {
   // Define values for SEO
   const seoTitle = 'Pokémon Berry List - Browse All Pokémon Berries';
+  const seoDescription =
+    "Explore the complete list of Pokémon Berries, including their effects, growth time, firmness, size, and other key attributes. Whether you're planning a battle strategy or crafting Pokéblocks and Poffins, this comprehensive guide provides detailed information about each Berry’s unique characteristics and usage.";
+  const seoKeywords =
+    'Pokémon Berries, Pokémon Berry List, Berry Effects, Pokémon Items, Growth Time, Soil Dryness, Berry Firmness, Pokémon Stat Enhancements, Pokéblocks, Poffins, Pokémon Strategy, Berry Smoothness, Max Berries, Berry Sizes, Pokémon Berry Guide, Pokémon Berry Database';
 
   return (
     <>
-      <Seo
-        title={seoTitle}
-        description="test"
-        type="website"
-        datePublished={new Date().toISOString()}
-        dateModified={new Date().toISOString()}
-      />
+      <Seo title={seoTitle} description={seoDescription} keywords={seoKeywords} />
       <LayoutV2 withHeader customKey="berry-list-page">
         <BerryListPage {...props} />
       </LayoutV2>

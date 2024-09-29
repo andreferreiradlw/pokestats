@@ -1,10 +1,12 @@
 import { useMemo } from 'react';
 // types
 import type { Berry } from 'pokenode-ts';
+// helpers
+import { usePlausible } from 'next-plausible';
+import { capitalise, removeDash } from '@/helpers';
 // components
 import { Numbered, Table } from '@/BaseStyles';
 import { Grid2, Stack, Tooltip, Typography, type Grid2Props } from '@mui/material';
-import { capitalise, removeDash } from '@/helpers';
 import CustomButton from '@/components/CustomButton';
 import Link from 'next/link';
 
@@ -13,6 +15,9 @@ interface BerryDetailsTableProps extends Grid2Props {
 }
 
 const BerryDetailsTable = ({ berry, ...rest }: BerryDetailsTableProps): JSX.Element => {
+  // analytics
+  const plausible = usePlausible();
+
   // berry data
   const {
     growth_time,
@@ -107,7 +112,9 @@ const BerryDetailsTable = ({ berry, ...rest }: BerryDetailsTableProps): JSX.Elem
       </Grid2>
       <Grid2 size={12}>
         <Link href="/berries" passHref legacyBehavior>
-          <CustomButton variant="contained">See all berries</CustomButton>
+          <CustomButton variant="contained" onClick={() => plausible('See All Berries Click')}>
+            See all berries
+          </CustomButton>
         </Link>
       </Grid2>
     </Grid2>

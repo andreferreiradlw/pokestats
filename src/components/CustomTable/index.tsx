@@ -40,7 +40,7 @@ export interface Column {
 // Cell interface defines the structure of a cell in a row
 export interface Cell extends Omit<TableCellProps, 'children'> {
   render: string | number | JSX.Element; // What is rendered in the cell
-  sortBy?: string | number; // Value used for sorting, if different from render
+  sortBy?: string | number | null; // Value used for sorting, if different from render
 }
 
 // Row interface defines the structure of a data row
@@ -121,14 +121,21 @@ const CustomTable = ({
       const aValue = a[sortConfig.key].sortBy ?? a[sortConfig.key].render;
       const bValue = b[sortConfig.key].sortBy ?? b[sortConfig.key].render;
 
+      // Handle null or undefined values: move them to the end (for ascending order) or beginning (for descending order)
+      if (aValue === null && bValue === null) return 0;
+      if (aValue === null) return sortConfig.direction === 'asc' ? 1 : -1;
+      if (bValue === null) return sortConfig.direction === 'asc' ? -1 : 1;
+
       if (typeof aValue === 'string' && typeof bValue === 'string') {
         return sortConfig.direction === 'asc'
           ? aValue.localeCompare(bValue)
           : bValue.localeCompare(aValue);
       }
+
       if (typeof aValue === 'number' && typeof bValue === 'number') {
         return sortConfig.direction === 'asc' ? aValue - bValue : bValue - aValue;
       }
+
       return 0;
     });
   }, [data, sortConfig]);

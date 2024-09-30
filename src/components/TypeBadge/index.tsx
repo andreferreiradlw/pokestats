@@ -1,12 +1,13 @@
 // helpers
 import { hoverVariant } from '@/animations';
+import { capitalise } from '@/helpers';
 // styles
 import { Badge } from './StyledBadge';
 // components
 import TypeIcon from '@/components/TypeIcon';
 import Link from 'next/link';
 import type { Theme } from '@mui/material';
-import { capitalize, Tooltip, Typography } from '@mui/material';
+import { Tooltip, Typography } from '@mui/material';
 
 export interface TypeBadgeProps {
   $iconOnly?: boolean;
@@ -27,7 +28,7 @@ const TypeBadge = ({
 
   return (
     <Link href={`/type/${$typename}`} prefetch={false} legacyBehavior passHref>
-      <Tooltip title={$iconOnly ? capitalize($typename) : ''} placement="right">
+      <Tooltip title={$iconOnly ? capitalise($typename) : ''} placement="right">
         <Badge
           $typename={$typename}
           $iconOnly={$iconOnly}

@@ -1,12 +1,15 @@
 import { useMemo, useState } from 'react';
 // types
 import type { PokestatsBerriesPageProps } from '@/pages/berries';
+// helpers
+import { fadeInUpVariant } from '@/animations';
 // components
 import { Grid2, Stack, Typography } from '@mui/material';
 import BerryTable from './BerryTable';
 import CustomButton from '../CustomButton';
 import CustomInput from '../CustomInput';
 import DropdownV2 from '../DropdownV2';
+import { motion } from 'framer-motion';
 
 const firmOptions = [
   { label: 'All', value: 'all' },
@@ -83,7 +86,22 @@ const BerryListPage = ({ berryData }: PokestatsBerriesPageProps): JSX.Element =>
           Reset Filters
         </CustomButton>
       </Grid2>
-      <BerryTable items={filteredBerries} />
+      {filteredBerries.length > 0 ? (
+        <BerryTable items={filteredBerries} />
+      ) : (
+        <Typography
+          variant="sectionSubTitle"
+          py={4}
+          component={motion.p}
+          initial="hidden"
+          animate="show"
+          exit="exit"
+          variants={fadeInUpVariant}
+          key="noitem-message"
+        >
+          No berries found for current criteria.
+        </Typography>
+      )}
     </Stack>
   );
 };

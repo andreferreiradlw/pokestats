@@ -2,12 +2,6 @@ import type { MoveTarget } from 'pokenode-ts';
 import MainClient from './MainClient';
 
 export const MovesApi = {
-  getAllNames: async () =>
-    await MainClient.move.listMoves(0, 721).then(({ results }) => results.map(({ name }) => name)),
-
-  getByNames: async (names: Array<string>) =>
-    await Promise.all(names.map(name => MainClient.move.getMoveByName(name))),
-
   getByName: async (name: string) => await MainClient.move.getMoveByName(name),
 
   getById: async (id: number) => await MainClient.move.getMoveById(id),
@@ -22,6 +16,12 @@ export const MovesApi = {
     }
     return await MovesApi.getByName(moveName);
   },
+
+  getAllNames: async () =>
+    await MainClient.move.listMoves(0, 721).then(({ results }) => results.map(({ name }) => name)),
+
+  getByNames: async (names: Array<string>) =>
+    await Promise.all(names.map(name => MainClient.move.getMoveByName(name))),
 
   getMoveTarget: async (targetId: number) => {
     const targetData = await MovesApi.getTargetById(targetId);

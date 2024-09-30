@@ -1,36 +1,38 @@
-export const movesByGeneration = [
+import type { GameGenValue } from '@/helpers';
+
+export const movesByGeneration: { genValue: GameGenValue; offset: number; limit: number }[] = [
   {
-    path: '/move/generation/1',
+    genValue: 'generation-i',
     offset: 0,
     limit: 165,
   },
   {
-    path: '/move/generation/2',
+    genValue: 'generation-ii',
     offset: 165,
     limit: 86,
   },
   {
-    path: '/move/generation/3',
+    genValue: 'generation-iii',
     offset: 251,
     limit: 103,
   },
   {
-    path: '/move/generation/4',
+    genValue: 'generation-iv',
     offset: 354,
     limit: 113,
   },
   {
-    path: '/move/generation/5',
+    genValue: 'generation-v',
     offset: 467,
     limit: 92,
   },
   {
-    path: '/move/generation/6',
+    genValue: 'generation-vi',
     offset: 559,
     limit: 62,
   },
   {
-    path: '/move/generation/7',
+    genValue: 'generation-vii',
     offset: 621,
     limit: 121,
   },

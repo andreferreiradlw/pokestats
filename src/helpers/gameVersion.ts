@@ -450,7 +450,7 @@ const gameVersions: GameVersions = [
   // },
 ];
 
-interface GenerationOption {
+export interface GenerationOption {
   value: 'all' | GameGenValue;
   label: string;
 }

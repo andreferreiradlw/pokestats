@@ -3,11 +3,10 @@ import { useState, useEffect, useMemo, useCallback } from 'react';
 import type { NamedAPIResource } from 'pokenode-ts';
 // helpers
 import { usePlausible } from 'next-plausible';
-import { generationOptions, getResourceId, mapIdToGeneration } from '@/helpers';
+import { type GameGenValue, generationOptions, getResourceId, mapIdToGeneration } from '@/helpers';
 import { fadeInUpVariant } from '@/animations';
 // components
-import type { Grid2Props, SelectChangeEvent } from '@mui/material';
-import { Grid2, Typography } from '@mui/material';
+import { Grid2, Typography, type Grid2Props } from '@mui/material';
 import InfiniteScroll from '@/components/InfiniteScroll';
 import DropdownV2 from '@/components/DropdownV2';
 import { motion } from 'framer-motion';
@@ -19,31 +18,29 @@ interface PokemonListProps extends Grid2Props {
 const PokemonList = ({ pokemon, ...rest }: PokemonListProps): JSX.Element => {
   const plausible = usePlausible();
 
-  const [gen, setGen] = useState<string>('all');
+  const [gen, setGen] = useState<'all' | GameGenValue>('all');
   const [sortBy, setSortBy] = useState<string>('id');
 
   useEffect(() => {
     const storedGen = sessionStorage.getItem('genSelect');
     const storedSortBy = sessionStorage.getItem('sortSelect');
-    if (storedGen) setGen(storedGen);
+    if (storedGen) setGen(storedGen as 'all' | GameGenValue);
     if (storedSortBy) setSortBy(storedSortBy);
   }, []);
 
   const handleGenChange = useCallback(
-    (e: SelectChangeEvent<string>) => {
-      const value = e.target.value;
-      setGen(value);
-      sessionStorage.setItem('genSelect', value);
+    (newGen: 'all' | GameGenValue) => {
+      setGen(newGen);
+      sessionStorage.setItem('genSelect', newGen);
       plausible('Homepage Generation Select');
     },
     [plausible],
   );
 
   const handleSortChange = useCallback(
-    (e: SelectChangeEvent<string>) => {
-      const value = e.target.value;
-      setSortBy(value);
-      sessionStorage.setItem('sortSelect', value);
+    (newValue: string) => {
+      setSortBy(newValue);
+      sessionStorage.setItem('sortSelect', newValue);
       plausible('Homepage Sort Select');
     },
     [plausible],
@@ -80,7 +77,7 @@ const PokemonList = ({ pokemon, ...rest }: PokemonListProps): JSX.Element => {
         {`Select your Pokémon (${sortedAndFilteredPokemon.length})`}
       </Typography>
       <Grid2 container wrap="wrap" gap={{ xs: 2, md: 4 }}>
-        <DropdownV2
+        <DropdownV2<'all' | GameGenValue>
           label="Game Generation"
           options={generationOptions}
           value={gen}

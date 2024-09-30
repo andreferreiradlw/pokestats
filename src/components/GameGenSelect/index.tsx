@@ -4,6 +4,7 @@ import { usePlausible } from 'next-plausible';
 import { GameVersionContext } from '@/context';
 // components
 import DropdownV2 from '../DropdownV2';
+import type { GameValue } from '@/helpers';
 
 const GameGenSelect = (): JSX.Element => {
   // analytics
@@ -12,13 +13,13 @@ const GameGenSelect = (): JSX.Element => {
   const { gameVersion, setGameVersion, dropdownOptions } = useContext(GameVersionContext);
 
   return (
-    <DropdownV2
+    <DropdownV2<GameValue>
       label="Game Version"
       value={gameVersion}
       options={dropdownOptions}
       minWidth="170px"
-      onChange={e => {
-        setGameVersion(e.target.value as string);
+      onChange={value => {
+        setGameVersion(value);
         plausible('Game Version Select');
       }}
     />

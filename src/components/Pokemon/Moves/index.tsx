@@ -52,7 +52,7 @@ const PokemonMoves = ({ pokemon, ...rest }: PokemonMovesProps): JSX.Element => {
             { label: 'Egg', value: 'egg' },
             { label: 'Tutor', value: 'tutor' },
           ]}
-          onChange={e => setLearnMethod(e.target.value)}
+          onChange={newMethod => setLearnMethod(newMethod)}
           value={learnMethod}
         />
         <GameGenSelect />

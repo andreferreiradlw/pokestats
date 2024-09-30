@@ -14,7 +14,6 @@ import {
   Stack,
   Typography,
   TextField,
-  type SelectChangeEvent,
   Slider,
   FormControl,
   InputLabel,
@@ -77,8 +76,8 @@ const HeadbuttLocationsPage = ({
     localStorage.setItem('pokemonTrainerId', value);
   };
 
-  const handleAreaChange = (event: SelectChangeEvent<string>) => {
-    const selectedArea = headbuttLocations.find(({ value }) => value === event.target.value);
+  const handleAreaChange = (newValue: string) => {
+    const selectedArea = headbuttLocations.find(({ value }) => value === newValue);
     setAreaDetails(selectedArea);
   };
 
@@ -86,8 +85,8 @@ const HeadbuttLocationsPage = ({
     setScale(newValue as number);
   };
 
-  const handleGameChange = (event: SelectChangeEvent<string>) => {
-    const selectedVersion = event.target.value as GameValue;
+  const handleGameChange = (newValue: GameValue) => {
+    const selectedVersion = newValue;
     setGameVersionInput(selectedVersion);
   };
 
@@ -162,7 +161,7 @@ const HeadbuttLocationsPage = ({
               options={[{ value: 'generation-ii', label: 'Generation II' }]}
               value="generation-ii"
             />
-            <DropdownV2
+            <DropdownV2<GameValue>
               formcontrolProps={{ fullWidth: true }}
               fullWidth
               label="Game Version"

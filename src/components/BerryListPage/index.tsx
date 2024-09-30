@@ -61,14 +61,14 @@ const BerryListPage = ({ berryData }: PokestatsBerriesPageProps): JSX.Element =>
           label="Firmness"
           options={firmOptions}
           value={selectedFirmness}
-          onChange={event => setSelectedFirmness(event.target.value)}
+          onChange={value => setSelectedFirmness(value)}
         />
         <DropdownV2
           label="Category"
           minWidth="175px"
           options={categoryOptions}
           value={selectedCategory}
-          onChange={event => setSelectedCategory(event.target.value)}
+          onChange={value => setSelectedCategory(value)}
         />
         <CustomButton
           variant="contained"

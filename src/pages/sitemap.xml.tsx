@@ -45,7 +45,8 @@ export const getServerSideProps: GetServerSideProps = async context => {
     return { notFound: true };
   }
 
-  const routes = ['', '/headbutt-tree-finder', '/items', '/berries'];
+  // static pages
+  const routes = ['', '/headbutt-tree-finder', '/items', '/berries', '/moves'];
 
   try {
     const { allMovesData, allPokemonData, allTypesData, allRegionsData, allItemsData } =

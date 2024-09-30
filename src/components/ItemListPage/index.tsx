@@ -26,7 +26,7 @@ const ItemListPage = ({
   const [filteredItems, setFilteredItems] = useState<ExtractedItem[]>([]);
 
   // Debounce search input to reduce unnecessary filtering
-  const debouncedName = useDebouncedValue(nameSearch, 150);
+  const debouncedName = useDebouncedValue(nameSearch, 100);
 
   const categoryOptions = useMemo(() => {
     const options = itemPocketNames.map(name => ({
@@ -84,14 +84,14 @@ const ItemListPage = ({
           label="Category"
           options={categoryOptions}
           value={selectedCategory}
-          onChange={event => setSelectedCategory(event.target.value)}
+          onChange={newCategory => setSelectedCategory(newCategory)}
         />
         <DropdownV2
           label="Attibute"
           minWidth="200px"
           options={attributeOptions}
           value={selectedAttribute}
-          onChange={event => setSelectedAttribute(event.target.value)}
+          onChange={newAttribute => setSelectedAttribute(newAttribute)}
         />
         <CustomButton
           variant="contained"

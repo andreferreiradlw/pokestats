@@ -176,7 +176,9 @@ const MovesTableV2 = ({
           },
           type: {
             render: (
-              <TypeBadge $iconOnly $typename={type.name as keyof Theme['palette']['types']} />
+              <Stack alignItems="center" justifyContent="center">
+                <TypeBadge $iconOnly $typename={type.name as keyof Theme['palette']['types']} />
+              </Stack>
             ),
             align: 'center',
           },

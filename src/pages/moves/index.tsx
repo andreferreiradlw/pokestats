@@ -19,11 +19,15 @@ export interface PokestatsMovesPageProps {
 
 const PokestatsMovesPage: NextPage<PokestatsMovesPageProps> = props => {
   // Define values for SEO
-  const seoTitle = `Pokémon Moves List`;
+  const seoTitle = 'Pokémon Moves List';
+  const seoDescription =
+    'Explore the complete list of all Pokémon moves, including details on move types, effects, power, and accuracy.';
+  const seoKeywords =
+    'Pokémon moves list, Pokémon moves by generation, Pokémon moves by type, Pokémon move power, best Pokémon moves, Pokémon move effects, Generation I moves, Pokémon battle moves, Pokémon move accuracy, Pokémon move database';
 
   return (
     <>
-      <Seo title={seoTitle} description="" keywords="" />
+      <Seo title={seoTitle} description={seoDescription} keywords={seoKeywords} />
       <LayoutV2 withHeader customKey="moves-list-page">
         <MovesListPage {...props} />
       </LayoutV2>

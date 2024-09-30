@@ -6,7 +6,7 @@ import { usePlausible } from 'next-plausible';
 import type { Move, MoveLearnMethod } from 'pokenode-ts';
 // helpers
 import type { FilteredMove, GameGenValue } from '@/helpers';
-import { removeDash, mapGeneration } from '@/helpers';
+import { removeDash, mapGeneration, findEnglishVerboseEffect } from '@/helpers';
 import { fadeInUpVariant } from '@/animations';
 // styles
 import type { Theme } from '@mui/material';
@@ -67,6 +67,7 @@ const MovesTableV2 = ({
     const baseColumns = [
       { field: 'name', headerName: 'Name', sortable: true, defaultSort: !learnMethod },
       { field: 'type', headerName: 'Type' },
+      { field: 'effect', headerName: 'Effect Entry' },
       {
         field: 'category',
         headerName: 'Category',
@@ -98,7 +99,7 @@ const MovesTableV2 = ({
         tooltipText:
           'A value between -8 and 8. Sets the order in which moves are executed during battle.',
       },
-      { field: 'generation', headerName: 'Introduced in' },
+      { field: 'generation', headerName: 'Introduced' },
     ];
 
     if (learnMethod) {
@@ -133,6 +134,7 @@ const MovesTableV2 = ({
           // @ts-expect-error: incorrect types
           level_learned_at,
           priority,
+          effect_entries,
         },
         index,
       ) => {
@@ -170,39 +172,51 @@ const MovesTableV2 = ({
             render: <Typography textTransform="capitalize">{removeDash(name)}</Typography>,
             onClick: () => onCellClick(name, id),
             sortBy: name,
+            sx: { whiteSpace: 'nowrap' },
           },
           type: {
             render: (
               <TypeBadge $iconOnly $typename={type.name as keyof Theme['palette']['types']} />
             ),
+            align: 'center',
+          },
+          effect: {
+            render: <Typography>{findEnglishVerboseEffect(effect_entries)}</Typography>,
+            onClick: () => onCellClick(name, id),
           },
           category: {
             render: <Typography textTransform="capitalize">{damage_class?.name}</Typography>,
             onClick: () => onCellClick(name, id),
+            align: 'center',
           },
           power: {
             render: power || '-',
             onClick: () => onCellClick(name, id),
             sortBy: power,
+            align: 'center',
           },
           pp: {
             render: pp || '-',
             onClick: () => onCellClick(name, id),
             sortBy: pp,
+            align: 'center',
           },
           accuracy: {
             render: accuracy ? `${accuracy}%` : '-',
             onClick: () => onCellClick(name, id),
             sortBy: accuracy,
+            align: 'center',
           },
           priority: {
             render: priority,
             onClick: () => onCellClick(name, id),
             sortBy: priority,
+            align: 'center',
           },
           generation: {
             render: mapGeneration(generation.name as GameGenValue) || '-',
             onClick: () => onCellClick(name, id),
+            sx: { whiteSpace: 'nowrap' },
           },
         };
       },

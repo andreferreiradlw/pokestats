@@ -30,7 +30,7 @@ const categoryMoveOptions = [
 ];
 
 const MovesListPage = ({ moves, typeOptions }: PokestatsMovesPageProps): JSX.Element => {
-  console.log('moves', typeOptions);
+  console.log('moves', moves);
 
   // states
   const [nameSearch, setNameSearch] = useState('');

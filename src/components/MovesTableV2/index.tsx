@@ -145,7 +145,7 @@ const MovesTableV2 = ({
             case 'level-up':
               return level_learned_at || '-';
             case 'machine':
-              return machineNames && machineNames[index] ? (
+              return machineNames?.[index] ? (
                 <Stack flexDirection="row" justifyContent="center" alignItems="center" gap={1}>
                   <span>{machineNames[index].toUpperCase()}</span>
                   <img

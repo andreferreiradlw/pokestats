@@ -270,6 +270,7 @@ const CustomTable = ({
         <TableRow
           key={rowIndex}
           component={motion.tr}
+          initial="rest"
           whileHover="hover"
           whileTap="tap"
           variants={rowVariant}

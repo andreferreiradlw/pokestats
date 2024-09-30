@@ -41,6 +41,7 @@ const Homepage = ({ pokemonTypes, pokemonList }: PokestatsHomepageProps): JSX.El
         href="https://github.com/andreferreiradlw/pokestats"
         target="_blank"
         rel="noopener"
+        initial="rest"
         whileHover="hover"
         whileTap="tap"
         variants={hoverVariant}

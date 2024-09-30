@@ -10,6 +10,8 @@ import InfiniteScroll from '@/components/InfiniteScroll';
 import type { StackProps } from '@mui/material';
 import { Stack, Typography, Tabs, Tab, Paper } from '@mui/material';
 import MovesTableV2 from '@/components/MovesTableV2';
+import Link from 'next/link';
+import CustomButton from '@/components/CustomButton';
 
 interface TypeTabsProps extends StackProps, TypePageProps {
   typeName: string;
@@ -63,6 +65,11 @@ const TypeTabs = ({ typeData, typeName, ...rest }: TypeTabsProps) => {
             isLoading={isLoadingMoves}
             noMovesText="No moves for current type."
           />
+          <Link href="/moves" passHref legacyBehavior>
+            <CustomButton variant="contained" size="large">
+              See all moves
+            </CustomButton>
+          </Link>
         </Stack>
       )}
     </Stack>

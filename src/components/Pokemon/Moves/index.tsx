@@ -12,6 +12,8 @@ import { Grid2, Typography } from '@mui/material';
 import DropdownV2 from '@/components/DropdownV2';
 import GameGenSelect from '@/components/GameGenSelect';
 import MovesTableV2 from '@/components/MovesTableV2';
+import Link from 'next/link';
+import CustomButton from '@/components/CustomButton';
 
 interface PokemonMovesProps extends Grid2Props {
   pokemon: Pokemon;
@@ -65,6 +67,13 @@ const PokemonMoves = ({ pokemon, ...rest }: PokemonMovesProps): JSX.Element => {
           isLoading={movesLoading || machinesLoading}
           noMovesText={`No ${learnMethod} moves for currently selected game version.`}
         />
+      </Grid2>
+      <Grid2 size={12}>
+        <Link href="/moves" passHref legacyBehavior>
+          <CustomButton variant="contained" size="large">
+            See all moves
+          </CustomButton>
+        </Link>
       </Grid2>
     </Grid2>
   );

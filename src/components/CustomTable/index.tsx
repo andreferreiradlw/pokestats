@@ -120,8 +120,10 @@ const CustomTable = ({
     setPage(0); // Reset to the first page
 
     return [...data].sort((a, b) => {
-      let aValue = a[sortConfig.key].sortBy ?? a[sortConfig.key].render;
-      let bValue = b[sortConfig.key].sortBy ?? b[sortConfig.key].render;
+      let aValue: string | number | JSX.Element | null =
+        a[sortConfig.key].sortBy ?? a[sortConfig.key].render;
+      let bValue: string | number | JSX.Element | null =
+        b[sortConfig.key].sortBy ?? b[sortConfig.key].render;
 
       // Treat "-" as undefined or null (no value)
       if (aValue === '-') aValue = null;

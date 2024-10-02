@@ -1,10 +1,11 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo } from 'react';
 // types
 import type { PokestatsItemsPageProps } from '@/pages/items';
 // helpers
-import { capitalise, type ExtractedItem, removeDash } from '@/helpers';
+import { capitalise, removeDash } from '@/helpers';
 import { useDebouncedValue } from '@/hooks';
 import { fadeInUpVariant } from '@/animations';
+import { useFormik } from 'formik';
 // components
 import { Grid2, Stack, Typography } from '@mui/material';
 import CustomInput from '@/components/CustomInput';
@@ -19,89 +20,100 @@ const ItemListPage = ({
   itemPocketData,
   allItemAttributes,
 }: PokestatsItemsPageProps): JSX.Element => {
-  // States
-  const [selectedCategory, setSelectedCategory] = useState('all');
-  const [selectedAttribute, setSelectedAttribute] = useState('all');
-  const [nameSearch, setNameSearch] = useState('');
-  const [filteredItems, setFilteredItems] = useState<ExtractedItem[]>([]);
+  // Formik setup
+  const { handleSubmit, values, resetForm, setFieldValue, handleChange } = useFormik({
+    initialValues: {
+      nameSearch: '',
+      selectedCategory: 'all',
+      selectedAttribute: 'all',
+    },
+    onSubmit: () => {},
+    validateOnChange: false, // skip validation on change
+    validateOnBlur: false, // skip validation on blur
+  });
 
-  // Debounce search input to reduce unnecessary filtering
-  const debouncedName = useDebouncedValue(nameSearch, 100);
+  // Debounce search input
+  const debouncedName = useDebouncedValue(values.nameSearch, 100);
 
+  // Memoized category options
   const categoryOptions = useMemo(() => {
     const options = itemPocketNames.map(name => ({
       label: capitalise(name),
       value: name,
     }));
-
     return [{ label: 'All', value: 'all' }, ...options];
   }, [itemPocketNames]);
 
+  // Memoized attribute options
   const attributeOptions = useMemo(() => {
     const options = allItemAttributes.map(({ name }) => ({
       label: capitalise(removeDash(name)),
       value: name,
     }));
-
     return [{ label: 'All', value: 'all' }, ...options];
   }, [allItemAttributes]);
 
-  // Callback to filter items based on search input and selected category
-  const filterItems = useCallback(() => {
+  // Memoized item filtering
+  const filteredItems = useMemo(() => {
     const search = debouncedName.trim().replace(/-/g, ' ').toLowerCase();
     const selectedCategories =
-      selectedCategory !== 'all'
-        ? itemPocketData.find(pocket => pocket.name === selectedCategory.toLowerCase())
+      values.selectedCategory !== 'all'
+        ? itemPocketData.find(pocket => pocket.name === values.selectedCategory.toLowerCase())
             ?.categories || []
         : null;
 
-    const filtered = itemData.filter(item => {
-      // Combine all filter conditions
+    return itemData.filter(item => {
       return (
         (!search || item.name.replace(/-/g, ' ').toLowerCase().includes(search)) &&
         (!selectedCategories || selectedCategories.includes(item.category)) &&
-        (selectedAttribute === 'all' || item.attributes.includes(selectedAttribute))
+        (values.selectedAttribute === 'all' || item.attributes.includes(values.selectedAttribute))
       );
     });
+  }, [debouncedName, values.selectedCategory, values.selectedAttribute, itemData, itemPocketData]);
 
-    setFilteredItems(filtered);
-  }, [debouncedName, selectedCategory, selectedAttribute, itemData, itemPocketData]);
-
+  // Effect to trigger filtering on debounced input
   useEffect(() => {
-    if (debouncedName === nameSearch) filterItems();
-  }, [filterItems, debouncedName, nameSearch]);
+    if (debouncedName === values.nameSearch) {
+      // Trigger filtering if debounced search matches current value
+    }
+  }, [debouncedName, values.nameSearch]);
+
+  // Memoized reset function
+  const handleReset = useCallback(() => {
+    resetForm();
+  }, [resetForm]);
 
   return (
     <Stack gap={4} width="100%">
       <Typography variant="pageHeading">Pokémon Item List</Typography>
-      <Grid2 direction="column" gap={2}>
+      <Grid2 direction="column" gap={2} component="form" onSubmit={handleSubmit}>
         <CustomInput
           label="Item Name"
-          value={nameSearch}
-          onChange={event => setNameSearch(event.target.value.toLowerCase())}
+          value={values.nameSearch}
+          onChange={handleChange}
+          name="nameSearch"
         />
         <DropdownV2
           label="Category"
           options={categoryOptions}
-          value={selectedCategory}
-          onChange={newCategory => setSelectedCategory(newCategory)}
+          value={values.selectedCategory}
+          onChange={value => setFieldValue('selectedCategory', value)}
         />
         <DropdownV2
-          label="Attibute"
+          label="Attribute"
           minWidth="200px"
           options={attributeOptions}
-          value={selectedAttribute}
-          onChange={newAttribute => setSelectedAttribute(newAttribute)}
+          value={values.selectedAttribute}
+          onChange={value => setFieldValue('selectedAttribute', value)}
         />
         <CustomButton
           variant="contained"
-          disabled={!nameSearch.trim() && selectedCategory === 'all' && selectedAttribute === 'all'}
-          onClick={() => {
-            // reset input states
-            setNameSearch('');
-            setSelectedCategory('all');
-            setSelectedAttribute('all');
-          }}
+          disabled={
+            !values.nameSearch.trim() &&
+            values.selectedCategory === 'all' &&
+            values.selectedAttribute === 'all'
+          }
+          onClick={handleReset}
         >
           Reset Filters
         </CustomButton>
@@ -109,7 +121,7 @@ const ItemListPage = ({
       {filteredItems.length > 0 ? (
         <ItemTable
           items={filteredItems}
-          customKey={`item-table-${selectedCategory}-${nameSearch}`}
+          customKey={`item-table-${values.selectedCategory}-${values.nameSearch}`}
         />
       ) : (
         <Typography

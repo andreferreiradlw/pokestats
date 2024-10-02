@@ -2,9 +2,7 @@ import MainClient from './MainClient';
 
 export const EggGroupApi = {
   getAllGroupNames: async () =>
-    await MainClient.pokemon
-      .listEggGroups(0, 64)
-      .then(({ results }) => results.map(({ name }) => name)),
+    await MainClient.pokemon.listEggGroups().then(({ results }) => results.map(({ name }) => name)),
 
   getByName: async (name: string) => await MainClient.pokemon.getEggGroupByName(name),
 

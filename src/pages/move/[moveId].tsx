@@ -13,7 +13,7 @@ import {
 } from '@/helpers';
 import { ContestApi, MachineApi, type MoveMachinesData, MovesApi } from '@/services';
 // components
-import Seo from '@/components/Seo'; // Import the Seo component
+import Seo from '@/components/Seo';
 import MovePage from '@/components/MovePage';
 import LayoutV2 from '@/components/LayoutV2';
 

@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useMemo, useCallback } from 'react';
 // types
 import type { PokestatsMovesPageProps } from '@/pages/moves';
 // helpers
@@ -9,89 +9,109 @@ import CustomButton from '../CustomButton';
 import DropdownV2 from '../DropdownV2';
 import CustomInput from '../CustomInput';
 import MovesTableV2 from '../MovesTableV2';
-
-const categoryMoveOptions = [
-  {
-    label: 'All',
-    value: 'all',
-  },
-  {
-    label: 'Physical',
-    value: 'physical',
-  },
-  {
-    label: 'Special',
-    value: 'special',
-  },
-  {
-    label: 'Status',
-    value: 'status',
-  },
-];
+import { useFormik } from 'formik';
 
 const MovesListPage = ({ moves, typeOptions }: PokestatsMovesPageProps): JSX.Element => {
-  // states
-  const [nameSearch, setNameSearch] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState('all');
-  const [selectedType, setSelectedType] = useState('all');
-  const [selectedGen, setSelectedGen] = useState<GenerationOption['value']>('all');
+  // Options
+  const categoryMoveOptions = useMemo(
+    () => [
+      { label: 'All', value: 'all' },
+      { label: 'Physical', value: 'physical' },
+      { label: 'Special', value: 'special' },
+      { label: 'Status', value: 'status' },
+    ],
+    [],
+  );
 
-  // moves
+  // Formik setup
+  const { handleSubmit, values, resetForm, setFieldValue, handleChange } = useFormik({
+    initialValues: {
+      nameSearch: '',
+      selectedCategory: 'all',
+      selectedType: 'all',
+      selectedGen: 'all',
+    },
+    onSubmit: () => {},
+    validateOnChange: false, // skip validation on change
+    validateOnBlur: false, // skip validation on blur
+  });
+
+  // Memoized filtered moves
   const filteredMoves = useMemo(() => {
-    const search = nameSearch.trim().replace(/-/g, ' ').toLowerCase();
+    const search = values.nameSearch.trim().replace(/-/g, ' ').toLowerCase();
 
     return moves.filter(move => {
-      // Combine all filter conditions
       return (
         (!search || move.name.replace(/-/g, ' ').toLowerCase().includes(search)) &&
-        (selectedGen === 'all' || move.generation.name === selectedGen) &&
-        (selectedCategory === 'all' || move.damage_class?.name === selectedCategory) &&
-        (selectedType === 'all' || move.type.name === selectedType)
+        (values.selectedGen === 'all' || move.generation.name === values.selectedGen) &&
+        (values.selectedCategory === 'all' ||
+          move.damage_class?.name === values.selectedCategory) &&
+        (values.selectedType === 'all' || move.type.name === values.selectedType)
       );
     });
-  }, [nameSearch, selectedGen, selectedCategory, selectedType]);
+  }, [values, moves]);
+
+  // Memoized event handlers
+  const handleCategoryChange = useCallback(
+    (newCategory: string) => {
+      setFieldValue('selectedCategory', newCategory);
+    },
+    [setFieldValue],
+  );
+
+  const handleTypeChange = useCallback(
+    (newType: string) => {
+      setFieldValue('selectedType', newType);
+    },
+    [setFieldValue],
+  );
+
+  const handleGenChange = useCallback(
+    (newGen: GenerationOption['value']) => {
+      setFieldValue('selectedGen', newGen);
+    },
+    [setFieldValue],
+  );
+
+  const handleReset = useCallback(() => resetForm(), [resetForm]);
 
   return (
     <Stack gap={4} width="100%">
       <Typography variant="pageHeading">Pokémon Moves List</Typography>
-      <Grid2 direction="column" gap={2}>
+      <Grid2 direction="column" gap={2} component="form" onSubmit={handleSubmit}>
         <CustomInput
           label="Move Name"
-          value={nameSearch}
-          onChange={event => setNameSearch(event.target.value.toLowerCase())}
+          value={values.nameSearch}
+          onChange={handleChange}
+          name="nameSearch"
         />
         <DropdownV2
           label="Category"
           options={categoryMoveOptions}
-          value={selectedCategory}
-          onChange={newCategory => setSelectedCategory(newCategory)}
+          value={values.selectedCategory}
+          onChange={handleCategoryChange}
         />
         <DropdownV2
           label="Type"
           options={typeOptions}
-          value={selectedType}
-          onChange={newType => setSelectedType(newType)}
+          value={values.selectedType}
+          onChange={handleTypeChange}
         />
         <DropdownV2<GenerationOption['value']>
           label="Generation"
           options={generationOptions.slice(0, 8)}
-          value={selectedGen}
-          onChange={newGen => setSelectedGen(newGen)}
+          value={values.selectedGen as GenerationOption['value']}
+          onChange={handleGenChange}
         />
         <CustomButton
           variant="contained"
           disabled={
-            !nameSearch &&
-            selectedGen === 'all' &&
-            selectedCategory === 'all' &&
-            selectedType === 'all'
+            !values.nameSearch &&
+            values.selectedGen === 'all' &&
+            values.selectedCategory === 'all' &&
+            values.selectedType === 'all'
           }
-          onClick={() => {
-            setNameSearch('');
-            setSelectedGen('all');
-            setSelectedCategory('all');
-            setSelectedType('all');
-          }}
+          onClick={handleReset}
         >
           Reset Filters
         </CustomButton>

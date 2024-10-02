@@ -1,18 +1,20 @@
 // types
 import type { GetStaticPaths, GetStaticProps, NextPage } from 'next';
-import type { EggGroup, Pokemon } from 'pokenode-ts';
+import type { EggGroup, Pokemon, PokemonSpecies } from 'pokenode-ts';
 // helpers
-import { EggGroupApi, PokemonApi } from '@/services';
+import { EggGroupApi, PokemonApi, SpeciesApi } from '@/services';
 // components
 import Seo from '@/components/Seo';
 import LayoutV2 from '@/components/LayoutV2';
 import EggGroupPage from '@/components/EggGroupPage';
 import { getResourceId } from '@/helpers';
 
+export type EggGroupTableData = Partial<Pokemon> & Partial<PokemonSpecies>;
+
 export interface PokestatsEggGroupPageProps {
   eggGroups: string[];
   eggGroupData: EggGroup;
-  pokemonData: Pokemon[];
+  tableData: EggGroupTableData[];
 }
 
 const PokestatsEggGroupPage: NextPage<PokestatsEggGroupPageProps> = props => {
@@ -56,13 +58,26 @@ export const getStaticProps: GetStaticProps<PokestatsEggGroupPageProps> = async 
 
     const pokemonIds = eggGroupData.pokemon_species.map(({ url }) => getResourceId(url));
 
-    const pokemonData = await PokemonApi.getByIds(pokemonIds);
+    const [speciesData, pokemonData] = await Promise.all([
+      SpeciesApi.getByIds(pokemonIds),
+      PokemonApi.getByIds(pokemonIds),
+    ]);
+
+    // Joining the data
+    const tableData: EggGroupTableData[] = pokemonData
+      .map(obj1 => {
+        const obj2 = speciesData.find(obj2 => obj2.id === obj1.id);
+        return { ...obj1, ...obj2 };
+      })
+      .filter(
+        entry => (entry.id >= 1 && entry.id <= 807) || (entry.id >= 10001 && entry.id <= 10157),
+      );
 
     return {
       props: {
         eggGroups: eggGroupNames.sort((a, b) => a.localeCompare(b)),
         eggGroupData,
-        pokemonData,
+        tableData,
       },
     };
   } catch (error) {

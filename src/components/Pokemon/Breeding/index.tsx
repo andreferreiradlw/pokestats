@@ -58,7 +58,10 @@ const Breeding = ({ species, babyTriggerItem, ...rest }: BreedingProps): JSX.Ele
     return (
       <>
         <Typography>{`${hatch_counter} cycles`}</Typography>
-        <Typography variant="body2" component="span">{`(${steps} steps)`}</Typography>
+        <Typography
+          variant="body2"
+          component="span"
+        >{`(${steps.toLocaleString()} steps)`}</Typography>
       </>
     );
   }, [hatch_counter]);

@@ -21,7 +21,7 @@ import CustomTable, {
 } from '@/components/CustomTable';
 import Loading from '@/components/Loading';
 
-interface TypeMovesProps extends Partial<CustomTableProps> {
+interface MovesTableV2Props extends Partial<CustomTableProps> {
   moves?: (FilteredMove | Move)[];
   learnMethod?: MoveLearnMethod['name'];
   machineNames?: string[];
@@ -36,7 +36,7 @@ const MovesTableV2 = ({
   isLoading,
   noMovesText,
   ...rest
-}: TypeMovesProps): JSX.Element => {
+}: MovesTableV2Props): JSX.Element => {
   // hooks
   const router = useRouter();
   const plausible = usePlausible();

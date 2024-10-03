@@ -1,4 +1,4 @@
-import { Fragment, useCallback, useMemo } from 'react';
+import { useCallback, useMemo } from 'react';
 // hooks
 import { useRouter } from 'next/router';
 import { usePlausible } from 'next-plausible';

@@ -7,7 +7,7 @@ import { EggGroupApi, PokemonApi, SpeciesApi } from '@/services';
 import Seo from '@/components/Seo';
 import LayoutV2 from '@/components/LayoutV2';
 import EggGroupPage from '@/components/EggGroupPage';
-import { getResourceId } from '@/helpers';
+import { findEnglishName, getResourceId } from '@/helpers';
 
 export type EggGroupTableData = Partial<Pokemon> & Partial<PokemonSpecies>;
 
@@ -18,11 +18,13 @@ export interface PokestatsEggGroupPageProps {
 }
 
 const PokestatsEggGroupPage: NextPage<PokestatsEggGroupPageProps> = props => {
-  console.log(props);
+  const pageTitle = `${findEnglishName(props.eggGroupData.names)} Egg Group - Pokémon Species, Abilities, Hatch Cycles & More`;
+  const pageDescription = `View detailed information for all Pokémon species in the ${findEnglishName(props.eggGroupData.names)} Egg Group. This table includes Pokémon IDs, names, types, egg groups, abilities, hatch cycles, growth rates, gender ratios, habitats, and more.`;
+  const pageKeywords = `Pokémon ${findEnglishName(props.eggGroupData.names)} Egg Group, Pokémon species data, Pokémon abilities, Pokémon hatch cycles, Pokémon growth rates, Pokémon gender ratios, Pokémon habitats, Pokémon types, Pokémon egg groups, Pokémon breeding information`;
 
   return (
     <>
-      <Seo title="EggGroup" description="" />
+      <Seo title={pageTitle} description={pageDescription} keywords={pageKeywords} />
       <LayoutV2 withHeader customKey="egg-group-name">
         <EggGroupPage {...props} />
       </LayoutV2>

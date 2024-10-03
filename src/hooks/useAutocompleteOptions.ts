@@ -4,7 +4,7 @@ import type { MoveType, Pokemon, PokemonType } from '@/types';
 import { unusedItems } from '@/constants';
 // helpers
 import { type GameGenValue, getResourceId, removeDuplicateMoves } from '@/helpers';
-import { ItemApi, MovesApi, PokemonApi, TypesApi } from '@/services';
+import { EggGroupApi, ItemApi, MovesApi, PokemonApi, TypesApi } from '@/services';
 // tanstack
 import type { UseQueryOptions, UseQueryResult } from '@tanstack/react-query';
 import { useQuery } from '@tanstack/react-query';
@@ -28,13 +28,20 @@ export interface PokestatsItemOption {
   name: string;
 }
 
+export interface PokestatsEggGroupOption {
+  assetType: 'eggGroup';
+  id: number;
+  name: string;
+}
+
 export type AutocompleteListOption =
   | Pokemon
   | PokemonType
   | MoveType
   | PokestatsRegion
   | PokestatsToolOption
-  | PokestatsItemOption;
+  | PokestatsItemOption
+  | PokestatsEggGroupOption;
 
 export const regionsData: PokestatsRegion[] = [
   { id: 1, assetType: 'region', name: 'kanto', generation: 'generation-i' },
@@ -51,12 +58,14 @@ export const useAutocompleteOptions = (
     queryKey: ['autocomplete'],
     queryFn: async () => {
       // Fetch data in parallel and validate responses
-      const [pokemonResponse, typesResponse, movesResponse, itemsResponse] = await Promise.all([
-        PokemonApi.listPokemons(0, 905),
-        TypesApi.listTypes(0, 18),
-        MovesApi.listMoves(0, 850),
-        ItemApi.listItems(),
-      ]);
+      const [pokemonResponse, typesResponse, movesResponse, itemsResponse, eggGroupsResponse] =
+        await Promise.all([
+          PokemonApi.listPokemons(0, 905),
+          TypesApi.listTypes(0, 18),
+          MovesApi.listMoves(0, 850),
+          ItemApi.listItems(),
+          EggGroupApi.getAllGroupNames(),
+        ]);
 
       // Map responses to a unified AutocompleteListOption type
       const pokemonOptions: Pokemon[] = pokemonResponse.results.map((pokemon, index) => ({
@@ -85,6 +94,12 @@ export const useAutocompleteOptions = (
           assetType: 'item',
         }));
 
+      const eggGroupsOptions: PokestatsEggGroupOption[] = eggGroupsResponse.map((group, index) => ({
+        assetType: 'eggGroup',
+        id: index,
+        name: group,
+      }));
+
       // Combine all options into a single array
       return [
         ...pokemonOptions,
@@ -93,6 +108,7 @@ export const useAutocompleteOptions = (
         ...itemOptions,
         ...regionsData,
         ...headbuttData,
+        ...eggGroupsOptions,
       ];
     },
     staleTime: 60 * 1000, // Cache for 1 minute to reduce API calls

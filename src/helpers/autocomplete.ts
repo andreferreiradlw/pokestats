@@ -4,8 +4,13 @@ import type { Pokemon, PokemonType, MoveType } from '@/types';
 import { MoveClient, PokemonClient } from 'pokenode-ts';
 import { removeDuplicateMoves } from './moves';
 import { getResourceId } from './getIdFromUrl';
-import { type PokestatsItemOption, type PokestatsRegion, regionsData } from '@/hooks';
-import { ItemApi } from '@/services';
+import {
+  type PokestatsEggGroupOption,
+  type PokestatsItemOption,
+  type PokestatsRegion,
+  regionsData,
+} from '@/hooks';
+import { EggGroupApi, ItemApi } from '@/services';
 import { unusedItems } from '@/constants';
 
 export interface AutocompleteListType {
@@ -14,6 +19,7 @@ export interface AutocompleteListType {
   allMovesData: MoveType[];
   allRegionsData: PokestatsRegion[];
   allItemsData: PokestatsItemOption[];
+  allEggGroupsData: PokestatsEggGroupOption[];
 }
 
 const fetchAutocompleteData = async (): Promise<AutocompleteListType> => {
@@ -27,11 +33,13 @@ const fetchAutocompleteData = async (): Promise<AutocompleteListType> => {
     { results: allTypesDataResults },
     { results: allMovesDataResults },
     { results: allItemsDataResults },
+    allEggGroupsDataResults,
   ] = await Promise.all([
     pokemonClient.listPokemons(0, 905),
     pokemonClient.listTypes(0, 18),
     moveClient.listMoves(0, 850),
     ItemApi.listItems(),
+    EggGroupApi.getAllGroupNames(),
   ]);
 
   const pokemonData: Pokemon[] = allPokemonDataResults.map((currPokemon, i) => ({
@@ -60,12 +68,19 @@ const fetchAutocompleteData = async (): Promise<AutocompleteListType> => {
       assetType: 'item',
     }));
 
+  const eggGroupsData: PokestatsEggGroupOption[] = allEggGroupsDataResults.map((group, index) => ({
+    assetType: 'eggGroup',
+    id: index,
+    name: group,
+  }));
+
   return {
     allPokemonData: pokemonData,
     allTypesData: typesData,
     allMovesData: movesData,
     allRegionsData: regionsData,
     allItemsData: itemsData,
+    allEggGroupsData: eggGroupsData,
   };
 };
 

@@ -16,6 +16,7 @@ import Loading from '@/components/Loading';
 // styles
 import {
   Container,
+  EggIcon,
   ItemIcon,
   ListWrapper,
   Option,
@@ -89,6 +90,8 @@ const AutocompleteIcon = ({
           src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/${name}.png`}
         />
       );
+    case 'eggGroup':
+      return <EggIcon />;
     default:
       return undefined;
   }
@@ -201,6 +204,8 @@ const AutocompleteV2 = ({
             await router.push(`/regions/${option.generation}/${option.name}`);
           } else if (option.assetType === 'tool') {
             await router.push(`/${option.name}`);
+          } else if (option.assetType === 'eggGroup') {
+            await router.push(`/egg-group/${option.name}`);
           } else {
             await router.push(`/${option.assetType}/${option.name}`);
           }

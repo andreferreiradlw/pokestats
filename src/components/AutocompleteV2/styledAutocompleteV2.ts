@@ -1,7 +1,12 @@
-import { Typography } from '@mui/material';
-import { styled } from '@mui/material/styles';
-import { motion } from 'framer-motion';
+// types
 import type { AutocompleteV2Props } from '.';
+// helpers
+import { styled } from '@mui/material/styles';
+// components
+import { Typography } from '@mui/material';
+import { motion } from 'framer-motion';
+// svg
+import EggIconSVG from 'public/static/iconLibrary/egg.svg';
 
 const Container = styled(motion.div, {
   shouldForwardProp: prop => prop !== 'width',
@@ -66,4 +71,6 @@ const PokeID = styled(Typography)(({ theme }) => ({
   marginLeft: 'auto',
 }));
 
-export { Container, ListWrapper, OptionWrapper, ItemIcon, Option, PokeID };
+const EggIcon = styled(EggIconSVG)({ width: '40px' });
+
+export { Container, ListWrapper, OptionWrapper, ItemIcon, Option, PokeID, EggIcon };

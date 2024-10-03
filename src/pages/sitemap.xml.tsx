@@ -1,7 +1,7 @@
 import type { GetServerSideProps } from 'next';
 import type { Pokemon, PokemonType, MoveType } from '@/types';
 import { fetchAutocompleteData } from '@/helpers';
-import type { PokestatsItemOption, PokestatsRegion } from '@/hooks';
+import type { PokestatsEggGroupOption, PokestatsItemOption, PokestatsRegion } from '@/hooks';
 
 const toUrl = (host: string, route: string, priority = '1.0'): string => `
   <url>
@@ -20,6 +20,7 @@ const createSitemap = (
   pokemonTypes: PokemonType[],
   movesList: MoveType[],
   allItemsData: PokestatsItemOption[],
+  allEggGroupsData: PokestatsEggGroupOption[],
 ): string => {
   const urls = [
     ...routes.map(route => toUrl(host, route)),
@@ -28,6 +29,7 @@ const createSitemap = (
     ...pokemonTypes.map(type => toUrl(host, `/type/${type.name}`, '0.8')),
     ...movesList.map(move => toUrl(host, `/move/${move.name}`, '0.9')),
     ...allItemsData.map(item => toUrl(host, `/item/${item.name}`, '0.8')),
+    ...allEggGroupsData.map(item => toUrl(host, `/egg-group/${item.name}`, '0.8')),
   ];
 
   return `<?xml version="1.0" encoding="UTF-8"?>
@@ -49,10 +51,16 @@ export const getServerSideProps: GetServerSideProps = async context => {
   const routes = ['', '/headbutt-tree-finder', '/items', '/berries', '/moves'];
 
   try {
-    const { allMovesData, allPokemonData, allTypesData, allRegionsData, allItemsData } =
-      await fetchAutocompleteData();
+    const {
+      allMovesData,
+      allPokemonData,
+      allTypesData,
+      allRegionsData,
+      allItemsData,
+      allEggGroupsData,
+    } = await fetchAutocompleteData();
 
-    if (!allPokemonData || !allTypesData || !allMovesData || !allItemsData) {
+    if (!allPokemonData || !allTypesData || !allMovesData || !allItemsData || !allEggGroupsData) {
       return { notFound: true };
     }
 
@@ -64,6 +72,7 @@ export const getServerSideProps: GetServerSideProps = async context => {
       allTypesData,
       allMovesData,
       allItemsData,
+      allEggGroupsData,
     );
 
     res.setHeader('Content-Type', 'text/xml');

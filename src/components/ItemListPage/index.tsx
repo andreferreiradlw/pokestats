@@ -21,7 +21,7 @@ const ItemListPage = ({
   allItemAttributes,
 }: PokestatsItemsPageProps): JSX.Element => {
   // Formik setup
-  const { handleSubmit, values, resetForm, setFieldValue, handleChange } = useFormik({
+  const { values, resetForm, setFieldValue, handleChange } = useFormik({
     initialValues: {
       nameSearch: '',
       selectedCategory: 'all',
@@ -86,7 +86,7 @@ const ItemListPage = ({
   return (
     <Stack gap={4} width="100%">
       <Typography variant="pageHeading">Pokémon Item List</Typography>
-      <Grid2 direction="column" gap={2} component="form" onSubmit={handleSubmit}>
+      <Stack flexDirection="row" flexWrap="wrap" gap={2} component="form">
         <CustomInput
           label="Item Name"
           value={values.nameSearch}
@@ -117,7 +117,7 @@ const ItemListPage = ({
         >
           Reset Filters
         </CustomButton>
-      </Grid2>
+      </Stack>
       {filteredItems.length > 0 ? (
         <ItemTable
           items={filteredItems}

@@ -5,7 +5,7 @@ import type { PokestatsBerriesPageProps } from '@/pages/berries';
 import { fadeInUpVariant } from '@/animations';
 import { useFormik } from 'formik';
 // components
-import { Grid2, Stack, Typography } from '@mui/material';
+import { Stack, Typography } from '@mui/material';
 import BerryTable from './BerryTable';
 import CustomButton from '../CustomButton';
 import CustomInput from '../CustomInput';
@@ -41,7 +41,7 @@ const BerryListPage = ({ berryData }: PokestatsBerriesPageProps): JSX.Element =>
   );
 
   // Formik setup
-  const { handleSubmit, values, resetForm, setFieldValue, handleChange } = useFormik({
+  const { values, resetForm, setFieldValue, handleChange } = useFormik({
     initialValues: {
       nameSearch: '',
       selectedFirmness: 'all',
@@ -84,7 +84,7 @@ const BerryListPage = ({ berryData }: PokestatsBerriesPageProps): JSX.Element =>
   return (
     <Stack gap={4} width="100%">
       <Typography variant="pageHeading">Pokémon Berry List</Typography>
-      <Grid2 direction="column" gap={2} component="form" onSubmit={handleSubmit}>
+      <Stack flexDirection="row" flexWrap="wrap" gap={2} component="form">
         <CustomInput
           label="Item Name"
           value={values.nameSearch}
@@ -115,7 +115,7 @@ const BerryListPage = ({ berryData }: PokestatsBerriesPageProps): JSX.Element =>
         >
           Reset Filters
         </CustomButton>
-      </Grid2>
+      </Stack>
       {filteredBerries.length > 0 ? (
         <BerryTable items={filteredBerries} />
       ) : (

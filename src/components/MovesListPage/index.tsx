@@ -24,7 +24,7 @@ const MovesListPage = ({ moves, typeOptions }: PokestatsMovesPageProps): JSX.Ele
   );
 
   // Formik setup
-  const { handleSubmit, values, resetForm, setFieldValue, handleChange } = useFormik({
+  const { values, resetForm, setFieldValue, handleChange } = useFormik({
     initialValues: {
       nameSearch: '',
       selectedCategory: 'all',
@@ -78,7 +78,7 @@ const MovesListPage = ({ moves, typeOptions }: PokestatsMovesPageProps): JSX.Ele
   return (
     <Stack gap={4} width="100%">
       <Typography variant="pageHeading">Pokémon Moves List</Typography>
-      <Grid2 direction="column" gap={2} component="form" onSubmit={handleSubmit}>
+      <Stack flexDirection="row" flexWrap="wrap" gap={2} component="form">
         <CustomInput
           label="Move Name"
           value={values.nameSearch}
@@ -115,7 +115,7 @@ const MovesListPage = ({ moves, typeOptions }: PokestatsMovesPageProps): JSX.Ele
         >
           Reset Filters
         </CustomButton>
-      </Grid2>
+      </Stack>
       <MovesTableV2
         paginated
         moves={filteredMoves}

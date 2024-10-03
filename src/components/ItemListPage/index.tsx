@@ -7,7 +7,7 @@ import { useDebouncedValue } from '@/hooks';
 import { fadeInUpVariant } from '@/animations';
 import { useFormik } from 'formik';
 // components
-import { Grid2, Stack, Typography } from '@mui/material';
+import { Stack, Typography } from '@mui/material';
 import CustomInput from '@/components/CustomInput';
 import DropdownV2 from '@/components/DropdownV2';
 import CustomButton from '@/components/CustomButton';

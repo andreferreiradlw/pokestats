@@ -1,17 +1,18 @@
 import { useMemo } from 'react';
 // helpers
-import { removeDash } from '@/helpers';
+import { capitalise, removeDash } from '@/helpers';
 import { styled } from '@mui/material/styles';
 // types
 import type { PokemonSpecies, EvolutionChain } from 'pokenode-ts';
 // styles
-import { Table, Numbered } from '@/components/BaseStyles';
+import { Table } from '@/components/BaseStyles';
 // components
 import type { Grid2Props } from '@mui/material';
-import { capitalize, Grid2, Typography } from '@mui/material';
+import { capitalize, Chip, Grid2, Stack, Typography } from '@mui/material';
 // icons
 import MaleIcon from '@mui/icons-material/Male';
 import FemaleIcon from '@mui/icons-material/Female';
+import Link from 'next/link';
 
 const Ratio = styled(Typography)`
   white-space: nowrap;
@@ -44,11 +45,22 @@ const Breeding = ({ species, babyTriggerItem, ...rest }: BreedingProps): JSX.Ele
   // Egg groups list
   const eggGroups = useMemo(() => {
     if (!egg_groups || egg_groups.length === 0) return 'No Egg Groups';
-    return egg_groups.map((group, i) => (
-      <Numbered key={group.name}>
-        <Typography textTransform="capitalize">{`${egg_groups.length > 1 ? `${i + 1}. ` : ''}${removeDash(group.name)}`}</Typography>
-      </Numbered>
-    ));
+
+    return (
+      <Stack flexDirection="row" gap={1} flexWrap="wrap">
+        {egg_groups.map(({ name }) => (
+          <Link key={name} href={`/egg-group/${name}`} legacyBehavior passHref>
+            <Chip
+              label={capitalise(name)}
+              // size="small"
+              sx={{ width: 'fit-content' }}
+              clickable
+              component="a"
+            />
+          </Link>
+        ))}
+      </Stack>
+    );
   }, [egg_groups]);
 
   // Egg cycle calculation
@@ -86,10 +98,6 @@ const Breeding = ({ species, babyTriggerItem, ...rest }: BreedingProps): JSX.Ele
             <td>{capitalize(removeDash(growth_rate.name))}</td>
           </tr>
           <tr>
-            <th>Egg Groups</th>
-            <td>{eggGroups}</td>
-          </tr>
-          <tr>
             <th>Egg Cycles</th>
             <td>{eggCycle}</td>
           </tr>
@@ -100,6 +108,10 @@ const Breeding = ({ species, babyTriggerItem, ...rest }: BreedingProps): JSX.Ele
           <tr>
             <th>Habitat</th>
             <td>{habitat ? capitalize(removeDash(habitat.name)) : 'None'}</td>
+          </tr>
+          <tr>
+            <th>Egg Groups</th>
+            <td>{eggGroups}</td>
           </tr>
         </tbody>
       </Table>

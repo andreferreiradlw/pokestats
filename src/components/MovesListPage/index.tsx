@@ -4,7 +4,7 @@ import type { PokestatsMovesPageProps } from '@/pages/moves';
 // helpers
 import { type GenerationOption, generationOptions } from '@/helpers';
 // components
-import { Grid2, Stack, Typography } from '@mui/material';
+import { Stack, Typography } from '@mui/material';
 import CustomButton from '../CustomButton';
 import DropdownV2 from '../DropdownV2';
 import CustomInput from '../CustomInput';

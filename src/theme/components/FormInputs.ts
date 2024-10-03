@@ -15,12 +15,17 @@ const FormInputs: {
       variant: 'standard',
     },
     styleOverrides: {
-      root: {
+      root: ({ theme }) => ({
         flexDirection: 'row',
         alignItems: 'center',
-        gap: '0.5em',
+        gap: theme.spacing(1),
         flexWrap: 'wrap',
-      },
+        [theme.breakpoints.down('md')]: {
+          flexDirection: 'column',
+          alignItems: 'flex-start',
+          width: '100%',
+        },
+      }),
     },
   },
   MuiInputLabel: {
@@ -81,10 +86,9 @@ const FormInputs: {
       root: ({ theme }) => ({
         padding: 0,
         backgroundColor: theme.palette.background.paper,
-
-        // [`& .${outlinedInputClasses.notchedOutline}`]: {
-        //   top: 0,
-        // },
+        [theme.breakpoints.down('md')]: {
+          width: '100%',
+        },
       }),
       input: {
         padding: '5px 10px !important',

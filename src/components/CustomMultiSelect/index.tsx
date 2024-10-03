@@ -61,7 +61,7 @@ const CustomMultiSelect = <T extends string | number>({
         onChange={handleChange}
         input={<OutlinedInput label={label} />}
         renderValue={selected => (
-          <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
+          <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5, maxWidth: 300 }}>
             {selected.map(value => (
               <Chip key={value} label={capitalise(value as string)} size="small" />
             ))}

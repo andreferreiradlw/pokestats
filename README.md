@@ -49,7 +49,7 @@
 ✅ [Headbutt Tree Encounters Map](https://pokestats.gg/headbutt-tree-finder) <br />
 ✅ [Item Page](https://pokestats.gg/items) <br />
 ✅ [Berries Page](https://pokestats.gg/berries) <br />
-✅ Egg Groups Page <br />
+✅ [Egg Groups Page](https://pokestats.gg/egg-group/bug) <br />
 🛠️ Sprites Page <br />
 💡 Growth Rates Page <br />
 💡 Type Relations Table Page <br />

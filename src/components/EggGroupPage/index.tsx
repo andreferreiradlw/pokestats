@@ -22,7 +22,7 @@ const EggGroupPage = ({
     () => [
       { label: 'All', value: 'all' },
       { label: 'Forest', value: 'forest' },
-      { label: 'Grassland', value: 'glassland' },
+      { label: 'Grassland', value: 'grassland' },
       { label: 'Mountain', value: 'mountain' },
       { label: 'Waters Edge', value: 'waters-edge' },
       { label: 'Rough Terrain', value: 'rough-terrain' },

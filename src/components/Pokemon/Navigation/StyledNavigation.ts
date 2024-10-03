@@ -35,7 +35,7 @@ const Arrow = styled(BtnSpan, {
 
   return {
     position: 'relative',
-    zIndex: 2,
+    zIndex: -1,
 
     '&:after': {
       content: "''",
@@ -43,7 +43,7 @@ const Arrow = styled(BtnSpan, {
       borderTop: '45px solid transparent',
       borderBottom: '45px solid transparent',
       transition: 'all 0.15s ease-in-out',
-      zIndex: 2,
+      zIndex: -1,
       ...(direction === 'left' && {
         borderRight: `15px solid ${primaryMainColor}`,
         boxShadow: `12px 0 0 0 ${primaryMainColor}`,

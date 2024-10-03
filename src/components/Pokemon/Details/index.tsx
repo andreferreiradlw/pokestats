@@ -39,7 +39,7 @@ const PokemonDetails = ({
   const { gameVersion } = useContext(GameVersionContext);
 
   // @ts-expect-error: cries is missing in pokemon type
-  const { types, abilities: pokemonAbilities, id, weight, height, cries } = pokemon;
+  const { types, abilities: pokemonAbilities, weight, height, cries, name } = pokemon;
   const {
     genera,
     flavor_text_entries,
@@ -50,6 +50,8 @@ const PokemonDetails = ({
     is_mythical,
     generation,
     names,
+    id,
+    varieties,
   } = species;
 
   const [audio, setAudio] = useState<{
@@ -136,9 +138,17 @@ const PokemonDetails = ({
             </>
           }
         >
-          <Typography variant="pageHeading" lineHeight={1.25}>
-            {findEnglishName(names)}
-          </Typography>
+          <Stack>
+            <Typography variant="pageHeading" lineHeight={1.25}>
+              {findEnglishName(names)}
+            </Typography>
+            {varieties.length > 1 && (
+              <Typography
+                textTransform="capitalize"
+                variant="subtitle2"
+              >{`${removeDash(name)} Variety`}</Typography>
+            )}
+          </Stack>
         </Badge>
       </Stack>
       <Stack direction="row" spacing={1}>

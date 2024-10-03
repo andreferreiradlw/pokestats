@@ -30,6 +30,7 @@ export interface PokestatsPokemonPageProps {
 }
 
 const PokestatsPokemonPage: NextPage<PokestatsPokemonPageProps> = props => {
+  console.log(props);
   // SEO-related variables
   const pokemonName = findEnglishName(props.species.names);
   const pageTitle = `${pokemonName} (Pokémon #${props.pokemon.id})`;
@@ -91,14 +92,14 @@ export const getStaticProps: GetStaticProps<PokestatsPokemonPageProps> = async (
       return { notFound: true };
     }
 
-    if (pokemonDataResults.id > 905) return { notFound: true };
+    // if (pokemonDataResults.id > 905) return { notFound: true };
 
     const pokemonAbilitiesResults = await AbilityApi.getPokemonAbilities(pokemonDataResults);
 
-    // get evolution chain id from url
-    const pokemonSpeciesResults = await SpeciesApi.getById(
-      getResourceId(pokemonDataResults.species.url),
-    );
+    // get pokemon species
+    const pokemonSpeciesResults = await SpeciesApi.getByName(pokemonDataResults.species.name);
+
+    console.log('pokemonSpeciesResults!', pokemonSpeciesResults);
 
     if (!pokemonSpeciesResults || !pokemonAbilitiesResults) {
       console.log('Failed to fetch pokemonSpeciesResults or pokemonAbilitiesResults');
@@ -128,11 +129,11 @@ export const getStaticProps: GetStaticProps<PokestatsPokemonPageProps> = async (
       props: {
         allPokemon: allPokemonData,
         pokemon: pokemonDataResults,
+        species: pokemonSpeciesResults,
         abilities: pokemonAbilitiesResults.map(ability => ({
           name: ability.name,
           effect_entries: ability.effect_entries.filter(entry => entry.language.name === 'en'),
         })) as Ability[],
-        species: pokemonSpeciesResults,
         evolutionData: evolutionDataResults,
         revalidate: 120,
       },

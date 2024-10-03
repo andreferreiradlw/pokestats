@@ -1,41 +1,50 @@
 import { useMemo } from 'react';
 // types
-import type { PokemonSpecies } from 'pokenode-ts';
+import type { Pokemon, PokemonSpecies } from 'pokenode-ts';
 // data
 import genderDescriptions from './genderDescriptions.json';
 // components
-import { Table, Numbered } from '@/components/BaseStyles';
+import { Table } from '@/components/BaseStyles';
 import type { Grid2Props } from '@mui/material';
-import { Grid2, Typography } from '@mui/material';
+import { Grid2, Stack, Typography } from '@mui/material';
 // helpers
 import { removeDash } from '@/helpers';
+import CustomButton from '@/components/CustomButton';
+import Link from 'next/link';
 
 interface PokemonFormsProps extends Grid2Props {
-  pokemonId: number;
+  pokemon: Pokemon;
   species: PokemonSpecies;
 }
 
-const PokemonForms = ({ pokemonId, species, ...rest }: PokemonFormsProps): JSX.Element => {
-  const { forms_switchable, varieties, has_gender_differences } = species;
+const PokemonForms = ({ pokemon, species, ...rest }: PokemonFormsProps): JSX.Element => {
+  // data
+  const { forms_switchable, varieties, has_gender_differences, id } = species;
+  const { name } = pokemon;
 
   // Memoize the gender description since it's static data
   // @ts-expect-error: cannot update json types
-  const genderDescription = useMemo(() => genderDescriptions[pokemonId], [pokemonId]);
+  const genderDescription = useMemo(() => genderDescriptions[id], [id]);
 
   // Memoize the current forms
   const currForms = useMemo(() => {
     if (!varieties?.length) return 'None';
 
-    return varieties.map((form, i) => {
-      const varietyName = removeDash(form.pokemon.name);
+    return varieties.map(({ is_default, pokemon }) => {
+      const varietyName = removeDash(pokemon.name);
       const displayName = varietyName.substring(varietyName.indexOf(' ') + 1);
 
       return (
-        <Numbered key={form.pokemon.name}>
-          {varieties.length > 1 ? `${i + 1}. ` : ''}
-          {displayName}
-          {form.is_default && <span> (Default)</span>}
-        </Numbered>
+        <Link key={pokemon.name} href={`/pokemon/${pokemon.name}`} legacyBehavior passHref>
+          <CustomButton
+            disabled={pokemon.name === name}
+            variant="outlined"
+            size="small"
+            fullWidth
+            color="inherit"
+            sx={{ justifyContent: 'center' }}
+          >{`${displayName} ${is_default ? '(Default)' : ''}`}</CustomButton>
+        </Link>
       );
     });
   }, [varieties]);
@@ -57,9 +66,9 @@ const PokemonForms = ({ pokemonId, species, ...rest }: PokemonFormsProps): JSX.E
           </tr>
           <tr>
             <th>Varieties</th>
-            <Typography textTransform="capitalize" component="td">
+            <Stack gap={1} component="td">
               {currForms}
-            </Typography>
+            </Stack>
           </tr>
           <tr>
             <th>Gender Differences</th>

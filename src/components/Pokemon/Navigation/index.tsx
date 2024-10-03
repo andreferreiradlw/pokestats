@@ -25,7 +25,7 @@ const Navigation = ({ allPokemon, pokemonId, ...rest }: NavigationProps): JSX.El
       flexDirection={{ xxs: 'column', sm: 'row' }}
       alignItems="center"
       justifyContent={{ xxs: 'flex-start', sm: 'center' }}
-      gap="1em"
+      gap={2}
       width="100%"
       {...rest}
     >

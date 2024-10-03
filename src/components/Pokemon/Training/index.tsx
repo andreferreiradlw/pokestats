@@ -8,7 +8,7 @@ import type {
 } from 'pokenode-ts';
 // components
 import type { Grid2Props } from '@mui/material';
-import { Grid2, Typography, Stack } from '@mui/material';
+import { Grid2, Typography } from '@mui/material';
 // helpers
 import { GameVersionContext } from '@/context';
 import { removeDash } from '@/helpers';
@@ -93,16 +93,7 @@ const Training = ({ pokemon, species, ...rest }: TrainingProps): JSX.Element => 
 
     return versionItems.map(({ item_details, version_details }, i) => (
       <Link href={`/item/${item_details.name}`} legacyBehavior passHref key={item_details.name}>
-        <Stack
-          flexDirection="row"
-          justifyContent={{ xxs: 'flex-start', md: 'space-between' }}
-          gap="0.5em"
-          margin="0 0 5px"
-          component={CustomButton}
-          variant="outlined"
-          color={theme => theme.palette.getContrastText(theme.palette.primary.contrastText)}
-          fullWidth
-        >
+        <CustomButton variant="outlined" color="inherit" fullWidth>
           <Numbered style={{ width: 'auto' }}>
             <Typography fontWeight="500" textTransform="capitalize">
               {`${versionItems.length > 1 ? `${i + 1}. ` : ''}${removeDash(item_details.name)}`}
@@ -115,7 +106,7 @@ const Training = ({ pokemon, species, ...rest }: TrainingProps): JSX.Element => 
             width={40}
             height={40}
           />
-        </Stack>
+        </CustomButton>
       </Link>
     ));
   }, [held_items, gameVersion]);

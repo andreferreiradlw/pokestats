@@ -23,8 +23,8 @@ const PokemonPage = ({
   evolutionData,
 }: Omit<PokestatsPokemonPageProps, 'autocompleteList' | 'pokemonGen'>): JSX.Element => {
   // data
-  const { id, stats, types, sprites } = pokemon;
-  const { names, varieties } = species;
+  const { stats, types, sprites } = pokemon;
+  const { varieties, id } = species;
 
   return (
     <Stack divider={<Divider />} gap={4}>
@@ -42,7 +42,7 @@ const PokemonPage = ({
           abilities={abilities}
           species={species}
         />
-        <FeaturedImage size={{ xxs: 12, lg: 7 }} specieNames={names} pokemonId={id} />
+        <FeaturedImage size={{ xxs: 12, lg: 7 }} species={species} pokemon={pokemon} />
       </Grid2>
       {/** BREEDING, TRAINING, MULTIPLIERS */}
       <Grid2
@@ -61,7 +61,7 @@ const PokemonPage = ({
         />
         <Training pokemon={pokemon} species={species} size={{ xxs: 12, md: 6, lg: 4 }} />
         <Multipliers pokemonTypes={types} size={{ xxs: 12, md: 6, lg: 4 }} />
-        <PokemonForms pokemonId={id} species={species} size={{ xxs: 12, md: 6, lg: 4 }} />
+        <PokemonForms pokemon={pokemon} species={species} size={{ xxs: 12, md: 6, lg: 4 }} />
         <BaseStats stats={stats} size={{ xxs: 12, lg: 8 }} />
       </Grid2>
       {/** ENCOUNTERS */}

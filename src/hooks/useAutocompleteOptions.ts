@@ -62,7 +62,7 @@ export const useAutocompleteOptions = (
         await Promise.all([
           PokemonApi.listPokemons(0, 1024),
           TypesApi.listTypes(0, 18),
-          MovesApi.listMoves(0, 850),
+          MovesApi.listMoves(0, 937),
           ItemApi.listItems(),
           EggGroupApi.getAllGroupNames(),
         ]);

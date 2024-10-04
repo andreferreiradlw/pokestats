@@ -99,7 +99,7 @@ const MovesListPage = ({ moves, typeOptions }: PokestatsMovesPageProps): JSX.Ele
         />
         <DropdownV2<GenerationOption['value']>
           label="Generation"
-          options={generationOptions.slice(0, 8)}
+          options={generationOptions}
           value={values.selectedGen as GenerationOption['value']}
           onChange={handleGenChange}
         />

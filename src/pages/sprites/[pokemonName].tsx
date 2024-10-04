@@ -17,7 +17,7 @@ import {
 } from '@/helpers';
 // components
 import Seo from '@/components/Seo';
-import { PokemonApi, SpeciesApi } from '@/services';
+import { MovesApi, PokemonApi, SpeciesApi } from '@/services';
 import LayoutV2 from '@/components/LayoutV2';
 
 export interface PokestatsPokemonPageProps {
@@ -71,11 +71,16 @@ export const getStaticProps: GetStaticProps<PokestatsPokemonPageProps> = async (
 
     const pokemonSpeciesData = await SpeciesApi.getByName(pokemonDataResults.species.name);
 
+    const genMovesList = await MovesApi.listMoves(0, 937).then(({ results }) =>
+      results.map(({ name }) => name),
+    );
+
     return {
       props: {
         pokemonDataResults,
         allPokemonData,
         pokemonSpeciesData,
+        genMovesList,
       },
     };
   } catch (error) {

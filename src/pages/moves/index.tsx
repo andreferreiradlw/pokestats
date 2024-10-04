@@ -36,21 +36,34 @@ const PokestatsMovesPage: NextPage<PokestatsMovesPageProps> = props => {
 };
 
 export const getStaticProps: GetStaticProps<PokestatsMovesPageProps> = async () => {
-  const genMovesList = await MovesApi.listMoves(0, 621).then(({ results }) =>
+  const genMovesList = await MovesApi.listMoves(0, 937).then(({ results }) =>
     results.map(({ name }) => name),
   );
 
-  const genMovesData = await MovesApi.getByNames(genMovesList);
-
-  if (!genMovesData) {
+  if (!genMovesList) {
     return { notFound: true };
   }
 
-  const typesData = await TypesApi.getAll();
+  const [genMovesData, typesData] = await Promise.all([
+    MovesApi.getByNames(genMovesList),
+    TypesApi.getAll(),
+  ]);
 
-  if (!typesData) {
+  if (!genMovesData || !typesData) {
     return { notFound: true };
   }
+
+  // const genMovesData = await MovesApi.getByNames(genMovesList);
+
+  // if (!genMovesData) {
+  //   return { notFound: true };
+  // }
+
+  // const typesData = await TypesApi.getAll();
+
+  // if (!typesData) {
+  //   return { notFound: true };
+  // }
 
   const typeOptions = typesData.map(({ name }) => ({ label: capitalise(name), value: name }));
 

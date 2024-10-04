@@ -28,7 +28,7 @@ const fetchSitemapData = async (): Promise<AutocompleteListType> => {
   ] = await Promise.all([
     pokemonClient.listPokemons(0, 1302),
     pokemonClient.listTypes(0, 18),
-    moveClient.listMoves(0, 850),
+    moveClient.listMoves(0, 937),
     ItemApi.listItems(),
     EggGroupApi.getAllGroupNames(),
   ]);

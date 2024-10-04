@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react';
 // types
-import type { Pokemon, PokemonSpecies } from 'pokenode-ts';
+import type { PokemonSpecies, PokemonSprites } from 'pokenode-ts';
 // helpers
 import { formatPokemonId } from '@/helpers';
 import { scaleInVariant } from '@/animations';
@@ -8,19 +8,18 @@ import { scaleInVariant } from '@/animations';
 import { JpnName } from '@/components/BaseStyles';
 import { ImageContainer } from './StyledFeatureImage';
 // components
-import { Grid2, ToggleButton, ToggleButtonGroup, type Grid2Props } from '@mui/material';
+import { Grid2, ToggleButton, ToggleButtonGroup, Typography, type Grid2Props } from '@mui/material';
 import ImageNextV2 from '@/components/ImageNextV2';
 
 interface FeaturedImageProps extends Grid2Props {
   species: PokemonSpecies;
-  pokemon: Pokemon;
+  sprites: PokemonSprites;
 }
 
 export type PokemonVersion = 'normal' | 'shiny';
 
-const FeaturedImage = ({ species, pokemon, ...rest }: FeaturedImageProps): JSX.Element => {
+const FeaturedImage = ({ species, sprites, ...rest }: FeaturedImageProps): JSX.Element => {
   // data
-  const { sprites } = pokemon;
   const { names, varieties, id } = species;
 
   // state
@@ -37,9 +36,9 @@ const FeaturedImage = ({ species, pokemon, ...rest }: FeaturedImageProps): JSX.E
   const imageURL = useMemo(() => {
     if (varieties.length > 1) {
       return version === 'normal'
-        ? (sprites.other?.['official-artwork'].front_default as string)
+        ? (sprites?.other?.['official-artwork']?.front_default as string)
         : // @ts-expect-error: incorrect type
-          (sprites.other?.['official-artwork'].front_shiny as string);
+          (sprites?.other?.['official-artwork']?.front_shiny as string);
     }
 
     return version === 'normal'
@@ -50,13 +49,17 @@ const FeaturedImage = ({ species, pokemon, ...rest }: FeaturedImageProps): JSX.E
   return (
     <Grid2 flexDirection="column" spacing={2} {...rest}>
       <ImageContainer alignItems="center" justifyContent="center" size={12} version={version}>
-        <ImageNextV2
-          imageProps={{ priority: true }}
-          placeholderwidth="20%"
-          alt={englishName!}
-          imageUrl={imageURL}
-          customKey={`${id}-feature-image-${version}`}
-        />
+        {imageURL ? (
+          <ImageNextV2
+            imageProps={{ priority: true }}
+            placeholderwidth="20%"
+            alt={englishName!}
+            imageUrl={imageURL}
+            customKey={`${id}-feature-image-${version}`}
+          />
+        ) : (
+          <Typography>Image not available</Typography>
+        )}
         {hiraganaName && (
           <JpnName
             initial="hidden"

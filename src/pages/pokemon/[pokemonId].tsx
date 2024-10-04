@@ -30,7 +30,6 @@ export interface PokestatsPokemonPageProps {
 }
 
 const PokestatsPokemonPage: NextPage<PokestatsPokemonPageProps> = props => {
-  console.log(props);
   // SEO-related variables
   const pokemonName = findEnglishName(props.species.names);
   const pageTitle = `${pokemonName} (Pokémon #${props.pokemon.id})`;
@@ -92,14 +91,18 @@ export const getStaticProps: GetStaticProps<PokestatsPokemonPageProps> = async (
       return { notFound: true };
     }
 
-    // if (pokemonDataResults.id > 905) return { notFound: true };
+    const [pokemonAbilitiesResults, pokemonSpeciesResults] = await Promise.all([
+      AbilityApi.getPokemonAbilities(pokemonDataResults),
+      SpeciesApi.getByName(pokemonDataResults.species.name),
+    ]);
 
-    const pokemonAbilitiesResults = await AbilityApi.getPokemonAbilities(pokemonDataResults);
+    // const pokemonAbilitiesResults = await AbilityApi.getPokemonAbilities(pokemonDataResults);
 
-    // get pokemon species
-    const pokemonSpeciesResults = await SpeciesApi.getByName(pokemonDataResults.species.name);
+    // // get pokemon species
+    // const pokemonSpeciesResults = await SpeciesApi.getByName(pokemonDataResults.species.name);
 
-    console.log('pokemonSpeciesResults!', pokemonSpeciesResults);
+    // no support for Generation IX pokemon yet
+    if (pokemonSpeciesResults.id > 905) return { notFound: true };
 
     if (!pokemonSpeciesResults || !pokemonAbilitiesResults) {
       console.log('Failed to fetch pokemonSpeciesResults or pokemonAbilitiesResults');

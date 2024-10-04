@@ -26,6 +26,8 @@ const PokemonPage = ({
   const { stats, types, sprites } = pokemon;
   const { varieties, id } = species;
 
+  console.log(sprites);
+
   return (
     <Stack divider={<Divider />} gap={4}>
       <Grid2
@@ -42,7 +44,7 @@ const PokemonPage = ({
           abilities={abilities}
           species={species}
         />
-        <FeaturedImage size={{ xxs: 12, lg: 7 }} species={species} pokemon={pokemon} />
+        <FeaturedImage size={{ xxs: 12, lg: 7 }} species={species} sprites={sprites} />
       </Grid2>
       {/** BREEDING, TRAINING, MULTIPLIERS */}
       <Grid2

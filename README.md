@@ -41,7 +41,7 @@
 ✅ [Type Page](https://pokestats.gg/type/flying) <br />
 ✅ Static Generated Pages <br />
 ✅ Typescript Refactoring <br />
-✅ Generation 8 Pokémon + Legends: Arceus ([some data is incomplete](https://github.com/PokeAPI/pokeapi/issues/520)) <br />
+✅ Generation VIII Pokémon + Legends: Arceus <br />
 ✅ [Move Page](https://pokestats.gg/move/solar-beam) <br />
 ✅ Material UI Implementation <br />
 ✅ Dark Mode <br />
@@ -50,7 +50,8 @@
 ✅ [Item Page](https://pokestats.gg/items) <br />
 ✅ [Berries Page](https://pokestats.gg/berries) <br />
 ✅ [Egg Groups Page](https://pokestats.gg/egg-group/bug) <br />
-🛠️ Sprites Page <br />
+✅ [Generation IX Data](https://pokestats.gg/pokemon/sprigatito) <br />
+✅ Sprites Page <br />
 💡 Growth Rates Page <br />
 💡 Type Relations Table Page <br />
 🛠️ Interactive Region Maps <br />

@@ -83,7 +83,7 @@ export const getStaticProps: GetStaticProps<PokestatsPokemonPageProps> = async (
     // fetch data
     const [pokemonDataResults, { results: allPokemonData }] = await Promise.all([
       PokemonApi.getByName(pokemonName),
-      PokemonApi.listPokemons(0, 905),
+      PokemonApi.listPokemons(0, 1024),
     ]);
 
     if (!allPokemonData || !pokemonDataResults) {
@@ -97,7 +97,7 @@ export const getStaticProps: GetStaticProps<PokestatsPokemonPageProps> = async (
     ]);
 
     // no support for Generation IX pokemon yet
-    if (pokemonSpeciesResults.id > 905) return { notFound: true };
+    // if (pokemonSpeciesResults.id > 905) return { notFound: true };
 
     if (!pokemonSpeciesResults || !pokemonAbilitiesResults) {
       console.log('Failed to fetch pokemonSpeciesResults or pokemonAbilitiesResults');

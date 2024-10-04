@@ -49,9 +49,9 @@ const PokestatsHomepage: NextPage<PokestatsHomepageProps> = props => {
 export const getStaticProps: GetStaticProps = async () => {
   try {
     // fetch data
-    const [typesResponse, pokemonList] = await Promise.all([
+    const [typesResponse, { results: pokemonList }] = await Promise.all([
       TypesApi.getAll(),
-      PokemonApi.listPokemons(0, 905).then(({ results }) => results),
+      PokemonApi.listPokemons(0, 1024),
     ]);
 
     if (!typesResponse) {

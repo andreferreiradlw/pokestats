@@ -1,6 +1,6 @@
 // types
 import type { PokestatsPokemonPageProps } from '@/pages/pokemon/[pokemonId]';
-import type { Pokemon } from 'pokenode-ts';
+import type { PokemonSpecies } from 'pokenode-ts';
 // helpers
 import { usePlausible } from 'next-plausible';
 // components
@@ -9,16 +9,21 @@ import type { StackProps } from '@mui/material';
 import { Stack } from '@mui/material';
 
 interface NavigationProps extends StackProps {
+  pokemonSpecies: PokemonSpecies;
   allPokemon: PokestatsPokemonPageProps['allPokemon'];
-  pokemonId: Pokemon['id'];
 }
 
-const Navigation = ({ allPokemon, pokemonId, ...rest }: NavigationProps): JSX.Element => {
+const Navigation = ({ allPokemon, pokemonSpecies, ...rest }: NavigationProps): JSX.Element => {
+  // analytics
   const plausible = usePlausible();
+
+  // data
+  const { id } = pokemonSpecies;
+
   const pokemonLength = allPokemon.length;
 
-  const prevPokemon = pokemonId > 1 ? allPokemon[pokemonId - 2] : null;
-  const nextPokemon = pokemonId < pokemonLength ? allPokemon[pokemonId] : null;
+  const prevPokemon = id > 1 ? allPokemon[id - 2] : null;
+  const nextPokemon = id < pokemonLength ? allPokemon[id] : null;
 
   return (
     <Stack
@@ -32,7 +37,7 @@ const Navigation = ({ allPokemon, pokemonId, ...rest }: NavigationProps): JSX.El
       {prevPokemon && (
         <NavigationButton
           pokemonName={prevPokemon.name}
-          pokemonId={pokemonId}
+          pokemonId={id}
           direction="left"
           handleClick={() => plausible('Previous Pokemon')}
         />
@@ -40,7 +45,7 @@ const Navigation = ({ allPokemon, pokemonId, ...rest }: NavigationProps): JSX.El
       {nextPokemon && (
         <NavigationButton
           pokemonName={nextPokemon.name}
-          pokemonId={pokemonId}
+          pokemonId={id}
           direction="right"
           handleClick={() => plausible('Next Pokemon')}
         />

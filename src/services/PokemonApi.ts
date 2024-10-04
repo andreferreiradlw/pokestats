@@ -15,5 +15,6 @@ export const PokemonApi = {
   getFormsByIds: async (numbers: Array<string>) =>
     await Promise.all(numbers.map(id => MainClient.pokemon.getPokemonFormById(Number(id)))),
 
-  listPokemons: async (from: number, to: number) => await MainClient.pokemon.listPokemons(from, to),
+  listPokemons: async (from?: number, to?: number) =>
+    await MainClient.pokemon.listPokemons(from, to),
 };

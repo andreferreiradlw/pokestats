@@ -34,7 +34,7 @@ const FeaturedImage = ({ species, sprites, ...rest }: FeaturedImageProps): JSX.E
   );
 
   const imageURL = useMemo(() => {
-    if (varieties.length > 1) {
+    if (varieties.length > 1 || id > 905) {
       return version === 'normal'
         ? (sprites?.other?.['official-artwork']?.front_default as string)
         : // @ts-expect-error: incorrect type

@@ -1,5 +1,5 @@
 // helpers
-import { removeDash, formatPokemonId } from '@/helpers';
+import { removeDash } from '@/helpers';
 // animations
 import { hoverVariant } from '@/animations';
 // components
@@ -30,9 +30,7 @@ const NavigationButton = ({
     <BtnAnchor href={`/pokemon/${pokemonName}`} onClick={handleClick} direction={direction}>
       <Arrow direction={direction}>
         <ImageNextV2
-          imageUrl={`https://raw.githubusercontent.com/andreferreiradlw/pokestats_media/main/assets/images/${formatPokemonId(
-            direction === 'left' ? pokemonId - 1 : pokemonId + 1,
-          )}.png`}
+          imageUrl={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${direction === 'left' ? pokemonId - 1 : pokemonId + 1}.png`}
           alt={pokemonName}
           customKey={`navigation-${direction}-${pokemonName}`}
           width="100%"

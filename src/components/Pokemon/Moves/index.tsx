@@ -55,7 +55,7 @@ const PokemonMoves = ({ pokemon, ...rest }: PokemonMovesProps): JSX.Element => {
           options={[
             { label: 'Level Up', value: 'level-up' },
             { label: 'Machines', value: 'machine' },
-            { label: 'Egg', value: 'egg' },
+            { label: 'Breeding', value: 'egg' },
             { label: 'Tutor', value: 'tutor' },
           ]}
           onChange={newMethod => setLearnMethod(newMethod)}

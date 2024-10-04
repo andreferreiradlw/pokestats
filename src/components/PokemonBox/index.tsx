@@ -34,9 +34,20 @@ const PokemonBox = ({
   defaultVarietyName,
   ...rest
 }: PokemonBoxProps): JSX.Element => {
+  // memo
   const generationName = useMemo(
     () => pokemonGen && mapGeneration(pokemonGen as GameGenValue),
     [pokemonGen],
+  );
+
+  const imageUrl = useMemo(
+    () =>
+      pokemonId > 905
+        ? `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemonId}.png`
+        : `https://raw.githubusercontent.com/andreferreiradlw/pokestats_media/main/assets/images/${formatPokemonId(
+            pokemonId,
+          )}.png`,
+    [pokemonId],
   );
 
   return (
@@ -57,9 +68,7 @@ const PokemonBox = ({
           <ImageNextV2
             alt={pokemonName}
             customKey={`pokemonbox-img-${pokemonId}`}
-            imageUrl={`https://raw.githubusercontent.com/andreferreiradlw/pokestats_media/main/assets/images/${formatPokemonId(
-              pokemonId,
-            )}.png`}
+            imageUrl={imageUrl}
             width="100px"
             height="100px"
           />

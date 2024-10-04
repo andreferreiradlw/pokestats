@@ -31,7 +31,9 @@ export type GameLabel =
   | "Let's Go Eevee"
   | 'Sword'
   | 'Shield'
-  | 'Legends: Arceus';
+  | 'Legends: Arceus'
+  | 'Scarlet'
+  | 'Violet';
 
 // Define types for the `value` property
 export type GameValue =
@@ -68,7 +70,8 @@ export type GameValue =
   | 'sword'
   | 'shield'
   | 'legends-arceus'
-  | 'scarlet';
+  | 'scarlet'
+  | 'violet';
 
 // Define types for the `group` property
 export type GameGroup =
@@ -432,22 +435,24 @@ const gameVersions: GameVersions = [
     genGroups: ['scarlet-violet'],
     moveGroups: ['scarlet-violet'],
   },
-  // {
-  //   label: 'Scarlet',
-  //   value: 'scarlet',
-  //   group: 'scarlet-violet',
-  //   generation: 'Generation IX',
-  //   genValue: 'generation-ix',
-  // genGroups: ['scarlet-violet'],
-  // },
-  // {
-  //   label: 'Violet',
-  //   value: 'violet',
-  //   group: 'scarlet-violet',
-  //   generation: 'Generation IX',
-  //   genValue: 'generation-ix',
-  // genGroups: ['scarlet-violet'],
-  // },
+  {
+    label: 'Scarlet',
+    value: 'scarlet',
+    group: 'scarlet-violet',
+    generation: 'Generation IX',
+    genValue: 'generation-ix',
+    genGroups: ['scarlet-violet'],
+    moveGroups: ['scarlet-violet'],
+  },
+  {
+    label: 'Violet',
+    value: 'violet',
+    group: 'scarlet-violet',
+    generation: 'Generation IX',
+    genValue: 'generation-ix',
+    genGroups: ['scarlet-violet'],
+    moveGroups: ['scarlet-violet'],
+  },
 ];
 
 export interface GenerationOption {
@@ -497,7 +502,7 @@ const mapIdToGeneration = (id: number): GameGenValue | 'all' => {
   if (id > 649 && id <= 721) return 'generation-vi';
   if (id > 721 && id <= 809) return 'generation-vii';
   if (id > 809 && id <= 905) return 'generation-viii';
-  if (id > 905 && id <= 1008) return 'generation-ix';
+  if (id > 905 && id <= 1025) return 'generation-ix';
   return 'all';
 };
 

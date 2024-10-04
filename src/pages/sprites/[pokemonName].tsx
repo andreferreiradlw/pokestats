@@ -27,7 +27,7 @@ const PokestatsSpritePage: NextPage<PokestatsSpritePageProps> = props => {
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const pokemonList = await PokemonApi.listPokemons(0, 1);
+  const pokemonList = await PokemonApi.listPokemons(0, 1302);
   // paths
   const paths = pokemonList.results.map(pokemon => {
     return {

@@ -59,7 +59,7 @@ const PokestatsPokemonPage: NextPage<PokestatsPokemonPageProps> = props => {
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const pokemonList = await PokemonApi.listPokemons(0, 250);
+  const pokemonList = await PokemonApi.listPokemons(0, 1024);
   // paths
   const paths = pokemonList.results.map(pokemon => {
     return {

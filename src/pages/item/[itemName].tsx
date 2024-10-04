@@ -49,7 +49,7 @@ const PokestatsItemPage: NextPage<PokestatsItemPageProps> = props => {
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const itemList = await ItemApi.listItems(0, 50);
+  const itemList = await ItemApi.listItems();
 
   const paths = itemList.results.map(({ name }) => ({
     params: { itemName: name },

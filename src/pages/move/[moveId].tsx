@@ -58,7 +58,7 @@ const PokestatsMovePage: NextPage<PokestatsMovePageProps> = props => {
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const moveList = await MovesApi.listMoves(0, 50);
+  const moveList = await MovesApi.listMoves(0, 937);
 
   const paths = moveList.results.map(move => ({
     params: { moveId: move.name },

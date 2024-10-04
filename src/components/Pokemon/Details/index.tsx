@@ -115,7 +115,7 @@ const PokemonDetails = ({
       <Stack
         alignItems={{ xxs: 'center', lg: 'flex-start' }}
         flexDirection={{ xxs: 'column-reverse', lg: 'column' }}
-        gap={{ xxs: 1, lg: 4 }}
+        gap={{ xxs: 1, lg: 2 }}
       >
         {types?.length > 0 && (
           <Stack flexDirection="row" flexWrap="wrap" width="auto" gap={2}>

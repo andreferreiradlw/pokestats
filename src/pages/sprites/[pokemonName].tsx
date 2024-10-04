@@ -1,38 +1,24 @@
 // types
 import type { GetStaticPaths, GetStaticProps, NextPage } from 'next';
-import type {
-  Pokemon as PokenodePokemon,
-  EvolutionChain,
-  PokemonSpecies,
-  Ability,
-  NamedAPIResource,
-} from 'pokenode-ts';
+import type { Pokemon, PokemonSpecies, NamedAPIResource } from 'pokenode-ts';
 // helpers
-import {
-  formatFlavorText,
-  gameVersions,
-  findEnglishName,
-  getResourceId,
-  formatPokemonId,
-} from '@/helpers';
+import { formatSpriteData } from '@/helpers';
+import { PokemonApi, SpeciesApi } from '@/services';
 // components
 import Seo from '@/components/Seo';
-import { MovesApi, PokemonApi, SpeciesApi } from '@/services';
 import LayoutV2 from '@/components/LayoutV2';
 
-export interface PokestatsPokemonPageProps {
-  allPokemon: NamedAPIResource[];
-  pokemon: PokenodePokemon;
-  abilities: Ability[];
-  species: PokemonSpecies;
-  evolutionData: EvolutionChain;
+export interface PokestatsSpritePageProps {
+  pokemon: Pokemon;
+  pokemonSpecies: PokemonSpecies;
+  allPokemonData: NamedAPIResource[];
 }
 
-const PokestatsPokemonPage: NextPage<PokestatsPokemonPageProps> = props => {
-  console.log(props);
+const PokestatsSpritePage: NextPage<PokestatsSpritePageProps> = props => {
+  console.log(props, formatSpriteData(props.pokemon.sprites, props.pokemonSpecies.varieties));
   return (
     <>
-      <Seo title="Sprites" description="" />
+      <Seo title="Pokemon Sprites" description="" />
       <LayoutV2 withHeader showGenSelect customKey="pokemon-sprites">
         {/* <PokemonPage {...props} /> */}
       </LayoutV2>
@@ -58,29 +44,24 @@ export const getStaticPaths: GetStaticPaths = async () => {
   };
 };
 
-export const getStaticProps: GetStaticProps<PokestatsPokemonPageProps> = async ({ params }) => {
+export const getStaticProps: GetStaticProps<PokestatsSpritePageProps> = async ({ params }) => {
   // get current pokemon name from url params
   const pokemonName = params?.pokemonName as string;
 
   try {
     // fetch data
-    const [pokemonDataResults, { results: allPokemonData }] = await Promise.all([
+    const [pokemonData, { results: allPokemonData }] = await Promise.all([
       PokemonApi.getByName(pokemonName),
       PokemonApi.listPokemons(0, 1302),
     ]);
 
-    const pokemonSpeciesData = await SpeciesApi.getByName(pokemonDataResults.species.name);
-
-    const genMovesList = await MovesApi.listMoves(0, 937).then(({ results }) =>
-      results.map(({ name }) => name),
-    );
+    const pokemonSpeciesData = await SpeciesApi.getByName(pokemonData.species.name);
 
     return {
       props: {
-        pokemonDataResults,
+        pokemon: pokemonData,
         allPokemonData,
-        pokemonSpeciesData,
-        genMovesList,
+        pokemonSpecies: pokemonSpeciesData,
       },
     };
   } catch (error) {
@@ -90,4 +71,4 @@ export const getStaticProps: GetStaticProps<PokestatsPokemonPageProps> = async (
   }
 };
 
-export default PokestatsPokemonPage;
+export default PokestatsSpritePage;

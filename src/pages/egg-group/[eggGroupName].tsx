@@ -18,6 +18,7 @@ export interface PokestatsEggGroupPageProps {
 }
 
 const PokestatsEggGroupPage: NextPage<PokestatsEggGroupPageProps> = props => {
+  // SEO
   const pageTitle = `${findEnglishName(props.eggGroupData.names)} Egg Group - Pokémon Species, Abilities, Hatch Cycles & More`;
   const pageDescription = `View detailed information for all Pokémon species in the ${findEnglishName(props.eggGroupData.names)} Egg Group. This table includes Pokémon IDs, names, types, egg groups, abilities, hatch cycles, growth rates, gender ratios, habitats, and more.`;
   const pageKeywords = `Pokémon ${findEnglishName(props.eggGroupData.names)} Egg Group, Pokémon species data, Pokémon abilities, Pokémon hatch cycles, Pokémon growth rates, Pokémon gender ratios, Pokémon habitats, Pokémon types, Pokémon egg groups, Pokémon breeding information`;
@@ -58,28 +59,26 @@ export const getStaticProps: GetStaticProps<PokestatsEggGroupPageProps> = async 
       return { notFound: true };
     }
 
-    const pokemonIds = eggGroupData.pokemon_species.map(({ url }) => getResourceId(url));
+    const speciesIdList = eggGroupData.pokemon_species.map(({ url }) => getResourceId(url));
 
     const [speciesData, pokemonData] = await Promise.all([
-      SpeciesApi.getByIds(pokemonIds),
-      PokemonApi.getByIds(pokemonIds),
+      SpeciesApi.getByIds(speciesIdList),
+      PokemonApi.getByIds(speciesIdList),
     ]);
 
     // Joining the data
-    const tableData: EggGroupTableData[] = pokemonData
-      .map(obj1 => {
-        const obj2 = speciesData.find(obj2 => obj2.id === obj1.id);
-        return { ...obj1, ...obj2 };
-      })
-      .filter(
-        entry => (entry.id >= 1 && entry.id <= 807) || (entry.id >= 10001 && entry.id <= 10157),
-      );
+    const tableData: EggGroupTableData[] = pokemonData.map(obj1 => {
+      const obj2 = speciesData.find(obj2 => obj2.id === obj1.id);
+      return { ...obj1, ...obj2 };
+    });
 
     return {
       props: {
         eggGroups: eggGroupNames.sort((a, b) => a.localeCompare(b)),
         eggGroupData,
         tableData,
+        speciesData,
+        pokemonData,
       },
     };
   } catch (error) {

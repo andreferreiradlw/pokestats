@@ -41,11 +41,9 @@ const EggGroupTable = ({
   const plausible = usePlausible();
 
   const onCellClick = useCallback(
-    (name: Pokemon['name'], id: Pokemon['id']) => {
-      if (id <= 905) {
-        plausible('Egg Group Table Click');
-        router.push(`/pokemon/${name}`);
-      }
+    (forms: Pokemon['forms'], id: Pokemon['id']) => {
+      plausible('Egg Group Table Click');
+      router.push(`/pokemon/${forms[0].name}`);
     },
     [plausible, router],
   );
@@ -89,6 +87,7 @@ const EggGroupTable = ({
       ({
         id = 1,
         name = '',
+        forms,
         sprites,
         types,
         egg_groups,
@@ -111,7 +110,7 @@ const EggGroupTable = ({
               <Typography textTransform="capitalize">{removeDash(name)}</Typography>
             </Stack>
           ),
-          onClick: () => onCellClick(name, id),
+          onClick: () => onCellClick(forms, id),
           sortBy: removeDash(name),
         },
         type: {
@@ -178,7 +177,7 @@ const EggGroupTable = ({
             ) : (
               ' - '
             ),
-          onClick: () => onCellClick(name, id),
+          onClick: () => onCellClick(forms, id),
         },
         cycles: {
           render: hatch_counter ? (
@@ -192,12 +191,12 @@ const EggGroupTable = ({
           ) : (
             'Unavailable'
           ),
-          onClick: () => onCellClick(name, id),
+          onClick: () => onCellClick(forms, id),
           sortBy: hatch_counter,
         },
         growthRate: {
           render: capitalise(removeDash(growth_rate?.name)),
-          onClick: () => onCellClick(name, id),
+          onClick: () => onCellClick(forms, id),
         },
         genderRatio: {
           render:
@@ -214,13 +213,13 @@ const EggGroupTable = ({
                 <FemaleIcon />
               </Typography>
             ),
-          onClick: () => onCellClick(name, id),
+          onClick: () => onCellClick(forms, id),
           sortBy: gender_rate,
           align: 'center',
         },
         habitat: {
           render: habitat ? capitalise(removeDash(habitat?.name)) : 'None',
-          onClick: () => onCellClick(name, id),
+          onClick: () => onCellClick(forms, id),
           sortBy: habitat?.name ?? '',
         },
       }),

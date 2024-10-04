@@ -66,7 +66,7 @@ export const getStaticProps: GetStaticProps<PokestatsPokemonPageProps> = async (
     // fetch data
     const [pokemonDataResults, { results: allPokemonData }] = await Promise.all([
       PokemonApi.getByName(pokemonName),
-      PokemonApi.listPokemons(0, 1500),
+      PokemonApi.listPokemons(0, 1302),
     ]);
 
     const pokemonSpeciesData = await SpeciesApi.getByName(pokemonDataResults.species.name);

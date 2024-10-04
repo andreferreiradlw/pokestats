@@ -6,6 +6,7 @@ import { GameVersionContext } from '@/context';
 import { mapVersionToGroup, filterMoves, type GameValue } from '@/helpers';
 // hooks
 import { useMachines, usePokemonMoves } from '@/hooks';
+import { usePlausible } from 'next-plausible';
 // components
 import type { Grid2Props } from '@mui/material';
 import { Grid2, Typography } from '@mui/material';
@@ -20,6 +21,9 @@ interface PokemonMovesProps extends Grid2Props {
 }
 
 const PokemonMoves = ({ pokemon, ...rest }: PokemonMovesProps): JSX.Element => {
+  // analytics
+  const plausible = usePlausible();
+
   // states
   const { gameVersion } = useContext(GameVersionContext);
   const [learnMethod, setLearnMethod] = useState<MoveLearnMethod['name']>('level-up');
@@ -70,7 +74,11 @@ const PokemonMoves = ({ pokemon, ...rest }: PokemonMovesProps): JSX.Element => {
       </Grid2>
       <Grid2 size={12}>
         <Link href="/moves" passHref legacyBehavior>
-          <CustomButton variant="contained" size="large">
+          <CustomButton
+            variant="contained"
+            size="large"
+            onClick={() => plausible('See All Moves Click')}
+          >
             See all moves
           </CustomButton>
         </Link>

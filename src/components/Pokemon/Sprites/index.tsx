@@ -3,17 +3,20 @@ import { useMemo } from 'react';
 import type { OtherPokemonSprites, Pokemon, PokemonSpecies, PokemonSprites } from 'pokenode-ts';
 // helpers
 import { removeUnderscore, capitalise, removeDash, formatPokemonId } from '@/helpers';
+import { usePlausible } from 'next-plausible';
 // styles
 import { SpriteContainer, Sprite } from './StyledSprites';
 // components
 import type { StackProps } from '@mui/material';
 import { Divider, Grid2, Stack, Typography } from '@mui/material';
 import type { ImageNextV2Props } from '@/components/ImageNextV2';
+import CustomButton from '@/components/CustomButton';
+import Link from 'next/link';
 
 interface SpritesProps extends StackProps {
   pokemonSprites: PokemonSprites;
-  pokemonId: Pokemon['id'];
-  forms: PokemonSpecies['varieties'];
+  pokemonSpecies: PokemonSpecies;
+  pokemon: Pokemon;
 }
 
 interface SpriteWithLabelProps {
@@ -70,7 +73,18 @@ const SpriteWithLabel = ({
   </SpriteContainer>
 );
 
-const Sprites = ({ pokemonSprites, pokemonId, forms, ...rest }: SpritesProps): JSX.Element => {
+const Sprites = ({
+  pokemonSprites,
+  pokemonSpecies,
+  pokemon,
+  ...rest
+}: SpritesProps): JSX.Element => {
+  // analytics
+  const plausible = usePlausible();
+
+  // data
+  const { id, varieties } = pokemonSpecies;
+
   // Cast pokemonSprites to the extended type to access custom properties
   const { animated } = pokemonSprites.versions['generation-v']['black-white'];
   const { dream_world: dreamWorldSprites, 'official-artwork': officialArtworkSprites } = (
@@ -78,24 +92,24 @@ const Sprites = ({ pokemonSprites, pokemonId, forms, ...rest }: SpritesProps): J
   ).other;
 
   const defaultVarietyName = useMemo(() => {
-    const defaultForm = removeDash(forms.find(form => form.is_default)?.pokemon.name);
+    const defaultForm = removeDash(varieties.find(({ is_default }) => is_default)?.pokemon.name);
 
     return capitalise(defaultForm.substring(defaultForm.indexOf(' ') + 1));
-  }, [forms]);
+  }, [varieties]);
 
   const alternativeForms = useMemo(
     () =>
-      forms
-        .filter(form => !form.is_default)
-        .map(form => ({
-          name: form.pokemon.name
+      varieties
+        .filter(({ is_default }) => !is_default)
+        .map(({ pokemon }) => ({
+          name: pokemon.name
             .replace(/\-[a-z]/g, match => match.toUpperCase())
             .split('-')
             .slice(1)
             .join('-')
             .replace(/-/g, ' '),
         })),
-    [forms],
+    [varieties],
   );
 
   return (
@@ -128,9 +142,8 @@ const Sprites = ({ pokemonSprites, pokemonId, forms, ...rest }: SpritesProps): J
               )}
             </Stack>
           </Stack>
-
           {/* Animated Sprites */}
-          {pokemonId < 650 && (
+          {id < 650 && (
             <Stack alignItems={{ xxs: 'center', lg: 'flex-start' }} gap={2} width="100%">
               <Stack
                 flexDirection="row-reverse"
@@ -156,7 +169,15 @@ const Sprites = ({ pokemonSprites, pokemonId, forms, ...rest }: SpritesProps): J
               </Stack>
             </Stack>
           )}
-
+          <Link href={`/sprites/${pokemon.name}`} legacyBehavior passHref>
+            <CustomButton
+              variant="contained"
+              size="large"
+              onClick={() => plausible('All Sprites Click')}
+            >
+              {`All ${removeDash(pokemon.name)} sprites`}
+            </CustomButton>
+          </Link>
           <Divider />
           <Typography variant="sectionTitle">Varieties</Typography>
 
@@ -208,8 +229,8 @@ const Sprites = ({ pokemonSprites, pokemonId, forms, ...rest }: SpritesProps): J
                             alt={`DreamWorld Design ${removeUnderscore(key)}`}
                             imageUrl={value}
                             height="170px"
-                            key={`dreamworld-artwork-${pokemonId}`}
-                            customKey={`dreamworld-artwork-${pokemonId}`}
+                            key={`dreamworld-artwork-${id}`}
+                            customKey={`dreamworld-artwork-${id}`}
                           />
                         </SpriteContainer>
                       ),
@@ -232,11 +253,11 @@ const Sprites = ({ pokemonSprites, pokemonId, forms, ...rest }: SpritesProps): J
                   <Sprite
                     alt={`${name} alternate form`}
                     imageUrl={`https://raw.githubusercontent.com/andreferreiradlw/pokestats_media/main/assets/images/${formatPokemonId(
-                      pokemonId,
+                      id,
                     )}-${name.replace(/ /g, '-')}.png`}
                     height="180px"
-                    key={`form-artwork-${pokemonId}-${name}`}
-                    customKey={`form-artwork-${pokemonId}-${name}`}
+                    key={`form-artwork-${id}-${name}`}
+                    customKey={`form-artwork-${id}-${name}`}
                   />
                 </SpriteContainer>
                 <p>{name}</p>

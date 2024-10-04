@@ -2,13 +2,13 @@ import { useMemo } from 'react';
 // types
 import type { Pokemon, PokemonSpecies } from 'pokenode-ts';
 // data
-import genderDescriptions from './genderDescriptions.json';
-// components
-import { Table } from '@/components/BaseStyles';
-import type { Grid2Props } from '@mui/material';
-import { Grid2, Stack, Typography } from '@mui/material';
+import { genderDifferences } from './genderDescriptions';
 // helpers
 import { removeDash } from '@/helpers';
+import { usePlausible } from 'next-plausible';
+// components
+import { Table } from '@/components/BaseStyles';
+import { Grid2, Stack, Typography, type Grid2Props } from '@mui/material';
 import CustomButton from '@/components/CustomButton';
 import Link from 'next/link';
 
@@ -18,13 +18,15 @@ interface PokemonFormsProps extends Grid2Props {
 }
 
 const PokemonForms = ({ pokemon, species, ...rest }: PokemonFormsProps): JSX.Element => {
+  // analytics
+  const plausible = usePlausible();
+
   // data
   const { forms_switchable, varieties, has_gender_differences, id } = species;
   const { name } = pokemon;
 
   // Memoize the gender description since it's static data
-  // @ts-expect-error: cannot update json types
-  const genderDescription = useMemo(() => genderDescriptions[id], [id]);
+  const genderDescription = useMemo(() => genderDifferences[id], [id]);
 
   // Memoize the current forms
   const currForms = useMemo(() => {
@@ -43,6 +45,7 @@ const PokemonForms = ({ pokemon, species, ...rest }: PokemonFormsProps): JSX.Ele
             fullWidth
             color="inherit"
             sx={{ justifyContent: 'center' }}
+            onClick={() => plausible('Pokemon Variety Click')}
           >{`${displayName} ${is_default ? '(Default)' : ''}`}</CustomButton>
         </Link>
       );

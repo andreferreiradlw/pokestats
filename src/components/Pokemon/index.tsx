@@ -24,7 +24,7 @@ const PokemonPage = ({
 }: Omit<PokestatsPokemonPageProps, 'autocompleteList' | 'pokemonGen'>): JSX.Element => {
   // data
   const { stats, types, sprites } = pokemon;
-  const { varieties, id } = species;
+  const { id } = species;
 
   return (
     <Stack divider={<Divider />} gap={4}>
@@ -78,7 +78,7 @@ const PokemonPage = ({
       </Stack>
       {/** SPRITES & NAVIGATION */}
       <Stack alignItems="flex-start" justifyContent="flex-start" gap={4}>
-        <Sprites pokemonSprites={sprites} pokemonId={id} forms={varieties} />
+        <Sprites pokemonSprites={sprites} pokemonSpecies={species} pokemon={pokemon} />
         <Navigation allPokemon={allPokemon} pokemonId={id} />
       </Stack>
     </Stack>

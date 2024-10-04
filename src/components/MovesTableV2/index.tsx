@@ -53,11 +53,9 @@ const MovesTableV2 = ({
   }, [learnMethod]);
 
   const onCellClick = useCallback(
-    (moveName: Move['name'], id: Move['id']) => {
-      if (id <= 850) {
-        plausible('Move Table Click');
-        router.push(`/move/${moveName}`);
-      }
+    (moveName: Move['name']) => {
+      plausible('Move Table Click');
+      router.push(`/move/${moveName}`);
     },
     [plausible, router],
   );
@@ -124,7 +122,6 @@ const MovesTableV2 = ({
       (
         {
           name,
-          id,
           type,
           damage_class,
           pp,
@@ -165,12 +162,12 @@ const MovesTableV2 = ({
         return {
           method: {
             render: methodCellContent,
-            onClick: () => onCellClick(name, id),
+            onClick: () => onCellClick(name),
             sortBy: level_learned_at,
           },
           name: {
             render: <Typography textTransform="capitalize">{removeDash(name)}</Typography>,
-            onClick: () => onCellClick(name, id),
+            onClick: () => onCellClick(name),
             sortBy: name,
             sx: { whiteSpace: 'nowrap' },
           },
@@ -182,40 +179,40 @@ const MovesTableV2 = ({
           },
           effect: {
             render: <Typography>{findEnglishVerboseEffect(effect_entries)}</Typography>,
-            onClick: () => onCellClick(name, id),
+            onClick: () => onCellClick(name),
           },
           category: {
             render: <Typography textTransform="capitalize">{damage_class?.name}</Typography>,
-            onClick: () => onCellClick(name, id),
+            onClick: () => onCellClick(name),
             align: 'center',
           },
           power: {
             render: power || '-',
-            onClick: () => onCellClick(name, id),
+            onClick: () => onCellClick(name),
             sortBy: power,
             align: 'center',
           },
           pp: {
             render: pp || '-',
-            onClick: () => onCellClick(name, id),
+            onClick: () => onCellClick(name),
             sortBy: pp,
             align: 'center',
           },
           accuracy: {
             render: accuracy ? `${accuracy}%` : '-',
-            onClick: () => onCellClick(name, id),
+            onClick: () => onCellClick(name),
             sortBy: accuracy,
             align: 'center',
           },
           priority: {
             render: priority,
-            onClick: () => onCellClick(name, id),
+            onClick: () => onCellClick(name),
             sortBy: priority,
             align: 'center',
           },
           generation: {
             render: mapGeneration(generation.name as GameGenValue) || '-',
-            onClick: () => onCellClick(name, id),
+            onClick: () => onCellClick(name),
             sx: { whiteSpace: 'nowrap' },
           },
         };

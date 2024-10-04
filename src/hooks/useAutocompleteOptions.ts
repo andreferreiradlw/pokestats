@@ -60,7 +60,7 @@ export const useAutocompleteOptions = (
       // Fetch data in parallel and validate responses
       const [pokemonResponse, typesResponse, movesResponse, itemsResponse, eggGroupsResponse] =
         await Promise.all([
-          PokemonApi.listPokemons(0, 905),
+          PokemonApi.listPokemons(0, 1024),
           TypesApi.listTypes(0, 18),
           MovesApi.listMoves(0, 850),
           ItemApi.listItems(),

@@ -50,9 +50,13 @@ const AutocompleteIcon = ({
       return id ? (
         <ItemIcon
           alt={`${name} pokémon`}
-          src={`https://raw.githubusercontent.com/andreferreiradlw/pokestats_media/main/assets/images/${formatPokemonId(
-            id,
-          )}.png`}
+          src={
+            id > 905
+              ? `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`
+              : `https://raw.githubusercontent.com/andreferreiradlw/pokestats_media/main/assets/images/${formatPokemonId(
+                  id,
+                )}.png`
+          }
         />
       ) : undefined;
     case 'type':

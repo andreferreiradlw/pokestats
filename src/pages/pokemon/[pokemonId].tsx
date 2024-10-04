@@ -96,11 +96,6 @@ export const getStaticProps: GetStaticProps<PokestatsPokemonPageProps> = async (
       SpeciesApi.getByName(pokemonDataResults.species.name),
     ]);
 
-    // const pokemonAbilitiesResults = await AbilityApi.getPokemonAbilities(pokemonDataResults);
-
-    // // get pokemon species
-    // const pokemonSpeciesResults = await SpeciesApi.getByName(pokemonDataResults.species.name);
-
     // no support for Generation IX pokemon yet
     if (pokemonSpeciesResults.id > 905) return { notFound: true };
 

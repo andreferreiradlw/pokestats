@@ -26,8 +26,6 @@ const PokemonPage = ({
   const { stats, types, sprites } = pokemon;
   const { varieties, id } = species;
 
-  console.log(sprites);
-
   return (
     <Stack divider={<Divider />} gap={4}>
       <Grid2

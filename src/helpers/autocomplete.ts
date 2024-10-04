@@ -35,7 +35,7 @@ const fetchAutocompleteData = async (): Promise<AutocompleteListType> => {
     { results: allItemsDataResults },
     allEggGroupsDataResults,
   ] = await Promise.all([
-    pokemonClient.listPokemons(0, 905),
+    pokemonClient.listPokemons(0, 1024),
     pokemonClient.listTypes(0, 18),
     moveClient.listMoves(0, 850),
     ItemApi.listItems(),

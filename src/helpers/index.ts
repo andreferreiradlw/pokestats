@@ -1,4 +1,3 @@
-export * from './autocomplete';
 export * from './deepEqual';
 export * from './findName';
 export * from './formatItemData';
@@ -15,4 +14,5 @@ export * from './parseLocationName';
 export * from './random';
 export * from './responsiveProps';
 export * from './scrollToTop';
+export * from './sitemap';
 export * from './typography';

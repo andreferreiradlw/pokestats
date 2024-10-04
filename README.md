@@ -52,6 +52,7 @@
 ✅ [Egg Groups Page](https://pokestats.gg/egg-group/bug) <br />
 ✅ [Generation IX Data](https://pokestats.gg/pokemon/sprigatito) <br />
 ✅ Sprites Page <br />
+🛠️ Catch-rate Calculator <br />
 💡 Growth Rates Page <br />
 💡 Type Relations Table Page <br />
 🛠️ Interactive Region Maps <br />

@@ -51,7 +51,7 @@ const FeaturedImage = ({ species, sprites, ...rest }: FeaturedImageProps): JSX.E
       <ImageContainer alignItems="center" justifyContent="center" size={12} version={version}>
         {imageURL ? (
           <ImageNextV2
-            imageProps={{ priority: true }}
+            imageProps={{ priority: true, unoptimized: false }}
             placeholderwidth="20%"
             alt={englishName!}
             imageUrl={imageURL}

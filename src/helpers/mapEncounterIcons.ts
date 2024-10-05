@@ -252,7 +252,8 @@ const mapGen6Icons = (methodName: string, regionName: string): string => {
 };
 
 const mapGen7Icons = (methodName: string): string => {
-  const baseUrl = `https://raw.githubusercontent.com/andreferreiradlw/pokestats_media/main/assets/icons/generation-vii`;
+  const baseUrl =
+    'https://raw.githubusercontent.com/andreferreiradlw/pokestats_media/main/assets/icons/generation-vii';
 
   const icons: Record<string, string> = {
     walk: `${baseUrl}/walk.png`,

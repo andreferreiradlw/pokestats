@@ -3,7 +3,7 @@ import { removeDash } from './typography';
 
 export const formatSpriteData = (
   pokemonSprites: PokemonSprites,
-  pokemonVarieties: Pokemon[] | null,
+  pokemonVarieties?: Pokemon[] | null,
 ) => {
   const { other, versions } = pokemonSprites;
 

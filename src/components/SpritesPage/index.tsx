@@ -6,7 +6,7 @@ import { capitalise, findEnglishName, formatSpriteData, removeDash } from '@/hel
 import { usePlausible } from 'next-plausible';
 // components
 import { Divider, Stack, Typography } from '@mui/material';
-import SpriteAccordion from './SpriteAccordion';
+import SpriteAccordion from '../SpriteAccordion';
 import Link from 'next/link';
 import CustomButton from '../CustomButton';
 

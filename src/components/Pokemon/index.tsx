@@ -76,10 +76,8 @@ const PokemonPage = ({
         <Moves pokemon={pokemon} />
       </Stack>
       {/** SPRITES & NAVIGATION */}
-      <Stack alignItems="flex-start" justifyContent="flex-start" gap={4}>
-        <Sprites pokemonSprites={sprites} pokemonSpecies={species} pokemon={pokemon} />
-        <Navigation allPokemon={allPokemon} pokemonSpecies={species} />
-      </Stack>
+      <Sprites pokemon={pokemon} />
+      <Navigation allPokemon={allPokemon} pokemonSpecies={species} />
     </Stack>
   );
 };

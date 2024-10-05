@@ -2,12 +2,14 @@ import { forwardRef } from 'react';
 // helpers
 import { hoverVariant } from '@/animations';
 // components
-import { Button as MuiButton, type ButtonProps } from '@mui/material';
+import { Box, Button as MuiButton, type ButtonProps } from '@mui/material';
 import { motion } from 'framer-motion';
 
 const CustomButton = forwardRef<HTMLButtonElement, ButtonProps>(
   ({ children, disabled, ...rest }, ref) => (
-    <motion.div
+    <Box
+      width="fit-content" // do not remove
+      component={motion.div}
       initial="rest"
       animate="rest"
       whileHover={!disabled ? 'hover' : undefined} // Only apply hover if not disabled
@@ -18,7 +20,7 @@ const CustomButton = forwardRef<HTMLButtonElement, ButtonProps>(
       <MuiButton ref={ref} disabled={disabled} {...rest}>
         {children}
       </MuiButton>
-    </motion.div>
+    </Box>
   ),
 );
 

@@ -6,14 +6,16 @@ import { findEnglishName, formatSpriteData, removeDash } from '@/helpers';
 import { usePlausible } from 'next-plausible';
 // components
 import { Divider, Stack, Typography } from '@mui/material';
-import SpriteAccordion from '../SpriteAccordion';
+import SpriteAccordion from '@/components/SpriteAccordion';
 import Link from 'next/link';
-import CustomButton from '../CustomButton';
+import CustomButton from '@/components/CustomButton';
+import Navigation from '@/components/Navigation';
 
 const SpritesPage = ({
   pokemon,
   otherFormsData,
   pokemonSpecies,
+  allPokemonData,
 }: PokestatsSpritePageProps): JSX.Element => {
   // analytics
   const plausible = usePlausible();
@@ -42,6 +44,7 @@ const SpritesPage = ({
       {mainSprites.length > 0 &&
         mainSprites.map(({ label, sprites }) => (
           <SpriteAccordion
+            pixelatedimg
             key={label}
             title={label}
             sprites={sprites}
@@ -68,7 +71,7 @@ const SpritesPage = ({
               />
             ))}
             {otherFormsData && (
-              <Stack flexDirection="row" gap={2} mt={4}>
+              <Stack flexDirection="row" gap={2} mt={4} flexWrap="wrap">
                 {otherFormsData.map(({ name }) => (
                   <Link key={name} href={`/sprites/${name}`} legacyBehavior passHref>
                     <CustomButton variant="contained">{`${removeDash(name)} Sprites`}</CustomButton>
@@ -110,6 +113,7 @@ const SpritesPage = ({
                 </Typography>
                 {gameVersions.map(({ label, sprites }, index) => (
                   <SpriteAccordion
+                    pixelatedimg
                     key={label}
                     title={label}
                     sprites={sprites}
@@ -122,6 +126,8 @@ const SpritesPage = ({
           </Stack>
         </>
       )}
+      <Divider />
+      <Navigation prefix="sprites" allPokemon={allPokemonData} pokemonSpecies={pokemonSpecies} />
     </Stack>
   );
 };

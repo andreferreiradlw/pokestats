@@ -12,7 +12,7 @@ import BaseStats from './BaseStats';
 import PokemonForms from './Forms';
 import Moves from './Moves';
 import Sprites from './Sprites';
-import Navigation from './Navigation';
+import Navigation from '../Navigation';
 import Encounters from './Encounters';
 
 const PokemonPage = ({

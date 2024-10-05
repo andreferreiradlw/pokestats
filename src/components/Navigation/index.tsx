@@ -11,9 +11,15 @@ import { Stack } from '@mui/material';
 interface NavigationProps extends StackProps {
   pokemonSpecies: PokemonSpecies;
   allPokemon: PokestatsPokemonPageProps['allPokemon'];
+  prefix?: 'pokemon' | 'sprites';
 }
 
-const Navigation = ({ allPokemon, pokemonSpecies, ...rest }: NavigationProps): JSX.Element => {
+const Navigation = ({
+  allPokemon,
+  pokemonSpecies,
+  prefix = 'pokemon',
+  ...rest
+}: NavigationProps): JSX.Element => {
   // analytics
   const plausible = usePlausible();
 
@@ -36,6 +42,7 @@ const Navigation = ({ allPokemon, pokemonSpecies, ...rest }: NavigationProps): J
     >
       {prevPokemon && (
         <NavigationButton
+          prefix={prefix}
           pokemonName={prevPokemon.name}
           pokemonId={id}
           direction="left"
@@ -44,6 +51,7 @@ const Navigation = ({ allPokemon, pokemonSpecies, ...rest }: NavigationProps): J
       )}
       {nextPokemon && (
         <NavigationButton
+          prefix={prefix}
           pokemonName={nextPokemon.name}
           pokemonId={id}
           direction="right"

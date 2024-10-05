@@ -1,9 +1,15 @@
-import { useState, useContext, useMemo } from 'react';
+import { useState, useContext, useMemo, useEffect } from 'react';
 // types
 import type { MoveLearnMethod, Pokemon } from 'pokenode-ts';
 // helpers
 import { GameVersionContext } from '@/context';
-import { mapVersionToGroup, filterMoves, type GameValue } from '@/helpers';
+import {
+  mapVersionToGroup,
+  filterMoves,
+  removeDash,
+  MoveLearnMethod as MoveLearnMethodEnum,
+  MoveLearnMethodLabel,
+} from '@/helpers';
 // hooks
 import { useMachines, usePokemonMoves } from '@/hooks';
 import { usePlausible } from 'next-plausible';
@@ -20,28 +26,61 @@ interface PokemonMovesProps extends Grid2Props {
   pokemon: Pokemon;
 }
 
+const learnMethodOptions = [
+  {
+    value: MoveLearnMethodEnum.LevelUp,
+    label: MoveLearnMethodLabel.LevelUp,
+  },
+  {
+    value: MoveLearnMethodEnum.Egg,
+    label: MoveLearnMethodLabel.Breeding,
+  },
+  {
+    value: MoveLearnMethodEnum.Tutor,
+    label: MoveLearnMethodLabel.Tutor,
+  },
+  {
+    value: MoveLearnMethodEnum.Machine,
+    label: MoveLearnMethodLabel.Machines,
+  },
+];
+
 const PokemonMoves = ({ pokemon, ...rest }: PokemonMovesProps): JSX.Element => {
-  // analytics
   const plausible = usePlausible();
 
-  // states
-  const { gameVersion } = useContext(GameVersionContext);
+  // States
+  const { gameVersion, gameDetails } = useContext(GameVersionContext);
   const [learnMethod, setLearnMethod] = useState<MoveLearnMethod['name']>('level-up');
 
-  // fetch all moves
   const { data: allMoves, isLoading: movesLoading } = usePokemonMoves(pokemon);
 
   const filteredMoves = useMemo(() => {
-    if (!allMoves) return [];
-    // currently selected game group
-    const gameGroup = mapVersionToGroup(gameVersion as GameValue);
-    // filter moves
+    if (!allMoves || !gameVersion) return [];
+
+    const gameGroup = mapVersionToGroup(gameVersion);
+
     return filterMoves(allMoves, learnMethod, gameGroup);
   }, [allMoves, gameVersion, learnMethod]);
 
-  // Process moves based on the selected game version
+  const filteredMethodOptions = useMemo(() => {
+    if (!gameDetails) return [];
+
+    return learnMethodOptions.filter(({ value: methodValue }) =>
+      gameDetails.moveLearnMethods.some(({ value }) => value === methodValue),
+    );
+  }, [gameDetails]);
+
+  useEffect(() => {
+    if (
+      filteredMethodOptions.length > 0 &&
+      !filteredMethodOptions.some(({ value }) => value === learnMethod)
+    ) {
+      setLearnMethod(filteredMethodOptions[0].value);
+    }
+  }, [filteredMethodOptions, learnMethod]);
+
   const { data: machines, isLoading: machinesLoading } = useMachines(filteredMoves, pokemon.name, {
-    enabled: learnMethod === 'machine' && filterMoves.length > 0,
+    enabled: learnMethod === 'machine' && filteredMoves.length > 0,
   });
 
   return (
@@ -51,13 +90,8 @@ const PokemonMoves = ({ pokemon, ...rest }: PokemonMovesProps): JSX.Element => {
       </Grid2>
       <Grid2 size={12} gap={4}>
         <DropdownV2
-          label="Type"
-          options={[
-            { label: 'Level Up', value: 'level-up' },
-            { label: 'Machines', value: 'machine' },
-            { label: 'Breeding', value: 'egg' },
-            { label: 'Tutor', value: 'tutor' },
-          ]}
+          label="Learn Method"
+          options={filteredMethodOptions} // Use filtered options here
           onChange={newMethod => setLearnMethod(newMethod)}
           value={learnMethod}
         />
@@ -65,11 +99,12 @@ const PokemonMoves = ({ pokemon, ...rest }: PokemonMovesProps): JSX.Element => {
       </Grid2>
       <Grid2 size={12}>
         <MovesTableV2
+          customKey={`moves-table-container-${learnMethod}-${gameVersion}`}
           moves={filteredMoves}
           machineNames={machines}
           learnMethod={learnMethod}
           isLoading={movesLoading || machinesLoading}
-          noMovesText={`No ${learnMethod} moves for currently selected game version.`}
+          noMovesText={`No ${removeDash(learnMethod)} moves for currently selected game version.`}
         />
       </Grid2>
       <Grid2 size={12}>

@@ -6,9 +6,9 @@ import { Box, Button as MuiButton, type ButtonProps } from '@mui/material';
 import { motion } from 'framer-motion';
 
 const CustomButton = forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ children, disabled, ...rest }, ref) => (
+  ({ children, disabled, fullWidth, ...rest }, ref) => (
     <Box
-      width="fit-content" // do not remove
+      width={fullWidth ? '100%' : 'fit-content'} // do not remove
       component={motion.div}
       initial="rest"
       animate="rest"
@@ -17,7 +17,7 @@ const CustomButton = forwardRef<HTMLButtonElement, ButtonProps>(
       variants={hoverVariant}
       key="custom-button"
     >
-      <MuiButton ref={ref} disabled={disabled} {...rest}>
+      <MuiButton ref={ref} disabled={disabled} fullWidth={fullWidth} {...rest}>
         {children}
       </MuiButton>
     </Box>

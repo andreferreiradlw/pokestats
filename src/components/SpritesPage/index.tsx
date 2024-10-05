@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 // types
 import type { PokestatsSpritePageProps } from '@/pages/sprites/[pokemonName]';
 // helpers
-import { capitalise, findEnglishName, formatSpriteData, removeDash } from '@/helpers';
+import { findEnglishName, formatSpriteData, removeDash } from '@/helpers';
 import { usePlausible } from 'next-plausible';
 // components
 import { Divider, Stack, Typography } from '@mui/material';
@@ -49,10 +49,7 @@ const SpritesPage = ({
           />
         ))}
       <Link href={`/pokemon/${name}`} legacyBehavior passHref>
-        <CustomButton
-          variant="contained"
-          sx={{ textTransform: 'capitalize' }}
-        >{`${englishName} Pokémon Page`}</CustomButton>
+        <CustomButton variant="contained">{`${englishName} Pokémon Page`}</CustomButton>
       </Link>
       {otherForms && otherForms.length > 0 && (
         <>
@@ -74,7 +71,7 @@ const SpritesPage = ({
               <Stack flexDirection="row" gap={2} mt={4}>
                 {otherFormsData.map(({ name }) => (
                   <Link key={name} href={`/sprites/${name}`} legacyBehavior passHref>
-                    <CustomButton variant="contained">{`${capitalise(removeDash(name))} Sprites`}</CustomButton>
+                    <CustomButton variant="contained">{`${removeDash(name)} Sprites`}</CustomButton>
                   </Link>
                 ))}
               </Stack>

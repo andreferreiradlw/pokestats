@@ -1,4 +1,4 @@
-import React, { createContext, useState, useMemo } from 'react';
+import { createContext, useState, useMemo, type ReactNode } from 'react';
 // helpers
 import {
   type GameValue,
@@ -11,26 +11,34 @@ import {
 import type { PokemonSpecies } from 'pokenode-ts';
 
 interface GameVersionContextProps {
-  gameVersion: GameValue;
+  gameVersion?: GameValue;
   gameGeneration: GameGenValue;
   setGameVersion: (version: string) => void;
   dropdownOptions: Game[];
+  gameDetails?: Game;
 }
 
 interface GameVersionProviderProps {
-  children: React.ReactNode;
+  children: ReactNode;
   pokemon?: PokemonSpecies;
 }
 
 export const GameVersionContext = createContext<GameVersionContextProps>({
-  gameVersion: '' as GameValue,
+  gameVersion: undefined,
   gameGeneration: '' as GameGenValue,
   setGameVersion: () => {},
   dropdownOptions: [],
+  gameDetails: undefined,
 });
 
 export const GameVersionProvider = ({ children, pokemon }: GameVersionProviderProps) => {
-  const [gameVersion, setGameVersion] = useState<string>('');
+  const [gameVersion, setGameVersion] = useState<string>();
+  // const [gameDetails, setGameDetails] = useState<Game>();
+
+  const gameDetails = useMemo(
+    () => gameVersions.find(({ value }) => value === gameVersion),
+    [gameVersion],
+  );
 
   // Calculate dropdown options based on the provided pokemon data
   const dropdownOptions = useMemo(() => {
@@ -56,8 +64,9 @@ export const GameVersionProvider = ({ children, pokemon }: GameVersionProviderPr
       gameGeneration: mapGameValueToGenerationValue(gameVersion as GameValue)!,
       setGameVersion,
       dropdownOptions,
+      gameDetails,
     }),
-    [gameVersion, dropdownOptions],
+    [gameVersion, dropdownOptions, gameDetails],
   );
 
   return <GameVersionContext.Provider value={contextValue}>{children}</GameVersionContext.Provider>;

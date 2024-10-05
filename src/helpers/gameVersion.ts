@@ -123,6 +123,31 @@ export type GameGenValue =
 export type GameGenGroups = GameGroup[];
 export type GameMoveGroups = GameGroup[];
 
+export enum MoveLearnMethod {
+  LevelUp = 'level-up',
+  Egg = 'egg',
+  Tutor = 'tutor',
+  Machine = 'machine',
+  LightBallEgg = 'light-ball-egg',
+  FormChange = 'form-change',
+  ZygardeCube = 'zygarde-cube',
+}
+
+export enum MoveLearnMethodLabel {
+  LevelUp = 'Level Up',
+  Breeding = 'Breeding',
+  Tutor = 'Tutor',
+  Machines = 'Machines',
+  LightBallEgg = 'Light Ball Egg',
+  FormChange = 'Form Change',
+  ZygardeCube = 'Zygarde Cube',
+}
+
+interface MoveLearnMethodOption {
+  value: MoveLearnMethod;
+  label: MoveLearnMethodLabel;
+}
+
 // Use the defined types in the `Game` interface
 export interface Game {
   label: GameLabel;
@@ -132,6 +157,8 @@ export interface Game {
   genValue: GameGenValue;
   genGroups: GameGenGroups;
   moveGroups: GameMoveGroups;
+  pokedexes: string[];
+  moveLearnMethods: MoveLearnMethodOption[];
 }
 
 // Define the type for a list of games
@@ -146,6 +173,17 @@ const gameVersions: GameVersions = [
     genValue: 'generation-i',
     genGroups: ['red-blue', 'yellow'],
     moveGroups: ['red-blue', 'yellow'],
+    pokedexes: ['kanto'],
+    moveLearnMethods: [
+      {
+        value: MoveLearnMethod.LevelUp,
+        label: MoveLearnMethodLabel.LevelUp,
+      },
+      {
+        value: MoveLearnMethod.Machine,
+        label: MoveLearnMethodLabel.Machines,
+      },
+    ],
   },
   {
     label: 'Blue',
@@ -155,6 +193,17 @@ const gameVersions: GameVersions = [
     genValue: 'generation-i',
     genGroups: ['red-blue', 'yellow'],
     moveGroups: ['red-blue', 'yellow'],
+    pokedexes: ['kanto'],
+    moveLearnMethods: [
+      {
+        value: MoveLearnMethod.LevelUp,
+        label: MoveLearnMethodLabel.LevelUp,
+      },
+      {
+        value: MoveLearnMethod.Machine,
+        label: MoveLearnMethodLabel.Machines,
+      },
+    ],
   },
   {
     label: 'Yellow',
@@ -164,6 +213,17 @@ const gameVersions: GameVersions = [
     genValue: 'generation-i',
     genGroups: ['red-blue', 'yellow'],
     moveGroups: ['red-blue', 'yellow'],
+    pokedexes: ['kanto'],
+    moveLearnMethods: [
+      {
+        value: MoveLearnMethod.LevelUp,
+        label: MoveLearnMethodLabel.LevelUp,
+      },
+      {
+        value: MoveLearnMethod.Machine,
+        label: MoveLearnMethodLabel.Machines,
+      },
+    ],
   },
   {
     label: 'Gold',
@@ -173,6 +233,21 @@ const gameVersions: GameVersions = [
     genValue: 'generation-ii',
     genGroups: ['gold-silver', 'crystal'],
     moveGroups: ['gold-silver', 'crystal'],
+    pokedexes: ['original-johto'],
+    moveLearnMethods: [
+      {
+        value: MoveLearnMethod.LevelUp,
+        label: MoveLearnMethodLabel.LevelUp,
+      },
+      {
+        value: MoveLearnMethod.Egg,
+        label: MoveLearnMethodLabel.Breeding,
+      },
+      {
+        value: MoveLearnMethod.Machine,
+        label: MoveLearnMethodLabel.Machines,
+      },
+    ],
   },
   {
     label: 'Silver',
@@ -182,6 +257,21 @@ const gameVersions: GameVersions = [
     genValue: 'generation-ii',
     genGroups: ['gold-silver', 'crystal'],
     moveGroups: ['gold-silver', 'crystal'],
+    pokedexes: ['original-johto'],
+    moveLearnMethods: [
+      {
+        value: MoveLearnMethod.LevelUp,
+        label: MoveLearnMethodLabel.LevelUp,
+      },
+      {
+        value: MoveLearnMethod.Egg,
+        label: MoveLearnMethodLabel.Breeding,
+      },
+      {
+        value: MoveLearnMethod.Machine,
+        label: MoveLearnMethodLabel.Machines,
+      },
+    ],
   },
   {
     label: 'Crystal',
@@ -191,6 +281,25 @@ const gameVersions: GameVersions = [
     genValue: 'generation-ii',
     genGroups: ['gold-silver', 'crystal'],
     moveGroups: ['gold-silver', 'crystal'],
+    pokedexes: ['original-johto'],
+    moveLearnMethods: [
+      {
+        value: MoveLearnMethod.LevelUp,
+        label: MoveLearnMethodLabel.LevelUp,
+      },
+      {
+        value: MoveLearnMethod.Egg,
+        label: MoveLearnMethodLabel.Breeding,
+      },
+      {
+        value: MoveLearnMethod.Tutor,
+        label: MoveLearnMethodLabel.Tutor,
+      },
+      {
+        value: MoveLearnMethod.Machine,
+        label: MoveLearnMethodLabel.Machines,
+      },
+    ],
   },
   {
     label: 'Ruby',
@@ -200,6 +309,21 @@ const gameVersions: GameVersions = [
     genValue: 'generation-iii',
     genGroups: ['ruby-sapphire', 'emerald'],
     moveGroups: ['ruby-sapphire', 'emerald', 'firered-leafgreen'],
+    pokedexes: ['hoenn'],
+    moveLearnMethods: [
+      {
+        value: MoveLearnMethod.LevelUp,
+        label: MoveLearnMethodLabel.LevelUp,
+      },
+      {
+        value: MoveLearnMethod.Egg,
+        label: MoveLearnMethodLabel.Breeding,
+      },
+      {
+        value: MoveLearnMethod.Machine,
+        label: MoveLearnMethodLabel.Machines,
+      },
+    ],
   },
   {
     label: 'Sapphire',
@@ -209,6 +333,21 @@ const gameVersions: GameVersions = [
     genValue: 'generation-iii',
     genGroups: ['ruby-sapphire', 'emerald'],
     moveGroups: ['ruby-sapphire', 'emerald', 'firered-leafgreen'],
+    pokedexes: ['hoenn'],
+    moveLearnMethods: [
+      {
+        value: MoveLearnMethod.LevelUp,
+        label: MoveLearnMethodLabel.LevelUp,
+      },
+      {
+        value: MoveLearnMethod.Egg,
+        label: MoveLearnMethodLabel.Breeding,
+      },
+      {
+        value: MoveLearnMethod.Machine,
+        label: MoveLearnMethodLabel.Machines,
+      },
+    ],
   },
   {
     label: 'Emerald',
@@ -218,6 +357,29 @@ const gameVersions: GameVersions = [
     genValue: 'generation-iii',
     genGroups: ['ruby-sapphire', 'emerald'],
     moveGroups: ['ruby-sapphire', 'emerald', 'firered-leafgreen'],
+    pokedexes: ['hoenn'],
+    moveLearnMethods: [
+      {
+        value: MoveLearnMethod.LevelUp,
+        label: MoveLearnMethodLabel.LevelUp,
+      },
+      {
+        value: MoveLearnMethod.Egg,
+        label: MoveLearnMethodLabel.Breeding,
+      },
+      {
+        value: MoveLearnMethod.Tutor,
+        label: MoveLearnMethodLabel.Tutor,
+      },
+      {
+        value: MoveLearnMethod.Machine,
+        label: MoveLearnMethodLabel.Machines,
+      },
+      {
+        value: MoveLearnMethod.LightBallEgg,
+        label: MoveLearnMethodLabel.LightBallEgg,
+      },
+    ],
   },
   {
     label: 'Fire Red',
@@ -227,6 +389,25 @@ const gameVersions: GameVersions = [
     genValue: 'generation-iii',
     genGroups: ['firered-leafgreen'],
     moveGroups: ['ruby-sapphire', 'emerald', 'firered-leafgreen'],
+    pokedexes: ['kanto'],
+    moveLearnMethods: [
+      {
+        value: MoveLearnMethod.LevelUp,
+        label: MoveLearnMethodLabel.LevelUp,
+      },
+      {
+        value: MoveLearnMethod.Egg,
+        label: MoveLearnMethodLabel.Breeding,
+      },
+      {
+        value: MoveLearnMethod.Tutor,
+        label: MoveLearnMethodLabel.Tutor,
+      },
+      {
+        value: MoveLearnMethod.Machine,
+        label: MoveLearnMethodLabel.Machines,
+      },
+    ],
   },
   {
     label: 'Leaf Green',
@@ -236,6 +417,25 @@ const gameVersions: GameVersions = [
     genValue: 'generation-iii',
     genGroups: ['firered-leafgreen'],
     moveGroups: ['ruby-sapphire', 'emerald', 'firered-leafgreen'],
+    pokedexes: ['kanto'],
+    moveLearnMethods: [
+      {
+        value: MoveLearnMethod.LevelUp,
+        label: MoveLearnMethodLabel.LevelUp,
+      },
+      {
+        value: MoveLearnMethod.Egg,
+        label: MoveLearnMethodLabel.Breeding,
+      },
+      {
+        value: MoveLearnMethod.Tutor,
+        label: MoveLearnMethodLabel.Tutor,
+      },
+      {
+        value: MoveLearnMethod.Machine,
+        label: MoveLearnMethodLabel.Machines,
+      },
+    ],
   },
   {
     label: 'Diamond',
@@ -245,6 +445,29 @@ const gameVersions: GameVersions = [
     genValue: 'generation-iv',
     genGroups: ['diamond-pearl', 'platinum', 'heartgold-soulsilver'],
     moveGroups: ['diamond-pearl', 'platinum', 'heartgold-soulsilver'],
+    pokedexes: ['original-sinnoh'],
+    moveLearnMethods: [
+      {
+        value: MoveLearnMethod.LevelUp,
+        label: MoveLearnMethodLabel.LevelUp,
+      },
+      {
+        value: MoveLearnMethod.Egg,
+        label: MoveLearnMethodLabel.Breeding,
+      },
+      {
+        value: MoveLearnMethod.Tutor,
+        label: MoveLearnMethodLabel.Tutor,
+      },
+      {
+        value: MoveLearnMethod.Machine,
+        label: MoveLearnMethodLabel.Machines,
+      },
+      {
+        value: MoveLearnMethod.LightBallEgg,
+        label: MoveLearnMethodLabel.LightBallEgg,
+      },
+    ],
   },
   {
     label: 'Pearl',
@@ -254,6 +477,29 @@ const gameVersions: GameVersions = [
     genValue: 'generation-iv',
     genGroups: ['diamond-pearl', 'platinum', 'heartgold-soulsilver'],
     moveGroups: ['diamond-pearl', 'platinum', 'heartgold-soulsilver'],
+    pokedexes: ['original-sinnoh'],
+    moveLearnMethods: [
+      {
+        value: MoveLearnMethod.LevelUp,
+        label: MoveLearnMethodLabel.LevelUp,
+      },
+      {
+        value: MoveLearnMethod.Egg,
+        label: MoveLearnMethodLabel.Breeding,
+      },
+      {
+        value: MoveLearnMethod.Tutor,
+        label: MoveLearnMethodLabel.Tutor,
+      },
+      {
+        value: MoveLearnMethod.Machine,
+        label: MoveLearnMethodLabel.Machines,
+      },
+      {
+        value: MoveLearnMethod.LightBallEgg,
+        label: MoveLearnMethodLabel.LightBallEgg,
+      },
+    ],
   },
   {
     label: 'Platinum',
@@ -263,6 +509,33 @@ const gameVersions: GameVersions = [
     genValue: 'generation-iv',
     genGroups: ['diamond-pearl', 'platinum', 'heartgold-soulsilver'],
     moveGroups: ['diamond-pearl', 'platinum', 'heartgold-soulsilver'],
+    pokedexes: ['extended-sinnoh'],
+    moveLearnMethods: [
+      {
+        value: MoveLearnMethod.LevelUp,
+        label: MoveLearnMethodLabel.LevelUp,
+      },
+      {
+        value: MoveLearnMethod.Egg,
+        label: MoveLearnMethodLabel.Breeding,
+      },
+      {
+        value: MoveLearnMethod.Tutor,
+        label: MoveLearnMethodLabel.Tutor,
+      },
+      {
+        value: MoveLearnMethod.Machine,
+        label: MoveLearnMethodLabel.Machines,
+      },
+      {
+        value: MoveLearnMethod.LightBallEgg,
+        label: MoveLearnMethodLabel.LightBallEgg,
+      },
+      {
+        value: MoveLearnMethod.FormChange,
+        label: MoveLearnMethodLabel.FormChange,
+      },
+    ],
   },
   {
     label: 'Heart Gold',
@@ -272,6 +545,33 @@ const gameVersions: GameVersions = [
     genValue: 'generation-iv',
     genGroups: ['diamond-pearl', 'platinum', 'heartgold-soulsilver'],
     moveGroups: ['diamond-pearl', 'platinum', 'heartgold-soulsilver'],
+    pokedexes: ['updated-johto'],
+    moveLearnMethods: [
+      {
+        value: MoveLearnMethod.LevelUp,
+        label: MoveLearnMethodLabel.LevelUp,
+      },
+      {
+        value: MoveLearnMethod.Egg,
+        label: MoveLearnMethodLabel.Breeding,
+      },
+      {
+        value: MoveLearnMethod.Tutor,
+        label: MoveLearnMethodLabel.Tutor,
+      },
+      {
+        value: MoveLearnMethod.Machine,
+        label: MoveLearnMethodLabel.Machines,
+      },
+      {
+        value: MoveLearnMethod.LightBallEgg,
+        label: MoveLearnMethodLabel.LightBallEgg,
+      },
+      {
+        value: MoveLearnMethod.FormChange,
+        label: MoveLearnMethodLabel.FormChange,
+      },
+    ],
   },
   {
     label: 'Soul Silver',
@@ -281,6 +581,33 @@ const gameVersions: GameVersions = [
     genValue: 'generation-iv',
     genGroups: ['diamond-pearl', 'platinum', 'heartgold-soulsilver'],
     moveGroups: ['diamond-pearl', 'platinum', 'heartgold-soulsilver'],
+    pokedexes: ['updated-johto'],
+    moveLearnMethods: [
+      {
+        value: MoveLearnMethod.LevelUp,
+        label: MoveLearnMethodLabel.LevelUp,
+      },
+      {
+        value: MoveLearnMethod.Egg,
+        label: MoveLearnMethodLabel.Breeding,
+      },
+      {
+        value: MoveLearnMethod.Tutor,
+        label: MoveLearnMethodLabel.Tutor,
+      },
+      {
+        value: MoveLearnMethod.Machine,
+        label: MoveLearnMethodLabel.Machines,
+      },
+      {
+        value: MoveLearnMethod.LightBallEgg,
+        label: MoveLearnMethodLabel.LightBallEgg,
+      },
+      {
+        value: MoveLearnMethod.FormChange,
+        label: MoveLearnMethodLabel.FormChange,
+      },
+    ],
   },
   {
     label: 'Black',
@@ -290,6 +617,33 @@ const gameVersions: GameVersions = [
     genValue: 'generation-v',
     genGroups: ['black-white', 'black-2-white-2'],
     moveGroups: ['black-white', 'black-2-white-2'],
+    pokedexes: ['original-unova'],
+    moveLearnMethods: [
+      {
+        value: MoveLearnMethod.LevelUp,
+        label: MoveLearnMethodLabel.LevelUp,
+      },
+      {
+        value: MoveLearnMethod.Egg,
+        label: MoveLearnMethodLabel.Breeding,
+      },
+      {
+        value: MoveLearnMethod.Tutor,
+        label: MoveLearnMethodLabel.Tutor,
+      },
+      {
+        value: MoveLearnMethod.Machine,
+        label: MoveLearnMethodLabel.Machines,
+      },
+      {
+        value: MoveLearnMethod.LightBallEgg,
+        label: MoveLearnMethodLabel.LightBallEgg,
+      },
+      {
+        value: MoveLearnMethod.FormChange,
+        label: MoveLearnMethodLabel.FormChange,
+      },
+    ],
   },
   {
     label: 'White',
@@ -299,6 +653,33 @@ const gameVersions: GameVersions = [
     genValue: 'generation-v',
     genGroups: ['black-white', 'black-2-white-2'],
     moveGroups: ['black-white', 'black-2-white-2'],
+    pokedexes: ['original-unova'],
+    moveLearnMethods: [
+      {
+        value: MoveLearnMethod.LevelUp,
+        label: MoveLearnMethodLabel.LevelUp,
+      },
+      {
+        value: MoveLearnMethod.Egg,
+        label: MoveLearnMethodLabel.Breeding,
+      },
+      {
+        value: MoveLearnMethod.Tutor,
+        label: MoveLearnMethodLabel.Tutor,
+      },
+      {
+        value: MoveLearnMethod.Machine,
+        label: MoveLearnMethodLabel.Machines,
+      },
+      {
+        value: MoveLearnMethod.LightBallEgg,
+        label: MoveLearnMethodLabel.LightBallEgg,
+      },
+      {
+        value: MoveLearnMethod.FormChange,
+        label: MoveLearnMethodLabel.FormChange,
+      },
+    ],
   },
   {
     label: 'Black 2',
@@ -308,6 +689,33 @@ const gameVersions: GameVersions = [
     genValue: 'generation-v',
     genGroups: ['black-white', 'black-2-white-2'],
     moveGroups: ['black-white', 'black-2-white-2'],
+    pokedexes: ['updated-unova'],
+    moveLearnMethods: [
+      {
+        value: MoveLearnMethod.LevelUp,
+        label: MoveLearnMethodLabel.LevelUp,
+      },
+      {
+        value: MoveLearnMethod.Egg,
+        label: MoveLearnMethodLabel.Breeding,
+      },
+      {
+        value: MoveLearnMethod.Tutor,
+        label: MoveLearnMethodLabel.Tutor,
+      },
+      {
+        value: MoveLearnMethod.Machine,
+        label: MoveLearnMethodLabel.Machines,
+      },
+      {
+        value: MoveLearnMethod.LightBallEgg,
+        label: MoveLearnMethodLabel.LightBallEgg,
+      },
+      {
+        value: MoveLearnMethod.FormChange,
+        label: MoveLearnMethodLabel.FormChange,
+      },
+    ],
   },
   {
     label: 'White 2',
@@ -317,6 +725,33 @@ const gameVersions: GameVersions = [
     genValue: 'generation-v',
     genGroups: ['black-white', 'black-2-white-2'],
     moveGroups: ['black-white', 'black-2-white-2'],
+    pokedexes: ['updated-unova'],
+    moveLearnMethods: [
+      {
+        value: MoveLearnMethod.LevelUp,
+        label: MoveLearnMethodLabel.LevelUp,
+      },
+      {
+        value: MoveLearnMethod.Egg,
+        label: MoveLearnMethodLabel.Breeding,
+      },
+      {
+        value: MoveLearnMethod.Tutor,
+        label: MoveLearnMethodLabel.Tutor,
+      },
+      {
+        value: MoveLearnMethod.Machine,
+        label: MoveLearnMethodLabel.Machines,
+      },
+      {
+        value: MoveLearnMethod.LightBallEgg,
+        label: MoveLearnMethodLabel.LightBallEgg,
+      },
+      {
+        value: MoveLearnMethod.FormChange,
+        label: MoveLearnMethodLabel.FormChange,
+      },
+    ],
   },
   {
     label: 'X',
@@ -326,6 +761,33 @@ const gameVersions: GameVersions = [
     genValue: 'generation-vi',
     genGroups: ['x-y', 'omega-ruby-alpha-sapphire'],
     moveGroups: ['x-y', 'omega-ruby-alpha-sapphire'],
+    pokedexes: ['kalos-central', 'kalos-coastal', 'kalos-mountain'],
+    moveLearnMethods: [
+      {
+        value: MoveLearnMethod.LevelUp,
+        label: MoveLearnMethodLabel.LevelUp,
+      },
+      {
+        value: MoveLearnMethod.Egg,
+        label: MoveLearnMethodLabel.Breeding,
+      },
+      {
+        value: MoveLearnMethod.Tutor,
+        label: MoveLearnMethodLabel.Tutor,
+      },
+      {
+        value: MoveLearnMethod.Machine,
+        label: MoveLearnMethodLabel.Machines,
+      },
+      {
+        value: MoveLearnMethod.LightBallEgg,
+        label: MoveLearnMethodLabel.LightBallEgg,
+      },
+      {
+        value: MoveLearnMethod.FormChange,
+        label: MoveLearnMethodLabel.FormChange,
+      },
+    ],
   },
   {
     label: 'Y',
@@ -335,6 +797,33 @@ const gameVersions: GameVersions = [
     genValue: 'generation-vi',
     genGroups: ['x-y', 'omega-ruby-alpha-sapphire'],
     moveGroups: ['x-y', 'omega-ruby-alpha-sapphire'],
+    pokedexes: ['kalos-central', 'kalos-coastal', 'kalos-mountain'],
+    moveLearnMethods: [
+      {
+        value: MoveLearnMethod.LevelUp,
+        label: MoveLearnMethodLabel.LevelUp,
+      },
+      {
+        value: MoveLearnMethod.Egg,
+        label: MoveLearnMethodLabel.Breeding,
+      },
+      {
+        value: MoveLearnMethod.Tutor,
+        label: MoveLearnMethodLabel.Tutor,
+      },
+      {
+        value: MoveLearnMethod.Machine,
+        label: MoveLearnMethodLabel.Machines,
+      },
+      {
+        value: MoveLearnMethod.LightBallEgg,
+        label: MoveLearnMethodLabel.LightBallEgg,
+      },
+      {
+        value: MoveLearnMethod.FormChange,
+        label: MoveLearnMethodLabel.FormChange,
+      },
+    ],
   },
   {
     label: 'Omega Ruby',
@@ -344,6 +833,33 @@ const gameVersions: GameVersions = [
     genValue: 'generation-vi',
     genGroups: ['x-y', 'omega-ruby-alpha-sapphire'],
     moveGroups: ['x-y', 'omega-ruby-alpha-sapphire'],
+    pokedexes: ['updated-hoenn'],
+    moveLearnMethods: [
+      {
+        value: MoveLearnMethod.LevelUp,
+        label: MoveLearnMethodLabel.LevelUp,
+      },
+      {
+        value: MoveLearnMethod.Egg,
+        label: MoveLearnMethodLabel.Breeding,
+      },
+      {
+        value: MoveLearnMethod.Tutor,
+        label: MoveLearnMethodLabel.Tutor,
+      },
+      {
+        value: MoveLearnMethod.Machine,
+        label: MoveLearnMethodLabel.Machines,
+      },
+      {
+        value: MoveLearnMethod.LightBallEgg,
+        label: MoveLearnMethodLabel.LightBallEgg,
+      },
+      {
+        value: MoveLearnMethod.FormChange,
+        label: MoveLearnMethodLabel.FormChange,
+      },
+    ],
   },
   {
     label: 'Alpha Sapphire',
@@ -353,6 +869,33 @@ const gameVersions: GameVersions = [
     genValue: 'generation-vi',
     genGroups: ['x-y', 'omega-ruby-alpha-sapphire'],
     moveGroups: ['x-y', 'omega-ruby-alpha-sapphire'],
+    pokedexes: ['updated-hoenn'],
+    moveLearnMethods: [
+      {
+        value: MoveLearnMethod.LevelUp,
+        label: MoveLearnMethodLabel.LevelUp,
+      },
+      {
+        value: MoveLearnMethod.Egg,
+        label: MoveLearnMethodLabel.Breeding,
+      },
+      {
+        value: MoveLearnMethod.Tutor,
+        label: MoveLearnMethodLabel.Tutor,
+      },
+      {
+        value: MoveLearnMethod.Machine,
+        label: MoveLearnMethodLabel.Machines,
+      },
+      {
+        value: MoveLearnMethod.LightBallEgg,
+        label: MoveLearnMethodLabel.LightBallEgg,
+      },
+      {
+        value: MoveLearnMethod.FormChange,
+        label: MoveLearnMethodLabel.FormChange,
+      },
+    ],
   },
   {
     label: 'Sun',
@@ -362,6 +905,37 @@ const gameVersions: GameVersions = [
     genValue: 'generation-vii',
     genGroups: ['sun-moon', 'ultra-sun-ultra-moon', 'lets-go-pikachu-lets-go-eevee'],
     moveGroups: ['sun-moon', 'ultra-sun-ultra-moon'],
+    pokedexes: ['original-alola'],
+    moveLearnMethods: [
+      {
+        value: MoveLearnMethod.LevelUp,
+        label: MoveLearnMethodLabel.LevelUp,
+      },
+      {
+        value: MoveLearnMethod.Egg,
+        label: MoveLearnMethodLabel.Breeding,
+      },
+      {
+        value: MoveLearnMethod.Tutor,
+        label: MoveLearnMethodLabel.Tutor,
+      },
+      {
+        value: MoveLearnMethod.Machine,
+        label: MoveLearnMethodLabel.Machines,
+      },
+      {
+        value: MoveLearnMethod.LightBallEgg,
+        label: MoveLearnMethodLabel.LightBallEgg,
+      },
+      {
+        value: MoveLearnMethod.FormChange,
+        label: MoveLearnMethodLabel.FormChange,
+      },
+      {
+        value: MoveLearnMethod.ZygardeCube,
+        label: MoveLearnMethodLabel.ZygardeCube,
+      },
+    ],
   },
   {
     label: 'Moon',
@@ -371,6 +945,37 @@ const gameVersions: GameVersions = [
     genValue: 'generation-vii',
     genGroups: ['sun-moon', 'ultra-sun-ultra-moon', 'lets-go-pikachu-lets-go-eevee'],
     moveGroups: ['sun-moon', 'ultra-sun-ultra-moon'],
+    pokedexes: ['original-alola'],
+    moveLearnMethods: [
+      {
+        value: MoveLearnMethod.LevelUp,
+        label: MoveLearnMethodLabel.LevelUp,
+      },
+      {
+        value: MoveLearnMethod.Egg,
+        label: MoveLearnMethodLabel.Breeding,
+      },
+      {
+        value: MoveLearnMethod.Tutor,
+        label: MoveLearnMethodLabel.Tutor,
+      },
+      {
+        value: MoveLearnMethod.Machine,
+        label: MoveLearnMethodLabel.Machines,
+      },
+      {
+        value: MoveLearnMethod.LightBallEgg,
+        label: MoveLearnMethodLabel.LightBallEgg,
+      },
+      {
+        value: MoveLearnMethod.FormChange,
+        label: MoveLearnMethodLabel.FormChange,
+      },
+      {
+        value: MoveLearnMethod.ZygardeCube,
+        label: MoveLearnMethodLabel.ZygardeCube,
+      },
+    ],
   },
   {
     label: 'Ultra Sun',
@@ -380,6 +985,37 @@ const gameVersions: GameVersions = [
     genValue: 'generation-vii',
     genGroups: ['sun-moon', 'ultra-sun-ultra-moon', 'lets-go-pikachu-lets-go-eevee'],
     moveGroups: ['sun-moon', 'ultra-sun-ultra-moon'],
+    pokedexes: ['updated-alola'],
+    moveLearnMethods: [
+      {
+        value: MoveLearnMethod.LevelUp,
+        label: MoveLearnMethodLabel.LevelUp,
+      },
+      {
+        value: MoveLearnMethod.Egg,
+        label: MoveLearnMethodLabel.Breeding,
+      },
+      {
+        value: MoveLearnMethod.Tutor,
+        label: MoveLearnMethodLabel.Tutor,
+      },
+      {
+        value: MoveLearnMethod.Machine,
+        label: MoveLearnMethodLabel.Machines,
+      },
+      {
+        value: MoveLearnMethod.LightBallEgg,
+        label: MoveLearnMethodLabel.LightBallEgg,
+      },
+      {
+        value: MoveLearnMethod.FormChange,
+        label: MoveLearnMethodLabel.FormChange,
+      },
+      {
+        value: MoveLearnMethod.ZygardeCube,
+        label: MoveLearnMethodLabel.ZygardeCube,
+      },
+    ],
   },
   {
     label: 'Ultra Moon',
@@ -389,6 +1025,37 @@ const gameVersions: GameVersions = [
     genValue: 'generation-vii',
     genGroups: ['sun-moon', 'ultra-sun-ultra-moon', 'lets-go-pikachu-lets-go-eevee'],
     moveGroups: ['sun-moon', 'ultra-sun-ultra-moon'],
+    pokedexes: ['updated-alola'],
+    moveLearnMethods: [
+      {
+        value: MoveLearnMethod.LevelUp,
+        label: MoveLearnMethodLabel.LevelUp,
+      },
+      {
+        value: MoveLearnMethod.Egg,
+        label: MoveLearnMethodLabel.Breeding,
+      },
+      {
+        value: MoveLearnMethod.Tutor,
+        label: MoveLearnMethodLabel.Tutor,
+      },
+      {
+        value: MoveLearnMethod.Machine,
+        label: MoveLearnMethodLabel.Machines,
+      },
+      {
+        value: MoveLearnMethod.LightBallEgg,
+        label: MoveLearnMethodLabel.LightBallEgg,
+      },
+      {
+        value: MoveLearnMethod.FormChange,
+        label: MoveLearnMethodLabel.FormChange,
+      },
+      {
+        value: MoveLearnMethod.ZygardeCube,
+        label: MoveLearnMethodLabel.ZygardeCube,
+      },
+    ],
   },
   {
     label: "Let's Go Pikachu",
@@ -398,6 +1065,21 @@ const gameVersions: GameVersions = [
     genValue: 'generation-vii',
     genGroups: ['sun-moon', 'ultra-sun-ultra-moon', 'lets-go-pikachu-lets-go-eevee'],
     moveGroups: ['lets-go-pikachu-lets-go-eevee'],
+    pokedexes: ['lets-go-kanto'],
+    moveLearnMethods: [
+      {
+        value: MoveLearnMethod.LevelUp,
+        label: MoveLearnMethodLabel.LevelUp,
+      },
+      {
+        value: MoveLearnMethod.Tutor,
+        label: MoveLearnMethodLabel.Tutor,
+      },
+      {
+        value: MoveLearnMethod.Machine,
+        label: MoveLearnMethodLabel.Machines,
+      },
+    ],
   },
   {
     label: "Let's Go Eevee",
@@ -407,6 +1089,21 @@ const gameVersions: GameVersions = [
     genValue: 'generation-vii',
     genGroups: ['sun-moon', 'ultra-sun-ultra-moon', 'lets-go-pikachu-lets-go-eevee'],
     moveGroups: ['lets-go-pikachu-lets-go-eevee'],
+    pokedexes: ['lets-go-kanto'],
+    moveLearnMethods: [
+      {
+        value: MoveLearnMethod.LevelUp,
+        label: MoveLearnMethodLabel.LevelUp,
+      },
+      {
+        value: MoveLearnMethod.Tutor,
+        label: MoveLearnMethodLabel.Tutor,
+      },
+      {
+        value: MoveLearnMethod.Machine,
+        label: MoveLearnMethodLabel.Machines,
+      },
+    ],
   },
   {
     label: 'Sword',
@@ -416,6 +1113,29 @@ const gameVersions: GameVersions = [
     genValue: 'generation-viii',
     genGroups: ['sword-shield'],
     moveGroups: ['sword-shield'],
+    pokedexes: ['galar'],
+    moveLearnMethods: [
+      {
+        value: MoveLearnMethod.LevelUp,
+        label: MoveLearnMethodLabel.LevelUp,
+      },
+      {
+        value: MoveLearnMethod.Egg,
+        label: MoveLearnMethodLabel.Breeding,
+      },
+      {
+        value: MoveLearnMethod.Tutor,
+        label: MoveLearnMethodLabel.Tutor,
+      },
+      {
+        value: MoveLearnMethod.Machine,
+        label: MoveLearnMethodLabel.Machines,
+      },
+      {
+        value: MoveLearnMethod.FormChange,
+        label: MoveLearnMethodLabel.FormChange,
+      },
+    ],
   },
   {
     label: 'Shield',
@@ -425,6 +1145,29 @@ const gameVersions: GameVersions = [
     genValue: 'generation-viii',
     genGroups: ['sword-shield'],
     moveGroups: ['sword-shield'],
+    pokedexes: ['galar'],
+    moveLearnMethods: [
+      {
+        value: MoveLearnMethod.LevelUp,
+        label: MoveLearnMethodLabel.LevelUp,
+      },
+      {
+        value: MoveLearnMethod.Egg,
+        label: MoveLearnMethodLabel.Breeding,
+      },
+      {
+        value: MoveLearnMethod.Tutor,
+        label: MoveLearnMethodLabel.Tutor,
+      },
+      {
+        value: MoveLearnMethod.Machine,
+        label: MoveLearnMethodLabel.Machines,
+      },
+      {
+        value: MoveLearnMethod.FormChange,
+        label: MoveLearnMethodLabel.FormChange,
+      },
+    ],
   },
   {
     label: 'Legends: Arceus',
@@ -434,6 +1177,21 @@ const gameVersions: GameVersions = [
     genValue: 'generation-viii',
     genGroups: ['scarlet-violet'],
     moveGroups: ['scarlet-violet'],
+    pokedexes: ['hisui'],
+    moveLearnMethods: [
+      {
+        value: MoveLearnMethod.LevelUp,
+        label: MoveLearnMethodLabel.LevelUp,
+      },
+      {
+        value: MoveLearnMethod.Tutor,
+        label: MoveLearnMethodLabel.Tutor,
+      },
+      {
+        value: MoveLearnMethod.Machine,
+        label: MoveLearnMethodLabel.Machines,
+      },
+    ],
   },
   {
     label: 'Scarlet',
@@ -443,6 +1201,21 @@ const gameVersions: GameVersions = [
     genValue: 'generation-ix',
     genGroups: ['scarlet-violet'],
     moveGroups: ['scarlet-violet'],
+    pokedexes: ['paldea'],
+    moveLearnMethods: [
+      {
+        value: MoveLearnMethod.LevelUp,
+        label: MoveLearnMethodLabel.LevelUp,
+      },
+      {
+        value: MoveLearnMethod.Tutor,
+        label: MoveLearnMethodLabel.Tutor,
+      },
+      {
+        value: MoveLearnMethod.Machine,
+        label: MoveLearnMethodLabel.Machines,
+      },
+    ],
   },
   {
     label: 'Violet',
@@ -452,6 +1225,21 @@ const gameVersions: GameVersions = [
     genValue: 'generation-ix',
     genGroups: ['scarlet-violet'],
     moveGroups: ['scarlet-violet'],
+    pokedexes: ['paldea'],
+    moveLearnMethods: [
+      {
+        value: MoveLearnMethod.LevelUp,
+        label: MoveLearnMethodLabel.LevelUp,
+      },
+      {
+        value: MoveLearnMethod.Tutor,
+        label: MoveLearnMethodLabel.Tutor,
+      },
+      {
+        value: MoveLearnMethod.Machine,
+        label: MoveLearnMethodLabel.Machines,
+      },
+    ],
   },
 ];
 

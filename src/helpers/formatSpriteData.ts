@@ -71,28 +71,28 @@ export const formatSpriteData = (
           imageUrl: showdown.front_default,
         },
         {
-          label: 'Front Female',
-          imageUrl: showdown.front_female,
+          label: 'Back Default',
+          imageUrl: showdown.back_default,
         },
         {
           label: 'Front Shiny',
           imageUrl: showdown.front_shiny,
         },
         {
-          label: 'Front Shiny Female',
-          imageUrl: showdown.front_shiny_female,
+          label: 'Back Shiny',
+          imageUrl: showdown.back_shiny,
         },
         {
-          label: 'Back Default',
-          imageUrl: showdown.back_default,
+          label: 'Front Female',
+          imageUrl: showdown.front_female,
         },
         {
           label: 'Back Female',
           imageUrl: showdown.back_female,
         },
         {
-          label: 'Back Shiny',
-          imageUrl: showdown.back_shiny,
+          label: 'Front Shiny Female',
+          imageUrl: showdown.front_shiny_female,
         },
         {
           label: 'Back Shiny Female',

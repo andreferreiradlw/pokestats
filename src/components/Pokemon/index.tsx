@@ -1,6 +1,7 @@
 // types
 import type { PokestatsPokemonPageProps } from '@/pages/pokemon/[pokemonId]';
 // components
+import { Divider, Grid2, Stack } from '@mui/material';
 import Details from './Details';
 import FeaturedImage from './FeatureImage';
 import EvolutionChain from './EvolutionChain';
@@ -12,7 +13,6 @@ import PokemonForms from './Forms';
 import Moves from './Moves';
 import Sprites from './Sprites';
 import Navigation from './Navigation';
-import { Divider, Grid2, Stack } from '@mui/material';
 import Encounters from './Encounters';
 
 const PokemonPage = ({

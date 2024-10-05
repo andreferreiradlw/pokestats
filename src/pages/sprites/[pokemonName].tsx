@@ -57,7 +57,7 @@ export const getStaticProps: GetStaticProps<PokestatsSpritePageProps> = async ({
     const pokemonSpeciesData = await SpeciesApi.getByName(pokemonData.species.name);
 
     const otherForms = pokemonSpeciesData.varieties
-      .filter(({ is_default }) => !is_default)
+      .filter(({ pokemon }) => pokemonName !== pokemon.name)
       .map(({ pokemon }) => PokemonApi.getByName(pokemon.name));
 
     let otherFormsData: Pokemon[] | null = null;

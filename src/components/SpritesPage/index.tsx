@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 // types
 import type { PokestatsSpritePageProps } from '@/pages/sprites/[pokemonName]';
 // helpers
-import { capitalise, formatSpriteData, removeDash } from '@/helpers';
+import { capitalise, findEnglishName, formatSpriteData, removeDash } from '@/helpers';
 import { usePlausible } from 'next-plausible';
 // components
 import { Divider, Stack, Typography } from '@mui/material';
@@ -10,7 +10,11 @@ import SpriteAccordion from './SpriteAccordion';
 import Link from 'next/link';
 import CustomButton from '../CustomButton';
 
-const SpritesPage = ({ pokemon, otherFormsData }: PokestatsSpritePageProps): JSX.Element => {
+const SpritesPage = ({
+  pokemon,
+  otherFormsData,
+  pokemonSpecies,
+}: PokestatsSpritePageProps): JSX.Element => {
   // analytics
   const plausible = usePlausible();
 
@@ -18,6 +22,11 @@ const SpritesPage = ({ pokemon, otherFormsData }: PokestatsSpritePageProps): JSX
   const { name, sprites } = pokemon;
 
   const englishName = useMemo(() => removeDash(name), [name]);
+
+  const speciesEnglishName = useMemo(
+    () => (pokemonSpecies?.names ? findEnglishName(pokemonSpecies.names) : ''),
+    [pokemonSpecies],
+  );
 
   const { generationSprites, otherSprites, mainSprites, otherForms } = useMemo(
     () => formatSpriteData(sprites, otherFormsData),
@@ -39,12 +48,18 @@ const SpritesPage = ({ pokemon, otherFormsData }: PokestatsSpritePageProps): JSX
             onChange={() => plausible('Pokemon Sprite Accordion Click')}
           />
         ))}
+      <Link href={`/pokemon/${name}`} legacyBehavior passHref>
+        <CustomButton
+          variant="contained"
+          sx={{ textTransform: 'capitalize' }}
+        >{`${englishName} Pokémon Page`}</CustomButton>
+      </Link>
       {otherForms && otherForms.length > 0 && (
         <>
           <Divider />
           <Stack>
             <Typography variant="sectionTitle" textTransform="capitalize" mb={4}>
-              {`${englishName} varieties`}
+              {`Other ${speciesEnglishName} varieties`}
             </Typography>
             {otherForms.map(({ label, sprites }, index) => (
               <SpriteAccordion

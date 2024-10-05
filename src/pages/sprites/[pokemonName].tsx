@@ -1,8 +1,10 @@
+import { useMemo } from 'react';
 // types
 import type { GetStaticPaths, GetStaticProps, NextPage } from 'next';
-import type { Pokemon, NamedAPIResource } from 'pokenode-ts';
+import type { Pokemon, PokemonSpecies, NamedAPIResource } from 'pokenode-ts';
 // helpers
 import { PokemonApi, SpeciesApi } from '@/services';
+import { capitalise, removeDash } from '@/helpers';
 // components
 import Seo from '@/components/Seo';
 import LayoutV2 from '@/components/LayoutV2';
@@ -10,14 +12,34 @@ import SpritesPage from '@/components/SpritesPage';
 
 export interface PokestatsSpritePageProps {
   pokemon: Pokemon;
+  pokemonSpecies: PokemonSpecies;
   allPokemonData: NamedAPIResource[];
   otherFormsData: Pokemon[] | null;
 }
 
 const PokestatsSpritePage: NextPage<PokestatsSpritePageProps> = props => {
+  const englishName = useMemo(() => capitalise(removeDash(props.pokemon.name)), [props.pokemon]);
+
+  const title = `${englishName} Pokémon Sprites - Animated, Shiny & More`;
+  const description = `Explore detailed ${englishName} sprites for all forms, including front, back, shiny, animated, and gender-specific variations. View high-quality images of Pokémon sprites from all generations and learn about their different forms and appearances.`;
+  const keywords = [
+    `${englishName} Pokémon sprites`,
+    `${englishName} shiny sprites`,
+    `${englishName} animated sprites`,
+    `${englishName} sprite variations`,
+    `${englishName} front and back sprites`,
+    `${englishName} gender differences`,
+    `Pokémon ${englishName} forms`,
+    `Pokémon ${englishName} sprite gallery`,
+    `${englishName} Pokémon Generation ${props.pokemonSpecies.generation.name} sprites`,
+    `${englishName} sprite images`,
+    `Pokémon ${englishName} artwork`,
+    `${englishName} evolution sprites`,
+  ];
+
   return (
     <>
-      <Seo title="Pokemon Sprites" description="" />
+      <Seo title={title} description={description} keywords={keywords.join(', ')} />
       <LayoutV2 withHeader customKey={`pokemon-sprites-${props.pokemon.name}`}>
         <SpritesPage {...props} />
       </LayoutV2>
@@ -68,6 +90,7 @@ export const getStaticProps: GetStaticProps<PokestatsSpritePageProps> = async ({
       props: {
         pokemon: pokemonData,
         allPokemonData,
+        pokemonSpecies: pokemonSpeciesData,
         otherFormsData,
       },
     };

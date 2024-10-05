@@ -103,7 +103,7 @@ const LocationTableV2 = ({
                         Method
                       </TableCell>
                       <TableCell rowSpan={2} align="center">
-                        Pokemon
+                        Pokémon
                       </TableCell>
                       <TableCell rowSpan={2} align="center">
                         Versions

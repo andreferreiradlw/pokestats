@@ -54,14 +54,14 @@ const HeadbuttEncounters = ({
   if (!encounters) {
     return (
       <Grid2 component={Paper} p={2} {...rest}>
-        {`No encounters in this area for Pokemon ${capitalise(gameVersion)} version.`}
+        {`No encounters in this area for Pokémon ${capitalise(gameVersion)} version.`}
       </Grid2>
     );
   }
 
   return (
     <Grid2 component={Paper} p={2} gap={2} flexDirection="column" {...rest}>
-      <Typography textTransform="capitalize">{`Pokemon ${gameVersion} encounters`}</Typography>
+      <Typography textTransform="capitalize">{`Pokémon ${gameVersion} encounters`}</Typography>
       {renderEncounterChips('Normal', encounters.normal)}
       {renderEncounterChips('Rare', encounters.rare)}
     </Grid2>

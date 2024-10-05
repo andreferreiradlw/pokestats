@@ -249,7 +249,7 @@ const EggGroupTable = ({
           variants={fadeInUpVariant}
           key="type-nomoves-message"
         >
-          {noMovesText || 'No Pokemon found to match current criteria.'}
+          {noMovesText || 'No Pokémon found to match current criteria.'}
         </Typography>
       )}
     </AnimatePresence>

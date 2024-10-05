@@ -10,6 +10,12 @@ const Accordion: {
     defaultProps: {
       expandIcon: createElement(CatchingPokemonIcon),
     },
+    styleOverrides: {
+      root: {
+        fontWeight: 700,
+        textTransform: 'capitalize',
+      },
+    },
   },
   MuiAccordion: {
     defaultProps: {

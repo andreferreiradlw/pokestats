@@ -1,6 +1,6 @@
 // types
 import type { GetStaticPaths, GetStaticProps, NextPage } from 'next';
-import type { Pokemon, PokemonSpecies, NamedAPIResource } from 'pokenode-ts';
+import type { Pokemon, NamedAPIResource } from 'pokenode-ts';
 // helpers
 import { PokemonApi, SpeciesApi } from '@/services';
 // components
@@ -10,15 +10,15 @@ import SpritesPage from '@/components/SpritesPage';
 
 export interface PokestatsSpritePageProps {
   pokemon: Pokemon;
-  pokemonSpecies: PokemonSpecies;
   allPokemonData: NamedAPIResource[];
+  otherFormsData: Pokemon[] | null;
 }
 
 const PokestatsSpritePage: NextPage<PokestatsSpritePageProps> = props => {
   return (
     <>
       <Seo title="Pokemon Sprites" description="" />
-      <LayoutV2 withHeader showGenSelect customKey="pokemon-sprites">
+      <LayoutV2 withHeader customKey={`pokemon-sprites-${props.pokemon.name}`}>
         <SpritesPage {...props} />
       </LayoutV2>
     </>
@@ -56,11 +56,19 @@ export const getStaticProps: GetStaticProps<PokestatsSpritePageProps> = async ({
 
     const pokemonSpeciesData = await SpeciesApi.getByName(pokemonData.species.name);
 
+    const otherForms = pokemonSpeciesData.varieties
+      .filter(({ is_default }) => !is_default)
+      .map(({ pokemon }) => PokemonApi.getByName(pokemon.name));
+
+    let otherFormsData: Pokemon[] | null = null;
+
+    if (otherForms.length > 0) otherFormsData = await Promise.all(otherForms);
+
     return {
       props: {
         pokemon: pokemonData,
         allPokemonData,
-        pokemonSpecies: pokemonSpeciesData,
+        otherFormsData,
       },
     };
   } catch (error) {

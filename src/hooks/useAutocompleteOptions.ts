@@ -94,6 +94,8 @@ export const useAutocompleteOptions = (
           assetType: 'item',
         }));
 
+      console.log(itemOptions);
+
       const eggGroupsOptions: PokestatsEggGroupOption[] = eggGroupsResponse.map((group, index) => ({
         assetType: 'eggGroup',
         id: index,

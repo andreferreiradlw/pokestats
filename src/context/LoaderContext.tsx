@@ -1,4 +1,3 @@
-// contexts/LoaderContext.tsx
 import { createContext, useContext, useState, useEffect, useMemo } from 'react';
 import { useRouter } from 'next/router';
 

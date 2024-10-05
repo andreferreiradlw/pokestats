@@ -31,8 +31,6 @@ const ItemTable = ({ items }: ItemTableProps): JSX.Element => {
     [plausible, router],
   );
 
-  console.log(items);
-
   // Define table columns
   const columns: Column[] = [
     { field: 'id', headerName: 'ID', sortable: true },

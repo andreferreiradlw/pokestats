@@ -1,13 +1,14 @@
+import { useMemo } from 'react';
 // types
 import type { PokemonSpecies, EvolutionDetail } from 'pokenode-ts';
+import type { HTMLMotionProps } from 'framer-motion';
 // helpers
-import { findEnglishName } from '@/helpers';
+import { findEnglishName, removeDash } from '@/helpers';
 import { fadeInUpVariant } from '@/animations';
-import { EvolutionContainer, EvoDetailsContainer, EvoArrow } from './StyledEvolution';
 // components
 import PokemonBox from '@/components/PokemonBox';
 import EvolutionDetails from '../EvolutionDetails';
-import type { HTMLMotionProps } from 'framer-motion';
+import { EvolutionContainer, EvoDetailsContainer, EvoArrow } from './StyledEvolution';
 
 export interface EvolutionProps extends HTMLMotionProps<'div'> {
   noArrow?: boolean;
@@ -21,11 +22,15 @@ const Evolution = ({
   evolutionDetails,
   ...rest
 }: EvolutionProps): JSX.Element | null => {
-  if (!species) return null;
-  // data
-  const { id, name, generation, varieties, names } = species;
+  const pokemonName = useMemo(
+    () => (species && findEnglishName(species?.names)) || removeDash(species?.name),
+    [species],
+  );
 
-  const pokemonName = findEnglishName(names) || '';
+  if (!species) return null;
+
+  // data
+  const { id, name, generation, varieties } = species;
 
   return (
     <EvolutionContainer

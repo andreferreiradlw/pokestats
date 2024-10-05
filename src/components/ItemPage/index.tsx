@@ -26,19 +26,26 @@ const ItemPage = ({
   // analytics
   const plausible = usePlausible();
 
+  // data
+  const { sprite, names, name, shortEntry, longEntry, flavourTextEntries } = item;
+
   return (
     <Stack gap={4}>
       <Stack>
         <Stack flexDirection="row" gap={1} alignItems="center">
-          <Typography variant="pageHeading">{findEnglishName(item.names)}</Typography>
-          {berryData && <Image src={item.sprite} alt={item.name} width={100} height={100} />}
+          <Typography variant="pageHeading">{findEnglishName(names)}</Typography>
+          {berryData && sprite && <Image src={sprite} alt={name} width={100} height={100} />}
         </Stack>
-        <Typography variant="sectionSubTitle" gutterBottom>
-          {item.shortEntry}
-        </Typography>
-        <Typography variant="sectionMessage" textAlign="left">
-          {item.longEntry}
-        </Typography>
+        {shortEntry && (
+          <Typography variant="sectionSubTitle" gutterBottom>
+            {shortEntry}
+          </Typography>
+        )}
+        {longEntry && (
+          <Typography variant="sectionMessage" textAlign="left">
+            {longEntry}
+          </Typography>
+        )}
       </Stack>
       <Grid2
         container
@@ -53,14 +60,18 @@ const ItemPage = ({
           <BerryDetailsTable size={{ xxs: 12, lg: 4 }} berry={berryData} />
         ) : (
           <Grid2 size={{ xxs: 12, lg: 4 }} alignItems="center" justifyContent="center">
-            <Image src={item.sprite} alt={item.name} width={100} height={100} />
+            {sprite ? (
+              <Image src={sprite} alt={name} width={100} height={100} />
+            ) : (
+              <Typography>No item image available.</Typography>
+            )}
           </Grid2>
         )}
       </Grid2>
       <Divider />
       <Grid2 container spacing={4} direction={{ xxs: 'column', lg: 'row' }} size={12} wrap="nowrap">
-        <ItemFlavorText size={{ xxs: 12, lg: 9 }} flavorTexts={item.flavourTextEntries} />
-        <LanguageTable size={{ xxs: 12, lg: 3 }} names={item.names} />
+        <ItemFlavorText size={{ xxs: 12, lg: 9 }} flavorTexts={flavourTextEntries} />
+        <LanguageTable size={{ xxs: 12, lg: 3 }} names={names} />
       </Grid2>
       <Divider />
       <CategoryItems category={category} categoryItems={categoryItems} />

@@ -85,10 +85,7 @@ export const getStaticProps: GetStaticProps<PokestatsItemPageProps> = async ({ p
     const categoryItemNames = categoryData.items.map(({ name }) => name);
     const categoryItemsData = (await ItemApi.getByNames(categoryItemNames))
       .map(formatItemData)
-      .filter(
-        ({ shortEntry, longEntry, category }) =>
-          shortEntry !== '' && longEntry !== '' && category !== 'unused',
-      )
+      .filter(({ category }) => category !== 'unused')
       .filter(({ name }) => name !== itemName)
       .sort((a, b) => a.name.localeCompare(b.name));
 

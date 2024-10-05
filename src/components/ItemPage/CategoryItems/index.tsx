@@ -4,7 +4,6 @@ import type { ItemCategory } from 'pokenode-ts';
 import { findEnglishName, removeDash, type ExtractedItem } from '@/helpers';
 // components
 import {
-  Box,
   Card,
   CardActions,
   CardContent,
@@ -12,15 +11,24 @@ import {
   Grid2,
   type Grid2Props,
   Stack,
+  styled,
   Typography,
 } from '@mui/material';
 import CustomButton from '@/components/CustomButton';
 import Link from 'next/link';
+// svg
+import QuestionMarkIcon from 'public/static/iconLibrary/question_mark.svg';
 
 export interface CategoryItemsProps extends Grid2Props {
   category: ItemCategory;
   categoryItems: ExtractedItem[];
 }
+
+const QuestionMark = styled(QuestionMarkIcon)(({ theme }) => ({
+  width: '20%',
+  height: 'auto',
+  fill: theme.palette.text.primary,
+}));
 
 const CategoryItems = ({ category, categoryItems, ...rest }: CategoryItemsProps): JSX.Element => (
   <Grid2 container size={12} spacing={2} direction="column" {...rest}>
@@ -33,7 +41,9 @@ const CategoryItems = ({ category, categoryItems, ...rest }: CategoryItemsProps)
           <Card sx={{ width: '100%', display: 'flex', flexDirection: 'column' }}>
             <Stack alignItems="center" justifyContent="center">
               {sprite === '' ? (
-                <Box width={100} height={100} />
+                <Stack width="100%" height={100} justifyContent="center" alignItems="center">
+                  <QuestionMark />
+                </Stack>
               ) : (
                 <CardMedia
                   component="img"
@@ -47,7 +57,7 @@ const CategoryItems = ({ category, categoryItems, ...rest }: CategoryItemsProps)
               <Typography variant="sectionSubTitle" gutterBottom>
                 {findEnglishName(names)}
               </Typography>
-              <Typography variant="subtitle2">{shortEntry}</Typography>
+              {shortEntry && <Typography variant="subtitle2">{shortEntry}</Typography>}
             </CardContent>
             <CardActions sx={{ mt: 'auto' }}>
               <CustomButton

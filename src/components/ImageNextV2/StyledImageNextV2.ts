@@ -45,6 +45,9 @@ const LoadingIcon = styled(EggIcon)`
   /* width: 50%; */
 `;
 
-const ErrorIcon = styled(Error404Icon)({ width: '50%' });
+const ErrorIcon = styled(Error404Icon)(({ theme }) => ({
+  width: '50%',
+  fill: theme.palette.text.primary,
+}));
 
 export { LoadingIcon, ErrorIcon, PlaceholderContainer, ImageEl };

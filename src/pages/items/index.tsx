@@ -69,10 +69,7 @@ export const getStaticProps: GetStaticProps<PokestatsItemsPageProps> = async () 
   // Filter and format item data
   const formattedItems: ExtractedItem[] = itemData
     .map(formatItemData)
-    .filter(
-      ({ shortEntry, longEntry, category }) =>
-        shortEntry !== '' && longEntry !== '' && category !== 'unused',
-    )
+    .filter(({ category }) => category !== 'unused')
     .sort((a, b) => a.name.localeCompare(b.name));
 
   return {

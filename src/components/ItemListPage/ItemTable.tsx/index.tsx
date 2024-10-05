@@ -12,6 +12,7 @@ import CustomTable, {
   type Row,
   type CustomTableProps,
 } from '@/components/CustomTable';
+import { PokeCurrency } from '@/BaseStyles';
 
 interface ItemTableProps extends Partial<CustomTableProps> {
   items: ExtractedItem[];
@@ -30,40 +31,71 @@ const ItemTable = ({ items }: ItemTableProps): JSX.Element => {
     [plausible, router],
   );
 
+  console.log(items);
+
   // Define table columns
   const columns: Column[] = [
-    { field: 'name', headerName: 'Name' },
-    { field: 'category', headerName: 'Category' },
+    { field: 'id', headerName: 'ID', sortable: true },
+    { field: 'name', headerName: 'Name', sortable: true, defaultSort: true },
     { field: 'shortEntry', headerName: 'Effect' },
+    { field: 'cost', headerName: 'Cost', sortable: true },
+    { field: 'category', headerName: 'Category', sortable: true },
+    { field: 'generation', headerName: 'Introduced' },
   ];
 
   // Transform items into rows for CustomTable
-  const data: Row[] = items.map(({ name, sprite, shortEntry, category }) => ({
-    name: {
-      render: (
-        <Stack direction="row" gap={1} alignItems="center">
-          {sprite ? (
-            <Image src={sprite} alt={name} width={32} height={32} />
-          ) : (
-            <Box width={32} height={32} />
-          )}
-          <Typography whiteSpace="nowrap">{capitalise(removeDash(name))}</Typography>
-        </Stack>
-      ),
-      onClick: () => onCellClick(name),
-    },
-    category: {
-      render: capitalise(removeDash(category)),
-      onClick: () => onCellClick(name),
-      sx: {
-        whiteSpace: 'nowrap',
+  const data: Row[] = items.map(
+    ({ name, sprite, shortEntry, category, id, generationIntroduced, cost }) => ({
+      id: {
+        render: `#${id}`,
+        onClick: () => onCellClick(name),
+        sortBy: id,
       },
-    },
-    shortEntry: {
-      render: shortEntry,
-      onClick: () => onCellClick(name),
-    },
-  }));
+      name: {
+        render: (
+          <Stack direction="row" gap={1} alignItems="center">
+            {sprite ? (
+              <Image src={sprite} alt={name} width={32} height={32} />
+            ) : (
+              <Box width={32} height={32} />
+            )}
+            <Typography whiteSpace="nowrap">{capitalise(removeDash(name))}</Typography>
+          </Stack>
+        ),
+        onClick: () => onCellClick(name),
+        sortBy: name,
+      },
+      shortEntry: {
+        render: shortEntry,
+        onClick: () => onCellClick(name),
+      },
+      cost: {
+        render: (
+          <Typography>
+            <PokeCurrency>$</PokeCurrency>
+            {cost.toLocaleString()}
+          </Typography>
+        ),
+        onClick: () => onCellClick(name),
+        sortBy: cost,
+      },
+      category: {
+        render: capitalise(removeDash(category)),
+        onClick: () => onCellClick(name),
+        sortBy: category,
+        sx: {
+          whiteSpace: 'nowrap',
+        },
+      },
+      generation: {
+        render: generationIntroduced,
+        onClick: () => onCellClick(name),
+        sx: {
+          whiteSpace: 'nowrap',
+        },
+      },
+    }),
+  );
 
   return (
     <CustomTable

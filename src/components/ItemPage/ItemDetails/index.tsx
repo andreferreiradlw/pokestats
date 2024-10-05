@@ -4,8 +4,7 @@ import type { ItemCategory } from 'pokenode-ts';
 import { capitalise, findEnglishName, type ExtractedItem } from '@/helpers';
 // components
 import { Grid2, type Grid2Props, Typography } from '@mui/material';
-import { Table } from '@/BaseStyles';
-import { PokeCurrency } from './StyledItemDetails';
+import { Table, PokeCurrency } from '@/BaseStyles';
 
 interface ItemDetailsProps extends Grid2Props {
   item: ExtractedItem;
@@ -41,7 +40,7 @@ const ItemDetails = ({ item, category, ...rest }: ItemDetailsProps): JSX.Element
             <th>Cost</th>
             <Typography component="td">
               <PokeCurrency>$</PokeCurrency>
-              {cost}
+              {cost.toLocaleString()}
             </Typography>
           </tr>
           {fling_power && (

@@ -1,5 +1,7 @@
 import { motion } from 'framer-motion';
 import { styled } from '@mui/material/styles';
+// fonts
+import { oriFont } from '@/components/Fonts';
 
 const JpnName = styled(motion.span)(({ theme }) => ({
   position: 'absolute',
@@ -22,4 +24,10 @@ const JpnName = styled(motion.span)(({ theme }) => ({
   },
 }));
 
-export { JpnName };
+const PokeCurrency = styled('span')({
+  fontFamily: oriFont.style.fontFamily,
+  fontSize: 'inherit',
+  color: 'inherit',
+});
+
+export { JpnName, PokeCurrency };

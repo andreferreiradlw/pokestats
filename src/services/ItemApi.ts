@@ -5,8 +5,10 @@ export const ItemApi = {
 
   listItemAttributes: async () => await MainClient.item.listItemAttributes(),
 
-  getAllItemNames: async () =>
-    await MainClient.item.listItems(0, 1137).then(({ results }) => results.map(({ name }) => name)),
+  getAllItemNames: async (offset = 0, limit = 1137) =>
+    await MainClient.item
+      .listItems(offset, limit)
+      .then(({ results }) => results.map(({ name }) => name)),
 
   getByName: async (name: string) => await MainClient.item.getItemByName(name),
 

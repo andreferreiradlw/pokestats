@@ -58,14 +58,7 @@ const SpriteWithLabel = ({
   customKey,
 }: SpriteWithLabelProps): JSX.Element => (
   <SpriteContainer>
-    <Sprite
-      imageProps={{ unoptimized: true }}
-      alt={alt}
-      imageUrl={src}
-      height={height}
-      pixelatedimg
-      customKey={customKey}
-    />
+    <Sprite alt={alt} imageUrl={src} height={height} pixelatedimg customKey={customKey} />
     <Stack>
       <Typography>{label}</Typography>
       <Typography>{removeUnderscore(alt)}</Typography>

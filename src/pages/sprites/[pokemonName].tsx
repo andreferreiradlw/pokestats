@@ -2,11 +2,11 @@
 import type { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 import type { Pokemon, PokemonSpecies, NamedAPIResource } from 'pokenode-ts';
 // helpers
-import { formatSpriteData } from '@/helpers';
 import { PokemonApi, SpeciesApi } from '@/services';
 // components
 import Seo from '@/components/Seo';
 import LayoutV2 from '@/components/LayoutV2';
+import SpritesPage from '@/components/SpritesPage';
 
 export interface PokestatsSpritePageProps {
   pokemon: Pokemon;
@@ -15,12 +15,11 @@ export interface PokestatsSpritePageProps {
 }
 
 const PokestatsSpritePage: NextPage<PokestatsSpritePageProps> = props => {
-  console.log(props, formatSpriteData(props.pokemon.sprites, props.pokemonSpecies.varieties));
   return (
     <>
       <Seo title="Pokemon Sprites" description="" />
       <LayoutV2 withHeader showGenSelect customKey="pokemon-sprites">
-        {/* <PokemonPage {...props} /> */}
+        <SpritesPage {...props} />
       </LayoutV2>
     </>
   );
@@ -40,7 +39,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   // return static paths
   return {
     paths,
-    fallback: 'blocking',
+    fallback: false,
   };
 };
 

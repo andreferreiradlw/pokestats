@@ -140,6 +140,14 @@ export const formatSpriteData = (
               label: 'Back Gray',
               imageUrl: versions['generation-i']?.['red-blue']?.back_gray,
             },
+            {
+              label: 'Front Transparent',
+              imageUrl: versions['generation-i']?.['red-blue']?.front_transparent,
+            },
+            {
+              label: 'Back Transparent',
+              imageUrl: versions['generation-i']?.['red-blue']?.back_transparent,
+            },
           ],
         },
         {
@@ -161,6 +169,14 @@ export const formatSpriteData = (
               label: 'Back Gray',
               imageUrl: versions['generation-i']?.yellow?.back_gray,
             },
+            {
+              label: 'Front Transparent',
+              imageUrl: versions['generation-i']?.yellow?.front_transparent,
+            },
+            {
+              label: 'Back Transparent',
+              imageUrl: versions['generation-i']?.yellow?.back_transparent,
+            },
           ],
         },
       ],
@@ -176,16 +192,32 @@ export const formatSpriteData = (
               imageUrl: versions['generation-ii']?.crystal?.front_default,
             },
             {
-              label: 'Front Shiny',
-              imageUrl: versions['generation-ii']?.crystal?.front_shiny,
-            },
-            {
               label: 'Back Default',
               imageUrl: versions['generation-ii']?.crystal?.back_default,
             },
             {
+              label: 'Front Shiny',
+              imageUrl: versions['generation-ii']?.crystal?.front_shiny,
+            },
+            {
               label: 'Back Shiny',
               imageUrl: versions['generation-ii']?.crystal?.back_shiny,
+            },
+            {
+              label: 'Front Transparent',
+              imageUrl: versions['generation-ii']?.crystal?.front_transparent,
+            },
+            {
+              label: 'Back Transparent',
+              imageUrl: versions['generation-ii']?.crystal?.back_transparent,
+            },
+            {
+              label: 'Front Shiny Transparent',
+              imageUrl: versions['generation-ii']?.crystal?.front_shiny_transparent,
+            },
+            {
+              label: 'Back Shiny Transparent',
+              imageUrl: versions['generation-ii']?.crystal?.back_shiny_transparent,
             },
           ],
         },
@@ -197,16 +229,20 @@ export const formatSpriteData = (
               imageUrl: versions['generation-ii']?.gold?.front_default,
             },
             {
-              label: 'Front Shiny',
-              imageUrl: versions['generation-ii']?.gold?.front_shiny,
-            },
-            {
               label: 'Back Default',
               imageUrl: versions['generation-ii']?.gold?.back_default,
             },
             {
+              label: 'Front Shiny',
+              imageUrl: versions['generation-ii']?.gold?.front_shiny,
+            },
+            {
               label: 'Back Shiny',
               imageUrl: versions['generation-ii']?.gold?.back_shiny,
+            },
+            {
+              label: 'Front Transparent',
+              imageUrl: versions['generation-ii']?.gold?.front_transparent,
             },
           ],
         },
@@ -218,16 +254,20 @@ export const formatSpriteData = (
               imageUrl: versions['generation-ii']?.silver?.front_default,
             },
             {
-              label: 'Front Shiny',
-              imageUrl: versions['generation-ii']?.silver?.front_shiny,
-            },
-            {
               label: 'Back Default',
               imageUrl: versions['generation-ii']?.silver?.back_default,
             },
             {
+              label: 'Front Shiny',
+              imageUrl: versions['generation-ii']?.silver?.front_shiny,
+            },
+            {
               label: 'Back Shiny',
               imageUrl: versions['generation-ii']?.silver?.back_shiny,
+            },
+            {
+              label: 'Front Transparent',
+              imageUrl: versions['generation-ii']?.silver?.front_transparent,
             },
           ],
         },
@@ -257,12 +297,12 @@ export const formatSpriteData = (
               imageUrl: versions['generation-iii']?.['ruby-sapphire']?.front_default,
             },
             {
-              label: 'Front Shiny',
-              imageUrl: versions['generation-iii']?.['ruby-sapphire']?.front_shiny,
-            },
-            {
               label: 'Back Default',
               imageUrl: versions['generation-iii']?.['ruby-sapphire']?.back_default,
+            },
+            {
+              label: 'Front Shiny',
+              imageUrl: versions['generation-iii']?.['ruby-sapphire']?.front_shiny,
             },
             {
               label: 'Back Shiny',
@@ -278,12 +318,12 @@ export const formatSpriteData = (
               imageUrl: versions['generation-iii']?.['firered-leafgreen']?.front_default,
             },
             {
-              label: 'Front Shiny',
-              imageUrl: versions['generation-iii']?.['firered-leafgreen']?.front_shiny,
-            },
-            {
               label: 'Back Default',
               imageUrl: versions['generation-iii']?.['firered-leafgreen']?.back_default,
+            },
+            {
+              label: 'Front Shiny',
+              imageUrl: versions['generation-iii']?.['firered-leafgreen']?.front_shiny,
             },
             {
               label: 'Back Shiny',
@@ -304,12 +344,12 @@ export const formatSpriteData = (
               imageUrl: versions['generation-iv']?.['diamond-pearl']?.front_default,
             },
             {
-              label: 'Front Shiny',
-              imageUrl: versions['generation-iv']?.['diamond-pearl']?.front_shiny,
-            },
-            {
               label: 'Back Default',
               imageUrl: versions['generation-iv']?.['diamond-pearl']?.back_default,
+            },
+            {
+              label: 'Front Shiny',
+              imageUrl: versions['generation-iv']?.['diamond-pearl']?.front_shiny,
             },
             {
               label: 'Back Shiny',
@@ -320,12 +360,12 @@ export const formatSpriteData = (
               imageUrl: versions['generation-iv']?.['diamond-pearl']?.front_female,
             },
             {
-              label: 'Front Shiny Female',
-              imageUrl: versions['generation-iv']?.['diamond-pearl']?.front_shiny_female,
-            },
-            {
               label: 'Back Female',
               imageUrl: versions['generation-iv']?.['diamond-pearl']?.back_female,
+            },
+            {
+              label: 'Front Shiny Female',
+              imageUrl: versions['generation-iv']?.['diamond-pearl']?.front_shiny_female,
             },
             {
               label: 'Back Shiny Female',
@@ -341,12 +381,12 @@ export const formatSpriteData = (
               imageUrl: versions['generation-iv']?.['heartgold-soulsilver']?.front_default,
             },
             {
-              label: 'Front Shiny',
-              imageUrl: versions['generation-iv']?.['heartgold-soulsilver']?.front_shiny,
-            },
-            {
               label: 'Back Default',
               imageUrl: versions['generation-iv']?.['heartgold-soulsilver']?.back_default,
+            },
+            {
+              label: 'Front Shiny',
+              imageUrl: versions['generation-iv']?.['heartgold-soulsilver']?.front_shiny,
             },
             {
               label: 'Back Shiny',
@@ -357,12 +397,12 @@ export const formatSpriteData = (
               imageUrl: versions['generation-iv']?.['heartgold-soulsilver']?.front_female,
             },
             {
-              label: 'Front Shiny Female',
-              imageUrl: versions['generation-iv']?.['heartgold-soulsilver']?.front_shiny_female,
-            },
-            {
               label: 'Back Female',
               imageUrl: versions['generation-iv']?.['heartgold-soulsilver']?.back_female,
+            },
+            {
+              label: 'Front Shiny Female',
+              imageUrl: versions['generation-iv']?.['heartgold-soulsilver']?.front_shiny_female,
             },
             {
               label: 'Back Shiny Female',
@@ -378,12 +418,12 @@ export const formatSpriteData = (
               imageUrl: versions['generation-iv']?.platinum?.front_default,
             },
             {
-              label: 'Front Shiny',
-              imageUrl: versions['generation-iv']?.platinum?.front_shiny,
-            },
-            {
               label: 'Back Default',
               imageUrl: versions['generation-iv']?.platinum?.back_default,
+            },
+            {
+              label: 'Front Shiny',
+              imageUrl: versions['generation-iv']?.platinum?.front_shiny,
             },
             {
               label: 'Back Shiny',
@@ -394,12 +434,12 @@ export const formatSpriteData = (
               imageUrl: versions['generation-iv']?.platinum?.front_female,
             },
             {
-              label: 'Front Shiny Female',
-              imageUrl: versions['generation-iv']?.platinum?.front_shiny_female,
-            },
-            {
               label: 'Back Female',
               imageUrl: versions['generation-iv']?.platinum?.back_female,
+            },
+            {
+              label: 'Front Shiny Female',
+              imageUrl: versions['generation-iv']?.platinum?.front_shiny_female,
             },
             {
               label: 'Back Shiny Female',
@@ -413,6 +453,43 @@ export const formatSpriteData = (
       label: 'Generation V',
       gameVersions: [
         {
+          label: 'Animated',
+          sprites: [
+            {
+              label: 'Front Default',
+              imageUrl: versions['generation-v']?.['black-white']?.animated?.front_default,
+            },
+            {
+              label: 'Back Default',
+              imageUrl: versions['generation-v']?.['black-white']?.animated?.back_default,
+            },
+            {
+              label: 'Front Shiny',
+              imageUrl: versions['generation-v']?.['black-white']?.animated?.front_shiny,
+            },
+            {
+              label: 'Back Shiny',
+              imageUrl: versions['generation-v']?.['black-white']?.animated?.back_shiny,
+            },
+            {
+              label: 'Front Female',
+              imageUrl: versions['generation-v']?.['black-white']?.animated?.front_female,
+            },
+            {
+              label: 'Back Female',
+              imageUrl: versions['generation-v']?.['black-white']?.animated?.back_female,
+            },
+            {
+              label: 'Front Shiny Female',
+              imageUrl: versions['generation-v']?.['black-white']?.animated?.front_shiny_female,
+            },
+            {
+              label: 'Back Shiny Female',
+              imageUrl: versions['generation-v']?.['black-white']?.animated?.back_shiny_female,
+            },
+          ],
+        },
+        {
           label: 'Black / White',
           sprites: [
             {
@@ -420,12 +497,12 @@ export const formatSpriteData = (
               imageUrl: versions['generation-v']?.['black-white']?.front_default,
             },
             {
-              label: 'Front Shiny',
-              imageUrl: versions['generation-v']?.['black-white']?.front_shiny,
-            },
-            {
               label: 'Back Default',
               imageUrl: versions['generation-v']?.['black-white']?.back_default,
+            },
+            {
+              label: 'Front Shiny',
+              imageUrl: versions['generation-v']?.['black-white']?.front_shiny,
             },
             {
               label: 'Back Shiny',
@@ -436,53 +513,16 @@ export const formatSpriteData = (
               imageUrl: versions['generation-v']?.['black-white']?.front_female,
             },
             {
-              label: 'Front Shiny Female',
-              imageUrl: versions['generation-v']?.['black-white']?.front_shiny_female,
-            },
-            {
               label: 'Back Female',
               imageUrl: versions['generation-v']?.['black-white']?.back_female,
             },
             {
+              label: 'Front Shiny Female',
+              imageUrl: versions['generation-v']?.['black-white']?.front_shiny_female,
+            },
+            {
               label: 'Back Shiny Female',
               imageUrl: versions['generation-v']?.['black-white']?.back_shiny_female,
-            },
-          ],
-        },
-        {
-          label: 'Black 2 / White 2',
-          sprites: [
-            {
-              label: 'Front Default',
-              imageUrl: versions['generation-v']?.['black-2-white-2']?.front_default,
-            },
-            {
-              label: 'Front Shiny',
-              imageUrl: versions['generation-v']?.['black-2-white-2']?.front_shiny,
-            },
-            {
-              label: 'Back Default',
-              imageUrl: versions['generation-v']?.['black-2-white-2']?.back_default,
-            },
-            {
-              label: 'Back Shiny',
-              imageUrl: versions['generation-v']?.['black-2-white-2']?.back_shiny,
-            },
-            {
-              label: 'Front Female',
-              imageUrl: versions['generation-v']?.['black-2-white-2']?.front_female,
-            },
-            {
-              label: 'Front Shiny Female',
-              imageUrl: versions['generation-v']?.['black-2-white-2']?.front_shiny_female,
-            },
-            {
-              label: 'Back Female',
-              imageUrl: versions['generation-v']?.['black-2-white-2']?.back_female,
-            },
-            {
-              label: 'Back Shiny Female',
-              imageUrl: versions['generation-v']?.['black-2-white-2']?.back_shiny_female,
             },
           ],
         },
@@ -499,12 +539,12 @@ export const formatSpriteData = (
               imageUrl: versions['generation-vi']?.['omegaruby-alphasapphire']?.front_default,
             },
             {
-              label: 'Front Shiny',
-              imageUrl: versions['generation-vi']?.['omegaruby-alphasapphire']?.front_shiny,
-            },
-            {
               label: 'Front Female',
               imageUrl: versions['generation-vi']?.['omegaruby-alphasapphire']?.front_female,
+            },
+            {
+              label: 'Front Shiny',
+              imageUrl: versions['generation-vi']?.['omegaruby-alphasapphire']?.front_shiny,
             },
             {
               label: 'Front Shiny Female',
@@ -520,12 +560,12 @@ export const formatSpriteData = (
               imageUrl: versions['generation-vi']?.['x-y']?.front_default,
             },
             {
-              label: 'Front Shiny',
-              imageUrl: versions['generation-vi']?.['x-y']?.front_shiny,
-            },
-            {
               label: 'Front Female',
               imageUrl: versions['generation-vi']?.['x-y']?.front_female,
+            },
+            {
+              label: 'Front Shiny',
+              imageUrl: versions['generation-vi']?.['x-y']?.front_shiny,
             },
             {
               label: 'Front Shiny Female',
@@ -539,7 +579,7 @@ export const formatSpriteData = (
       label: 'Generation VII',
       gameVersions: [
         {
-          label: 'Sun / Moon',
+          label: 'Ultra Sun / Ultra Moon',
           sprites: [
             {
               label: 'Icon',
@@ -560,6 +600,24 @@ export const formatSpriteData = (
             {
               label: 'Front Shiny Female',
               imageUrl: versions['generation-vii']?.['ultra-sun-ultra-moon']?.front_shiny_female,
+            },
+          ],
+        },
+      ],
+    },
+    {
+      label: 'Generation VIII',
+      gameVersions: [
+        {
+          label: 'Icons',
+          sprites: [
+            {
+              label: 'Front Default',
+              imageUrl: versions['generation-viii']?.icons?.front_default,
+            },
+            {
+              label: 'Front Female',
+              imageUrl: versions['generation-viii']?.icons?.front_female,
             },
           ],
         },

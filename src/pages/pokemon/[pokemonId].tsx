@@ -71,7 +71,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   // return static paths
   return {
     paths,
-    fallback: 'blocking',
+    fallback: false,
   };
 };
 
@@ -95,9 +95,6 @@ export const getStaticProps: GetStaticProps<PokestatsPokemonPageProps> = async (
       AbilityApi.getPokemonAbilities(pokemonDataResults),
       SpeciesApi.getByName(pokemonDataResults.species.name),
     ]);
-
-    // no support for Generation IX pokemon yet
-    // if (pokemonSpeciesResults.id > 905) return { notFound: true };
 
     if (!pokemonSpeciesResults || !pokemonAbilitiesResults) {
       console.log('Failed to fetch pokemonSpeciesResults or pokemonAbilitiesResults');

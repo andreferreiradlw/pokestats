@@ -32,6 +32,7 @@ const createSitemap = (
     ...movesList.map(move => toUrl(host, `/move/${move.name}`, '0.9')),
     ...allItemsData.map(item => toUrl(host, `/item/${item.name}`, '0.8')),
     ...allEggGroupsData.map(item => toUrl(host, `/egg-group/${item.name}`, '0.8')),
+    ...pokemonList.map(pokemon => toUrl(host, `/sprites/${pokemon.name}`), '0.8'),
   ];
 
   return `<?xml version="1.0" encoding="UTF-8"?>

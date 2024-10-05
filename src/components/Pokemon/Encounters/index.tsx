@@ -22,7 +22,9 @@ const Encounters = ({ species, ...rest }: EncountersProps): JSX.Element => {
   // context
   const { gameVersion, gameGeneration } = useContext(GameVersionContext);
   // data
-  const { data: encounterDetails, isLoading } = usePokemonEncounters(species.id, gameVersion);
+  const { data: encounterDetails, isLoading } = usePokemonEncounters(species.id, gameVersion!, {
+    enabled: !!gameVersion,
+  });
 
   useEffect(() => {
     const storedBannerSetting = localStorage.getItem('hideEncounterBanner');

@@ -98,7 +98,7 @@ const HeadbuttLocationsPage = ({
   }, [defaultLocation]);
 
   useEffect(() => {
-    if (gameGeneration === 'generation-ii') {
+    if (gameVersion && gameGeneration === 'generation-ii') {
       setGameVersionInput(gameVersion);
     }
   }, [gameVersion, gameGeneration]);

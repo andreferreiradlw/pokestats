@@ -1,12 +1,13 @@
 'use client';
 
-import Footer from './Footer';
-import type { HeaderV2Props } from '../HeaderV2';
-import HeaderV2 from '../HeaderV2';
+// types
+import type { ContainerProps } from '@mui/material';
+// components
+import HeaderV2, { type HeaderV2Props } from './HeaderV2';
 import { ChildrenContainer, LayoutContainer } from './StyledLayoutV2';
 import { AnimatePresence, type HTMLMotionProps, motion } from '@/client';
 import ScrollToTopButton from './ScrollToTopButton';
-import type { ContainerProps } from '@mui/material';
+import Footer from './Footer';
 
 interface LayoutV2Props
   extends Omit<HTMLMotionProps<'main'>, keyof ContainerProps>,

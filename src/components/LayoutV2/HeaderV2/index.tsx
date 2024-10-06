@@ -1,14 +1,13 @@
 // components
 import Link from 'next/link';
-import GameGenSelect from '../../GameGenSelect';
-import AutocompleteV2 from '../../AutocompleteV2';
-import type { AppBarProps } from '@mui/material';
-import { Stack } from '@mui/material';
+import GameGenSelect from '@/components/GameGenSelect';
+import AutocompleteV2 from '@/components/AutocompleteV2';
+import ThemeToggleButton from '@/components/ThemeToggleButton';
+import { Stack, type AppBarProps } from '@mui/material';
 // helpers
 import { hoverVariant } from '@/animations';
 // styles
 import { ContentContainer, HeaderContainer, Logo } from './styledHeaderV2';
-import ThemeToggleButton from '../../ThemeToggleButton';
 
 export interface HeaderV2Props extends AppBarProps {
   showGenSelect?: boolean;

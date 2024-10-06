@@ -5,7 +5,7 @@ import { useBreakpoint } from '@/hooks';
 // styles
 import { FooterContainer, PokestatsIcon, Anchor, FooterContent } from './StyledFooter';
 // components
-import { motion } from 'framer-motion';
+import { motion } from '@/client';
 import { Container, Grid2, Link } from '@mui/material';
 import ImageNextV2 from '@/components/ImageNextV2';
 

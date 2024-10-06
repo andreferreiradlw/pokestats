@@ -35,7 +35,7 @@ const LanguageTable = ({ names, ...rest }: LanguageTableProps): JSX.Element => {
         <Table>
           <tbody>
             {sortedNames.map(({ language, name }) => (
-              <tr key={name}>
+              <tr key={`${language.name}-${name}-row`}>
                 <th>{languageCodes[language.name]}</th>
                 <Typography component="td">{name}</Typography>
               </tr>

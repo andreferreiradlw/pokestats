@@ -10,8 +10,7 @@ import {
 } from '@/helpers';
 // components
 import { Table } from '@/BaseStyles';
-import type { Grid2Props } from '@mui/material';
-import { Box, Grid2, Typography } from '@mui/material';
+import { Box, Grid2, Typography, type Grid2Props } from '@mui/material';
 
 interface GroupedFlavorText {
   flavor: string;

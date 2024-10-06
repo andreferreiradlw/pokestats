@@ -2,6 +2,8 @@
 
 // types
 import type { ContainerProps } from '@mui/material';
+// helpers
+import { pageContainerVariant } from '@/animations';
 // components
 import HeaderV2, { type HeaderV2Props } from './HeaderV2';
 import { ChildrenContainer, LayoutContainer } from './StyledLayoutV2';
@@ -31,6 +33,7 @@ const LayoutV2 = ({
         <ChildrenContainer
           maxWidth="xl"
           component={motion.main}
+          variants={pageContainerVariant}
           initial="hidden"
           animate="visible"
           exit="fade"

@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 // types
 import type { ItemAttribute, ItemFlingEffect } from 'pokenode-ts';
 // components
@@ -10,7 +11,6 @@ import {
   findEnglishName,
   removeDash,
 } from '@/helpers';
-import { useMemo } from 'react';
 
 export interface ItemEffectsProps extends Grid2Props {
   flingEffect: ItemFlingEffect | null;

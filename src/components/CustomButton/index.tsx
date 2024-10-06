@@ -3,7 +3,7 @@ import { forwardRef } from 'react';
 import { hoverVariant } from '@/animations';
 // components
 import { Box, Button as MuiButton, type ButtonProps } from '@mui/material';
-import { motion } from 'framer-motion';
+import { motion } from '@/client';
 
 const CustomButton = forwardRef<HTMLButtonElement, ButtonProps>(
   ({ children, disabled, fullWidth, ...rest }, ref) => (

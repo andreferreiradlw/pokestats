@@ -1,5 +1,7 @@
+'use client';
+
 // types
-import type { PokestatsItemPageProps } from 'src/old.pages/item/[itemName]';
+import type { PokestatsItemPageProps } from '@/app/item/[itemName]/page';
 // helpers
 import { findEnglishName } from '@/helpers';
 import { usePlausible } from 'next-plausible';
@@ -8,12 +10,12 @@ import { Divider, Grid2, Stack, Typography } from '@mui/material';
 import ItemDetails from './ItemDetails';
 import Image from 'next/image';
 import ItemEffects from './ItemEffects';
-import LanguageTable from '../LanguageTable';
+import LanguageTable from '@/components/LanguageTable';
 import ItemFlavorText from './ItemFlavorText';
 import CategoryItems from './CategoryItems';
 import BerryDetailsTable from './BerryDetailsTable';
 import Link from 'next/link';
-import CustomButton from '../CustomButton';
+import CustomButton from '@/components/CustomButton';
 
 const ItemPage = ({
   item,

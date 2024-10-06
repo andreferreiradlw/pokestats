@@ -6,7 +6,7 @@ import { BerryApi, ItemApi } from '@/services';
 // components
 import LayoutV2 from '@/components/LayoutV2';
 import { type ExtractedItem, findEnglishName, formatItemData } from '@/helpers';
-import ItemPage from '@/components/ItemPage';
+import ItemPage from '@/components/pages/ItemPage';
 import Seo from '@/components/Seo';
 
 export interface PokestatsItemPageProps {

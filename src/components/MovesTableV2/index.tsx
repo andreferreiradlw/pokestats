@@ -1,6 +1,6 @@
 import { useMemo, useCallback } from 'react';
 // hooks
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 import { usePlausible } from 'next-plausible';
 // types
 import type { Move, MoveLearnMethod } from 'pokenode-ts';

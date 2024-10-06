@@ -1,14 +1,16 @@
+'use client';
+
 import { useMemo, useCallback } from 'react';
 // types
-import type { PokestatsMovesPageProps } from 'src/old.pages/moves';
+import type { PokestatsMovesPageProps } from '@/app/moves/page';
 // helpers
 import { type GenerationOption, generationOptions } from '@/helpers';
 // components
 import { Stack, Typography } from '@mui/material';
-import CustomButton from '../CustomButton';
-import DropdownV2 from '../DropdownV2';
-import CustomInput from '../CustomInput';
-import MovesTableV2 from '../MovesTableV2';
+import CustomButton from '@/components/CustomButton';
+import DropdownV2 from '@/components/DropdownV2';
+import CustomInput from '@/components/CustomInput';
+import MovesTableV2 from '@/components/MovesTableV2';
 import { useFormik } from 'formik';
 
 const MovesListPage = ({ moves, typeOptions }: PokestatsMovesPageProps): JSX.Element => {

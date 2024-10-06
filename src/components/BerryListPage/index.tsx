@@ -1,3 +1,5 @@
+'use client';
+
 import { useMemo, useCallback } from 'react';
 // types
 import type { PokestatsBerriesPageProps } from 'src/old.pages/berries';

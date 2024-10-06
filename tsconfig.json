@@ -8,7 +8,6 @@
       "@/BaseStyles": ["src/components/BaseStyles"],
       "@/BaseStyles/*": ["src/components/BaseStyles/*"],
       "@/client": ["src/components/client"],
-      // "@/client/*": ["src/client/*"],
       "@/components": ["src/components"],
       "@/components/*": ["src/components/*"],
       "@/constants": ["src/constants"],
@@ -26,6 +25,7 @@
       "@/hooks/*": ["src/hooks/*"],
       "@/services": ["src/services"],
       "@/services/*": ["src/services/*"],
+      "@/skeletons": ["src/components/skeletons"],
       "@/context": ["src/context"],
       "@/context/*": ["src/context/*"]
     },

@@ -1,4 +1,3 @@
-import { cache } from 'react';
 // types
 import type { NamedAPIResource } from 'pokenode-ts';
 // helpers
@@ -15,7 +14,7 @@ export interface PokestatsHomepageProps {
   pokemonList: NamedAPIResource[];
 }
 
-const fetchPokestatsData = cache(async (): Promise<PokestatsHomepageProps> => {
+const fetchPokestatsData = async (): Promise<PokestatsHomepageProps> => {
   const [typesResponse, { results: pokemonList }] = await Promise.all([
     TypesApi.getAll(),
     PokemonApi.listPokemons(0, 1024),
@@ -25,7 +24,7 @@ const fetchPokestatsData = cache(async (): Promise<PokestatsHomepageProps> => {
     pokemonTypes: typesResponse,
     pokemonList,
   };
-});
+};
 
 export default async function PokestatsHomepage() {
   const props = await fetchPokestatsData();

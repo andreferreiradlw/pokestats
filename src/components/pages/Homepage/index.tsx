@@ -1,24 +1,31 @@
-import { useMemo, useEffect } from 'react';
-import { useRouter } from 'next/router';
-// heplpers
+'use client';
+
+import { useMemo } from 'react';
+// types
+import type { NamedAPIResource } from 'pokenode-ts';
+// helpers
 import { usePlausible } from 'next-plausible';
 import { getRandomInt } from '@/helpers';
 import { hoverVariant } from '@/animations';
-// types
-import type { PokestatsHomepageProps } from '@/pages/index';
+import { useRouter } from 'next/navigation';
 // styles
 import { FirstSection, GithubLink, Pokeball, SecondSection } from './styledHomepage';
 // components
 import PokemonList from './PokemonList';
 import TypeList from './TypeList';
-import AutocompleteV2 from '../AutocompleteV2';
+import AutocompleteV2 from '@/components/AutocompleteV2';
 import { Container, Divider, Stack, Typography } from '@mui/material';
 import CustomButton from '@/components/CustomButton';
 // icons
 import Github from 'public/static/iconLibrary/github.svg';
-import ThemeToggleButton from '../ThemeToggleButton';
+import ThemeToggleButton from '@/components/ThemeToggleButton';
 
-const Homepage = ({ pokemonTypes, pokemonList }: PokestatsHomepageProps): JSX.Element => {
+export interface ClientHomepageProps {
+  pokemonTypes: NamedAPIResource[];
+  pokemonList: NamedAPIResource[];
+}
+
+const ClientHomepage = ({ pokemonTypes, pokemonList }: ClientHomepageProps): JSX.Element => {
   // hooks
   const router = useRouter();
   const plausible = usePlausible();
@@ -28,11 +35,6 @@ const Homepage = ({ pokemonTypes, pokemonList }: PokestatsHomepageProps): JSX.El
     () => (pokemonList ? `/pokemon/${pokemonList[getRandomInt(1, pokemonList.length)].name}` : ''),
     [pokemonList],
   );
-
-  // prefetch random pokemon page
-  useEffect(() => {
-    if (router && randomPokemonUrl !== '') router.prefetch(randomPokemonUrl);
-  }, [randomPokemonUrl, router]);
 
   return (
     <>
@@ -54,9 +56,9 @@ const Homepage = ({ pokemonTypes, pokemonList }: PokestatsHomepageProps): JSX.El
         <Typography variant="mainHeading">PokeStats</Typography>
         <AutocompleteV2 />
         <CustomButton
-          onClick={async () => {
+          onClick={() => {
             plausible('Random Pokemon');
-            await router.push(randomPokemonUrl);
+            router.push(randomPokemonUrl);
           }}
           variant="contained"
           color="secondary"
@@ -78,4 +80,4 @@ const Homepage = ({ pokemonTypes, pokemonList }: PokestatsHomepageProps): JSX.El
   );
 };
 
-export default Homepage;
+export default ClientHomepage;

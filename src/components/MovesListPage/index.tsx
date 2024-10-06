@@ -1,6 +1,6 @@
 import { useMemo, useCallback } from 'react';
 // types
-import type { PokestatsMovesPageProps } from '@/pages/moves';
+import type { PokestatsMovesPageProps } from 'src/old.pages/moves';
 // helpers
 import { type GenerationOption, generationOptions } from '@/helpers';
 // components

@@ -3,7 +3,7 @@ import { useCallback, useMemo } from 'react';
 import { useRouter } from 'next/router';
 import { usePlausible } from 'next-plausible';
 // types
-import type { EggGroupTableData } from '@/pages/egg-group/[eggGroupName]';
+import type { EggGroupTableData } from 'src/old.pages/egg-group/[eggGroupName]';
 import type { Pokemon } from 'pokenode-ts';
 // helpers
 import { capitalise, removeDash } from '@/helpers';

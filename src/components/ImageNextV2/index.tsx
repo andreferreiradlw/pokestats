@@ -1,3 +1,5 @@
+'use client';
+
 import { useState, useCallback, useMemo, forwardRef } from 'react';
 // types
 import type { ImageProps } from 'next/image';

@@ -1,3 +1,5 @@
+'use client';
+
 import { useCallback } from 'react';
 // types
 import type { Engine } from 'tsparticles-engine';

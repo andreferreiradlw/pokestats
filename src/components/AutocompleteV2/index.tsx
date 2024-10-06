@@ -1,11 +1,12 @@
+'use client';
+
 import type { CSSProperties } from 'react';
 // types
 import type { HTMLMotionProps } from 'framer-motion';
 // hooks
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 import { usePlausible } from 'next-plausible';
-import type { AutocompleteListOption } from '@/hooks';
-import { useAutocompleteOptions } from '@/hooks';
+import { useAutocompleteOptions, type AutocompleteListOption } from '@/hooks';
 // helpers
 import { formatPokemonId, mapGeneration, removeDash } from '@/helpers';
 import { fadeInDownVariant } from '@/animations';

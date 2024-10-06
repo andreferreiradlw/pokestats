@@ -1,3 +1,5 @@
+'use client';
+
 import { createContext, useState, useMemo, type ReactNode } from 'react';
 // helpers
 import {

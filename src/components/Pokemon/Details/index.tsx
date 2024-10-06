@@ -1,6 +1,6 @@
 import { useContext, useState, useEffect, useMemo } from 'react';
 // types
-import type { PokestatsPokemonPageProps } from '@/pages/pokemon/[pokemonId]';
+import type { PokestatsPokemonPageProps } from 'src/old.pages/pokemon/[pokemonId]';
 import type { Ability } from 'pokenode-ts';
 // helpers
 import { GameVersionContext } from '@/context';

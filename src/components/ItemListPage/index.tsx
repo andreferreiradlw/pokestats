@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo } from 'react';
 // types
-import type { PokestatsItemsPageProps } from '@/pages/items';
+import type { PokestatsItemsPageProps } from 'src/old.pages/items/index.jsx';
 // helpers
 import { capitalise, removeDash } from '@/helpers';
 import { useDebouncedValue } from '@/hooks';

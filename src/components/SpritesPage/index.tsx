@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 // types
-import type { PokestatsSpritePageProps } from '@/pages/sprites/[pokemonName]';
+import type { PokestatsSpritePageProps } from 'src/old.pages/sprites/[pokemonName]';
 // helpers
 import { findEnglishName, formatSpriteData, removeDash } from '@/helpers';
 import { usePlausible } from 'next-plausible';

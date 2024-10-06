@@ -1,5 +1,5 @@
 // types
-import type { PokestatsMovePageProps } from '@/pages/move/[moveId]';
+import type { PokestatsMovePageProps } from 'src/old.pages/move/[moveId]';
 // helpers
 import { findEnglishName } from '@/helpers';
 // components

@@ -1,3 +1,5 @@
+'use client';
+
 // ctx
 import { useLoader } from '@/context';
 // components

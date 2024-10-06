@@ -1,3 +1,5 @@
+'use client';
+
 // hooks
 import { useIsClient, useWindowSize } from 'usehooks-ts';
 // helpers
@@ -5,8 +7,6 @@ import { scrollToTop } from '@/helpers';
 import { fadeInUpVariant, pageContainerVariant } from '@/animations';
 // components
 import { type ContainerProps, useScrollTrigger } from '@mui/material';
-import type { HTMLMotionProps } from 'framer-motion';
-import { AnimatePresence, motion } from 'framer-motion';
 import Footer from './Footer';
 import type { HeaderV2Props } from '../HeaderV2';
 import HeaderV2 from '../HeaderV2';
@@ -14,6 +14,7 @@ import HeaderV2 from '../HeaderV2';
 import { ChildrenContainer, LayoutContainer, ScrollButton } from './StyledLayoutV2';
 // icons
 import ArrowCircleUpIcon from '@mui/icons-material/ArrowCircleUp';
+import { AnimatePresence, motion, type HTMLMotionProps } from '@/client';
 
 interface LayoutV2Props
   extends Omit<HTMLMotionProps<'main'>, keyof ContainerProps>,

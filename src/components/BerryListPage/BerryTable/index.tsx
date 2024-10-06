@@ -1,5 +1,5 @@
 // types
-import type { BerryItem } from '@/pages/berries';
+import type { BerryItem } from 'src/old.pages/berries';
 // helpers
 import { fadeInUpVariant } from '@/animations';
 import { capitalise, removeDash } from '@/helpers';

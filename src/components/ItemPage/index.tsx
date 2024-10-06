@@ -1,5 +1,5 @@
 // types
-import type { PokestatsItemPageProps } from '@/pages/item/[itemName]';
+import type { PokestatsItemPageProps } from 'src/old.pages/item/[itemName]';
 // helpers
 import { findEnglishName } from '@/helpers';
 import { usePlausible } from 'next-plausible';

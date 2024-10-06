@@ -1,6 +1,6 @@
 import { useCallback, useMemo } from 'react';
 // types
-import type { PokestatsEggGroupPageProps } from '@/pages/egg-group/[eggGroupName]';
+import type { PokestatsEggGroupPageProps } from 'src/old.pages/egg-group/[eggGroupName]';
 // helpers
 import { useFormik } from 'formik';
 import { capitalise, findEnglishName } from '@/helpers';

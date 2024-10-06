@@ -1,3 +1,5 @@
+'use client';
+
 import { css, keyframes } from '@mui/material/styles';
 
 // Create the keyframes for floating img

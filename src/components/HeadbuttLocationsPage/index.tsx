@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from 'react';
 // types
-import type { PokestatsHeadbuttLocationsPageProps } from '@/pages/headbutt-tree-finder';
+import type { PokestatsHeadbuttLocationsPageProps } from 'src/old.pages/headbutt-tree-finder';
 // data
 import { type HeadbuttLocation, headbuttLocations } from './headbuttData';
 // helpers

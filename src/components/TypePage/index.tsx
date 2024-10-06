@@ -1,5 +1,5 @@
 // types
-import type { PokestatsTypePageProps } from '@/pages/type/[typeId]';
+import type { PokestatsTypePageProps } from 'src/old.pages/type/[typeId]';
 // helpers
 import { findEnglishName } from '@/helpers';
 import { useBreakpoint } from '@/hooks';

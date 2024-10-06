@@ -1,3 +1,5 @@
+'use client';
+
 import type { ThemeOptions } from '@mui/material/styles';
 import { createTheme, responsiveFontSizes } from '@mui/material/styles';
 import { lightPalette, darkPalette, typeColors, gameColors } from './palette';

@@ -1,3 +1,5 @@
+'use client';
+
 import { JosefinSansFont, MontserratFont, QuicksandFont } from '@/components/Fonts';
 import { createTheme, type ThemeOptions } from '@mui/material';
 import { common } from '@mui/material/colors';

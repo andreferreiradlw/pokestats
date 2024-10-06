@@ -1,6 +1,6 @@
 import { useMemo, useCallback } from 'react';
 // types
-import type { PokestatsBerriesPageProps } from '@/pages/berries';
+import type { PokestatsBerriesPageProps } from 'src/old.pages/berries';
 // helpers
 import { fadeInUpVariant } from '@/animations';
 import { useFormik } from 'formik';

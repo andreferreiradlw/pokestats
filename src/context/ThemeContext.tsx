@@ -1,4 +1,5 @@
-// src/context/ThemeContext.tsx
+'use client';
+
 import type { ReactNode } from 'react';
 import { createContext, useState, useMemo, useEffect } from 'react';
 import { ThemeProvider } from '@mui/material/styles';

@@ -3,7 +3,6 @@ import type { GetStaticProps, NextPage } from 'next';
 // helpers
 import { fadeInUpVariant } from '@/animations';
 // components
-import Seo from '@/components/Seo'; // Import the Seo component
 import Homepage from '@/components/Homepage';
 import { PokemonApi, TypesApi } from '@/services';
 import type { NamedAPIResource } from 'pokenode-ts';
@@ -17,22 +16,8 @@ export interface PokestatsHomepageProps {
 }
 
 const PokestatsHomepage: NextPage<PokestatsHomepageProps> = props => {
-  // SEO-related variables
-  const pageTitle = 'Pokestats.gg - Your Complete Pokémon Encyclopedia';
-  const pageDescription =
-    'PokeStats.gg is your ultimate online Pokémon encyclopedia, featuring comprehensive information on Pokémon species, Pokédex entries, abilities, evolution chains, moves, stats, and more.';
-  const pageKeywords =
-    'Pokémon, Pokédex, Pokémon stats, Pokémon abilities, Pokémon evolutions, Pokémon moves, Pokémon types, Pokémon guide, Pokémon encyclopedia, Pokestats, Pokeapi';
-  const pageImage = '/static/android-icon-512x512.png';
-
   return (
     <Grid2 container>
-      <Seo
-        title={pageTitle}
-        description={pageDescription}
-        image={pageImage}
-        keywords={pageKeywords}
-      />
       <LayoutV2
         initial="hidden"
         animate="show"

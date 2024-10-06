@@ -1,5 +1,5 @@
 // types
-import type { PokestatsRegionsPageProps } from '@/pages/regions';
+import type { PokestatsRegionsPageProps } from 'src/old.pages/regions';
 // components
 import { Stack } from '@mui/material';
 

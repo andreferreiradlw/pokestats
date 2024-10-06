@@ -1,6 +1,6 @@
 import { useCallback } from 'react';
 // helpers
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 import { usePlausible } from 'next-plausible';
 import { fadeInUpVariant } from '@/animations';
 import { capitalise, removeDash, type ExtractedItem } from '@/helpers';

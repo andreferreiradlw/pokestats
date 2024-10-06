@@ -1,6 +1,8 @@
+'use client';
+
 import { useCallback, useEffect, useMemo } from 'react';
 // types
-import type { PokestatsItemsPageProps } from 'src/old.pages/items/index.jsx';
+import type { PokestatsItemsPageProps } from '@/app/items/page.jsx';
 // helpers
 import { capitalise, removeDash } from '@/helpers';
 import { useDebouncedValue } from '@/hooks';
@@ -12,7 +14,7 @@ import CustomInput from '@/components/CustomInput';
 import DropdownV2 from '@/components/DropdownV2';
 import CustomButton from '@/components/CustomButton';
 import ItemTable from './ItemTable.tsx';
-import { motion } from 'framer-motion';
+import { motion } from '@/client';
 
 const ItemListPage = ({
   itemData,

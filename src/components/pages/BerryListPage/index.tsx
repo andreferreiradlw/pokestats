@@ -2,17 +2,17 @@
 
 import { useMemo, useCallback } from 'react';
 // types
-import type { PokestatsBerriesPageProps } from 'src/old.pages/berries';
+import type { PokestatsBerriesPageProps } from '@/app/berries/page';
 // helpers
 import { fadeInUpVariant } from '@/animations';
 import { useFormik } from 'formik';
 // components
 import { Stack, Typography } from '@mui/material';
 import BerryTable from './BerryTable';
-import CustomButton from '../CustomButton';
-import CustomInput from '../CustomInput';
-import DropdownV2 from '../DropdownV2';
-import { motion } from 'framer-motion';
+import CustomButton from '@/components/CustomButton';
+import CustomInput from '@/components/CustomInput';
+import DropdownV2 from '@/components/DropdownV2';
+import { motion } from '@/client';
 
 const BerryListPage = ({ berryData }: PokestatsBerriesPageProps): JSX.Element => {
   // Options

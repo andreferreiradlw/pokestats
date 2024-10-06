@@ -9,7 +9,7 @@ const TableListSkeleton = ({ rowCount = 5 }: TableListSkeletonProps): JSX.Elemen
     <Stack gap={4} width="100%">
       {/* Skeleton for the page heading */}
       <Typography variant="pageHeading">
-        <Skeleton width="30%" height={40} />
+        <Skeleton width="30%" />
       </Typography>
 
       {/* Skeleton for the search form */}

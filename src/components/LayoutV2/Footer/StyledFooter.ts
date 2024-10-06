@@ -1,3 +1,5 @@
+'use client';
+
 // helpers
 import { riseUp } from '@/animations';
 import { styled } from '@mui/material/styles';

@@ -2,8 +2,7 @@
 import type { NamedAPIResource } from 'pokenode-ts';
 // components
 import TypeBadge from '@/components/TypeBadge';
-import type { Grid2Props, Theme } from '@mui/material';
-import { Grid2, Typography } from '@mui/material';
+import { Grid2, Typography, type Grid2Props, type Theme } from '@mui/material';
 
 interface TypeListProps extends Grid2Props {
   types: NamedAPIResource[];

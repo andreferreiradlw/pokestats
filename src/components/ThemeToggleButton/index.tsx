@@ -1,3 +1,5 @@
+'use client';
+
 import { useContext } from 'react';
 // helpers
 import { usePlausible } from 'next-plausible';

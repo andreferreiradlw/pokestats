@@ -14,17 +14,13 @@ export interface PokestatsHomepageProps {
   pokemonList: NamedAPIResource[];
 }
 
-export const fetchPokestatsData = async () => {
+export const fetchPokestatsData = async (): Promise<PokestatsHomepageProps> => {
   try {
     // fetch data
     const [typesResponse, { results: pokemonList }] = await Promise.all([
       TypesApi.getAll(),
       PokemonApi.listPokemons(0, 1024),
     ]);
-
-    if (!typesResponse) {
-      return { notFound: true };
-    }
 
     return {
       pokemonTypes: typesResponse,
@@ -38,7 +34,7 @@ export const fetchPokestatsData = async () => {
 };
 
 export default async function PokestatsHomepage() {
-  const { pokemonList, pokemonTypes } = await fetchPokestatsData();
+  const props = await fetchPokestatsData();
 
   return (
     <Grid2 container>
@@ -48,7 +44,7 @@ export default async function PokestatsHomepage() {
         variants={fadeInUpVariant}
         customKey="homepage-container"
       >
-        <Homepage pokemonList={pokemonList} pokemonTypes={pokemonTypes} />
+        <Homepage {...props} />
       </LayoutV2>
       <Particles />
     </Grid2>

@@ -1,6 +1,8 @@
+'use client';
+
 import { AppBar, Container } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import { motion } from 'framer-motion';
+import { motion } from '@/client';
 
 const HeaderContainer = styled(AppBar)(({ theme }) => ({
   marginBottom: theme.spacing(2),

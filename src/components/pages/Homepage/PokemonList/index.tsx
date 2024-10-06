@@ -1,3 +1,5 @@
+'use client';
+
 import { useState, useEffect, useMemo, useCallback } from 'react';
 // types
 import type { NamedAPIResource } from 'pokenode-ts';
@@ -9,7 +11,7 @@ import { fadeInUpVariant } from '@/animations';
 import { Grid2, Typography, type Grid2Props } from '@mui/material';
 import InfiniteScroll from '@/components/InfiniteScroll';
 import DropdownV2 from '@/components/DropdownV2';
-import { motion } from 'framer-motion';
+import { motion } from '@/client';
 
 interface PokemonListProps extends Grid2Props {
   pokemon: NamedAPIResource[];

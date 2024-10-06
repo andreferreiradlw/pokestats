@@ -2,86 +2,35 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@/animations": [
-        "src/animations"
-      ],
-      "@/animations/*": [
-        "src/animations/*"
-      ],
-      "@/BaseStyles": [
-        "src/components/BaseStyles"
-      ],
-      "@/BaseStyles/*": [
-        "src/components/BaseStyles/*"
-      ],
-      "@/client": [
-        "src/components/client"
-      ],
+      "@/app/*": ["src/app/*"],
+      "@/animations": ["src/animations"],
+      "@/animations/*": ["src/animations/*"],
+      "@/BaseStyles": ["src/components/BaseStyles"],
+      "@/BaseStyles/*": ["src/components/BaseStyles/*"],
+      "@/client": ["src/components/client"],
       // "@/client/*": ["src/client/*"],
-      "@/components": [
-        "src/components"
-      ],
-      "@/components/*": [
-        "src/components/*"
-      ],
-      "@/constants": [
-        "src/constants"
-      ],
-      "@/constants/*": [
-        "src/constants/*"
-      ],
-      "@/MuiTheme": [
-        "src/theme"
-      ],
-      "@/MuiTheme/*": [
-        "src/theme/*"
-      ],
-      "@/helpers": [
-        "src/helpers"
-      ],
-      "@/helpers/*": [
-        "src/helpers/*"
-      ],
-      "@/types": [
-        "types"
-      ],
-      "@/types/*": [
-        "types/*"
-      ],
-      "@/PageComponents": [
-        "src/components/pages"
-      ],
-      "@/pages": [
-        "src/old.pages"
-      ],
-      "@/pages/*": [
-        "src/old.pages/*"
-      ],
-      "@/hooks": [
-        "src/hooks"
-      ],
-      "@/hooks/*": [
-        "src/hooks/*"
-      ],
-      "@/services": [
-        "src/services"
-      ],
-      "@/services/*": [
-        "src/services/*"
-      ],
-      "@/context": [
-        "src/context"
-      ],
-      "@/context/*": [
-        "src/context/*"
-      ]
+      "@/components": ["src/components"],
+      "@/components/*": ["src/components/*"],
+      "@/constants": ["src/constants"],
+      "@/constants/*": ["src/constants/*"],
+      "@/MuiTheme": ["src/theme"],
+      "@/MuiTheme/*": ["src/theme/*"],
+      "@/helpers": ["src/helpers"],
+      "@/helpers/*": ["src/helpers/*"],
+      "@/types": ["types"],
+      "@/types/*": ["types/*"],
+      "@/PageComponents": ["src/components/pages"],
+      "@/pages": ["src/old.pages"],
+      "@/pages/*": ["src/old.pages/*"],
+      "@/hooks": ["src/hooks"],
+      "@/hooks/*": ["src/hooks/*"],
+      "@/services": ["src/services"],
+      "@/services/*": ["src/services/*"],
+      "@/context": ["src/context"],
+      "@/context/*": ["src/context/*"]
     },
     "target": "es5",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -100,16 +49,6 @@
       }
     ]
   },
-  "include": [
-    "types/*.d.ts",
-    "src/**/*.ts",
-    "src/**/*.tsx",
-    ".next/types/**/*.ts"
-  ],
-  "exclude": [
-    "node_modules",
-    "dist",
-    "src/**/*.js",
-    "src/**/*.jsx"
-  ]
+  "include": ["types/*.d.ts", "src/**/*.ts", "src/**/*.tsx", ".next/types/**/*.ts"],
+  "exclude": ["node_modules", "dist", "src/**/*.js", "src/**/*.jsx"]
 }

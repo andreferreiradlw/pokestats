@@ -1,8 +1,10 @@
-import { motion } from 'framer-motion';
-import PokeballIcon from 'public/static/iconLibrary/pokeball.svg';
-import { Stack } from '@mui/material';
+'use client';
+
+// helpers
 import { styled } from '@mui/material/styles';
-import { rotate } from '@/animations';
+// components
+import { motion } from '@/client';
+import { Stack } from '@mui/material';
 
 const FirstSection = styled(Stack)({
   alignItems: 'center',
@@ -46,9 +48,4 @@ const GithubLink = styled(motion.a)(({ theme }) => ({
   },
 }));
 
-const Pokeball = styled(PokeballIcon)`
-  animation: 3s ${rotate} 0ms infinite linear;
-  width: 1em;
-`;
-
-export { FirstSection, SecondSection, GithubLink, Pokeball };
+export { FirstSection, SecondSection, GithubLink };

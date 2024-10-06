@@ -1,7 +1,11 @@
-import { styled, alpha } from '@mui/material/styles';
-import { motion } from 'framer-motion';
+'use client';
+
 // types
 import type { TypeBadgeProps } from './index';
+// helpers
+import { styled, alpha } from '@mui/material/styles';
+// components
+import { motion } from '@/client';
 
 const Badge = styled(motion.a, {
   shouldForwardProp: prop =>

@@ -4,6 +4,7 @@ import { useRouter } from 'next/navigation';
 import { usePlausible } from 'next-plausible';
 // types
 import type { Move, MoveLearnMethod } from 'pokenode-ts';
+import type { PartialMove } from '@/app/moves/page';
 // helpers
 import type { FilteredMove, GameGenValue } from '@/helpers';
 import { removeDash, mapGeneration, findEnglishVerboseEffect } from '@/helpers';
@@ -22,7 +23,7 @@ import CustomTable, {
 import Loading from '@/components/Loading';
 
 interface MovesTableV2Props extends Partial<CustomTableProps> {
-  moves?: (FilteredMove | Move)[];
+  moves?: (FilteredMove | Move | PartialMove)[];
   learnMethod?: MoveLearnMethod['name'];
   machineNames?: string[];
   isLoading?: boolean;

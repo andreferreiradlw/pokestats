@@ -114,4 +114,13 @@ export const unusedItems = [
   'clothing-trunk',
   'catching-pocket',
   'battle-pocket',
+  'golden-nanab-berry',
+  'golden-pinap-berry',
+  'golden-razz-berry',
+  'kee-berry',
+  'maranga-berry',
+  'roseli-berry',
+  'silver-nanab-berry',
+  'silver-pinap-berry',
+  'silver-razz-berry',
 ];

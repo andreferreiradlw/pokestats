@@ -5,6 +5,7 @@ import { BerryApi, ItemApi } from '@/services';
 import { type ExtractedItem, formatItemData } from '@/helpers';
 // components
 import { ItemPage } from '@/PageComponents';
+import { unusedItems } from '@/constants';
 
 export interface PokestatsItemPageProps {
   item: ExtractedItem;
@@ -19,6 +20,7 @@ const PokestatsItemPage = async ({ params }: { params: { itemName: string } }) =
   const itemName = params.itemName;
 
   const itemData = await ItemApi.getByName(itemName);
+
   if (!itemData) {
     throw new Error('Item not found');
   }
@@ -38,7 +40,7 @@ const PokestatsItemPage = async ({ params }: { params: { itemName: string } }) =
   const categoryItemNames = categoryData.items.map(({ name }) => name);
   const categoryItemsData = (await ItemApi.getByNames(categoryItemNames))
     .map(formatItemData)
-    .filter(({ category, name }) => category !== 'unused' && name !== itemName) // Combined filters
+    .filter(({ category, name }) => category !== 'unused' && name !== itemName)
     .sort((a, b) => a.name.localeCompare(b.name));
 
   // Get berry data if the item belongs to the 'berries' pocket
@@ -63,9 +65,11 @@ const PokestatsItemPage = async ({ params }: { params: { itemName: string } }) =
 export async function generateStaticParams() {
   const itemList = await ItemApi.listItems();
 
-  return itemList.results.map(({ name }) => ({
-    itemName: name,
-  }));
+  return itemList.results
+    .filter(({ name }) => !unusedItems.includes(name))
+    .map(({ name }) => ({
+      itemName: name,
+    }));
 }
 
 export default PokestatsItemPage;

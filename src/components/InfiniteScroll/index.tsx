@@ -1,3 +1,5 @@
+'use client';
+
 import { useState, useEffect, useRef, useCallback } from 'react';
 // helpers
 import { getResourceId } from '@/helpers';

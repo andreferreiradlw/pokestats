@@ -1,0 +1,55 @@
+// types
+import type { Move, MoveTarget, SuperContestEffect, ContestEffect } from 'pokenode-ts';
+// helpers
+import { ContestApi, MachineApi, MovesApi, type MoveMachinesData } from '@/services';
+import { getResourceId } from '@/helpers';
+// components
+import { MovePage } from '@/PageComponents';
+
+export interface PokestatsMovePageProps {
+  move: Move;
+  moveMachines: MoveMachinesData | null;
+  target: MoveTarget;
+  superContestEffect: SuperContestEffect | null;
+  contestEffect: ContestEffect | null;
+}
+
+const PokestatsMovePage = async ({ params }: { params: { moveId: string } }) => {
+  const moveName = params.moveId;
+
+  const [moveData, allMovesData] = await Promise.all([
+    MovesApi.getMoveData(moveName),
+    MovesApi.listMoves(0, 850),
+  ]);
+
+  if (!allMovesData || !moveData) {
+    throw new Error('Move data not found');
+  }
+
+  const [targetData, moveMachinesData, { superContestEffectData, contestEffectData }] =
+    await Promise.all([
+      MovesApi.getMoveTarget(getResourceId(moveData.target.url)),
+      MachineApi.getMoveMachinesData(moveData.machines),
+      ContestApi.getMoveContestEffects(moveData),
+    ]);
+
+  const props: PokestatsMovePageProps = {
+    move: moveData,
+    moveMachines: moveMachinesData,
+    target: targetData,
+    superContestEffect: superContestEffectData,
+    contestEffect: contestEffectData,
+  };
+
+  return <MovePage {...props} />;
+};
+
+export async function generateStaticParams() {
+  const moveList = await MovesApi.listMoves(0, 937);
+
+  return moveList.results.map(move => ({
+    moveId: move.name,
+  }));
+}
+
+export default PokestatsMovePage;

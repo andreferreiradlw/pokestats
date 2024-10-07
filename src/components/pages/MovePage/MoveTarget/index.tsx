@@ -1,4 +1,5 @@
-// components/MoveTarget.tsx
+'use client';
+
 import { useMemo } from 'react';
 // types
 import type { NamedAPIResource, MoveTarget as PokenodeMoveTarget } from 'pokenode-ts';
@@ -13,8 +14,7 @@ import {
   BattleGround,
 } from './StyledMoveTarget';
 // components
-import type { Grid2Props } from '@mui/material';
-import { Grid2, Stack, Typography } from '@mui/material';
+import { Grid2, Stack, Typography, type Grid2Props } from '@mui/material';
 // utilities
 import {
   mapTypeToPokemonId,

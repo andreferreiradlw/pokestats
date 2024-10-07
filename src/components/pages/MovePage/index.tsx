@@ -1,9 +1,8 @@
 // types
-import type { PokestatsMovePageProps } from 'src/old.pages/move/[moveId]';
+import type { PokestatsMovePageProps } from '@/app/move/[moveId]/page';
 // helpers
 import { findEnglishName } from '@/helpers';
 // components
-import TypeBadge from '@/components/TypeBadge';
 import MoveInfo from './MoveInfo';
 import MoveEntries from './MoveEntries';
 import MoveContest from './MoveContest';
@@ -12,8 +11,8 @@ import MoveMachines from './MoveMachines';
 import MoveTarget from './MoveTarget';
 import MovePokemon from './MovePokemon';
 import MoveStats from './MoveStats';
-import type { Theme } from '@mui/material';
-import { Divider, Grid2, Stack, Typography } from '@mui/material';
+import TypeBadge from '@/components/TypeBadge';
+import { Divider, Grid2, Stack, Typography, type Theme } from '@mui/material';
 
 export type MovePageProps = Omit<PokestatsMovePageProps, 'autocompleteList'>;
 

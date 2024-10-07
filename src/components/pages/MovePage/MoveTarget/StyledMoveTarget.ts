@@ -1,10 +1,7 @@
 import { styled } from '@mui/material/styles';
-// animations
-// import { blink } from '@/animations';
 // components
 import { Stack } from '@mui/material';
 
-// Define types for the Badge component props
 interface BadgeProps {
   $isAffected?: boolean;
   $isSelected?: boolean;
@@ -52,7 +49,6 @@ const Badge = styled('div', {
     },
 
     '&:before, &:after': {
-      // animation: `${blink(theme.palette.background.default, 'background')} 2s infinite ease-in-out 1s`,
       backgroundSize: '20px 20px',
       content: '""',
       display: 'inline-flex',

@@ -1,3 +1,5 @@
+'use client';
+
 // types
 import type { PokestatsItemPageProps } from '@/app/item/[itemName]/page';
 // helpers

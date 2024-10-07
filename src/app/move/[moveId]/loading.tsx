@@ -1,5 +1,5 @@
-import { ItemPageSkeleton } from '@/skeletons';
+import { MovePageSkeleton } from '@/skeletons';
 
-const Loading = () => <ItemPageSkeleton />;
+const Loading = () => <MovePageSkeleton />;
 
 export default Loading;

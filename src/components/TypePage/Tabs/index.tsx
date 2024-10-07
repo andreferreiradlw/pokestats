@@ -1,6 +1,6 @@
 import { useMemo, useState, useCallback } from 'react';
 // types
-import type { TypePageProps } from '../index';
+import type { PokestatsTypePageProps } from '@/app/type/[typeId]/page';
 import type { NamedAPIResource } from 'pokenode-ts';
 // helpers
 import { getResourceId } from '@/helpers';
@@ -13,7 +13,7 @@ import MovesTableV2 from '@/components/MovesTableV2';
 import Link from 'next/link';
 import CustomButton from '@/components/CustomButton';
 
-interface TypeTabsProps extends StackProps, TypePageProps {
+interface TypeTabsProps extends StackProps, PokestatsTypePageProps {
   typeName: string;
 }
 

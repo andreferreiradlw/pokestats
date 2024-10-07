@@ -14,15 +14,13 @@ import MoveStats from './MoveStats';
 import TypeBadge from '@/components/TypeBadge';
 import { Divider, Grid2, Stack, Typography, type Theme } from '@mui/material';
 
-export type MovePageProps = Omit<PokestatsMovePageProps, 'autocompleteList'>;
-
 const MovePage = ({
   move,
   moveMachines,
   target,
   superContestEffect,
   contestEffect,
-}: MovePageProps): JSX.Element => {
+}: PokestatsMovePageProps): JSX.Element => {
   // data
   const { names: moveNames, type, flavor_text_entries, learned_by_pokemon } = move;
 

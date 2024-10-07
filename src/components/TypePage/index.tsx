@@ -1,5 +1,7 @@
+'use client';
+
 // types
-import type { PokestatsTypePageProps } from 'src/old.pages/type/[typeId]';
+import type { PokestatsTypePageProps } from '@/app/type/[typeId]/page';
 // helpers
 import { findEnglishName } from '@/helpers';
 import { useBreakpoint } from '@/hooks';
@@ -8,13 +10,9 @@ import TypeInfo from './Info';
 import TypeRelations from './Relations';
 import TypeIcon from './TypeIcon';
 import Tabs from './Tabs';
-// styles
-import type { Theme } from '@mui/material';
-import { Divider, Grid2, Stack, Typography } from '@mui/material';
+import { Divider, Grid2, Stack, Typography, type Theme } from '@mui/material';
 
-export type TypePageProps = Omit<PokestatsTypePageProps, 'autocompleteList'>;
-
-const TypePage = ({ typeData }: TypePageProps): JSX.Element => {
+const TypePage = ({ typeData }: PokestatsTypePageProps): JSX.Element => {
   // breakpoint
   const isLargeUp = useBreakpoint({ breakpoint: 'lg' });
 

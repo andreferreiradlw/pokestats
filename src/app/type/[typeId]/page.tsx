@@ -3,7 +3,7 @@ import type { Type } from 'pokenode-ts';
 // helpers
 import { TypesApi } from '@/services';
 // components
-import TypePage from '@/components/TypePage';
+import { TypePage } from '@/PageComponents';
 
 export interface PokestatsTypePageProps {
   typeData: Type;
@@ -14,15 +14,7 @@ const PokestatsTypePage = async ({ params }: { params: { typeId: string } }) => 
 
   const typeData = await TypesApi.getByName(typeName);
 
-  if (!typeData) {
-    throw new Error('Type data not found');
-  }
-
-  const props: PokestatsTypePageProps = {
-    typeData,
-  };
-
-  return <TypePage {...props} />;
+  return <TypePage typeData={typeData} />;
 };
 
 export async function generateStaticParams() {

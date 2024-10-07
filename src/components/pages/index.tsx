@@ -5,3 +5,4 @@ export { default as ItemListPage } from './ItemListPage';
 export { default as ItemPage } from './ItemPage';
 export { default as MovePage } from './MovePage';
 export { default as MovesListPage } from './MovesListPage';
+export { default as TypePage } from './TypePage';

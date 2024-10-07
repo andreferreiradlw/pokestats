@@ -7,7 +7,7 @@ interface TypeLayoutProps {
 }
 
 const TypeLayout = ({ children, params }: TypeLayoutProps) => {
-  const customKey = `move-${params.typeId}-page`;
+  const customKey = `type-${params.typeId}-page`;
 
   return (
     <LayoutV2 withHeader customKey={customKey}>

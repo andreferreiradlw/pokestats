@@ -1,3 +1,5 @@
+'use client';
+
 // types
 import type { PokestatsPokemonPageProps } from 'src/old.pages/pokemon/[pokemonId]';
 import type { PokemonSpecies } from 'pokenode-ts';

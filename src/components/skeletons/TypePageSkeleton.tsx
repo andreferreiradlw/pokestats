@@ -6,7 +6,7 @@ const TypePageSkeleton = (): JSX.Element => {
       <Grid2 container spacing={4} direction="column">
         <Grid2>
           <Typography variant="pageHeading">
-            <Skeleton width="200px" height={40} />
+            <Skeleton width="200px" />
           </Typography>
         </Grid2>
         <Grid2 container spacing={4} direction={{ xxs: 'column', lg: 'row' }} size={12}>

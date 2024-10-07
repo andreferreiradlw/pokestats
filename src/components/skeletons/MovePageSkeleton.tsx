@@ -16,7 +16,7 @@ const MovePageSkeleton = (): JSX.Element => {
         >
           <Skeleton variant="circular" width={40} height={40} />
           <Typography variant="pageHeading">
-            <Skeleton width="200px" height={40} />
+            <Skeleton width="200px" />
           </Typography>
         </Stack>
         <Grid2

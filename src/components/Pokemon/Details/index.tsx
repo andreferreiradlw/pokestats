@@ -3,6 +3,7 @@ import { useContext, useState, useEffect, useMemo } from 'react';
 import type { PokestatsPokemonPageProps } from 'src/old.pages/pokemon/[pokemonId]';
 import type { Ability } from 'pokenode-ts';
 // helpers
+import { hoverVariant } from '@/animations';
 import { GameVersionContext } from '@/context';
 import {
   removeDash,
@@ -10,16 +11,15 @@ import {
   formatFlavorText,
   findEnglishName,
   type GameGenValue,
+  capitalise,
 } from '@/helpers';
 // components
-import TypeBadge from '@/components/TypeBadge';
-import type { Grid2Props, Theme } from '@mui/material';
-import { Badge, capitalize, Chip, Grid2, Stack, Typography } from '@mui/material';
-// styles
-import { Table, Numbered } from '@/BaseStyles';
-import { Flavor } from './StyledDetails';
 import { motion } from '@/client';
-import { hoverVariant } from '@/animations';
+import { Table, Numbered } from '@/BaseStyles';
+import TypeBadge from '@/components/TypeBadge';
+import { Badge, type Grid2Props, type Theme, Chip, Grid2, Stack, Typography } from '@mui/material';
+// styles
+import { Flavor } from './StyledDetails';
 // icons
 import VolumeUpIcon from '@mui/icons-material/VolumeUp';
 import VolumeDownIcon from '@mui/icons-material/VolumeDown';
@@ -208,11 +208,11 @@ const PokemonDetails = ({
           </tr>
           <tr>
             <th>Shape</th>
-            <td>{shape ? capitalize(removeDash(shape.name)) : 'No shape'}</td>
+            <td>{shape ? capitalise(removeDash(shape.name)) : 'No shape'}</td>
           </tr>
           <tr>
             <th>Color</th>
-            <td>{capitalize(color.name)}</td>
+            <td>{capitalise(color.name)}</td>
           </tr>
         </tbody>
       </Table>

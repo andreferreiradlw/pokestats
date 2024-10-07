@@ -3,10 +3,11 @@ import type { EvolutionChain as EvoChainType, PokemonSpecies } from 'pokenode-ts
 // helpers
 import { fadeInUpVariant } from '@/animations';
 import { useEvolutionChain } from '@/hooks';
+import { capitalise } from '@/helpers';
 // components
 import Evolution from './Evolution';
 import { motion } from '@/client';
-import { capitalize, Grid2, Typography, type Grid2Props } from '@mui/material';
+import { Grid2, Typography, type Grid2Props } from '@mui/material';
 import Loading from '@/components/Loading';
 
 interface EvolutionChainProps extends Grid2Props {
@@ -97,7 +98,7 @@ const EvolutionChain = ({
                 variants={fadeInUpVariant}
                 key="no-evolutions"
               >
-                {`${capitalize(pokemonSpecies.name)} does not evolve.`}
+                {`${capitalise(pokemonSpecies.name)} does not evolve.`}
               </Typography>
             )}
           </>

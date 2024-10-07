@@ -1,12 +1,11 @@
 // types
 import type { Move } from 'pokenode-ts';
 // helpers
-import { removeDash } from '@/helpers';
+import { capitalise, removeDash } from '@/helpers';
 // styles
 import { Table } from '@/BaseStyles';
 // components
-import type { Grid2Props } from '@mui/material';
-import { Box, capitalize, Grid2, Typography } from '@mui/material';
+import { Box, type Grid2Props, Grid2, Typography } from '@mui/material';
 
 interface MoveStatsProps extends Grid2Props {
   move: Move;
@@ -31,7 +30,7 @@ const MoveStats = ({ move, moveName, ...rest }: MoveStatsProps): JSX.Element => 
           <tbody>
             {stat_changes.map(({ change, stat }, i) => (
               <tr key={`stat-change-${name}-${stat.name}-${i}`}>
-                <th>{capitalize(removeDash(stat.name))}</th>
+                <th>{capitalise(removeDash(stat.name))}</th>
                 <td>{change}</td>
               </tr>
             ))}

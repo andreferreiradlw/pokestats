@@ -21,10 +21,6 @@ const PokestatsItemPage = async ({ params }: { params: { itemName: string } }) =
 
   const itemData = await ItemApi.getByName(itemName);
 
-  if (!itemData) {
-    throw new Error('Item not found');
-  }
-
   const formattedItemData = formatItemData(itemData);
 
   // Fetch category, fling effect, and attributes concurrently

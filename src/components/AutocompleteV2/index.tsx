@@ -8,18 +8,11 @@ import { useRouter } from 'next/navigation';
 import { usePlausible } from 'next-plausible';
 import { useAutocompleteOptions, type AutocompleteListOption } from '@/hooks';
 // helpers
-import { formatPokemonId, mapGeneration, removeDash } from '@/helpers';
+import { capitalise, formatPokemonId, mapGeneration, removeDash } from '@/helpers';
 import { fadeInDownVariant } from '@/animations';
 // components
 import type { AutocompleteProps, Theme } from '@mui/material';
-import {
-  Autocomplete,
-  Box,
-  capitalize,
-  createFilterOptions,
-  Stack,
-  TextField,
-} from '@mui/material';
+import { Autocomplete, Box, createFilterOptions, Stack, TextField } from '@mui/material';
 import Loading from '@/components/Loading';
 // styles
 import {
@@ -140,7 +133,7 @@ const AutocompleteV2 = ({
         clearOnBlur
         loading={isLoading}
         options={data || []}
-        getOptionLabel={({ name }) => capitalize(removeDash(name))}
+        getOptionLabel={({ name }) => capitalise(removeDash(name))}
         getOptionKey={({ id, assetType }) => `${assetType}-${id}`}
         filterOptions={filterOptions}
         groupBy={({ assetType }) => assetType}

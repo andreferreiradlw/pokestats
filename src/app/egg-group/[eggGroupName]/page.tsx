@@ -22,10 +22,6 @@ const PokestatsEggGroupPage = async ({ params }: { params: { eggGroupName: strin
     EggGroupApi.getByName(eggGroupName),
   ]);
 
-  if (!eggGroupNames || !eggGroupData) {
-    throw new Error('Egg group data not found');
-  }
-
   const speciesIdList = eggGroupData.pokemon_species.map(({ url }) => getResourceId(url));
 
   const [speciesData, pokemonData] = await Promise.all([

@@ -2,10 +2,16 @@ import { useMemo } from 'react';
 // types
 import type { AbilityEffectChange, Move, PastMoveStatValues } from 'pokenode-ts';
 // helpers
-import { createSentence, type GameGroup, mapGroupToGeneration, removeUnderscore } from '@/helpers';
+import {
+  capitalise,
+  createSentence,
+  type GameGroup,
+  mapGroupToGeneration,
+  removeUnderscore,
+} from '@/helpers';
 // components
-import type { Grid2Props } from '@mui/material';
-import { capitalize, Grid2, Stack, Typography } from '@mui/material';
+
+import { Grid2, Stack, Typography, type Grid2Props } from '@mui/material';
 
 interface MoveEntriesProps extends Grid2Props {
   move: Move;
@@ -23,7 +29,7 @@ const buildValuesPhrase = (
     if (key !== 'version_group' && key !== 'effect_entries' && value) {
       switch (key) {
         case 'power':
-          phraseElements.push(`${value} ${capitalize(removeUnderscore(key))}`);
+          phraseElements.push(`${value} ${capitalise(removeUnderscore(key))}`);
           break;
         case 'pp':
           phraseElements.push(`${value} ${removeUnderscore(key).toUpperCase()}`);

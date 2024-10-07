@@ -2,11 +2,11 @@ import React, { useMemo, memo } from 'react';
 // types
 import type { EvolutionDetail, NamedAPIResource } from 'pokenode-ts';
 // helpers
-import { removeDash, getResourceId } from '@/helpers';
+import { removeDash, getResourceId, capitalise } from '@/helpers';
 // components
 import Link from 'next/link';
 import { Container, Details, ItemImage } from './StyledEvolutionDetails';
-import { capitalize, Stack, Link as MuiLink } from '@mui/material';
+import { Stack, Link as MuiLink } from '@mui/material';
 // svg icons
 import LoopIcon from '@mui/icons-material/Loop';
 import SignpostIcon from '@mui/icons-material/Signpost';
@@ -78,7 +78,7 @@ const ConditionalLinkText = memo(
       <>
         {prefix}
         <MuiLink href={`${path}${item.name}`} component={Link}>
-          {capitalize(transform(item.name))}
+          {capitalise(transform(item.name))}
         </MuiLink>
         {suffix}
       </>
@@ -183,7 +183,7 @@ const EvolutionDetailsText = memo(
   }) => (
     <>
       {min_level ? `reach level ${min_level}` : triggerDisplay}
-      {location && ` at ${capitalize(removeDash(location.name))}`}
+      {location && ` at ${capitalise(removeDash(location.name))}`}
       <ConditionalLinkText
         item={trade_species}
         prefix=" for "

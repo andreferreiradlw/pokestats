@@ -17,14 +17,7 @@ export interface PokestatsMovePageProps {
 const PokestatsMovePage = async ({ params }: { params: { moveId: string } }) => {
   const moveName = params.moveId;
 
-  const [moveData, allMovesData] = await Promise.all([
-    MovesApi.getMoveData(moveName),
-    MovesApi.listMoves(0, 850),
-  ]);
-
-  if (!allMovesData || !moveData) {
-    throw new Error('Move data not found');
-  }
+  const moveData = await MovesApi.getMoveData(moveName);
 
   const [targetData, moveMachinesData, { superContestEffectData, contestEffectData }] =
     await Promise.all([

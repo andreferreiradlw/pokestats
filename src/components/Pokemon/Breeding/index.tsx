@@ -5,16 +5,14 @@ import { styled } from '@mui/material/styles';
 import { usePlausible } from 'next-plausible';
 // types
 import type { PokemonSpecies, EvolutionChain } from 'pokenode-ts';
-// styles
-import { Table } from '@/components/BaseStyles';
 // components
-import type { Grid2Props } from '@mui/material';
-import { capitalize, Grid2, Stack, Typography } from '@mui/material';
+import { Table } from '@/BaseStyles';
+import { type Grid2Props, Grid2, Stack, Typography } from '@mui/material';
+import Link from 'next/link';
+import CustomButton from '@/components/CustomButton';
 // icons
 import MaleIcon from '@mui/icons-material/Male';
 import FemaleIcon from '@mui/icons-material/Female';
-import Link from 'next/link';
-import CustomButton from '@/components/CustomButton';
 
 const Ratio = styled(Typography)`
   white-space: nowrap;
@@ -103,7 +101,7 @@ const Breeding = ({ species, babyTriggerItem, ...rest }: BreedingProps): JSX.Ele
           </tr>
           <tr>
             <th>Growth Rate</th>
-            <td>{capitalize(removeDash(growth_rate.name))}</td>
+            <td>{capitalise(removeDash(growth_rate.name))}</td>
           </tr>
           <tr>
             <th>Egg Cycles</th>
@@ -111,11 +109,11 @@ const Breeding = ({ species, babyTriggerItem, ...rest }: BreedingProps): JSX.Ele
           </tr>
           <tr>
             <th>Baby Trigger Item</th>
-            <td>{babyTriggerItem ? capitalize(removeDash(babyTriggerItem.name)) : 'None'}</td>
+            <td>{babyTriggerItem ? capitalise(removeDash(babyTriggerItem.name)) : 'None'}</td>
           </tr>
           <tr>
             <th>Habitat</th>
-            <td>{habitat ? capitalize(removeDash(habitat.name)) : 'None'}</td>
+            <td>{habitat ? capitalise(removeDash(habitat.name)) : 'None'}</td>
           </tr>
           <tr>
             <th>Egg Groups</th>

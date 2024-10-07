@@ -2,6 +2,7 @@ import { useMemo } from 'react';
 // helpers
 import { staggerChildVariant } from '@/animations';
 import {
+  capitalise,
   type GameGenValue,
   mapEncounterMethodIcons,
   parseLocationName,
@@ -13,7 +14,6 @@ import type { EncounterData } from '@/hooks';
 // components
 import { Table } from '@/BaseStyles';
 import {
-  capitalize,
   Card,
   CardActions,
   CardContent,
@@ -86,7 +86,7 @@ const EncounterCard = ({
             methodName:
               isHeadbuttMethod && methodName === 'headbutt-high'
                 ? 'Headbutt rare'
-                : capitalize(removeDash(methodName)),
+                : capitalise(removeDash(methodName)),
             iconUrl: mapEncounterMethodIcons(
               methodName,
               pokemonName,

@@ -1,11 +1,10 @@
 // types
 import type { ContestEffect, Move, SuperContestEffect } from 'pokenode-ts';
 // helpers
-import { removeDash } from '@/helpers';
+import { capitalise, removeDash } from '@/helpers';
 // components
 import Contest from './Contest';
-import type { Grid2Props } from '@mui/material';
-import { capitalize, Grid2, Typography } from '@mui/material';
+import { Grid2, Typography, type Grid2Props } from '@mui/material';
 
 interface MoveContestProps extends Grid2Props {
   move: Move;
@@ -42,7 +41,7 @@ const MoveContest = ({
             </Typography>
             {' has the '}
             <Typography fontWeight="600" component="span">
-              {capitalize(removeDash(contest_type.name))}
+              {capitalise(removeDash(contest_type.name))}
             </Typography>
             {' contest type.'}
           </Typography>

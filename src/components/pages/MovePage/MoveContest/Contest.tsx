@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import { Fragment, useMemo } from 'react';
 // types
 import type {
   ContestComboDetail,
@@ -7,12 +7,11 @@ import type {
   SuperContestEffect,
 } from 'pokenode-ts';
 // helpers
-import { removeDash } from '@/helpers';
+import { capitalise, removeDash } from '@/helpers';
 // styles
 import { Table } from '@/BaseStyles';
 // components
-import type { Grid2Props } from '@mui/material';
-import { Box, capitalize, Link as MuiLink, Stack, Typography } from '@mui/material';
+import { Box, Link as MuiLink, Stack, Typography, type Grid2Props } from '@mui/material';
 import Link from 'next/link';
 
 interface ContestProps extends Grid2Props {
@@ -27,12 +26,12 @@ interface ContestProps extends Grid2Props {
 const renderLinks = (combos: NamedAPIResource[], lastDivider = 'or'): JSX.Element => (
   <>
     {combos.map(({ name }, i) => (
-      <React.Fragment key={`${name}-combo`}>
+      <Fragment key={`${name}-combo`}>
         <MuiLink href={`/move/${name}`} component={Link}>
-          {capitalize(removeDash(name))}
+          {capitalise(removeDash(name))}
         </MuiLink>
         {i < combos.length - 1 && (i === combos.length - 2 ? ` ${lastDivider} ` : ', ')}
-      </React.Fragment>
+      </Fragment>
     ))}
   </>
 );

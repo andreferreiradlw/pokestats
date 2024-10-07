@@ -10,7 +10,7 @@ module.exports = {
     NEXT_PUBLIC_ANALYTICS: process.env.NEXT_PUBLIC_ANALYTICS,
     NEXT_PUBLIC_ENV_VAR: process.env.NEXT_PUBLIC_ENV_VAR,
   },
-  staticPageGenerationTimeout: 90,
+  staticPageGenerationTimeout: 120,
   images: {
     unoptimized: true,
     remotePatterns: [

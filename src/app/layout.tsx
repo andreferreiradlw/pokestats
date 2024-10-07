@@ -1,6 +1,8 @@
 // types
 import type { ReactNode } from 'react';
 import type { Metadata } from 'next';
+// helpers
+import { SpeedInsights } from '@vercel/speed-insights/next';
 // components
 import Providers from './providers';
 
@@ -19,7 +21,10 @@ export const metadata: Metadata = {
 const RootLayout = ({ children }: { children: ReactNode }) => (
   <html lang="en">
     <body>
-      <Providers>{children}</Providers>
+      <Providers>
+        {children}
+        <SpeedInsights />
+      </Providers>
     </body>
   </html>
 );

@@ -9,7 +9,7 @@ import Link from 'next/link';
 import Particles from '@/components/Particles';
 import { Stack } from '@mui/material';
 
-const NotFound = (): JSX.Element => {
+const NotFoundPage = (): JSX.Element => {
   // Get the current path
   const pathname = usePathname();
 
@@ -38,4 +38,4 @@ const NotFound = (): JSX.Element => {
   );
 };
 
-export default NotFound;
+export default NotFoundPage;

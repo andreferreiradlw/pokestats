@@ -1,12 +1,12 @@
 import type { ReactNode } from 'react';
 import LayoutV2 from '@/components/LayoutV2';
 
-interface EggGroupLayoutProps {
+interface PokemonSpritesLayoutProps {
   children: ReactNode;
   params: { pokemonName: string };
 }
 
-const EggGroupLayout = ({ children, params }: EggGroupLayoutProps) => {
+const PokemonSpritesLayout = ({ children, params }: PokemonSpritesLayoutProps) => {
   const customKey = `pokemon-sprites-${params.pokemonName}-page`;
 
   return (
@@ -16,4 +16,4 @@ const EggGroupLayout = ({ children, params }: EggGroupLayoutProps) => {
   );
 };
 
-export default EggGroupLayout;
+export default PokemonSpritesLayout;

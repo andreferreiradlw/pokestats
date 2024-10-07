@@ -1,3 +1,5 @@
+'use client';
+
 import { type PropsWithChildren, useRef, useState } from 'react';
 // helpers
 import { mapGeneration, type GameGenValue } from '@/helpers';
@@ -8,7 +10,7 @@ import CanvasMapper, { type CanvasMapperArea, type CanvasMapperHandle } from './
 import { Grid2, Stack, Typography, useTheme } from '@mui/material';
 import LocationDetails from './LocationDetails';
 import { AnimatePresence } from '@/client';
-import CustomButton from '../CustomButton';
+import CustomButton from '@/components/CustomButton';
 
 interface RegionPageProps extends PropsWithChildren {
   areas: CanvasMapperArea[];

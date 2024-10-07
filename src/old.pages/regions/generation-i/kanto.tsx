@@ -3,7 +3,7 @@ import type { NextPage, GetServerSideProps } from 'next';
 // components
 import Seo from '@/components/Seo'; // Import the Seo component
 import LayoutV2 from '@/components/LayoutV2';
-import KantoGen1 from '@/components/RegionsPages/generation-i/kanto';
+import KantoGen1 from '@/components/pages/RegionsPages/generation-i/kanto';
 
 export interface PokestatsRegionsPageProps {
   location: string | null;
@@ -39,7 +39,7 @@ export const getServerSideProps: GetServerSideProps = async context => {
 
   return {
     props: {
-      location: typeof location === 'string' ? location : null, // Ensure location is a string or null
+      location: typeof location === 'string' ? location : null,
     },
   };
 };

@@ -1,4 +1,4 @@
 // components
-import NotFound from '@/components/NotFound';
+import { NotFoundPage } from '@/PageComponents';
 
-export default NotFound;
+export default NotFoundPage;

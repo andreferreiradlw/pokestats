@@ -13,7 +13,7 @@ import { Stack, Typography } from '@mui/material';
 import CustomInput from '@/components/CustomInput';
 import DropdownV2 from '@/components/DropdownV2';
 import CustomButton from '@/components/CustomButton';
-import ItemTable from './ItemTable.tsx';
+import ItemTable from './ItemTable';
 import { motion } from '@/client';
 
 const ItemListPage = ({

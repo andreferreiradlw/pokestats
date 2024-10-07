@@ -1,9 +1,9 @@
 import { useCallback, useMemo } from 'react';
 // hooks
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 import { usePlausible } from 'next-plausible';
 // types
-import type { EggGroupTableData } from 'src/old.pages/egg-group/[eggGroupName]';
+import type { EggGroupTableData } from '@/app/egg-group/[eggGroupName]/page';
 import type { Pokemon } from 'pokenode-ts';
 // helpers
 import { capitalise, removeDash } from '@/helpers';

@@ -1,16 +1,18 @@
+'use client';
+
 import { useCallback, useMemo } from 'react';
 // types
-import type { PokestatsEggGroupPageProps } from 'src/old.pages/egg-group/[eggGroupName]';
+import type { PokestatsEggGroupPageProps } from '@/app/egg-group/[eggGroupName]/page';
 // helpers
 import { useFormik } from 'formik';
 import { capitalise, findEnglishName } from '@/helpers';
 // components
 import { Grid2, Stack, Typography } from '@mui/material';
 import EggGroupTable from './EggGroupTable';
-import CustomInput from '../CustomInput';
-import CustomButton from '../CustomButton';
-import CustomMultiSelect from '../CustomMultiSelect';
-import CustomSlider from '../CustomSlider';
+import CustomInput from '@/components/CustomInput';
+import CustomButton from '@/components/CustomButton';
+import CustomMultiSelect from '@/components/CustomMultiSelect';
+import CustomSlider from '@/components/CustomSlider';
 
 const EggGroupPage = ({
   eggGroupData,

@@ -9,7 +9,7 @@ import {
   type FormattedItemPocket,
 } from '@/helpers';
 // components
-import ItemListPage from '@/components/ItemListPage';
+import { ItemListPage } from '@/PageComponents';
 
 export interface PokestatsItemsPageProps {
   itemData: ExtractedItem[];

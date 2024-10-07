@@ -1,7 +1,9 @@
+'use client';
+
 import { useMemo, useCallback } from 'react';
 // hooks
 import { useRouter } from 'next/navigation';
-import { usePlausible } from 'next-plausible';
+import { track } from '@vercel/analytics';
 // types
 import type { Move, MoveLearnMethod } from 'pokenode-ts';
 import type { PartialMove } from '@/app/moves/page';
@@ -40,7 +42,6 @@ const MovesTableV2 = ({
 }: MovesTableV2Props): JSX.Element => {
   // hooks
   const router = useRouter();
-  const plausible = usePlausible();
 
   const mapMethodName = useMemo(() => {
     switch (learnMethod) {
@@ -55,10 +56,10 @@ const MovesTableV2 = ({
 
   const onCellClick = useCallback(
     (moveName: Move['name']) => {
-      plausible('Move Table Click');
+      track('Move Table Click', { moveName });
       router.push(`/move/${moveName}`);
     },
-    [plausible, router],
+    [track, router],
   );
 
   // Define the columns for CustomTable

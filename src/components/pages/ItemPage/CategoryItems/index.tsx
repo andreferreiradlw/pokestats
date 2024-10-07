@@ -11,24 +11,16 @@ import {
   Grid2,
   type Grid2Props,
   Stack,
-  styled,
   Typography,
 } from '@mui/material';
 import CustomButton from '@/components/CustomButton';
 import Link from 'next/link';
-// svg
-import QuestionMarkIcon from 'public/static/iconLibrary/question_mark.svg';
+import { QuestionMark } from './styledCategoryItems';
 
 export interface CategoryItemsProps extends Grid2Props {
   category: ItemCategory;
   categoryItems: ExtractedItem[];
 }
-
-const QuestionMark = styled(QuestionMarkIcon)(({ theme }) => ({
-  width: '20%',
-  height: 'auto',
-  fill: theme.palette.text.primary,
-}));
 
 const CategoryItems = ({ category, categoryItems, ...rest }: CategoryItemsProps): JSX.Element => (
   <Grid2 container size={12} spacing={2} direction="column" {...rest}>

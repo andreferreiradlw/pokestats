@@ -2,16 +2,13 @@
 
 import { useContext } from 'react';
 // helpers
-import { usePlausible } from 'next-plausible';
+import { track } from '@vercel/analytics';
 import { ColorModeContext } from '@/context';
 // components
 import { ThemeSwitch } from './styledThemeToggleButton';
 import { Stack, type StackProps } from '@mui/material';
 
 const ThemeToggleButton = (props: StackProps): JSX.Element => {
-  // analytics
-  const plausible = usePlausible();
-
   // context
   const colorMode = useContext(ColorModeContext);
 
@@ -22,7 +19,7 @@ const ThemeToggleButton = (props: StackProps): JSX.Element => {
         checked={colorMode.mode === 'dark'}
         onChange={() => {
           colorMode.toggleColorMode();
-          plausible('Toggle Theme Click');
+          track('Toggle Theme Click');
         }}
       />
     </Stack>

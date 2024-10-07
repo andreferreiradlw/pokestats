@@ -4,7 +4,7 @@ import { useMemo } from 'react';
 // types
 import type { NamedAPIResource } from 'pokenode-ts';
 // helpers
-import { usePlausible } from 'next-plausible';
+import { track } from '@vercel/analytics';
 import { getRandomInt } from '@/helpers';
 import { useRouter } from 'next/navigation';
 // components
@@ -18,7 +18,6 @@ interface RandomButtonProps {
 
 const RandomButton = ({ pokemonList }: RandomButtonProps): JSX.Element => {
   const router = useRouter();
-  const plausible = usePlausible();
 
   // Generate the random Pokémon URL
   const randomPokemonUrl = useMemo(
@@ -28,7 +27,7 @@ const RandomButton = ({ pokemonList }: RandomButtonProps): JSX.Element => {
 
   // Handle button click
   const handleClick = () => {
-    plausible('Random Pokemon');
+    track('Random Pokemon Button Click');
     router.push(randomPokemonUrl);
   };
 

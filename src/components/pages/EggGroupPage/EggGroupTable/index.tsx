@@ -1,7 +1,7 @@
 import { useCallback, useMemo } from 'react';
 // hooks
 import { useRouter } from 'next/navigation';
-import { usePlausible } from 'next-plausible';
+import { track } from '@vercel/analytics';
 // types
 import type { EggGroupTableData } from '@/app/egg-group/[eggGroupName]/page';
 import type { Pokemon } from 'pokenode-ts';
@@ -38,16 +38,15 @@ const EggGroupTable = ({
 }: EggGroupTableProps): JSX.Element => {
   // hooks
   const router = useRouter();
-  const plausible = usePlausible();
 
   const onCellClick = useCallback(
     (forms?: Pokemon['forms']) => {
       if (forms) {
-        plausible('Egg Group Table Click');
+        track('Egg Group Table Item Click');
         router.push(`/pokemon/${forms[0].name}`);
       }
     },
-    [plausible, router],
+    [track, router],
   );
 
   // Define the columns for CustomTable

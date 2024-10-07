@@ -1,11 +1,10 @@
 'use client';
 
-import { useMemo } from 'react';
 // types
 import type { Pokemon } from 'pokenode-ts';
 // helpers
 import { formatSpriteData, removeDash } from '@/helpers';
-import { usePlausible } from 'next-plausible';
+import { track } from '@vercel/analytics/server';
 // components
 import { Stack, Typography, type StackProps } from '@mui/material';
 import CustomButton from '@/components/CustomButton';
@@ -17,15 +16,12 @@ interface SpritesProps extends StackProps {
 }
 
 const Sprites = ({ pokemon, ...rest }: SpritesProps): JSX.Element => {
-  // analytics
-  const plausible = usePlausible();
-
   // data
   const { name, sprites } = pokemon;
 
-  const pokemonName = useMemo(() => removeDash(name), [name]);
+  const pokemonName = removeDash(name);
 
-  const { otherSprites, mainSprites } = useMemo(() => formatSpriteData(sprites), [sprites]);
+  const { otherSprites, mainSprites } = formatSpriteData(sprites);
 
   return (
     <Stack gap={4} width="100%" {...rest}>
@@ -56,7 +52,7 @@ const Sprites = ({ pokemon, ...rest }: SpritesProps): JSX.Element => {
         <CustomButton
           variant="contained"
           size="large"
-          onClick={() => plausible('All Sprites Click')}
+          onClick={() => track('Pokemon Page - All Sprites Click')}
         >
           {`All ${pokemonName} sprites`}
         </CustomButton>

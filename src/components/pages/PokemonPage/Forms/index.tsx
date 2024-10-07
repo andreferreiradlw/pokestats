@@ -7,7 +7,7 @@ import type { Pokemon, PokemonSpecies } from 'pokenode-ts';
 import { genderDifferences } from './genderDescriptions';
 // helpers
 import { removeDash } from '@/helpers';
-import { usePlausible } from 'next-plausible';
+import { track } from '@vercel/analytics';
 // components
 import { Table } from '@/BaseStyles';
 import { Grid2, Stack, Typography, type Grid2Props } from '@mui/material';
@@ -20,9 +20,6 @@ interface PokemonFormsProps extends Grid2Props {
 }
 
 const PokemonForms = ({ pokemon, species, ...rest }: PokemonFormsProps): JSX.Element => {
-  // analytics
-  const plausible = usePlausible();
-
   // data
   const { forms_switchable, varieties, has_gender_differences, id } = species;
   const { name } = pokemon;
@@ -47,7 +44,7 @@ const PokemonForms = ({ pokemon, species, ...rest }: PokemonFormsProps): JSX.Ele
             fullWidth
             color="inherit"
             sx={{ justifyContent: 'center' }}
-            onClick={() => plausible('Pokemon Variety Click')}
+            onClick={() => track('Pokemon Page - Variety Click')}
           >{`${displayName} ${is_default ? '(Default)' : ''}`}</CustomButton>
         </Link>
       );

@@ -5,7 +5,7 @@ import { useMemo } from 'react';
 import type { PokestatsSpritePageProps } from '@/app/sprites/[pokemonName]/page';
 // helpers
 import { findEnglishName, formatSpriteData, removeDash } from '@/helpers';
-import { usePlausible } from 'next-plausible';
+import { track } from '@vercel/analytics';
 // components
 import { Divider, Stack, Typography } from '@mui/material';
 import SpriteAccordion from '@/components/SpriteAccordion';
@@ -19,9 +19,6 @@ const SpritesPage = ({
   pokemonSpecies,
   allPokemonData,
 }: PokestatsSpritePageProps): JSX.Element => {
-  // analytics
-  const plausible = usePlausible();
-
   // data
   const { name, sprites } = pokemon;
 
@@ -50,7 +47,7 @@ const SpritesPage = ({
             key={label}
             title={label}
             sprites={sprites}
-            onChange={() => plausible('Pokemon Sprite Accordion Click')}
+            onChange={() => track('Pokemon Sprite Page - Accordion Click')}
           />
         ))}
       <Link href={`/pokemon/${name}`} legacyBehavior passHref>
@@ -69,7 +66,7 @@ const SpritesPage = ({
                 title={label}
                 sprites={sprites}
                 defaultExpanded={index === 0}
-                onChange={() => plausible('Pokemon Sprite Accordion Click')}
+                onChange={() => track('Pokemon Sprite Page - Accordion Click')}
               />
             ))}
             {otherFormsData && (
@@ -97,7 +94,7 @@ const SpritesPage = ({
                 title={label}
                 sprites={sprites}
                 defaultExpanded={index === 0}
-                onChange={() => plausible('Pokemon Sprite Accordion Click')}
+                onChange={() => track('Pokemon Sprite Page - Accordion Click')}
               />
             ))}
           </Stack>
@@ -120,7 +117,7 @@ const SpritesPage = ({
                     title={label}
                     sprites={sprites}
                     defaultExpanded={index === 0}
-                    onChange={() => plausible('Pokemon Sprite Accordion Click')}
+                    onChange={() => track('Pokemon Sprite Page - Accordion Click')}
                   />
                 ))}
               </Stack>

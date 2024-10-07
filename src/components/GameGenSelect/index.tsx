@@ -1,14 +1,14 @@
+'use client';
+
 import { useContext } from 'react';
 // helpers
-import { usePlausible } from 'next-plausible';
+import { track } from '@vercel/analytics';
 import { GameVersionContext } from '@/context';
 // components
 import DropdownV2 from '../DropdownV2';
 import type { GameValue } from '@/helpers';
 
 const GameGenSelect = (): JSX.Element | null => {
-  // analytics
-  const plausible = usePlausible();
   // context
   const { gameVersion, setGameVersion, dropdownOptions } = useContext(GameVersionContext);
 
@@ -22,7 +22,7 @@ const GameGenSelect = (): JSX.Element | null => {
       minWidth="185px"
       onChange={value => {
         setGameVersion(value);
-        plausible('Game Version Select');
+        track('Game Version Select', { gameVersion: value });
       }}
     />
   );

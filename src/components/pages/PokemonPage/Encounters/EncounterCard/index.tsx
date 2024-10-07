@@ -8,8 +8,7 @@ import {
   parseLocationName,
   removeDash,
 } from '@/helpers';
-// hooks
-import { usePlausible } from 'next-plausible';
+import { track } from '@vercel/analytics';
 import type { EncounterData } from '@/hooks';
 // components
 import { Table } from '@/BaseStyles';
@@ -51,9 +50,6 @@ const EncounterCard = ({
   pokemonName,
   ...rest
 }: EncounterCardProps): JSX.Element => {
-  // analytics
-  const plausible = usePlausible();
-
   // data
   const { location_area, version_details, location } = encounter;
 
@@ -171,7 +167,7 @@ const EncounterCard = ({
                 <CustomButton
                   size="small"
                   variant="contained"
-                  onClick={() => plausible('All Area Encounters Click')}
+                  onClick={() => track('Pokemon Page - All Area Encounters Click')}
                 >
                   Area Details
                 </CustomButton>
@@ -186,7 +182,7 @@ const EncounterCard = ({
                 <CustomButton
                   size="small"
                   variant="contained"
-                  onClick={() => plausible('Headbutt Tree Finder Click')}
+                  onClick={() => track('Pokemon Page - Headbutt Tree Finder Click')}
                 >
                   Headbutt Tree Finder
                 </CustomButton>

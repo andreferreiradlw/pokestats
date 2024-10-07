@@ -1,3 +1,5 @@
+'use client';
+
 // components
 import { motion } from '@/client';
 import { styled } from '@mui/material/styles';

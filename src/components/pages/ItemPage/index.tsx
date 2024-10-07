@@ -1,10 +1,8 @@
-'use client';
-
 // types
 import type { PokestatsItemPageProps } from '@/app/item/[itemName]/page';
 // helpers
 import { findEnglishName } from '@/helpers';
-import { usePlausible } from 'next-plausible';
+import { track } from '@vercel/analytics/server';
 // components
 import { Divider, Grid2, Stack, Typography } from '@mui/material';
 import ItemDetails from './ItemDetails';
@@ -25,9 +23,6 @@ const ItemPage = ({
   flingEffect,
   berryData,
 }: PokestatsItemPageProps): JSX.Element => {
-  // analytics
-  const plausible = usePlausible();
-
   // data
   const { sprite, names, name, shortEntry, longEntry, flavourTextEntries } = item;
 
@@ -82,7 +77,7 @@ const ItemPage = ({
           <CustomButton
             size="large"
             variant="contained"
-            onClick={() => plausible('See All Items Click')}
+            onClick={() => track('Item Page - See All Items Click')}
           >
             See all items
           </CustomButton>

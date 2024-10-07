@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 // types
 import type { Berry } from 'pokenode-ts';
 // helpers
-import { usePlausible } from 'next-plausible';
+import { track } from '@vercel/analytics';
 import { capitalise, removeDash } from '@/helpers';
 // components
 import { Numbered, Table } from '@/BaseStyles';
@@ -15,9 +15,6 @@ interface BerryDetailsTableProps extends Grid2Props {
 }
 
 const BerryDetailsTable = ({ berry, ...rest }: BerryDetailsTableProps): JSX.Element => {
-  // analytics
-  const plausible = usePlausible();
-
   // berry data
   const {
     growth_time,
@@ -115,7 +112,7 @@ const BerryDetailsTable = ({ berry, ...rest }: BerryDetailsTableProps): JSX.Elem
           <CustomButton
             size="large"
             variant="contained"
-            onClick={() => plausible('See All Berries Click')}
+            onClick={() => track('Item Page - See All Berries Click')}
           >
             See all berries
           </CustomButton>

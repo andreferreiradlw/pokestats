@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
 // helpers
 import { useRouter } from 'next/navigation';
-import { usePlausible } from 'next-plausible';
+import { track } from '@vercel/analytics';
 import { fadeInUpVariant } from '@/animations';
 import { capitalise, removeDash, type ExtractedItem } from '@/helpers';
 // components
@@ -21,14 +21,13 @@ interface ItemTableProps extends Partial<CustomTableProps> {
 const ItemTable = ({ items }: ItemTableProps): JSX.Element => {
   // hooks
   const router = useRouter();
-  const plausible = usePlausible();
 
   const onCellClick = useCallback(
     (itemName: ExtractedItem['name']) => {
-      plausible('Item Table Click');
+      track('Item Table Click', { itemName });
       router.push(`/item/${itemName}`);
     },
-    [plausible, router],
+    [track, router],
   );
 
   // Define table columns

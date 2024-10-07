@@ -1,5 +1,7 @@
+'use client';
+
 // helpers
-import { usePlausible } from 'next-plausible';
+import { track } from '@vercel/analytics';
 import { hoverVariant } from '@/animations';
 import { useBreakpoint } from '@/hooks';
 // styles
@@ -10,9 +12,6 @@ import { Container, Grid2, Link } from '@mui/material';
 import ImageNextV2 from '@/components/ImageNextV2';
 
 const Footer = (): JSX.Element => {
-  // analytics
-  const plausible = usePlausible();
-
   // breakpoint
   const isMdUp = useBreakpoint({ breakpoint: 'md' });
 
@@ -26,7 +25,7 @@ const Footer = (): JSX.Element => {
                 href="https://github.com/andreferreiradlw/pokestats"
                 target="_blank"
                 rel="noopener"
-                onClick={() => plausible('Github Footer')}
+                onClick={() => track('Github Footer Link Click')}
               >
                 Github
               </Link>
@@ -34,7 +33,7 @@ const Footer = (): JSX.Element => {
                 href="https://github.com/andreferreiradlw/pokestats/issues"
                 target="_blank"
                 rel="noopener"
-                onClick={() => plausible('Open Issue Footer')}
+                onClick={() => track('Open Issue Footer Link Click')}
               >
                 Open Issue
               </Link>
@@ -72,7 +71,7 @@ const Footer = (): JSX.Element => {
                   href="https://pokeapi.co/"
                   target="_blank"
                   rel="noopener"
-                  onClick={() => plausible('Pokeapi Footer')}
+                  onClick={() => track('Pokeapi Footer Link Click')}
                 >
                   <ImageNextV2
                     imageUrl="/static/pokeapi_logo.png"

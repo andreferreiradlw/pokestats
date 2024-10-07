@@ -14,7 +14,7 @@ import {
 } from '@/helpers';
 // hooks
 import { useMachines, usePokemonMoves } from '@/hooks';
-import { usePlausible } from 'next-plausible';
+import { track } from '@vercel/analytics';
 // components
 import { Grid2, Typography, type Grid2Props } from '@mui/material';
 import DropdownV2 from '@/components/DropdownV2';
@@ -47,8 +47,6 @@ const learnMethodOptions = [
 ];
 
 const PokemonMoves = ({ pokemon, ...rest }: PokemonMovesProps): JSX.Element => {
-  const plausible = usePlausible();
-
   // States
   const { gameVersion, gameDetails } = useContext(GameVersionContext);
   const [learnMethod, setLearnMethod] = useState<MoveLearnMethod['name']>('level-up');
@@ -113,7 +111,7 @@ const PokemonMoves = ({ pokemon, ...rest }: PokemonMovesProps): JSX.Element => {
           <CustomButton
             variant="contained"
             size="large"
-            onClick={() => plausible('See All Moves Click')}
+            onClick={() => track('Pokemon Page - See All Moves Click')}
           >
             See all moves
           </CustomButton>

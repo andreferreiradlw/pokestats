@@ -5,7 +5,7 @@ import type { CSSProperties } from 'react';
 import type { HTMLMotionProps } from '@/client';
 // hooks
 import { useRouter } from 'next/navigation';
-import { usePlausible } from 'next-plausible';
+import { track } from '@vercel/analytics';
 import { useAutocompleteOptions, type AutocompleteListOption } from '@/hooks';
 // helpers
 import { capitalise, formatPokemonId, mapGeneration, removeDash } from '@/helpers';
@@ -111,8 +111,6 @@ const AutocompleteV2 = ({
 }: AutocompleteV2Props): JSX.Element => {
   // router
   const router = useRouter();
-  // analytics
-  const plausible = usePlausible();
   // fetch data
   const { data, isLoading } = useAutocompleteOptions();
 
@@ -193,28 +191,17 @@ const AutocompleteV2 = ({
           exit: 'exit',
           variants: fadeInDownVariant,
         }}
-        onHighlightChange={async (_, option) => {
-          if (option) {
-            if (option.assetType === 'region') {
-              await router.prefetch(`/regions/${option.generation}/${option.name}`);
-            } else if (option.assetType === 'tool') {
-              await router.prefetch(`/${option.name}`);
-            } else {
-              await router.prefetch(`/${option.assetType}/${option.name}`);
-            }
-          }
-        }}
         onChange={async (_, option) => {
-          plausible('Autocomplete Selection');
+          track('Autocomplete Selection', { assetType: option.name, name: option.name });
 
           if (option.assetType === 'region') {
-            await router.push(`/regions/${option.generation}/${option.name}`);
+            router.push(`/regions/${option.generation}/${option.name}`);
           } else if (option.assetType === 'tool') {
-            await router.push(`/${option.name}`);
+            router.push(`/${option.name}`);
           } else if (option.assetType === 'eggGroup') {
-            await router.push(`/egg-group/${option.name}`);
+            router.push(`/egg-group/${option.name}`);
           } else {
-            await router.push(`/${option.assetType}/${option.name}`);
+            router.push(`/${option.assetType}/${option.name}`);
           }
         }}
         noOptionsText="Nothing was found!"

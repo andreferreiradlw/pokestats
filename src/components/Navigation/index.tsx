@@ -4,11 +4,10 @@
 import type { PokestatsPokemonPageProps } from '@/app/pokemon/[pokemonName]/page';
 import type { PokemonSpecies } from 'pokenode-ts';
 // helpers
-import { usePlausible } from 'next-plausible';
+import { track } from '@vercel/analytics';
 // components
 import NavigationButton from './NavigationButton';
-import type { StackProps } from '@mui/material';
-import { Stack } from '@mui/material';
+import { Stack, type StackProps } from '@mui/material';
 
 interface NavigationProps extends StackProps {
   pokemonSpecies: PokemonSpecies;
@@ -22,9 +21,6 @@ const Navigation = ({
   prefix = 'pokemon',
   ...rest
 }: NavigationProps): JSX.Element => {
-  // analytics
-  const plausible = usePlausible();
-
   // data
   const { id } = pokemonSpecies;
 
@@ -48,7 +44,7 @@ const Navigation = ({
           pokemonName={prevPokemon.name}
           pokemonId={id}
           direction="left"
-          handleClick={() => plausible('Previous Pokemon')}
+          handleClick={() => track('Previous Pokemon Navigation Click')}
         />
       )}
       {nextPokemon && (
@@ -57,7 +53,7 @@ const Navigation = ({
           pokemonName={nextPokemon.name}
           pokemonId={id}
           direction="right"
-          handleClick={() => plausible('Next Pokemon')}
+          handleClick={() => track('Next Pokemon Navigation Click')}
         />
       )}
     </Stack>

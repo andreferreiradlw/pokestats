@@ -6,7 +6,7 @@ import type { PokemonType } from 'pokenode-ts';
 // helpers
 import getMultipliers, { type MultipliersRes } from './damage_multipliers';
 import { removeUnderscore } from '@/helpers';
-import { usePlausible } from 'next-plausible';
+import { track } from '@vercel/analytics';
 // components
 import TypeBadge from '@/components/TypeBadge';
 import { Table } from '@/components/BaseStyles';
@@ -58,9 +58,6 @@ const Multipliers = ({ pokemonTypes, ...rest }: MultipliersProps): JSX.Element =
   // states
   const [isAttackMode, setIsAttackMode] = useState(true);
 
-  // analytics
-  const plausible = usePlausible();
-
   const currTypes = useMemo(() => pokemonTypes.map(currType => currType.type.name), [pokemonTypes]);
 
   const { attack: attackMultipliers, defense: defenseMultipliers } = useMemo(
@@ -70,7 +67,7 @@ const Multipliers = ({ pokemonTypes, ...rest }: MultipliersProps): JSX.Element =
 
   const handleSwitchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setIsAttackMode(event.target.checked);
-    plausible('Relations Click');
+    track('Pokemon Page - Relations Click');
   };
 
   return (

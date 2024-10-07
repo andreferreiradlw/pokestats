@@ -48,7 +48,7 @@ export async function generateStaticParams() {
   const typeList = await TypesApi.getAll();
 
   return typeList.map(({ name }) => ({
-    typeId: name,
+    typeName: name,
   }));
 }
 

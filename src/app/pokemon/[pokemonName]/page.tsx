@@ -113,7 +113,7 @@ export async function generateStaticParams() {
   const pokemonList = await PokemonApi.listPokemons(0, 1024);
 
   return pokemonList.results.map(pokemon => ({
-    pokemonId: pokemon.name,
+    pokemonName: pokemon.name,
   }));
 }
 

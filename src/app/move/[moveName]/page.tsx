@@ -91,7 +91,7 @@ export async function generateStaticParams() {
   const moveList = await MovesApi.listMoves(0, 937);
 
   return moveList.results.map(move => ({
-    moveId: move.name,
+    moveName: move.name,
   }));
 }
 

@@ -1,7 +1,7 @@
 'use client';
 
 // types
-import type { PokestatsPokemonPageProps } from 'src/old.pages/pokemon/[pokemonId]';
+import type { PokestatsPokemonPageProps } from '@/app/pokemon/[pokemonId]/page';
 import type { PokemonSpecies } from 'pokenode-ts';
 // helpers
 import { usePlausible } from 'next-plausible';

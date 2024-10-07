@@ -6,7 +6,19 @@ import { getResourceId } from '@/helpers';
 // components
 import { EggGroupPage } from '@/PageComponents';
 
-export type EggGroupTableData = Partial<Pokemon> & Partial<PokemonSpecies>;
+export interface EggGroupTableData {
+  name: PokemonSpecies['name'];
+  egg_groups: PokemonSpecies['egg_groups'];
+  habitat: PokemonSpecies['habitat'];
+  hatch_counter: PokemonSpecies['hatch_counter'];
+  id: PokemonSpecies['id'];
+  forms: Pokemon['forms'];
+  sprites: Pokemon['sprites'];
+  types: Pokemon['types'];
+  abilities: Pokemon['abilities'];
+  growth_rate: PokemonSpecies['growth_rate'];
+  gender_rate: PokemonSpecies['gender_rate'];
+}
 
 export interface PokestatsEggGroupPageProps {
   eggGroups: string[];
@@ -30,10 +42,28 @@ const PokestatsEggGroupPage = async ({ params }: { params: { eggGroupName: strin
   ]);
 
   // Joining the data
-  const tableData: EggGroupTableData[] = pokemonData.map(pokemon => {
-    const species = speciesData.find(species => species.id === pokemon.id);
-    return { ...pokemon, ...species };
-  });
+  const tableData: EggGroupTableData[] = pokemonData
+    .map(pokemon => {
+      const species = speciesData.find(species => species.id === pokemon.id);
+
+      if (!species) return null;
+
+      // return lean data
+      return {
+        name: species.name,
+        egg_groups: species.egg_groups,
+        habitat: species.habitat,
+        hatch_counter: species.hatch_counter,
+        id: species.id,
+        forms: pokemon.forms,
+        sprites: pokemon.sprites,
+        types: pokemon.types,
+        abilities: pokemon.abilities,
+        growth_rate: species.growth_rate,
+        gender_rate: species.gender_rate,
+      };
+    })
+    .filter(group => !!group);
 
   const props: PokestatsEggGroupPageProps = {
     eggGroups: eggGroupNames.sort((a, b) => a.localeCompare(b)),

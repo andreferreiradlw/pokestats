@@ -1,16 +1,15 @@
 import { Fragment } from 'react';
-// helpers
+// types
 import type { NamedAPIResource } from 'pokenode-ts';
+import type { PokestatsMovePageProps } from '@/app/move/[moveId]/page';
 // styles
 import { Table } from '@/BaseStyles';
 // components
-import type { MovePageProps } from '..';
-import type { Grid2Props } from '@mui/material';
-import { Box, Grid2, Stack, Typography } from '@mui/material';
+import { Box, Grid2, Stack, Typography, type Grid2Props } from '@mui/material';
 
 interface MoveMachinesProps extends Grid2Props {
   moveName: string;
-  machines: MovePageProps['moveMachines'];
+  machines: PokestatsMovePageProps['moveMachines'];
   moveType: NamedAPIResource['name'];
 }
 

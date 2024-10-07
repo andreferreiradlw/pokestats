@@ -1,5 +1,6 @@
 // types
 import type { NamedAPIResource } from 'pokenode-ts';
+import type { Metadata } from 'next';
 // helpers
 import { ItemApi } from '@/services';
 import {
@@ -18,6 +19,11 @@ export interface PokestatsItemsPageProps {
   itemPocketData: FormattedItemPocket[];
   allItemAttributes: NamedAPIResource[];
 }
+
+export const metadata: Metadata = {
+  title: 'Pokémon Items List - Browse All Pokémon Items',
+  description: 'Discover all Pokémon items including held items, evolution stones, and more.',
+};
 
 const PokestatsItemsPage = async () => {
   try {

@@ -2,7 +2,7 @@
 
 import { useContext, useState, useEffect, useMemo } from 'react';
 // types
-import type { PokestatsPokemonPageProps } from '@/app/pokemon/[pokemonId]/page';
+import type { PokestatsPokemonPageProps } from '@/app/pokemon/[pokemonName]/page';
 import type { Ability } from 'pokenode-ts';
 // helpers
 import { hoverVariant } from '@/animations';

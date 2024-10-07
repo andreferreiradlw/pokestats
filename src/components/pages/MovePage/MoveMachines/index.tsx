@@ -1,7 +1,7 @@
 import { Fragment } from 'react';
 // types
 import type { NamedAPIResource } from 'pokenode-ts';
-import type { PokestatsMovePageProps } from '@/app/move/[moveId]/page';
+import type { PokestatsMovePageProps } from '@/app/move/[moveName]/page';
 // styles
 import { Table } from '@/BaseStyles';
 // components

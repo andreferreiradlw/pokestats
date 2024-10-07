@@ -1,6 +1,8 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+// types
+import type { Metadata } from 'next';
 // helpers
 import { GameVersionProvider } from '@/context';
 import { useSearchParams } from 'next/navigation';
@@ -10,6 +12,12 @@ import { HeadbuttLocationsPage } from '@/PageComponents';
 export interface PokestatsHeadbuttLocationsPageProps {
   defaultLocation: string | null;
 }
+
+export const metadata: Metadata = {
+  title: 'Headbutt Tree Calculator - Find Pokémon with Headbutt',
+  description:
+    'This Headbutt Tree Calculator tool helps you locate Pokémon available through headbutting trees in different Generation II game areas.',
+};
 
 const PokestatsHeadbuttLocationsPage = (): JSX.Element => {
   const searchParams = useSearchParams();

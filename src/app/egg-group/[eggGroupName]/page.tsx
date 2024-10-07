@@ -1,8 +1,9 @@
 // types
 import type { EggGroup, Pokemon, PokemonSpecies } from 'pokenode-ts';
+import type { Metadata } from 'next';
 // helpers
 import { EggGroupApi, PokemonApi, SpeciesApi } from '@/services';
-import { getResourceId } from '@/helpers';
+import { findEnglishName, getResourceId } from '@/helpers';
 import { notFound } from 'next/navigation';
 // components
 import { EggGroupPage } from '@/PageComponents';
@@ -27,9 +28,24 @@ export interface PokestatsEggGroupPageProps {
   tableData: EggGroupTableData[];
 }
 
-const PokestatsEggGroupPage = async ({ params }: { params: { eggGroupName: string } }) => {
-  const eggGroupName = params.eggGroupName;
+interface EggGroupPageParams {
+  params: { eggGroupName: string };
+}
 
+export async function generateMetadata({
+  params: { eggGroupName },
+}: EggGroupPageParams): Promise<Metadata> {
+  const eggGroupData = await EggGroupApi.getByName(eggGroupName);
+
+  const groupName = findEnglishName(eggGroupData.names);
+
+  return {
+    title: `${groupName} Egg Group - Pokémon Species, Abilities, Hatch Cycles & More`,
+    description: `View detailed information for all Pokémon species in the ${groupName} Egg Group. This table includes Pokémon IDs, names, types, egg groups, abilities, hatch cycles, growth rates, gender ratios, habitats, and more.`,
+  };
+}
+
+const PokestatsEggGroupPage = async ({ params: { eggGroupName } }: EggGroupPageParams) => {
   try {
     const [eggGroupNames, eggGroupData] = await Promise.all([
       EggGroupApi.getAllGroupNames(),

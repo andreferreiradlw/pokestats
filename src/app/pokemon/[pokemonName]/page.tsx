@@ -6,9 +6,10 @@ import type {
   Ability,
   NamedAPIResource,
 } from 'pokenode-ts';
+import type { Metadata } from 'next';
 // helpers
 import { AbilityApi, EvolutionApi, PokemonApi, SpeciesApi } from '@/services';
-import { getResourceId } from '@/helpers';
+import { findEnglishFlavorText, findEnglishName, formatFlavorText, getResourceId } from '@/helpers';
 import { notFound } from 'next/navigation';
 // components
 import { PokemonPage } from '@/PageComponents';
@@ -22,9 +23,34 @@ export interface PokestatsPokemonPageProps {
   evolutionData: EvolutionChain;
 }
 
-const PokestatsPokemonPage = async ({ params }: { params: { pokemonId: string } }) => {
-  const pokemonName = params.pokemonId;
+interface PokemonPageParams {
+  params: { pokemonName: string };
+}
 
+export async function generateMetadata({
+  params: { pokemonName },
+}: PokemonPageParams): Promise<Metadata> {
+  const { species, sprites } = await PokemonApi.getByName(pokemonName);
+  const { names, id, flavor_text_entries } = await SpeciesApi.getByName(species.name);
+
+  const pokemonEnglishName = findEnglishName(names);
+  const pageTitle = `${pokemonEnglishName} - Pokémon #${id}`;
+  const pageDescription = findEnglishFlavorText(flavor_text_entries);
+
+  return {
+    title: pageTitle,
+    description: formatFlavorText(pageDescription),
+    openGraph: {
+      images: [
+        {
+          url: sprites.front_default!,
+        },
+      ],
+    },
+  };
+}
+
+const PokestatsPokemonPage = async ({ params: { pokemonName } }: PokemonPageParams) => {
   try {
     const [pokemonDataResults, { results: allPokemonData }] = await Promise.all([
       PokemonApi.getByName(pokemonName),

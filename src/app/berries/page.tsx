@@ -1,5 +1,6 @@
 // types
 import type { Berry } from 'pokenode-ts';
+import type { Metadata } from 'next';
 // helpers
 import { BerryApi, ItemApi } from '@/services';
 import { formatItemData, type ExtractedItem } from '@/helpers';
@@ -12,6 +13,12 @@ export type BerryItem = Partial<ExtractedItem> & Berry;
 export interface PokestatsBerriesPageProps {
   berryData: BerryItem[];
 }
+
+export const metadata: Metadata = {
+  title: 'Pokémon Berry List - Browse All Pokémon Berries',
+  description:
+    'Explore the complete list of Pokémon Berries, including their effects, growth time, firmness, size, and other key attributes. Whether you are planning a battle strategy or crafting Pokéblocks and Poffins, this comprehensive guide provides detailed information about each Berry’s unique characteristics and usage.',
+};
 
 const PokestatsBerriesPage = async () => {
   try {

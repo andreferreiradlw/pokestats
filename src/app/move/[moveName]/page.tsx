@@ -1,8 +1,18 @@
 // types
 import type { Move, MoveTarget, SuperContestEffect, ContestEffect } from 'pokenode-ts';
+import type { Metadata } from 'next';
 // helpers
 import { ContestApi, MachineApi, MovesApi, type MoveMachinesData } from '@/services';
-import { getResourceId } from '@/helpers';
+import {
+  capitalise,
+  findEnglishMoveFlavorText,
+  findEnglishName,
+  formatFlavorText,
+  type GameGenValue,
+  getResourceId,
+  mapGeneration,
+  removeDash,
+} from '@/helpers';
 import { notFound } from 'next/navigation';
 // components
 import { MovePage } from '@/PageComponents';
@@ -15,9 +25,39 @@ export interface PokestatsMovePageProps {
   contestEffect: ContestEffect | null;
 }
 
-const PokestatsMovePage = async ({ params }: { params: { moveId: string } }) => {
-  const moveName = params.moveId;
+interface MovePageParams {
+  params: { moveName: string };
+}
 
+export async function generateMetadata({
+  params: { moveName },
+}: MovePageParams): Promise<Metadata> {
+  const { names, name, type, flavor_text_entries, damage_class, generation } =
+    await MovesApi.getMoveData(moveName);
+
+  const moveEnglishName = findEnglishName(names) ?? capitalise(removeDash(name));
+  const pageTitle = `${moveEnglishName} - ${capitalise(type.name)} Type Pokémon Move`;
+  const moveFlavorText = findEnglishMoveFlavorText(flavor_text_entries);
+  const pageDescription = moveFlavorText
+    ? formatFlavorText(moveFlavorText)
+    : `${moveEnglishName} is a ${capitalise(type.name)}-type ${capitalise(
+        damage_class!.name,
+      )} move introduced in ${mapGeneration(generation.name as GameGenValue)}.`;
+
+  return {
+    title: pageTitle,
+    description: pageDescription,
+    openGraph: {
+      images: [
+        {
+          url: `https://raw.githubusercontent.com/msikma/pokesprite/master/items/tm/${type.name}.png`,
+        },
+      ],
+    },
+  };
+}
+
+const PokestatsMovePage = async ({ params: { moveName } }: MovePageParams) => {
   try {
     const moveData = await MovesApi.getMoveData(moveName);
 

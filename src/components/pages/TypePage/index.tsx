@@ -1,7 +1,7 @@
 'use client';
 
 // types
-import type { PokestatsTypePageProps } from '@/app/type/[typeId]/page';
+import type { PokestatsTypePageProps } from '@/app/type/[typeName]/page';
 // helpers
 import { findEnglishName } from '@/helpers';
 import { useBreakpoint } from '@/hooks';

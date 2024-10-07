@@ -1,5 +1,5 @@
 // types
-import type { PokestatsPokemonPageProps } from '@/app/pokemon/[pokemonId]/page';
+import type { PokestatsPokemonPageProps } from '@/app/pokemon/[pokemonName]/page';
 // components
 import { Divider, Grid2, Stack } from '@mui/material';
 import Details from './Details';

@@ -1,5 +1,20 @@
+// types
 import type { ReactNode } from 'react';
-import Providers from './providers'; // Importing the Providers component
+import type { Metadata } from 'next';
+// components
+import Providers from './providers';
+
+export const metadata: Metadata = {
+  title: {
+    default: 'Pokestats.gg - Your Complete Pokémon Encyclopedia',
+    template: '%s - Pokestats.gg',
+  },
+  description:
+    'PokeStats.gg is your ultimate online Pokémon encyclopedia, featuring comprehensive information on Pokémon species, Pokédex entries, abilities, evolution chains, moves, stats, and more.',
+  twitter: {
+    card: 'summary_large_image',
+  },
+};
 
 const RootLayout = ({ children }: { children: ReactNode }) => (
   <html lang="en">

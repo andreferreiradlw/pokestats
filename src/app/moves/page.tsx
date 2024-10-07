@@ -1,5 +1,6 @@
 // types
 import type { Move } from 'pokenode-ts';
+import type { Metadata } from 'next';
 // helpers
 import { MovesApi, TypesApi } from '@/services';
 import { capitalise } from '@/helpers';
@@ -28,6 +29,12 @@ export interface PokestatsMovesPageProps {
     label: string;
   }[];
 }
+
+export const metadata: Metadata = {
+  title: 'Pokémon Moves List - Browse All Pokémon Moves',
+  description:
+    'Explore the complete list of all Pokémon moves, including details on move types, effects, power, and accuracy.',
+};
 
 const PokestatsMovesPage = async () => {
   try {

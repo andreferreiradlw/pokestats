@@ -1,8 +1,9 @@
 // types
 import type { Berry, ItemAttribute, ItemCategory, ItemFlingEffect } from 'pokenode-ts';
+import type { Metadata } from 'next';
 // helpers
 import { BerryApi, ItemApi } from '@/services';
-import { type ExtractedItem, formatItemData } from '@/helpers';
+import { type ExtractedItem, findEnglishName, formatItemData } from '@/helpers';
 import { notFound } from 'next/navigation';
 // components
 import { ItemPage } from '@/PageComponents';
@@ -17,9 +18,31 @@ export interface PokestatsItemPageProps {
   berryData: Berry | null;
 }
 
-const PokestatsItemPage = async ({ params }: { params: { itemName: string } }) => {
-  const itemName = params.itemName;
+interface ItemPageParams {
+  params: { itemName: string };
+}
 
+export async function generateMetadata({
+  params: { itemName },
+}: ItemPageParams): Promise<Metadata> {
+  const itemData = await ItemApi.getByName(itemName);
+  const categoryData = await ItemApi.getCategoryByName(itemData.category.name);
+
+  const { names, longEntry, sprite, generationIntroduced } = formatItemData(itemData);
+
+  const itemEnglishName = findEnglishName(names);
+  const categoryName = findEnglishName(categoryData.names);
+
+  return {
+    title: `${itemEnglishName} - Pokémon ${categoryName} Item`,
+    description: `${longEntry} ${categoryName} Pokémon item introduced in ${generationIntroduced}.`,
+    openGraph: {
+      images: [{ url: sprite }],
+    },
+  };
+}
+
+const PokestatsItemPage = async ({ params: { itemName } }: ItemPageParams) => {
   try {
     const itemData = await ItemApi.getByName(itemName);
 

@@ -1,6 +1,6 @@
 import { useMemo, useState, useCallback } from 'react';
 // types
-import type { PokestatsTypePageProps } from '@/app/type/[typeId]/page';
+import type { PokestatsTypePageProps } from '@/app/type/[typeName]/page';
 import type { NamedAPIResource } from 'pokenode-ts';
 // helpers
 import { getResourceId } from '@/helpers';

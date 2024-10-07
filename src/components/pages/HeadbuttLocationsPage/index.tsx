@@ -2,13 +2,13 @@
 
 import { useContext, useEffect, useState } from 'react';
 // types
-import type { PokestatsHeadbuttLocationsPageProps } from '@/app/headbutt-tree-finder/page';
 import type { GameValue } from '@/helpers';
 // data
 import { type HeadbuttLocation, headbuttLocations } from './headbuttData';
 // helpers
 import { useBreakpoint, useDebouncedValue } from '@/hooks';
 import { GameVersionContext } from '@/context';
+import { useSearchParams } from 'next/navigation';
 // components
 import {
   Grid2,
@@ -52,9 +52,8 @@ const mapScaleMarks = [
   },
 ];
 
-const HeadbuttLocationsPage = ({
-  defaultLocation,
-}: PokestatsHeadbuttLocationsPageProps): JSX.Element => {
+const HeadbuttLocationsPage = (): JSX.Element => {
+  const searchParams = useSearchParams();
   // context
   const { gameVersion, gameGeneration } = useContext(GameVersionContext);
 
@@ -92,11 +91,13 @@ const HeadbuttLocationsPage = ({
   };
 
   useEffect(() => {
-    if (defaultLocation) {
-      const location = headbuttLocations.find(({ value }) => value === defaultLocation);
+    const paramLocation = searchParams.get('location');
+
+    if (paramLocation) {
+      const location = headbuttLocations.find(({ value }) => value === paramLocation);
       if (location) setAreaDetails(location);
     }
-  }, [defaultLocation]);
+  }, [searchParams]);
 
   useEffect(() => {
     if (gameVersion && gameGeneration === 'generation-ii') {

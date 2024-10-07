@@ -5,7 +5,7 @@ import { fadeInUpVariant } from '@/animations';
 import { useEvolutionChain } from '@/hooks';
 // components
 import Evolution from './Evolution';
-import { motion } from 'framer-motion';
+import { motion } from '@/client';
 import { capitalize, Grid2, Typography, type Grid2Props } from '@mui/material';
 import Loading from '@/components/Loading';
 

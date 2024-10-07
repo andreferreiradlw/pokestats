@@ -2,7 +2,7 @@ import { capitalise, type GameValue } from '@/helpers';
 import { Avatar, Chip, Grid2, Paper, Stack, Typography, type Grid2Props } from '@mui/material';
 import { useMemo, useCallback, memo } from 'react';
 import { type HeadbuttEncounter, mapAreaHeadbuttEncounters } from '../headbuttData';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 
 interface HeadbuttEncountersProps extends Grid2Props {
   areaKey: string;

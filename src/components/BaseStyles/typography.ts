@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { motion } from '@/client';
 import { styled } from '@mui/material/styles';
 // fonts
 import { oriFont } from '@/components/Fonts';

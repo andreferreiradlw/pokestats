@@ -4,7 +4,7 @@ import type { ImageNextV2Props } from './index';
 // animations
 import { tumble } from '@/animations';
 // components
-import { motion } from 'framer-motion';
+import { motion } from '@/client';
 import Image from 'next/image';
 // svg
 import EggIcon from 'public/static/iconLibrary/egg.svg';

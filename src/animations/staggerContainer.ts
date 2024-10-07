@@ -1,4 +1,4 @@
-import type { Variants } from 'framer-motion';
+import type { Variants } from '@/client';
 
 // Parent variant for staggering children animations
 export const staggerContainerVariant: Variants = {

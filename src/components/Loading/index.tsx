@@ -8,7 +8,7 @@ import { LoadingContainer, PotionIcon, PokeballIcon, RecordIcon, Text } from './
 // components
 import type { StackProps } from '@mui/material';
 import { Stack } from '@mui/material';
-import { motion } from 'framer-motion';
+import { motion } from '@/client';
 
 export interface LoadingProps extends StackProps {
   $iconWidth?: number | string | Record<string, string | number>;

@@ -1,6 +1,8 @@
+'use client';
+
 import Head from 'next/head';
 import Script from 'next/script';
-import { useRouter } from 'next/router';
+import { usePathname } from 'next/navigation';
 
 interface SeoProps {
   title: string;
@@ -31,11 +33,12 @@ const Seo = ({
   dateModified,
   children,
 }: SeoProps): JSX.Element => {
-  const router = useRouter();
+  // Get the current path
+  const pathname = usePathname();
 
   // Get the host and construct the full URL
   const baseUrl = typeof window !== 'undefined' ? window.location.origin : 'https://pokestats.gg';
-  const fullUrl = `${baseUrl}${router.asPath}`;
+  const fullUrl = `${baseUrl}${pathname}`;
 
   // format title
   const pageTitle = title ? `${title} - Pokestats.gg` : PokestatsPageTitle;

@@ -6,7 +6,7 @@ import { calculateTreeIndex, getEncounterRate } from '@/helpers';
 import type { HeadbuttLocation } from '../headbuttData';
 // components
 import { Box, Grid2, type Grid2Props } from '@mui/material';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, motion } from '@/client';
 import Loading from '@/components/Loading';
 import HeadbuttGridItem from './HeadbuttGridItem';
 

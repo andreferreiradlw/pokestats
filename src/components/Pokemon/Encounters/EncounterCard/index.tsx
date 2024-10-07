@@ -24,7 +24,7 @@ import {
   Typography,
   type Grid2Props,
 } from '@mui/material';
-import { motion } from 'framer-motion';
+import { motion } from '@/client';
 import CustomButton from '@/components/CustomButton';
 import Link from 'next/link';
 

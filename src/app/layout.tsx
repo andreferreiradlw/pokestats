@@ -9,8 +9,6 @@ import CssBaseline from '@mui/material/CssBaseline';
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v14-appRouter';
 // contexts
 import { GameVersionProvider, ThemeContextProvider } from '@/context';
-// components
-import PageLoader from '@/components/PageLoader';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -37,7 +35,6 @@ export default function RootLayout({
               <GameVersionProvider>
                 <ThemeContextProvider>
                   <CssBaseline />
-                  <PageLoader />
                   {children}
                 </ThemeContextProvider>
               </GameVersionProvider>

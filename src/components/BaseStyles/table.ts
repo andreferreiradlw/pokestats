@@ -1,5 +1,5 @@
 import { styled } from '@mui/material/styles';
-import { motion } from 'framer-motion';
+import { motion } from '@/client';
 
 // Simple table styles using MUI styled
 const Table = styled(motion.table)(({ theme }) => ({

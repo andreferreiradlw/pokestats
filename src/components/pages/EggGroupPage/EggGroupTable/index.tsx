@@ -11,7 +11,7 @@ import { fadeInUpVariant } from '@/animations';
 // styles
 import { Chip, Stack, type Theme, Tooltip, Typography } from '@mui/material';
 // components
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, motion } from '@/client';
 import TypeBadge from '@/components/TypeBadge';
 import CustomTable, {
   type Row,

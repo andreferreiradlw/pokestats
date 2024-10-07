@@ -1,6 +1,6 @@
 import { Container } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import { motion } from 'framer-motion';
+import { motion } from '@/client';
 
 const LayoutContainer = styled(Container)`
   display: flex;

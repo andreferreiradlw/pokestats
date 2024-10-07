@@ -1,5 +1,5 @@
 // types
-import { motion } from 'framer-motion';
+import { motion } from '@/client';
 import type { CanvasMapperArea } from '../CanvasMapper';
 // hooks
 import { useBreakpoint, useLocationAreas } from '@/hooks';

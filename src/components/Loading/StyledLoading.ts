@@ -6,7 +6,7 @@ import { ellipsis, shake, riseUp, pokeballShake, rotate } from '@/animations';
 import { responsivePropsV2 } from '@/helpers';
 // components
 import { styled, Typography } from '@mui/material';
-import { motion } from 'framer-motion';
+import { motion } from '@/client';
 // svg
 import Potion from 'public/static/iconLibrary/potion.svg';
 import Pokeball from 'public/static/iconLibrary/pokeball.svg';

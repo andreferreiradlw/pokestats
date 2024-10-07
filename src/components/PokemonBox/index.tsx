@@ -13,7 +13,7 @@ import { hoverVariant } from '@/animations';
 // styles
 import { PokeBox } from './StyledPokemonBox';
 // components
-import { motion } from 'framer-motion';
+import { motion } from '@/client';
 import Link from 'next/link';
 import { Typography, type CardProps } from '@mui/material';
 import ImageNextV2 from '../ImageNextV2';

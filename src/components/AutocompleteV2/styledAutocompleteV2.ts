@@ -4,7 +4,7 @@ import type { AutocompleteV2Props } from '.';
 import { styled } from '@mui/material/styles';
 // components
 import { Typography } from '@mui/material';
-import { motion } from 'framer-motion';
+import { motion } from '@/client';
 // svg
 import EggIconSVG from 'public/static/iconLibrary/egg.svg';
 

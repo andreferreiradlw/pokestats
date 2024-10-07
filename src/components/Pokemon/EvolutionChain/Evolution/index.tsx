@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 // types
 import type { PokemonSpecies, EvolutionDetail } from 'pokenode-ts';
-import type { HTMLMotionProps } from 'framer-motion';
+import type { HTMLMotionProps } from '@/client';
 // helpers
 import { findEnglishName, removeDash } from '@/helpers';
 import { fadeInUpVariant } from '@/animations';

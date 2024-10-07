@@ -7,7 +7,7 @@ import { alpha } from '@mui/material/styles';
 import CanvasMapper, { type CanvasMapperArea, type CanvasMapperHandle } from './CanvasMapper';
 import { Grid2, Stack, Typography, useTheme } from '@mui/material';
 import LocationDetails from './LocationDetails';
-import { AnimatePresence } from 'framer-motion';
+import { AnimatePresence } from '@/client';
 import CustomButton from '../CustomButton';
 
 interface RegionPageProps extends PropsWithChildren {

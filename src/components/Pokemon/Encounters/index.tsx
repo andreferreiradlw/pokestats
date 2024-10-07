@@ -6,7 +6,7 @@ import { GameVersionContext } from '@/context';
 import type { PokemonSpecies } from 'pokenode-ts';
 // components
 import { Alert, AlertTitle, Button, Grid2, Link, Typography, type Grid2Props } from '@mui/material';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, motion } from '@/client';
 import { fadeInUpVariant, staggerContainerVariant } from '@/animations';
 import GameGenSelect from '@/components/GameGenSelect';
 import Loading from '@/components/Loading';

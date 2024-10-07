@@ -18,7 +18,7 @@ import { Badge, capitalize, Chip, Grid2, Stack, Typography } from '@mui/material
 // styles
 import { Table, Numbered } from '@/BaseStyles';
 import { Flavor } from './StyledDetails';
-import { motion } from 'framer-motion';
+import { motion } from '@/client';
 import { hoverVariant } from '@/animations';
 // icons
 import VolumeUpIcon from '@mui/icons-material/VolumeUp';

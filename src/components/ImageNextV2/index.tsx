@@ -8,7 +8,7 @@ import { placeholderVariant, fadeInUpVariant, hoverVariant } from '@/animations'
 // styles
 import { LoadingIcon, ErrorIcon, PlaceholderContainer, ImageEl } from './StyledImageNextV2';
 // components
-import { AnimatePresence, type HTMLMotionProps, motion } from 'framer-motion';
+import { AnimatePresence, type HTMLMotionProps, motion } from '@/client';
 import { Box, Stack, type StackProps } from '@mui/material';
 
 export interface ImageNextV2Props

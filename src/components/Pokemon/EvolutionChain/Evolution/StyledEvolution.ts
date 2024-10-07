@@ -1,6 +1,6 @@
 import { styled } from '@mui/material/styles';
 // components
-import { motion } from 'framer-motion';
+import { motion } from '@/client';
 // svg
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 

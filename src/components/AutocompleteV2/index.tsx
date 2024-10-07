@@ -2,7 +2,7 @@
 
 import type { CSSProperties } from 'react';
 // types
-import type { HTMLMotionProps } from 'framer-motion';
+import type { HTMLMotionProps } from '@/client';
 // hooks
 import { useRouter } from 'next/navigation';
 import { usePlausible } from 'next-plausible';

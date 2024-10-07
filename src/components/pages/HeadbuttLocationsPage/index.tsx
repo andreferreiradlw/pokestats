@@ -1,12 +1,13 @@
+'use client';
+
 import { useContext, useEffect, useState } from 'react';
 // types
-import type { PokestatsHeadbuttLocationsPageProps } from 'src/old.pages/headbutt-tree-finder';
+import type { PokestatsHeadbuttLocationsPageProps } from '@/app/headbutt-tree-finder/page';
+import type { GameValue } from '@/helpers';
 // data
 import { type HeadbuttLocation, headbuttLocations } from './headbuttData';
 // helpers
 import { useBreakpoint, useDebouncedValue } from '@/hooks';
-import type { GameValue } from '@/helpers';
-// ctx
 import { GameVersionContext } from '@/context';
 // components
 import {
@@ -22,10 +23,10 @@ import {
   AccordionSummary,
   AccordionDetails,
 } from '@mui/material';
-import DropdownV2 from '../DropdownV2';
+import DropdownV2 from '@/components/DropdownV2';
 import HeadbuttIndices from './HeadbuttIndices';
 import HeadbuttMap from './HeadbuttMap';
-import ImageNextV2 from '../ImageNextV2';
+import ImageNextV2 from '@/components/ImageNextV2';
 import HeadbuttEncounters from './HeadbuttEncounters';
 
 const mapScaleMarks = [

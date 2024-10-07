@@ -2,7 +2,7 @@
 import type { NextPage, GetServerSideProps } from 'next';
 // components
 import LayoutV2 from '@/components/LayoutV2';
-import HeadbuttLocationsPage from '@/components/HeadbuttLocationsPage';
+import HeadbuttLocationsPage from '@/components/pages/HeadbuttLocationsPage';
 import Seo from '@/components/Seo';
 
 export interface PokestatsHeadbuttLocationsPageProps {

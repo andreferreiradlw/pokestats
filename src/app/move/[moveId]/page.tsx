@@ -3,6 +3,7 @@ import type { Move, MoveTarget, SuperContestEffect, ContestEffect } from 'pokeno
 // helpers
 import { ContestApi, MachineApi, MovesApi, type MoveMachinesData } from '@/services';
 import { getResourceId } from '@/helpers';
+import { notFound } from 'next/navigation';
 // components
 import { MovePage } from '@/PageComponents';
 
@@ -17,24 +18,33 @@ export interface PokestatsMovePageProps {
 const PokestatsMovePage = async ({ params }: { params: { moveId: string } }) => {
   const moveName = params.moveId;
 
-  const moveData = await MovesApi.getMoveData(moveName);
+  try {
+    const moveData = await MovesApi.getMoveData(moveName);
 
-  const [targetData, moveMachinesData, { superContestEffectData, contestEffectData }] =
-    await Promise.all([
-      MovesApi.getMoveTarget(getResourceId(moveData.target.url)),
-      MachineApi.getMoveMachinesData(moveData.machines),
-      ContestApi.getMoveContestEffects(moveData),
-    ]);
+    if (!moveData) {
+      notFound();
+    }
 
-  const props: PokestatsMovePageProps = {
-    move: moveData,
-    moveMachines: moveMachinesData,
-    target: targetData,
-    superContestEffect: superContestEffectData,
-    contestEffect: contestEffectData,
-  };
+    const [targetData, moveMachinesData, { superContestEffectData, contestEffectData }] =
+      await Promise.all([
+        MovesApi.getMoveTarget(getResourceId(moveData.target.url)),
+        MachineApi.getMoveMachinesData(moveData.machines),
+        ContestApi.getMoveContestEffects(moveData),
+      ]);
 
-  return <MovePage {...props} />;
+    const props: PokestatsMovePageProps = {
+      move: moveData,
+      moveMachines: moveMachinesData,
+      target: targetData,
+      superContestEffect: superContestEffectData,
+      contestEffect: contestEffectData,
+    };
+
+    return <MovePage {...props} />;
+  } catch (error) {
+    console.error(error);
+    notFound();
+  }
 };
 
 export async function generateStaticParams() {

@@ -3,6 +3,7 @@ import type { Berry, ItemAttribute, ItemCategory, ItemFlingEffect } from 'pokeno
 // helpers
 import { BerryApi, ItemApi } from '@/services';
 import { type ExtractedItem, formatItemData } from '@/helpers';
+import { notFound } from 'next/navigation';
 // components
 import { ItemPage } from '@/PageComponents';
 import { unusedItems } from '@/constants';
@@ -19,45 +20,57 @@ export interface PokestatsItemPageProps {
 const PokestatsItemPage = async ({ params }: { params: { itemName: string } }) => {
   const itemName = params.itemName;
 
-  const itemData = await ItemApi.getByName(itemName);
+  try {
+    const itemData = await ItemApi.getByName(itemName);
 
-  const formattedItemData = formatItemData(itemData);
+    if (!itemData) {
+      notFound();
+    }
 
-  // Fetch category, fling effect, and attributes concurrently
-  const [categoryData, flingEffectData, attributesData] = await Promise.all([
-    ItemApi.getCategoryByName(formattedItemData.category),
-    formattedItemData.fling_effect
-      ? ItemApi.getFlingEffectByName(formattedItemData.fling_effect.name)
-      : Promise.resolve(null),
-    ItemApi.getAttributesByNames(formattedItemData.attributes),
-  ]);
+    const formattedItemData = formatItemData(itemData);
 
-  // Fetch category items concurrently and filter afterwards
-  const categoryItemNames = categoryData.items.map(({ name }) => name);
-  const categoryItemsData = (await ItemApi.getByNames(categoryItemNames))
-    .map(formatItemData)
-    .filter(({ category, name }) => category !== 'unused' && name !== itemName)
-    .sort((a, b) => a.name.localeCompare(b.name));
+    // Fetch category, fling effect, and attributes concurrently
+    const [categoryData, flingEffectData, attributesData] = await Promise.all([
+      ItemApi.getCategoryByName(formattedItemData.category),
+      formattedItemData.fling_effect
+        ? ItemApi.getFlingEffectByName(formattedItemData.fling_effect.name)
+        : Promise.resolve(null),
+      ItemApi.getAttributesByNames(formattedItemData.attributes),
+    ]);
 
-  // Get berry data if the item belongs to the 'berries' pocket
-  const berryData =
-    categoryData.pocket.name === 'berries'
-      ? await BerryApi.getByName(itemData.name.split('-')[0])
-      : null;
+    if (!categoryData || !attributesData) {
+      notFound();
+    }
 
-  return (
-    <ItemPage
-      item={formattedItemData}
-      category={categoryData}
-      categoryItems={categoryItemsData}
-      flingEffect={flingEffectData}
-      attributes={attributesData}
-      berryData={berryData}
-    />
-  );
+    // Fetch category items concurrently and filter afterwards
+    const categoryItemNames = categoryData.items.map(({ name }) => name);
+    const categoryItemsData = (await ItemApi.getByNames(categoryItemNames))
+      .map(formatItemData)
+      .filter(({ category, name }) => category !== 'unused' && name !== itemName)
+      .sort((a, b) => a.name.localeCompare(b.name));
+
+    // Get berry data if the item belongs to the 'berries' pocket
+    const berryData =
+      categoryData.pocket.name === 'berries'
+        ? await BerryApi.getByName(itemData.name.split('-')[0])
+        : null;
+
+    return (
+      <ItemPage
+        item={formattedItemData}
+        category={categoryData}
+        categoryItems={categoryItemsData}
+        flingEffect={flingEffectData}
+        attributes={attributesData}
+        berryData={berryData}
+      />
+    );
+  } catch (error) {
+    console.error(error);
+    notFound();
+  }
 };
 
-// Generate static paths for items
 export async function generateStaticParams() {
   const itemList = await ItemApi.listItems();
 

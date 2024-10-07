@@ -1,12 +1,13 @@
 'use client';
 
+// helpers
 import { usePathname } from 'next/navigation';
-// styles
+// components
 import { Container, Title, Message, Image } from './StyledNotFound';
 import CustomButton from '@/components/CustomButton';
-// components
 import Link from 'next/link';
 import Particles from '@/components/Particles';
+import { Stack } from '@mui/material';
 
 const NotFound = (): JSX.Element => {
   // Get the current path
@@ -14,16 +15,24 @@ const NotFound = (): JSX.Element => {
 
   return (
     <Container justifyContent="center" alignItems="center">
-      <Image src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/shiny/250.gif" />
+      <Image
+        pixelatedimg
+        imageUrl="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/250.gif"
+        customKey={`404-pokemon-gif-${pathname}`}
+        alt="Image of Oh-ho pokemon"
+      />
       <Title variant="mainHeading">HO-OH!</Title>
-      <Message variant="sectionMessage">
-        The requested page {pathname && <span>{pathname}</span>} could not be found.
-        <br />
-        Check that you typed the URL correctly!
-      </Message>
-      <Link href="/" passHref>
-        <CustomButton key="404-notfound-btn">Go back home</CustomButton>
-      </Link>
+      <Stack width="100%" justifyContent="center" alignItems="center">
+        <Message variant="sectionMessage" gutterBottom>
+          The requested page {pathname && <span>{pathname}</span>} could not be found.
+        </Message>
+        <Message variant="sectionMessage">Check that you typed the URL correctly!</Message>
+        <Link href="/" passHref>
+          <CustomButton variant="contained" key="404-notfound-btn" sx={{ mt: 4 }}>
+            Go back home
+          </CustomButton>
+        </Link>
+      </Stack>
       <Particles />
     </Container>
   );

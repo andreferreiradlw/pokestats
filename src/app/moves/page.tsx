@@ -3,6 +3,7 @@ import type { Move } from 'pokenode-ts';
 // helpers
 import { MovesApi, TypesApi } from '@/services';
 import { capitalise } from '@/helpers';
+import { notFound } from 'next/navigation';
 // components
 import { MovesListPage } from '@/PageComponents';
 
@@ -29,53 +30,66 @@ export interface PokestatsMovesPageProps {
 }
 
 const PokestatsMovesPage = async () => {
-  // Fetch the moves and types data
-  const genMovesList = await MovesApi.listMoves(0, 937).then(({ results }) =>
-    results.map(({ name }) => name),
-  );
+  try {
+    // Fetch the moves and types data
+    const genMovesList = await MovesApi.listMoves(0, 937).then(({ results }) =>
+      results.map(({ name }) => name),
+    );
 
-  const [genMovesData, typesData] = await Promise.all([
-    MovesApi.getByNames(genMovesList),
-    TypesApi.getAll(),
-  ]);
+    if (!genMovesList) {
+      notFound();
+    }
 
-  const typeOptions = typesData.map(({ name }) => ({ label: capitalise(name), value: name }));
+    const [genMovesData, typesData] = await Promise.all([
+      MovesApi.getByNames(genMovesList),
+      TypesApi.getAll(),
+    ]);
 
-  const formattedMoves = genMovesData.map(
-    ({
-      damage_class,
-      generation,
-      id,
-      type,
-      pp,
-      power,
-      accuracy,
-      name,
-      // @ts-expect-error: incorrect types
-      level_learned_at,
-      priority,
-      effect_entries,
-    }) => ({
-      damage_class,
-      generation,
-      id,
-      type,
-      pp,
-      power,
-      accuracy,
-      name,
-      level_learned_at,
-      priority,
-      effect_entries,
-    }),
-  );
+    if (!genMovesData || !typesData) {
+      notFound();
+    }
 
-  const props: PokestatsMovesPageProps = {
-    moves: formattedMoves,
-    typeOptions: [{ label: 'All', value: 'all' }, ...typeOptions],
-  };
+    const typeOptions = typesData.map(({ name }) => ({ label: capitalise(name), value: name }));
 
-  return <MovesListPage {...props} />;
+    const formattedMoves = genMovesData.map(
+      ({
+        damage_class,
+        generation,
+        id,
+        type,
+        pp,
+        power,
+        accuracy,
+        name,
+        // @ts-expect-error: incorrect types
+        level_learned_at,
+        priority,
+        effect_entries,
+      }) => ({
+        damage_class,
+        generation,
+        id,
+        type,
+        pp,
+        power,
+        accuracy,
+        name,
+        level_learned_at,
+        priority,
+        effect_entries,
+      }),
+    );
+
+    const props: PokestatsMovesPageProps = {
+      moves: formattedMoves,
+      typeOptions: [{ label: 'All', value: 'all' }, ...typeOptions],
+    };
+
+    return <MovesListPage {...props} />;
+  } catch (error) {
+    console.error(error);
+    notFound();
+  }
 };
 
 export default PokestatsMovesPage;

@@ -3,6 +3,7 @@ import type { Berry } from 'pokenode-ts';
 // helpers
 import { BerryApi, ItemApi } from '@/services';
 import { formatItemData, type ExtractedItem } from '@/helpers';
+import { notFound } from 'next/navigation';
 // components
 import { BerryListPage } from '@/PageComponents';
 
@@ -12,19 +13,38 @@ export interface PokestatsBerriesPageProps {
   berryData: BerryItem[];
 }
 
-export default async function PokestatsBerriesPage() {
-  const berryNames = await BerryApi.getAllNames();
+const PokestatsBerriesPage = async () => {
+  try {
+    const berryNames = await BerryApi.getAllNames();
 
-  const berryData = await BerryApi.getByNames(berryNames);
+    if (!berryNames) {
+      notFound();
+    }
 
-  const itemData = await ItemApi.getByNames(berryData.map(({ item }) => item.name));
+    const berryData = await BerryApi.getByNames(berryNames);
 
-  const formattedItems = itemData.map(formatItemData);
+    if (!berryData) {
+      notFound();
+    }
 
-  const combinedInformation: BerryItem[] = berryData.map(berry => {
-    const foundItem = formattedItems.find(item => item.name === berry.item.name);
-    return foundItem ? { ...foundItem, ...berry } : { ...berry };
-  });
+    const itemData = await ItemApi.getByNames(berryData.map(({ item }) => item.name));
 
-  return <BerryListPage berryData={combinedInformation} />;
-}
+    if (!itemData) {
+      notFound();
+    }
+
+    const formattedItems = itemData.map(formatItemData);
+
+    const combinedInformation: BerryItem[] = berryData.map(berry => {
+      const foundItem = formattedItems.find(item => item.name === berry.item.name);
+      return foundItem ? { ...foundItem, ...berry } : { ...berry };
+    });
+
+    return <BerryListPage berryData={combinedInformation} />;
+  } catch (error) {
+    console.error(error);
+    notFound();
+  }
+};
+
+export default PokestatsBerriesPage;

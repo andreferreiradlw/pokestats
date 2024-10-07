@@ -3,6 +3,7 @@ import type { EggGroup, Pokemon, PokemonSpecies } from 'pokenode-ts';
 // helpers
 import { EggGroupApi, PokemonApi, SpeciesApi } from '@/services';
 import { getResourceId } from '@/helpers';
+import { notFound } from 'next/navigation';
 // components
 import { EggGroupPage } from '@/PageComponents';
 
@@ -29,49 +30,60 @@ export interface PokestatsEggGroupPageProps {
 const PokestatsEggGroupPage = async ({ params }: { params: { eggGroupName: string } }) => {
   const eggGroupName = params.eggGroupName;
 
-  const [eggGroupNames, eggGroupData] = await Promise.all([
-    EggGroupApi.getAllGroupNames(),
-    EggGroupApi.getByName(eggGroupName),
-  ]);
+  try {
+    const [eggGroupNames, eggGroupData] = await Promise.all([
+      EggGroupApi.getAllGroupNames(),
+      EggGroupApi.getByName(eggGroupName),
+    ]);
 
-  const speciesIdList = eggGroupData.pokemon_species.map(({ url }) => getResourceId(url));
+    if (!eggGroupData || !eggGroupNames) {
+      notFound();
+    }
 
-  const [speciesData, pokemonData] = await Promise.all([
-    SpeciesApi.getByIds(speciesIdList),
-    PokemonApi.getByIds(speciesIdList),
-  ]);
+    const speciesIdList = eggGroupData.pokemon_species.map(({ url }) => getResourceId(url));
 
-  // Joining the data
-  const tableData: EggGroupTableData[] = pokemonData
-    .map(pokemon => {
-      const species = speciesData.find(species => species.id === pokemon.id);
+    const [speciesData, pokemonData] = await Promise.all([
+      SpeciesApi.getByIds(speciesIdList),
+      PokemonApi.getByIds(speciesIdList),
+    ]);
 
-      if (!species) return null;
+    if (!speciesData || !pokemonData) {
+      notFound();
+    }
 
-      // return lean data
-      return {
-        name: species.name,
-        egg_groups: species.egg_groups,
-        habitat: species.habitat,
-        hatch_counter: species.hatch_counter,
-        id: species.id,
-        forms: pokemon.forms,
-        sprites: pokemon.sprites,
-        types: pokemon.types,
-        abilities: pokemon.abilities,
-        growth_rate: species.growth_rate,
-        gender_rate: species.gender_rate,
-      };
-    })
-    .filter(group => !!group);
+    const tableData: EggGroupTableData[] = pokemonData
+      .map(pokemon => {
+        const species = speciesData.find(species => species.id === pokemon.id);
 
-  const props: PokestatsEggGroupPageProps = {
-    eggGroups: eggGroupNames.sort((a, b) => a.localeCompare(b)),
-    eggGroupData,
-    tableData,
-  };
+        if (!species) return null;
 
-  return <EggGroupPage {...props} />;
+        return {
+          name: species.name,
+          egg_groups: species.egg_groups,
+          habitat: species.habitat,
+          hatch_counter: species.hatch_counter,
+          id: species.id,
+          forms: pokemon.forms,
+          sprites: pokemon.sprites,
+          types: pokemon.types,
+          abilities: pokemon.abilities,
+          growth_rate: species.growth_rate,
+          gender_rate: species.gender_rate,
+        };
+      })
+      .filter(group => !!group);
+
+    const props: PokestatsEggGroupPageProps = {
+      eggGroups: eggGroupNames.sort((a, b) => a.localeCompare(b)),
+      eggGroupData,
+      tableData,
+    };
+
+    return <EggGroupPage {...props} />;
+  } catch (error) {
+    console.error(error);
+    notFound();
+  }
 };
 
 export async function generateStaticParams() {

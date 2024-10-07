@@ -1,9 +1,8 @@
-import { styled, alpha } from '@mui/material/styles';
-import { Stack, Typography } from '@mui/material';
+import { Stack, Typography, styled, alpha } from '@mui/material';
+import ImageNextV2 from '@/components/ImageNextV2';
 
 const Container = styled(Stack)(({ theme }) => ({
-  backgroundColor: alpha(theme.palette.common.black, 0.7),
-  color: theme.palette.common.white,
+  backgroundColor: alpha(theme.palette.background.default, 0.5),
   height: '100vh',
   margin: 'auto',
   minHeight: '100vh',
@@ -13,17 +12,15 @@ const Container = styled(Stack)(({ theme }) => ({
 
 const Title = styled(Typography)({
   fontStyle: 'italic',
-  marginBottom: 0,
 });
 
 const Message = styled(Typography)(({ theme }) => ({
   fontWeight: 500,
-  margin: '0 auto 1.5rem',
   maxWidth: '90%',
-  wordBreak: 'break-word',
 
   '& span': {
-    backgroundColor: theme.palette.common.black,
+    backgroundColor: theme.palette.primary.main,
+    color: theme.palette.primary.contrastText,
     borderRadius: '4px',
     fontWeight: 700,
     padding: '3px 5px',
@@ -31,13 +28,11 @@ const Message = styled(Typography)(({ theme }) => ({
 
   [theme.breakpoints.up('md')]: {
     maxWidth: '75%',
-    margin: '0 auto 2rem',
   },
 }));
 
-const Image = styled('img')(({ theme }) => ({
-  imageRendering: 'pixelated',
-  marginBottom: '2rem',
+const Image = styled(ImageNextV2)(({ theme }) => ({
+  marginBottom: theme.spacing(4),
   width: '150px',
 
   [theme.breakpoints.up('md')]: {

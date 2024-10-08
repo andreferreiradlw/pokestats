@@ -148,7 +148,7 @@ const MovesTableV2 = ({
                 <Stack flexDirection="row" justifyContent="center" alignItems="center" gap={1}>
                   <span>{machineNames[index].toUpperCase()}</span>
                   <img
-                    src={`https://raw.githubusercontent.com/msikma/pokesprite/master/items/${machineNames[index].includes('hm') ? 'hm' : 'tm'}/${type.name}.png`}
+                    src={`https://raw.githubusercontent.com/msikma/pokesprite/master/items/${!machineNames[index].includes('hm') || type.name === 'ground' ? 'tm' : 'hm'}/${type.name}.png`}
                     alt={type.name}
                     width="30"
                   />

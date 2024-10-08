@@ -191,7 +191,7 @@ const AutocompleteV2 = ({
           exit: 'exit',
           variants: fadeInDownVariant,
         }}
-        onChange={async (_, option) => {
+        onChange={(_, option) => {
           track('Autocomplete Selection', { assetType: option.name, name: option.name });
 
           if (option.assetType === 'region') {

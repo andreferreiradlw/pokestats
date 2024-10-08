@@ -11,7 +11,7 @@ export interface PokestatsRegionsPageProps {
   location: string | null;
 }
 
-export async function generateMetadata(): Promise<Metadata> {
+export function generateMetadata(): Metadata {
   const zones = kantoZones.map(({ key }) => `pokemon ${removeDash(key)} map`);
 
   return {

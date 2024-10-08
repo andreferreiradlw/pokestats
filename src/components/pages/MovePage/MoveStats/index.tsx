@@ -41,7 +41,7 @@ const MoveStats = ({ move, moveName, ...rest }: MoveStatsProps): JSX.Element => 
           <Typography fontWeight="600" component="span">
             {moveName}
           </Typography>
-          {` doesn't affect any stats when used.`}
+          {" doesn't affect any stats when used."}
         </Typography>
       )}
     </Grid2>

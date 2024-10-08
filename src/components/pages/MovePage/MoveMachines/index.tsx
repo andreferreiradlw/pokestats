@@ -71,7 +71,7 @@ const MoveMachines = ({
           <Typography fontWeight="600" component="span">
             {moveName}
           </Typography>
-          {` has no machine names in any version.`}
+          {' has no machine names in any version.'}
         </Typography>
       )}
     </Grid2>

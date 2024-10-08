@@ -1,4 +1,4 @@
-export const runtime = 'nodejs';
+export const runtime = 'edge';
 
 // types
 import type { Pokemon, PokemonSpecies, NamedAPIResource } from 'pokenode-ts';

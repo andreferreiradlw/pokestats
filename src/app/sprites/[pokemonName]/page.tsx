@@ -4,7 +4,7 @@ import type { Metadata } from 'next';
 // helpers
 import { PokemonApi, SpeciesApi } from '@/services';
 import { notFound } from 'next/navigation';
-import { findEnglishName } from '@/helpers';
+import { findEnglishName, removeDash } from '@/helpers';
 // components
 import { SpritesPage } from '@/PageComponents';
 
@@ -22,14 +22,31 @@ interface PokemonSpritesPageParams {
 export async function generateMetadata({
   params: { pokemonName },
 }: PokemonSpritesPageParams): Promise<Metadata> {
-  const { species, sprites } = await PokemonApi.getByName(pokemonName);
-  const { names } = await SpeciesApi.getByName(species.name);
+  const { species, sprites, name } = await PokemonApi.getByName(pokemonName);
+  const { names, varieties } = await SpeciesApi.getByName(species.name);
 
   const pokemonEnglishName = findEnglishName(names);
+  const baseName = removeDash(name);
+
+  const formKeywords = varieties.map(({ pokemon }) => removeDash(pokemon.name));
+  const formShinyKeywords = formKeywords.map(keyword => `${keyword} shiny`);
 
   return {
     title: `${pokemonEnglishName} Pokémon Sprites - Animated, Shiny & More`,
     description: `Explore detailed ${pokemonEnglishName} sprites for all forms, including front, back, shiny, animated, and gender-specific variations. View high-quality images of Pokémon sprites from all generations and learn about their different forms and appearances.`,
+    keywords: [
+      `${baseName} images`,
+      `${baseName} pokemon images`,
+      `${baseName} pokemon shiny`,
+      `${baseName} shiny`,
+      `${baseName} animated`,
+      `${baseName} sprites`,
+      `${baseName} pokemon sprites`,
+      `${baseName} sprite`,
+      `${baseName} by generation`,
+      ...formKeywords,
+      ...formShinyKeywords,
+    ],
     openGraph: {
       images: [
         {

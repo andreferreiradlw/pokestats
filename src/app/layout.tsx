@@ -6,7 +6,7 @@ import Providers from './providers';
 
 export const metadata: Metadata = {
   title: {
-    default: 'Pokestats.gg - Your Complete Pokémon Encyclopedia',
+    default: 'Pokestats.gg - Pokémon Dex',
     template: '%s - Pokestats.gg',
   },
   description:
@@ -14,6 +14,17 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
   },
+  keywords: [
+    'pokestats',
+    'pokestat',
+    'poke stats',
+    'poke stat',
+    'pokedex',
+    'pokemon dex',
+    'pokemon stats',
+    'poke gg',
+    'pokemon db',
+  ],
 };
 
 const RootLayout = ({ children }: { children: ReactNode }) => (

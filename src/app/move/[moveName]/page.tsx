@@ -10,6 +10,7 @@ import {
   formatFlavorText,
   type GameGenValue,
   getResourceId,
+  listGamesByGeneration,
   mapGeneration,
   removeDash,
 } from '@/helpers';
@@ -35,7 +36,8 @@ export async function generateMetadata({
   const { names, name, type, flavor_text_entries, damage_class, generation } =
     await MovesApi.getMoveData(moveName);
 
-  const moveEnglishName = findEnglishName(names) ?? capitalise(removeDash(name));
+  const baseName = removeDash(name);
+  const moveEnglishName = findEnglishName(names) ?? capitalise(baseName);
   const pageTitle = `${moveEnglishName} - ${capitalise(type.name)} Type Pokémon Move`;
   const moveFlavorText = findEnglishMoveFlavorText(flavor_text_entries);
   const pageDescription = moveFlavorText
@@ -44,9 +46,24 @@ export async function generateMetadata({
         damage_class!.name,
       )} move introduced in ${mapGeneration(generation.name as GameGenValue)}.`;
 
+  const games = listGamesByGeneration(generation.name as GameGenValue).map(
+    game => `${baseName} ${game}`,
+  );
+
   return {
     title: pageTitle,
     description: pageDescription,
+    keywords: [
+      baseName,
+      name,
+      `${baseName} pokemon`,
+      `pokemon with ${baseName}`,
+      `${baseName} move`,
+      `${baseName} move pokemon`,
+      `${baseName} gg`,
+      `is ${baseName} a good move`,
+      ...games,
+    ],
     openGraph: {
       images: [
         {

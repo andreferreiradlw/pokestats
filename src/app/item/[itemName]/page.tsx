@@ -3,7 +3,13 @@ import type { Berry, ItemAttribute, ItemCategory, ItemFlingEffect } from 'pokeno
 import type { Metadata } from 'next';
 // helpers
 import { BerryApi, ItemApi } from '@/services';
-import { type ExtractedItem, findEnglishName, formatItemData } from '@/helpers';
+import {
+  type ExtractedItem,
+  findEnglishName,
+  formatItemData,
+  type GameGenValue,
+  listGamesByGeneration,
+} from '@/helpers';
 import { notFound } from 'next/navigation';
 // components
 import { ItemPage } from '@/PageComponents';
@@ -33,9 +39,23 @@ export async function generateMetadata({
   const itemEnglishName = findEnglishName(names);
   const categoryName = findEnglishName(categoryData.names);
 
+  const itemGames = listGamesByGeneration(
+    itemData.game_indices[0]?.generation.name as GameGenValue,
+  ).map(game => `${itemEnglishName} ${game}`);
+
   return {
     title: `${itemEnglishName} - Pokémon ${categoryName} Item`,
     description: `${longEntry} ${categoryName} Pokémon item introduced in ${generationIntroduced}.`,
+    keywords: [
+      itemEnglishName ?? '',
+      `${itemEnglishName} pokemon`,
+      `${itemEnglishName} pokemon item`,
+      `${itemEnglishName} ${generationIntroduced}`,
+      `pokemon ${itemGames[0]}`,
+      `${categoryName} pokemon`,
+      `${itemEnglishName} ${categoryName}`,
+      ...itemGames,
+    ],
     openGraph: {
       images: [{ url: sprite }],
     },

@@ -24,8 +24,25 @@ export async function generateMetadata({
   const typeEnglishName = findEnglishName(names);
 
   return {
-    title: `${typeEnglishName} Type`,
+    title: `${typeEnglishName} Type - Pokémon & Moves Dex`,
     description: `Explore the ${typeEnglishName} type in the Pokémon world, including strengths, weaknesses, and key Pokémon. Learn about the ${typeEnglishName} type's unique characteristics and how it fits into battles.`,
+    keywords: [
+      `pokemon ${typeEnglishName}`,
+      `pokestats ${typeEnglishName}`,
+      `pokemon db ${typeEnglishName}`,
+      `pokemondb ${typeEnglishName}`,
+      `${typeEnglishName} pokemon db`,
+      `${typeEnglishName} pokemon list`,
+      `list of ${typeEnglishName} type pokemon`,
+      `${typeEnglishName} type move list`,
+      `gg ${typeEnglishName}`,
+      `${typeEnglishName} type pokemon`,
+      `${typeEnglishName} pokemon`,
+      `all ${typeEnglishName} pokemon`,
+      `all ${typeEnglishName} type pokemon`,
+      `all ${typeEnglishName} type moves`,
+      `${typeEnglishName} pokemon moves`,
+    ],
   };
 }
 

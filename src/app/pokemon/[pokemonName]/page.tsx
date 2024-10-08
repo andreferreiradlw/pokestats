@@ -9,7 +9,15 @@ import type {
 import type { Metadata } from 'next';
 // helpers
 import { AbilityApi, EvolutionApi, PokemonApi, SpeciesApi } from '@/services';
-import { findEnglishFlavorText, findEnglishName, formatFlavorText, getResourceId } from '@/helpers';
+import {
+  findEnglishFlavorText,
+  findEnglishName,
+  formatFlavorText,
+  type GameGenValue,
+  getResourceId,
+  listGamesByGeneration,
+  removeDash,
+} from '@/helpers';
 import { notFound } from 'next/navigation';
 // components
 import { PokemonPage } from '@/PageComponents';
@@ -30,16 +38,45 @@ interface PokemonPageParams {
 export async function generateMetadata({
   params: { pokemonName },
 }: PokemonPageParams): Promise<Metadata> {
-  const { species, sprites } = await PokemonApi.getByName(pokemonName);
-  const { names, id, flavor_text_entries } = await SpeciesApi.getByName(species.name);
+  const { species, sprites, name } = await PokemonApi.getByName(pokemonName);
+  const { names, id, flavor_text_entries, generation } = await SpeciesApi.getByName(species.name);
 
   const pokemonEnglishName = findEnglishName(names);
   const pageTitle = `${pokemonEnglishName} - Pokémon #${id}`;
   const pageDescription = findEnglishFlavorText(flavor_text_entries);
+  const baseName = removeDash(name);
+
+  const games = listGamesByGeneration(generation.name as GameGenValue).map(
+    game => `${pokemonEnglishName} ${game}`,
+  );
 
   return {
     title: pageTitle,
     description: formatFlavorText(pageDescription),
+    keywords: [
+      baseName,
+      `shiny ${baseName}`,
+      `${baseName} gg`,
+      `${baseName} ${id}`,
+      `pokemon ${baseName}`,
+      `pokemon ${id}`,
+      `pokemon #${id}`,
+      `pokemon number ${id}`,
+      `pokemon ${id} slot`,
+      `${baseName} ${removeDash(generation.name)}`,
+      `${baseName} pokedex`,
+      `${baseName} dex`,
+      `${baseName} catch rate`,
+      `${baseName} evolution`,
+      `${baseName} stats`,
+      `${baseName} base stats`,
+      `${baseName} height`,
+      `${baseName} weight`,
+      `${baseName} generation`,
+      `${baseName} ev yield`,
+      `${baseName} weakness`,
+      ...games,
+    ],
     openGraph: {
       images: [
         {

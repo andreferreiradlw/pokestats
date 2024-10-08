@@ -21,8 +21,18 @@ export interface PokestatsItemsPageProps {
 }
 
 export const metadata: Metadata = {
-  title: 'Pokémon Items List - Browse All Pokémon Items',
+  title: 'Pokémon Item Dex - Browse All Pokémon Items',
   description: 'Discover all Pokémon items including held items, evolution stones, and more.',
+  keywords: [
+    'pokemon items',
+    'pokemon dex items',
+    'pokestats items',
+    'pokemon db items',
+    'pokemondb items',
+    'pokemon item list',
+    'pokemon all items',
+    'pokemon items list',
+  ],
 };
 
 const PokestatsItemsPage = async () => {

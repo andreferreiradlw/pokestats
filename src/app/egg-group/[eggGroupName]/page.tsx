@@ -42,6 +42,13 @@ export async function generateMetadata({
   return {
     title: `${groupName} Egg Group - Pokémon Species, Abilities, Hatch Cycles & More`,
     description: `View detailed information for all Pokémon species in the ${groupName} Egg Group. This table includes Pokémon IDs, names, types, egg groups, abilities, hatch cycles, growth rates, gender ratios, habitats, and more.`,
+    keywords: [
+      `${groupName} egg group`,
+      `${groupName} pokemon group`,
+      `${groupName} pokemon`,
+      `${groupName} pokemon egg group`,
+      `${groupName} hatch cycles`,
+    ],
   };
 }
 

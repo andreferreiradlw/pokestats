@@ -13,6 +13,12 @@ export const metadata: Metadata = {
   title: 'Headbutt Tree Calculator - Find Pokémon with Headbutt',
   description:
     'This Headbutt Tree Calculator tool helps you locate Pokémon available through headbutting trees in different Generation II game areas.',
+  keywords: [
+    'headbutt tree calculator',
+    'headbutt pokemon move',
+    'pokemon headbutt tree calculator',
+    'pokemon silver headbutt tree calculator',
+  ],
 };
 
 const PokestatsHeadbuttLocationsPage = (): JSX.Element => (

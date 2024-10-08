@@ -31,9 +31,19 @@ export interface PokestatsMovesPageProps {
 }
 
 export const metadata: Metadata = {
-  title: 'Pokémon Moves List - Browse All Pokémon Moves',
+  title: 'Pokémon Move Dex - Browse All Pokémon Moves',
   description:
     'Explore the complete list of all Pokémon moves, including details on move types, effects, power, and accuracy.',
+  keywords: [
+    'pokemon moves',
+    'pokemon dex moves',
+    'pokestats moves',
+    'pokemon db moves',
+    'pokemondb moves',
+    'pokemon move list',
+    'pokemon all moves',
+    'pokemon moves list',
+  ],
 };
 
 const PokestatsMovesPage = async () => {

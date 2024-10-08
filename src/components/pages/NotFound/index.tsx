@@ -6,8 +6,8 @@ import { usePathname } from 'next/navigation';
 import { Container, Title, Message, Image } from './StyledNotFound';
 import CustomButton from '@/components/CustomButton';
 import Link from 'next/link';
-import Particles from '@/components/Particles';
 import { Stack } from '@mui/material';
+import ParticlesV2 from '@/components/ParticlesV2';
 
 const NotFoundPage = (): JSX.Element => {
   // Get the current path
@@ -33,7 +33,7 @@ const NotFoundPage = (): JSX.Element => {
           </CustomButton>
         </Link>
       </Stack>
-      <Particles />
+      <ParticlesV2 />
     </Container>
   );
 };

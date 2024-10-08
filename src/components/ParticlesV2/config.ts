@@ -1,10 +1,11 @@
-const particleConfig = {
+import type { IOptions, RecursivePartial } from '@tsparticles/engine';
+
+const particleConfig: RecursivePartial<IOptions> = {
   particles: {
     number: {
-      value: 15,
+      value: 20,
       density: {
         enable: true,
-        value_area: 1500,
       },
     },
     color: {
@@ -12,27 +13,29 @@ const particleConfig = {
     },
     shape: {
       type: 'image',
-      image: {
-        src: '../static/iconLibrary/pokeball.svg',
-        width: 100,
-        height: 100,
+      options: {
+        image: [
+          {
+            src: '../static/iconLibrary/pokeball.svg',
+            width: 100,
+            height: 100,
+          },
+        ],
       },
     },
     opacity: {
       value: 1,
-      random: false,
-      anim: {
+      animation: {
         enable: false,
       },
     },
     size: {
-      value: 40,
-      random: true,
-      anim: {
+      value: { min: 10, max: 50 },
+      animation: {
         enable: false,
       },
     },
-    line_linked: {
+    links: {
       enable: false,
     },
     move: {
@@ -40,8 +43,9 @@ const particleConfig = {
       speed: 0.5,
       random: true,
       straight: false,
-      out_mode: 'out',
-      bounce: true,
+      outModes: {
+        default: 'out',
+      },
       drift: 0,
       gravity: {
         acceleration: 9.81,
@@ -51,26 +55,27 @@ const particleConfig = {
       },
       attract: {
         enable: false,
-        rotateX: 3687.8477399907024,
-        rotateY: 1200,
+        rotate: {
+          x: 3687.8477399907024,
+          y: 1200,
+        },
       },
     },
   },
   interactivity: {
-    detect_on: 'window',
+    detectsOn: 'window',
     events: {
-      onhover: {
+      onHover: {
         enable: false,
         mode: 'repulse',
       },
-      onclick: {
+      onClick: {
         enable: false,
         mode: 'repulse',
       },
-      resize: true,
     },
   },
-  retina_detect: true,
+  retinaDetect: true,
 };
 
 export default particleConfig;

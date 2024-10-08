@@ -7,7 +7,7 @@ import { PokemonApi, TypesApi } from '@/services';
 import { Grid2 } from '@mui/material';
 import LayoutV2 from '@/components/LayoutV2';
 import { Homepage } from '@/PageComponents';
-import Particles from '@/components/Particles';
+import ParticlesV2 from '@/components/ParticlesV2';
 
 export interface PokestatsHomepageProps {
   pokemonTypes: NamedAPIResource[];
@@ -39,7 +39,7 @@ export default async function PokestatsHomepage() {
       >
         <Homepage {...props} />
       </LayoutV2>
-      <Particles />
+      <ParticlesV2 />
     </Grid2>
   );
 }

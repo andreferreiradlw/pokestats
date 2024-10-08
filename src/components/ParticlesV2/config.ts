@@ -1,26 +1,20 @@
 import type { IOptions, RecursivePartial } from '@tsparticles/engine';
+import { particles } from './particles';
 
 const particleConfig: RecursivePartial<IOptions> = {
   particles: {
     number: {
-      value: 20,
+      value: 20, // Particle count for a more lively hover effect
       density: {
         enable: true,
+        height: 1200,
+        width: 1200,
       },
-    },
-    color: {
-      value: '#000',
     },
     shape: {
       type: 'image',
       options: {
-        image: [
-          {
-            src: '../static/iconLibrary/pokeball.svg',
-            width: 100,
-            height: 100,
-          },
-        ],
+        image: particles,
       },
     },
     opacity: {
@@ -29,53 +23,65 @@ const particleConfig: RecursivePartial<IOptions> = {
         enable: false,
       },
     },
+    collisions: {
+      enable: true,
+      mode: 'bounce',
+      maxSpeed: 10,
+    },
     size: {
-      value: { min: 10, max: 50 },
+      value: { min: 20, max: 75 }, // Particles vary in size
       animation: {
-        enable: false,
+        enable: true,
+        speed: 2,
+        mode: 'random',
       },
     },
+    rotate: {
+      value: 200, // Initial rotation angle
+      animation: {
+        enable: true,
+        speed: 3, // Speed of the rotation
+        sync: false, // Each particle rotates at a different speed
+      },
+      direction: 'clockwise', // Can be 'clockwise' or 'counterclockwise'
+    },
     links: {
-      enable: false,
+      enable: false, // No links between particles
     },
     move: {
       enable: true,
-      speed: 0.5,
-      random: true,
-      straight: false,
+      speed: { min: 0.1, max: 1 }, // Increased speed for a noticeable rightward motion
+      direction: 'right', // Ensures particles move to the right
+      random: false, // Disable random movement so particles follow the set direction
+      straight: false, // Ensure non-linear movement
       outModes: {
-        default: 'out',
+        default: 'out', // Particles leave and re-enter smoothly
       },
-      drift: 0,
+      drift: 1, // Adds gentle drifting to make the movement feel less static
       gravity: {
-        acceleration: 9.81,
-        enable: false,
-        inverse: false,
-        maxSpeed: 50,
+        enable: false, // No gravity effect
       },
-      attract: {
-        enable: false,
-        rotate: {
-          x: 3687.8477399907024,
-          y: 1200,
+      path: {
+        enable: true, // Enable path-based movement for wave-like motion
+        options: {
+          frequency: 1, // Lower frequency for smoother waves
+          amplitude: 20, // Larger amplitude to make the wave noticeable
         },
       },
     },
   },
   interactivity: {
-    detectsOn: 'window',
+    detectsOn: 'canvas', // No user interactions
     events: {
       onHover: {
-        enable: false,
-        mode: 'repulse',
+        enable: false, // Disable hover interaction
       },
       onClick: {
-        enable: false,
-        mode: 'repulse',
+        enable: false, // Disable click interaction
       },
     },
   },
-  retinaDetect: true,
+  retinaDetect: true, // Enhances appearance on high-DPI screens
 };
 
 export default particleConfig;

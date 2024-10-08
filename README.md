@@ -51,7 +51,7 @@
 ✅ [Berries Page](https://pokestats.gg/berries) <br />
 ✅ [Egg Groups Page](https://pokestats.gg/egg-group/bug) <br />
 ✅ [Generation IX Data](https://pokestats.gg/pokemon/sprigatito) <br />
-✅ Sprites Page <br />
+✅ [Sprites Page](https://pokestats.gg/sprites/charizard) <br />
 🛠️ Catch-rate Calculator <br />
 💡 Growth Rates Page <br />
 💡 Type Relations Table Page <br />

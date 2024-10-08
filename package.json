@@ -25,7 +25,10 @@
     "lint": "eslint src -c .eslintrc --ext js",
     "prettier": "prettier \"**/*.{js,ts,md,json,yml}\" --ignore-path .gitignore",
     "fix:eslint": "eslint --fix \"**/*.*\"",
-    "fix:prettier": "prettier --write \"**/*.*\""
+    "fix:prettier": "prettier --write \"**/*.*\"",
+    "pages:build": "npx @cloudflare/next-on-pages",
+    "preview": "yarn pages:build && wrangler pages dev",
+    "deploy": "yarn pages:build && wrangler pages deploy"
   },
   "dependencies": {
     "@emotion/cache": "^11.13.1",
@@ -53,6 +56,7 @@
     "usehooks-ts": "^3.1.0"
   },
   "devDependencies": {
+    "@cloudflare/next-on-pages": "^1.13.5",
     "@emotion/babel-plugin": "^11.12.0",
     "@next/eslint-plugin-next": "^14.2.14",
     "@svgr/webpack": "^8.1.0",
@@ -73,7 +77,8 @@
     "express": "^4.21.0",
     "prettier": "^3.3.3",
     "typescript": "^5.6.2",
-    "webpack": "^5.95.0"
+    "webpack": "^5.95.0",
+    "wrangler": "^3.80.2"
   },
   "browserslist": [
     ">0.2%",

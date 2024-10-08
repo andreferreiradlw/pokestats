@@ -1,8 +1,9 @@
-/** @type {import('next').NextConfig} */
+import { setupDevPlatform } from '@cloudflare/next-on-pages/next-dev';
 
-module.exports = {
+/** @type {import('next').NextConfig} */
+const nextConfig = {
   reactStrictMode: true,
-  swcMinify: true, // Ensure SWC minification is enabled
+  swcMinify: true,
   compiler: {
     emotion: true,
   },
@@ -31,18 +32,6 @@ module.exports = {
       },
     ],
   },
-  async rewrites() {
-    return [
-      {
-        source: '/js/script.js',
-        destination: 'https://plausible.io/js/script.js',
-      },
-      {
-        source: '/api/event',
-        destination: 'https://plausible.io/api/event',
-      },
-    ];
-  },
   webpack(config) {
     config.module.rules.push({
       test: /\.svg$/,
@@ -51,3 +40,9 @@ module.exports = {
     return config;
   },
 };
+
+if (process.env.NODE_ENV === 'development') {
+  await setupDevPlatform(); // This enables Cloudflare bindings in development mode
+}
+
+export default nextConfig;

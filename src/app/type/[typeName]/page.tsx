@@ -1,4 +1,4 @@
-export const runtime = 'edge';
+export const runtime = 'nodejs';
 
 // types
 import type { Type } from 'pokenode-ts';

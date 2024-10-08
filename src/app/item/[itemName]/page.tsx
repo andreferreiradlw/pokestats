@@ -1,4 +1,4 @@
-export const runtime = 'edge';
+export const runtime = 'nodejs';
 
 // types
 import type { Berry, ItemAttribute, ItemCategory, ItemFlingEffect } from 'pokenode-ts';

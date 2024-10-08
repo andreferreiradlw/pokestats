@@ -1,4 +1,4 @@
-export const runtime = 'edge';
+export const runtime = 'nodejs';
 
 // types
 import type { Move, MoveTarget, SuperContestEffect, ContestEffect } from 'pokenode-ts';

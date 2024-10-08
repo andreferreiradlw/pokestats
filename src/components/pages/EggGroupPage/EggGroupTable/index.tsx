@@ -28,12 +28,14 @@ interface EggGroupTableProps extends Partial<CustomTableProps> {
   pokemon: EggGroupTableData[];
   eggGroup: string;
   noMovesText?: string;
+  customKey: string;
 }
 
 const EggGroupTable = ({
   pokemon,
   eggGroup,
   noMovesText,
+  customKey,
   ...rest
 }: EggGroupTableProps): JSX.Element => {
   // hooks
@@ -234,7 +236,7 @@ const EggGroupTable = ({
           paginated
           columns={columns}
           data={tableData}
-          customKey={`egg-group-table-container-${eggGroup}`}
+          customKey={customKey ?? `egg-group-table-container-${eggGroup}`}
           {...rest}
         />
       ) : (

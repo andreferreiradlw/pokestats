@@ -119,7 +119,10 @@ const BerryListPage = ({ berryData }: PokestatsBerriesPageProps): JSX.Element =>
         </CustomButton>
       </Stack>
       {filteredBerries.length > 0 ? (
-        <BerryTable items={filteredBerries} />
+        <BerryTable
+          items={filteredBerries}
+          customKey={`berry-table-${values.nameSearch.trim()}-${values.selectedFirmness}-${values.selectedCategory}`}
+        />
       ) : (
         <Typography
           variant="sectionSubTitle"

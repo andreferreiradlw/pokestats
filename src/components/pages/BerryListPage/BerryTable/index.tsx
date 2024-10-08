@@ -17,9 +17,10 @@ import Link from 'next/link';
 
 interface BerryTableProps extends Partial<CustomTableProps> {
   items: BerryItem[];
+  customKey: string;
 }
 
-const BerryTable = ({ items }: BerryTableProps): JSX.Element => {
+const BerryTable = ({ items, customKey }: BerryTableProps): JSX.Element => {
   // Define table columns
   const columns: Column[] = [
     { field: 'name', headerName: 'Name', sortable: true, defaultSort: true },
@@ -137,7 +138,7 @@ const BerryTable = ({ items }: BerryTableProps): JSX.Element => {
     <CustomTable
       columns={columns}
       data={data}
-      customKey="berry-table"
+      customKey={customKey ?? 'berry-table'}
       initial="hidden"
       animate="show"
       exit="exit"

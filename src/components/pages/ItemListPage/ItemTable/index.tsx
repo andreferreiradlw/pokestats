@@ -18,7 +18,7 @@ interface ItemTableProps extends Partial<CustomTableProps> {
   items: ExtractedItem[];
 }
 
-const ItemTable = ({ items }: ItemTableProps): JSX.Element => {
+const ItemTable = ({ items, ...rest }: ItemTableProps): JSX.Element => {
   // hooks
   const router = useRouter();
 
@@ -104,6 +104,7 @@ const ItemTable = ({ items }: ItemTableProps): JSX.Element => {
       animate="show"
       exit="exit"
       variants={fadeInUpVariant}
+      {...rest}
     />
   );
 };

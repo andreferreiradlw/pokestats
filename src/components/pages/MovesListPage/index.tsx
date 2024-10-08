@@ -122,6 +122,7 @@ const MovesListPage = ({ moves, typeOptions }: PokestatsMovesPageProps): JSX.Ele
         paginated
         moves={filteredMoves}
         noMovesText="No moves found for current criteria."
+        customKey={`moves-table-${values.nameSearch.trim()}-${values.selectedGen}-${values.selectedCategory}-${values.selectedType}`}
       />
     </Stack>
   );

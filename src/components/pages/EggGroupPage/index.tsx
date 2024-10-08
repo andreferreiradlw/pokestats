@@ -137,7 +137,11 @@ const EggGroupPage = ({
           </CustomButton>
         </Grid2>
       </Grid2>
-      <EggGroupTable pokemon={filteredEggGroups} eggGroup={eggGroupData.name} />
+      <EggGroupTable
+        pokemon={filteredEggGroups}
+        eggGroup={eggGroupData.name}
+        customKey={`group-${eggGroupData.name}-${values.nameSearch.trim()}-${values.selectedOtherGroups.join('-')}-${values.selectedHabitats.join('-')}`}
+      />
     </Stack>
   );
 };

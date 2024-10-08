@@ -123,7 +123,7 @@ const ItemListPage = ({
       {filteredItems.length > 0 ? (
         <ItemTable
           items={filteredItems}
-          customKey={`item-table-${values.selectedCategory}-${values.nameSearch}`}
+          customKey={`item-table-${values.selectedCategory}-${values.nameSearch}-${values.selectedAttribute}`}
         />
       ) : (
         <Typography

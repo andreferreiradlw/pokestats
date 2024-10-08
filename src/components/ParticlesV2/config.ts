@@ -4,7 +4,7 @@ import { particles } from './particles';
 const particleConfig: RecursivePartial<IOptions> = {
   particles: {
     number: {
-      value: 20, // Particle count for a more lively hover effect
+      value: 22, // Particle count for a more lively hover effect
       density: {
         enable: true,
         height: 1200,

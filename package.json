@@ -1,7 +1,6 @@
 {
   "name": "pokestats",
   "version": "0.2.0",
-  "private": false,
   "description": "PokeStats.gg is an online encyclopedia of Pokémon species containing information such as Pokédex entries, descriptions, evolution chains, moves, stats and much more.",
   "keywords": [
     "pokemon",
@@ -85,5 +84,6 @@
     ">0.2%",
     "not dead",
     "not op_mini all"
-  ]
+  ],
+  "packageManager": "yarn@4.5.0"
 }

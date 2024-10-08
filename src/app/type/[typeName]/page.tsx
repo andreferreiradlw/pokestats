@@ -1,3 +1,5 @@
+export const runtime = 'edge';
+
 // types
 import type { Type } from 'pokenode-ts';
 import type { Metadata } from 'next';

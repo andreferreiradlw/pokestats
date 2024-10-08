@@ -1,3 +1,5 @@
+export const runtime = 'edge';
+
 // types
 import type { Move, MoveTarget, SuperContestEffect, ContestEffect } from 'pokenode-ts';
 import type { Metadata } from 'next';

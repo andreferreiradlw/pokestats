@@ -1,3 +1,5 @@
+export const runtime = 'edge';
+
 // types
 import type {
   Pokemon as PokenodePokemon,

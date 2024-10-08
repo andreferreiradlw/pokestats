@@ -1,3 +1,5 @@
+export const runtime = 'edge';
+
 // types
 import type { Pokemon, PokemonSpecies, NamedAPIResource } from 'pokenode-ts';
 import type { Metadata } from 'next';

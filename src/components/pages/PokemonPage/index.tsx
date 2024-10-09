@@ -77,7 +77,7 @@ const PokemonPage = ({
       </Stack>
       {/** SPRITES & NAVIGATION */}
       <Sprites pokemon={pokemon} />
-      <Navigation allPokemon={allPokemon} pokemonSpecies={species} />
+      <Navigation allPokemon={allPokemon} speciesId={species.id} />
     </Stack>
   );
 };

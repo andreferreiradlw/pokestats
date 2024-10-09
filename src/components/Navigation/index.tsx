@@ -2,7 +2,6 @@
 
 // types
 import type { PokestatsPokemonPageProps } from '@/app/pokemon/[pokemonName]/page';
-import type { PokemonSpecies } from 'pokenode-ts';
 // helpers
 import { track } from '@vercel/analytics';
 // components
@@ -10,24 +9,21 @@ import NavigationButton from './NavigationButton';
 import { Stack, type StackProps } from '@mui/material';
 
 interface NavigationProps extends StackProps {
-  pokemonSpecies: PokemonSpecies;
+  speciesId: number;
   allPokemon: PokestatsPokemonPageProps['allPokemon'];
   prefix?: 'pokemon' | 'sprites';
 }
 
 const Navigation = ({
   allPokemon,
-  pokemonSpecies,
+  speciesId,
   prefix = 'pokemon',
   ...rest
 }: NavigationProps): JSX.Element => {
-  // data
-  const { id } = pokemonSpecies;
-
   const pokemonLength = allPokemon.length;
 
-  const prevPokemon = id > 1 ? allPokemon[id - 2] : null;
-  const nextPokemon = id < pokemonLength ? allPokemon[id] : null;
+  const prevPokemon = speciesId > 1 ? allPokemon[speciesId - 2] : null;
+  const nextPokemon = speciesId < pokemonLength ? allPokemon[speciesId] : null;
 
   return (
     <Stack
@@ -42,7 +38,7 @@ const Navigation = ({
         <NavigationButton
           prefix={prefix}
           pokemonName={prevPokemon.name}
-          pokemonId={id}
+          pokemonId={speciesId}
           direction="left"
           handleClick={() => track('Previous Pokemon Navigation Click')}
         />
@@ -51,7 +47,7 @@ const Navigation = ({
         <NavigationButton
           prefix={prefix}
           pokemonName={nextPokemon.name}
-          pokemonId={id}
+          pokemonId={speciesId}
           direction="right"
           handleClick={() => track('Next Pokemon Navigation Click')}
         />

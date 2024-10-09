@@ -1,5 +1,3 @@
-export const runtime = 'edge';
-
 // types
 import type { Metadata } from 'next';
 // helpers

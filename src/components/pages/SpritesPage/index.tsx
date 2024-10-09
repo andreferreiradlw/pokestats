@@ -21,13 +21,11 @@ const SpritesPage = ({
 }: PokestatsSpritePageProps): JSX.Element => {
   // data
   const { name, sprites } = pokemon;
+  const { id, names } = pokemonSpecies;
 
   const englishName = useMemo(() => removeDash(name), [name]);
 
-  const speciesEnglishName = useMemo(
-    () => (pokemonSpecies?.names ? findEnglishName(pokemonSpecies.names) : ''),
-    [pokemonSpecies],
-  );
+  const speciesEnglishName = useMemo(() => (names ? findEnglishName(names) : ''), [names]);
 
   const { generationSprites, otherSprites, mainSprites, otherForms } = useMemo(
     () => formatSpriteData(sprites, otherFormsData),
@@ -126,7 +124,7 @@ const SpritesPage = ({
         </>
       )}
       <Divider />
-      <Navigation prefix="sprites" allPokemon={allPokemonData} pokemonSpecies={pokemonSpecies} />
+      <Navigation prefix="sprites" allPokemon={allPokemonData} speciesId={id} />
     </Stack>
   );
 };

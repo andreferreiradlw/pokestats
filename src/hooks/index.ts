@@ -9,3 +9,4 @@ export * from './usePokemonList';
 export * from './usePokemonMoves';
 export * from './useScrollPosition';
 export * from './useTypeMoves';
+export * from './useUmami';

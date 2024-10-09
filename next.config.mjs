@@ -32,6 +32,21 @@ const nextConfig = {
       },
     ],
   },
+
+  // Add rewrites to bypass ad blockers
+  async rewrites() {
+    return [
+      {
+        source: '/homer.js', // Your custom endpoint
+        destination: process.env.NEXT_PUBLIC_UMAMI_SCRIPT_URL, // The real Umami script URL
+      },
+      {
+        source: '/api/umami', // Rewrite API endpoint for event tracking
+        destination: `${process.env.NEXT_PUBLIC_UMAMI_SCRIPT_URL.replace('umami.js', 'api/event')}`,
+      },
+    ];
+  },
+
   webpack(config) {
     config.module.rules.push({
       test: /\.svg$/,

@@ -4,7 +4,7 @@
 import type { PokestatsItemPageProps } from '@/app/item/[itemName]/page';
 // helpers
 import { findEnglishName } from '@/helpers';
-import { track } from '@vercel/analytics/server';
+import { useUmami } from '@/hooks';
 // components
 import { Divider, Grid2, Stack, Typography } from '@mui/material';
 import ItemDetails from './ItemDetails';
@@ -25,6 +25,9 @@ const ItemPage = ({
   flingEffect,
   berryData,
 }: PokestatsItemPageProps): JSX.Element => {
+  // analytics
+  const { track } = useUmami();
+
   // data
   const { sprite, names, name, shortEntry, longEntry, flavourTextEntries } = item;
 

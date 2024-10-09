@@ -14,7 +14,7 @@ import {
 } from '@/helpers';
 // hooks
 import { useMachines, usePokemonMoves } from '@/hooks';
-import { track } from '@vercel/analytics';
+import { useUmami } from '@/hooks';
 // components
 import { Grid2, Typography, type Grid2Props } from '@mui/material';
 import DropdownV2 from '@/components/DropdownV2';
@@ -47,6 +47,9 @@ const learnMethodOptions = [
 ];
 
 const PokemonMoves = ({ pokemon, ...rest }: PokemonMovesProps): JSX.Element => {
+  // analytics
+  const { track } = useUmami();
+
   // States
   const { gameVersion, gameDetails } = useContext(GameVersionContext);
   const [learnMethod, setLearnMethod] = useState<MoveLearnMethod['name']>('level-up');

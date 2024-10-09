@@ -3,7 +3,7 @@
 import { useMemo, useCallback } from 'react';
 // hooks
 import { useRouter } from 'next/navigation';
-import { track } from '@vercel/analytics';
+import { useUmami } from '@/hooks';
 // types
 import type { Move, MoveLearnMethod } from 'pokenode-ts';
 import type { PartialMove } from '@/app/moves/page';
@@ -42,6 +42,8 @@ const MovesTableV2 = ({
 }: MovesTableV2Props): JSX.Element => {
   // hooks
   const router = useRouter();
+
+  const { track } = useUmami();
 
   const mapMethodName = useMemo(() => {
     switch (learnMethod) {

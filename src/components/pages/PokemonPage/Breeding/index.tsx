@@ -4,7 +4,7 @@ import { useMemo } from 'react';
 // helpers
 import { capitalise, removeDash } from '@/helpers';
 import { styled } from '@mui/material/styles';
-import { track } from '@vercel/analytics';
+import { useUmami } from '@/hooks';
 // types
 import type { PokemonSpecies, EvolutionChain } from 'pokenode-ts';
 // components
@@ -31,6 +31,9 @@ interface BreedingProps extends Grid2Props {
 }
 
 const Breeding = ({ species, babyTriggerItem, ...rest }: BreedingProps): JSX.Element => {
+  // analytics
+  const { track } = useUmami();
+
   // data
   const { gender_rate, egg_groups, hatch_counter, habitat, growth_rate } = species;
 

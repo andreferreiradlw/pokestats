@@ -7,7 +7,7 @@ const toSitemapEntry = (host: string, route: string): MetadataRoute.Sitemap[0] =
 });
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const host = process.env.NEXT_PUBLIC_ENV_VAR === 'prod_deployment' ? 'pokestats.gg' : 'localhost';
+  const host = process.env.NEXT_PUBLIC_ENV_VAR === 'prod' ? 'pokestats.gg' : 'localhost';
 
   // Static pages
   const staticRoutes = ['', '/headbutt-tree-finder', '/items', '/berries', '/moves'];

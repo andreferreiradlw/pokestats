@@ -7,7 +7,7 @@ import type { Pokemon, PokemonSpecies } from 'pokenode-ts';
 import { genderDifferences } from './genderDescriptions';
 // helpers
 import { removeDash } from '@/helpers';
-import { track } from '@vercel/analytics';
+import { useUmami } from '@/hooks';
 // components
 import { Table } from '@/BaseStyles';
 import { Grid2, Stack, Typography, type Grid2Props } from '@mui/material';
@@ -20,6 +20,9 @@ interface PokemonFormsProps extends Grid2Props {
 }
 
 const PokemonForms = ({ pokemon, species, ...rest }: PokemonFormsProps): JSX.Element => {
+  // analytics
+  const { track } = useUmami();
+
   // data
   const { forms_switchable, varieties, has_gender_differences, id } = species;
   const { name } = pokemon;

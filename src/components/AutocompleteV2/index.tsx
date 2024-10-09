@@ -5,8 +5,7 @@ import type { CSSProperties } from 'react';
 import type { HTMLMotionProps } from '@/client';
 // hooks
 import { useRouter } from 'next/navigation';
-import { track } from '@vercel/analytics';
-import { useAutocompleteOptions, type AutocompleteListOption } from '@/hooks';
+import { useAutocompleteOptions, useUmami, type AutocompleteListOption } from '@/hooks';
 // helpers
 import { capitalise, formatPokemonId, mapGeneration, removeDash } from '@/helpers';
 import { fadeInDownVariant } from '@/animations';
@@ -109,8 +108,9 @@ const AutocompleteV2 = ({
   autocompleteOptions,
   ...rest
 }: AutocompleteV2Props): JSX.Element => {
-  // router
+  // hooks
   const router = useRouter();
+  const { track } = useUmami();
   // fetch data
   const { data, isLoading } = useAutocompleteOptions();
 
@@ -192,7 +192,7 @@ const AutocompleteV2 = ({
           variants: fadeInDownVariant,
         }}
         onChange={(_, option) => {
-          track('Autocomplete Selection', { assetType: option.name, name: option.name });
+          track('Autocomplete Selection', { assetType: option.assetType, name: option.name });
 
           if (option.assetType === 'region') {
             router.push(`/regions/${option.generation}/${option.name}`);

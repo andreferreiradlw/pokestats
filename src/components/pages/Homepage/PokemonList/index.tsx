@@ -4,7 +4,7 @@ import { useState, useEffect, useMemo, useCallback } from 'react';
 // types
 import type { NamedAPIResource } from 'pokenode-ts';
 // helpers
-import { track } from '@vercel/analytics';
+import { useUmami } from '@/hooks';
 import { type GameGenValue, generationOptions, getResourceId, mapIdToGeneration } from '@/helpers';
 import { fadeInUpVariant } from '@/animations';
 // components
@@ -18,6 +18,9 @@ interface PokemonListProps extends Grid2Props {
 }
 
 const PokemonList = ({ pokemon, ...rest }: PokemonListProps): JSX.Element => {
+  // analytics
+  const { track } = useUmami();
+
   // states
   const [gen, setGen] = useState<'all' | GameGenValue>('all');
   const [sortBy, setSortBy] = useState<string>('id');

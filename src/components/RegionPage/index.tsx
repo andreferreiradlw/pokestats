@@ -3,7 +3,7 @@
 import { type PropsWithChildren, useRef, useState } from 'react';
 // helpers
 import { mapGeneration, type GameGenValue } from '@/helpers';
-import { track } from '@vercel/analytics';
+import { useUmami } from '@/hooks';
 import { alpha } from '@mui/material/styles';
 // components
 import CanvasMapper, { type CanvasMapperArea, type CanvasMapperHandle } from './CanvasMapper';
@@ -28,6 +28,9 @@ const RegionPage = ({
   defaultLocation,
   children,
 }: RegionPageProps): JSX.Element => {
+  // analytics
+  const { track } = useUmami();
+
   // state
   const [highlightAllAreas, setHighlightAllAreas] = useState(false);
   const [selectedArea, setSelectedArea] = useState<CanvasMapperArea>();

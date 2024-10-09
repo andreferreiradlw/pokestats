@@ -3,7 +3,7 @@
 // types
 import type { PokestatsPokemonPageProps } from '@/app/pokemon/[pokemonName]/page';
 // helpers
-import { track } from '@vercel/analytics';
+import { useUmami } from '@/hooks';
 // components
 import NavigationButton from './NavigationButton';
 import { Stack, type StackProps } from '@mui/material';
@@ -20,6 +20,9 @@ const Navigation = ({
   prefix = 'pokemon',
   ...rest
 }: NavigationProps): JSX.Element => {
+  // analytics
+  const { track } = useUmami();
+
   const pokemonLength = allPokemon.length;
 
   const prevPokemon = speciesId > 1 ? allPokemon[speciesId - 2] : null;

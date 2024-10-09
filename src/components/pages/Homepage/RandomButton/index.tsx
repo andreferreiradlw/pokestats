@@ -4,7 +4,7 @@ import { useMemo } from 'react';
 // types
 import type { NamedAPIResource } from 'pokenode-ts';
 // helpers
-import { track } from '@vercel/analytics';
+import { useUmami } from '@/hooks';
 import { getRandomInt } from '@/helpers';
 import { useRouter } from 'next/navigation';
 // components
@@ -17,7 +17,9 @@ interface RandomButtonProps {
 }
 
 const RandomButton = ({ pokemonList }: RandomButtonProps): JSX.Element => {
+  // hooks
   const router = useRouter();
+  const { track } = useUmami();
 
   // Generate the random Pokémon URL
   const randomPokemonUrl = useMemo(

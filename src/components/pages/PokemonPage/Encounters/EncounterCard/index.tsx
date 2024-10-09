@@ -8,8 +8,7 @@ import {
   parseLocationName,
   removeDash,
 } from '@/helpers';
-import { track } from '@vercel/analytics';
-import type { EncounterData } from '@/hooks';
+import { useUmami, type EncounterData } from '@/hooks';
 // components
 import { Table } from '@/BaseStyles';
 import {
@@ -50,6 +49,9 @@ const EncounterCard = ({
   pokemonName,
   ...rest
 }: EncounterCardProps): JSX.Element => {
+  // analytics
+  const { track } = useUmami();
+
   // data
   const { location_area, version_details, location } = encounter;
 

@@ -4,7 +4,7 @@
 import type { Pokemon } from 'pokenode-ts';
 // helpers
 import { formatSpriteData, removeDash } from '@/helpers';
-import { track } from '@vercel/analytics/server';
+import { useUmami } from '@/hooks';
 // components
 import { Stack, Typography, type StackProps } from '@mui/material';
 import CustomButton from '@/components/CustomButton';
@@ -16,6 +16,9 @@ interface SpritesProps extends StackProps {
 }
 
 const Sprites = ({ pokemon, ...rest }: SpritesProps): JSX.Element => {
+  // analytics
+  const { track } = useUmami();
+
   // data
   const { name, sprites } = pokemon;
 

@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 // types
 import type { Berry } from 'pokenode-ts';
 // helpers
-import { track } from '@vercel/analytics';
+import { useUmami } from '@/hooks';
 import { capitalise, removeDash } from '@/helpers';
 // components
 import { Numbered, Table } from '@/BaseStyles';
@@ -15,6 +15,9 @@ interface BerryDetailsTableProps extends Grid2Props {
 }
 
 const BerryDetailsTable = ({ berry, ...rest }: BerryDetailsTableProps): JSX.Element => {
+  // analytics
+  const { track } = useUmami();
+
   // berry data
   const {
     growth_time,

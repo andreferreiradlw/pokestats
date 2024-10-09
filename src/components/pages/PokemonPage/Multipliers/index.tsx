@@ -6,7 +6,7 @@ import type { PokemonType } from 'pokenode-ts';
 // helpers
 import getMultipliers, { type MultipliersRes } from './damage_multipliers';
 import { removeUnderscore } from '@/helpers';
-import { track } from '@vercel/analytics';
+import { useUmami } from '@/hooks';
 // components
 import TypeBadge from '@/components/TypeBadge';
 import { Table } from '@/components/BaseStyles';
@@ -55,6 +55,9 @@ const TypesTable = memo(
 );
 
 const Multipliers = ({ pokemonTypes, ...rest }: MultipliersProps): JSX.Element => {
+  // analytics
+  const { track } = useUmami();
+
   // states
   const [isAttackMode, setIsAttackMode] = useState(true);
 

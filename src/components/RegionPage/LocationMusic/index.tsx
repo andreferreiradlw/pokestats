@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState, useRef, useCallback } from 'react';
 // helpers
-import { track } from '@vercel/analytics';
+import { useUmami } from '@/hooks';
 import { mapLocationMusic, type GameGenValue } from '@/helpers';
 // components
 import { Slider, Typography, Stack, IconButton, Tooltip } from '@mui/material';
@@ -21,6 +21,9 @@ const formatTime = (time: number): string => {
 };
 
 const LocationMusic = ({ generation, locationName }: LocationMusicProps): JSX.Element => {
+  // analytics
+  const { track } = useUmami();
+
   // States
   const [isPlaying, setIsPlaying] = useState(false);
   const [isLooping, setIsLooping] = useState(false);

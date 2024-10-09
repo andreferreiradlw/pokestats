@@ -3,7 +3,7 @@ import type { BerryItem } from '@/app/berries/page';
 // helpers
 import { fadeInUpVariant } from '@/animations';
 import { capitalise, removeDash } from '@/helpers';
-import { track } from '@vercel/analytics';
+import { useUmami } from '@/hooks';
 // components
 import { Box, Stack, Typography } from '@mui/material';
 import Image from 'next/image';
@@ -21,6 +21,9 @@ interface BerryTableProps extends Partial<CustomTableProps> {
 }
 
 const BerryTable = ({ items, customKey }: BerryTableProps): JSX.Element => {
+  // analytics
+  const { track } = useUmami();
+
   // Define table columns
   const columns: Column[] = [
     { field: 'name', headerName: 'Name', sortable: true, defaultSort: true },

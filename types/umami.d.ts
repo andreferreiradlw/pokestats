@@ -1,5 +1,5 @@
 interface Window {
   umami?: {
-    trackEvent: (eventName: string, eventData?: Record<string, any>) => void;
+    track: (eventName: string, eventData?: Record<string, any>) => void;
   };
 }

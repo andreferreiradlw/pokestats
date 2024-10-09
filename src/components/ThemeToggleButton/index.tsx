@@ -2,7 +2,7 @@
 
 import { useContext } from 'react';
 // helpers
-import { track } from '@vercel/analytics';
+import { useUmami } from '@/hooks';
 import { ColorModeContext } from '@/context';
 // components
 import { ThemeSwitch } from './styledThemeToggleButton';
@@ -11,6 +11,9 @@ import { Stack, type StackProps } from '@mui/material';
 const ThemeToggleButton = (props: StackProps): JSX.Element => {
   // context
   const colorMode = useContext(ColorModeContext);
+
+  // analytics
+  const { track } = useUmami();
 
   return (
     <Stack {...props}>

@@ -1,7 +1,7 @@
 import { useCallback, useMemo } from 'react';
 // hooks
 import { useRouter } from 'next/navigation';
-import { track } from '@vercel/analytics';
+import { useUmami } from '@/hooks';
 // types
 import type { EggGroupTableData } from '@/app/egg-group/[eggGroupName]/page';
 import type { Pokemon } from 'pokenode-ts';
@@ -40,6 +40,7 @@ const EggGroupTable = ({
 }: EggGroupTableProps): JSX.Element => {
   // hooks
   const router = useRouter();
+  const { track } = useUmami();
 
   const onCellClick = useCallback(
     (forms?: Pokemon['forms']) => {

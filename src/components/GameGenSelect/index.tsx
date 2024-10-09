@@ -2,13 +2,16 @@
 
 import { useContext } from 'react';
 // helpers
-import { track } from '@vercel/analytics';
+import type { GameValue } from '@/helpers';
+import { useUmami } from '@/hooks';
 import { GameVersionContext } from '@/context';
 // components
 import DropdownV2 from '../DropdownV2';
-import type { GameValue } from '@/helpers';
 
 const GameGenSelect = (): JSX.Element | null => {
+  // analytics
+  const { track } = useUmami();
+
   // context
   const { gameVersion, setGameVersion, dropdownOptions } = useContext(GameVersionContext);
 

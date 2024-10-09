@@ -32,15 +32,15 @@ const RootLayout = ({ children }: { children: ReactNode }) => (
   <html lang="en">
     <body>
       <head>
-        {process.env.NODE_ENV === 'production' && (
+        {process.env.NEXT_PUBLIC_ENV_VAR === 'prod' && (
           <Script
             async
             defer
+            src={process.env.NEXT_PUBLIC_UMAMI_SCRIPT_URL}
             data-website-id={process.env.NEXT_PUBLIC_UMAMI_WEBSITE_ID}
-            src="/homer.js"
+            strategy="lazyOnload"
           />
         )}
-        <script defer src="/homer.js" data-website-id={process.env.NEXT_PUBLIC_UMAMI_WEBSITE_ID} />
       </head>
       <Providers>{children}</Providers>
     </body>

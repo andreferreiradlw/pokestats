@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
 // helpers
 import { useRouter } from 'next/navigation';
-import { track } from '@vercel/analytics';
+import { useUmami } from '@/hooks';
 import { fadeInUpVariant } from '@/animations';
 import { capitalise, removeDash, type ExtractedItem } from '@/helpers';
 // components
@@ -21,6 +21,7 @@ interface ItemTableProps extends Partial<CustomTableProps> {
 const ItemTable = ({ items, ...rest }: ItemTableProps): JSX.Element => {
   // hooks
   const router = useRouter();
+  const { track } = useUmami();
 
   const onCellClick = useCallback(
     (itemName: ExtractedItem['name']) => {

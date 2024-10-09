@@ -1,9 +1,8 @@
 'use client';
 
 // helpers
-import { track } from '@vercel/analytics';
 import { hoverVariant } from '@/animations';
-import { useBreakpoint } from '@/hooks';
+import { useBreakpoint, useUmami } from '@/hooks';
 // styles
 import { FooterContainer, PokestatsIcon, Anchor, FooterContent } from './StyledFooter';
 // components
@@ -14,6 +13,8 @@ import ImageNextV2 from '@/components/ImageNextV2';
 const Footer = (): JSX.Element => {
   // breakpoint
   const isMdUp = useBreakpoint({ breakpoint: 'md' });
+
+  const { track } = useUmami();
 
   return (
     <FooterContainer>

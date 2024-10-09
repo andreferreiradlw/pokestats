@@ -1,29 +1,29 @@
 'use client';
 
 // helpers
-import { useIsClient, useWindowSize } from 'usehooks-ts';
 import { scrollToTop } from '@/helpers';
+import { useBreakpoint } from '@/hooks';
 import { fadeInUpVariant } from '@/animations';
 // components
 import { ScrollButton } from './styledScrollToTopButton';
 import { useScrollTrigger } from '@mui/material';
+// icons
 import ArrowCircleUpIcon from '@mui/icons-material/ArrowCircleUp';
 
 const ScrollToTopButton = (): JSX.Element | null => {
   // hooks
-  const isClient = useIsClient();
-  const { width } = useWindowSize();
+  const isMdDown = useBreakpoint({ breakpoint: 'md', queryType: 'down' });
+
   const scrollPosition = useScrollTrigger({
     disableHysteresis: true,
     threshold: 1000,
   });
 
-  // Only show button when on client, window width > 768px, and scrollPosition is true
-  if (width <= 768 || !scrollPosition) return null;
+  if (isMdDown || !scrollPosition) return null;
 
   return (
     <ScrollButton
-      onClick={isClient ? scrollToTop : undefined}
+      onClick={scrollToTop}
       whileHover="hover"
       whileTap="tap"
       initial="hidden"

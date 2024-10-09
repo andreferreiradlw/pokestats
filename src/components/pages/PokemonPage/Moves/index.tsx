@@ -13,8 +13,7 @@ import {
   MoveLearnMethodLabel,
 } from '@/helpers';
 // hooks
-import { useMachines, usePokemonMoves } from '@/hooks';
-import { useUmami } from '@/hooks';
+import { useMachines, usePokemonMoves, useUmami } from '@/hooks';
 // components
 import { Grid2, Typography, type Grid2Props } from '@mui/material';
 import DropdownV2 from '@/components/DropdownV2';

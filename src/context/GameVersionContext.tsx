@@ -18,6 +18,7 @@ interface GameVersionContextProps {
   setGameVersion: (version: string) => void;
   dropdownOptions: Game[];
   gameDetails?: Game;
+  pokemon?: PokemonSpecies;
 }
 
 interface GameVersionProviderProps {
@@ -31,11 +32,12 @@ export const GameVersionContext = createContext<GameVersionContextProps>({
   setGameVersion: () => {},
   dropdownOptions: [],
   gameDetails: undefined,
+  pokemon: undefined,
 });
 
 export const GameVersionProvider = ({ children, pokemon }: GameVersionProviderProps) => {
+  console.log('GameVersionProvider', pokemon);
   const [gameVersion, setGameVersion] = useState<string>();
-  // const [gameDetails, setGameDetails] = useState<Game>();
 
   const gameDetails = useMemo(
     () => gameVersions.find(({ value }) => value === gameVersion),
@@ -67,6 +69,7 @@ export const GameVersionProvider = ({ children, pokemon }: GameVersionProviderPr
       setGameVersion,
       dropdownOptions,
       gameDetails,
+      pokemon,
     }),
     [gameVersion, dropdownOptions, gameDetails],
   );

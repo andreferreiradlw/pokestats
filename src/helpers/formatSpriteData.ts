@@ -43,7 +43,7 @@ export const formatSpriteData = (
           imageUrl: pokemonSprites.front_shiny_female,
         },
         {
-          label: 'Front Shiny Female',
+          label: 'Back Shiny Female',
           imageUrl: pokemonSprites.back_shiny_female,
         },
       ],

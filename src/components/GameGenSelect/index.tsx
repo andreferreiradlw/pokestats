@@ -15,12 +15,13 @@ const GameGenSelect = (): JSX.Element | null => {
   // context
   const { gameVersion, setGameVersion, dropdownOptions } = useContext(GameVersionContext);
 
-  if (!gameVersion) return null;
+  // if (!gameVersion) return null;
 
   return (
     <DropdownV2<GameValue>
       label="Game Version"
-      value={gameVersion}
+      disabled={!gameVersion}
+      value={gameVersion!}
       options={dropdownOptions}
       minWidth="185px"
       onChange={value => {

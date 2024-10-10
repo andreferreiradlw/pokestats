@@ -26,6 +26,7 @@ const LayoutV2 = ({
   customKey,
   ...rest
 }: LayoutV2Props): JSX.Element => {
+  console.log(withHeader, showGenSelect, customKey);
   return (
     <LayoutContainer maxWidth={false} disableGutters>
       {withHeader && <HeaderV2 showGenSelect={showGenSelect} />}

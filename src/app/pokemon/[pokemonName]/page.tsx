@@ -24,6 +24,7 @@ import { notFound } from 'next/navigation';
 // components
 import { PokemonPage } from '@/PageComponents';
 import { GameVersionProvider } from '@/context';
+import LayoutV2 from '@/components/LayoutV2';
 
 export interface PokestatsPokemonPageProps {
   allPokemon: NamedAPIResource[];
@@ -138,7 +139,9 @@ const PokestatsPokemonPage = async ({ params: { pokemonName } }: PokemonPagePara
 
     return (
       <GameVersionProvider pokemon={props.species}>
-        <PokemonPage {...props} />
+        <LayoutV2 withHeader showGenSelect customKey={`pokemon-${props.pokemon.id}-page`}>
+          <PokemonPage {...props} />
+        </LayoutV2>
       </GameVersionProvider>
     );
   } catch (error) {

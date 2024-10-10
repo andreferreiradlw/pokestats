@@ -1,6 +1,9 @@
-import { styled } from '@mui/material/styles';
-import { TableCell, Stack } from '@mui/material';
+// types
 import type { GameValue } from '@/helpers';
+// helpers
+import { styled } from '@mui/material/styles';
+// components
+import { TableCell, Stack } from '@mui/material';
 
 interface GamePillProps {
   game: GameValue;
@@ -26,10 +29,6 @@ const MethodContainer = styled(Stack)(({ theme }) => ({
   alignItems: 'center',
   justifyContent: 'center',
   gap: theme.spacing(1),
-
-  '& img': {
-    width: '40px',
-  },
 }));
 
 const PokemonCell = styled(TableCell)({

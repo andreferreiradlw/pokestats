@@ -25,29 +25,26 @@ const LayoutV2 = ({
   showGenSelect,
   customKey,
   ...rest
-}: LayoutV2Props): JSX.Element => {
-  console.log(withHeader, showGenSelect, customKey);
-  return (
-    <LayoutContainer maxWidth={false} disableGutters>
-      {withHeader && <HeaderV2 showGenSelect={showGenSelect} />}
-      <AnimatePresence>
-        <ChildrenContainer
-          maxWidth="xl"
-          component={motion.main}
-          variants={pageContainerVariant}
-          initial="hidden"
-          animate="visible"
-          exit="fade"
-          key={customKey || 'layout-grid-container'}
-          {...rest}
-        >
-          {children}
-        </ChildrenContainer>
-        <Footer />
-        <ScrollToTopButton />
-      </AnimatePresence>
-    </LayoutContainer>
-  );
-};
+}: LayoutV2Props): JSX.Element => (
+  <LayoutContainer maxWidth={false} disableGutters>
+    {withHeader && <HeaderV2 showGenSelect={showGenSelect} />}
+    <AnimatePresence>
+      <ChildrenContainer
+        maxWidth="xl"
+        component={motion.main}
+        variants={pageContainerVariant}
+        initial="hidden"
+        animate="visible"
+        exit="fade"
+        key={customKey || 'layout-grid-container'}
+        {...rest}
+      >
+        {children}
+      </ChildrenContainer>
+      <Footer />
+      <ScrollToTopButton />
+    </AnimatePresence>
+  </LayoutContainer>
+);
 
 export default LayoutV2;

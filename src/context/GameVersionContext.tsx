@@ -36,7 +36,6 @@ export const GameVersionContext = createContext<GameVersionContextProps>({
 });
 
 export const GameVersionProvider = ({ children, pokemon }: GameVersionProviderProps) => {
-  console.log('GameVersionProvider', pokemon);
   const [gameVersion, setGameVersion] = useState<string>();
 
   const gameDetails = useMemo(

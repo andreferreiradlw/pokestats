@@ -52,7 +52,6 @@
     "sharp": "^0.33.5"
   },
   "devDependencies": {
-    "@cloudflare/next-on-pages": "^1.13.5",
     "@emotion/babel-plugin": "^11.12.0",
     "@next/eslint-plugin-next": "^14.2.14",
     "@svgr/webpack": "^8.1.0",
@@ -73,9 +72,7 @@
     "express": "^4.21.0",
     "prettier": "^3.3.3",
     "typescript": "^5.6.2",
-    "vercel": "^37.6.3",
-    "webpack": "^5.95.0",
-    "wrangler": "^3.80.2"
+    "webpack": "^5.95.0"
   },
   "browserslist": [
     ">0.2%",

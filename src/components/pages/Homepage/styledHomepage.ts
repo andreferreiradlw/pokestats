@@ -4,7 +4,7 @@
 import { styled } from '@mui/material/styles';
 // components
 import { motion } from '@/client';
-import { Stack } from '@mui/material';
+import { alpha, Stack } from '@mui/material';
 
 const FirstSection = styled(Stack)({
   alignItems: 'center',
@@ -19,9 +19,10 @@ const FirstSection = styled(Stack)({
 
 const SecondSection = styled(Stack)(({ theme }) => ({
   alignItems: 'center',
-  backgroundColor: theme.palette.background.default,
+  backgroundColor: alpha(theme.palette.background.default, 0.975),
   justifyContent: 'center',
   width: '100%',
+  borderRadius: '10px',
 }));
 
 const GithubLink = styled(motion.a)(({ theme }) => ({

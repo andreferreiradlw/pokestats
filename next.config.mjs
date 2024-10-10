@@ -1,5 +1,3 @@
-import { setupDevPlatform } from '@cloudflare/next-on-pages/next-dev';
-
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
@@ -42,9 +40,5 @@ const nextConfig = {
     return config;
   },
 };
-
-if (process.env.NODE_ENV === 'development') {
-  await setupDevPlatform(); // This enables Cloudflare bindings in development mode
-}
 
 export default nextConfig;

@@ -4,7 +4,7 @@ import { Paper } from '@mui/material';
 
 const PokeBox = styled(Paper)`
   align-items: center;
-  border-radius: 5px;
+  border-radius: ${({ theme }) => theme.shape.borderRadius};
   display: flex;
   flex-basis: auto;
   flex-direction: column;

@@ -22,7 +22,7 @@ const SecondSection = styled(Stack)(({ theme }) => ({
   backgroundColor: alpha(theme.palette.background.default, 0.975),
   justifyContent: 'center',
   width: '100%',
-  borderRadius: '10px',
+  borderRadius: theme.shape.borderRadius,
 }));
 
 const GithubLink = styled(motion.a)(({ theme }) => ({
@@ -33,7 +33,7 @@ const GithubLink = styled(motion.a)(({ theme }) => ({
 
   svg: {
     background: theme.palette.background.default,
-    borderRadius: '25%',
+    borderRadius: theme.shape.borderRadius,
     fill: theme.palette.text.primary,
     height: 'auto',
     width: '30px',

@@ -11,7 +11,7 @@ export type ThemeMode = 'light' | 'dark';
 
 // Static parts of the theme that don't change between modes
 const baseThemeOptions: Partial<ThemeOptions> = {
-  shape: { borderRadius: 2 },
+  shape: { borderRadius: 5 },
   ...customTypography,
   ...styledMuiComponents,
   ...customBreakpoints,

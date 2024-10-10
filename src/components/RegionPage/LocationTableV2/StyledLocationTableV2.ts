@@ -14,7 +14,7 @@ const GamePill = styled('span', {
   return {
     backgroundColor: gameColor,
     color: theme.palette.getContrastText(gameColor),
-    borderRadius: '4px',
+    borderRadius: theme.shape.borderRadius,
     fontSize: theme.typography.caption.fontSize,
     fontWeight: theme.typography.fontWeightBold,
     padding: `${theme.spacing(0.25)} ${theme.spacing(0.5)}`,

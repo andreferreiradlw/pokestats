@@ -79,13 +79,13 @@ const BtnAnchor = styled(Link, {
   overflow: 'hidden',
 
   ...(direction === 'left' && {
-    borderRadius: '5px 0 0 5px',
+    borderRadius: `${theme.shape.borderRadius} 0 0 ${theme.shape.borderRadius}`,
     borderRight: 'none',
     flexDirection: 'row',
   }),
 
   ...(direction === 'right' && {
-    borderRadius: '0 5px 5px 0',
+    borderRadius: `0 ${theme.shape.borderRadius} ${theme.shape.borderRadius} 0`,
     borderLeft: 'none',
     flexDirection: 'row-reverse',
   }),

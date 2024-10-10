@@ -27,7 +27,7 @@ const Badge = styled('div', {
 })<BadgeProps>(({ theme, $isAffected, $isSelected }) => ({
   alignItems: 'center',
   border: '2px solid transparent',
-  borderRadius: '5px',
+  borderRadius: theme.shape.borderRadius,
   display: 'flex',
   fontWeight: 600,
   gap: '0.25em',

@@ -16,7 +16,7 @@ const Badge = styled(motion.a, {
     prop !== '$iconHeight',
 })<TypeBadgeProps>(({ theme, $typename, $fill, $iconOnly, $iconWidth, $iconHeight }) => ({
   alignItems: 'center',
-  borderRadius: '4px',
+  borderRadius: theme.shape.borderRadius,
   display: 'flex',
   flexDirection: 'row',
   gap: '0.5em',

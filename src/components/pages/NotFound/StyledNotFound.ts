@@ -21,7 +21,7 @@ const Message = styled(Typography)(({ theme }) => ({
   '& span': {
     backgroundColor: theme.palette.primary.main,
     color: theme.palette.primary.contrastText,
-    borderRadius: '4px',
+    borderRadius: theme.shape.borderRadius,
     fontWeight: 700,
     padding: '3px 5px',
   },

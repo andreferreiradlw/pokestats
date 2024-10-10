@@ -1,5 +1,3 @@
-export const runtime = 'edge';
-
 // types
 import type { Berry, ItemAttribute, ItemCategory, ItemFlingEffect } from 'pokenode-ts';
 import type { Metadata } from 'next';

@@ -1,5 +1,3 @@
-export const runtime = 'nodejs';
-
 // types
 import type { EggGroup, Pokemon, PokemonSpecies } from 'pokenode-ts';
 import type { Metadata } from 'next';

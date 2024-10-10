@@ -1,5 +1,3 @@
-export const runtime = 'nodejs';
-
 // types
 import type {
   Pokemon as PokenodePokemon,

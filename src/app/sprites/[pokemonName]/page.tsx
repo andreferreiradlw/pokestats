@@ -1,5 +1,3 @@
-export const runtime = 'nodejs';
-
 // types
 import type { Pokemon, PokemonSpecies, NamedAPIResource } from 'pokenode-ts';
 import type { Metadata } from 'next';

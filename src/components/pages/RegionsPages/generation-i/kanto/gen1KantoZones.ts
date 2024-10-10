@@ -89,7 +89,7 @@ export const kantoZones: CanvasMapperProps['areas'] = [
     shape: 'rect',
     coords: [737, 507, 678, 565],
     description:
-      'Vermillion City is the fourth city that the player is introduced to. This city is south of Cerulean City. Here, the player must enter the St. Anne and receive HM01 (Cut). From there, the player can cut the tree to enter the gym to battle the gym leader, Lt. Surge. In this city, the player can receive the Pokémon Squirtle (in Pokémon Yellow).',
+      'Vermilion City is the fourth city that the player is introduced to. This city is south of Cerulean City. Here, the player must enter the St. Anne and receive HM01 (Cut). From there, the player can cut the tree to enter the gym to battle the gym leader, Lt. Surge. In this city, the player can receive the Pokémon Squirtle (in Pokémon Yellow).',
   },
   {
     id: '155',

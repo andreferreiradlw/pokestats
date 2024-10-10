@@ -1,12 +1,19 @@
+import { useMemo } from 'react';
 // types
-import { motion } from '@/client';
+import type { Location, LocationArea } from 'pokenode-ts';
 import type { CanvasMapperArea } from '../CanvasMapper';
 // hooks
 import { useBreakpoint, useLocationAreas } from '@/hooks';
 // helpers
-import { findEnglishName, type GameGenValue } from '@/helpers';
+import {
+  type AreaEncounters,
+  findEnglishName,
+  formatLocationEncounters,
+  type GameGenValue,
+} from '@/helpers';
 import { fadeInUpVariant } from '@/animations';
 // components
+import { motion } from '@/client';
 import { Alert, Box, Button, Grid2, Stack, Typography, type Grid2Props } from '@mui/material';
 import Loading from '@/components/Loading';
 import LocationTableV2 from '../LocationTableV2';
@@ -19,6 +26,19 @@ interface LocationDetailsProps extends Grid2Props {
   generation: GameGenValue;
 }
 
+export interface FormattedLocationData {
+  location: Location;
+  locationAreas: {
+    encounter_method_rates?: LocationArea['encounter_method_rates'];
+    game_index: LocationArea['game_index'];
+    id: LocationArea['id'];
+    location: LocationArea['location'];
+    name: LocationArea['name'];
+    names: LocationArea['names'];
+    pokemon_encounters: AreaEncounters[];
+  }[];
+}
+
 const LocationDetails = ({ area, generation, ...rest }: LocationDetailsProps): JSX.Element => {
   // breakpoint
   const isLargeUp = useBreakpoint({ breakpoint: 'lg' });
@@ -28,6 +48,26 @@ const LocationDetails = ({ area, generation, ...rest }: LocationDetailsProps): J
 
   // data
   const { data, isLoading, refetch } = useLocationAreas(Number(id), generation);
+
+  const formattedData: FormattedLocationData | undefined = useMemo(() => {
+    if (!data?.locationAreas) return data as undefined;
+
+    // Typed accumulator for better clarity and type safety
+    const result = data.locationAreas.reduce<FormattedLocationData['locationAreas']>(
+      (acc, currentArea) => {
+        const formatted = formatLocationEncounters(currentArea.pokemon_encounters);
+
+        if (formatted.length > 0) {
+          acc.push({ ...currentArea, pokemon_encounters: formatted });
+        }
+
+        return acc;
+      },
+      [],
+    );
+
+    return { location: data.location, locationAreas: result };
+  }, [data]);
 
   if (isLoading) {
     return (
@@ -53,21 +93,21 @@ const LocationDetails = ({ area, generation, ...rest }: LocationDetailsProps): J
       variants={fadeInUpVariant}
       {...rest}
     >
-      {data ? (
+      {formattedData ? (
         <>
           <Grid2 size={{ xs: 12, lg: 4 }} gap={2} flexDirection="column">
-            <Typography variant="h3">{findEnglishName(data.location.names)}</Typography>
+            <Typography variant="h3">{findEnglishName(formattedData.location.names)}</Typography>
             <Typography gutterBottom>{description}</Typography>
             <LocationMusic generation={generation} locationName={key} />
             {isLargeUp &&
-              (data.locationAreas ? (
+              (formattedData.locationAreas ? (
                 <Stack gap={4} width="100%">
-                  {data.locationAreas.map(({ name, names, id }) => {
+                  {formattedData.locationAreas.map(({ name, names, id }) => {
                     const locationAreaName = findEnglishName(names);
 
                     return (
                       <Box key={name}>
-                        {data.locationAreas!.length > 1 && (
+                        {formattedData.locationAreas!.length > 1 && (
                           <Typography variant="sectionSubTitle" gutterBottom>
                             {locationAreaName}
                           </Typography>
@@ -83,23 +123,23 @@ const LocationDetails = ({ area, generation, ...rest }: LocationDetailsProps): J
                 </Stack>
               ) : (
                 <ImageBackdrop
-                  key={`${generation}-${data.location.name}-${id}`}
-                  alt={findEnglishName(data.location.names) || area.title}
-                  src={`https://raw.githubusercontent.com/andreferreiradlw/pokestats_media/main/assets/regions/${generation}/${data.location.name}.png`}
+                  key={`${generation}-${formattedData.location.name}-${id}`}
+                  alt={findEnglishName(formattedData.location.names) || area.title}
+                  src={`https://raw.githubusercontent.com/andreferreiradlw/pokestats_media/main/assets/regions/${generation}/${formattedData.location.name}.png`}
                 />
               ))}
           </Grid2>
           <Grid2 size={{ xs: 12, lg: 8 }}>
-            {data.locationAreas?.length ? (
+            {formattedData.locationAreas?.length ? (
               <LocationTableV2
-                locationAreas={data.locationAreas}
+                locationAreas={formattedData.locationAreas}
                 generation={generation}
-                region={data.location.region?.name}
+                region={formattedData.location.region?.name}
               />
             ) : (
               <Stack py={12} width="100%" alignItems="center" gap={2}>
                 <ImageNextV2
-                  customKey={`no-encounters-${data.location.name}`}
+                  customKey={`no-encounters-${formattedData.location.name}`}
                   imageUrl={`https://raw.githubusercontent.com/andreferreiradlw/pokestats_media/main/assets/misc/${generation}/trainer-back.png`}
                   alt="Pokémon Trainer"
                   width={150}

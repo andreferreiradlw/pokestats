@@ -6,7 +6,7 @@ interface RegionsLayoutProps {
 }
 
 const RegionsLayout = ({ children }: RegionsLayoutProps) => (
-  <LayoutV2 withHeader customKey="kanto-gen1-region">
+  <LayoutV2 withHeader customKey="region-page">
     {children}
   </LayoutV2>
 );

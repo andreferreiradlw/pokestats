@@ -1,11 +1,8 @@
-import { Fragment, useMemo } from 'react';
-// types
-import type { LocationArea } from 'pokenode-ts';
+import { Fragment } from 'react';
 // helpers
 import {
   capitalise,
   findEnglishName,
-  formatLocationEncounters,
   formatPokemonId,
   type GameGenValue,
   mapEncounterMethodIcons,
@@ -31,9 +28,10 @@ import {
   AccordionDetails,
 } from '@mui/material';
 import Link from 'next/link';
+import type { FormattedLocationData } from '../LocationDetails';
 
 interface LocationTableProps extends Grid2Props {
-  locationAreas: LocationArea[];
+  locationAreas: FormattedLocationData['locationAreas'];
   generation: GameGenValue;
   region?: string;
 }
@@ -71,19 +69,11 @@ const LocationTableV2 = ({
   region,
   ...rest
 }: LocationTableProps): JSX.Element => {
-  // Memoize formatted encounters data
-  const formattedLocationData = useMemo(() => {
-    return locationAreas.map(area => ({
-      ...area,
-      formattedEncounters: formatLocationEncounters(area.pokemon_encounters),
-    }));
-  }, [locationAreas]);
-
   return (
     <Grid2 size={12} flexDirection="column" {...rest}>
-      {formattedLocationData.map(({ formattedEncounters, name: areaName, id: areaId, names }) => (
+      {locationAreas.map(({ name: areaName, id: areaId, names, pokemon_encounters }) => (
         <Accordion
-          defaultExpanded={!!formattedEncounters.length}
+          defaultExpanded={!!pokemon_encounters.length}
           key={`${areaName}-${areaId}-container`}
         >
           <AccordionSummary
@@ -93,7 +83,7 @@ const LocationTableV2 = ({
             {findEnglishName(names)}
           </AccordionSummary>
           <AccordionDetails>
-            {formattedEncounters.length > 0 ? (
+            {pokemon_encounters.length > 0 ? (
               <TableContainer>
                 <Table>
                   {/* Table headers */}
@@ -123,7 +113,7 @@ const LocationTableV2 = ({
                   </TableHead>
                   {/* Table body */}
                   <TableBody>
-                    {formattedEncounters.map(({ name: methodName, pokemon }) => {
+                    {pokemon_encounters.map(({ name: methodName, pokemon }) => {
                       const methodRowSpan = pokemon.reduce(
                         (total, p) => total + p.versions.length,
                         0,
@@ -148,7 +138,7 @@ const LocationTableV2 = ({
                                             region,
                                           )}
                                           alt={methodName}
-                                          height="45px"
+                                          width={40}
                                         />
                                       )}
                                       <Typography textTransform="capitalize">

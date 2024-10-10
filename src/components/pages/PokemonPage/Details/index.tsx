@@ -178,7 +178,6 @@ const PokemonDetails = ({
           />
         )}
       </Stack>
-
       <Flavor variant="h5" component="h3">
         {flavorText}
       </Flavor>

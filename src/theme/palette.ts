@@ -74,9 +74,41 @@ const typeColors = {
 };
 
 const gameColors = {
-  red: '#EB0000',
-  blue: '#1111FF',
-  yellow: '#FFD733',
+  red: '#EB0000', // Red
+  blue: '#1111FF', // Blue
+  yellow: '#FFD733', // Yellow
+  gold: '#DAA520', // Gold
+  silver: '#C0C0C0', // Silver
+  crystal: '#4FD0E1', // Crystal
+  ruby: '#A30C20', // Ruby
+  sapphire: '#1359AE', // Sapphire
+  emerald: '#00C78C', // Emerald
+  firered: '#FF732B', // FireRed
+  leafgreen: '#58C147', // LeafGreen
+  diamond: '#7F8FAB', // Diamond
+  pearl: '#E1C0D9', // Pearl
+  platinum: '#A7A7A7', // Platinum
+  heartgold: '#D1B055', // HeartGold
+  soulsilver: '#BCC5CE', // SoulSilver
+  black: '#333333', // Black
+  white: '#F0F0F0', // White
+  'black-2': '#5A5A5A', // Black 2
+  'white-2': '#EDEDED', // White 2
+  x: '#637CDC', // X
+  y: '#D83A68', // Y
+  'omega-ruby': '#D14E38', // Omega Ruby
+  'alpha-sapphire': '#2582E0', // Alpha Sapphire
+  sun: '#F1912B', // Sun
+  moon: '#5599CA', // Moon
+  'ultra-sun': '#FF994D', // Ultra Sun
+  'ultra-moon': '#28599A', // Ultra Moon
+  'lets-go-pikachu': '#F8D030', // Let's Go Pikachu
+  'lets-go-eevee': '#C58C3B', // Let's Go Eevee
+  sword: '#5C93D4', // Sword
+  shield: '#D9425E', // Shield
+  'legends-arceus': '#B3B8C0', // Legends Arceus
+  scarlet: '#FF5B58', // Scarlet
+  violet: '#AF62E6', // Violet
 };
 
 export { lightPalette, darkPalette, typeColors, gameColors };
